@@ -12,8 +12,8 @@ function ok(req) {
 }
 
 export default async function handler(req, res) {
-  if (!(await consume(req, "admin"))) return res.status(429).json({ error: "quota" });
-  if (!ok(req)) return res.status(401).json({ error: "mot_de_passe" });
+  // Seuls les essais ratés sont comptés (60 par jour et par IP) : l'admin connecté navigue sans limite.
+  if (!ok(req)) return (await consume(req, "admin")) ? res.status(401).json({ error: "mot_de_passe" }) : res.status(429).json({ error: "quota" });
   try {
     if (req.method === "PATCH") {                     // ?remarque=<id>&statut=traite|nouveau|rejete
       const id = Number(req.query?.remarque), st = String(req.query?.statut || "");
@@ -28,6 +28,20 @@ export default async function handler(req, res) {
       return res.status(200).json({ ok: true });
     }
     const B = base();
+    if (req.query?.vue === "mesures") {               // ?vue=mesures → toutes les propositions + état de leur fiche
+      const gen = await select("fiches", "select=id,created_at&limit=5000").catch(() => []);
+      const G = Object.fromEntries(gen.map((f) => [f.id, f.created_at]));
+      return res.status(200).json({ mesures: B.mesures.map((m) => ({ id: m.id, P: m.P, cand: B.candidats[m.P]?.cand || m.P, t: m.t, s: m.section,
+        f: B.fiches[m.id] ? "base" : G[m.id] ? "gen" : null, d: G[m.id] || null })) });
+    }
+    if (req.query?.voir) {                             // ?voir=<id> → la mesure complète et sa fiche
+      const id = String(req.query.voir); const m = B.byId[id]; if (!m) return res.status(404).json({ error: "inconnue" });
+      let fiche = B.fiches[id] || null, origine = fiche ? "base" : null;
+      if (!fiche) { const r = await select("fiches", `select=data,created_at&id=eq.${encodeURIComponent(id)}`).catch(() => []); if (r[0]) { fiche = r[0].data; origine = "gen"; } }
+      const rq = await select("remarques", `select=created_at,type,texte,statut&mesure_id=eq.${encodeURIComponent(id)}&order=created_at.desc`).catch(() => []);
+      const { _n, ...mm } = m;
+      return res.status(200).json({ mesure: { ...mm, cand: B.candidats[m.P]?.cand, nom: B.candidats[m.P]?.nom }, fiche, origine, remarques: rq });
+    }
     const info = (id) => { const m = B.byId[id]; return m ? { t: m.t, cand: B.candidats[m.P]?.cand || m.P } : { t: id, cand: "?" }; };
     const [stats, chats, fiches, remarques] = await Promise.all([
       rpc("admin_stats", {}),

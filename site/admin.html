@@ -27,6 +27,15 @@ button.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
 input{font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:8px;width:260px;max-width:100%}
 .tabs{display:flex;gap:6px;margin-bottom:10px}.tabs button[aria-pressed="true"]{background:var(--ink);color:#fff}
 .scroll{max-height:560px;overflow:auto}
+.prop{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:14px}@media(max-width:900px){.prop{grid-template-columns:1fr}}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}.filters input{width:220px}
+select{font:inherit;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;max-width:100%}
+.ml .row{padding:9px 8px;border-top:1px solid var(--line);cursor:pointer;font-size:13px}.ml .row:hover{background:#faf9f7}.ml .row.on{background:#f1ecff}
+.pill{display:inline-block;font-size:11px;font-weight:600;border-radius:99px;padding:1px 8px;margin-right:6px}
+.pill.base{background:#e6f5ec;color:var(--pour)}.pill.gen{background:#efe8ff;color:var(--brand)}.pill.none{background:#f0efec;color:var(--muted)}
+#det h3{font-size:14px;margin:16px 0 6px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+#det ul{margin:0;padding-left:18px}#det li{margin:4px 0}#det p{margin:4px 0}
+.kv{font-size:13px}.kv b{font-weight:600}
 #login{max-width:380px;margin:80px auto;background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px}
 </style>
 </head>
@@ -46,6 +55,10 @@ input{font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:
   <div class="card" style="margin-bottom:14px"><h2>Remarques des utilisateurs</h2>
     <div class="tabs" id="rt"><button aria-pressed="true" data-s="nouveau">À traiter</button><button aria-pressed="false" data-s="traite">Traitées</button><button aria-pressed="false" data-s="rejete">Rejetées</button></div>
     <div class="scroll" id="remarques"></div></div>
+  <div class="card" style="margin-bottom:14px"><h2>Propositions et fiches <span class="muted small" id="pcount"></span></h2>
+    <div class="filters"><input id="pq" placeholder="Rechercher une mesure…"><select id="pc"></select>
+      <select id="pf"><option value="">Toutes</option><option value="any">Avec fiche</option><option value="base">Fiche relue (base)</option><option value="gen">Fiche générée</option><option value="none">Sans fiche</option></select></div>
+    <div class="prop"><div class="scroll ml" id="plist"><p class="muted">Chargement…</p></div><div class="scroll" id="det"><p class="muted">Clique sur une mesure pour voir sa fiche.</p></div></div></div>
   <div class="grid">
     <div class="card"><h2>Mesures les plus vues</h2>
       <div class="tabs" id="tt"><button aria-pressed="true" data-s="vus">Les plus vues</button><button aria-pressed="false" data-s="pour">Les plus aimées</button><button aria-pressed="false" data-s="contre">Les plus rejetées</button></div>
@@ -103,6 +116,57 @@ function renderTop(){
   if(SORT==="contre") L=L.filter(x=>x.vus>=3).sort((a,b)=>b.contre/b.vus-a.contre/a.vus||b.vus-a.vus);
   $("#top").innerHTML=`<tr><th>Mesure</th><th class="n">Vues</th><th>Pour / contre</th></tr>`+(L.slice(0,60).map(x=>`<tr><td><b>${esc(x.cand)}</b> — ${esc(x.t.length>110?x.t.slice(0,108)+"…":x.t)}</td><td class="n">${x.vus}</td><td><div class="bar" title="${x.pour} pour, ${x.contre} contre"><i style="width:${100*x.pour/x.vus}%;background:var(--pour)"></i><i style="width:${100*x.contre/x.vus}%;background:var(--contre)"></i></div><span class="muted small">${Math.round(100*x.pour/x.vus)} % pour</span></td></tr>`).join("")||'<tr><td colspan="3" class="muted">Pas encore de réponses enregistrées.</td></tr>');
 }
+let M=null, SEL=null;
+async function loadMesures(){
+  try{ M=(await api("GET","?vue=mesures")).mesures; }catch(e){ $("#plist").innerHTML=`<p class="muted">${esc(e.message)}</p>`; return; }
+  const C={}; M.forEach(m=>{ const c=C[m.P]||(C[m.P]={cand:m.cand,n:0,f:0}); c.n++; if(m.f) c.f++; });
+  $("#pc").innerHTML=`<option value="">Tous les candidats</option>`+Object.entries(C).sort((a,b)=>b[1].n-a[1].n).map(([k,c])=>`<option value="${esc(k)}">${esc(c.cand)} — ${c.n} mesures, ${c.f} fiches</option>`).join("");
+  renderList();
+}
+const norm=s=>String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+const PILL={base:'<span class="pill base">fiche relue</span>',gen:'<span class="pill gen">fiche générée</span>'};
+function renderList(){
+  if(!M) return; const q=norm($("#pq").value), c=$("#pc").value, f=$("#pf").value;
+  const L=M.filter(m=>(!c||m.P===c)&&(!f||(f==="any"?m.f:f==="none"?!m.f:m.f===f))&&(!q||norm(m.t+" "+m.s+" "+m.cand).includes(q)));
+  const nf=M.filter(m=>m.f).length;
+  $("#pcount").textContent=`· ${L.length} affichées sur ${M.length} · ${nf} avec fiche (${M.filter(m=>m.f==="base").length} relues, ${M.filter(m=>m.f==="gen").length} générées)`;
+  $("#plist").innerHTML=L.slice(0,400).map(m=>`<div class="row${m.id===SEL?" on":""}" data-id="${esc(m.id)}">${PILL[m.f]||'<span class="pill none">sans fiche</span>'}<b>${esc(m.cand)}</b> — ${esc(m.t.length>140?m.t.slice(0,138)+"…":m.t)}<div class="muted small">${esc(m.s)}</div></div>`).join("")+(L.length>400?`<p class="muted small">… ${L.length-400} de plus, affine la recherche.</p>`:"")||'<p class="muted">Aucune mesure.</p>';
+  document.querySelectorAll("#plist .row").forEach(r=>r.onclick=()=>voir(r.dataset.id));
+}
+["#pq","#pc","#pf"].forEach(s=>$(s).addEventListener("input",renderList));
+const LAB={resume:"Résumé",logique:"Pourquoi le candidat la propose",arguments:"Arguments",accompagnement:"Les mesures qui vont avec",concret:"Concrètement",eco:"Volet économique",cout:"Coût",financement:"Financement",recettes:"Recettes / économies",critiques:"Critiques",reponses:"Réponses du camp",monde:"À l'étranger",tensions:"Tensions",similaires:"Propositions similaires",sources:"Sources"};
+const SKIP=new Set(["maj","v","statut","genere"]);
+const link=(u,t)=>`<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(t||(()=>{try{return new URL(u).hostname.replace(/^www\./,"")}catch(e){return u}})())}</a>`;
+function val(v){
+  if(v==null||v==="") return "";
+  if(typeof v!=="object") return `<p>${esc(v)}</p>`;
+  if(Array.isArray(v)) return v.length?`<ul>${v.map(x=>`<li>${typeof x==="object"&&x?obj(x):esc(x)}</li>`).join("")}</ul>`:"";
+  return obj(v,true);
+}
+function obj(o,block){
+  const u=o.url||o.lien, rest=Object.entries(o).filter(([k])=>!["url","lien","media"].includes(k));
+  const simple=rest.every(([,x])=>typeof x!=="object"||x==null);
+  if(simple&&!block){ const head=["camp","qui","pays","nom","titre","id"].map(k=>o[k]).filter(Boolean).join(" · ");
+    const body=rest.filter(([k])=>!["camp","qui","pays","nom","titre"].includes(k)).map(([k,x])=>k==="id"&&BYID[x]?`<i>${esc(BYID[x])}</i>`:esc(x)).join(" — ");
+    return `<span class="kv">${head?`<b>${esc(head)}</b> : `:""}${body}${u?` (${link(u,o.media)})`:""}</span>`; }
+  return rest.map(([k,x])=>`<div style="margin:6px 0"><b class="small">${esc(LAB[k]||k)}</b>${val(x)}</div>`).join("")+(u?`<p>${link(u,o.media)}</p>`:"");
+}
+let BYID={}; const ORDER=["resume","logique","concret","eco","critiques","reponses","monde","tensions","similaires","sources"]; const ORD=k=>{const i=ORDER.indexOf(k); return i<0?99:i;};
+async function voir(id){
+  SEL=id; renderList(); $("#det").innerHTML='<p class="muted">Chargement…</p>';
+  try{ const d=await api("GET","?voir="+encodeURIComponent(id)); const m=d.mesure, f=d.fiche;
+    BYID=Object.fromEntries((M||[]).map(x=>[x.id,x.t.slice(0,110)]));
+    $("#det").innerHTML=`<div class="muted small">${esc(m.cand)} · ${esc(m.nom||m.P)} · ${esc(m.section)} · <code>${esc(m.id)}</code></div>
+      <h2 style="margin:6px 0">${esc(m.t)}</h2>${m.intro?`<p class="small muted" style="white-space:pre-wrap">${esc(m.intro.slice(0,1500))}</p>`:""}${m.url?`<p class="small">Source : ${link(m.url)}</p>`:""}
+      ${d.remarques.length?`<h3>Remarques (${d.remarques.length})</h3><ul>${d.remarques.map(r=>`<li class="small"><b>${esc(TYPES[r.type]||r.type)}</b> · ${esc(r.statut)} · ${fmt(r.created_at)} — ${esc(r.texte)}</li>`).join("")}</ul>`:""}
+      ${f?`<div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px">${PILL[d.origine]}<span class="muted small">${esc(f.maj||"")}${f.v?" · v"+esc(f.v):""}</span>${d.origine==="gen"?`<button id="delf">Supprimer la fiche</button>`:""}</div>`
+        +Object.entries(f).filter(([k])=>!SKIP.has(k)).sort((a,b)=>ORD(a[0])-ORD(b[0])).map(([k,v])=>`<h3>${esc(LAB[k]||k)}</h3>${val(v)}`).join("")
+        :`<p class="muted" style="margin-top:14px">Pas encore de fiche pour cette mesure.</p>`}`;
+    const b=$("#delf"); if(b) b.onclick=async()=>{ if(b.dataset.ok!=="1"){ b.textContent="Confirmer ?"; b.dataset.ok="1"; return; } b.disabled=true; try{ await api("DELETE","?fiche="+encodeURIComponent(id)); const x=M.find(z=>z.id===id); if(x) x.f=null; voir(id); }catch(e){ b.textContent="Erreur"; } };
+  }catch(e){ $("#det").innerHTML=`<p class="muted">${esc(e.message)}</p>`; }
+}
+const _load=load; load=async()=>{ await _load(); if(!$("#app").hidden) loadMesures(); };
+$("#reload").onclick=load;
 if(KEY) load();
 </script>
 </body>
