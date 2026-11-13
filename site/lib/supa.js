@@ -35,6 +35,14 @@ export async function userFromToken(token) {
   const u = await r.json(); return u && u.id ? u : null;
 }
 /** Supprime définitivement un utilisateur (API d'administration Auth). */
+/** Crée un compte confirmé côté serveur (évite la vérification d'adresse mail de Supabase : l'e-mail est purement technique). */
+export async function createUser(email, password) {
+  const r = await fetch(`${URL_}/auth/v1/admin/users`, { method: "POST", headers: { ...H(), "Content-Type": "application/json" }, body: JSON.stringify({ email, password, email_confirm: true }) });
+  const d = await r.json().catch(() => ({}));
+  if (!r.ok) { const e = new Error(d.msg || d.message || d.error_description || `createUser ${r.status}`); e.code = d.error_code || d.code; e.status = r.status; throw e; }
+  return d;
+}
+
 export async function deleteUser(id) {
   const r = await fetch(`${URL_}/auth/v1/admin/users/${id}`, { method: "DELETE", headers: H() });
   if (!r.ok) throw new Error(`deleteUser: ${r.status} ${await r.text()}`);

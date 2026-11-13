@@ -511,9 +511,11 @@ function bindAccount(root){
     if(!/^[a-z0-9_]{3,20}$/.test(user)){ st.textContent="Pseudo : 3 à 20 caractères, lettres, chiffres ou _."; return; }
     st.textContent="Un instant…";
     if(AUTH_MODE==="signup"){
-      const {data,error}=await SB.auth.signUp({email,password:pass});
-      if(error){ st.textContent=/registered|exists/i.test(error.message)?"Ce pseudo est déjà pris.":/password/i.test(error.message)?"Mot de passe trop faible : 8 caractères minimum.":"Ça n'a pas marché : "+error.message; return; }
-      if(!data.session){ st.textContent="Compte créé, mais la confirmation par email est activée dans Supabase : désactive-la (voir README)."; return; }
+      /* Création côté serveur : Supabase refuse sinon l'adresse technique (domaine sans boîte mail). */
+      let r, d={}; try{ r=await fetch(API+"/compte",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({pseudo:user,password:pass})}); d=await r.json().catch(()=>({})); }catch(e){ st.textContent="Pas de connexion. Réessaie."; return; }
+      if(!r.ok){ st.textContent=d.error==="pris"?"Ce pseudo est déjà pris.":d.error==="mot_de_passe"?"Mot de passe trop faible : 8 caractères minimum.":d.error==="quota"?"Trop de comptes créés depuis ce réseau aujourd'hui.":"Ça n'a pas marché"+(d.detail?" : "+d.detail:"")+"."; return; }
+      const {data,error}=await SB.auth.signInWithPassword({email,password:pass});
+      if(error||!data.session){ st.textContent="Compte créé, mais la connexion a échoué : réessaie via « Se connecter »."; return; }
       USER=data.session.user;
       try{ await SB.from("profils").upsert({user_id:USER.id,consent_at:new Date().toISOString(),swipes:SW,updated_at:new Date().toISOString()}); }catch(e){}
       toast("Bienvenue @"+user+" !"); renderProfil();
