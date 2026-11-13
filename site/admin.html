@@ -43,6 +43,9 @@ input{font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:
     <div><button id="reload">Actualiser</button> <button id="out">Se déconnecter</button></div>
   </div>
   <div class="kpis" id="kpis"></div>
+  <div class="card" style="margin-bottom:14px"><h2>Remarques des utilisateurs</h2>
+    <div class="tabs" id="rt"><button aria-pressed="true" data-s="nouveau">À traiter</button><button aria-pressed="false" data-s="traite">Traitées</button><button aria-pressed="false" data-s="rejete">Rejetées</button></div>
+    <div class="scroll" id="remarques"></div></div>
   <div class="grid">
     <div class="card"><h2>Mesures les plus vues</h2>
       <div class="tabs" id="tt"><button aria-pressed="true" data-s="vus">Les plus vues</button><button aria-pressed="false" data-s="pour">Les plus aimées</button><button aria-pressed="false" data-s="contre">Les plus rejetées</button></div>
@@ -57,7 +60,8 @@ input{font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 let KEY=""; try{KEY=sessionStorage.getItem("adm")||"";}catch(e){}
-let D=null, SORT="vus";
+let D=null, SORT="vus", RST="nouveau";
+const TYPES={erreur:"Erreur",source:"Source manquante",point_de_vue:"Point de vue absent",mesure:"Texte de la mesure",autre:"Autre"};
 async function api(method="GET",q=""){
   const r=await fetch("/api/admin"+q,{method,headers:{"x-admin-key":KEY}});
   if(r.status===401) throw new Error("Mot de passe incorrect.");
@@ -70,13 +74,21 @@ async function load(){
 }
 $("#f").onsubmit=e=>{ e.preventDefault(); KEY=$("#pw").value; try{sessionStorage.setItem("adm",KEY);}catch(e){} load(); };
 $("#reload").onclick=load; $("#out").onclick=()=>{ try{sessionStorage.removeItem("adm");}catch(e){} KEY=""; location.reload(); };
+document.querySelectorAll("#rt button").forEach(b=>b.onclick=()=>{ RST=b.dataset.s; document.querySelectorAll("#rt button").forEach(x=>x.setAttribute("aria-pressed",x===b)); renderRq(); });
+function renderRq(){
+  const L=(D.remarques||[]).filter(r=>r.statut===RST);
+  document.querySelector('#rt [data-s="nouveau"]').textContent="À traiter ("+(D.remarques||[]).filter(r=>r.statut==="nouveau").length+")";
+  $("#remarques").innerHTML=L.length?L.map(r=>`<div class="q open"><div class="who">${fmt(r.created_at)} · <b>${esc(TYPES[r.type]||r.type)}</b> · ${r.compte?"utilisateur connecté":"anonyme"} · ${esc(r.cand)} — ${esc((r.t||"").slice(0,90))}</div><div style="margin:4px 0">${esc(r.texte)}</div>${r.source_url?`<a class="small" href="${esc(r.source_url)}" target="_blank" rel="noopener noreferrer">${esc(r.source_url)}</a>`:""}
+    <div style="margin-top:6px">${r.statut!=="traite"?`<button data-rq="${r.id}" data-st="traite">Marquer traitée</button> `:""}${r.statut!=="rejete"?`<button data-rq="${r.id}" data-st="rejete">Rejeter</button> `:""}${r.statut!=="nouveau"?`<button data-rq="${r.id}" data-st="nouveau">Remettre à traiter</button>`:""}</div></div>`).join(""):'<p class="muted">Rien ici.</p>';
+  document.querySelectorAll("[data-rq]").forEach(b=>b.onclick=async()=>{ b.disabled=true; try{ await api("PATCH","?remarque="+b.dataset.rq+"&statut="+b.dataset.st); const r=D.remarques.find(x=>String(x.id)===b.dataset.rq); if(r) r.statut=b.dataset.st; renderRq(); }catch(e){ b.textContent="Erreur"; } });
+}
 document.querySelectorAll("#tt button").forEach(b=>b.onclick=()=>{ SORT=b.dataset.s; document.querySelectorAll("#tt button").forEach(x=>x.setAttribute("aria-pressed",x===b)); renderTop(); });
 const fmt=d=>new Date(d).toLocaleString("fr-FR",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
 function render(){
   const s=D.stats; $("#maj").textContent="Mis à jour "+new Date().toLocaleTimeString("fr-FR");
-  const k=[["Inscrits",s.inscrits],["Nouveaux (7 j)",s.inscrits_7j],["Profils actifs",s.profils_actifs],["Réponses (swipes)",s.reponses],["Questions à l'IA",s.chats_total],["Questions (7 j)",s.chats_7j],["Fiches générées",s.fiches]];
+  const k=[["Remarques à traiter",(D.remarques||[]).filter(r=>r.statut==="nouveau").length],["Inscrits",s.inscrits],["Nouveaux (7 j)",s.inscrits_7j],["Profils actifs",s.profils_actifs],["Réponses (swipes)",s.reponses],["Questions à l'IA",s.chats_total],["Questions (7 j)",s.chats_7j],["Fiches générées",s.fiches]];
   $("#kpis").innerHTML=k.map(([l,v])=>`<div class="kpi"><span class="muted small">${l}</span><b>${(v||0).toLocaleString("fr-FR")}</b></div>`).join("");
-  renderTop();
+  renderTop(); renderRq();
   $("#chats").innerHTML=D.chats.length?D.chats.map(c=>`<div class="q"><div class="who">${fmt(c.created_at)} · ${c.mode==="mesure"?"sur la mesure : "+esc(c.mesure?.cand)+" — "+esc((c.mesure?.t||"").slice(0,80)):"chat général"}</div><div class="t">${esc(c.question)}</div><div class="a">${esc(c.reponse)}</div></div>`).join(""):'<p class="muted">Aucune question pour l\'instant.</p>';
   document.querySelectorAll(".q .t").forEach(t=>t.onclick=()=>t.parentElement.classList.toggle("open"));
   const u={}; (s.usage||[]).forEach(r=>{ (u[r.jour]=u[r.jour]||{}); u[r.jour][r.kind]=r.n; u[r.jour].ips=Math.max(u[r.jour].ips||0,r.ips); });

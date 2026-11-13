@@ -128,6 +128,8 @@ main{flex:1;overflow-y:auto;overflow-x:hidden;min-height:0;scroll-behavior:smoot
 .hbar .tr i{display:block;height:100%;border-radius:0 4px 4px 0;min-width:2px}
 .hbar .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted);font-weight:600}
 .hbar:hover .nm{text-decoration:underline}
+.linkrow{display:block;width:100%;text-align:left;font:500 16px/1.35 var(--serif);padding:2px 0;color:var(--ink)}
+.linkrow .note{font-family:var(--sans);white-space:nowrap}
 .hbar .tr{position:relative}
 .hbar .cut{position:absolute;right:14px;top:-3px;bottom:-3px;width:7px;background:var(--card);transform:skewX(-20deg)}
 #info .msgs{max-width:560px}
@@ -519,7 +521,7 @@ function renderProfile(q){
   const sib=M.filter(x=>x.s===m.s);
   const parts=[];
   /* en-tête */
-  if(REVIEW){ const v=SW[m.id]; parts.push(`<div class="box" style="padding:12px 14px;display:flex;align-items:center;gap:10px;background:var(--soft);border:0"><div style="flex:1;font-size:14px"><b>Révision · ${esc(REVIEW.label)}</b> · ${REVIEW.i+1} / ${REVIEW.ids.length}<br><span class="note">Tu avais répondu : <b style="color:${v===1?"var(--pour)":v===-1?"var(--contre)":"var(--muted)"}">${v===1?"pour":v===-1?"contre":"sans avis"}</b>. ❤ ou ✕ pour changer, → pour garder.</span></div><button class="cta ghost" id="b-quit-rev" style="padding:8px 14px">Quitter</button></div>`); }
+  if(REVIEW){ const v=SW[m.id]; parts.push(`<div class="box" style="padding:12px 14px;display:flex;align-items:center;gap:10px;background:var(--soft);border:0"><div style="flex:1;font-size:14px"><b>Révision · ${esc(REVIEW.label)}</b> · ${REVIEW.i+1} / ${REVIEW.ids.length}<br><span class="note">${v===undefined?"Pas encore de réponse. ❤ ou ✕ pour répondre, → pour passer.":`Tu avais répondu : <b style="color:${v===1?"var(--pour)":v===-1?"var(--contre)":"var(--muted)"}">${v===1?"pour":v===-1?"contre":"sans avis"}</b>. ❤ ou ✕ pour changer, → pour garder.`}</span></div><button class="cta ghost" id="b-quit-rev" style="padding:8px 14px">Quitter</button></div>`); }
   parts.push(`<div class="ph-name"><div><div class="kicker">${REVIEW?"Déjà vue":(done+1)+" / "+q.all.length} · ${esc(short(m.S.partie))}</div><h2>${esc(m.S.section)}</h2></div></div>`);
   /* la mesure */
   parts.push(`<div class="box photo" style="background:${gradOf(m)}"><div class="over">${pBadge(m)}${m.cle?'<span class="badge">Mesure clé</span>':""}${F?`<span class="badge">${F.genere?"Fiche générée":"Fiche sourcée"}</span>`:""}</div><div class="q">${esc(m.t)}</div></div>`);
@@ -531,6 +533,12 @@ function renderProfile(q){
   if(F) parts.push(`<div class="box prompt"><div class="label">Le débat en une phrase</div><div class="answer">${esc(F.resume)}</div></div>`);
   /* sous-points */
   if(m.sous.length) parts.push(`<div class="box photo small" style="background:${gradOf(m)};filter:saturate(.85) brightness(.95)"><ul>${m.sous.map(s=>`<li>${esc(s)}</li>`).join("")}</ul></div>`);
+  /* le raisonnement du candidat */
+  if(F&&F.logique){ const L=F.logique;
+    parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">Pourquoi ${esc(P.nom)} le propose</div><div class="answer sm">${esc(L.texte||"")}</div>
+      ${(L.arguments||[]).map(a=>`<div class="item"><div class="txt" style="font-size:16px">${esc(a.texte)}</div>${srcA(a)}</div>`).join("")}</div>`);
+    if((L.accompagnement||[]).length) parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">Les mesures qui vont avec</div><p class="note" style="margin:-6px 0 8px">Dans le même programme, pour rendre la mesure possible.</p>
+      ${L.accompagnement.map(a=>`<div class="item">${a.id&&BYID[a.id]?`<button class="linkrow" data-open="${esc(a.id)}">${esc(a.texte)} <span class="note">→ voir la mesure</span></button>`:`<div class="txt" style="font-size:16px">${esc(a.texte)}</div>${a.url?srcA({media:"Source",url:a.url}):""}`}</div>`).join("")}</div>`); }
   /* concrètement */
   if(F) parts.push(`<div class="box prompt"><div class="label">Concrètement</div>${F.concret.map(x=>`<div class="item"><div class="txt">${esc(x)}</div></div>`).join("")}</div>`);
   /* volet économique */
@@ -558,10 +566,27 @@ function renderProfile(q){
   if(sib.length>1) parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">Dans la même partie du programme (${sib.length})</div><div class="sib">${sib.slice(0,12).map(x=>`<div class="${x===m?"cur":""}">${esc(x.t)}</div>`).join("")}${sib.length>12?`<div class="note">+ ${sib.length-12} autres</div>`:""}</div></div>`);
   /* débattre */
   parts.push(`<div class="box prompt" style="padding-bottom:24px"><div class="label">Une question sur cette mesure ?</div><div class="answer sm">Demande qui paierait, ce que ça change pour toi, ou ce qu'en pensent les autres camps.</div><div style="margin-top:16px"><button class="cta" id="b-chat">${IC.chat.replace('<svg','<svg width="18" height="18"')}Ouvrir la discussion</button></div></div>`);
+  parts.push(`<div class="box prompt" style="padding-bottom:22px" id="rq-box"><div class="label">Une erreur, un oubli ?</div><div class="answer sm" style="font-size:17px">Signale une erreur, une source manquante ou un point de vue absent. Chaque remarque est lue.</div>
+    <div style="margin-top:14px"><button class="cta ghost" id="b-rq">Faire une remarque</button></div>
+    <form id="f-rq" hidden style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
+      <div class="chips" style="padding:0" id="rq-type">${[["erreur","Erreur"],["source","Source manquante"],["point_de_vue","Point de vue absent"],["mesure","Le texte de la mesure"],["autre","Autre"]].map(([k,l],i)=>`<button type="button" class="chip" data-t="${k}" aria-pressed="${i===0}">${l}</button>`).join("")}</div>
+      <textarea id="rq-txt" class="field" style="border-radius:14px;min-height:96px;resize:vertical" maxlength="1500" required placeholder="Explique ce qui ne va pas ou ce qui manque…"></textarea>
+      <input id="rq-url" class="field" type="url" placeholder="Lien vers une source (facultatif)">
+      <button class="cta">Envoyer</button><p class="note" id="rq-st" style="margin:0">Ta remarque est anonyme, sauf si tu es connecté. N'y mets pas d'informations personnelles.</p></form></div>`);
   parts.push(`<div style="height:70px"></div>`);
   feed.innerHTML=`<div class="profile">${parts.join("")}</div>`;
   $("#b-chat").onclick=()=>openConvo("m:"+m.id);
   const qr=$("#b-quit-rev"); if(qr) qr.onclick=()=>{ REVIEW=null; nextProfile(); };
+  $$("#feed [data-open]").forEach(b=>b.onclick=()=>startReview([b.dataset.open],"mesure liée"));
+  $("#b-rq").onclick=()=>{ $("#f-rq").hidden=false; $("#b-rq").hidden=true; $("#rq-txt").focus(); };
+  $$("#rq-type .chip").forEach(c=>c.onclick=()=>$$("#rq-type .chip").forEach(x=>x.setAttribute("aria-pressed",x===c)));
+  $("#f-rq").onsubmit=async e=>{ e.preventDefault(); const st=$("#rq-st"), btn=$("#f-rq button.cta"); btn.disabled=true; st.textContent="Envoi…";
+    const type=($("#rq-type [aria-pressed='true']")||{}).dataset?.t||"autre";
+    try{ let h={"Content-Type":"application/json"}; if(SB&&USER){ const {data}=await SB.auth.getSession(); if(data.session) h.Authorization="Bearer "+data.session.access_token; }
+      const r=await fetch(API+"/remarque",{method:"POST",headers:h,body:JSON.stringify({mesureId:m.id,type,texte:$("#rq-txt").value,url:$("#rq-url").value})});
+      if(r.status===429) throw Object.assign(new Error(),{q:1}); if(!r.ok) throw new Error();
+      $("#f-rq").innerHTML=`<p class="answer sm">Merci ! Ta remarque a bien été envoyée.</p>`; }
+    catch(err){ btn.disabled=false; st.textContent=err.q?"Tu as envoyé beaucoup de remarques aujourd'hui, réessaie demain.":API?"L'envoi a échoué. Réessaie.":"Les remarques s'activent une fois le site en ligne."; } };
   const bi=$("#b-intro"); if(bi) bi.onclick=()=>{ $("#intro").classList.remove("clamp"); bi.remove(); };
   const g=$("#b-gen"); if(g){ g.onclick=()=>generate(m);
     if(API) fetchFiche(m.id).then(f=>{ if(CURM!==m) return; if(f){ const y=$("#main").scrollTop; renderProfile(queue()); $("#main").scrollTop=y; } else { $("#gen-msg").textContent="Pas encore de fiche sourcée pour cette mesure. Sois le premier à la générer."; $("#gen-wrap").hidden=false; } });

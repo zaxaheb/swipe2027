@@ -35,6 +35,10 @@ export const FICHE = {
   type: "object",
   properties: {
     resume: { type: "string", description: "Le débat en une phrase" },
+    logique: { type: "object", description: "Le raisonnement du camp qui propose, avec ses sources", properties: {
+      texte: { type: "string" },
+      arguments: { type: "array", items: { type: "object", properties: { texte: { type: "string" }, media: { type: "string" }, url: { type: "string" } }, required: ["texte", "url"] } },
+      accompagnement: { type: "array", items: { type: "object", properties: { id: { type: "string" }, texte: { type: "string" }, url: { type: "string" } }, required: ["texte"] } } }, required: ["texte"] },
     concret: { type: "array", items: { type: "string" }, description: "3 à 4 faits" },
     eco: ECO,
     similaires: { type: "array", items: { type: "object", properties: { camp: { type: "string" }, prop: { type: "string" } }, required: ["camp", "prop"] } },
@@ -43,7 +47,7 @@ export const FICHE = {
     tensions: { type: "array", items: { type: "string" } },
     monde: { type: "array", items: ITEM_SOURCE({ pays: { type: "string" } }) }
   },
-  required: ["resume", "concret", "eco", "similaires", "critiques", "reponses", "tensions", "monde"]
+  required: ["resume", "logique", "concret", "eco", "similaires", "critiques", "reponses", "tensions", "monde"]
 };
 
 /** Validation légère + nettoyage : on retire tout item sans URL http(s). */
@@ -52,6 +56,7 @@ export function cleanFiche(f) {
   const arr = (x) => (Array.isArray(x) ? x : []);
   const out = {
     resume: String(f.resume || "").slice(0, 400),
+    logique: f.logique ? { texte: String(f.logique.texte || "").slice(0, 1500), arguments: arr(f.logique.arguments).filter(ok).slice(0, 6), accompagnement: arr(f.logique.accompagnement).slice(0, 8) } : null,
     concret: arr(f.concret).map(String).slice(0, 6),
     eco: f.eco ? { chiffre: String(f.eco.chiffre || "Non chiffré"), cout: String(f.eco.cout || "—"), financement: String(f.eco.financement || "—"), rapporte: String(f.eco.rapporte || "—"), sources: arr(f.eco.sources).filter(ok).slice(0, 5) } : null,
     similaires: arr(f.similaires).slice(0, 6),

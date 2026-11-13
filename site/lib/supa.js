@@ -39,3 +39,7 @@ export async function deleteUser(id) {
   const r = await fetch(`${URL_}/auth/v1/admin/users/${id}`, { method: "DELETE", headers: H() });
   if (!r.ok) throw new Error(`deleteUser: ${r.status} ${await r.text()}`);
 }
+export async function patch(table, query, values) {
+  const r = await fetch(`${URL_}/rest/v1/${table}?${query}`, { method: "PATCH", headers: { ...H(), Prefer: "return=minimal" }, body: JSON.stringify(values) });
+  if (!r.ok) throw new Error(`patch ${table}: ${r.status}`);
+}

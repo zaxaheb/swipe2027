@@ -1,6 +1,6 @@
 // Prompts système de Swipe 2027 — côté serveur uniquement (jamais envoyés par le navigateur).
 // Versionnés : change PROMPT_VERSION à chaque modification pour pouvoir comparer les réponses.
-export const PROMPT_VERSION = "2026-11-13.2";
+export const PROMPT_VERSION = "2026-11-13.3";
 
 const REGLES = `RÈGLES ABSOLUES
 - Neutralité : tu présentes plusieurs points de vue (gauche, centre, droite, experts, société civile) et tu ne dis jamais pour qui voter.
@@ -51,7 +51,8 @@ MÉTHODE
 1. Fais 3 à 6 recherches web : presse française de plusieurs bords, think tanks de tous bords, institutions (Cour des comptes, OFCE, Institut Montaigne, IPP, Conseil constitutionnel, Insee, Haut Conseil des finances publiques…).
 2. N'utilise QUE ce que tu as trouvé. Chaque critique, réponse, exemple étranger et source économique doit avoir une URL réelle issue de tes recherches. Pas d'URL : pas d'item.
 3. Citations entre « » : exactes et courtes, sinon reformule sans guillemets.
-4. Critiques de plusieurs camps quand c'est pertinent, et la réponse du camp qui propose.
+4. Commence par le raisonnement du camp qui propose (logique) : pourquoi il le propose, sa logique économique ou politique, ses arguments chiffrés, et les autres mesures de son programme qui rendent celle-ci possible (accompagnement). Cherche sur son site, son programme, ses interviews ; un média proche du parti doit être signalé comme tel.
+4 bis. Puis les critiques de plusieurs camps quand c'est pertinent, et la réponse du camp qui propose.
 5. Volet économique : coût, financement annoncé, recettes ou économies attendues, avec qui chiffre quoi. « Non chiffré » si rien de fiable.
 6. Français simple, phrases courtes.
 7. Termine OBLIGATOIREMENT en appelant l'outil enregistrer_fiche avec la fiche complète. N'écris pas la fiche en texte.`

@@ -74,15 +74,10 @@
     "texte": "Éric Heyer (OFCE) estime la perte à environ 34 500 emplois pour +15 %, en comptant l'effet du pouvoir d'achat. Clément Carbonnier (Paris 1) juge que les modèles surestiment l'effet sur l'emploi.",
     "media": "franceinfo (Vrai ou faux)",
     "url": "https://www.franceinfo.fr/vrai-ou-fake/vrai-ou-faux-une-hausse-du-smic-a-1-700-euros-entrainerait-elle-la-destruction-de-230-000-emplois-comme-l-affirme-le-gouvernement_8274335.html"
-   },
-   {
-    "qui": "Argument LFI",
-    "texte": "Les exonérations de cotisations patronales sont passées de 40 Md€ (2018) à 80 Md€ (2024) sans faire monter les salaires.",
-    "media": "L'insoumission",
-    "url": "https://linsoumission.fr/2026/11/12/smic-macron-lecornu-escroquerie/"
    }
   ],
   "tensions": [
+   "La caisse de péréquation n'est pas chiffrée : on ne sait pas combien elle prélèverait aux grandes entreprises ni combien elle verserait aux TPE-PME.",
    "La mesure est « immédiate », mais son coût n'est pas écrit : le financement n'est donné qu'en global.",
    "Le gouvernement estime que sa propre hausse de 1,6 % coûte 5 000 à 20 000 emplois. Appliquer la même logique à +15 % donne un ordre de grandeur proche de 230 000, mais la méthode n'est pas publiée.",
    "Le RN critique la hausse du Smic tout en proposant +10 % sur les salaires, financés par une exonération de charges, donc par l'État.",
@@ -111,13 +106,78 @@
   "resume": "À gauche, tout le monde veut environ 1 700 €. Le vrai désaccord porte sur le nombre d'emplois perdus (de 34 500 à 230 000 selon les hypothèses) et sur qui paie : l'employeur ou l'État.",
   "eco": {
    "cout": "Pour l'État, pas de coût direct : c'est l'employeur qui paie environ +200 € net par salarié au Smic. Mais si les allègements de cotisations suivent le Smic, ils coûtent plus cher aux comptes publics.",
-   "financement": "Payé par les entreprises. LFI ne chiffre pas d'aide spécifique aux TPE dans ce chapitre.",
+   "financement": "Payé par les employeurs. Pour les petites entreprises, LFI prévoit une caisse de péréquation financée par les grandes entreprises, un impôt sur les sociétés progressif, des tarifs réglementés de l'énergie et le blocage des prix de première nécessité. Dans son budget 2027, LFI affiche 37,5 Md€ pour « relancer l'activité par les revenus populaires », financés par 106,4 Md€ de recettes nouvelles (impôts sur les plus riches et les grandes entreprises).",
    "rapporte": "Plus de pouvoir d'achat, donc de consommation et de cotisations. Coût en emplois estimé entre ~34 500 (OFCE) et 230 000 (gouvernement).",
    "chiffre": "Coût emplois : 34 500 à 230 000",
    "sources": [
     {
      "media": "franceinfo",
      "url": "https://www.franceinfo.fr/vrai-ou-fake/vrai-ou-faux-une-hausse-du-smic-a-1-700-euros-entrainerait-elle-la-destruction-de-230-000-emplois-comme-l-affirme-le-gouvernement_8274335.html"
+    },
+    {
+     "media": "L'Avenir en commun, financement",
+     "url": "https://www.lavenirencommun.org/financement/"
+    }
+   ]
+  },
+  "logique": {
+   "texte": "Pour LFI, le Smic à 1 700 € n'est pas une mesure isolée : c'est le moteur d'une relance par la demande. Mieux payés, les salariés modestes consomment plus, ce qui fait tourner l'activité et l'emploi, et rapporte des cotisations à la Sécurité sociale. LFI juge que l'austérité a échoué : les coupes ont freiné la croissance sans réduire le déficit. Pour que les petites entreprises puissent suivre, le programme prévoit des mesures d'accompagnement, financées en partie par les grandes entreprises.",
+   "arguments": [
+    {
+     "texte": "La consommation populaire porte une grosse part de l'activité : LFI avance que « 51% de l'activité du pays » en dépend (Antoine Léaument parle de 53 % du PIB).",
+     "media": "L'Insoumission (média du mouvement)",
+     "url": "https://linsoumission.fr/2026/11/09/macron-smic-arnaque/"
+    },
+    {
+     "texte": "Un Smic plus élevé augmente les cotisations, donc renforce les comptes de la Sécurité sociale et des retraites.",
+     "media": "Quartz FR (Antoine Léaument, député LFI)",
+     "url": "https://fr.qz.com/antoine-leaument-reclame-smic-1700-euros-net-conference-sociale-110826"
+    },
+    {
+     "texte": "Le budget LFI 2027 consacre 37,5 Md€ à « relancer l'activité par les revenus populaires », et attend un regain d'activité dès 2028. Selon LFI, les coupes budgétaires « ont fait baisser la croissance et augmenter le déficit ».",
+     "media": "L'Avenir en commun, page financement",
+     "url": "https://www.lavenirencommun.org/financement/"
+    },
+    {
+     "texte": "Exemple mis en avant : l'Espagne a augmenté son salaire minimum 8 fois entre 2018 et 2026.",
+     "media": "L'Insoumission",
+     "url": "https://linsoumission.fr/2026/11/09/macron-smic-arnaque/"
+    },
+    {
+     "texte": "Environ 2 millions de salariés sont concernés, dont 60 % de femmes et près de 40 % dans l'hôtellerie-restauration.",
+     "media": "L'Insoumission",
+     "url": "https://linsoumission.fr/2026/11/09/macron-smic-arnaque/"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "un-nouveau-pacte-productif-pour-les-petites-entreprises-2",
+     "texte": "Caisse de péréquation interentreprises, financée par un barème progressif : les grandes entreprises aident les TPE-PME à passer les difficultés de trésorerie",
+     "url": "https://www.lavenirencommun.org/programme/une-economie-au-service-des-besoins/un-nouveau-pacte-productif-pour-les-petites-entreprises/"
+    },
+    {
+     "id": "faire-la-revolution-fiscale-2",
+     "texte": "Impôt sur les sociétés progressif : moins d'impôt pour les PME, plus pour les grands groupes",
+     "url": "https://www.lavenirencommun.org/programme/une-economie-au-service-des-besoins/faire-la-revolution-fiscale/"
+    },
+    {
+     "id": "creer-un-etat-d-urgence-sociale-1",
+     "texte": "Blocage et encadrement des prix des produits de première nécessité, énergie et carburant compris",
+     "url": "https://www.lavenirencommun.org/programme/une-economie-au-service-des-besoins/creer-un-etat-d-urgence-sociale/"
+    },
+    {
+     "texte": "Retour des tarifs réglementés de l'énergie pour les entreprises",
+     "url": "https://www.lavenirencommun.org/programme/une-economie-au-service-des-besoins/un-nouveau-pacte-productif-pour-les-petites-entreprises/"
+    },
+    {
+     "id": "un-nouveau-pacte-productif-pour-les-petites-entreprises-1",
+     "texte": "Sanctions renforcées contre les retards de paiement des grands groupes envers les TPE-PME",
+     "url": "https://www.lavenirencommun.org/programme/une-economie-au-service-des-besoins/un-nouveau-pacte-productif-pour-les-petites-entreprises/"
+    },
+    {
+     "id": "un-nouveau-pacte-productif-pour-les-petites-entreprises-9",
+     "texte": "Facilités de trésorerie à taux zéro pour les TPE-PME via le pôle public bancaire",
+     "url": "https://www.lavenirencommun.org/programme/une-economie-au-service-des-besoins/un-nouveau-pacte-productif-pour-les-petites-entreprises/"
     }
    ]
   }
