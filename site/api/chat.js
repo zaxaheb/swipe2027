@@ -4,7 +4,7 @@ import { SYSTEM, PROMPT_VERSION } from "../lib/prompts.js";
 import { retrieve, mesure, base } from "../lib/data.js";
 import { consume } from "../lib/quota.js";
 import { messages, textOf } from "../lib/anthropic.js";
-import { select } from "../lib/supa.js";
+import { select, insert } from "../lib/supa.js";
 
 const cleanMsgs = (arr) => (Array.isArray(arr) ? arr : []).slice(-12)
   .map((m) => ({ role: m.role === "assistant" ? "assistant" : "user", content: String(m.content || "").slice(0, 2000) }))
@@ -31,7 +31,10 @@ export default async function handler(req, res) {
       } else system = SYSTEM.general(retrieve(msgs[msgs.length - 1].content));
     }
     const d = await messages({ max_tokens: 700, system, messages: msgs });
-    res.status(200).json({ text: textOf(d), v: PROMPT_VERSION });
+    const text = textOf(d);
+    // Journal anonyme : ni IP, ni compte, ni historique ; seulement la dernière question et la réponse.
+    if (mode !== "profil") await insert("chats", { mode, mesure_id: mode === "mesure" ? String(mesureId).slice(0, 160) : null, question: msgs[msgs.length - 1].content.slice(0, 1000), reponse: text.slice(0, 3000), v: PROMPT_VERSION }).catch(() => {});
+    res.status(200).json({ text, v: PROMPT_VERSION });
   } catch (e) {
     res.status(e.status || 500).json({ error: e.status === 429 ? "rate_limited" : "erreur" });
   }

@@ -19,3 +19,23 @@ export async function upsert(table, row) {
   const r = await fetch(`${URL_}/rest/v1/${table}`, { method: "POST", headers: { ...H(), Prefer: "resolution=merge-duplicates" }, body: JSON.stringify(row) });
   if (!r.ok) throw new Error(`upsert ${table}: ${r.status} ${await r.text()}`);
 }
+export async function insert(table, row) {
+  const r = await fetch(`${URL_}/rest/v1/${table}`, { method: "POST", headers: { ...H(), Prefer: "return=minimal" }, body: JSON.stringify(row) });
+  if (!r.ok) throw new Error(`insert ${table}: ${r.status} ${await r.text()}`);
+}
+export async function del(table, query) {
+  const r = await fetch(`${URL_}/rest/v1/${table}?${query}`, { method: "DELETE", headers: H() });
+  if (!r.ok) throw new Error(`delete ${table}: ${r.status}`);
+}
+/** Vérifie le jeton d'un utilisateur connecté et renvoie son id (ou null). */
+export async function userFromToken(token) {
+  if (!token) return null;
+  const r = await fetch(`${URL_}/auth/v1/user`, { headers: { apikey: KEY, Authorization: `Bearer ${token}` } });
+  if (!r.ok) return null;
+  const u = await r.json(); return u && u.id ? u : null;
+}
+/** Supprime définitivement un utilisateur (API d'administration Auth). */
+export async function deleteUser(id) {
+  const r = await fetch(`${URL_}/auth/v1/admin/users/${id}`, { method: "DELETE", headers: H() });
+  if (!r.ok) throw new Error(`deleteUser: ${r.status} ${await r.text()}`);
+}

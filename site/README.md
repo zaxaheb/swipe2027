@@ -20,7 +20,8 @@ supabase/schema.sql    les tables et règles de sécurité à créer dans Supaba
 
 1. Crée un compte sur https://supabase.com, puis un projet (région : Paris ou Francfort).
 2. **SQL Editor > New query** : colle `supabase/schema.sql`, puis clique sur **Run**.
-3. **Authentication > Sign In / Providers > Email** : laisse « Email » activé. Le lien magique est actif par défaut.
+3. **SQL Editor** : lance aussi `supabase/migration-002.sql` (pseudos, consentement, journal des chats, tableau de bord).
+3 bis. **Authentication > Sign In / Providers > Email** : laisse « Email » activé mais **désactive « Confirm email »**. Les comptes se créent avec un pseudo et un mot de passe ; l'app génère un e-mail technique `pseudo@users.swipe2027.app` auquel aucun mail n'est envoyé. Mets aussi la longueur minimale du mot de passe à 8.
 4. **Authentication > URL Configuration** : mets l'URL de ton site (ex. `https://swipe2027.vercel.app`) dans *Site URL* et dans *Redirect URLs*.
 5. **Project Settings > API Keys** : note (les nouvelles clés `sb_publishable_…` / `sb_secret_…` et les anciennes `anon` / `service_role` marchent toutes les deux) :
    - `Project URL` (public) ;
@@ -44,10 +45,11 @@ Puis dans le tableau de bord Vercel > ton projet > **Settings > Environment Vari
 | Variable | Valeur |
 |---|---|
 | `ANTHROPIC_API_KEY` | ta clé API (console.anthropic.com) |
-| `ANTHROPIC_MODEL` | le modèle Claude choisi (il doit gérer l'outil web search) |
+| `ANTHROPIC_MODEL` | `claude-sonnet-5-5` (recommandé : bon rapport qualité/prix, gère la recherche web) |
 | `SUPABASE_URL` | Project URL |
 | `SUPABASE_SERVICE_ROLE_KEY` | clé service_role (secrète) |
 | `QUOTA_SALT` | une phrase au hasard (sert à hacher les IP) |
+| `ADMIN_PASSWORD` | mot de passe de la page `/admin.html` (12 caractères minimum conseillés) |
 | `QUOTA_CHAT` / `QUOTA_FICHE` / `QUOTA_PROFIL` | optionnel : 30 / 3 / 5 par IP et par jour par défaut |
 
 Ensuite, mets en production avec `npx vercel --prod`.
@@ -104,3 +106,22 @@ Points d'attention :
 - Apple refuse les apps qui ne sont qu'un site emballé (règle 4.2). Les comptes, le profil, le hors-ligne et des notifications (ex. « la mesure du jour ») aident à passer.
 - Les deux stores demandent une politique de confidentialité et la suppression de compte dans l'app. Les règles RLS du schéma permettent déjà de supprimer son profil : un bouton reste à ajouter.
 - Contenu politique : les stores l'acceptent pour l'information électorale, à condition de citer ses sources et de ne pas se faire passer pour un service officiel.
+
+## 6. Suivre l'activité : la page admin
+
+`https://<ton-site>/admin.html` → mot de passe = `ADMIN_PASSWORD`. On y voit :
+- inscrits, profils actifs, nombre de réponses ;
+- mesures les plus vues, aimées, rejetées ;
+- questions posées à l'IA (anonymes : ni compte ni IP), avec la réponse en cliquant ;
+- utilisation de l'IA jour par jour ;
+- fiches générées, avec un bouton pour en supprimer une (elle pourra être régénérée).
+
+Les données brutes sont aussi dans Supabase > Table Editor (`profils`, `chats`, `fiches`, `usage`) et Authentication > Users.
+
+## 7. Données personnelles
+
+- Case de consentement obligatoire à l'inscription (les réponses peuvent révéler des opinions politiques : article 9 RGPD).
+- Page `/confidentialite.html` : **remplace `CONTACT_A_COMPLETER`** par une adresse de contact avant le lancement.
+- Bouton « Supprimer mon compte » dans Profil : efface le compte et toutes les réponses (`api/compte.js`).
+- Chats : journal anonyme, à purger après 12 mois (`select purge_chats();` dans le SQL Editor, ou une tâche Cron Supabase).
+- Ce n'est pas un avis juridique : fais relire avant un lancement public.

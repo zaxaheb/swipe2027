@@ -222,6 +222,7 @@ details.lcard summary::-webkit-details-marker{display:none}
   <div class="topbar">
     <h1>Swipe 2027</h1>
     <div class="tools">
+      <button class="chip" id="b-account" style="padding:6px 12px" onclick="location.hash='profil'">Se connecter</button>
       <button class="iconbtn" id="b-filter" aria-label="Filtrer les mesures"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg></button>
     </div>
   </div>
@@ -402,21 +403,51 @@ async function pullRemote(){
   try{ nextProfile(); show(location.hash.slice(1)||"swipe"); }catch(e){}
 }
 async function pushRemote(){ if(!SB||!USER) return; try{ await SB.from("profils").upsert({user_id:USER.id,swipes:SW,updated_at:new Date().toISOString()}); }catch(e){} }
-if(SB){ SB.auth.onAuthStateChange((ev,session)=>{ const u=session?session.user:null; const changed=(u&&u.id)!==(USER&&USER.id); USER=u; if(changed){ if(USER) pullRemote(); if($("#v-profil").classList.contains("on")) renderProfil(); } }); }
+function refreshAccountChip(){ const c=document.getElementById("b-account"); if(!c) return; c.hidden=!SB; c.textContent=USER?"@"+pseudoOf(USER):"Se connecter"; }
+setTimeout(refreshAccountChip,0);
+if(SB){ SB.auth.onAuthStateChange((ev,session)=>{ const u=session?session.user:null; const changed=(u&&u.id)!==(USER&&USER.id); USER=u; refreshAccountChip(); if(changed){ if(USER) pullRemote(); if($("#v-profil").classList.contains("on")) renderProfil(); } }); }
+const EMAIL_DOMAIN="users.swipe2027.app";             // e-mail technique : aucun mail n'est envoyé
+const pseudoOf=u=>u&&u.email?u.email.split("@")[0]:"";
+let AUTH_MODE="signup";
 function accountHTML(){
   if(!SB) return "";
-  if(USER) return `<div class="box prompt" style="padding-bottom:20px"><div class="label">Ton compte</div><div class="answer sm">Connecté avec ${esc(USER.email)}</div><p class="note" style="margin:8px 0 12px">Tes réponses sont sauvegardées et synchronisées sur tous tes appareils.</p><button class="cta ghost" id="b-logout">Se déconnecter</button></div>`;
-  return `<div class="box prompt" style="padding-bottom:20px"><div class="label">Garde tes réponses</div><div class="answer sm">Crée un compte avec ton email pour retrouver ton profil sur tous tes appareils.</div>
-   <form id="f-login" style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap"><input id="in-email" class="field" type="email" required placeholder="ton@email.fr" autocomplete="email" style="flex:1;min-width:200px"><button class="cta">Recevoir le lien</button></form>
-   <p class="note" id="login-st" style="margin:10px 0 0">Pas de mot de passe : tu reçois un lien de connexion par email.</p></div>`;
+  if(USER) return `<div class="box prompt" style="padding-bottom:20px"><div class="label">Ton compte</div><div class="answer sm">Connecté en tant que <b>@${esc(pseudoOf(USER))}</b></div><p class="note" style="margin:8px 0 12px">Tes réponses sont sauvegardées et synchronisées sur tous tes appareils.</p>
+    <div class="row" style="display:flex;gap:8px;flex-wrap:wrap"><button class="cta ghost" id="b-logout">Se déconnecter</button><button class="cta ghost" id="b-del" style="color:var(--contre)">Supprimer mon compte</button></div>
+    <div class="confirm" id="del-confirm"><span class="note">Ton compte et toutes tes réponses seront effacés définitivement.</span><button class="cta" id="b-del-yes" style="background:var(--contre)">Oui, tout supprimer</button><button class="cta ghost" id="b-del-no">Annuler</button></div><p class="note" id="del-st"></p></div>`;
+  const su=AUTH_MODE==="signup";
+  return `<div class="box prompt" style="padding-bottom:20px" id="compte"><div class="label">${su?"Crée ton compte":"Connexion"}</div><div class="answer sm">${su?"Choisis un pseudo et un mot de passe pour garder tes réponses sur tous tes appareils.":"Content de te revoir !"}</div>
+   <form id="f-auth" style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
+     <input id="in-user" class="field" required minlength="3" maxlength="20" pattern="[a-zA-Z0-9_]{3,20}" placeholder="Pseudo (lettres, chiffres, _)" autocomplete="username" autocapitalize="none">
+     <input id="in-pass" class="field" type="password" required minlength="8" placeholder="Mot de passe (8 caractères min.)" autocomplete="${su?"new-password":"current-password"}">
+     ${su?`<label class="note" style="display:flex;gap:10px;align-items:flex-start;color:var(--ink)"><input type="checkbox" id="in-consent" required style="margin-top:3px;width:18px;height:18px;flex:none"><span>J'accepte que mes réponses pour ou contre les mesures soient enregistrées avec mon compte. Elles peuvent révéler des opinions politiques. Je peux supprimer mon compte à tout moment. <a href="/confidentialite.html" target="_blank">Confidentialité</a></span></label>`:""}
+     <button class="cta">${su?"Créer mon compte":"Se connecter"}</button></form>
+   <p class="note" id="auth-st" style="margin:10px 0 0">${su?`Déjà un compte ? <button class="linkbtn" id="b-mode" style="margin:0">Se connecter</button>`:`Pas encore de compte ? <button class="linkbtn" id="b-mode" style="margin:0">Créer un compte</button>`}</p>
+   <p class="note" style="margin:6px 0 0">Pas d'email demandé. Garde bien ton mot de passe : sans email, on ne peut pas le récupérer.</p></div>`;
 }
 function bindAccount(root){
-  const f=root.querySelector("#f-login"); if(f) f.onsubmit=async e=>{ e.preventDefault(); const st=$("#login-st"); st.textContent="Envoi…";
-    const {error}=await SB.auth.signInWithOtp({email:$("#in-email").value.trim(),options:{emailRedirectTo:location.origin+"/#profil"}});
-    st.textContent=error?"Ça n'a pas marché : vérifie l'adresse et réessaie.":"C'est envoyé ! Ouvre le lien reçu par email sur cet appareil."; };
+  const m=root.querySelector("#b-mode"); if(m) m.onclick=()=>{ AUTH_MODE=AUTH_MODE==="signup"?"login":"signup"; renderProfil(); setTimeout(()=>{const c=$("#compte"); if(c) c.scrollIntoView({block:"center"});},50); };
+  const f=root.querySelector("#f-auth"); if(f) f.onsubmit=async e=>{ e.preventDefault(); const st=$("#auth-st");
+    const user=$("#in-user").value.trim().toLowerCase(), pass=$("#in-pass").value, email=user+"@"+EMAIL_DOMAIN;
+    if(!/^[a-z0-9_]{3,20}$/.test(user)){ st.textContent="Pseudo : 3 à 20 caractères, lettres, chiffres ou _."; return; }
+    st.textContent="Un instant…";
+    if(AUTH_MODE==="signup"){
+      const {data,error}=await SB.auth.signUp({email,password:pass});
+      if(error){ st.textContent=/registered|exists/i.test(error.message)?"Ce pseudo est déjà pris.":/password/i.test(error.message)?"Mot de passe trop faible : 8 caractères minimum.":"Ça n'a pas marché : "+error.message; return; }
+      if(!data.session){ st.textContent="Compte créé, mais la confirmation par email est activée dans Supabase : désactive-la (voir README)."; return; }
+      USER=data.session.user;
+      try{ await SB.from("profils").upsert({user_id:USER.id,username:user,consent_at:new Date().toISOString(),swipes:SW,updated_at:new Date().toISOString()}); }catch(e){}
+      toast("Bienvenue @"+user+" !"); renderProfil();
+    } else {
+      const {error}=await SB.auth.signInWithPassword({email,password:pass});
+      st.textContent=error?"Pseudo ou mot de passe incorrect.":"Connecté !";
+    } };
   const o=root.querySelector("#b-logout"); if(o) o.onclick=async()=>{ await SB.auth.signOut(); USER=null; renderProfil(); };
+  const d=root.querySelector("#b-del"); if(d){ d.onclick=()=>$("#del-confirm").classList.add("on"); $("#b-del-no").onclick=()=>$("#del-confirm").classList.remove("on");
+    $("#b-del-yes").onclick=async()=>{ const st=$("#del-st"); st.textContent="Suppression…";
+      try{ const {data}=await SB.auth.getSession(); const r=await fetch(API+"/compte",{method:"DELETE",headers:{Authorization:"Bearer "+data.session.access_token}});
+        if(!r.ok) throw new Error(); await SB.auth.signOut().catch(()=>{}); USER=null; SW={}; HIST=[]; store.set("sw2027",SW); toast("Compte supprimé"); nextProfile(); location.hash="profil"; renderProfil(); }
+      catch(e){ st.textContent="La suppression a échoué. Réessaie, ou écris-nous (voir la page Confidentialité)."; } }; }
 }
-
 /* ================= navigation ================= */
 const VIEWS=["swipe","votes","cond","chat","profil"];
 const curView=()=>{ const v=location.hash.slice(1); return VIEWS.includes(v)?v:"swipe"; };
@@ -606,7 +637,7 @@ function openConvo(k){ CK=k; const isG=k==="g", m=isG?null:BYID[k.slice(2)];
   $("#cv-name").textContent=isG?"Parler politique":m.S.section+" · "+m.P;
   $("#cv-av").style.background=isG?"#111":gradOf(m); $("#cv-av").textContent=isG?"?":m.P;
   const H=CHATS[k]||[];
-  $("#cv-msgs").innerHTML=(m?`<div class="quote">${esc(m.t)}</div>`:`<div class="quote">Pose une question sur les programmes des candidats, les votes à l'Assemblée ou les condamnations. Réponses neutres, appuyées sur les données de l'app.</div>`)+H.map(x=>`<div class="msg ${x.role==="user"?"u":"a"}">${esc(x.content)}</div>`).join("");
+  $("#cv-msgs").innerHTML=(m?`<div class="quote">${esc(m.t)}</div>`:`<div class="quote">Pose une question sur les programmes des candidats, les votes à l'Assemblée ou les condamnations. Réponses neutres, appuyées sur les données de l'app.</div>`)+`<p class="note" style="text-align:center;margin:0 0 8px">Les questions sont enregistrées de façon anonyme pour améliorer l'app. N'y mets pas d'informations personnelles.</p>`+H.map(x=>`<div class="msg ${x.role==="user"?"u":"a"}">${esc(x.content)}</div>`).join("");
   const S=isG?["Que proposent les candidats sur les retraites ?","Comment le RN a voté sur le budget ?","Qui vote le plus souvent ensemble ?","C'est quoi la 6e République ?"]:["Qui paierait ?","Ça change quoi pour moi ?","Ça a marché ailleurs ?","Les principales critiques ?"];
   $("#cv-sugg").innerHTML=S.map(s=>`<button>${esc(s)}</button>`).join("");
   $$("#cv-sugg button").forEach(b=>b.onclick=()=>{$("#cv-in").value=b.textContent;$("#cv-form").requestSubmit();});
@@ -660,6 +691,7 @@ function renderProfil(){
   <div class="box prompt" style="padding-bottom:22px"><div class="label">Tes derniers choix</div><div class="liked">${recent.map(k=>`<div class="row"><b style="background:${SW[k]===1?"#e4f4ea":"#fbe7e6"};color:${SW[k]===1?"var(--pour)":"var(--contre)"}">${SW[k]===1?"POUR":"CONTRE"}</b><span><span class="badge ${PROGS[BYID[k].P].badge}" style="margin-right:6px">${BYID[k].P}</span>${esc(BYID[k].t)}</span></div>`).join("")}</div></div>
   <div class="box prompt" style="padding-bottom:22px"><div class="label">Ce que disent tes choix</div><p class="note" style="margin:0 0 12px">Un résumé neutre de tes réponses, sans te ranger dans un camp.</p><button class="cta" id="p-ai">Analyser mes choix</button><div class="answer sm" id="p-ai-out" style="margin-top:14px;white-space:pre-wrap"></div></div>
   <div class="endrow"><button class="cta ghost" id="p-reset">Tout recommencer</button></div>
+  <p class="note" style="text-align:center"><a href="/confidentialite.html">Confidentialité et données personnelles</a></p>
   <div class="confirm" id="p-confirm"><span class="note">Effacer toutes tes réponses ?</span><button class="cta" id="p-yes" style="background:var(--contre)">Oui, effacer</button><button class="cta ghost" id="p-no">Annuler</button></div></div>`;
   bindChart(p); bindAccount(p);
   $("#p-reset").onclick=()=>$("#p-confirm").classList.add("on"); $("#p-no").onclick=()=>$("#p-confirm").classList.remove("on");
