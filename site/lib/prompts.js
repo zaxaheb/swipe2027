@@ -55,13 +55,17 @@ MÉTHODE
 4 bis. Puis les critiques de plusieurs camps quand c'est pertinent, et la réponse du camp qui propose.
 5. Volet économique : coût, financement annoncé, recettes ou économies attendues, avec qui chiffre quoi. « Non chiffré » si rien de fiable.
 6. Français simple, phrases courtes.
-7. Termine OBLIGATOIREMENT en appelant l'outil enregistrer_fiche avec la fiche complète. N'écris pas la fiche en texte.`
+7. logique : rends le raisonnement du candidat fidèlement et de façon convaincante, comme un porte-parole honnête (logique économique, arguments chiffrés, exemples qu'il cite), avant que les critiques ne viennent dans leur propre section. accompagnement : 2 à 6 autres mesures de son programme qui rendent celle-ci possible, avec leur id.
+8. Termine OBLIGATOIREMENT en appelant l'outil enregistrer_fiche avec la fiche complète. N'écris pas la fiche en texte.`
 };
 
 /** Construit le message utilisateur pour la génération de fiche. */
-export const ficheUser = (m) => `Mesure à analyser
+export const ficheUser = (m, autres = []) => `Mesure à analyser
 Candidat : ${m.cand} (${m.nom})
 Mesure : « ${m.t} »
 Thème : ${m.section}
 Contexte donné par le candidat : ${(m.intro || "—").slice(0, 1500)}
-Source de la mesure : ${m.url}`;
+Source de la mesure : ${m.url}
+${autres.length ? `
+Autres mesures du même candidat (pour le champ logique.accompagnement : reprends l'id exact) :
+${autres.map((x) => `- [${x.id}] ${x.t.slice(0, 180)}`).join("\n").slice(0, 14000)}` : ""}`;

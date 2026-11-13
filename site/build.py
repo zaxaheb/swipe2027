@@ -15,7 +15,10 @@ v = json.load(open(D + 'assemblee/scrutins_17e_cles.json'))
 for s in v['scrutins']: s.pop('cle', None)
 c = json.load(open(D + 'condamnations/condamnations.json'))
 fi = json.load(open(D + 'fiches.json'))
+if os.path.exists(D + 'fiches_auto.json'):   # fiches générées par scripts/generer-fiches.mjs (les fiches écrites à la main restent prioritaires)
+    auto = json.load(open(D + 'fiches_auto.json')); fi = {**{k: v for k, v in auto.items() if k in {m['id'] for m in Mz}}, **fi}
 ids = {m['id'] for m in Mz}; assert all(k in ids for k in fi)
+print(len(fi), 'fiches au total')
 J = lambda o: json.dumps(o, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
 h = open(os.path.join(H, 'template.html')).read()
 for k, o in [('PROG', {'progs': progs, 'sections': S, 'mesures': Mz}), ('VOTES', v), ('COND', c), ('FICHES', fi)]:
