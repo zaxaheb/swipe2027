@@ -17,6 +17,13 @@ c = json.load(open(D + 'condamnations/condamnations.json'))
 fi = json.load(open(D + 'fiches.json'))
 if os.path.exists(D + 'fiches_auto.json'):   # fiches générées par scripts/generer-fiches.mjs (les fiches écrites à la main restent prioritaires)
     auto = json.load(open(D + 'fiches_auto.json')); fi = {**{k: v for k, v in auto.items() if k in {m['id'] for m in Mz}}, **fi}
+if os.path.exists(D + 'fiches_cowork.json'):  # fiches rédigées par les agents Claude (sourcées via pages lues) : au-dessus des fiches auto
+    cw = {k: v for k, v in json.load(open(D + 'fiches_cowork.json')).items() if k in {m['id'] for m in Mz}}
+    main = json.load(open(D + 'fiches.json'))
+    for k, fv in cw.items():
+        if k in main:
+            if not main[k].get("logique") and fv.get("logique"): fi[k] = {**main[k], "logique": fv["logique"]}
+        else: fi[k] = fv
 ids = {m['id'] for m in Mz}; assert all(k in ids for k in fi)
 print(len(fi), 'fiches au total')
 J = lambda o: json.dumps(o, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
