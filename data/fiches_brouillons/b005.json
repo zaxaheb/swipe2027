@@ -1,0 +1,287 @@
+{
+ "qualifier-tout-le-monde-1": {
+  "statut": "documente",
+  "resume": "LFI veut ouvrir plus de classes et de lycées professionnels et agricoles publics, à rebours de la politique récente qui ferme les formations jugées sans débouchés et mise sur l'apprentissage et les stages.",
+  "logique": {
+   "texte": "Pour LFI, la transition écologique demande des qualifications de pointe à tous les niveaux et dans tous les secteurs. Le mouvement juge les filières publiques d'enseignement professionnel « aujourd'hui dévastées ». Il les présente comme une voie d'excellence, où étudie un tiers de la jeunesse. L'idée est de reconstruire une offre publique, pensée avec la formation continue, plutôt que de laisser le privé et l'apprentissage prendre le relais. La mesure va avec un retour à plus d'heures de cours et moins de stages.",
+   "arguments": [
+    {
+     "texte": "La voie professionnelle accueille un tiers de la jeunesse du pays, selon le programme.",
+     "media": "L'Avenir en commun (programme LFI)",
+     "url": "https://www.lavenirencommun.org/programme/le-gout-du-futur-aux-nouvelles-frontieres-de-l-humanite/qualifier-tout-le-monde/#qualifier-tout-le-monde-1"
+    },
+    {
+     "texte": "Une mission flash de l'Assemblée (2025) constate que les réformes successives du bac pro ont surtout réduit les heures d'enseignement, au détriment de la qualité. 70 % des élèves ont des parents employés, ouvriers ou inactifs.",
+     "media": "Assemblée nationale, mission flash Bannier-Raux",
+     "url": "https://www.assemblee-nationale.fr/dyn/17/documents/refbacpro/l17n172686245_document"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "qualifier-tout-le-monde-6",
+     "texte": "Rétablir le bac pro en quatre ans et abroger les réformes récentes du lycée professionnel."
+    },
+    {
+     "id": "qualifier-tout-le-monde-9",
+     "texte": "Redonner des moyens aux lycées agricoles publics, d'abord dans les déserts éducatifs."
+    },
+    {
+     "id": "qualifier-tout-le-monde-12",
+     "texte": "Réserver la taxe d'apprentissage aux établissements publics."
+    },
+    {
+     "id": "qualifier-tout-le-monde-10",
+     "texte": "Rendre l'internat accessible et gratuit pour les mineurs éloignés, sous condition de ressources."
+    },
+    {
+     "id": "qualifier-tout-le-monde-2",
+     "texte": "Créer des centres polytechniques professionnels pour la formation initiale et continue."
+    }
+   ]
+  },
+  "concret": [
+   "En 2024, environ 172 800 élèves ont obtenu un bac pro, formés dans 2 100 lycées professionnels par plus de 60 000 professeurs.",
+   "La carte des formations est aujourd'hui révisée d'environ 6 % par an dans chaque académie.",
+   "La mesure ne fixe pas de nombre de classes ni de lycées à créer."
+  ],
+  "eco": {
+   "chiffre": "Non chiffré",
+   "cout": "Le programme ne donne ni objectif chiffré ni budget.",
+   "financement": "Le programme prévoit de réserver la taxe d'apprentissage aux établissements publics.",
+   "rapporte": "",
+   "sources": [
+    {
+     "media": "L'Avenir en commun (programme LFI)",
+     "url": "https://www.lavenirencommun.org/programme/le-gout-du-futur-aux-nouvelles-frontieres-de-l-humanite/qualifier-tout-le-monde/#qualifier-tout-le-monde-1"
+    },
+    {
+     "media": "Assemblée nationale",
+     "url": "https://www.assemblee-nationale.fr/dyn/17/documents/refbacpro/l17n172686245_document"
+    }
+   ]
+  },
+  "similaires": [],
+  "critiques": [
+   {
+    "camp": "Majorité présidentielle",
+    "qui": "Emmanuel Macron, président de la République",
+    "texte": "Sa réforme vise à fermer les formations sans débouchés et à en ouvrir là où l'économie a besoin de bras, par exemple dans le bâtiment, l'industrie et le numérique plutôt que dans le commerce. L'objectif affiché est aussi de réduire le décrochage.",
+    "media": "Politis (cite Le Point)",
+    "url": "https://www.politis.fr/articles/2023/09/lycees-pros-une-reforme-injuste-pour-les-plus-modestes/"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Syndicats enseignants (Snuep-FSU, CGT Éduc'action)",
+    "texte": "Ils dénoncent un tri des élèves et une logique qui ignore la qualité des emplois. Selon eux, réduire les heures de cours aggrave le décrochage.",
+    "media": "Politis",
+    "url": "https://www.politis.fr/articles/2023/09/lycees-pros-une-reforme-injuste-pour-les-plus-modestes/"
+   }
+  ],
+  "tensions": [
+   "Ouvrir des classes publiques ou adapter l'offre aux besoins des entreprises : les deux logiques s'opposent.",
+   "Le coût et le nombre de places visées ne sont pas précisés.",
+   "La place de l'apprentissage, très soutenu depuis 2018, reste un point de débat."
+  ],
+  "monde": [],
+  "maj": "13 nov. 2026"
+ },
+ "etre-une-grande-nation-scientifique-1": {
+  "statut": "documente",
+  "resume": "LFI veut augmenter l'argent public pour la recherche, alors que la France stagne autour de 2,2 % du PIB et que les budgets récents ont été rabotés.",
+  "logique": {
+   "texte": "Pour LFI, la science est un pilier de l'indépendance du pays face aux crises écologiques. La France doit rester une « nation du savoir scientifique ». Le mouvement veut des moyens stables et récurrents pour les laboratoires plutôt que des financements par appels à projets. Il propose de prendre l'argent du crédit d'impôt recherche, jugé peu efficace, pour le donner directement aux universités et instituts publics. Il veut aussi recruter plus de chercheurs titulaires.",
+   "arguments": [
+    {
+     "texte": "La France ne consacre que 2,18 % de son PIB à la recherche (2023), alors que six pays de l'UE, dont l'Allemagne, atteignent 3 %.",
+     "media": "Next (rapport de la Cour des comptes)",
+     "url": "https://next.ink/262413/recherche-francaise-la-cour-des-comptes-remet-les-key-labs-sur-le-tapis/"
+    },
+    {
+     "texte": "Le budget 2026 ne réalise qu'un quart à un cinquième de la hausse prévue par la loi de programmation de la recherche pour 2026.",
+     "media": "Sénat, avis budgétaire",
+     "url": "https://www.senat.fr/rap/a25-144-51/a25-144-51_mono.html"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "etre-une-grande-nation-scientifique-6",
+     "texte": "Supprimer le crédit d'impôt recherche au profit de dotations récurrentes aux universités et instituts."
+    },
+    {
+     "id": "etre-une-grande-nation-scientifique-5",
+     "texte": "Supprimer l'ANR et renforcer les grands instituts publics comme le CNRS."
+    },
+    {
+     "id": "etre-une-grande-nation-scientifique-3",
+     "texte": "Recruter sur statut de chercheur ou d'enseignant-chercheur après le doctorat."
+    },
+    {
+     "id": "etre-une-grande-nation-scientifique-2",
+     "texte": "Financer des plans de recherche sur des secteurs d'avenir."
+    }
+   ]
+  },
+  "concret": [
+   "La loi de programmation de la recherche (2020) vise un budget annuel de 20 Md€ en 2030 et au moins 3 % du PIB pour la recherche.",
+   "Cette trajectoire est en retard pour la deuxième année consécutive, selon le Sénat.",
+   "En 2024, environ 900 M€ de crédits de la recherche et du supérieur ont été annulés par décret.",
+   "La mesure ne fixe pas de niveau chiffré à atteindre."
+  ],
+  "eco": {
+   "chiffre": "Non chiffré",
+   "cout": "Le programme ne donne pas de montant. À titre de repère, passer de 2,2 % à 3 % du PIB représente un effort public et privé très important.",
+   "financement": "Le programme propose de redéployer le crédit d'impôt recherche vers des dotations aux laboratoires publics.",
+   "rapporte": "",
+   "sources": [
+    {
+     "media": "Sénat",
+     "url": "https://www.senat.fr/rap/a25-144-51/a25-144-51_mono.html"
+    },
+    {
+     "media": "Next",
+     "url": "https://next.ink/262413/recherche-francaise-la-cour-des-comptes-remet-les-key-labs-sur-le-tapis/"
+    }
+   ]
+  },
+  "similaires": [
+   {
+    "camp": "Sénateurs de plusieurs bords (LR, centristes, PCF)",
+    "prop": "Ils demandent de respecter la trajectoire de hausse prévue par la loi de programmation de la recherche."
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Gouvernement (2024)",
+    "qui": "Ministère de l'Enseignement supérieur et de la Recherche",
+    "texte": "Pour réduire le déficit sans hausser les impôts, le ministère a annulé des crédits. Il assure que les salaires et les moyens de base des laboratoires sont préservés.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/education/un-tres-mauvais-signal-un-crime-les-senateurs-tres-remontes-contre-les-900-millions-deuros-deconomies-dans-la-recherche-e"
+   },
+   {
+    "camp": "Institution indépendante",
+    "qui": "Cour des comptes",
+    "texte": "La Cour insiste moins sur le montant que sur l'organisation. Elle propose de réduire le nombre de laboratoires mixtes et de concentrer les moyens sur certains d'entre eux.",
+    "media": "Next",
+    "url": "https://next.ink/262413/recherche-francaise-la-cour-des-comptes-remet-les-key-labs-sur-le-tapis/"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Pierre Ouzoulias, sénateur PCF",
+    "texte": "Il qualifie les coupes de « coup de rabot magistral » contre la capacité future du pays.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/education/un-tres-mauvais-signal-un-crime-les-senateurs-tres-remontes-contre-les-900-millions-deuros-deconomies-dans-la-recherche-e"
+   }
+  ],
+  "tensions": [
+   "L'objectif de 3 % inclut la recherche privée : la hausse de la seule dépense publique ne suffit pas à l'atteindre.",
+   "Supprimer le crédit d'impôt recherche pourrait réduire la recherche des entreprises : c'est un point de débat.",
+   "Le niveau visé n'est pas chiffré dans le programme."
+  ],
+  "monde": [
+   {
+    "pays": "Allemagne",
+    "texte": "Elle consacre environ 3,1 % de son PIB à la R&D et vise 3,5 %.",
+    "media": "Sénat",
+    "url": "https://www.senat.fr/rap/a25-144-51/a25-144-51_mono.html"
+   }
+  ],
+  "maj": "13 nov. 2026"
+ },
+ "creer-une-conscription-ecologique-pour-le-secours-collectif-1": {
+  "statut": "documente",
+  "resume": "LFI veut un service citoyen obligatoire avant 25 ans, payé au Smic et tourné vers les secours face aux crises climatiques ; son coût, chiffré à plus de 18 Md€ par an en 2022 par l'Institut Montaigne, est au cœur du débat.",
+  "logique": {
+   "texte": "Pour LFI, le service national universel (SNU) a été coûteux et inutile, et le nouveau service militaire volontaire ne profite qu'aux jeunes les plus précaires. Le mouvement propose à la place un service obligatoire avant 25 ans, rémunéré au Smic revalorisé. Sa mission principale serait d'aider la société à faire face aux crises climatiques : incendies, inondations, secours. Jean-Luc Mélenchon veut ainsi disposer d'une grande réserve formée, mobilisable en masse lors des catastrophes. Le service inclurait aussi un bilan de santé et une remise à niveau en lecture et calcul.",
+   "arguments": [
+    {
+     "texte": "Après les incendies de l'été, Jean-Luc Mélenchon défend une garde de sécurité civile constituée par conscription, pour apporter « des renforts efficaces » en cas de crise.",
+     "media": "L'info durable (AFP)",
+     "url": "https://www.linfodurable.fr/presidentielle-melenchon-colore-sa-rentree-en-vert-en-proposant-la-conscription-ecologique-58678"
+    },
+    {
+     "texte": "En 2022, l'équipe de campagne chiffrait la mesure à 7,4 Md€ par an, dont environ 4 Md€ compensés par des économies.",
+     "media": "Institut Montaigne",
+     "url": "https://www.institutmontaigne.org/presidentielle-2022/jean-luc-melenchon/mettre-en-place-une-conscription-citoyenne-de-9-mois-remuneree-au-smic-pour-les-moins-de-25-ans/"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "creer-une-conscription-ecologique-pour-le-secours-collectif-2",
+     "texte": "Une conscription de neuf mois, d'abord consacrée à l'adaptation aux crises climatiques."
+    },
+    {
+     "id": "creer-une-conscription-ecologique-pour-le-secours-collectif-4",
+     "texte": "Un bilan de santé et une évaluation en lecture, écriture et calcul, avec mise à niveau."
+    },
+    {
+     "id": "creer-une-conscription-ecologique-pour-le-secours-collectif-5",
+     "texte": "Abroger le service militaire volontaire créé par Emmanuel Macron."
+    },
+    {
+     "id": "creer-une-conscription-ecologique-pour-le-secours-collectif-6",
+     "texte": "Créer une garde nationale et régionale sous commandement civil."
+    },
+    {
+     "id": "creer-une-conscription-ecologique-pour-le-secours-collectif-3",
+     "texte": "Proposer aux volontaires ayant des compétences rares (cyber…) d'être affectés selon ces compétences."
+    }
+   ]
+  },
+  "concret": [
+   "La conscription a été suspendue en France en 1997.",
+   "Le service militaire volontaire voulu par Emmanuel Macron dure dix mois ; il vise 3 000 jeunes en 2026 et 50 000 par an en 2035.",
+   "La mesure LFI concernerait toute une classe d'âge, soit environ 680 000 jeunes par an selon l'Institut Montaigne."
+  ],
+  "eco": {
+   "chiffre": "≈ 18,5 Md€ / an (Institut Montaigne, version 2022)",
+   "cout": "En 2022, l'Institut Montaigne estimait le coût entre 18 et 19,5 Md€ par an, dont 10,8 Md€ de salaires au Smic revalorisé. L'équipe de campagne l'estimait à 7,4 Md€.",
+   "financement": "Le programme 2022 comptait sur environ 4 Md€ d'économies, notamment la fin de dispositifs existants comme la Journée défense et citoyenneté.",
+   "rapporte": "Gains possibles pour les structures d'accueil et le secteur de la défense, selon l'Institut Montaigne.",
+   "sources": [
+    {
+     "media": "Institut Montaigne",
+     "url": "https://www.institutmontaigne.org/presidentielle-2022/jean-luc-melenchon/mettre-en-place-une-conscription-citoyenne-de-9-mois-remuneree-au-smic-pour-les-moins-de-25-ans/"
+    }
+   ]
+  },
+  "similaires": [
+   {
+    "camp": "Emmanuel Macron (Renaissance)",
+    "prop": "Service militaire volontaire de dix mois, à partir de l'été 2026."
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Think tank libéral",
+    "qui": "Institut Montaigne",
+    "texte": "L'institut juge la mesure lourde à mettre en place vu son ampleur. Il chiffre son coût à environ 18,5 Md€ par an, plus du double de l'estimation de LFI. Il note aussi que le service remplacerait une année d'études ou de travail, ce qui réduirait l'activité.",
+    "media": "Institut Montaigne (analyse du programme 2022)",
+    "url": "https://www.institutmontaigne.org/presidentielle-2022/jean-luc-melenchon/mettre-en-place-une-conscription-citoyenne-de-9-mois-remuneree-au-smic-pour-les-moins-de-25-ans/"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Équipe de campagne de Jean-Luc Mélenchon (2022)",
+    "texte": "Elle chiffrait le coût net à 7,4 Md€, en supposant que 20 % des jeunes seraient inaptes à la formation militaire et en comptant environ 4 Md€ d'économies.",
+    "media": "Institut Montaigne",
+    "url": "https://www.institutmontaigne.org/presidentielle-2022/jean-luc-melenchon/mettre-en-place-une-conscription-citoyenne-de-9-mois-remuneree-au-smic-pour-les-moins-de-25-ans/"
+   }
+  ],
+  "tensions": [
+   "Les chiffrages datent de 2022 : la version 2027 n'est pas encore évaluée.",
+   "Le coût dépend fortement du Smic revalorisé à 1 700 € net, une autre mesure du programme.",
+   "L'encadrement et l'hébergement de centaines de milliers de jeunes par an posent des questions logistiques."
+  ],
+  "monde": [
+   {
+    "pays": "Suisse, Autriche, Grèce, Norvège, Finlande, Danemark, Estonie, Lituanie",
+    "texte": "Ces pays européens ont encore un service militaire obligatoire. L'Allemagne et l'Italie ont des services civiques proches du modèle français.",
+    "media": "Institut Montaigne",
+    "url": "https://www.institutmontaigne.org/presidentielle-2022/jean-luc-melenchon/mettre-en-place-une-conscription-citoyenne-de-9-mois-remuneree-au-smic-pour-les-moins-de-25-ans/"
+   }
+  ],
+  "maj": "13 nov. 2026"
+ }
+}

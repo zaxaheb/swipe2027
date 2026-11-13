@@ -1,0 +1,355 @@
+{
+ "garantir-une-retraite-digne-1": {
+  "maj": "13 nov. 2026",
+  "concret": [
+   "Aujourd'hui, l'âge légal monte progressivement vers 64 ans depuis la réforme de 2023.",
+   "LFI veut d'abord abroger la réforme de 2023, puis revenir pas à pas à 60 ans à taux plein après 40 annuités.",
+   "L'Institut Montaigne estimait en 2024 le paquet retraites du Nouveau Front populaire (60 ans, minimum de pension au Smic, années de RSA comptées) à environ 58 Md€ par an en 2027, avec une fourchette de 49 à 67 Md€.",
+   "Dans ce chiffrage, le retour sur la réforme de 2010 (62 ans) pèse 27 Md€ et l'abrogation de celle de 2023 pèse 8,2 Md€."
+  ],
+  "similaires": [
+   {
+    "camp": "RN",
+    "prop": "Départ à 62 ans, voire 60 ans pour ceux qui ont commencé à travailler tôt (avant 20 ans, avec 40 annuités)"
+   },
+   {
+    "camp": "PS / Écologistes / PCF",
+    "prop": "Abrogation de la réforme de 2023, inscrite dans le programme NFP de 2024"
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Économistes",
+    "qui": "Gilbert Cette, président du Conseil d'orientation des retraites",
+    "texte": "Cité par l'Institut Montaigne : le seul retour à 60 ans « pourrait induire un coût annuel pour les finances publiques compris entre 50 Md€ et 120 Md€ », si l'on compte la perte de recettes fiscales.",
+    "media": "Institut Montaigne",
+    "url": "https://www.institutmontaigne.org/legislatives-2024/nouveau-front-populaire/abroger-la-reforme-des-retraites-restaurer-la-retraite-a-60-ans-en-prenant-en-compte-le-rsa-en-portant-le-minimum-contributif-au-smic/"
+   },
+   {
+    "camp": "Think tank libéral",
+    "qui": "Institut Montaigne",
+    "texte": "Juge que la mesure « pourrait constituer une rupture importante ». Le financement devrait suivre le même calendrier que la dépense pour ne pas creuser le déficit, alors que la France est sous procédure européenne pour déficit excessif.",
+    "media": "Institut Montaigne",
+    "url": "https://www.institutmontaigne.org/legislatives-2024/nouveau-front-populaire/abroger-la-reforme-des-retraites-restaurer-la-retraite-a-60-ans-en-prenant-en-compte-le-rsa-en-portant-le-minimum-contributif-au-smic/"
+   },
+   {
+    "camp": "Faisabilité politique",
+    "qui": "Institut Montaigne",
+    "texte": "L'abrogation de 2023 peut rassembler au-delà de la gauche, mais le reste est moins consensuel : « En cas de majorité relative, il paraît improbable qu'ils puissent être votés. »",
+    "media": "Institut Montaigne",
+    "url": "https://www.institutmontaigne.org/legislatives-2024/nouveau-front-populaire/abroger-la-reforme-des-retraites-restaurer-la-retraite-a-60-ans-en-prenant-en-compte-le-rsa-en-portant-le-minimum-contributif-au-smic/"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Équipe de campagne (2024)",
+    "texte": "Elle juge la mesure applicable juridiquement et politiquement forte, surtout sur l'âge légal, même sans majorité absolue.",
+    "media": "Institut Montaigne",
+    "url": "https://www.institutmontaigne.org/legislatives-2024/nouveau-front-populaire/abroger-la-reforme-des-retraites-restaurer-la-retraite-a-60-ans-en-prenant-en-compte-le-rsa-en-portant-le-minimum-contributif-au-smic/"
+   },
+   {
+    "qui": "Analyse juridique",
+    "texte": "L'Institut Montaigne ne voit « pas de difficulté a priori » sur la constitutionnalité d'une telle loi.",
+    "media": "Institut Montaigne",
+    "url": "https://www.institutmontaigne.org/legislatives-2024/nouveau-front-populaire/abroger-la-reforme-des-retraites-restaurer-la-retraite-a-60-ans-en-prenant-en-compte-le-rsa-en-portant-le-minimum-contributif-au-smic/"
+   }
+  ],
+  "tensions": [
+   "Le chiffrage le plus cité date de 2024 : le programme 2027 n'est pas encore chiffré mesure par mesure.",
+   "Les estimations vont de 50 à 120 Md€ selon qu'on compte ou non les pertes d'impôts et de cotisations dues aux départs plus précoces.",
+   "Le RN promet aussi un retour vers 60-62 ans : le débat porte surtout sur l'ampleur et le financement."
+  ],
+  "monde": [],
+  "resume": "Revenir à 60 ans, c'est populaire mais cher : de 50 à 120 milliards par an selon les estimations. Tout dépend de qui paie.",
+  "eco": {
+   "cout": "Environ 58 Md€ par an en 2027 pour le paquet retraites NFP (fourchette 49 à 67 Md€). Jusqu'à 50 à 120 Md€ pour le seul retour à 60 ans selon Gilbert Cette, en comptant les recettes perdues.",
+   "financement": "LFI annonce, pour tout son programme, 106,4 Md€ de recettes nouvelles en 2027, sans financement fléché mesure par mesure. Le détail est sur son site.",
+   "rapporte": "Plus de temps libre et d'emplois libérés pour les jeunes selon LFI, mais moins d'actifs qui cotisent.",
+   "chiffre": "≈ 58 Md€ / an",
+   "sources": [
+    {
+     "media": "Institut Montaigne",
+     "url": "https://www.institutmontaigne.org/legislatives-2024/nouveau-front-populaire/abroger-la-reforme-des-retraites-restaurer-la-retraite-a-60-ans-en-prenant-en-compte-le-rsa-en-portant-le-minimum-contributif-au-smic/"
+    },
+    {
+     "media": "L'Avenir en commun",
+     "url": "https://www.lavenirencommun.org/financement/"
+    }
+   ]
+  },
+  "statut": "documente",
+  "logique": {
+   "texte": "Pour LFI, la retraite est une conquête sociale : un droit au repos et à une vie libérée des contraintes de l'emploi. Le mouvement juge que la réforme à 64 ans a été imposée contre les syndicats et le Parlement. Il y voit une étape vers l'affaiblissement de la répartition au profit des fonds financiers. Il veut donc d'abord annuler 64 ans, puis redescendre pas à pas vers 60 ans avec 40 annuités. Le financement doit venir du partage des richesses : plus de salaires, donc plus de cotisations, et la fin des exonérations non compensées.",
+   "arguments": [
+    {
+     "texte": "Le budget 2027 de LFI affiche 9 Md€ de dépenses pour cette mesure la première année, dans une enveloppe de 12 Md€ pour la Sécurité sociale (retraites et chômage).",
+     "media": "L'Avenir en commun (programme LFI)",
+     "url": "https://www.lavenirencommun.org/programme/mettre-en-securite-sociale/garantir-une-retraite-digne/#garantir-une-retraite-digne-1"
+    },
+    {
+     "texte": "Mélenchon affirme qu'une hausse de 1 % des salaires rapporte 2,5 Md€ aux caisses de retraite : augmenter les salaires finance donc les pensions (argument de 2019, non vérifié par l'article).",
+     "media": "Public Sénat (2019)",
+     "url": "https://www.publicsenat.fr/actualites/politique/retraites-a-60-ans-financee-par-la-hausse-des-salaires-et-l-investissement-dit"
+    },
+    {
+     "texte": "Il promet de hausser les cotisations moins vite que les salaires, pour que les salariés ne perdent rien : « vous ne sentirez rien passer ».",
+     "media": "Public Sénat (2019)",
+     "url": "https://www.publicsenat.fr/actualites/politique/retraites-a-60-ans-financee-par-la-hausse-des-salaires-et-l-investissement-dit"
+    },
+    {
+     "texte": "Le programme 2027 prévoit 106,4 Md€ de recettes nouvelles (retour sur les baisses d'impôts depuis 2017, taxe sur les très grandes fortunes, grandes entreprises), pour 81,7 Md€ de dépenses nouvelles.",
+     "media": "L'Avenir en commun (programme LFI)",
+     "url": "https://www.lavenirencommun.org/financement/"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "garantir-une-retraite-digne-2",
+     "texte": "Porter toutes les pensions d'une carrière complète au niveau du Smic revalorisé."
+    },
+    {
+     "id": "garantir-une-retraite-digne-3",
+     "texte": "Compter les périodes au RSA pour valider des trimestres de retraite."
+    },
+    {
+     "id": "garantir-une-retraite-digne-4",
+     "texte": "Supprimer les avantages fiscaux de la retraite par capitalisation pour financer la répartition."
+    },
+    {
+     "id": "garantir-une-retraite-digne-5",
+     "texte": "Faire compenser par l'État les exonérations de cotisations, pour renflouer les caisses."
+    },
+    {
+     "id": "garantir-une-retraite-digne-7",
+     "texte": "Supprimer la décote, jugée pénalisante surtout pour les femmes."
+    },
+    {
+     "id": "augmenter-les-salaires-1",
+     "texte": "Smic à 1 700 € net et salaires indexés sur l'inflation, ce qui augmente les cotisations."
+    }
+   ]
+  }
+ },
+ "reunir-une-assemblee-constituante-pour-passer-a-la-6e-republique-1": {
+  "maj": "13 nov. 2026",
+  "concret": [
+   "LFI veut passer par un référendum (article 11 de la Constitution) pour convoquer une Assemblée constituante, qui écrirait une nouvelle Constitution.",
+   "Dans la 6e République proposée : proportionnelle à l'Assemblée, fin du 49.3, et débat obligatoire à l'Assemblée pour toute pétition de plus de 500 000 signatures.",
+   "Aujourd'hui, réviser la Constitution passe par l'article 89 : vote du même texte par l'Assemblée et le Sénat, puis référendum ou Congrès."
+  ],
+  "similaires": [
+   {
+    "camp": "RN",
+    "prop": "Référendums sur l'immigration et la préférence nationale, RIC et proportionnelle : il vise lui aussi l'article 11"
+   },
+   {
+    "camp": "LR (Retailleau)",
+    "prop": "Référendum sur l'immigration et le droit du sol"
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Juristes",
+    "qui": "110 constitutionnalistes, tribune dans Le Monde",
+    "texte": "L'article 11 ne permet pas de réviser la Constitution. « Que la Constitution soit complexe à réviser ne donne pas le droit de s'en affranchir. » Le Conseil constitutionnel peut contrôler un décret de référendum avant le vote (jurisprudence Hauchemaille, 2000).",
+    "media": "Public Sénat, 12 nov. 2026",
+    "url": "https://www.publicsenat.fr/actualites/politique/revision-de-la-constitution-110-constitutionnalistes-rappellent-a-marine-le-pen-et-jean-luc-melenchon-quils-ne-pourront-pas-avoir-recours-au-referendum-via-larticle-11"
+   },
+   {
+    "camp": "Juristes",
+    "qui": "Mathieu Carpentier, professeur à Toulouse Capitole",
+    "texte": "Estime que le sujet a été « capturé » par une partie de la droite et de la gauche à des fins électorales.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/revision-de-la-constitution-110-constitutionnalistes-rappellent-a-marine-le-pen-et-jean-luc-melenchon-quils-ne-pourront-pas-avoir-recours-au-referendum-via-larticle-11"
+   },
+   {
+    "camp": "Juristes",
+    "qui": "Julien Bonnet, initiateur de la tribune",
+    "texte": "La tribune « ne vise pas un candidat en particulier » : elle s'applique à Mélenchon comme à Le Pen.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/revision-de-la-constitution-110-constitutionnalistes-rappellent-a-marine-le-pen-et-jean-luc-melenchon-quils-ne-pourront-pas-avoir-recours-au-referendum-via-larticle-11"
+   },
+   {
+    "camp": "Juristes",
+    "qui": "Dominique Rousseau, professeur de droit constitutionnel à Paris 1 (2017)",
+    "texte": "Estime que l'article 11 ne permet pas de convoquer une constituante et parle de « coup d'État ». Il propose plutôt une commission mêlant citoyens tirés au sort, élus et juristes.",
+    "media": "Public Sénat (2017)",
+    "url": "https://www.publicsenat.fr/actualites/politique/l-assemblee-constituante-voulue-par-jean-luc-melenchon-est-elle-possible-58777"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Argument des partisans de l'article 11",
+    "texte": "Ils invoquent le précédent de 1962, quand de Gaulle a fait élire le président au suffrage universel par référendum (article 11). Les constitutionnalistes répondent que c'était déjà irrégulier à l'époque.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/revision-de-la-constitution-110-constitutionnalistes-rappellent-a-marine-le-pen-et-jean-luc-melenchon-quils-ne-pourront-pas-avoir-recours-au-referendum-via-larticle-11"
+   }
+  ],
+  "tensions": [
+   "Le RN et LFI défendent tous deux l'article 11 pour contourner le Sénat, sur des sujets opposés.",
+   "Le Conseil constitutionnel peut bloquer le décret de référendum avant le vote : la mesure pourrait s'arrêter avant d'avoir commencé.",
+   "Le contenu exact de la future Constitution dépend de l'Assemblée constituante, pas du programme."
+  ],
+  "monde": [
+   {
+    "pays": "France, 1962",
+    "texte": "De Gaulle utilise l'article 11 pour l'élection du président au suffrage universel. Le Conseil d'État avait rendu un avis défavorable.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/revision-de-la-constitution-110-constitutionnalistes-rappellent-a-marine-le-pen-et-jean-luc-melenchon-quils-ne-pourront-pas-avoir-recours-au-referendum-via-larticle-11"
+   },
+   {
+    "pays": "France, 1969",
+    "texte": "Le référendum de De Gaulle sur le Sénat et les régions échoue, et il démissionne.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/revision-de-la-constitution-110-constitutionnalistes-rappellent-a-marine-le-pen-et-jean-luc-melenchon-quils-ne-pourront-pas-avoir-recours-au-referendum-via-larticle-11"
+   }
+  ],
+  "resume": "LFI veut changer de République par référendum, mais 110 juristes rappellent que la voie choisie (l'article 11) n'est pas faite pour réviser la Constitution.",
+  "eco": {
+   "cout": "Faible : organiser un référendum puis élire une assemblée constituante (coût d'une élection nationale). Aucun chiffrage officiel.",
+   "financement": "Budget de l'État (organisation des scrutins).",
+   "rapporte": "Pas d'effet budgétaire direct.",
+   "chiffre": "Coût marginal",
+   "sources": []
+  },
+  "statut": "documente",
+  "logique": {
+   "texte": "Pour LFI, la Ve République a fait son temps : elle permet l'exercice solitaire du pouvoir par le président. Le mouvement estime que le peuple a été ignoré, la même politique continuant malgré trois défaites électorales. Plutôt que de retoucher la Constitution, il veut que les citoyens écrivent eux-mêmes la suivante. D'où deux référendums : un pour lancer l'Assemblée constituante, un autre pour adopter le texte qu'elle propose. Le contenu final reviendrait à cette assemblée, pas au président.",
+   "arguments": [
+    {
+     "texte": "Le processus prévoit un premier référendum (article 11) pour lancer la Constituante et fixer sa composition, puis un second pour adopter la nouvelle Constitution.",
+     "media": "L'Avenir en commun (programme LFI)",
+     "url": "https://www.lavenirencommun.org/programme/fonder-la-6e-republique/reunir-une-assemblee-constituante-pour-passer-a-la-6e-republique/#reunir-une-assemblee-constituante-pour-passer-a-la-6e-republique-1"
+    },
+    {
+     "texte": "En 2017, le programme prévoyait que le référendum fixe le mode de scrutin, la parité, une part de tirage au sort et des incompatibilités pour les membres de la Constituante, avec deux ans au maximum pour écrire le texte.",
+     "media": "Public Sénat (2017)",
+     "url": "https://www.publicsenat.fr/actualites/politique/l-assemblee-constituante-voulue-par-jean-luc-melenchon-est-elle-possible-58777"
+    },
+    {
+     "texte": "Charlotte Girard, autrice de cette partie du programme LFI en 2017, faisait valoir que le Conseil constitutionnel se déclare incompétent depuis 1962 pour contrôler une loi adoptée par référendum.",
+     "media": "Public Sénat (2017)",
+     "url": "https://www.publicsenat.fr/actualites/politique/l-assemblee-constituante-voulue-par-jean-luc-melenchon-est-elle-possible-58777"
+    },
+    {
+     "texte": "La juriste Marie-Anne Cohendet (Paris 1) jugeait cette procédure « la plus démocratique qui soit pour adopter une Constitution », tout en estimant l'usage de l'article 11 irrégulier.",
+     "media": "Public Sénat (2017)",
+     "url": "https://www.publicsenat.fr/actualites/politique/l-assemblee-constituante-voulue-par-jean-luc-melenchon-est-elle-possible-58777"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "reunir-une-assemblee-constituante-pour-passer-a-la-6e-republique-2",
+     "texte": "Référendum par l'article 11 pour lancer la Constituante et décider de sa composition."
+    },
+    {
+     "id": "reunir-une-assemblee-constituante-pour-passer-a-la-6e-republique-3",
+     "texte": "Le projet de Constitution sera soumis à référendum à la fin des travaux."
+    },
+    {
+     "id": "une-republique-de-la-souverainete-populaire-permanente-1",
+     "texte": "Référendum d'initiative citoyenne : révoquer des élus, proposer ou abroger une loi, modifier la Constitution."
+    },
+    {
+     "id": "une-republique-de-la-souverainete-populaire-permanente-8",
+     "texte": "Référendum obligatoire pour toute révision de la Constitution ou nouveau traité européen."
+    },
+    {
+     "id": "abolir-la-monarchie-presidentielle-4",
+     "texte": "Supprimer les « votes forcés » comme l'article 49.3."
+    }
+   ]
+  }
+ },
+ "garantir-le-droit-au-logement-1": {
+  "statut": "peu_documente",
+  "resume": "Mesure peu débattue publiquement à ce jour : LFI promet zéro sans-abri en cinq ans, un objectif déjà annoncé par Emmanuel Macron en 2017 et non atteint.",
+  "logique": {
+   "texte": "Pour LFI, le sans-abrisme est le résultat d'avoir confié le logement au marché. Le nombre de sans-domicile a doublé en dix ans et les expulsions battent des records, selon le programme. Le mouvement veut donc rendre réel le droit, déjà inscrit dans la loi, à un hébergement d'urgence pour toute personne, sans condition. Mais l'hébergement n'est qu'une première marche : le programme mise sur le « logement d'abord », la réquisition des logements vides et une forte hausse des logements publics pour que les gens sortent durablement de la rue.",
+   "arguments": [
+    {
+     "texte": "Le programme chiffre à 3 Md€ en 2027 l'enveloppe « logements d'urgence et réquisition de logements vacants ».",
+     "media": "L'Avenir en commun (programme LFI)",
+     "url": "https://www.lavenirencommun.org/programme/fonder-la-6e-republique/garantir-le-droit-au-logement/#garantir-le-droit-au-logement-1"
+    },
+    {
+     "texte": "LFI s'appuie sur un constat : 4,2 millions de personnes mal logées et près de 3 millions de ménages en attente d'un logement public.",
+     "media": "L'Avenir en commun (programme LFI)",
+     "url": "https://www.lavenirencommun.org/programme/fonder-la-6e-republique/garantir-le-droit-au-logement/#garantir-le-droit-au-logement-1"
+    },
+    {
+     "texte": "La Fondation pour le logement des défavorisés recense environ 350 000 sans-domicile, dont 40 000 à la rue, et plus de 900 morts de la rue en 2025 : des chiffres qui appuient l'urgence invoquée par LFI.",
+     "media": "Public Sénat (2026)",
+     "url": "https://www.publicsenat.fr/actualites/societe/le-mal-logement-lalerte-relancee-a-la-veille-des-elections-municipales"
+    },
+    {
+     "texte": "Les associations défendent le « logement d'abord », que reprend LFI : pour Manuel Domergue (Fondation Abbé Pierre), investir dans le parc social coûte moins cher à long terme que l'urgence.",
+     "media": "Public Sénat (2021)",
+     "url": "https://www.publicsenat.fr/actualites/societe/sortir-de-la-rue-un-logement-d-abord-187412"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "eradiquer-la-pauvrete-2",
+     "texte": "Augmenter fortement les places d'accueil dans une logique de « logement d'abord »."
+    },
+    {
+     "id": "garantir-le-droit-au-logement-11",
+     "texte": "Réquisitionner les logements vides pour les remettre en location."
+    },
+    {
+     "id": "garantir-le-droit-au-logement-2",
+     "texte": "Interdire les expulsions locatives sans relogement public."
+    },
+    {
+     "id": "garantir-le-droit-au-logement-4",
+     "texte": "Produire 200 000 logements publics par an pendant 5 ans."
+    },
+    {
+     "id": "garantir-le-droit-au-logement-12",
+     "texte": "Taxe progressive sur les logements vacants."
+    },
+    {
+     "id": "eradiquer-la-pauvrete-1",
+     "texte": "Garantie d'autonomie : revenu porté au seuil de pauvreté."
+    }
+   ]
+  },
+  "concret": [
+   "Le droit à un hébergement d'urgence inconditionnel existe déjà dans la loi : LFI veut le faire appliquer réellement.",
+   "Environ 350 000 personnes sont sans domicile ou en hébergement d'urgence, dont 40 000 à la rue (Fondation pour le logement des défavorisés, 2026).",
+   "L'objectif est fixé pour la fin du quinquennat, soit 2032."
+  ],
+  "eco": {
+   "chiffre": "≈ 3 Md€ en 2027",
+   "cout": "3 Md€ en 2027 selon LFI, pour l'hébergement d'urgence et la réquisition de logements vacants réunis. Pas de chiffrage indépendant.",
+   "financement": "Recettes nouvelles du programme (106,4 Md€ annoncés en 2027), sans fléchage précis.",
+   "rapporte": "Non chiffré. Les associations jugent qu'un vrai logement coûte moins cher à long terme que l'urgence répétée.",
+   "sources": [
+    {
+     "media": "L'Avenir en commun",
+     "url": "https://www.lavenirencommun.org/programme/fonder-la-6e-republique/garantir-le-droit-au-logement/#garantir-le-droit-au-logement-1"
+    },
+    {
+     "media": "L'Avenir en commun",
+     "url": "https://www.lavenirencommun.org/financement/"
+    }
+   ]
+  },
+  "similaires": [
+   {
+    "camp": "Emmanuel Macron (2017)",
+    "prop": "« Je ne veux plus de femmes et d'hommes dans la rue » d'ici la fin de l'année 2017"
+   }
+  ],
+  "critiques": [],
+  "reponses": [],
+  "tensions": [
+   "Emmanuel Macron avait déjà promis en 2017 qu'il n'y aurait plus personne à la rue ; le nombre de sans-domicile a continué d'augmenter.",
+   "Selon les associations, l'hébergement d'urgence seul ne fait pas sortir de la rue : tout dépend de la production de vrais logements.",
+   "Les 3 Md€ couvrent aussi la réquisition : le coût de l'hébergement seul n'est pas isolé."
+  ],
+  "monde": [],
+  "maj": "13 nov. 2026"
+ }
+}

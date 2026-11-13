@@ -1,0 +1,238 @@
+{
+ "atteindre-l-egalite-salariale-1": {
+  "statut": "documente",
+  "resume": "LFI veut réduire le temps partiel imposé, qui touche surtout des femmes peu payées ; les experts reconnaissent le problème mais mettent en garde contre des contraintes qui freineraient l'embauche.",
+  "logique": {
+   "texte": "Pour LFI, le temps partiel subi est une cause centrale des écarts de salaire entre femmes et hommes. Le programme rappelle que les femmes gagnent en moyenne 22 % de moins que les hommes et forment 70 % des travailleurs pauvres. Le mouvement estime que ces emplois à petites heures et horaires décalés enferment les femmes dans la précarité. La proposition de loi déposée par les députées insoumises en janvier 2025 détaille la méthode : rendre le temps partiel plus coûteux pour les employeurs qui en abusent et mieux payer les petites heures. L'objectif affiché est que les femmes ne soient « plus des subalternes » au travail.",
+   "arguments": [
+    {
+     "texte": "Sur 4,2 millions de salariés à temps partiel, 83 % sont des femmes, et 34 % des salariés à temps partiel sont en sous-emploi (47 % sous 24 h par semaine).",
+     "media": "Assemblée nationale, proposition de loi LFI n° 793 (janv. 2025)",
+     "url": "https://www.assemblee-nationale.fr/dyn/17/textes/l17b0793_proposition-loi.pdf"
+    },
+    {
+     "texte": "En 2019, seules 10 branches sur 93 prévoyaient un minimum d'au moins 24 h ; 1,9 million de salariés restaient sous ce seuil légal.",
+     "media": "Assemblée nationale, proposition de loi LFI n° 793",
+     "url": "https://www.assemblee-nationale.fr/dyn/17/textes/l17b0793_proposition-loi.pdf"
+    },
+    {
+     "texte": "Dispositifs proposés : réduire de 20 % les allègements de cotisations des entreprises comptant plus de 15 % de temps partiel dans une catégorie d'emploi ; majorer les heures sous 24 h (+10 %), sous 15 h (+15 %) et sous 8 h (+25 %) ; 3 h consécutives minimum par jour ; prime d'au moins 15 % pour les heures entre 18 h et 9 h.",
+     "media": "Assemblée nationale, proposition de loi LFI n° 793",
+     "url": "https://www.assemblee-nationale.fr/dyn/17/textes/l17b0793_proposition-loi.pdf"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "atteindre-l-egalite-salariale-2",
+     "texte": "Revaloriser les salaires des métiers majoritairement féminins et reconnaître leur pénibilité."
+    },
+    {
+     "id": "atteindre-l-egalite-salariale-3",
+     "texte": "Sanctionner plus durement les entreprises qui ne respectent pas l'égalité salariale."
+    },
+    {
+     "id": "atteindre-l-egalite-salariale-6",
+     "texte": "Créer un congé d'accueil de l'enfant identique et obligatoire pour les deux parents."
+    },
+    {
+     "id": "reduire-le-temps-de-travail-et-faire-naitre-une-societe-du-temps-choisi-5",
+     "texte": "En finir avec l'annualisation contrainte et les horaires fractionnés."
+    },
+    {
+     "id": "faire-le-service-public-de-la-petite-enfance-1",
+     "texte": "Créer un service public de la petite enfance, pour que la garde d'enfants ne pousse plus les mères vers le temps partiel."
+    }
+   ]
+  },
+  "concret": [
+   "En 2023, 4,2 millions de salariés travaillent à temps partiel (17,4 %), dont 77,9 % de femmes.",
+   "Le temps partiel « contraint » concerne environ 1 million de personnes, soit 24,4 % des temps partiels ; 74,2 % sont des femmes.",
+   "Le minimum légal de 24 h par semaine existe depuis 2013, mais de nombreuses branches y dérogent (73 sur 201 étudiées fixent moins).",
+   "Le programme ne détaille pas lui-même de dispositif : la proposition de loi LFI de 2025 donne la piste la plus précise."
+  ],
+  "eco": {
+   "chiffre": "Non chiffré",
+   "cout": "Pas de chiffrage public. La mesure pèserait surtout sur les employeurs (heures mieux payées, allègements de cotisations réduits).",
+   "financement": "Pas de dépense publique directe : le levier principal est la modulation des cotisations patronales.",
+   "rapporte": "La réduction des allègements de cotisations pour les entreprises qui abusent du temps partiel augmenterait les recettes sociales, sans montant publié.",
+   "sources": [
+    {
+     "media": "Assemblée nationale, proposition de loi LFI n° 793",
+     "url": "https://www.assemblee-nationale.fr/dyn/17/textes/l17b0793_proposition-loi.pdf"
+    },
+    {
+     "media": "IGAS, mission sur le temps partiel (déc. 2024)",
+     "url": "https://www.strategie-plan.gouv.fr/files/2024-12/presentation-missiontempspartiel-20241218final2.pdf"
+    }
+   ]
+  },
+  "similaires": [],
+  "critiques": [
+   {
+    "camp": "Experts",
+    "qui": "Antoine Magnier et Louis-Charles Viossat, inspecteurs de l'IGAS",
+    "texte": "Le rapport cite une étude selon laquelle le plancher de 24 h pèse sur l'emploi, surtout celui des femmes. Il recommande plutôt d'assouplir ce plancher pour les personnes très éloignées de l'emploi, avec des contreparties, et prévient qu'un excès de contraintes peut freiner les embauches.",
+    "media": "IGAS, présentation au HCREP (déc. 2024)",
+    "url": "https://www.strategie-plan.gouv.fr/files/2024-12/presentation-missiontempspartiel-20241218final2.pdf"
+   },
+   {
+    "camp": "Experts",
+    "qui": "Mission IGAS",
+    "texte": "Selon la mission, la baisse du temps partiel depuis 2017 vient surtout de l'amélioration du marché du travail, et non des règles juridiques : la durée moyenne (23,1 h) n'a presque pas bougé depuis 2013.",
+    "media": "IGAS, présentation au HCREP (déc. 2024)",
+    "url": "https://www.strategie-plan.gouv.fr/files/2024-12/presentation-missiontempspartiel-20241218final2.pdf"
+   }
+  ],
+  "reponses": [],
+  "tensions": [
+   "Le chiffre de « 80 % » du programme désigne la part de femmes parmi les temps partiels, pas la part des femmes concernées. Selon l'IGAS, les femmes représentent 74 % du temps partiel contraint.",
+   "Arbitrage entre protection des salariés et risque de moins d'embauches dans l'aide à domicile, la propreté ou la restauration rapide.",
+   "Certains salariés gagnent peu à augmenter leurs heures à cause du système socio-fiscal, ce qui limite l'effet des mesures."
+  ],
+  "monde": [
+   {
+    "pays": "Union européenne",
+    "texte": "La France a moins de temps partiel (17,4 %) que la moyenne de l'UE (18,8 %), mais plus de sous-emploi à temps partiel (4,3 % contre 2,7 %). L'Allemagne, le Danemark et les Pays-Bas ont beaucoup plus de temps partiel.",
+    "media": "IGAS, mission sur le temps partiel",
+    "url": "https://www.strategie-plan.gouv.fr/files/2024-12/presentation-missiontempspartiel-20241218final2.pdf"
+   }
+  ],
+  "maj": "13 nov. 2026"
+ },
+ "eradiquer-les-violences-sexistes-et-sexuelles-1": {
+  "statut": "documente",
+  "resume": "LFI veut une loi globale contre les violences sexistes et sexuelles financée à 3 Md€ par an, comme le demandent les associations ; le gouvernement a promis 1,5 Md€ pour 2027 et chiffre le texte en cours à 3-4 Md€ à terme.",
+  "logique": {
+   "texte": "Pour LFI, les violences sexistes et sexuelles sont « systémiques » et liées à la domination masculine. Elles exigent donc une réponse d'ensemble : police, justice, école, logement, santé. Le mouvement reprend la demande de la coalition féministe pour une « loi intégrale » et son budget de 3 Md€ par an, jugé minimal par les associations. Ses députés ont aussi porté un texte pour faire rembourser à 100 % les soins de psychotraumatisme de toutes les victimes, présenté comme un complément à la loi intégrale.",
+   "arguments": [
+    {
+     "texte": "La coalition de 150 associations, ONG et syndicats demande 2,6 à 3 Md€ pour recruter des enquêteurs spécialisés et former les professionnels au-delà de la police et de la justice.",
+     "media": "Carenews",
+     "url": "https://www.carenews.com/carenews-info/news/les-associations-reclament-une-loi-integrale-contre-les-violences-sexuelles"
+    },
+    {
+     "texte": "Beaucoup de plaintes sont classées faute d'enquête menée à temps ; la loi intégrale imposerait des actes d'enquête dans des délais fixés.",
+     "media": "Carenews",
+     "url": "https://www.carenews.com/carenews-info/news/les-associations-reclament-une-loi-integrale-contre-les-violences-sexuelles"
+    },
+    {
+     "texte": "Le 29 octobre 2026, l'Assemblée a adopté (152 voix contre 5) le texte LFI de prise en charge intégrale des soins des victimes ; la rapporteure Gabrielle Cathala juge qu'il « complète utilement la loi intégrale ».",
+     "media": "LCP",
+     "url": "https://lcp.fr/actualites/violences-sexuelles-l-assemblee-vote-un-texte-de-lfi-sur-la-prise-en-charge-integrale"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "eradiquer-les-violences-sexistes-et-sexuelles-2",
+     "texte": "Rendre le budget de l'État transparent sur ce qu'il consacre à l'égalité femmes-hommes."
+    },
+    {
+     "id": "eradiquer-les-violences-sexistes-et-sexuelles-5",
+     "texte": "Combattre l'impunité des agresseurs et la requalification des viols en délits."
+    },
+    {
+     "id": "eradiquer-les-violences-sexistes-et-sexuelles-6",
+     "texte": "Renforcer les obligations des employeurs face aux violences conjugales et sexuelles."
+    },
+    {
+     "id": "eradiquer-les-violences-sexistes-et-sexuelles-8",
+     "texte": "Créer un fonds pour indemniser les enfants des victimes de féminicides."
+    },
+    {
+     "id": "eradiquer-les-violences-sexistes-et-sexuelles-10",
+     "texte": "Rembourser partout les tests de soumission chimique."
+    }
+   ]
+  },
+  "concret": [
+   "Une proposition de loi « intégrale » soutenue par la coalition féministe est en cours d'examen : adoptée à l'Assemblée en octobre 2026, elle doit passer au Sénat, visé pour janvier 2027.",
+   "Elle couvre viol, harcèlement, prostitution, traite, violences gynécologiques, mutilations, mariages forcés et violences en ligne, pour les mineurs comme pour les adultes.",
+   "Aujourd'hui, l'Assurance maladie rembourse à 100 % les soins des victimes mineures depuis 1998 ; le texte l'étendrait aux adultes.",
+   "Environ 1,5 Md€ est déjà dépensé chaque année pour la prévention et la lutte contre ces violences."
+  ],
+  "eco": {
+   "chiffre": "≈ 3 Md€ / an",
+   "cout": "Le gouvernement estime le coût des mesures adoptées à l'Assemblée à 3 à 4 Md€ à terme, en plus des 1,5 Md€ déjà dépensés.",
+   "financement": "Budget de l'État et de la Sécurité sociale. Le programme LFI ne précise pas la recette dédiée dans ce chapitre.",
+   "rapporte": "Non chiffré.",
+   "sources": [
+    {
+     "media": "LCP",
+     "url": "https://lcp.fr/actualites/violences-sexuelles-le-cout-de-la-loi-integrale-evalue-entre-3-a-4-milliards-d-euros-a-l"
+    },
+    {
+     "media": "Public Sénat",
+     "url": "https://www.publicsenat.fr/actualites/politique/loi-integrale-les-15-milliard-deuros-annonces-par-le-gouvernement-sont-ils-a-la-hauteur-des-besoins-revendiques-par-les-associations"
+    }
+   ]
+  },
+  "similaires": [
+   {
+    "camp": "Gouvernement Lecornu",
+    "prop": "Soutien à la loi intégrale et environ 1,5 Md€ en 2027 contre les violences sexistes et sexuelles, présenté comme un « socle de départ »."
+   },
+   {
+    "camp": "PS",
+    "prop": "La députée Céline Thiébault-Martinez est rapporteure générale de la loi intégrale et demande des précisions sur les enveloppes."
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Gouvernement",
+    "qui": "Camille Galliard-Minier, ministre déléguée",
+    "texte": "Elle reproche aux députés LFI de vouloir réécrire, avec leur texte sur les soins, ce que l'Assemblée vient de trancher dans la loi intégrale, et renvoie à la navette avec le Sénat.",
+    "media": "LCP",
+    "url": "https://lcp.fr/actualites/violences-sexuelles-l-assemblee-vote-un-texte-de-lfi-sur-la-prise-en-charge-integrale"
+   },
+   {
+    "camp": "Droite (LR)",
+    "qui": "Lionel Duparay, député Droite républicaine",
+    "texte": "Il dénonce dans le texte LFI sur les soins une « pure opération de communication ».",
+    "media": "LCP",
+    "url": "https://lcp.fr/actualites/violences-sexuelles-l-assemblee-vote-un-texte-de-lfi-sur-la-prise-en-charge-integrale"
+   },
+   {
+    "camp": "Gauche (PS)",
+    "qui": "Océane Godard, députée socialiste",
+    "texte": "Elle demande à LFI d'expliquer comment un texte de quatre articles irait plus loin qu'une loi intégrale de 133 articles.",
+    "media": "LCP",
+    "url": "https://lcp.fr/actualites/violences-sexuelles-l-assemblee-vote-un-texte-de-lfi-sur-la-prise-en-charge-integrale"
+   },
+   {
+    "camp": "Centre (Ensemble)",
+    "qui": "Christopher Weissberg, député Ensemble pour la République",
+    "texte": "Il demande de voter d'abord la loi intégrale et rappelle que LFI devra accepter des compromis pour gouverner.",
+    "media": "LCP",
+    "url": "https://lcp.fr/actualites/violences-sexuelles-l-assemblee-vote-un-texte-de-lfi-sur-la-prise-en-charge-integrale"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Anne-Cécile Mailfert, présidente de la Fondation des femmes",
+    "texte": "Face aux 1,5 Md€ annoncés par le gouvernement, elle parle de « poudre de perlimpinpin » ; les associations jugent que 3 Md€ est un minimum.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/loi-integrale-les-15-milliard-deuros-annonces-par-le-gouvernement-sont-ils-a-la-hauteur-des-besoins-revendiques-par-les-associations"
+   },
+   {
+    "qui": "Stéphane Peu, président du groupe GDR (communistes)",
+    "texte": "Il juge le texte LFI sur les soins « ni à contretemps, ni superflu », craignant un recul de la loi intégrale au Sénat.",
+    "media": "LCP",
+    "url": "https://lcp.fr/actualites/violences-sexuelles-l-assemblee-vote-un-texte-de-lfi-sur-la-prise-en-charge-integrale"
+   }
+  ],
+  "tensions": [
+   "La loi intégrale est déjà en discussion au Parlement : la mesure dépendra de ce qu'il en restera après le Sénat.",
+   "Écart entre les 3 Md€ demandés et les 1,5 Md€ promis pour 2027, dont une part repose sur des moyens déjà engagés.",
+   "Le gouvernement chiffre le texte à 3-4 Md€ « en rythme de croisière », donc après plusieurs années de montée en charge."
+  ],
+  "monde": [
+   {
+    "pays": "Espagne",
+    "texte": "Une loi organique de 2004, votée à l'unanimité, a créé un parquet et plus d'une centaine de tribunaux spécialisés, la formation des professionnels et le système VioGen d'évaluation du danger. L'article ne donne pas de chiffre d'impact.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/lutte-contre-les-violences-sexuelles-pourquoi-lespagne-est-devenue-un-modele"
+   }
+  ],
+  "maj": "13 nov. 2026"
+ }
+}

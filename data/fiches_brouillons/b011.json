@@ -1,0 +1,261 @@
+{
+ "retailleau-31-1": {
+  "statut": "documente",
+  "resume": "Retailleau veut alléger fortement la fiscalité des entreprises pour réindustrialiser ; les études disponibles montrent un écart réel avec nos voisins mais des effets mesurés encore limités, pour un coût non financé à ce stade.",
+  "logique": {
+   "texte": "Pour LR, le parti que préside Bruno Retailleau, la désindustrialisation vient de choix politiques qui ont privilégié la dépense publique et les normes au détriment de la production. Les impôts de production frappent les entreprises avant même qu'elles fassent un bénéfice, ce qui pénalise surtout l'industrie et l'investissement. Le projet promet donc un « choc fiscal pour produire plus en France » : un impôt sur les sociétés ramené autour de 20 % et environ 15 Md€ de baisse ciblée des impôts de production. Cette baisse d'impôts s'inscrit dans une ligne libérale qui veut aussi réduire la dépense publique et donner la priorité au désendettement.",
+   "arguments": [
+    {
+     "texte": "La part de l'industrie dans le PIB est passée d'environ 20 % au début des années 1970 à moins de 10 %, avec près d'un million d'emplois perdus et un déficit commercial de plus de 80 Md€.",
+     "media": "Les Républicains (site du parti)",
+     "url": "https://republicains.fr/qrtravail/"
+    },
+    {
+     "texte": "Allègement ciblé d'environ 15 Md€ : suppression de la C3S (5,3 Md€) et de la CVAE (4,3 Md€), exonération de la part industrielle de la CFE (1,9 Md€), allègement du forfait social (2,8 Md€).",
+     "media": "Votons 2027 (d'après le site des Républicains)",
+     "url": "https://votons-2027.fr/candidats/retailleau/programme/economie"
+    },
+    {
+     "texte": "La CVAE est présentée comme un impôt qui pénalise l'investissement, et la CFE comme une taxation de l'outil productif fondée sur les immobilisations.",
+     "media": "Votons 2027 (d'après le site des Républicains)",
+     "url": "https://votons-2027.fr/candidats/retailleau/programme/economie"
+    },
+    {
+     "texte": "Les impôts de production pesaient 5,3 % du PIB en France en 2020, contre 0,8 % en Allemagne et environ 2,7 % dans l'UE.",
+     "media": "Institut Montaigne",
+     "url": "https://www.institutmontaigne.org/presidentielle-2022/eric-zemmour/baisser-les-impots-de-production-de-30-milliards-deuros-supplementaires/"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "retailleau-31-2",
+     "texte": "Refuser le retour de l'ISF et la taxe Zucman, pour ne pas alourdir la fiscalité du capital."
+    },
+    {
+     "id": "retailleau-29-1",
+     "texte": "Exonérer de cotisations et d'impôt sur le revenu les heures travaillées au-delà de 1 623 heures par an."
+    },
+    {
+     "id": "retailleau-29-3",
+     "texte": "Exonérer de cotisations retraite et chômage ceux qui ont tous leurs trimestres avant l'âge légal."
+    },
+    {
+     "id": "retailleau-29-2",
+     "texte": "Plafonner le RSA et le conditionner à une activité, dans une logique de baisse de la dépense publique."
+    }
+   ]
+  },
+  "concret": [
+   "Le taux normal de l'impôt sur les sociétés est aujourd'hui de 25 % ; la mesure le ramènerait autour de 20 %.",
+   "Les impôts de production (C3S, CVAE, CFE...) sont dus quel que soit le bénéfice ; la CVAE est déjà en cours de suppression progressive, décalée de plusieurs années.",
+   "Le projet LR vise surtout l'industrie et les entreprises à forte intensité en capital, y compris l'agroalimentaire.",
+   "Le programme détaillé du candidat n'est pas encore entièrement publié."
+  ],
+  "eco": {
+   "chiffre": "≈ 15 Md€ / an (impôts de production) + IS non chiffré",
+   "cout": "Environ 15 Md€ pour la baisse ciblée des impôts de production selon LR ; la baisse de l'IS n'est pas chiffrée. À titre de comparaison, l'Institut Montaigne estimait à environ 25 Md€ par an net une baisse de 30 Md€ proposée en 2022.",
+   "financement": "Non précisé. Le candidat met en avant la baisse de la dépense publique.",
+   "rapporte": "Une partie du coût revient via l'impôt sur les sociétés si les bénéfices augmentent (effet-retour estimé à environ 6 Md€ pour 30 Md€ de baisse par l'Institut Montaigne).",
+   "sources": [
+    {
+     "media": "Votons 2027",
+     "url": "https://votons-2027.fr/candidats/retailleau/programme/economie"
+    },
+    {
+     "media": "Institut Montaigne",
+     "url": "https://www.institutmontaigne.org/presidentielle-2022/eric-zemmour/baisser-les-impots-de-production-de-30-milliards-deuros-supplementaires/"
+    },
+    {
+     "media": "France-vote",
+     "url": "https://www.france-vote.fr/actualites/programme-bruno-retailleau-2027"
+    }
+   ]
+  },
+  "similaires": [
+   {
+    "camp": "Xavier Bertrand (LR · Nous France)",
+    "prop": "Baisser les impôts de production de 35 Md€ sur le quinquennat."
+   },
+   {
+    "camp": "Éric Zemmour (Reconquête)",
+    "prop": "Baisser les impôts de production d'environ 30 Md€ (programme 2022)."
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Experts",
+    "qui": "Institut des politiques publiques (IPP), rapport n° 60",
+    "texte": "Sur la baisse de CVAE et de CFE de 2021, l'IPP trouve un impact limité sur le chiffre d'affaires, la masse salariale et l'investissement, et peu de résultats robustes.",
+    "media": "IPP",
+    "url": "https://www.ipp.eu/wp-content/uploads/2025/10/FS_ImpotsProductions-9.pdf"
+   },
+   {
+    "camp": "Experts",
+    "qui": "Institut des politiques publiques (IPP)",
+    "texte": "Les gains de ces baisses vont davantage aux grandes entreprises et aux entreprises intensives en capital, et ne sont pas liés à la rentabilité.",
+    "media": "IPP",
+    "url": "https://www.ipp.eu/wp-content/uploads/2025/10/FS_ImpotsProductions-9.pdf"
+   },
+   {
+    "camp": "Experts",
+    "qui": "Institut Montaigne",
+    "texte": "Si la CVAE des collectivités est compensée, l'État supporte seul le coût, ce qui exige d'autres recettes ou de fortes baisses de dépenses.",
+    "media": "Institut Montaigne",
+    "url": "https://www.institutmontaigne.org/presidentielle-2022/eric-zemmour/baisser-les-impots-de-production-de-30-milliards-deuros-supplementaires/"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Rexecode, étude pour le METI (patronat des ETI)",
+    "texte": "Les baisses déjà engagées ont eu des effets visibles sur l'investissement industriel, et la France reste au-dessus de ses voisins.",
+    "media": "L'Info Durable",
+    "url": "https://www.linfodurable.fr/bien-quen-baisse-les-impots-de-production-restent-relativement-eleves-en-france-selon-une-etude"
+   }
+  ],
+  "tensions": [
+   "Comment financer une baisse d'impôts alors que le candidat donne aussi la priorité au désendettement ?",
+   "Les évaluations empiriques des baisses récentes (IPP) trouvent peu d'effets, quand les études patronales (Rexecode) en voient sur l'investissement.",
+   "Le taux de 20 % d'IS n'est pas détaillé dans les documents publics consultés."
+  ],
+  "monde": [
+   {
+    "pays": "Allemagne",
+    "texte": "Les impôts de production y pèsent environ 0,8 % du PIB en 2020, contre 5,3 % en France.",
+    "media": "Institut Montaigne",
+    "url": "https://www.institutmontaigne.org/presidentielle-2022/eric-zemmour/baisser-les-impots-de-production-de-30-milliards-deuros-supplementaires/"
+   },
+   {
+    "pays": "Italie et Espagne",
+    "texte": "En 2022, ces impôts pesaient 2,4 % du PIB en Italie et 1,5 % en Espagne, contre 2,6 % en France selon une autre mesure.",
+    "media": "L'Info Durable (étude Rexecode)",
+    "url": "https://www.linfodurable.fr/bien-quen-baisse-les-impots-de-production-restent-relativement-eleves-en-france-selon-une-etude"
+   }
+  ],
+  "maj": "13 nov. 2026"
+ },
+ "retailleau-32-1": {
+  "statut": "documente",
+  "resume": "Retailleau veut tout miser sur le nucléaire et couper les aides à l'éolien et au solaire ; le gouvernement, une partie de LR et la filière y voient une erreur pour le climat et l'emploi.",
+  "logique": {
+   "texte": "Dans une tribune au Figaro en juillet 2025, cosignée avec François-Xavier Bellamy et Julien Aubert, Bruno Retailleau appelle à « rebâtir un parc nucléaire » et à arrêter le financement public de l'éolien et du photovoltaïque. Il juge que ces énergies intermittentes fragilisent le réseau et font courir un risque de black-out. Il estime aussi qu'elles pèsent sur le pouvoir d'achat, notamment via le coût du raccordement, et qu'elles abîment les paysages et la biodiversité. Il défend une logique de marché : les producteurs doivent assumer eux-mêmes leur production sans subvention. Le programme LR prévoit en parallèle de maîtriser les coûts et délais des EPR2 et de relancer la recherche sur un réacteur de 4e génération.",
+   "arguments": [
+    {
+     "texte": "L'intermittence de l'éolien et du solaire fait courir un risque de black-out au réseau électrique.",
+     "media": "Public Sénat (tribune au Figaro)",
+     "url": "https://www.publicsenat.fr/actualites/politique/fin-des-subventions-aux-eoliennes-et-au-photovoltaique-la-tribune-de-bruno-retailleau-met-le-socle-commun-en-surchauffe"
+    },
+    {
+     "texte": "Ces filières pèsent sur le pouvoir d'achat, notamment via le coût du raccordement, et portent atteinte aux paysages et à la biodiversité.",
+     "media": "Public Sénat",
+     "url": "https://www.publicsenat.fr/actualites/politique/fin-des-subventions-aux-eoliennes-et-au-photovoltaique-la-tribune-de-bruno-retailleau-met-le-socle-commun-en-surchauffe"
+    },
+    {
+     "texte": "Le soutien public aux renouvelables coûterait 10,67 Md€ au budget de l'État en 2027, contre 9,06 Md€ en 2026, selon la CRE.",
+     "media": "Banque des Territoires (AFP)",
+     "url": "https://www.banquedesterritoires.fr/vers-une-hausse-de-11-du-cout-du-soutien-public-aux-energies-renouvelables-en-2027"
+    },
+    {
+     "texte": "Selon Julien Aubert, cosignataire, le moratoire ne viserait pas toutes les renouvelables : la géothermie par exemple n'est pas concernée.",
+     "media": "Public Sénat",
+     "url": "https://www.publicsenat.fr/actualites/politique/fin-des-subventions-aux-eoliennes-et-au-photovoltaique-la-tribune-de-bruno-retailleau-met-le-socle-commun-en-surchauffe"
+    }
+   ],
+   "accompagnement": []
+  },
+  "concret": [
+   "L'État soutient l'éolien et le solaire par des contrats garantissant un prix aux producteurs ; ce sont les « charges de service public de l'énergie ».",
+   "Fin 2024, les contrats en cours représentaient 87 Md€ d'engagements à long terme selon la Cour des comptes ; arrêter les aides viserait donc surtout les nouveaux projets.",
+   "L'électricité renouvelable est passée de moins de 100 TWh en 2016 (18 % du mix) à environ 150 TWh en 2024 (27 %).",
+   "Le nouveau nucléaire (EPR2) ne doit pas produire avant la fin des années 2030."
+  ],
+  "eco": {
+   "chiffre": "≈ 9 à 11 Md€ / an de soutien aux renouvelables en jeu",
+   "cout": "La mesure est une économie, pas une dépense : le soutien public aux renouvelables est prévu à 10,67 Md€ en 2027 (prévision CRE). Mais les contrats déjà signés continuent d'être payés. Le coût de la relance nucléaire n'est pas chiffré par le candidat.",
+   "financement": "Non précisé pour le nouveau nucléaire.",
+   "rapporte": "Économie progressive sur les nouveaux contrats, de montant non chiffré par le candidat. Entre 2016 et 2024, l'État a versé en moyenne 2,9 Md€ par an, avec des recettes nettes en 2022-2023 quand les prix étaient hauts.",
+   "sources": [
+    {
+     "media": "Banque des Territoires (AFP)",
+     "url": "https://www.banquedesterritoires.fr/vers-une-hausse-de-11-du-cout-du-soutien-public-aux-energies-renouvelables-en-2027"
+    },
+    {
+     "media": "Selectra (rapport Cour des comptes)",
+     "url": "https://selectra.info/energie/actualites/marche/cour-des-comptes-87-milliards-euros-soutien-energies-renouvelables-france"
+    },
+    {
+     "media": "France-vote",
+     "url": "https://www.france-vote.fr/actualites/programme-bruno-retailleau-2027"
+    }
+   ]
+  },
+  "similaires": [
+   {
+    "camp": "Xavier Bertrand (LR · Nous France)",
+    "prop": "Donner la priorité au nucléaire et s'opposer aux projets éoliens terrestres."
+   },
+   {
+    "camp": "Éric Zemmour (Reconquête)",
+    "prop": "Construire de nouveaux réacteurs et s'opposer au développement de l'éolien."
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Gouvernement / Renaissance",
+    "qui": "Agnès Pannier-Runacher, ministre de la Transition écologique (en 2025)",
+    "texte": "Elle juge la position « irresponsable quand on prétend être un homme d'État ».",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/fin-des-subventions-aux-eoliennes-et-au-photovoltaique-la-tribune-de-bruno-retailleau-met-le-socle-commun-en-surchauffe"
+   },
+   {
+    "camp": "Renaissance",
+    "qui": "Gabriel Attal, président des députés Renaissance",
+    "texte": "Il y voit « un contresens historique et scientifique ».",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/fin-des-subventions-aux-eoliennes-et-au-photovoltaique-la-tribune-de-bruno-retailleau-met-le-socle-commun-en-surchauffe"
+   },
+   {
+    "camp": "Présidence",
+    "qui": "Emmanuel Macron, président de la République",
+    "texte": "La France a « besoin de renouvelable » pour atteindre la neutralité carbone en 2050 ; arrêter d'investir ne serait pas une bonne idée.",
+    "media": "Connaissance des énergies (AFP)",
+    "url": "https://www.connaissancedesenergies.org/afp/macron-repond-retailleau-apres-son-appel-stopper-les-subventions-publiques-pour-leolien-et-le-photovoltaique-250703"
+   },
+   {
+    "camp": "LR",
+    "qui": "Olivier Rietmann, sénateur LR",
+    "texte": "Il parle de « posture politique, populiste et inconsciente » et rappelle que les renouvelables représentent 102 000 emplois.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/fin-des-subventions-aux-eoliennes-et-au-photovoltaique-la-tribune-de-bruno-retailleau-met-le-socle-commun-en-surchauffe"
+   },
+   {
+    "camp": "LR",
+    "qui": "Antoine Vermorel-Marques, vice-président de LR chargé de l'écologie",
+    "texte": "Il refuse d'opposer 100 % nucléaire et 100 % renouvelables : « Les deux sont des voies d'échec ».",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/fin-des-subventions-aux-eoliennes-et-au-photovoltaique-la-tribune-de-bruno-retailleau-met-le-socle-commun-en-surchauffe"
+   },
+   {
+    "camp": "Filière",
+    "qui": "Jules Nyssen, président du Syndicat des énergies renouvelables",
+    "texte": "Le nucléaire ne produira pas d'électricité nouvelle avant 2038 au mieux ; miser sur lui seul freinerait la sortie des énergies fossiles et maintiendrait la dépendance aux pays exportateurs.",
+    "media": "L'Info Durable",
+    "url": "https://www.linfodurable.fr/opter-pour-le-seul-nucleaire-renforce-la-dependance-letranger-defend-le-syndicat-des-energies-51927"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Bruno Retailleau et les cosignataires de la tribune",
+    "texte": "Ils défendent une logique de marché : ceux qui vendent de l'électricité doivent pouvoir assumer leur production sans aide publique.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/fin-des-subventions-aux-eoliennes-et-au-photovoltaique-la-tribune-de-bruno-retailleau-met-le-socle-commun-en-surchauffe"
+   }
+  ],
+  "tensions": [
+   "Les nouveaux réacteurs n'arriveront pas avant la fin des années 2030 : comment couvrir la hausse de la demande d'électricité d'ici là ?",
+   "Les contrats déjà signés (87 Md€ d'engagements) resteront à payer, ce qui limite l'économie à court terme.",
+   "La position divise jusqu'au sein de LR."
+  ],
+  "monde": [],
+  "maj": "13 nov. 2026"
+ }
+}

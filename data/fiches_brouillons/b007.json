@@ -1,0 +1,287 @@
+{
+ "une-republique-affirmant-le-role-central-des-communes-1": {
+  "statut": "peu_documente",
+  "resume": "Mesure peu débattue publiquement à ce jour : LFI veut refaire de la commune la base de la démocratie locale, contre les métropoles et les fusions imposées.",
+  "logique": {
+   "texte": "Pour LFI, les communes sont le premier lieu de la souveraineté populaire depuis la Révolution. Le mouvement estime qu'elles ont été réduites à gérer des coupes budgétaires et la concurrence entre collectivités. Il veut une « République communaliste », où la commune porte la démocratie, l'entraide et la planification écologique. La libre association permettrait aux communes de choisir avec qui elles coopèrent, au lieu de regroupements imposés d'en haut.",
+   "arguments": [
+    {
+     "texte": "Jean-Luc Mélenchon s'oppose aux baisses de moyens imposées aux communes et à leur effacement au profit d'« institutions souvent trop éloignées ou technocratiques ».",
+     "media": "Courrier de J.-L. Mélenchon aux maires (Action populaire, site du mouvement), juin 2026",
+     "url": "https://infos.actionpopulaire.fr/wp-content/uploads/2026/06/Courrier_maires.pdf"
+    },
+    {
+     "texte": "Selon ce courrier, les communes doivent redevenir centrales pour garantir l'accès aux services publics partout et piloter les investissements face à l'urgence climatique.",
+     "media": "Courrier de J.-L. Mélenchon aux maires (Action populaire, site du mouvement)",
+     "url": "https://infos.actionpopulaire.fr/wp-content/uploads/2026/06/Courrier_maires.pdf"
+    },
+    {
+     "texte": "Le programme veut « restaurer la souveraineté municipale » et refuser les fusions de communes imposées.",
+     "media": "L'Avenir en commun 2027 (programme)",
+     "url": "https://www.lavenirencommun.org/programme/fonder-la-6e-republique/une-republique-affirmant-le-role-central-des-communes/#une-republique-affirmant-le-role-central-des-communes-1"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "une-republique-affirmant-le-role-central-des-communes-2",
+     "texte": "Supprimer les métropoles et rendre aux communes le libre choix de leurs associations."
+    },
+    {
+     "id": "une-republique-affirmant-le-role-central-des-communes-4",
+     "texte": "Refuser les fusions forcées de communes."
+    },
+    {
+     "id": "une-republique-affirmant-le-role-central-des-communes-3",
+     "texte": "Rééquilibrer la dotation globale de fonctionnement (DGF) et l'indexer sur l'inflation."
+    },
+    {
+     "id": "une-republique-affirmant-le-role-central-des-communes-10",
+     "texte": "Rétablir une taxe d'habitation progressive, dont 80 % des ménages seraient exonérés, pour redonner des moyens aux communes."
+    },
+    {
+     "id": "une-republique-affirmant-le-role-central-des-communes-5",
+     "texte": "Créer un fonds de soutien aux communes rurales pour recruter et mieux payer les agents."
+    },
+    {
+     "id": "l-organisation-de-l-etat-au-service-de-la-planification-ecologique-2",
+     "texte": "Associer pleinement les communes aux investissements de la planification écologique."
+    }
+   ]
+  },
+  "concret": [
+   "Aujourd'hui, chaque commune doit appartenir à une intercommunalité. Les métropoles regroupent les plus grandes villes et leurs voisines.",
+   "LFI veut supprimer les métropoles et laisser les communes choisir librement leurs regroupements.",
+   "Le programme ne détaille pas le sort des compétences aujourd'hui exercées par les intercommunalités (transports, déchets, eau…)."
+  ],
+  "eco": {
+   "chiffre": "Non chiffré",
+   "cout": "Non chiffré dans le programme.",
+   "financement": "Le programme prévoit une DGF rééquilibrée et indexée sur l'inflation et une taxe d'habitation progressive, sans montant.",
+   "rapporte": "Non chiffré.",
+   "sources": [
+    {
+     "media": "L'Avenir en commun 2027 (programme)",
+     "url": "https://www.lavenirencommun.org/programme/fonder-la-6e-republique/une-republique-affirmant-le-role-central-des-communes/#une-republique-affirmant-le-role-central-des-communes-1"
+    }
+   ]
+  },
+  "similaires": [],
+  "critiques": [],
+  "reponses": [],
+  "tensions": [
+   "Rendre l'intercommunalité libre peut créer des « trous » dans la carte des services partagés (eau, transports, déchets). Le programme ne dit pas comment ils seraient gérés.",
+   "Le projet d'écorégions, dans le même programme, crée en parallèle un échelon régional fort : l'articulation entre les deux n'est pas détaillée."
+  ],
+  "monde": [],
+  "maj": "13 nov. 2026"
+ },
+ "l-organisation-de-l-etat-au-service-de-la-planification-ecologique-1": {
+  "statut": "documente",
+  "resume": "LFI veut redessiner les régions selon les bassins-versants pour placer l'eau au cœur de l'action publique ; des écologistes et des géographes jugent le découpage imprécis et imposé d'en haut.",
+  "logique": {
+   "texte": "Pour LFI, les 13 régions créées en 2015 suivent une logique de compétitivité économique, pas d'écologie. Jean-Luc Mélenchon veut des régions taillées selon la géographie : bassins-versants, massifs, littoraux. L'eau en serait le fil directeur, avec un objectif « zéro pollution et zéro épuisement » de la ressource. Ces écorégions seraient la première ligne de la planification écologique, avec des moyens dédiés. Le projet s'inscrit dans la 6e République voulue par le mouvement.",
+   "arguments": [
+    {
+     "texte": "Mélenchon juge que « Les régions actuelles sont des régions de l'ancien monde » et que l'écorégion inscrit la crise climatique dans l'organisation de l'État.",
+     "media": "L'Info durable (AFP), 2 juil. 2026",
+     "url": "https://www.linfodurable.fr/melenchon-presente-son-projet-decoregions-pour-introduire-leau-dans-le-debat-57788"
+    },
+    {
+     "texte": "Selon lui, « à la fin, tout revient à l'eau » : la pollution de l'air finit dans les rivières, d'où un découpage par bassins-versants.",
+     "media": "L'Info durable (AFP), 2 juil. 2026",
+     "url": "https://www.linfodurable.fr/melenchon-presente-son-projet-decoregions-pour-introduire-leau-dans-le-debat-57788"
+    },
+    {
+     "texte": "Les régions deviendraient la première ligne d'alerte et de mise en œuvre de la planification écologique, avec des moyens financiers fléchés. Les députés Claire Lejeune et Gabriel Amard pilotent le chantier ; Manuel Bompard veut une mise en œuvre dès les premiers mois.",
+     "media": "Politis, juil. 2026",
+     "url": "https://www.politis.fr/articles/2026/07/politique-ecologie-une-france-des-ecoregions-le-reve-insoumis-dune-decentralisation-verte/"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "l-organisation-de-l-etat-au-service-de-la-planification-ecologique-6",
+     "texte": "Créer des assemblées citoyennes régionales sur les projets d'aménagement liés à la planification écologique."
+    },
+    {
+     "id": "l-organisation-de-l-etat-au-service-de-la-planification-ecologique-2",
+     "texte": "Impliquer les communes dans les décisions et les investissements de la planification écologique."
+    },
+    {
+     "id": "l-organisation-de-l-etat-au-service-de-la-planification-ecologique-5",
+     "texte": "Créer des Défenseurs de la nature (eau, air, forêt, sols) au niveau communal."
+    },
+    {
+     "id": "la-bifurcation-ecologique-pour-une-societe-de-l-harmonie-4",
+     "texte": "Adopter des lois-cadres de planification écologique coordonnant les échelles nationale et locales."
+    },
+    {
+     "id": "la-bifurcation-ecologique-pour-une-societe-de-l-harmonie-6",
+     "texte": "Créer un conseil à la planification écologique."
+    },
+    {
+     "id": "l-organisation-de-l-etat-au-service-de-la-planification-ecologique-9",
+     "texte": "Renforcer l'ingénierie territoriale pour aider les collectivités à planifier."
+    }
+   ]
+  },
+  "concret": [
+   "La France compte 13 régions métropolitaines depuis la réforme de 2015.",
+   "Il existe déjà des agences de l'eau organisées par grands bassins depuis 1964.",
+   "Le nombre d'écorégions et leur carte ne sont pas arrêtés : la presse évoque selon les cas six ou douze régions."
+  ],
+  "eco": {
+   "chiffre": "Non chiffré",
+   "cout": "Aucun chiffrage publié ; la carte finale n'est pas arrêtée.",
+   "financement": "Non précisé.",
+   "rapporte": "Non chiffré.",
+   "sources": [
+    {
+     "media": "Politis",
+     "url": "https://www.politis.fr/articles/2026/07/politique-ecologie-une-france-des-ecoregions-le-reve-insoumis-dune-decentralisation-verte/"
+    }
+   ]
+  },
+  "similaires": [
+   {
+    "camp": "Les Écologistes",
+    "prop": "Les Verts défendaient dès 2015 la notion de « biorégion », proche mais non imposée d'en haut (selon David Cormand, cité par Politis)."
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Écologistes",
+    "qui": "David Cormand, eurodéputé, ancien dirigeant des Verts",
+    "texte": "Il trouve l'idée intéressante mais « très imprécise », la qualifie de gadget et estime qu'un découpage seulement géographique ignore l'histoire. Il pose la question des compétences, de l'autonomie fiscale et des moyens des agences de l'eau.",
+    "media": "Politis",
+    "url": "https://www.politis.fr/articles/2026/07/politique-ecologie-une-france-des-ecoregions-le-reve-insoumis-dune-decentralisation-verte/"
+   },
+   {
+    "camp": "Géographe",
+    "qui": "Martin Vanier, géographe, professeur à l'université Paris-Est Créteil",
+    "texte": "Il juge la carte incohérente : Massif central divisé en six, Loire coupée en deux, une région à 18,6 millions d'habitants. Il y voit un geste « bien plus jacobin que décentralisateur » qui ignore agences de l'eau, parcs et régions.",
+    "media": "La Grande Conversation, août 2026",
+    "url": "https://www.lagrandeconversation.com/app/uploads/2026/08/lfi-et-le-bio-regionalisme-la-grande-conversation.pdf"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Jean-Luc Mélenchon",
+    "texte": "Se dit ouvert à toutes les critiques, ne revendique pas la paternité de l'idée et dit avoir besoin des Écologistes pour la porter.",
+    "media": "L'Info durable (AFP)",
+    "url": "https://www.linfodurable.fr/melenchon-presente-son-projet-decoregions-pour-introduire-leau-dans-le-debat-57788"
+   }
+  ],
+  "tensions": [
+   "Le nombre de régions et leur tracé restent flous (six ou douze selon les sources).",
+   "Sort incertain de régions à forte identité (Normandie, Pays basque, Île-de-France).",
+   "Un découpage décidé par l'État peut contredire la logique de décentralisation et de « libre association » prônée ailleurs dans le programme.",
+   "Une nouvelle réforme régionale prendrait du temps, alors que les urgences (eau, climat) sont immédiates, selon Martin Vanier."
+  ],
+  "monde": [
+   {
+    "pays": "États-Unis (Californie)",
+    "texte": "Le bio-régionalisme est né en Californie dans les années 1970 comme un projet de contre-société, pas comme un découpage administratif.",
+    "media": "La Grande Conversation",
+    "url": "https://www.lagrandeconversation.com/app/uploads/2026/08/lfi-et-le-bio-regionalisme-la-grande-conversation.pdf"
+   }
+  ],
+  "maj": "13 nov. 2026"
+ },
+ "l-egalite-des-populations-par-la-democratie-et-les-services-publics-1": {
+  "statut": "documente",
+  "resume": "LFI promet un service public essentiel à 15-30 minutes de chaque habitant ; des chercheurs rappellent que le temps de trajet ne garantit pas à lui seul un accès réel.",
+  "logique": {
+   "texte": "LFI part d'un constat : quartiers populaires, petites villes, campagnes et Outre-mer partagent la condition de « territoires délaissés ». Selon le mouvement, laisser le privé organiser l'essentiel a créé « des déserts pour le peuple et des oasis pour les riches ». Les services publics doivent donc être le pilier de l'égalité territoriale. La mesure fixe une garantie mesurable : une école, une gare, un hôpital et une poste à 15 à 30 minutes au plus. Elle s'accompagne d'un moratoire sur les fermetures et de services itinérants.",
+   "arguments": [
+    {
+     "texte": "Le programme vise une distance maximale de 15 à 30 minutes, en voiture ou en transport collectif, vers les services essentiels.",
+     "media": "L'Avenir en commun 2027 (programme)",
+     "url": "https://www.lavenirencommun.org/programme/fonder-la-6e-republique/l-egalite-des-populations-par-la-democratie-et-les-services-publics/#l-egalite-des-populations-par-la-democratie-et-les-services-publics-1"
+    },
+    {
+     "texte": "Le nombre de maternités a été divisé par deux entre 1975 et 2020, et plus d'une femme sur quatre en âge d'accoucher vit à plus de 30 minutes de la plus proche (DREES). Ces chiffres illustrent l'éloignement que LFI veut corriger.",
+     "media": "La Vie des idées, 10 mars 2026",
+     "url": "https://laviedesidees.fr/Quand-les-services-de-proximite-s-eloignent"
+    },
+    {
+     "texte": "Mélenchon écrit aux maires que les communes doivent retrouver une place centrale pour garantir l'accès aux services publics partout.",
+     "media": "Courrier aux maires (Action populaire, site du mouvement)",
+     "url": "https://infos.actionpopulaire.fr/wp-content/uploads/2026/06/Courrier_maires.pdf"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "l-egalite-des-populations-par-la-democratie-et-les-services-publics-8",
+     "texte": "Moratoire sur les fermetures d'écoles, maternités, bureaux de poste, gares et services de proximité."
+    },
+    {
+     "id": "l-egalite-des-populations-par-la-democratie-et-les-services-publics-5",
+     "texte": "Développer des services publics itinérants pour les communes isolées."
+    },
+    {
+     "id": "l-egalite-des-populations-par-la-democratie-et-les-services-publics-2",
+     "texte": "Faire du département l'échelle d'organisation du maillage en services publics."
+    },
+    {
+     "id": "l-egalite-des-populations-par-la-democratie-et-les-services-publics-6",
+     "texte": "Renforcer les dotations de l'État aux collectivités selon leurs inégalités."
+    },
+    {
+     "id": "developper-les-transports-publics-ecologiques-repenser-la-mobilite-individuelle-4",
+     "texte": "Stopper la suppression des petites lignes ferroviaires et en rouvrir."
+    },
+    {
+     "id": "faire-passer-la-sante-d-abord-et-reconstruire-les-etablissements-de-sante-publics-notamment-les-hopitaux-5",
+     "texte": "Rouvrir progressivement des urgences, maternités et Ehpad publics."
+    }
+   ]
+  },
+  "concret": [
+   "Les maisons France Services devaient déjà garantir un accès « à moins de vingt minutes » à un guichet administratif.",
+   "Un tiers des enfants de 3 à 10 ans sont scolarisés hors de leur commune, à 9,5 km en moyenne.",
+   "La mesure ajoute un critère de temps d'accès à l'école, la gare, l'hôpital et la poste, avec un moratoire sur les fermetures."
+  ],
+  "eco": {
+   "chiffre": "Non chiffré",
+   "cout": "Le programme ne chiffre pas cette mesure séparément. Le programme global annonce 81,7 Md€ de dépenses nouvelles.",
+   "financement": "Par le budget général du programme (106,4 Md€ de recettes nouvelles annoncées).",
+   "rapporte": "Non chiffré.",
+   "sources": [
+    {
+     "media": "L'Avenir en commun 2027 (programme)",
+     "url": "https://www.lavenirencommun.org/programme/fonder-la-6e-republique/l-egalite-des-populations-par-la-democratie-et-les-services-publics/#l-egalite-des-populations-par-la-democratie-et-les-services-publics-1"
+    }
+   ]
+  },
+  "similaires": [
+   {
+    "camp": "Gouvernement Lecornu",
+    "prop": "En septembre 2025, Sébastien Lecornu a annoncé 5 000 centres « France Santé » d'ici 2027 pour un accès médical en moins de 30 minutes."
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Chercheuses",
+    "qui": "Maryame Amarouche, Aurélie Delage et Nora Nafaa",
+    "texte": "Elles jugent qu'une lecture strictement métrique de l'accès est « rapidement limitée » : mobilité, numérique ou situation familiale changent l'accès réel, et un service présent peut être dégradé (« proximité de façade »).",
+    "media": "La Vie des idées, 10 mars 2026",
+    "url": "https://laviedesidees.fr/Quand-les-services-de-proximite-s-eloignent"
+   },
+   {
+    "camp": "Médecins (sur l'objectif santé à 30 minutes du gouvernement)",
+    "qui": "Mathilde Chouquet, Union des remplaçants et jeunes généralistes de Bretagne",
+    "texte": "Sur une promesse proche, elle estime que 90 % des Français vivent déjà à moins de 30 minutes d'un généraliste : le problème est le manque de médecins, pas de bâtiments.",
+    "media": "Connexion France",
+    "url": "https://www.connexionfrance.com/news/new-french-pm-targets-30-minute-health-access-for-all/743976"
+   }
+  ],
+  "reponses": [],
+  "tensions": [
+   "Garantir un hôpital et une gare à 30 minutes partout suppose des recrutements (médecins, cheminots) que le temps de trajet ne règle pas.",
+   "L'écart entre 15 et 30 minutes et entre voiture et transport collectif laisse une marge d'interprétation importante.",
+   "Le coût du maillage n'est pas détaillé."
+  ],
+  "monde": [],
+  "maj": "13 nov. 2026"
+ }
+}

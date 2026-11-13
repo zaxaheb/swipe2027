@@ -1,0 +1,367 @@
+{
+ "labib-165-1": {
+  "statut": "documente",
+  "resume": "Selma Labib veut baisser fortement la durée du travail sans baisse de salaire pour partager l'emploi ; ses détracteurs pointent le coût pour les entreprises et l'État.",
+  "logique": {
+   "texte": "Pour le NPA-Révolutionnaires, les gains de productivité doivent profiter aux salariés et non aux actionnaires. Travailler moins, sans perdre de salaire ni subir plus de charge de travail, permettrait de partager le travail entre tous et de faire reculer le chômage. La mesure s'inscrit dans une « rupture anticapitaliste » : hausse générale des salaires, interdiction des licenciements, contrôle des grandes entreprises. Le coût serait supporté par les profits et les grandes fortunes, pas par les salariés.",
+   "arguments": [
+    {
+     "texte": "Elle réclame « la réduction du temps de travail pour toutes et tous sans perte de salaire », associée à l'interdiction des licenciements.",
+     "media": "Votons 2027 (d'après son discours à la Fête de l'Humanité)",
+     "url": "https://votons-2027.fr/candidats/labib/programme/economie"
+    },
+    {
+     "texte": "Les gains de productivité devraient revenir aux salariés plutôt qu'au patronat.",
+     "media": "Votons 2027",
+     "url": "https://votons-2027.fr/candidats/labib/programme/economie"
+    },
+    {
+     "texte": "La baisse doit se faire sans hausse de la charge de travail, avec l'objectif d'une semaine de 32 heures ou de quatre jours.",
+     "media": "France-Vote",
+     "url": "https://www.france-vote.fr/candidats/selma-labib"
+    },
+    {
+     "texte": "Financement : impôt fortement progressif sur les bénéfices des grandes entreprises, fin des allègements de cotisations et des niches fiscales.",
+     "media": "Votons 2027",
+     "url": "https://votons-2027.fr/candidats/labib/programme/economie"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "labib-164-1",
+     "texte": "Augmenter tous les salaires et pensions de 400 € par mois."
+    },
+    {
+     "id": "labib-166-1",
+     "texte": "Abroger la réforme des retraites de 2023 et revenir à 62 ans ou moins."
+    }
+   ]
+  },
+  "concret": [
+   "La durée légale est de 35 heures par semaine en France depuis les lois Aubry (1998-2000).",
+   "Selma Labib évoque 32 heures ou une semaine de quatre jours, sans baisse de salaire ni hausse de la charge de travail.",
+   "Elle n'a pas publié de programme chiffré : la mesure vient surtout de son discours à la Fête de l'Humanité (septembre 2026)."
+  ],
+  "eco": {
+   "chiffre": "Non chiffré",
+   "cout": "Non chiffré par la candidate. Pour une mesure proche (32 h sans baisse de salaire, PCF 2022), l'Institut Montaigne estimait le coût public à environ 6,2 Md€ par an, et la hausse de la masse salariale privée à 36 à 57 Md€.",
+   "financement": "Impôt fortement progressif sur les revenus et les bénéfices des grandes entreprises, fin des exonérations de cotisations et des niches fiscales, contrôle des marges des grands groupes.",
+   "rapporte": "Selon le camp qui propose : créations d'emplois par le partage du travail. L'Institut Montaigne prévoit un gain d'emploi public, mais un effet négatif à moyen terme dans le privé.",
+   "sources": [
+    {
+     "media": "Institut Montaigne (chiffrage de la proposition PCF 2022)",
+     "url": "https://www.institutmontaigne.org/presidentielle-2022/fabien-roussel/passer-a-la-semaine-de-travail-a-32h/"
+    },
+    {
+     "media": "Votons 2027",
+     "url": "https://votons-2027.fr/candidats/labib/programme/economie"
+    }
+   ]
+  },
+  "similaires": [
+   {
+    "camp": "Lutte ouvrière (Nathalie Arthaud)",
+    "prop": "Réduire le temps de travail sans perte de salaire, « répartition du travail entre tous »."
+   },
+   {
+    "camp": "PCF (Fabien Roussel, 2022)",
+    "prop": "Semaine de 32 heures sans baisse de salaire."
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Think tank libéral",
+    "qui": "Institut Montaigne",
+    "texte": "Sur la version PCF 2022 de la mesure : la hausse du coût du travail (2,5 à 4 points de marge) pèserait sur l'emploi privé à moyen terme, surtout l'emploi peu qualifié. Elle pourrait aussi entraîner des hausses de prix.",
+    "media": "Institut Montaigne",
+    "url": "https://www.institutmontaigne.org/presidentielle-2022/fabien-roussel/passer-a-la-semaine-de-travail-a-32h/"
+   },
+   {
+    "camp": "Think tank libéral",
+    "qui": "Fondation iFRAP",
+    "texte": "Les 35 heures n'auraient pas créé plus de 300 000 emplois ; un effet plus fort des 32 heures est jugé peu probable. L'iFRAP préfère une négociation du temps de travail par branche.",
+    "media": "iFRAP (note de 2012)",
+    "url": "https://www.ifrap.org/emploi-et-politiques-sociales/arretons-avec-les-39h-35h-ou-32h-negocions-plutot-le-temps-de-travail-par-branche"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Selma Labib (NPA-Révolutionnaires)",
+    "texte": "Le coût doit être pris sur les profits : suppression des allègements de cotisations et des niches fiscales des entreprises, impôt fortement progressif sur leurs bénéfices.",
+    "media": "Votons 2027",
+    "url": "https://votons-2027.fr/candidats/labib/programme/economie"
+   }
+  ],
+  "tensions": [
+   "L'ampleur exacte de la baisse (« drastique ») n'est pas fixée : 32 heures, quatre jours, ou moins.",
+   "Les effets sur l'emploi du passage aux 35 heures restent débattus entre économistes, ce qui rend l'effet d'une nouvelle baisse incertain.",
+   "Le maintien des salaires suppose un financement par les entreprises, alors que la candidate supprime aussi les aides publiques qui ont compensé les 35 heures."
+  ],
+  "monde": [
+   {
+    "pays": "Islande",
+    "texte": "Expérimentation depuis 2017 (de 40 h à 35-36 h), jugée concluante et étendue par la négociation.",
+    "media": "Institut Montaigne",
+    "url": "https://www.institutmontaigne.org/presidentielle-2022/fabien-roussel/passer-a-la-semaine-de-travail-a-32h/"
+   },
+   {
+    "pays": "Espagne",
+    "texte": "Un fonds de 10 M€ aide les entreprises volontaires à passer à une semaine plus courte, avec une aide dégressive sur trois ans.",
+    "media": "Institut Montaigne",
+    "url": "https://www.institutmontaigne.org/presidentielle-2022/fabien-roussel/passer-a-la-semaine-de-travail-a-32h/"
+   }
+  ],
+  "maj": "13 nov. 2026"
+ },
+ "arthaud-124-1": {
+  "statut": "documente",
+  "resume": "Nathalie Arthaud veut « répartir le travail entre tous » en baissant sa durée sans baisse de salaire ; ses détracteurs craignent un coût du travail trop élevé.",
+  "logique": {
+   "texte": "Pour Lutte ouvrière, le chômage vient d'un travail mal réparti : certains s'épuisent quand d'autres sont privés d'emploi. Baisser le temps et la charge de travail, sans baisser les salaires, permettrait d'employer tout le monde, surtout face aux baisses d'activité et à l'automatisation par l'IA. Les gains de productivité sont jugés captés par les actionnaires ; il s'agit de les rendre aux travailleurs. La mesure va avec l'interdiction des licenciements et le contrôle des travailleurs sur les entreprises.",
+   "arguments": [
+    {
+     "texte": "Le dépliant de LO appelle à la « répartition du travail entre tous, sans perte de salaire », notamment face à l'automatisation par l'IA.",
+     "media": "Votons 2027 (d'après le dépliant de Lutte ouvrière, nov. 2026)",
+     "url": "https://votons-2027.fr/candidats/arthaud/programme/economie"
+    },
+    {
+     "texte": "LO veut créer « des centaines de milliers d'emplois » dans les hôpitaux, Ehpad, écoles et transports, selon les besoins listés par le personnel.",
+     "media": "Votons 2027",
+     "url": "https://votons-2027.fr/candidats/arthaud/programme/economie"
+    },
+    {
+     "texte": "Les gains de productivité seraient mal répartis ; les redistribuer financerait la baisse du temps de travail.",
+     "media": "ÉlyséeScope",
+     "url": "https://www.elyseescope.com/questions/travailler-moins-pour-travailler-tous-le-slogan-de-nathalie-arthaud-decrypt"
+    },
+    {
+     "texte": "Le budget et la dette doivent être payés « par les profits patronaux », pas par les salariés.",
+     "media": "Votons 2027",
+     "url": "https://votons-2027.fr/candidats/arthaud/programme/economie"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "arthaud-124-2",
+     "texte": "Interdire les licenciements et instaurer un contrôle des travailleurs sur les entreprises."
+    },
+    {
+     "id": "arthaud-123-1",
+     "texte": "Aucun salaire sous 2 200 € net par mois."
+    },
+    {
+     "id": "arthaud-125-1",
+     "texte": "Exproprier les grandes fortunes."
+    }
+   ]
+  },
+  "concret": [
+   "La durée légale du travail est aujourd'hui de 35 heures par semaine.",
+   "France-Vote rattache la mesure à une semaine de 32 heures ou de quatre jours.",
+   "LO ne fixe pas de durée précise : le temps de travail serait réparti selon le nombre de personnes à employer."
+  ],
+  "eco": {
+   "chiffre": "Non chiffré",
+   "cout": "Non chiffré par la candidate. Pour une semaine de 32 h sans baisse de salaire (PCF 2022), l'Institut Montaigne estimait le coût public à environ 6,2 Md€ par an et la hausse de la masse salariale privée à 36 à 57 Md€.",
+   "financement": "Profits des entreprises et grandes fortunes : réquisition des profits, expropriation des grands actionnaires, fiscalité fondée sur les profits du capital.",
+   "rapporte": "Selon LO : retour à l'emploi des chômeurs par le partage du travail. Non chiffré.",
+   "sources": [
+    {
+     "media": "Institut Montaigne (chiffrage de la proposition PCF 2022)",
+     "url": "https://www.institutmontaigne.org/presidentielle-2022/fabien-roussel/passer-a-la-semaine-de-travail-a-32h/"
+    },
+    {
+     "media": "Votons 2027",
+     "url": "https://votons-2027.fr/candidats/arthaud/programme/economie"
+    }
+   ]
+  },
+  "similaires": [
+   {
+    "camp": "NPA-Révolutionnaires (Selma Labib)",
+    "prop": "Réduire drastiquement le temps de travail sans perte de salaire."
+   },
+   {
+    "camp": "PCF (Fabien Roussel, 2022)",
+    "prop": "Semaine de 32 heures sans baisse de salaire."
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Think tank libéral",
+    "qui": "Institut Montaigne",
+    "texte": "Sur la version PCF 2022 : la hausse du coût du travail pèserait à moyen terme sur l'emploi privé, surtout peu qualifié, et pourrait se traduire par des hausses de prix.",
+    "media": "Institut Montaigne",
+    "url": "https://www.institutmontaigne.org/presidentielle-2022/fabien-roussel/passer-a-la-semaine-de-travail-a-32h/"
+   },
+   {
+    "camp": "Think tank libéral",
+    "qui": "Fondation iFRAP",
+    "texte": "Les 35 heures auraient créé au plus 300 000 emplois ; un ordre de l'État ne suffit pas à généraliser une baisse du temps de travail. L'iFRAP préfère une négociation par branche.",
+    "media": "iFRAP (note de 2012)",
+    "url": "https://www.ifrap.org/emploi-et-politiques-sociales/arretons-avec-les-39h-35h-ou-32h-negocions-plutot-le-temps-de-travail-par-branche"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Lutte ouvrière",
+    "texte": "Le coût doit être payé par les profits : LO veut réquisitionner les profits et rendre publiques les comptes des entreprises pour montrer qu'elles peuvent payer.",
+    "media": "Votons 2027",
+    "url": "https://votons-2027.fr/candidats/arthaud/programme/economie"
+   }
+  ],
+  "tensions": [
+   "Aucune durée cible officielle : 32 heures selon certaines sources, « répartition » selon les besoins pour LO.",
+   "Le financement repose sur l'expropriation et la réquisition des profits, ce qui suppose un changement de système économique, pas une simple réforme.",
+   "Le programme 2027 n'est pas encore arrêté selon France-Vote."
+  ],
+  "monde": [
+   {
+    "pays": "Islande",
+    "texte": "Expérimentation de 35-36 h depuis 2017, jugée concluante et étendue par la négociation.",
+    "media": "Institut Montaigne",
+    "url": "https://www.institutmontaigne.org/presidentielle-2022/fabien-roussel/passer-a-la-semaine-de-travail-a-32h/"
+   },
+   {
+    "pays": "Espagne",
+    "texte": "Fonds public de 10 M€ pour aider les entreprises volontaires à réduire la semaine de travail.",
+    "media": "Institut Montaigne",
+    "url": "https://www.institutmontaigne.org/presidentielle-2022/fabien-roussel/passer-a-la-semaine-de-travail-a-32h/"
+   }
+  ],
+  "maj": "13 nov. 2026"
+ },
+ "arthaud-126-1": {
+  "statut": "documente",
+  "resume": "Nathalie Arthaud veut régulariser tous les sans-papiers et instaurer la liberté de circulation ; la droite redoute un « appel d'air », la gauche modérée propose des régularisations ciblées.",
+  "logique": {
+   "texte": "Pour Lutte ouvrière, les travailleurs immigrés font partie de la même classe ouvrière que les travailleurs français : les diviser affaiblit tous les salariés. Les sans-papiers travaillent déjà, souvent dans les hôpitaux, le bâtiment, le nettoyage ou les usines, mais sans droits, ce qui les rend exploitables. Les régulariser les protège et empêche le patronat de faire pression sur les salaires. LO va plus loin que la seule régularisation : liberté de circulation et d'installation pour tous, et droit de vote des travailleurs immigrés.",
+   "arguments": [
+    {
+     "texte": "Le dépliant de LO demande la « régularisation de tous les sans-papiers » et la liberté de circulation et d'installation pour chaque être humain.",
+     "media": "Votons 2027 (d'après le dépliant de Lutte ouvrière)",
+     "url": "https://votons-2027.fr/candidats/arthaud/programme/immigration"
+    },
+    {
+     "texte": "Les travailleurs immigrés sont jugés indispensables aux hôpitaux, au bâtiment, au nettoyage et aux usines ; ils doivent donc aussi avoir le droit de vote.",
+     "media": "Votons 2027",
+     "url": "https://votons-2027.fr/candidats/arthaud/programme/immigration"
+    },
+    {
+     "texte": "Arthaud refuse toute distinction entre travailleurs français et étrangers, et dénonce les expulsions et « l'Europe-forteresse ».",
+     "media": "France-Vote",
+     "url": "https://www.france-vote.fr/candidats/nathalie-arthaud"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "arthaud-123-1",
+     "texte": "Aucun salaire sous 2 200 € net par mois, pour tous les travailleurs."
+    },
+    {
+     "id": "arthaud-124-2",
+     "texte": "Interdire les licenciements et instaurer un contrôle des travailleurs sur les entreprises."
+    }
+   ]
+  },
+  "concret": [
+   "Il n'existe pas de chiffre officiel : le ministère de l'Intérieur évalue à environ 700 000 le nombre de personnes en situation irrégulière.",
+   "Aujourd'hui, la régularisation se fait au cas par cas : environ 20 000 à 30 000 par an entre 2012 et 2024.",
+   "En 2025, Bruno Retailleau a abrogé la circulaire Valls et durci les conditions (sept ans de présence au lieu de cinq).",
+   "Les dernières grandes vagues datent de 1997 (plus de 70 000 personnes) et 2006 (7 000 personnes)."
+  ],
+  "eco": {
+   "chiffre": "Non chiffré",
+   "cout": "Non chiffré par la candidate.",
+   "financement": "Sans objet direct ; LO ne présente pas de chiffrage.",
+   "rapporte": "Selon les partisans de la régularisation, les personnes régularisées paient davantage d'impôts et de cotisations. Aucun chiffre n'est avancé dans les sources lues.",
+   "sources": [
+    {
+     "media": "Public Sénat",
+     "url": "https://www.publicsenat.fr/actualites/politique/immigration-a-quoi-correspond-la-proposition-dolivier-faure-de-regulariser-400-000-travailleurs-sans-papiers"
+    },
+    {
+     "media": "Public Sénat",
+     "url": "https://www.publicsenat.fr/actualites/politique/il-ny-a-que-avantages-a-regulariser-les-sans-papiers"
+    }
+   ]
+  },
+  "similaires": [
+   {
+    "camp": "NPA-Révolutionnaires (Selma Labib)",
+    "prop": "Régulariser tous les sans-papiers et leurs familles."
+   },
+   {
+    "camp": "PS (Olivier Faure)",
+    "prop": "Régulariser 400 000 travailleurs sans-papiers, sur le modèle espagnol ; « pas tous les sans-papiers »."
+   },
+   {
+    "camp": "La France insoumise",
+    "prop": "Régularisation des travailleurs sans-papiers, selon Public Sénat."
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Les Républicains",
+    "qui": "Bruno Retailleau, président de LR",
+    "texte": "À propos du plan espagnol, il refuse toute « régularisation massive » et craint que les personnes régularisées viennent ensuite en France.",
+    "media": "LCP",
+    "url": "https://lcp.fr/actualites/bruno-retailleau-veut-mettre-au-ban-l-espagne-pour-sa-politique-de-regularisation-de"
+   },
+   {
+    "camp": "Droite (presse)",
+    "qui": "Aziliz Le Corre, rédactrice en chef au JDD",
+    "texte": "Elle invoque l'« appel d'air » : régulariser attirerait davantage de migrants. Elle juge qu'« on importe de la misère ».",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/il-ny-a-que-avantages-a-regulariser-les-sans-papiers"
+   },
+   {
+    "camp": "Gauche modérée",
+    "qui": "Olivier Faure, Premier secrétaire du PS",
+    "texte": "Il propose une régularisation limitée aux travailleurs et précise : « Je ne parle pas de tous les sans-papiers. »",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/immigration-a-quoi-correspond-la-proposition-dolivier-faure-de-regulariser-400-000-travailleurs-sans-papiers"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Jean-Luc Mano, conseiller en communication",
+    "texte": "Il rejette l'idée d'un appel d'air : la plupart des migrants fuient des conditions de vie catastrophiques, pas les règles du pays d'accueil.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/il-ny-a-que-avantages-a-regulariser-les-sans-papiers"
+   },
+   {
+    "qui": "Roselyne Bachelot, ancienne ministre",
+    "texte": "Elle juge qu'il n'y a que des avantages : ces travailleurs seront nécessaires avec la baisse de la natalité.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/il-ny-a-que-avantages-a-regulariser-les-sans-papiers"
+   }
+  ],
+  "tensions": [
+   "LO vise « tous » les sans-papiers sans condition, alors que toutes les régularisations récentes en Europe fixent des critères (durée de présence, casier).",
+   "La liberté totale de circulation et d'installation est incompatible avec les règles actuelles de l'espace Schengen et du droit des étrangers.",
+   "Le nombre réel de personnes concernées est inconnu."
+  ],
+  "monde": [
+   {
+    "pays": "Espagne",
+    "texte": "En 2026, plus de 500 000 personnes présentes depuis au moins cinq mois peuvent obtenir un titre de séjour ; la Commission européenne a exprimé des réserves pour Schengen.",
+    "media": "Euronews",
+    "url": "https://fr.euronews.com/my-europe/2026/04/30/la-ministre-la-politique-migratoire-humaine-de-lespagne-modele-pour-leurope"
+   },
+   {
+    "pays": "Espagne",
+    "texte": "Environ un million de demandes ont été déposées et la moitié acceptées, au cas par cas, selon Matthieu Tardis (Synergie Migration).",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/immigration-a-quoi-correspond-la-proposition-dolivier-faure-de-regulariser-400-000-travailleurs-sans-papiers"
+   },
+   {
+    "pays": "Italie",
+    "texte": "Le gouvernement Meloni autorise 500 000 travailleurs étrangers à venir sur 2026-2028.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/immigration-a-quoi-correspond-la-proposition-dolivier-faure-de-regulariser-400-000-travailleurs-sans-papiers"
+   }
+  ],
+  "maj": "13 nov. 2026"
+ }
+}

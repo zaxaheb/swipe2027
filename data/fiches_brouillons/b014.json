@@ -1,0 +1,118 @@
+{
+ "dupontaignan-132-1": {
+  "statut": "documente",
+  "resume": "Nicolas Dupont-Aignan veut supprimer la Commission et la Cour de justice de l'UE pour rendre le pouvoir aux États ; ses adversaires y voient la fin du cadre juridique commun de l'Union.",
+  "logique": {
+   "texte": "Pour Debout la France, l'Union est gouvernée par des institutions non élues : la Commission, la Banque centrale et les juges de Luxembourg. Supprimer la Commission et la CJUE rendrait aux nations leur indépendance et aux électeurs le dernier mot. Dupont-Aignan ne propose pas une sortie « à l'anglaise » : il veut dissoudre l'UE actuelle avec d'autres États et reconstruire une « Europe légère » de nations souveraines qui coopèrent sur des projets précis. Cette Europe des nations s'accompagne du retour des contrôles aux frontières nationales.",
+   "arguments": [
+    {
+     "texte": "Selon lui, « ce sont des gens non élus qui gouvernent » l'Europe, notamment des « juges à Luxembourg non élus ».",
+     "media": "Sud Radio (2019)",
+     "url": "https://www.sudradio.fr/politique/nicolas-dupont-aignan-ce-sont-des-gens-non-elus-qui-gouvernent-leurope"
+    },
+    {
+     "texte": "Il reproche à la Commission de négocier les accords commerciaux sous l'influence des lobbies, ce qui favoriserait les délocalisations (exemple cité : la production des Smart partie en Chine).",
+     "media": "Sud Radio (2019)",
+     "url": "https://www.sudradio.fr/politique/nicolas-dupont-aignan-ce-sont-des-gens-non-elus-qui-gouvernent-leurope"
+    },
+    {
+     "texte": "Il estime que « les règles de l'Union européenne sont devenues une prison pour la France » et empêchent d'agir sur l'immigration, la sécurité, l'agriculture et l'industrie.",
+     "media": "Sud Radio (mai 2026)",
+     "url": "https://www.sudradio.fr/linvite-politique/nicolas-dupont-aignan-les-regles-de-lue-sont-devenues-une-prison-pour-la-france"
+    },
+    {
+     "texte": "Il propose de dissoudre l'UE avec d'autres États et de la reconstruire en « Europe des nations libres, souveraines, qui travaillent ensemble », sans sortie unilatérale.",
+     "media": "Sud Radio (mai 2026)",
+     "url": "https://www.sudradio.fr/linvite-politique/nicolas-dupont-aignan-les-regles-de-lue-sont-devenues-une-prison-pour-la-france"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "dupontaignan-133-1",
+     "texte": "Sortir du commandement intégré de l'OTAN et arrêter le soutien militaire à l'Ukraine, dans la même logique d'indépendance nationale."
+    },
+    {
+     "id": "dupontaignan-131-1",
+     "texte": "Créer un référendum d'initiative citoyenne dès un million de signataires, pour redonner la décision aux électeurs."
+    },
+    {
+     "id": "dupontaignan-129-1",
+     "texte": "Supprimer le droit du sol par référendum, une politique migratoire décidée au niveau national."
+    }
+   ]
+  },
+  "concret": [
+   "La Commission européenne propose les lois de l'UE et négocie les accords commerciaux ; la CJUE fait respecter le droit européen dans les États membres.",
+   "Le projet remplace l'UE par une « communauté d'États européens » et rétablit les frontières nationales ; une sortie de l'euro est aussi envisagée selon France-Vote.",
+   "Le programme 2027 n'est pas arrêté : ni calendrier ni procédure juridique ne sont détaillés.",
+   "Dupont-Aignan dit vouloir une dissolution de l'UE négociée avec d'autres États, pas une sortie seule de la France."
+  ],
+  "eco": {
+   "chiffre": "Non chiffré",
+   "cout": "Aucune estimation publiée du coût ou des effets de la suppression de ces institutions.",
+   "financement": "Sans objet (réforme institutionnelle).",
+   "rapporte": "Non chiffré par le candidat.",
+   "sources": [
+    {
+     "media": "France-Vote",
+     "url": "https://www.france-vote.fr/candidats/nicolas-dupont-aignan"
+    }
+   ]
+  },
+  "similaires": [
+   {
+    "camp": "RN (européennes 2019)",
+    "prop": "Supprimer la Commission européenne au profit d'une « Union européenne des Nations »."
+   },
+   {
+    "camp": "Les Patriotes, UPR",
+    "prop": "Sortir complètement de l'UE (Frexit)."
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Écologistes",
+    "qui": "Rebecca Harms, eurodéputée verte (2019)",
+    "texte": "Réagissant à la même idée portée par le RN, elle rappelle que « La Commission européenne défend notre intérêt commun » et juge que la supprimer porterait un coup fatal au fonctionnement de l'UE.",
+    "media": "Euronews",
+    "url": "https://fr.euronews.com/2019/04/16/europeennes-le-rn-veut-la-peau-de-la-commission"
+   },
+   {
+    "camp": "Centre (LREM)",
+    "qui": "Jean Arthuis, eurodéputé (2019)",
+    "texte": "Selon lui, un modèle où les États négocient directement sans Commission paralyserait l'Union.",
+    "media": "Euronews",
+    "url": "https://fr.euronews.com/2019/04/16/europeennes-le-rn-veut-la-peau-de-la-commission"
+   },
+   {
+    "camp": "Associatif (droits de l'homme)",
+    "qui": "Jean-Pierre Dubois, président d'honneur de la LDH",
+    "texte": "Remettre en cause la primauté du droit européen reviendrait à faire tomber tout l'édifice juridique de l'Union. Il estime que ceux qui veulent écarter les juges européens cherchent surtout à paralyser le contrôle des droits fondamentaux.",
+    "media": "LDH, Droits & Libertés n°196 (2022)",
+    "url": "https://www.ldh-france.org/wp-content/uploads/2022/04/HL196-Monde-4.-Apres-le-Brexit-vers-un-Librexit-sortir-du-droit-europeen.pdf"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Nicolas Dupont-Aignan",
+    "texte": "Il récuse tout repli : il veut une Europe de nations qui coopèrent, et non une sortie unilatérale « à l'anglaise ».",
+    "media": "Sud Radio (mai 2026)",
+    "url": "https://www.sudradio.fr/linvite-politique/nicolas-dupont-aignan-les-regles-de-lue-sont-devenues-une-prison-pour-la-france"
+   }
+  ],
+  "tensions": [
+   "Supprimer la Commission et la CJUE suppose de réviser les traités, donc l'accord de tous les États membres ; le candidat ne dit pas comment l'obtenir.",
+   "Sans Cour de justice, on ne sait pas qui trancherait les litiges entre États sur les règles communes (marché unique, concurrence).",
+   "Le projet oscille entre réforme de l'UE (dissolution-reconstruction) et sortie de l'euro, selon les sources."
+  ],
+  "monde": [
+   {
+    "pays": "Royaume-Uni",
+    "texte": "Dix ans après le vote du Brexit, le PIB britannique serait 6 à 8 % sous sa trajectoire sans Brexit (étude NBER citée). Les exportations de biens vers l'UE ont nettement reculé et le coût des formalités douanières atteint environ 8 % en moyenne.",
+    "media": "Le Grand Continent",
+    "url": "https://legrandcontinent.eu/fr/2026/06/19/le-brexit-dix-ans-apres/"
+   }
+  ],
+  "maj": "13 nov. 2026"
+ }
+}

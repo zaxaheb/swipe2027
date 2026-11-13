@@ -1,0 +1,232 @@
+{
+ "relancer-la-decouverte-de-l-espace-1": {
+  "statut": "documente",
+  "resume": "LFI veut redonner des moyens et le pilotage de la politique spatiale au CNES, au moment où l'État lui impose de fortes coupes budgétaires.",
+  "logique": {
+   "texte": "Pour LFI, l'espace est une « nouvelle frontière » à explorer pour la science et pour observer le réchauffement climatique. Le mouvement estime que la France, première puissance spatiale en Europe, perd la main face à SpaceX et aux grands acteurs privés. Il veut donc que l'agence publique, le CNES, redevienne le pilote de la politique spatiale, plutôt qu'un simple financeur de start-up. Cette mesure s'inscrit dans un projet de souveraineté : lanceurs, satellites et données doivent rester sous contrôle public.",
+   "arguments": [
+    {
+     "texte": "Le programme rappelle que la France est la première puissance spatiale d'Europe et que des milliers d'applications du quotidien dépendent des satellites.",
+     "media": "L'Avenir en commun (programme de campagne)",
+     "url": "https://melenchon2027.fr/?p=26656"
+    },
+    {
+     "texte": "Les députés LFI ont proposé en 2025 d'augmenter de 15 % la dotation du CNES et du CNRS, jugeant que la hausse prévue en 2026 ne compense pas les coupes de 2025.",
+     "media": "Assemblée nationale (amendement du groupe LFI au PLF 2026)",
+     "url": "https://www.assemblee-nationale.fr/dyn/17/amendements/1906C/AN/1166.pdf"
+    },
+    {
+     "texte": "Ils citent l'Allemagne, qui prévoit 35 milliards d'euros pour la défense spatiale d'ici 2030, et le besoin de recherche sur les débris et l'encombrement de l'orbite par Starlink.",
+     "media": "Assemblée nationale (amendement du groupe LFI au PLF 2026)",
+     "url": "https://www.assemblee-nationale.fr/dyn/17/amendements/1906C/AN/1166.pdf"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "assurer-la-souverainete-spatiale-francaise-4",
+     "texte": "Nationaliser ArianeGroup et créer un pôle public du satellite."
+    },
+    {
+     "id": "assurer-la-souverainete-spatiale-francaise-7",
+     "texte": "Concentrer l'argent public sur un seul projet de lanceur, MaiaSpace, en plus d'Ariane 6."
+    },
+    {
+     "id": "investir-pour-lancer-la-bifurcation-de-notre-economie-13",
+     "texte": "Relancer l'observation spatiale de la Terre pour lutter contre le changement climatique."
+    },
+    {
+     "id": "relancer-la-decouverte-de-l-espace-5",
+     "texte": "Renforcer le Centre spatial guyanais comme avant-poste souverain."
+    },
+    {
+     "id": "relancer-la-decouverte-de-l-espace-6",
+     "texte": "Assurer la participation française aux missions dans le système solaire."
+    }
+   ]
+  },
+  "concret": [
+   "Le CNES est l'agence spatiale française ; son budget est le plus important d'Europe.",
+   "Le gouvernement impose au CNES une baisse de 330 M€ sur 2026-2028, après 100 M€ retirés en 2025, soit environ 20 % de son budget annuel.",
+   "Pour absorber ces coupes, la direction du CNES a surtout réduit les projets scientifiques, notamment d'observation de la Terre.",
+   "Depuis le début des années 2020, l'État pousse à confier davantage de projets à des industriels et start-up du « NewSpace »."
+  ],
+  "eco": {
+   "chiffre": "Non chiffré",
+   "cout": "Le programme ne chiffre pas la hausse. Les députés LFI ont proposé fin 2025 environ 556 M€ supplémentaires pour le CNES et le CNRS réunis.",
+   "financement": "Dans cet amendement, par redéploiement de crédits de l'Agence nationale de la recherche et de la recherche nucléaire.",
+   "rapporte": "Non évalué.",
+   "sources": [
+    {
+     "media": "Assemblée nationale",
+     "url": "https://www.assemblee-nationale.fr/dyn/17/amendements/1906C/AN/1166.pdf"
+    },
+    {
+     "media": "L'Info durable",
+     "url": "https://www.linfodurable.fr/espace-800-scientifiques-salarment-des-coupes-budgetaires-au-cnes-57769"
+    }
+   ]
+  },
+  "similaires": [
+   {
+    "camp": "Scientifiques (tribune de 800 chercheurs)",
+    "prop": "Demandent de relancer les projets gelés au CNES."
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Gouvernement / majorité",
+    "qui": "Bruno Le Maire, alors ministre de l'Économie",
+    "texte": "En 2021, il souhaitait que des start-up prennent davantage la place occupée jusque-là par le CNES, à l'opposé d'un CNES maître d'œuvre.",
+    "media": "Presse-citron",
+    "url": "https://www.presse-citron.net/cnes-le-new-space-francais-ne-fait-pas-que-des-heureux/"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Plus de 800 scientifiques, dont Françoise Combes et Valérie Masson-Delmotte",
+    "texte": "Ils jugent les coupes « incompatibles avec l'ambition affichée de la France dans ce domaine ».",
+    "media": "L'Info durable",
+    "url": "https://www.linfodurable.fr/espace-800-scientifiques-salarment-des-coupes-budgetaires-au-cnes-57769"
+   },
+   {
+    "qui": "Cadres et ingénieurs du CNES",
+    "texte": "En 2022, ils reprochaient à l'État de confier l'argent public à des start-up sans s'appuyer sur le savoir-faire du CNES.",
+    "media": "Presse-citron",
+    "url": "https://www.presse-citron.net/cnes-le-new-space-francais-ne-fait-pas-que-des-heureux/"
+   }
+  ],
+  "tensions": [
+   "Le contexte budgétaire va dans le sens inverse : l'État réduit les moyens du CNES.",
+   "Le programme ne précise ni le montant de la hausse ni la frontière entre rôle du CNES et rôle des industriels privés.",
+   "Choix entre spatial scientifique, spatial militaire et soutien au NewSpace."
+  ],
+  "monde": [
+   {
+    "pays": "États-Unis",
+    "texte": "La NASA dispose d'un budget d'environ 14 milliards de dollars, contre un peu moins de 3 pour le CNES (chiffres 2022).",
+    "media": "Presse-citron",
+    "url": "https://www.presse-citron.net/cnes-le-new-space-francais-ne-fait-pas-que-des-heureux/"
+   },
+   {
+    "pays": "Allemagne",
+    "texte": "Prévoit d'investir 35 milliards d'euros dans la défense spatiale d'ici 2030.",
+    "media": "Assemblée nationale (amendement LFI)",
+    "url": "https://www.assemblee-nationale.fr/dyn/17/amendements/1906C/AN/1166.pdf"
+   }
+  ],
+  "maj": "13 nov. 2026"
+ },
+ "defendre-l-espace-comme-bien-commun-de-l-humanite-1": {
+  "statut": "documente",
+  "resume": "LFI veut que la France ratifie le traité de la Lune de 1979 et porte un nouveau traité contre l'appropriation des ressources spatiales et la militarisation de l'espace, ce qui l'oppose aux accords Artemis signés par la France.",
+  "logique": {
+   "texte": "Pour LFI, l'espace a été pensé par les grands traités comme un bien commun, protégé des logiques de domination. Le mouvement estime que des acteurs privés comme SpaceX et des puissances comme les États-Unis cherchent à l'accaparer, le polluent et accélèrent sa militarisation. Il propose donc de s'appuyer sur le traité de la Lune, qui fait de la Lune et de ses ressources un « patrimoine commun de l'humanité ». La France le ratifierait et proposerait un nouveau traité plus large. La mesure va avec un retrait des accords Artemis, portés par la NASA.",
+   "arguments": [
+    {
+     "texte": "Le programme reproche aux acteurs privés et aux nations offensives de saturer l'espace, de le polluer et d'accélérer sa militarisation.",
+     "media": "L'Avenir en commun (programme de campagne)",
+     "url": "https://melenchon2027.fr/?p=26656"
+    },
+    {
+     "texte": "Le traité de 1979 qualifie la Lune et ses ressources de patrimoine commun de l'humanité ; la France l'a signé en 1980 sans jamais le ratifier.",
+     "media": "Sénat (rapport de la délégation à la prospective)",
+     "url": "https://www.senat.fr/rap/r22-668/r22-6684.html"
+    },
+    {
+     "texte": "Selon certains juristes, les accords Artemis contredisent l'esprit des traités de 1967 et 1979 en autorisant l'extraction de ressources.",
+     "media": "Futura Sciences",
+     "url": "https://www.futura-sciences.com/sciences/actualites/exploration-exploration-spatiale-france-signe-accords-artemis-98862/"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "defendre-l-espace-comme-bien-commun-de-l-humanite-2",
+     "texte": "Se retirer des accords Artemis et inviter d'autres pays à faire de même."
+    },
+    {
+     "id": "defendre-l-espace-comme-bien-commun-de-l-humanite-4",
+     "texte": "Promouvoir un programme international de dépollution de l'orbite basse, porté par l'ONU."
+    },
+    {
+     "id": "defendre-l-espace-comme-bien-commun-de-l-humanite-3",
+     "texte": "Planifier la bifurcation écologique de l'industrie spatiale."
+    },
+    {
+     "id": "assurer-la-souverainete-spatiale-francaise-1",
+     "texte": "Lutter contre la course à l'armement spatial tout en protégeant la France des nouvelles menaces."
+    },
+    {
+     "id": "assurer-la-souverainete-spatiale-francaise-3",
+     "texte": "Fermer le Centre spatial de l'OTAN à Toulouse."
+    }
+   ]
+  },
+  "concret": [
+   "Le traité de l'espace de 1967 interdit l'appropriation nationale des corps célestes mais ne dit rien des ressources.",
+   "Le traité de la Lune (1979) est en vigueur depuis 1984 mais seuls 17 pays l'ont ratifié, aucune grande puissance spatiale.",
+   "La France a signé les accords Artemis le 7 juin 2022 ; ils affirment que l'extraction de ressources n'est pas une appropriation."
+  ],
+  "eco": {
+   "chiffre": "Non chiffré",
+   "cout": "Mesure diplomatique sans coût budgétaire direct identifié.",
+   "financement": "Sans objet.",
+   "rapporte": "Non évalué. Les partisans d'Artemis mettent en avant des débouchés pour l'industrie française.",
+   "sources": [
+    {
+     "media": "Futura Sciences",
+     "url": "https://www.futura-sciences.com/sciences/actualites/exploration-exploration-spatiale-france-signe-accords-artemis-98862/"
+    }
+   ]
+  },
+  "similaires": [
+   {
+    "camp": "Chine et Russie",
+    "prop": "Refusent les accords Artemis et défendent leur propre projet de base lunaire commune."
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Droite et centre (Sénat)",
+    "qui": "Christine Lavarde (LR) et Vanina Paoli-Gagin (Les Indépendants), sénatrices",
+    "texte": "Leur rapport appelle à « assumer » l'exploitation des ressources de la Lune et de Mars et juge la voie multilatérale peu réaliste.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/societe/espace-un-rapport-du-senat-se-penche-sur-les-enjeux-de-lexploitation-des-ressources-extraterrestres"
+   },
+   {
+    "camp": "Gouvernement",
+    "qui": "Partisans de la signature d'Artemis (CNES, gouvernement)",
+    "texte": "La signature ouvre des débouchés à l'industrie et la France ne pouvait pas rester à l'écart de cette dynamique.",
+    "media": "Futura Sciences",
+    "url": "https://www.futura-sciences.com/sciences/actualites/exploration-exploration-spatiale-france-signe-accords-artemis-98862/"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Christine Lavarde, sénatrice LR",
+    "texte": "Elle-même juge que la signature d'Artemis revient à « se ranger derrière les Etats-Unis », ce qui rejoint la critique LFI sur la dépendance.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/societe/espace-un-rapport-du-senat-se-penche-sur-les-enjeux-de-lexploitation-des-ressources-extraterrestres"
+   }
+  ],
+  "tensions": [
+   "Aucune grande puissance spatiale n'a ratifié le traité de la Lune : son effet réel reste incertain.",
+   "Démilitariser l'espace tout en garantissant la défense spatiale de la France, comme le prévoit aussi le programme.",
+   "Le Sénat juge les règles environnementales peu transposables à l'espace, alors que LFI insiste sur la pollution orbitale."
+  ],
+  "monde": [
+   {
+    "pays": "Arabie saoudite",
+    "texte": "S'est retirée du traité de la Lune en janvier 2023.",
+    "media": "Sénat",
+    "url": "https://www.senat.fr/rap/r22-668/r22-6684.html"
+   },
+   {
+    "pays": "États-Unis",
+    "texte": "Ont lancé les accords Artemis en 2020 ; 24 pays les avaient signés en juin 2023.",
+    "media": "Sénat",
+    "url": "https://www.senat.fr/rap/r22-668/r22-6684.html"
+   }
+  ],
+  "maj": "13 nov. 2026"
+ }
+}

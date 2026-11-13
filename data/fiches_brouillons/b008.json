@@ -1,0 +1,459 @@
+{
+ "passer-a-la-francophonie-des-peuples-1": {
+  "statut": "peu_documente",
+  "resume": "Mesure peu débattue publiquement à ce jour : le recul du français dans les organisations internationales est un constat partagé à droite comme à gauche.",
+  "logique": {
+   "texte": "Pour LFI, le français est la troisième langue la plus parlée au monde, et son centre de gravité est en Afrique. Le mouvement estime que la francophonie est trop souvent enfermée dans un cadre officiel, loin des populations. Défendre le français dans les institutions internationales, c'est garder une langue de travail partagée par des centaines de millions de personnes face à l'anglais. Le programme veut passer d'une francophonie d'institutions à une « francophonie des peuples », avec une dimension politique.",
+   "arguments": [
+    {
+     "texte": "Le français est présenté comme la troisième langue la plus parlée au monde, avec un centre de gravité sur le continent africain.",
+     "media": "L'Avenir en commun 2027 (site non officiel reprenant le programme)",
+     "url": "https://www.lavenirencommun.org/programme/un-monde-ordonne/passer-a-la-francophonie-des-peuples/#passer-a-la-francophonie-des-peuples-1"
+    },
+    {
+     "texte": "La francophonie serait aujourd'hui « confinée dans un cadre officiel inaccessible » à la majorité des francophones.",
+     "media": "L'Avenir en commun 2027 (site non officiel reprenant le programme)",
+     "url": "https://www.lavenirencommun.org/programme/un-monde-ordonne/passer-a-la-francophonie-des-peuples/#passer-a-la-francophonie-des-peuples-1"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "passer-a-la-francophonie-des-peuples-4",
+     "texte": "Créer un Erasmus francophone pour les échanges d'étudiants."
+    },
+    {
+     "id": "passer-a-la-francophonie-des-peuples-5",
+     "texte": "Élaborer des contenus éducatifs et des diplômes communs entre pays francophones."
+    },
+    {
+     "id": "passer-a-la-francophonie-des-peuples-6",
+     "texte": "Renforcer les médias audiovisuels francophones."
+    },
+    {
+     "id": "passer-a-la-francophonie-des-peuples-7",
+     "texte": "Renforcer l'Assemblée parlementaire de la Francophonie."
+    },
+    {
+     "id": "passer-a-la-francophonie-des-peuples-8",
+     "texte": "Créer une grande revue scientifique francophone mondiale."
+    },
+    {
+     "id": "passer-a-la-francophonie-des-peuples-11",
+     "texte": "Renforcer le réseau des Instituts français et Alliances françaises."
+    }
+   ]
+  },
+  "concret": [
+   "À la Commission européenne, 3,7 % des documents sont rédigés d'abord en français, contre 40 % en 1997 (rapport 2023 au Parlement sur la langue française).",
+   "En 2020, le parquet européen n'a retenu que l'anglais comme langue de travail. En 2021, la CEDH a cessé de traduire systématiquement ses communiqués en français.",
+   "Selon une sénatrice LR (mars 2026), l'anglais domine aussi à l'ONU, à l'OCDE et à l'ISO, même si le nombre de francophones augmente.",
+   "Le programme ne précise pas les moyens concrets pour imposer le français dans ces institutions."
+  ],
+  "eco": {
+   "chiffre": "Non chiffré",
+   "cout": "Non chiffré par LFI.",
+   "financement": "Non précisé.",
+   "rapporte": "—",
+   "sources": [
+    {
+     "media": "L'Avenir en commun 2027 (site non officiel)",
+     "url": "https://www.lavenirencommun.org/programme/un-monde-ordonne/passer-a-la-francophonie-des-peuples/#passer-a-la-francophonie-des-peuples-1"
+    }
+   ]
+  },
+  "similaires": [
+   {
+    "camp": "LR",
+    "prop": "La sénatrice Évelyne Renaud-Garabedian demande au gouvernement des initiatives pour faire du français une vraie langue de travail (question écrite, mars 2026)."
+   },
+   {
+    "camp": "Gouvernement",
+    "prop": "Discours d'Emmanuel Macron à Villers-Cotterêts (oct. 2023) sur la défense du français."
+   }
+  ],
+  "critiques": [],
+  "reponses": [],
+  "tensions": [
+   "Le constat du recul est partagé, mais les tentatives passées (présidence française de l'UE en 2022, rapport Lequesne) ont eu peu d'effet concret selon le juriste Florian Leroy (Actu-Juridique, 2023).",
+   "Le choix des langues de travail dépend des règles de chaque organisation : la France ne peut pas décider seule."
+  ],
+  "monde": [],
+  "maj": "13 nov. 2026"
+ },
+ "rn-1": {
+  "statut": "documente",
+  "resume": "Le RN veut faire trancher l'immigration par référendum dès 2027, mais la voie choisie (article 11) est contestée par la plupart des constitutionnalistes et par le président du Conseil constitutionnel.",
+  "logique": {
+   "texte": "Pour le RN, l'immigration est un sujet trop important pour être laissé aux seuls élus et juges : c'est au peuple de trancher directement. Marine Le Pen veut donc convoquer dès le début du mandat un référendum pour réviser la Constitution. Le texte reprend une proposition de loi constitutionnelle de 2024 : fin du droit du sol et du regroupement familial, priorité nationale, asile durci, fin de la primauté du droit européen. Le RN passe par l'article 11 pour éviter un blocage du Sénat, en s'appuyant sur le précédent de 1962 du général de Gaulle.",
+   "arguments": [
+    {
+     "texte": "Marine Le Pen juge le référendum « la voie la plus démocratique qui soit ».",
+     "media": "La Gazette France (AFP), 5 sept. 2026",
+     "url": "https://www.lagazettefrance.fr/article/en-revisant-la-constitution-par-referendum-le-rn-au-pouvoir-ouvrirait-une-crise-majeure"
+    },
+    {
+     "texte": "Jordan Bardella : « Dès notre victoire, nous soumettrons aux Français un référendum constitutionnel sur l'immigration ».",
+     "media": "La Gazette France (AFP), 5 sept. 2026",
+     "url": "https://www.lagazettefrance.fr/article/en-revisant-la-constitution-par-referendum-le-rn-au-pouvoir-ouvrirait-une-crise-majeure"
+    },
+    {
+     "texte": "Le recours à l'article 11 s'appuie sur le précédent de 1962, quand de Gaulle a fait adopter l'élection du président au suffrage universel direct.",
+     "media": "Parlons Politique, 14 oct. 2026",
+     "url": "https://www.parlons-politique.fr/elections/referendum-constitutionnel-comment-le-projet-du-rn-pourrait-contourner-le-verrou-du-senat-en-2027_29316/"
+    },
+    {
+     "texte": "Selon Bardella, bloquer le référendum d'une présidente élue serait « un coup de force extrêmement grave ».",
+     "media": "La Gazette France (AFP)",
+     "url": "https://www.lagazettefrance.fr/article/en-revisant-la-constitution-par-referendum-le-rn-au-pouvoir-ouvrirait-une-crise-majeure"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "rn-1-1",
+     "texte": "Mettre fin à l'immigration de peuplement et au regroupement familial."
+    },
+    {
+     "id": "rn-1-2",
+     "texte": "Traiter les demandes d'asile uniquement à l'étranger."
+    },
+    {
+     "id": "rn-1-3",
+     "texte": "Réserver les aides sociales aux Français."
+    },
+    {
+     "id": "rn-1-7",
+     "texte": "Supprimer le droit du sol."
+    },
+    {
+     "id": "rn-x7-2",
+     "texte": "Soumettre la préférence nationale et la limitation de l'immigration à référendum."
+    },
+    {
+     "id": "rn-x6-1",
+     "texte": "Réserver les révisions de la Constitution au référendum."
+    }
+   ]
+  },
+  "concret": [
+   "Le référendum porterait sur une révision large de la Constitution : fin du droit du sol et du regroupement familial, priorité nationale pour les aides, asile durci.",
+   "Le texte reprend une proposition de loi constitutionnelle de 14 articles déposée en 2024, qui touche aussi à la primauté du droit européen.",
+   "Le RN veut passer par l'article 11 (le président soumet directement un texte au peuple), et non par l'article 89 qui exige l'accord des deux chambres.",
+   "Aujourd'hui, l'article 11 permet un référendum sur l'organisation des pouvoirs publics et les politiques économiques, sociales ou environnementales, pas explicitement sur une révision constitutionnelle."
+  ],
+  "eco": {
+   "chiffre": "Non chiffré",
+   "cout": "Coût d'organisation d'un scrutin national, non chiffré.",
+   "financement": "—",
+   "rapporte": "Le RN attend de la politique d'immigration environ 29 Md€ d'économies en 2031 (contre-budget), chiffre lié aux mesures soumises à référendum.",
+   "sources": [
+    {
+     "media": "Planète Grandes Écoles",
+     "url": "https://www.planetegrandesecoles.com/budget-marine-le-pen-2027-mesures-contre-budget-rn"
+    }
+   ]
+  },
+  "similaires": [
+   {
+    "camp": "LR (Bruno Retailleau)",
+    "prop": "Référendum sur l'immigration et possibilité pour le président de passer outre une censure du Conseil constitutionnel."
+   },
+   {
+    "camp": "LFI",
+    "prop": "Révision constitutionnelle par référendum pour passer à une VIe République."
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Conseil constitutionnel",
+    "qui": "Richard Ferrand, président du Conseil constitutionnel",
+    "texte": "« Aujourd'hui, vouloir réformer la Constitution par l'article 11, ça n'existe pas ». Seul l'article 89 le permet.",
+    "media": "Parlons Politique, 14 oct. 2026",
+    "url": "https://www.parlons-politique.fr/elections/referendum-constitutionnel-comment-le-projet-du-rn-pourrait-contourner-le-verrou-du-senat-en-2027_29316/"
+   },
+   {
+    "camp": "Juristes",
+    "qui": "110 constitutionnalistes",
+    "texte": "L'article 11 ne peut pas servir à réviser la Constitution, et le Conseil constitutionnel peut contrôler le décret de référendum.",
+    "media": "Public Sénat, 12 nov. 2026",
+    "url": "https://www.publicsenat.fr/actualites/politique/revision-de-la-constitution-110-constitutionnalistes-rappellent-a-marine-le-pen-et-jean-luc-melenchon-quils-ne-pourront-pas-avoir-recours-au-referendum-via-larticle-11"
+   },
+   {
+    "camp": "Juristes",
+    "qui": "Denys de Béchillon, constitutionnaliste",
+    "texte": "Le Conseil peut interdire au président de poser des questions inconstitutionnelles. Organiser un référendum illégal pourrait être « un motif de destitution ».",
+    "media": "La Gazette France (AFP)",
+    "url": "https://www.lagazettefrance.fr/article/en-revisant-la-constitution-par-referendum-le-rn-au-pouvoir-ouvrirait-une-crise-majeure"
+   },
+   {
+    "camp": "Juristes",
+    "qui": "Serge Slama, professeur de droit public (Grenoble Alpes)",
+    "texte": "Parle d'une « Ve République bis » et note que le Sénat, dominé par la droite, pourrait s'y opposer.",
+    "media": "La Gazette France (AFP)",
+    "url": "https://www.lagazettefrance.fr/article/en-revisant-la-constitution-par-referendum-le-rn-au-pouvoir-ouvrirait-une-crise-majeure"
+   },
+   {
+    "camp": "Juristes",
+    "qui": "Didier Maus, président de l'Association française de droit constitutionnel (2022)",
+    "texte": "Estimait déjà en 2022 que la voie de l'article 11 serait censurée, avec « un obstacle politique réel » au Sénat.",
+    "media": "Public Sénat, avril 2022",
+    "url": "https://www.publicsenat.fr/actualites/politique/revision-de-la-constitution-par-referendum-marine-le-pen-dans-une-impasse"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Matthias Renault, député RN",
+    "texte": "« Ce référendum aura lieu, ce n'est pas à lui d'en décider », en réponse à Richard Ferrand.",
+    "media": "Parlons Politique",
+    "url": "https://www.parlons-politique.fr/elections/referendum-constitutionnel-comment-le-projet-du-rn-pourrait-contourner-le-verrou-du-senat-en-2027_29316/"
+   },
+   {
+    "qui": "Louis Aliot, vice-président du RN",
+    "texte": "Reproche à Richard Ferrand de manquer de neutralité et de « s'engager sur des voies politiques ».",
+    "media": "Parlons Politique",
+    "url": "https://www.parlons-politique.fr/elections/referendum-constitutionnel-comment-le-projet-du-rn-pourrait-contourner-le-verrou-du-senat-en-2027_29316/"
+   }
+  ],
+  "tensions": [
+   "Le débat porte surtout sur la procédure : article 11 (sans le Parlement) ou article 89 (avec un Sénat hostile).",
+   "Si le Conseil constitutionnel bloque le référendum, un conflit ouvert entre la présidente élue et le Conseil est possible.",
+   "Le contenu exact de la question posée aux Français n'est pas encore publié."
+  ],
+  "monde": [],
+  "maj": "13 nov. 2026"
+ },
+ "rn-1-3": {
+  "maj": "13 nov. 2026",
+  "concret": [
+   "C'est la « préférence » ou « priorité nationale » : réserver les aides sociales aux Français, et exiger 5 ans de travail en France aux étrangers pour les prestations de solidarité.",
+   "Le RN veut aussi la priorité nationale pour le logement social et l'emploi.",
+   "Marine Le Pen veut soumettre la préférence nationale à référendum si elle est élue."
+  ],
+  "similaires": [
+   {
+    "camp": "LR (2024)",
+    "prop": "Référendum d'initiative partagée sur l'accès des étrangers aux prestations sociales, censuré par le Conseil constitutionnel en avril 2024"
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Juristes",
+    "qui": "Les Surligneurs (Clotilde Jégousse)",
+    "texte": "La mesure heurte la Déclaration de 1789, le préambule de 1946 (« nul ne peut être lésé, dans son travail ou son emploi, en raison des origines ») et l'article 1er de la Constitution.",
+    "media": "Les Surligneurs, juin 2024",
+    "url": "https://lessurligneurs.eu/preference-nationale-limpossible-inscription-dans-la-constitution/"
+   },
+   {
+    "camp": "Conseil constitutionnel",
+    "qui": "Décision du 11 avril 2024",
+    "texte": "A rejeté un référendum sur l'accès des étrangers aux aides sociales : conditions jugées disproportionnées et contraires au principe de solidarité nationale.",
+    "media": "Les Surligneurs",
+    "url": "https://lessurligneurs.eu/preference-nationale-limpossible-inscription-dans-la-constitution/"
+   },
+   {
+    "camp": "Juristes",
+    "qui": "110 constitutionnalistes",
+    "texte": "L'article 11 ne peut pas servir à réviser la Constitution, et le Conseil constitutionnel peut contrôler le décret de référendum.",
+    "media": "Public Sénat, 12 nov. 2026",
+    "url": "https://www.publicsenat.fr/actualites/politique/revision-de-la-constitution-110-constitutionnalistes-rappellent-a-marine-le-pen-et-jean-luc-melenchon-quils-ne-pourront-pas-avoir-recours-au-referendum-via-larticle-11"
+   },
+   {
+    "camp": "Économistes",
+    "qui": "Institut de l'Entreprise",
+    "texte": "Sur les 18,1 Md€ d'économies attendues des prestations réservées, il estime qu'elles risquent de heurter le principe d'égalité et le droit européen.",
+    "media": "Planète Grandes Écoles",
+    "url": "https://www.planetegrandesecoles.com/budget-marine-le-pen-2027-mesures-contre-budget-rn"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "RN",
+    "texte": "Passer par une révision de la Constitution validée par référendum, pour que le peuple tranche directement.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/revision-de-la-constitution-110-constitutionnalistes-rappellent-a-marine-le-pen-et-jean-luc-melenchon-quils-ne-pourront-pas-avoir-recours-au-referendum-via-larticle-11"
+   }
+  ],
+  "tensions": [
+   "Sans révision de la Constitution, la mesure serait très probablement censurée.",
+   "Une révision par l'article 89 suppose l'accord du Sénat, aujourd'hui hostile au RN."
+  ],
+  "monde": [],
+  "resume": "La mesure phare du RN sur l'immigration se heurte à la Constitution : le débat porte autant sur le droit que sur le fond.",
+  "eco": {
+   "cout": "C'est une économie, pas une dépense.",
+   "financement": "—",
+   "rapporte": "Le contre-budget RN compte 18,1 Md€ d'économies sur les prestations réservées, et environ 29 Md€ en 2031 pour tout le volet immigration. L'Institut de l'Entreprise juge ces gains juridiquement fragiles.",
+   "chiffre": "≈ 18 Md€ d'économies annoncées",
+   "sources": [
+    {
+     "media": "Planète Grandes Écoles",
+     "url": "https://www.planetegrandesecoles.com/budget-marine-le-pen-2027-mesures-contre-budget-rn"
+    }
+   ]
+  },
+  "statut": "documente",
+  "logique": {
+   "texte": "Pour le RN, la solidarité nationale doit d'abord bénéficier à ceux qui appartiennent à la nation. La nationalité est présentée comme un critère légitime, comme pour le droit de vote. La condition de 5 ans de travail vise à éviter que les aides sociales attirent l'immigration. Le RN en attend aussi des économies importantes pour redresser les comptes. Comme la mesure se heurte à la Constitution actuelle, le RN veut la faire adopter par référendum.",
+   "arguments": [
+    {
+     "texte": "Marine Le Pen présente la nationalité comme un critère de solidarité : « Qu'est-ce que le droit de vote sinon un privilège exclusif accordé aux Français ».",
+     "media": "Parlons Politique, 20 sept. 2026",
+     "url": "https://www.parlons-politique.fr/elections/logement-social-la-priorite-nationale-du-rn-changerait-elle-vraiment-la-vie-des-menages-francais_27460/"
+    },
+    {
+     "texte": "Le contre-budget RN compte 18,1 Md€ d'économies sur les prestations réservées aux Français.",
+     "media": "Planète Grandes Écoles",
+     "url": "https://www.planetegrandesecoles.com/budget-marine-le-pen-2027-mesures-contre-budget-rn"
+    },
+    {
+     "texte": "Le RN veut inscrire la priorité nationale dans la Constitution par référendum, jugé « la voie la plus démocratique qui soit ».",
+     "media": "La Gazette France (AFP), 5 sept. 2026",
+     "url": "https://www.lagazettefrance.fr/article/en-revisant-la-constitution-par-referendum-le-rn-au-pouvoir-ouvrirait-une-crise-majeure"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "rn-1-4",
+     "texte": "Priorité nationale pour le logement social et l'emploi."
+    },
+    {
+     "id": "rn-x1-5",
+     "texte": "Réserver les allocations familiales aux Français."
+    },
+    {
+     "id": "rn-x7-2",
+     "texte": "Soumettre la préférence nationale à référendum."
+    },
+    {
+     "id": "rn-cb-5",
+     "texte": "Créer une allocation sociale unique."
+    },
+    {
+     "id": "rn-22",
+     "texte": "Créer un ministère de la lutte contre les fraudes, y compris aux prestations sociales."
+    }
+   ]
+  }
+ },
+ "rn-1-4": {
+  "statut": "documente",
+  "resume": "Le RN veut donner la priorité aux Français pour les HLM et l'emploi : ses opposants y voient une discrimination inconstitutionnelle qui ne réglera pas la pénurie de logements.",
+  "logique": {
+   "texte": "Pour le RN, les Français doivent passer en premier quand l'État attribue un bien rare comme un logement social. Marine Le Pen considère que la nationalité est un critère légitime de solidarité publique. Elle a fait du logement un « sujet majeur » de sa campagne, avec un volet construction : relancer les chantiers, faciliter l'accès à la propriété, alléger les normes. La priorité nationale à l'emploi suit la même logique pour le marché du travail.",
+   "arguments": [
+    {
+     "texte": "Le logement est présenté comme un « sujet majeur » et un chantier prioritaire en cas d'élection (discours d'Hénin-Beaumont, 13 sept. 2026).",
+     "media": "LCP",
+     "url": "https://lcp.fr/actualites/reserver-les-logements-hlm-aux-francais-la-proposition-de-marine-le-pen-provoque-une"
+    },
+    {
+     "texte": "La nationalité serait un critère légitime de solidarité, comme le droit de vote réservé aux Français.",
+     "media": "Parlons Politique, 20 sept. 2026",
+     "url": "https://www.parlons-politique.fr/elections/logement-social-la-priorite-nationale-du-rn-changerait-elle-vraiment-la-vie-des-menages-francais_27460/"
+    },
+    {
+     "texte": "La priorité s'accompagne d'une relance de la construction et d'un assouplissement des normes, dont la fin des contraintes liées au DPE.",
+     "media": "Parlons Politique",
+     "url": "https://www.parlons-politique.fr/elections/logement-social-la-priorite-nationale-du-rn-changerait-elle-vraiment-la-vie-des-menages-francais_27460/"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "rn-1-3",
+     "texte": "Réserver les aides sociales aux Français."
+    },
+    {
+     "id": "rn-17-1",
+     "texte": "Construire 100 000 logements sociaux par an."
+    },
+    {
+     "id": "rn-17-3",
+     "texte": "Créer un Fonds de garantie des loyers pour protéger les propriétaires."
+    },
+    {
+     "id": "rn-x3-3",
+     "texte": "Supprimer les obligations de rénovation liées au DPE."
+    },
+    {
+     "id": "rn-x7-2",
+     "texte": "Soumettre la préférence nationale à référendum."
+    }
+   ]
+  },
+  "concret": [
+   "Les Français seraient prioritaires pour l'attribution des HLM. Marine Le Pen veut aussi réserver les APL aux Français et abroger la loi SRU.",
+   "Selon l'Union sociale pour l'habitat, les étrangers représentent 15 % des locataires du parc social.",
+   "Le parc social compte environ 5,4 millions de logements, près de 16 % des résidences principales (Insee, 2025).",
+   "Aujourd'hui, un étranger doit être en situation régulière et respecter des plafonds de ressources pour obtenir un HLM."
+  ],
+  "eco": {
+   "chiffre": "Non chiffré",
+   "cout": "Non chiffré par le RN.",
+   "financement": "—",
+   "rapporte": "Pas de logements supplémentaires créés : la mesure change l'ordre d'attribution.",
+   "sources": [
+    {
+     "media": "Parlons Politique",
+     "url": "https://www.parlons-politique.fr/elections/logement-social-la-priorite-nationale-du-rn-changerait-elle-vraiment-la-vie-des-menages-francais_27460/"
+    }
+   ]
+  },
+  "similaires": [
+   {
+    "camp": "Reconquête (Éric Zemmour)",
+    "prop": "Préférence nationale pour le logement social."
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Bailleurs sociaux",
+    "qui": "Emmanuelle Cosse, présidente de l'USH, ex-ministre écologiste",
+    "texte": "Dénonce une « lubie xénophobe » et rappelle que les étrangers accèdent déjà moins au logement social que les Français.",
+    "media": "LCP, sept. 2026",
+    "url": "https://lcp.fr/actualites/reserver-les-logements-hlm-aux-francais-la-proposition-de-marine-le-pen-provoque-une"
+   },
+   {
+    "camp": "Gauche",
+    "qui": "Pierre Ouzoulias, sénateur communiste",
+    "texte": "« La préférence nationale, c'est ce que Pétain a mis en place en 1940 ».",
+    "media": "LCP",
+    "url": "https://lcp.fr/actualites/reserver-les-logements-hlm-aux-francais-la-proposition-de-marine-le-pen-provoque-une"
+   },
+   {
+    "camp": "Macronistes",
+    "qui": "Prisca Thévenot (Ensemble pour la République)",
+    "texte": "Dénonce une différence de droits entre infirmières françaises et étrangères en situation régulière.",
+    "media": "LCP",
+    "url": "https://lcp.fr/actualites/reserver-les-logements-hlm-aux-francais-la-proposition-de-marine-le-pen-provoque-une"
+   },
+   {
+    "camp": "Locataires",
+    "qui": "Confédération nationale du logement (CNL)",
+    "texte": "La préférence nationale « ne résoudra rien à la pénurie » de logements.",
+    "media": "LCP",
+    "url": "https://lcp.fr/actualites/reserver-les-logements-hlm-aux-francais-la-proposition-de-marine-le-pen-provoque-une"
+   },
+   {
+    "camp": "Analyse",
+    "qui": "Parlons Politique",
+    "texte": "Sans hausse de l'offre, la mesure risque surtout de déplacer la file d'attente. Elle pourrait être censurée au nom du principe d'égalité.",
+    "media": "Parlons Politique",
+    "url": "https://www.parlons-politique.fr/elections/logement-social-la-priorite-nationale-du-rn-changerait-elle-vraiment-la-vie-des-menages-francais_27460/"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "RN",
+    "texte": "Pour lever l'obstacle constitutionnel, le RN veut inscrire la priorité nationale dans la Constitution par référendum.",
+    "media": "La Gazette France (AFP)",
+    "url": "https://www.lagazettefrance.fr/article/en-revisant-la-constitution-par-referendum-le-rn-au-pouvoir-ouvrirait-une-crise-majeure"
+   }
+  ],
+  "tensions": [
+   "Le député RN Frédéric Falcon, coordinateur logement de la campagne, disait en 2024 que le RN ne voulait pas revenir sur la loi SRU (rappelé par Guillaume Kasbarian).",
+   "Le volet emploi (priorité nationale à l'embauche) n'est pas détaillé : secteurs, contrôles et sanctions restent inconnus.",
+   "Sans révision de la Constitution, la mesure serait probablement censurée."
+  ],
+  "monde": [],
+  "maj": "13 nov. 2026"
+ }
+}

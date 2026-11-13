@@ -1,0 +1,206 @@
+{
+ "attal-15-1": {
+  "statut": "documente",
+  "resume": "Gabriel Attal veut augmenter le salaire net en supprimant des cotisations sur le travail ; le financement (TVA sociale ou économies sociales, dont l'assurance chômage) divise économistes et partis.",
+  "logique": {
+   "texte": "Pour Gabriel Attal, le modèle social pèse trop sur ceux qui travaillent. Il veut que le travail paie davantage, sans passer par des hausses de salaire imposées aux entreprises. Il propose donc de supprimer des cotisations pour augmenter directement le net. Le manque à gagner serait compensé par une « TVA sociale » ou par des économies sur la sphère sociale, notamment une réforme plus stricte de l'assurance chômage. L'objectif affiché à long terme est un salaire médian bien plus élevé.",
+   "arguments": [
+    {
+     "texte": "Sur son site de campagne, il écrit que « Nos dépenses sociales ne peuvent plus reposer autant sur les Français qui travaillent ».",
+     "media": "Public Sénat",
+     "url": "https://www.publicsenat.fr/actualites/economie/presidentielle-que-proposent-les-candidats-pour-augmenter-les-salaires"
+    },
+    {
+     "texte": "Son programme promet +250 € nets par mois pour le salaire médian dès début 2027, par suppression de cotisations, sans nouvelle contrainte pour les entreprises.",
+     "media": "Votons 2027 (d'après attalpresident.fr, mesure 6)",
+     "url": "https://votons-2027.fr/candidats/attal/programme/economie"
+    },
+    {
+     "texte": "En juillet 2025, il affirmait pouvoir faire passer le salaire médian de 2 200 à 3 000 € nets en deux décennies.",
+     "media": "Public Sénat",
+     "url": "https://www.publicsenat.fr/actualites/economie/presidentielle-que-proposent-les-candidats-pour-augmenter-les-salaires"
+    },
+    {
+     "texte": "La réforme de l'assurance chômage qu'il avait lancée à Matignon serait reprise dès le début du mandat, avec un objectif de 5 Md€ d'économies et de retour à l'emploi.",
+     "media": "Votons 2027 (d'après attalpresident.fr, mesure 30)",
+     "url": "https://votons-2027.fr/candidats/attal/programme/economie"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "attal-14-2",
+     "texte": "Baisser la dépense sociale pour réinvestir dans l'éducation et l'innovation."
+    },
+    {
+     "id": "attal-14-1",
+     "texte": "Inscrire une règle d'or budgétaire dans la Constitution, sans hausse d'impôt pour les ménages."
+    },
+    {
+     "id": "attal-15-2",
+     "texte": "Remplacer le Code du travail par une « Constitution du travail » négociée avec les partenaires sociaux."
+    }
+   ]
+  },
+  "concret": [
+   "Le salaire net augmenterait car une partie des cotisations aujourd'hui prélevées sur la fiche de paie serait supprimée.",
+   "La Sécurité sociale est financée à 56 % par les cotisations, 20 % par la CSG, le reste surtout par des impôts dont la TVA.",
+   "Une TVA sociale a déjà été votée en France en 2012 (+1,6 point, de 19,6 % à 21,2 %), puis abrogée dès l'été suivant.",
+   "Le taux normal de TVA en France est de 20 %, contre environ 22 % en moyenne dans l'UE."
+  ],
+  "eco": {
+   "chiffre": "Non chiffré",
+   "cout": "Le coût de la baisse des cotisations n'est pas chiffré publiquement.",
+   "financement": "TVA sociale ou économies sur la sphère sociale (réforme de l'assurance chômage : 5 Md€ visés ; frein sur les dépenses sociales).",
+   "rapporte": "Hausse du salaire net : +250 € par mois pour le salaire médian selon le programme.",
+   "sources": [
+    {
+     "media": "Public Sénat",
+     "url": "https://www.publicsenat.fr/actualites/economie/presidentielle-que-proposent-les-candidats-pour-augmenter-les-salaires"
+    },
+    {
+     "media": "Votons 2027",
+     "url": "https://votons-2027.fr/candidats/attal/programme/economie"
+    }
+   ]
+  },
+  "similaires": [
+   {
+    "camp": "PS (François Hollande)",
+    "prop": "Baisser les cotisations salariales, financé par +4 points de TVA."
+   },
+   {
+    "camp": "Patronat (Medef)",
+    "prop": "Allègement de cotisations contre +2,3 points de TVA."
+   },
+   {
+    "camp": "Droite (Bruno Le Maire)",
+    "prop": "Hausse de 2 à 3 points de TVA pour financer le modèle social."
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Économiste",
+    "qui": "Clément Carbonnier, économiste à l'université Paris 1",
+    "texte": "La TVA n'est pas progressive : elle pèserait plus sur les ménages modestes, les retraités et les allocataires de minima sociaux. Il y voit une « forme d'antiredistribution ».",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/emploi/presidentielle-le-regain-dinteret-pour-la-tva-sociale-idee-clivante-pour-augmenter-le-salaire-net"
+   },
+   {
+    "camp": "Économiste",
+    "qui": "Bruno Coquet, économiste associé à l'OFCE",
+    "texte": "La mesure favoriserait l'emploi mais « augmente l'inflation » et pèse sur la consommation ; il craint un recul du consentement à l'impôt.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/emploi/presidentielle-le-regain-dinteret-pour-la-tva-sociale-idee-clivante-pour-augmenter-le-salaire-net"
+   },
+   {
+    "camp": "Opinion publique",
+    "qui": "Sondage Elabe pour Les Échos",
+    "texte": "54 % des sondés s'opposent à la TVA sociale, avec un rejet fort chez les électeurs du NFP et du RN.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/emploi/presidentielle-le-regain-dinteret-pour-la-tva-sociale-idee-clivante-pour-augmenter-le-salaire-net"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Sylvain Catherine, économiste (Wharton)",
+    "texte": "Les prestations sociales étant indexées sur les prix, leurs bénéficiaires seraient protégés de la hausse de TVA, sauf désindexation.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/emploi/presidentielle-le-regain-dinteret-pour-la-tva-sociale-idee-clivante-pour-augmenter-le-salaire-net"
+   }
+  ],
+  "tensions": [
+   "Le mode de compensation n'est pas tranché : TVA sociale ou économies sur la protection sociale.",
+   "Une hausse de TVA paraît difficile à concilier avec la promesse de n'augmenter aucun impôt pendant le quinquennat.",
+   "Le programme mis en ligne évoque des économies sociales mais ne mentionne pas explicitement la TVA sociale.",
+   "L'« année blanche » sur les dépenses sociales peut se heurter à l'indexation des prestations, qui protège les ménages en cas de TVA sociale."
+  ],
+  "monde": [],
+  "maj": "13 nov. 2026"
+ },
+ "attal-17-1": {
+  "statut": "documente",
+  "resume": "Gabriel Attal veut ouvrir le débat sur une GPA « éthique », encadrée et non rémunérée ; la proposition est rejetée par la droite et contestée jusque dans son propre camp.",
+  "logique": {
+   "texte": "Gabriel Attal estime que le débat sur la gestation pour autrui existe dans la société et qu'il ne faut pas l'occulter. Il défend un modèle de GPA dite « éthique » : encadrée par la loi et sans contrepartie financière pour la femme qui porte l'enfant. Il a lancé dès l'été 2025 une réflexion au sein de Renaissance, dans une convention sur les « nouvelles fragilités ». Il présente le sujet comme une question bioéthique, sur laquelle chaque parti laisse en général la liberté de vote.",
+   "arguments": [
+    {
+     "texte": "Il affirme : « J'ai toujours dit que ce débat existait et qu'il ne fallait pas l'occulter ».",
+     "media": "Aleteia",
+     "url": "https://fr.aleteia.org/2026/05/26/gpa-la-porte-parole-du-gouvernement-en-total-desaccord-avec-gabriel-attal/"
+    },
+    {
+     "texte": "Il rappelle que sur les sujets bioéthiques, la liberté de vote s'est imposée dans tous les partis.",
+     "media": "Aleteia",
+     "url": "https://fr.aleteia.org/2026/05/26/gpa-la-porte-parole-du-gouvernement-en-total-desaccord-avec-gabriel-attal/"
+    },
+    {
+     "texte": "Le modèle étudié est une GPA encadrée et non lucrative, sans paiement de la mère porteuse.",
+     "media": "Brut",
+     "url": "https://www.brut.media/fr/articles/france/politique/cest-quoi-la-gpa-ethique"
+    },
+    {
+     "texte": "Selon un sondage Ifop de 2022, 59 % des Français sont favorables à la GPA, pour les couples hétérosexuels comme homosexuels.",
+     "media": "Brut",
+     "url": "https://www.brut.media/fr/articles/france/politique/cest-quoi-la-gpa-ethique"
+    }
+   ],
+   "accompagnement": []
+  },
+  "concret": [
+   "La GPA est aujourd'hui interdite en France.",
+   "La proposition vise une GPA sans rémunération de la mère porteuse, encadrée par la loi.",
+   "Les modalités précises (qui y aurait accès, quel contrôle) ne sont pas encore détaillées publiquement."
+  ],
+  "eco": {
+   "chiffre": "Sans objet",
+   "cout": "Mesure de société, sans coût budgétaire chiffré.",
+   "financement": "Sans objet.",
+   "rapporte": "Sans objet.",
+   "sources": [
+    {
+     "media": "Brut",
+     "url": "https://www.brut.media/fr/articles/france/politique/cest-quoi-la-gpa-ethique"
+    }
+   ]
+  },
+  "similaires": [],
+  "critiques": [
+   {
+    "camp": "Gouvernement / Renaissance",
+    "qui": "Maud Bregeon, porte-parole du gouvernement",
+    "texte": "Elle se dit « extrêmement défavorable » : la GPA serait contraire à la dignité des femmes et au féminisme. Elle ne comprend pas ce que signifie une GPA « éthique », rémunérée ou non.",
+    "media": "Aleteia",
+    "url": "https://fr.aleteia.org/2026/05/26/gpa-la-porte-parole-du-gouvernement-en-total-desaccord-avec-gabriel-attal/"
+   },
+   {
+    "camp": "LR",
+    "qui": "Bruno Retailleau, alors ministre de l'Intérieur et président de LR",
+    "texte": "Il dénonce une pratique qui revient selon lui à louer le ventre de femmes pauvres, et accuse ses défenseurs de déformer les mots pour justifier l'injustifiable.",
+    "media": "Ground News (d'après Le Figaro)",
+    "url": "https://ground.news/article/we-make-the-words-lie-to-justify-the-unjustifiable-retailleau-replies-to-attal-defender-of-an-ethical-gpa"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Gabriel Attal",
+    "texte": "Il maintient que le débat existe et doit être mené, et que la liberté de vote est la règle sur les sujets bioéthiques.",
+    "media": "Aleteia",
+    "url": "https://fr.aleteia.org/2026/05/26/gpa-la-porte-parole-du-gouvernement-en-total-desaccord-avec-gabriel-attal/"
+   }
+  ],
+  "tensions": [
+   "La proposition ne fait pas consensus au sein de Renaissance.",
+   "La notion de GPA « éthique » (non rémunérée) est contestée : ses opposants jugent que la gratuité ne change pas le fond du problème.",
+   "Le contenu précis du futur encadrement reste à définir."
+  ],
+  "monde": [
+   {
+    "pays": "Pays-Bas, Canada, certains États américains",
+    "texte": "La GPA y est légale, sous des formes et encadrements variables.",
+    "media": "Brut",
+    "url": "https://www.brut.media/fr/articles/france/politique/cest-quoi-la-gpa-ethique"
+   }
+  ],
+  "maj": "13 nov. 2026"
+ }
+}

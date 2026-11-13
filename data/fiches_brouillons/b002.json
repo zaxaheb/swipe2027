@@ -1,0 +1,234 @@
+{
+ "reussir-la-renovation-energetique-1": {
+  "statut": "documente",
+  "resume": "LFI veut isoler 700 000 logements par an avec un reste à charge nul pour les plus modestes ; l'objectif chiffré est partagé par d'autres camps, mais la qualité et le coût réel des rénovations font débat.",
+  "logique": {
+   "texte": "Pour LFI, la précarité énergétique tue et le rythme actuel de rénovation est beaucoup trop lent. Le programme parle de 10 000 morts par an liés à la précarité énergétique et estime qu'il faudrait 2 000 ans pour tout rénover au rythme actuel. Avec les canicules, le parti veut traiter à la fois les passoires (froid) et les bouilloires (chaleur) thermiques. Le plan est porté par l'État et un pôle public bancaire, avec des aides allant jusqu'à 100 % des travaux pour les ménages modestes. LFI y voit aussi un plan d'emplois pour le bâtiment.",
+   "arguments": [
+    {
+     "texte": "Plus de 3 millions de résidences principales sont des passoires énergétiques et près de la moitié des logements sont des bouilloires thermiques ; le logement pèse 15 % des émissions de gaz à effet de serre.",
+     "media": "Plan BTP-Logement, site de campagne Mélenchon 2027",
+     "url": "https://melenchon2027.fr/wp-content/uploads/2026/09/M-27-PLAN-BTP-LOGEMENT.pdf"
+    },
+    {
+     "texte": "L'isolation coûterait 5,3 Md€ par an à l'État et autant au pôle public bancaire et aux autres acteurs ; le plan BTP-logement complet vise plus de 300 000 emplois et 250 000 salariés formés d'ici 2030.",
+     "media": "Plan BTP-Logement, site de campagne Mélenchon 2027",
+     "url": "https://melenchon2027.fr/wp-content/uploads/2026/09/M-27-PLAN-BTP-LOGEMENT.pdf"
+    },
+    {
+     "texte": "Aide publique couvrant 100 % des travaux pour les plus modestes, puis dégressive selon les revenus ; les propriétaires de plus de 5 logements sont exclus. Le reste à charge serait couvert par des prêts longs du pôle public bancaire.",
+     "media": "SeLoger (12 nov. 2026)",
+     "url": "https://edito.seloger.com/actualites/presidentielles/logement-5-grandes-mesures-de-melenchon-presidentielle-de-2027-article"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "reussir-la-renovation-energetique-2",
+     "texte": "Créer un service public qui planifie, finance et organise la rénovation, en priorité contre la précarité énergétique."
+    },
+    {
+     "id": "reussir-la-renovation-energetique-3",
+     "texte": "Privilégier les rénovations complètes et interdire réellement la location des passoires thermiques."
+    },
+    {
+     "id": "reussir-la-renovation-energetique-5",
+     "texte": "Remplacer progressivement les chauffages au fioul et au gaz par des systèmes sans émissions, comme les pompes à chaleur."
+    },
+    {
+     "id": "reussir-la-renovation-energetique-7",
+     "texte": "Former aux métiers de la rénovation et créer un guichet unique public pour accompagner les propriétaires."
+    },
+    {
+     "id": "pour-des-banques-au-service-de-l-interet-general-1",
+     "texte": "Créer un pôle public bancaire, qui prêterait aux ménages pour le reste à charge."
+    }
+   ]
+  },
+  "concret": [
+   "Objectif : isoler au moins 700 000 logements par an.",
+   "Aides jusqu'à 100 % des travaux pour les ménages les plus modestes, dégressives ensuite, hors propriétaires de plus de 5 logements.",
+   "Le plan prévoit aussi de remplacer chaque année 400 000 chaudières au fioul et 350 000 au gaz.",
+   "En 2021, MaPrimeRénov' a financé environ 644 000 rénovations, mais surtout des gestes isolés (souvent le chauffage)."
+  ],
+  "eco": {
+   "chiffre": "≈ 10,6 Md€ / an (dont 5,3 Md€ État)",
+   "cout": "Selon le plan LFI : 5,3 Md€ par an pour l'État et 5,3 Md€ pour le pôle public bancaire et autres acteurs, pour l'isolation seule.",
+   "financement": "Budget de l'État (subventions plutôt que niches fiscales) et prêts, garanties du pôle public bancaire.",
+   "rapporte": "LFI attend des emplois (plus de 300 000 pour tout le plan BTP-logement) et des économies d'énergie. Non chiffré par une source indépendante.",
+   "sources": [
+    {
+     "media": "Plan BTP-Logement Mélenchon 2027",
+     "url": "https://melenchon2027.fr/wp-content/uploads/2026/09/M-27-PLAN-BTP-LOGEMENT.pdf"
+    },
+    {
+     "media": "Institut Montaigne (2022)",
+     "url": "https://www.institutmontaigne.org/presidentielle-2022/emmanuel-macron/lancer-la-renovation-thermique-de-700-000-logements-par-an/"
+    }
+   ]
+  },
+  "similaires": [
+   {
+    "camp": "Emmanuel Macron (2022)",
+    "prop": "Lancer la rénovation thermique de 700 000 logements par an, via MaPrimeRénov'."
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Institution de contrôle",
+    "qui": "Cour des comptes, citée par l'Institut Montaigne",
+    "texte": "Sur l'objectif de 700 000 rénovations par an (version Macron 2022) : 86 % des dossiers ne portent que sur un seul geste. La massification s'est faite en baissant les exigences de gains énergétiques.",
+    "media": "Institut Montaigne (2022)",
+    "url": "https://www.institutmontaigne.org/presidentielle-2022/emmanuel-macron/lancer-la-renovation-thermique-de-700-000-logements-par-an/"
+   },
+   {
+    "camp": "Think tank libéral",
+    "qui": "Institut Montaigne",
+    "texte": "Les petits travaux dominent, alors que les rénovations globales sont plus efficaces contre les émissions. Un tel objectif crée une dépense nouvelle sans visibilité budgétaire durable.",
+    "media": "Institut Montaigne (2022)",
+    "url": "https://www.institutmontaigne.org/presidentielle-2022/emmanuel-macron/lancer-la-renovation-thermique-de-700-000-logements-par-an/"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Programme LFI",
+    "texte": "Le programme veut justement privilégier les rénovations complètes et conditionner les labels à des résultats énergétiques vérifiés.",
+    "media": "L'Avenir en commun",
+    "url": "https://www.lavenirencommun.org/programme/pour-une-bifurcation-ecologique-et-sociale/reussir-la-renovation-energetique/#reussir-la-renovation-energetique-1"
+   }
+  ],
+  "tensions": [
+   "Le coût de 10,6 Md€ par an vient de LFI et n'a pas été vérifié par une source indépendante.",
+   "« Isoler » 700 000 logements ne dit pas s'il s'agit de rénovations complètes ou de gestes simples, ce qui change beaucoup le coût et l'effet.",
+   "La capacité des artisans à suivre ce rythme n'est pas évaluée ; LFI prévoit 250 000 salariés formés d'ici 2030."
+  ],
+  "monde": [
+   {
+    "pays": "Allemagne",
+    "texte": "La banque publique KfW prête jusqu'à 120 000 € pour une rénovation globale, avec des aides liées à un niveau de performance.",
+    "media": "Institut Montaigne (2022)",
+    "url": "https://www.institutmontaigne.org/presidentielle-2022/emmanuel-macron/lancer-la-renovation-thermique-de-700-000-logements-par-an/"
+   },
+   {
+    "pays": "Suède",
+    "texte": "Une fiscalité forte sur les énergies fossiles depuis 1992 a réduit leur part dans le chauffage urbain à 8,3 % en 2016, contre 47 % en France.",
+    "media": "Institut Montaigne (2022)",
+    "url": "https://www.institutmontaigne.org/presidentielle-2022/emmanuel-macron/lancer-la-renovation-thermique-de-700-000-logements-par-an/"
+   }
+  ],
+  "maj": "13 nov. 2026"
+ },
+ "rompre-avec-la-maltraitance-animale-1": {
+  "statut": "documente",
+  "resume": "LFI veut interdire les très grands élevages intensifs au nom du bien-être animal, de la santé et de l'environnement ; la profession agricole conteste qu'il existe des « fermes-usines » en France.",
+  "logique": {
+   "texte": "Pour LFI, l'élevage industriel traite les animaux comme des marchandises et fait courir des risques sanitaires, comme les zoonoses (grippe aviaire, Covid-19). Le parti lie aussi ces élevages à la pollution (algues vertes, ammoniac) et à la disparition des petites fermes. Dès 2021, ses députés ont proposé une loi pour définir les fermes-usines par des seuils de taille. L'objectif est de revenir à des élevages plus petits, plus nombreux et plus respectueux des animaux.",
+   "arguments": [
+    {
+     "texte": "La proposition de loi de 2021 fixe des seuils : plus de 150 truies, 150 vaches laitières, 400 veaux ou 30 000 places de volailles, par exemple.",
+     "media": "Assemblée nationale, proposition de loi n° 4018 (2021)",
+     "url": "https://www.assemblee-nationale.fr/dyn/15/textes/l15b4018_proposition-loi.pdf"
+    },
+    {
+     "texte": "Les auteurs lient la concentration d'animaux aux pandémies (grippe aviaire, H1N1, Covid-19), à l'usage d'antibiotiques et à la pollution par les lisiers.",
+     "media": "Assemblée nationale, proposition de loi n° 4018 (2021)",
+     "url": "https://www.assemblee-nationale.fr/dyn/15/textes/l15b4018_proposition-loi.pdf"
+    },
+    {
+     "texte": "Ces fermes réduiraient l'emploi agricole et mettraient la pression sur les petits producteurs, tout en dépendant des subventions.",
+     "media": "Assemblée nationale, proposition de loi n° 4018 (2021)",
+     "url": "https://www.assemblee-nationale.fr/dyn/15/textes/l15b4018_proposition-loi.pdf"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "rompre-avec-la-maltraitance-animale-7",
+     "texte": "Fixer de nouvelles normes d'élevage : accès à l'air libre, pâturage, densité, surface minimale."
+    },
+    {
+     "id": "rompre-avec-la-maltraitance-animale-5",
+     "texte": "Interdire l'élevage de poules et de lapins en batterie et d'autres pratiques jugées cruelles."
+    },
+    {
+     "id": "rompre-avec-la-maltraitance-animale-2",
+     "texte": "Réduire de 50 % la consommation moyenne de protéines animales."
+    },
+    {
+     "id": "souverainete-alimentaire-et-revolution-agricole-pour-une-agriculture-ecologique-et-paysanne-1",
+     "texte": "Relocaliser une agriculture écologique et créer 500 000 emplois agricoles."
+    },
+    {
+     "id": "souverainete-alimentaire-et-revolution-agricole-pour-une-agriculture-ecologique-et-paysanne-2",
+     "texte": "Garantir des prix planchers rémunérateurs aux agriculteurs."
+    }
+   ]
+  },
+  "concret": [
+   "Le terme « ferme-usine » n'a pas de définition légale en France.",
+   "LFI propose de le définir par des seuils de taille, liés aux plus gros élevages classés (ICPE).",
+   "Selon des chiffres du ministère (2019), 65 % des porcs sont élevés dans des exploitations de plus de 2 000 porcs.",
+   "Selon l'ancien ministre Julien Denormandie, un élevage bovin français compte en moyenne 144 bêtes."
+  ],
+  "eco": {
+   "chiffre": "Non chiffré",
+   "cout": "Non chiffré. La reconversion des grands élevages aurait un coût, non évalué publiquement.",
+   "financement": "La proposition de loi de 2021 prévoyait une taxe additionnelle, sans montant.",
+   "rapporte": "Non chiffré.",
+   "sources": [
+    {
+     "media": "Assemblée nationale, proposition de loi n° 4018 (2021)",
+     "url": "https://www.assemblee-nationale.fr/dyn/15/textes/l15b4018_proposition-loi.pdf"
+    }
+   ]
+  },
+  "similaires": [
+   {
+    "camp": "LFI (2021)",
+    "prop": "Proposition de loi pour un moratoire puis l'interdiction des fermes-usines, signée notamment par Jean-Luc Mélenchon, Mathilde Panot et François Ruffin."
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Gouvernement (centre)",
+    "qui": "Julien Denormandie, alors ministre de l'Agriculture",
+    "texte": "Il conteste l'existence en France des très grands élevages dénoncés : les caricatures existent, selon lui, « mais à l'étranger ».",
+    "media": "Réussir (2022)",
+    "url": "https://www.reussir.fr/lelevage-intensif-fait-debat"
+   },
+   {
+    "camp": "Syndicat agricole",
+    "qui": "Christiane Lambert, figure de la FNSEA",
+    "texte": "Elle reproche à Jean-Luc Mélenchon de ne pas connaître les exploitations et demande de mieux définir intensif et extensif : « Il faut approfondir pour sortir des clichés ».",
+    "media": "Réussir (2022)",
+    "url": "https://www.reussir.fr/lelevage-intensif-fait-debat"
+   },
+   {
+    "camp": "Syndicat agricole",
+    "qui": "FNSEA",
+    "texte": "Après l'entrée d'un député LFI dans un élevage porcin avec des militants animalistes en 2019, le syndicat a dénoncé une violation de propriété « scandaleuse et inadmissible ».",
+    "media": "Public Sénat (2019)",
+    "url": "https://www.publicsenat.fr/actualites/non-classe/un-depute-lfi-s-introduit-dans-un-elevage-porcin-intensif-indignation-du-monde"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Bastien Lachaud, député LFI",
+    "texte": "Il juge qu'on ne peut pas croire la filière sur parole et qu'il faut une loi, car la production moins chère se fait au détriment des animaux, des travailleurs et de l'environnement.",
+    "media": "Public Sénat (2019)",
+    "url": "https://www.publicsenat.fr/actualites/non-classe/un-depute-lfi-s-introduit-dans-un-elevage-porcin-intensif-indignation-du-monde"
+   },
+   {
+    "qui": "Romain Espinosa, chercheur en économie au CNRS",
+    "texte": "Les deux camps ont en partie raison : la plupart des éleveurs ont de petites structures, mais la plupart des animaux vivent dans de très grands élevages.",
+    "media": "Réussir (2022)",
+    "url": "https://www.reussir.fr/lelevage-intensif-fait-debat"
+   }
+  ],
+  "tensions": [
+   "Tout dépend des seuils retenus : la plupart des éleveurs seraient peu concernés, mais une grande partie des animaux le serait.",
+   "Le coût de reconversion des grands élevages et l'effet sur les prix ne sont pas chiffrés.",
+   "Aucun pays de référence n'est cité dans les sources lues ; l'effet sur les importations n'est pas évalué."
+  ],
+  "monde": [],
+  "maj": "13 nov. 2026"
+ }
+}

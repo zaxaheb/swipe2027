@@ -1,0 +1,286 @@
+{
+ "bertrand-67-1": {
+  "statut": "peu_documente",
+  "resume": "Mesure peu débattue publiquement à ce jour : un plancher de 1 500 € net pour tout salarié à temps plein, payé en partie par l'État et non par l'employeur.",
+  "logique": {
+   "texte": "Xavier Bertrand veut que le travail paie mieux que l'assistance, sans alourdir le coût du travail pour les entreprises. Plutôt qu'une forte hausse du Smic, qu'il juge risquée pour l'emploi, il propose que l'État complète lui-même les bas salaires jusqu'à 1 500 € net. L'employeur continue de verser le salaire, et l'écart est pris en charge par une « prime au travail ». La mesure va avec un RSA conditionné à une activité et une baisse des impôts de production, pour rendre le retour à l'emploi plus attractif.",
+   "arguments": [
+    {
+     "texte": "Engagement formulé en 2021 : aucun salarié à temps complet ne touchera moins de 1 500 € net par mois.",
+     "media": "France-Vote (fiche candidat, citant franceinfo, 4 oct. 2021)",
+     "url": "https://www.france-vote.fr/candidats/xavier-bertrand"
+    },
+    {
+     "texte": "Avec un salaire de 1 259 € net (Smic de 2021), l'État verserait l'écart, soit environ 241 € par mois, sans coût pour les entreprises.",
+     "media": "France-Vote (fiche candidat)",
+     "url": "https://www.france-vote.fr/candidats/xavier-bertrand"
+    },
+    {
+     "texte": "Il se dit plutôt opposé à une forte hausse du Smic, qui pèserait sur les employeurs.",
+     "media": "France-Vote (fiche candidat)",
+     "url": "https://www.france-vote.fr/candidats/xavier-bertrand"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "bertrand-68-1",
+     "texte": "Conditionner le RSA à une activité ou une formation, pour creuser l'écart entre travail et assistance."
+    },
+    {
+     "id": "bertrand-66-1",
+     "texte": "Baisser les impôts de production de 35 Md€ sur le quinquennat pour soutenir l'emploi."
+    }
+   ]
+  },
+  "concret": [
+   "Aujourd'hui, l'employeur paie au moins le Smic ; l'État complète déjà certains bas revenus via la prime d'activité, sous conditions de ressources du foyer.",
+   "La proposition date de la campagne 2021 ; les montants (1 500 € et 1 259 €) n'ont pas été actualisés au Smic de 2026.",
+   "Le complément serait versé par l'État, pas par l'entreprise."
+  ],
+  "eco": {
+   "chiffre": "Non chiffré",
+   "cout": "Non chiffré par le candidat ; dépend du nombre de salariés à temps plein sous 1 500 € net et du niveau du Smic.",
+   "financement": "Non précisé.",
+   "rapporte": "Non précisé.",
+   "sources": [
+    {
+     "media": "France-Vote",
+     "url": "https://www.france-vote.fr/candidats/xavier-bertrand"
+    }
+   ]
+  },
+  "similaires": [],
+  "critiques": [],
+  "reponses": [],
+  "tensions": [
+   "Coût budgétaire non chiffré, alors que la mesure s'ajoute à 35 Md€ de baisse d'impôts de production.",
+   "Articulation non précisée avec la prime d'activité existante.",
+   "Risque, souvent évoqué pour ce type d'aide, que les employeurs aient moins de raisons d'augmenter les bas salaires : non documenté ici."
+  ],
+  "monde": [],
+  "maj": "13 nov. 2026"
+ },
+ "bertrand-69-1": {
+  "statut": "documente",
+  "resume": "Faire voter chaque année par le Parlement des quotas d'immigration, ce qui suppose selon le candidat de réviser la Constitution par référendum, alors que le Conseil constitutionnel a déjà bloqué des quotas.",
+  "logique": {
+   "texte": "Pour Xavier Bertrand, la France « subit une immigration qu'elle ne choisit plus ». Il veut que le pays décide lui-même qui peut s'installer, en fonction de ses besoins. Des quotas votés chaque année par le Parlement donneraient ce pouvoir aux élus. Comme le Conseil constitutionnel a déjà écarté ce type de dispositif, il passe par une révision de la Constitution, validée par référendum, pour que le peuple tranche. Les quotas s'accompagnent d'une baisse de l'immigration familiale, de la fin des régularisations et d'expulsions systématiques des étrangers condamnés.",
+   "arguments": [
+    {
+     "texte": "Deux principes : décider qui s'installe et qui doit partir, et adapter l'immigration aux besoins du pays.",
+     "media": "Europe 1 (4 nov. 2021)",
+     "url": "https://www.europe1.fr/politique/xavier-bertrand-devoile-ses-propositions-pour-reprendre-le-controle-de-limmigration-4075260"
+    },
+    {
+     "texte": "Réviser la Constitution par référendum pour que chaque année « le Parlement fixe des quotas d'immigration ».",
+     "media": "Europe 1",
+     "url": "https://www.europe1.fr/politique/xavier-bertrand-devoile-ses-propositions-pour-reprendre-le-controle-de-limmigration-4075260"
+    },
+    {
+     "texte": "Réduire en priorité l'immigration familiale, avec un « passeport républicain » et la maîtrise du français pour rejoindre un conjoint.",
+     "media": "Europe 1",
+     "url": "https://www.europe1.fr/politique/xavier-bertrand-devoile-ses-propositions-pour-reprendre-le-controle-de-limmigration-4075260"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "bertrand-69-2",
+     "texte": "Mettre fin aux régularisations et durcir le regroupement familial."
+    },
+    {
+     "id": "bertrand-72-1",
+     "texte": "Réviser la Constitution par référendum sur l'immigration, le terrorisme et la laïcité."
+    }
+   ]
+  },
+  "concret": [
+   "En janvier 2024, le Conseil constitutionnel a censuré l'article de la loi immigration qui imposait au Parlement un débat annuel et la fixation de quotas, comme « cavalier législatif ».",
+   "Une décision de 1993 a jugé des quotas inconstitutionnels pour certains types d'immigration (notamment familiale).",
+   "Aujourd'hui, aucun plafond chiffré n'est voté : les titres de séjour sont délivrés selon des critères fixés par la loi."
+  ],
+  "eco": {
+   "chiffre": "Sans objet",
+   "cout": "Non chiffré.",
+   "financement": "Sans objet.",
+   "rapporte": "Non chiffré.",
+   "sources": [
+    {
+     "media": "France-Vote",
+     "url": "https://www.france-vote.fr/candidats/xavier-bertrand"
+    }
+   ]
+  },
+  "similaires": [
+   {
+    "camp": "LR (Sénat)",
+    "prop": "Amendement Karoutchi sur des quotas, voté au Sénat en 2018 et réintroduit dans la loi immigration de 2023."
+   },
+   {
+    "camp": "Gouvernement Philippe (2019)",
+    "prop": "Quotas annuels limités aux métiers en tension."
+   },
+   {
+    "camp": "David Lisnard",
+    "prop": "Quotas annuels et restriction du droit du sol."
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Gouvernement (2018)",
+    "qui": "Jacqueline Gourault, ministre auprès du ministre de l'Intérieur",
+    "texte": "Elle jugeait la mesure irréalisable, l'immigration familiale ne pouvant être plafonnée pour des raisons constitutionnelles, et le droit existant suffisant pour l'immigration de travail.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/non-classe/quotas-d-immigration-les-senateurs-lr-rappellent-que-le-gouvernement-s-y-opposait"
+   },
+   {
+    "camp": "Gauche (PS)",
+    "qui": "Patrick Kanner, président du groupe PS au Sénat",
+    "texte": "Il doute que des quotas règlent quoi que ce soit et préfère former en France les personnes pour les métiers en tension.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/non-classe/quotas-d-immigration-les-senateurs-lr-rappellent-que-le-gouvernement-s-y-opposait"
+   },
+   {
+    "camp": "Juristes",
+    "qui": "Marie-Odile Peyroux-Sissoko, professeure de droit public",
+    "texte": "La compatibilité des quotas avec le principe d'égalité n'a pas été tranchée par le Conseil en 2024 : la question reste « pendante ».",
+    "media": "Le Club des juristes",
+    "url": "https://www.leclubdesjuristes.com/societe/droit-et-justice/censure-de-la-loi-immigration-pas-de-debat-pas-de-quotas-4690/"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Xavier Bertrand",
+    "texte": "La révision constitutionnelle par référendum vise justement à lever l'obstacle juridique.",
+    "media": "Europe 1",
+    "url": "https://www.europe1.fr/politique/xavier-bertrand-devoile-ses-propositions-pour-reprendre-le-controle-de-limmigration-4075260"
+   }
+  ],
+  "tensions": [
+   "Un référendum de révision (article 89) suppose d'abord un vote du texte par les deux chambres.",
+   "Le droit au regroupement familial découle aussi de la Convention européenne des droits de l'homme : non traité par le candidat.",
+   "Le niveau des quotas n'est pas chiffré."
+  ],
+  "monde": [
+   {
+    "pays": "Canada",
+    "texte": "Le gouvernement présente chaque année au Parlement un plan pluriannuel de cibles par catégorie, révisable ; ce n'est pas une limite légale contraignante (cible de 401 000 résidents permanents en 2021).",
+    "media": "Sénat (législation comparée, 2023)",
+    "url": "https://www.senat.fr/lc/lc315/lc315.html"
+   },
+   {
+    "pays": "Royaume-Uni",
+    "texte": "Le quota de visas de travailleurs qualifiés a été supprimé en 2021 avec le système à points ; un plafond reste pour les saisonniers.",
+    "media": "Sénat (législation comparée, 2023)",
+    "url": "https://www.senat.fr/lc/lc315/lc315.html"
+   }
+  ],
+  "maj": "13 nov. 2026"
+ },
+ "bertrand-70-1": {
+  "statut": "documente",
+  "resume": "Rétablir des peines minimales pour les récidivistes et supprimer l'atténuation de peine des mineurs récidivistes, deux mesures déjà testées puis supprimées ou censurées.",
+  "logique": {
+   "texte": "Xavier Bertrand estime que l'impunité nourrit la délinquance et que la loi doit garantir une sanction certaine. Les peines minimales automatiques visent d'abord les récidivistes et les agresseurs de policiers, gendarmes, pompiers ou maires. Selon lui, le juge garderait une part d'individualisation, ce qui respecte les principes du droit pénal. Pour les mineurs récidivistes, il veut supprimer l'excuse de minorité, qui divise par deux la peine encourue. Ces mesures passent par une révision de la Constitution par référendum.",
+   "arguments": [
+    {
+     "texte": "Des peines minimales sont « la seule façon de casser l'impunité ».",
+     "media": "Europe 1 (avril 2021)",
+     "url": "https://www.europe1.fr/politique/peine-automatique-pour-les-agresseurs-de-policiers-critique-bertrand-persiste-et-signe-4039922"
+    },
+    {
+     "texte": "En 2021, il proposait un an de prison minimum non aménageable pour les agresseurs de forces de l'ordre, pompiers et maires.",
+     "media": "Europe 1",
+     "url": "https://www.europe1.fr/politique/peine-automatique-pour-les-agresseurs-de-policiers-critique-bertrand-persiste-et-signe-4039922"
+    },
+    {
+     "texte": "Il affirme que la mesure respecte « les principes fondamentaux du droit pénal », le juge gardant une marge.",
+     "media": "Europe 1",
+     "url": "https://www.europe1.fr/politique/peine-automatique-pour-les-agresseurs-de-policiers-critique-bertrand-persiste-et-signe-4039922"
+    }
+   ],
+   "accompagnement": [
+    {
+     "id": "bertrand-72-1",
+     "texte": "Réviser la Constitution par référendum sur l'immigration, le terrorisme et la laïcité."
+    }
+   ]
+  },
+  "concret": [
+   "Des peines planchers pour récidivistes ont existé de 2007 à 2014 (loi Dati), avant d'être supprimées.",
+   "L'excuse de minorité réduit la peine encourue par un mineur ; la loi de 2007 permettait déjà de l'écarter pour les plus de 16 ans en seconde récidive.",
+   "Le 19 juin 2025, le Conseil constitutionnel a censuré la dérogation à l'excuse de minorité prévue par la loi Attal : l'atténuation de la responsabilité des mineurs selon l'âge est une exigence constitutionnelle.",
+   "Gérald Darmanin a reconnu en février 2026 qu'il « faut changer la Constitution » pour supprimer l'excuse de minorité."
+  ],
+  "eco": {
+   "chiffre": "Non chiffré",
+   "cout": "Non chiffré par le candidat. Plus de détenus implique plus de places de prison : environ 32 000 € par détenu et par an selon une estimation de 2014.",
+   "financement": "Non précisé.",
+   "rapporte": "Sans objet.",
+   "sources": [
+    {
+     "media": "Terra Nova (note reproduite par la CNAPE)",
+     "url": "https://www.cnape.fr/documents/pour-en-finir-avec-les-peines-plancher"
+    }
+   ]
+  },
+  "similaires": [
+   {
+    "camp": "Gérald Darmanin",
+    "prop": "Suppression de l'excuse de minorité, via une révision constitutionnelle."
+   },
+   {
+    "camp": "Gabriel Attal (loi de 2025)",
+    "prop": "Dérogation à l'excuse de minorité pour les 16-18 ans récidivistes, censurée."
+   },
+   {
+    "camp": "David Lisnard",
+    "prop": "Peines planchers automatiques pour les récidivistes."
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Gouvernement Castex (2021)",
+    "qui": "Éric Dupond-Moretti, ministre de la Justice",
+    "texte": "Il assimilait les peines automatiques à envoyer en prison des personnes sans preuve ni procès.",
+    "media": "Europe 1",
+    "url": "https://www.europe1.fr/politique/peine-automatique-pour-les-agresseurs-de-policiers-critique-bertrand-persiste-et-signe-4039922"
+   },
+   {
+    "camp": "Majorité présidentielle (2021)",
+    "qui": "Stanislas Guerini, délégué général d'En Marche",
+    "texte": "« Casser nos droits les plus fondamentaux, non ».",
+    "media": "Europe 1",
+    "url": "https://www.europe1.fr/politique/peine-automatique-pour-les-agresseurs-de-policiers-critique-bertrand-persiste-et-signe-4039922"
+   },
+   {
+    "camp": "Magistrats (think tank de gauche)",
+    "qui": "Auteurs magistrats d'une note Terra Nova (2014)",
+    "texte": "L'effet dissuasif n'a pas été démontré, la loi a aggravé la surpopulation carcérale et a surtout touché vols et atteintes aux biens.",
+    "media": "Terra Nova (note reproduite par la CNAPE)",
+    "url": "https://www.cnape.fr/documents/pour-en-finir-avec-les-peines-plancher"
+   },
+   {
+    "camp": "Gauche parlementaire",
+    "qui": "Groupes LFI, PS et écologistes",
+    "texte": "Ils ont saisi le Conseil constitutionnel contre la loi Attal, qui a censuré la dérogation à l'excuse de minorité.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/justice-des-mineurs-le-conseil-constitutionnel-censure-largement-le-texte-attal-notamment-la-derogation-de-lexcuse-de-minorite"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Xavier Bertrand",
+    "texte": "Il a jugé « indigne » la réaction du garde des Sceaux et maintient que le juge garderait une marge d'individualisation.",
+    "media": "Europe 1",
+    "url": "https://www.europe1.fr/politique/peine-automatique-pour-les-agresseurs-de-policiers-critique-bertrand-persiste-et-signe-4039922"
+   }
+  ],
+  "tensions": [
+   "Sans révision constitutionnelle, la suppression de l'excuse de minorité serait très probablement censurée.",
+   "Bilan contesté des peines planchers 2007-2014 : taux d'application en baisse (50 % en 2007, 38,6 % en 2011) et forte disparité entre tribunaux.",
+   "Effet sur une population carcérale déjà au-dessus des capacités."
+  ],
+  "monde": [],
+  "maj": "13 nov. 2026"
+ }
+}
