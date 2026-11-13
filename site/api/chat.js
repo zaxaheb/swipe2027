@@ -10,7 +10,7 @@ const cleanMsgs = (arr) => (Array.isArray(arr) ? arr : []).slice(-12)
   .map((m) => ({ role: m.role === "assistant" ? "assistant" : "user", content: String(m.content || "").slice(0, 2000) }))
   .filter((m) => m.content);
 
-export const config = { maxDuration: 120 };
+export const config = { maxDuration: 300 };
 
 /** Les erreurs sont aussi rangées dans le journal des chats : elles apparaissent en rouge dans /admin. */
 const logErr = (mode, mesureId, msgs, e) => insert("chats", { mode: mode || "general", mesure_id: mode === "mesure" ? String(mesureId || "").slice(0, 160) : null,
@@ -19,7 +19,7 @@ const logErr = (mode, mesureId, msgs, e) => insert("chats", { mode: mode || "gen
 
 /** Réponse avec recherche web (outil serveur d'Anthropic) ; ajoute les sources citées si le texte n'en a pas. */
 async function withWeb(system, msgs) {
-  const tools = [{ type: "web_search_20250305", name: "web_search", max_uses: Number(process.env.CHAT_MAX_SEARCHES || 3), user_location: { type: "approximate", country: "FR", timezone: "Europe/Paris" } }];
+  const tools = [{ type: "web_search_20250305", name: "web_search", max_uses: Number(process.env.CHAT_MAX_SEARCHES || 10), user_location: { type: "approximate", country: "FR", timezone: "Europe/Paris" } }];
   const conv = [...msgs]; let d, parts = [];
   for (let i = 0; i < 3; i++) {                       // la recherche peut demander plusieurs tours (pause_turn)
     d = await messages({ max_tokens: 1200, system, tools, messages: conv });
@@ -35,13 +35,18 @@ async function withWeb(system, msgs) {
 }
 
 /** Version en direct (SSE) : on montre au navigateur les étapes (recherches web) puis le texte au fil de l'eau. */
+const SEARCH = () => ({ type: "web_search_20250305", name: "web_search", max_uses: Number(process.env.CHAT_MAX_SEARCHES || 10), user_location: { type: "approximate", country: "FR", timezone: "Europe/Paris" } });
+const FETCH = () => ({ type: "web_fetch_20250910", name: "web_fetch", max_uses: Number(process.env.CHAT_MAX_FETCHES || 3), max_content_tokens: 12000 });
+let fetchOk = process.env.CHAT_WEB_FETCH !== "0";
+
 async function streamWeb(res, system, msgs, send) {
-  const tools = [{ type: "web_search_20250305", name: "web_search", max_uses: Number(process.env.CHAT_MAX_SEARCHES || 3), user_location: { type: "approximate", country: "FR", timezone: "Europe/Paris" } }];
   const conv = [...msgs]; let full = ""; const cites = new Map();
-  for (let turn = 0; turn < 3; turn++) {
-    const r = await fetch("https://api.anthropic.com/v1/messages", { method: "POST",
-      headers: { "x-api-key": process.env.ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01", "content-type": "application/json" },
-      body: JSON.stringify({ model: process.env.ANTHROPIC_MODEL, max_tokens: 1400, system, tools, messages: conv, stream: true }) });
+  for (let turn = 0; turn < 8; turn++) {
+    const call = () => fetch("https://api.anthropic.com/v1/messages", { method: "POST",
+      headers: { "x-api-key": process.env.ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01", "content-type": "application/json", ...(fetchOk ? { "anthropic-beta": "web-fetch-2025-09-10" } : {}) },
+      body: JSON.stringify({ model: process.env.ANTHROPIC_MODEL, max_tokens: 3000, system, tools: fetchOk ? [SEARCH(), FETCH()] : [SEARCH()], messages: conv, stream: true }) });
+    let r = await call();
+    if (r.status === 400 && fetchOk) { const t = await r.text(); if (/fetch|beta|tool/i.test(t)) { console.warn("web_fetch indisponible, on continue sans :", t.slice(0, 200)); fetchOk = false; r = await call(); } else { const e = new Error(`anthropic 400: ${t}`); e.status = 502; throw e; } }
     if (!r.ok) { const e = new Error(`anthropic ${r.status}: ${await r.text()}`); e.status = r.status === 429 ? 429 : 502; throw e; }
     const blocks = []; let stop = null, buf = "";
     const dec = new TextDecoder();
@@ -67,7 +72,7 @@ async function streamWeb(res, system, msgs, send) {
           else if (ev.delta.type === "citations_delta") { const ct = ev.delta.citation; (b.citations ||= []).push(ct); if (ct.url) cites.set(ct.url, ct.title || ct.url); }
         } else if (ev.type === "content_block_stop") {
           const b = blocks[ev.index];
-          if (b && b.type === "server_tool_use") { try { b.input = JSON.parse(b._json || "{}"); } catch { b.input = {}; } delete b._json; send({ type: "search", query: b.input.query || "" }); }
+          if (b && b.type === "server_tool_use") { try { b.input = JSON.parse(b._json || "{}"); } catch { b.input = {}; } delete b._json; if (b.name === "web_fetch") send({ type: "fetch", url: b.input.url || "" }); else send({ type: "search", query: b.input.query || "" }); }
         } else if (ev.type === "message_delta") stop = ev.delta.stop_reason;
         else if (ev.type === "error") throw new Error("anthropic stream: " + JSON.stringify(ev.error));
       }

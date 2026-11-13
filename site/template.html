@@ -790,6 +790,7 @@ $("#cv-form").onsubmit=async e=>{ e.preventDefault(); const q=$("#cv-in").value.
       while((i=buf.indexOf("\n\n"))>=0){ const line=buf.slice(0,i); buf=buf.slice(i+2); if(!line.startsWith("data: ")) continue; let ev; try{ ev=JSON.parse(line.slice(6)); }catch(e){ continue; }
         if(ev.type==="step") addStep("✓",esc(ev.label),true);
         else if(ev.type==="search") addStep("🔎",`Recherche web : « ${esc(ev.query)} »`,true);
+        else if(ev.type==="fetch"){ let d=ev.url; try{ d=new URL(ev.url).hostname.replace(/^www\./,""); }catch(e){} addStep("📖",`Lecture de la page : ${esc(d)}`,true); }
         else if(ev.type==="results"){ addStep("📄",`${ev.n} résultat${ev.n>1?"s":""}${ev.sites.length?" · "+esc(ev.sites.join(", ")):""}`,false); addStep("","Lecture des sources",true); }
         else if(ev.type==="text"){ if(!txt) addStep("✍️","Rédaction de la réponse",false); txt+=ev.delta; if(!raf) raf=setTimeout(paint,16); }
         else if(ev.type==="error") throw Object.assign(new Error("x"),{code:ev.error==="indisponible"?"indispo":ev.error==="surcharge"?"surcharge":"http",st:ev.detail});
