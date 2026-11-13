@@ -128,6 +128,9 @@ main{flex:1;overflow-y:auto;overflow-x:hidden;min-height:0;scroll-behavior:smoot
 .hbar .tr i{display:block;height:100%;border-radius:0 4px 4px 0;min-width:2px}
 .hbar .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted);font-weight:600}
 .hbar:hover .nm{text-decoration:underline}
+.hbar .tr{position:relative}
+.hbar .cut{position:absolute;right:14px;top:-3px;bottom:-3px;width:7px;background:var(--card);transform:skewX(-20deg)}
+#info .msgs{max-width:560px}
 /* toast */
 .toast{position:fixed;left:50%;top:18px;transform:translate(-50%,-80px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-weight:600;font-size:14px;z-index:30;transition:transform .25s;white-space:nowrap}
 .toast.on{transform:translate(-50%,0)}
@@ -197,6 +200,7 @@ details.lcard summary::-webkit-details-marker{display:none}
 .msg{max-width:82%;padding:10px 14px;border-radius:20px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px}
 .msg.u{align-self:flex-end;background:var(--brand);color:#fff;border-bottom-right-radius:6px}
 .msg.a{align-self:flex-start;background:var(--soft);border-bottom-left-radius:6px}
+.msg.a a{color:inherit;text-decoration:underline;text-underline-offset:2px;word-break:break-word}
 .sugg{display:flex;gap:8px;overflow-x:auto;padding:4px 16px 8px;scrollbar-width:none;max-width:620px;width:100%;margin:0 auto}
 .sugg button{flex:none;border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:14px;font-weight:500}
 .composer{display:flex;gap:8px;padding:10px 16px calc(10px + var(--safe-b));border-top:1px solid var(--line);max-width:620px;width:100%;margin:0 auto}
@@ -222,6 +226,7 @@ details.lcard summary::-webkit-details-marker{display:none}
   <div class="topbar">
     <h1>Swipe 2027</h1>
     <div class="tools">
+      <button class="iconbtn" id="b-info" aria-label="Comment ça marche ?" style="font:700 17px var(--serif)">i</button>
       <button class="chip" id="b-account" style="padding:6px 12px" onclick="location.hash='profil'">Se connecter</button>
       <button class="iconbtn" id="b-filter" aria-label="Filtrer les mesures"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg></button>
     </div>
@@ -305,6 +310,10 @@ details.lcard summary::-webkit-details-marker{display:none}
   <button data-v="profil" aria-label="Mon profil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg></button>
 </div></nav>
 
+<div class="convo" id="info" role="dialog" aria-modal="true" aria-labelledby="info-t">
+  <header><button class="iconbtn" id="info-x" aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button><div class="n" id="info-t">Comment ça marche</div></header>
+  <div class="msgs" id="info-body" style="gap:14px"></div>
+</div>
 <div class="convo" id="convo" role="dialog" aria-modal="true" aria-labelledby="cv-name">
   <header>
     <button class="iconbtn" id="cv-back" aria-label="Retour"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -369,6 +378,7 @@ async function ai(payload){
   if(!r.ok) throw Object.assign(new Error("http"),{code:r.status===404?"off":"http"});
   return (await r.json()).text;
 }
+function linkify(s){ return esc(s).replace(/\[([^\]]{1,120})\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>').replace(/(^|[\s(])(https?:\/\/[^\s<)]+)/g,'$1<a href="$2" target="_blank" rel="noopener">$2</a>'); }
 const aiErr=e=>e.code==="off"?"L'IA n'est pas encore branchée sur ce site (voir README).":e.code==="quota"?"Tu as atteint la limite d'utilisation de l'IA pour aujourd'hui. Reviens demain !":e.code==="rate"?"Trop de demandes, réessaie dans une minute.":e.code==="busy"?"Quelqu'un est déjà en train de générer cette fiche. Réessaie dans une minute.":"Ça n'a pas marché. Réessaie.";
 /* fiches partagées : générées une fois, puis servies à tous */
 const REMOTE={}; const REMOTE_MISS=new Set();
@@ -637,7 +647,7 @@ function openConvo(k){ CK=k; const isG=k==="g", m=isG?null:BYID[k.slice(2)];
   $("#cv-name").textContent=isG?"Parler politique":m.S.section+" · "+m.P;
   $("#cv-av").style.background=isG?"#111":gradOf(m); $("#cv-av").textContent=isG?"?":m.P;
   const H=CHATS[k]||[];
-  $("#cv-msgs").innerHTML=(m?`<div class="quote">${esc(m.t)}</div>`:`<div class="quote">Pose une question sur les programmes des candidats, les votes à l'Assemblée ou les condamnations. Réponses neutres, appuyées sur les données de l'app.</div>`)+`<p class="note" style="text-align:center;margin:0 0 8px">Les questions sont enregistrées de façon anonyme pour améliorer l'app. N'y mets pas d'informations personnelles.</p>`+H.map(x=>`<div class="msg ${x.role==="user"?"u":"a"}">${esc(x.content)}</div>`).join("");
+  $("#cv-msgs").innerHTML=(m?`<div class="quote">${esc(m.t)}</div>`:`<div class="quote">Pose une question sur les programmes des candidats, les votes à l'Assemblée ou les condamnations. Réponses neutres, appuyées sur les données de l'app.</div>`)+`<p class="note" style="text-align:center;margin:0 0 8px">Les questions sont enregistrées de façon anonyme pour améliorer l'app. N'y mets pas d'informations personnelles.</p>`+H.map(x=>`<div class="msg ${x.role==="user"?"u":"a"}">${x.role==="user"?esc(x.content):linkify(x.content)}</div>`).join("");
   const S=isG?["Que proposent les candidats sur les retraites ?","Comment le RN a voté sur le budget ?","Qui vote le plus souvent ensemble ?","C'est quoi la 6e République ?"]:["Qui paierait ?","Ça change quoi pour moi ?","Ça a marché ailleurs ?","Les principales critiques ?"];
   $("#cv-sugg").innerHTML=S.map(s=>`<button>${esc(s)}</button>`).join("");
   $$("#cv-sugg button").forEach(b=>b.onclick=()=>{$("#cv-in").value=b.textContent;$("#cv-form").requestSubmit();});
@@ -648,31 +658,29 @@ $("#cv-form").onsubmit=async e=>{ e.preventDefault(); const q=$("#cv-in").value.
   H.push({role:"user",content:q}); box.insertAdjacentHTML("beforeend",`<div class="msg u">${esc(q)}</div>`);
   const out=document.createElement("div"); out.className="msg a"; out.textContent="…"; box.appendChild(out); box.scrollTop=1e9;
   const payload=k==="g"?{mode:"general",messages:H.slice(-12)}:{mode:"mesure",mesureId:k.slice(2),messages:H.slice(-12)};
-  try{ const t=await ai(payload); out.textContent=t; H.push({role:"assistant",content:t}); store.set("chats2027",CHATS); }
+  out.textContent="Recherche en cours…";
+  try{ const t=await ai(payload); out.innerHTML=linkify(t); H.push({role:"assistant",content:t}); store.set("chats2027",CHATS); }
   catch(err){ H.pop(); out.textContent=aiErr(err); }
   box.scrollTop=1e9; };
 
 /* ================= PROFIL ================= */
 /* histogramme : nombre de propositions par candidat */
-let HIDE_LFI=false;
 function chartHTML(){
   const rows=PKEYS.map(P=>({P,n:M.filter(m=>m.P===P).length})).sort((a,b)=>b.n-a.n);
-  const shown=HIDE_LFI?rows.filter(r=>r.P!=="LFI"):rows; const max=Math.max(...shown.map(r=>r.n));
-  return `<div class="box prompt" style="padding-bottom:20px"><div class="label">Nombre de propositions par candidat</div>
-  <p class="note" style="margin:-6px 0 12px">Mesures présentes dans l'app. Touche un candidat pour ne voir que ses propositions.</p>
-  <div>${shown.map(r=>`<button class="hbar" data-p="${r.P}" title="${esc(PROGS[r.P].cand)} : ${r.n} propositions"><span class="nm">${esc(PROGS[r.P].cand)}</span><span class="tr"><i style="width:${100*r.n/max}%;background:#${(GR[r.P]||GR0.RN)[0].split(",")[0].slice(1)}"></i></span><span class="v">${r.n}</span></button>`).join("")}</div>
-  <button class="linkbtn" id="b-hidelfi">${HIDE_LFI?"Réafficher LFI":"Masquer LFI pour mieux comparer les autres"}</button>
-  <p class="note" style="margin:10px 0 0">LFI est le seul à avoir publié un programme complet. Pour les autres, ce sont les propositions annoncées ou recensées à ce jour.</p></div>`;
+  // Axe coupé : la plus grande barre dépasse largement les autres, on la coupe (repère « ⫽ ») pour garder les autres lisibles.
+  const second=rows[1]?rows[1].n:rows[0].n, cut=rows[0].n>second*3, max=cut?second*1.25:rows[0].n;
+  return `<div class="hchart">${rows.map((r,i)=>{ const broken=cut&&i===0, w=broken?100:100*r.n/max;
+    return `<button class="hbar" data-p="${r.P}" title="${esc(PROGS[r.P].cand)} : ${r.n} propositions"><span class="nm">${esc(PROGS[r.P].cand)}</span><span class="tr"><i style="width:${w}%;background:#${(GR[r.P]||GR0.RN)[0].split(",")[0].slice(1)}"></i>${broken?'<b class="cut" aria-hidden="true"></b>':""}</span><span class="v">${r.n}</span></button>`; }).join("")}</div>
+  ${cut?`<p class="note" style="margin:8px 0 0">La barre de ${esc(PROGS[rows[0].P].cand)} est coupée : elle dépasse largement l'échelle des autres.</p>`:""}`;
 }
 function bindChart(root){
-  root.querySelectorAll(".hbar").forEach(b=>b.onclick=()=>{ FILTER=b.dataset.p; store.set("f2027b",FILTER); $$("#f-chips .chip").forEach(x=>x.setAttribute("aria-pressed",x.dataset.f===FILTER)); location.hash="swipe"; nextProfile(); });
-  const t=root.querySelector("#b-hidelfi"); if(t) t.onclick=()=>{ HIDE_LFI=!HIDE_LFI; renderProfil(); };
+  root.querySelectorAll(".hbar").forEach(b=>b.onclick=()=>{ FILTER=b.dataset.p; store.set("f2027b",FILTER); $$("#f-chips .chip").forEach(x=>x.setAttribute("aria-pressed",x.dataset.f===FILTER)); $("#info").classList.remove("on"); location.hash="swipe"; nextProfile(); });
 }
 
 function renderProfil(){
   const ids=Object.keys(SW).filter(k=>BYID[k]), pour=ids.filter(k=>SW[k]===1), contre=ids.filter(k=>SW[k]===-1), passe=ids.filter(k=>SW[k]===0);
   const p=$("#profil");
-  if(pour.length+contre.length<5){ p.innerHTML=`<h2 class="ptitle">Ton profil</h2>${accountHTML()}${SB?'<div style="height:14px"></div>':""}${chartHTML()}<div style="height:14px"></div><div class="box prompt" style="padding-bottom:24px"><div class="label">Pas encore assez de réponses</div><div class="answer">Réagis à au moins 5 mesures pour voir ce qui ressort.</div><p class="note" style="margin-top:10px">${ids.length} mesure(s) vue(s) sur ${M.length}.</p><div style="margin-top:14px"><button class="cta" onclick="location.hash='swipe'">Découvrir des mesures</button></div></div>`; bindChart(p); bindAccount(p); return; }
+  if(pour.length+contre.length<5){ p.innerHTML=`<h2 class="ptitle">Ton profil</h2>${accountHTML()}${SB?'<div style="height:14px"></div>':""}<div class="box prompt" style="padding-bottom:24px"><div class="label">Pas encore assez de réponses</div><div class="answer">Réagis à au moins 5 mesures pour voir ce qui ressort.</div><p class="note" style="margin-top:10px">${ids.length} mesure(s) vue(s) sur ${M.length}.</p><div style="margin-top:14px"><button class="cta" onclick="location.hash='swipe'">Découvrir des mesures</button></div></div>`; bindAccount(p); return; }
   const score=P=>{ const a=pour.filter(k=>BYID[k].P===P).length, b=contre.filter(k=>BYID[k].P===P).length; return {a,b,t:a+b,p:a+b?Math.round(100*a/(a+b)):null}; };
   const S=Object.fromEntries(PKEYS.map(P=>[P,score(P)]));
   const bySec={}; for(const k of [...pour,...contre]){const m=BYID[k],s=m.P+" · "+m.S.section;(bySec[s]=bySec[s]||{a:0,t:0});bySec[s].t++;if(SW[k]===1)bySec[s].a++;}
@@ -687,19 +695,44 @@ function renderProfil(){
   <p class="note" style="margin:0">Les programmes n'ont pas tous la même taille : LFI a publié un programme complet (plus de 1 000 mesures), les autres candidats n'ont pour l'instant annoncé que quelques dizaines de propositions. Un score sur peu de mesures est moins solide.</p>
   ${secs.length?`<div class="box prompt" style="padding-bottom:22px"><div class="label">Là où tu adhères le plus</div>${top.map(x=>`<div class="item"><div class="txt">${esc(x.s)} <span class="note">${x.p}% sur ${x.t}</span></div></div>`).join("")}</div>
   <div class="box prompt" style="padding-bottom:22px"><div class="label">Là où tu décroches</div>${low.map(x=>`<div class="item"><div class="txt">${esc(x.s)} <span class="note">${x.p}% sur ${x.t}</span></div></div>`).join("")}</div>`:""}
-  ${chartHTML()}
   <div class="box prompt" style="padding-bottom:22px"><div class="label">Tes derniers choix</div><div class="liked">${recent.map(k=>`<div class="row"><b style="background:${SW[k]===1?"#e4f4ea":"#fbe7e6"};color:${SW[k]===1?"var(--pour)":"var(--contre)"}">${SW[k]===1?"POUR":"CONTRE"}</b><span><span class="badge ${PROGS[BYID[k].P].badge}" style="margin-right:6px">${BYID[k].P}</span>${esc(BYID[k].t)}</span></div>`).join("")}</div></div>
   <div class="box prompt" style="padding-bottom:22px"><div class="label">Ce que disent tes choix</div><p class="note" style="margin:0 0 12px">Un résumé neutre de tes réponses, sans te ranger dans un camp.</p><button class="cta" id="p-ai">Analyser mes choix</button><div class="answer sm" id="p-ai-out" style="margin-top:14px;white-space:pre-wrap"></div></div>
   <div class="endrow"><button class="cta ghost" id="p-reset">Tout recommencer</button></div>
   <p class="note" style="text-align:center"><a href="/confidentialite.html">Confidentialité et données personnelles</a></p>
   <div class="confirm" id="p-confirm"><span class="note">Effacer toutes tes réponses ?</span><button class="cta" id="p-yes" style="background:var(--contre)">Oui, effacer</button><button class="cta ghost" id="p-no">Annuler</button></div></div>`;
-  bindChart(p); bindAccount(p);
+  bindAccount(p);
   $("#p-reset").onclick=()=>$("#p-confirm").classList.add("on"); $("#p-no").onclick=()=>$("#p-confirm").classList.remove("on");
   $("#p-yes").onclick=()=>{SW={};HIST=[];save();nextProfile();location.hash="swipe";};
   $("#p-ai").onclick=async()=>{ const b=$("#p-ai"),o=$("#p-ai-out"); b.disabled=true; o.textContent="…"; const L=k=>`- [${BYID[k].P}] ${BYID[k].t}`;
     try{ o.textContent=await ai({mode:"profil",choix:{pour,contre}}); }
     catch(e){ o.textContent=aiErr(e); b.disabled=false; } };
 }
+
+/* ================= infos ================= */
+function renderInfo(){
+  const nFiches=Object.keys(FICHES).length, nCand=PKEYS.length;
+  $("#info-body").innerHTML=`
+  <div class="box prompt" style="padding-bottom:20px"><div class="label">Le principe</div><div class="answer sm">Une proposition à la fois. ❤ si tu es pour, ✕ si tu es contre. Sous chaque proposition, tu trouves son contexte, ce qu'en disent les autres camps, son coût et ce qui se fait ailleurs. À la fin, ton profil montre de quels candidats tu es proche, mesure par mesure.</div></div>
+  <div class="box prompt" style="padding-bottom:20px"><div class="label">Les candidats et leurs propositions</div><p class="note" style="margin:-6px 0 12px">${nCand} candidats déclarés, ${M.length.toLocaleString("fr-FR")} propositions. Touche un nom pour ne voir que les siennes.</p>${chartHTML()}
+    <p class="note" style="margin:12px 0 0">Les écarts viennent surtout de l'état des programmes : La France insoumise a publié un programme complet ; les autres candidats n'ont encore annoncé qu'une partie de leurs propositions. L'app se met à jour à mesure qu'ils publient.</p></div>
+  <div class="box prompt" style="padding-bottom:20px"><div class="label">D'où viennent les propositions</div>
+    <div class="item"><div class="who">Programmes officiels</div><div class="txt" style="font-size:16px">L'Avenir en commun (LFI), les 22 mesures et le programme 2024 du RN, sur les sites des partis.</div></div>
+    <div class="item"><div class="who">Annonces dans la presse</div><div class="txt" style="font-size:16px">Pour les candidats sans programme complet : déclarations, livres, conférences, relayés par la presse.</div></div>
+    <div class="item"><div class="who">Positions recensées</div><div class="txt" style="font-size:16px">Pour certains candidats, positions compilées par France-Vote à partir de leurs déclarations et de leurs votes.</div></div>
+    <p class="note" style="margin:8px 0 0">Chaque proposition a un lien « Lire le texte officiel » ou « Voir la source ».</p></div>
+  <div class="box prompt" style="padding-bottom:20px"><div class="label">Les analyses</div>
+    <div class="item"><div class="who">Fiches sourcées (${nFiches})</div><div class="txt" style="font-size:16px">Écrites à partir d'articles de presse, de think tanks de tous bords et d'institutions. Chaque critique a son lien.</div></div>
+    <div class="item"><div class="who">Fiches générées</div><div class="txt" style="font-size:16px">Pour les autres mesures, l'IA fait des recherches web et rédige une fiche, partagée ensuite avec tout le monde. Elles sont marquées « Fiche générée » : vérifie les sources.</div></div>
+    <div class="item"><div class="who">Le chat</div><div class="txt" style="font-size:16px">Une IA (Claude) qui s'appuie sur la base de l'app et peut chercher sur internet. Consigne : rester neutre, citer ses sources, ne jamais dire pour qui voter.</div></div></div>
+  <div class="box prompt" style="padding-bottom:20px"><div class="label">Les autres données</div>
+    <div class="item"><div class="who">Votes à l'Assemblée</div><div class="txt" style="font-size:16px">Données officielles de l'Assemblée nationale (17e législature) : votes solennels, motions de censure, votes sur l'ensemble d'un texte.</div></div>
+    <div class="item"><div class="who">Condamnations</div><div class="txt" style="font-size:16px">Base Poligraph, complétée par les décisions de justice et la presse. Définitives et non définitives sont séparées ; la présomption d'innocence s'applique aux secondes.</div></div></div>
+  <div class="box prompt" style="padding-bottom:20px"><div class="label">Indépendance</div><div class="answer sm">Swipe 2027 n'est lié à aucun parti ni candidat, et ne donne aucune consigne de vote. Une erreur, une source manquante ? Dis-le nous.</div><p class="note" style="margin:10px 0 0"><a href="/confidentialite.html">Confidentialité et données personnelles</a></p></div>`;
+  bindChart($("#info-body"));
+}
+$("#b-info").onclick=()=>{ renderInfo(); $("#info").classList.add("on"); $("#info-body").scrollTop=0; };
+$("#info-x").onclick=()=>$("#info").classList.remove("on");
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") $("#info").classList.remove("on"); });
 
 /* ================= démarrage ================= */
 if("serviceWorker" in navigator && location.protocol==="https:") navigator.serviceWorker.register("/sw.js").catch(()=>{});
