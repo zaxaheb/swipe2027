@@ -133,23 +133,35 @@ main{flex:1;overflow-y:auto;overflow-x:hidden;min-height:0;scroll-behavior:smoot
 .hbar .tr{position:relative}
 .hbar .cut{position:absolute;right:14px;top:-3px;bottom:-3px;width:7px;background:var(--card);transform:skewX(-20deg)}
 #info .msgs{max-width:560px}
-/* cartes repliables */
-.fold{padding:18px 20px}
-.fold .label{margin-bottom:8px}
-.fold .answer.sm{font-size:18px;line-height:1.38}
-details.fold>summary{list-style:none;cursor:pointer;display:block}
+/* cartes façon Hinge : carrées, question en petit, réponse en grand */
+.fold{padding:26px 24px 22px;border-radius:12px}
+details.fold:not([open])>summary,div.fold{min-height:min(84vw,380px);display:flex;flex-direction:column}
+details.fold>summary{list-style:none;cursor:pointer;display:flex;flex-direction:column}
 details.fold>summary::-webkit-details-marker{display:none}
-.more-btn{display:inline-flex;align-items:center;gap:4px;margin-top:10px;font:600 13px var(--sans);color:var(--muted)}
-.more-btn::after{content:"";width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .2s}
-details[open].fold .more-btn{font-size:0;margin:0}
-details[open].fold .more-btn::after{display:none}
-details[open].fold>summary{margin-bottom:4px}
-.det{border-top:1px solid var(--line);margin-top:12px;padding-top:4px}
-.det .item:first-child{padding-top:10px}
-.det-p{font:500 16px/1.5 var(--serif);margin:10px 0}
-.camps{display:flex;flex-wrap:wrap;gap:6px}
-.cnt{display:inline-block;min-width:20px;padding:1px 7px;border-radius:999px;background:var(--soft);font-size:12px;color:var(--muted);margin-left:4px;text-align:center}
-.fold .eco-big{margin:2px 0 0}
+.fold .label{font:700 16px/1.3 var(--sans);margin-bottom:14px;letter-spacing:-.01em}
+.fold .pv{flex:1;display:flex;flex-direction:column;justify-content:center}
+.fold .pv .answer.sm,.fold .pv .answer{font:600 clamp(24px,6.6vw,30px)/1.22 var(--serif);letter-spacing:-.01em;display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical;overflow:hidden}
+.fold .pv .item{border:0;padding:6px 0}
+.fold .pv .linkrow{font-size:21px;line-height:1.3}
+.fold .eco-big{font:600 clamp(40px,12vw,56px)/1.05 var(--serif);letter-spacing:-.02em;margin:0 0 6px}
+.more-btn{align-self:flex-start;margin-top:18px;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;background:var(--soft);font:600 14px var(--sans);color:var(--ink)}
+.more-btn::after{content:"";width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px)}
+details[open].fold .pv,details[open].fold .more-btn{display:none}
+details[open].fold>summary{margin-bottom:0}
+.det{padding-top:0}
+.det .item{padding:14px 0}
+.det .item:first-child{border-top:0;padding-top:4px}
+.det .txt{font-size:19px;line-height:1.4}
+.det-p{font:500 18px/1.5 var(--serif);margin:0 0 10px}
+.det-p.big{font:600 22px/1.35 var(--serif)}
+.det .eco-big{margin-bottom:12px}
+.camps{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.camps .badge{font-size:13px;padding:5px 11px}
+.cnt{display:inline-block;min-width:22px;padding:1px 8px;border-radius:999px;background:var(--soft);font-size:12px;color:var(--muted);margin-left:6px;text-align:center;vertical-align:1px}
+.axis{position:relative;height:28px}
+.axis-bar{position:absolute;left:0;right:0;top:11px;height:6px;border-radius:3px;background:linear-gradient(90deg,#c0392b,#e08a8a 30%,#d9d6d0 50%,#8fa5d9 70%,#1f3a9e)}
+.axis-dot{position:absolute;top:2px;width:24px;height:24px;margin-left:-12px;border-radius:50%;background:#111;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.axis-lbl{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);font-weight:600}
 /* toast */
 .toast{position:fixed;left:50%;top:18px;transform:translate(-50%,-80px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-weight:600;font-size:14px;z-index:30;transition:transform .25s;white-space:nowrap}
 .toast.on{transform:translate(-50%,0)}
@@ -549,7 +561,7 @@ function renderProfile(q){
   /* ===== cartes compactes : un résumé visible, le détail au toucher ===== */
   const one=(s,n=170)=>{ s=String(s||"").trim(); const m1=s.match(/^.+?[.!?](\s|$)/); let o=(m1?m1[0]:s).trim(); if(o.length>n) o=o.slice(0,n-1).replace(/\s+\S*$/,"")+"…"; return o; };
   const rest=(s)=>{ s=String(s||"").trim(); const f=one(s,10000); return s.length>f.length+2?s.slice(f.length).trim():""; };
-  const fold=(label,sum,det,cls="")=>det?`<details class="box prompt fold ${cls}"><summary><div class="label">${label}</div>${sum}<span class="more-btn">Voir plus</span></summary><div class="det">${det}</div></details>`:`<div class="box prompt fold ${cls}"><div class="label">${label}</div>${sum}</div>`;
+  const fold=(label,sum,det,cls="")=>det?`<details class="box prompt fold ${cls}"><summary><div class="label">${label}</div><div class="pv">${sum}</div><span class="more-btn">Voir plus</span></summary><div class="det">${det}</div></details>`:`<div class="box prompt fold ${cls}"><div class="label">${label}</div><div class="pv">${sum}</div></div>`;
   const items=(arr,f)=>arr.map(f).join("");
   const crit=c=>`<div class="item"><div class="who">${esc(c.camp||c.pays||c.qui||"")}${c.qui&&c.camp?" · "+esc(c.qui):""}</div><div class="txt">${esc(c.texte)}</div>${srcA(c)}</div>`;
   /* le débat en une phrase */
@@ -560,20 +572,20 @@ function renderProfile(q){
   const intro=(m.S.intro&&m.S.intro!==m.t+"."&&m.S.intro.length>40)?m.S.intro:"";
   if(F&&F.logique){ const L=F.logique, args=L.arguments||[];
     parts.push(fold(`Pourquoi ${esc(P.nom)} le propose`,`<div class="answer sm">${esc(one(L.texte))}</div>`,
-      (rest(L.texte)?`<p class="det-p">${esc(rest(L.texte))}</p>`:"")+items(args,a=>`<div class="item"><div class="txt">${esc(a.texte)}</div>${srcA(a)}</div>`)));
+      `<p class="det-p big">${esc(L.texte)}</p>`+items(args,a=>`<div class="item"><div class="txt">${esc(a.texte)}</div>${srcA(a)}</div>`)));
     const acc=L.accompagnement||[];
     const accRow=a=>`<div class="item">${a.id&&BYID[a.id]?`<button class="linkrow" data-open="${esc(a.id)}">${esc(a.texte)} <span class="note">→ voir</span></button>`:`<div class="txt">${esc(a.texte)}</div>${a.url?srcA({media:"Source",url:a.url}):""}`}</div>`;
-    if(acc.length) parts.push(fold(`Les mesures qui vont avec <span class="cnt">${acc.length}</span>`,items(acc.slice(0,2),accRow),acc.length>2?items(acc.slice(2),accRow):""));
+    if(acc.length) parts.push(fold(`Les mesures qui vont avec <span class="cnt">${acc.length}</span>`,items(acc.slice(0,2),accRow),acc.length>2?items(acc,accRow):""));
   } else {
     parts.push(fold(`Pourquoi ${esc(P.nom)} le propose`,intro?`<div class="answer sm">${esc(one(intro,200))}</div>`:`<div class="answer sm" style="color:var(--muted)">${esc(P.cand)} n'a pas encore détaillé ses arguments pour cette mesure.</div>`,
-      intro?(rest(intro)?`<p class="det-p">${esc(rest(intro))}</p>`:"")+`<p class="note">Texte du programme de ${esc(P.cand)}.</p>`:`<div>${srcA({media:"Voir la source de la mesure",url:m.src||m.S.url})}</div>`));
+      intro?(rest(intro)||one(intro,200).endsWith("…")?`<p class="det-p big">${esc(intro)}</p><p class="note">Texte du programme de ${esc(P.cand)}.</p>`:""):`<div>${srcA({media:"Voir la source de la mesure",url:m.src||m.S.url})}</div>`));
   }
   /* combien ça coûte */
   const euro=IC.euro.replace('<svg','<svg width="15" height="15" style="vertical-align:-2px;margin-right:5px"');
   if(F&&F.eco){ const e=F.eco;
     parts.push(fold(`${euro}Combien ça coûte ?`,`<div class="eco-big">${esc(e.chiffre||"Non chiffré")}</div>`,
-      `<div class="eco-row"><div class="k">Coût</div><div class="v">${esc(e.cout||"—")}</div></div><div class="eco-row"><div class="k">Financement</div><div class="v">${esc(e.financement||"—")}</div></div><div class="eco-row"><div class="k">Rapporte</div><div class="v">${esc(e.rapporte||"—")}</div></div>${(e.sources||[]).map(srcA).join(" ")}<p class="note" style="margin:10px 0 0">Vue d'ensemble : ${esc(P.eco)}</p>`));
-  } else parts.push(fold(`${euro}Combien ça coûte ?`,`<div class="answer sm" style="color:var(--muted)">Pas encore chiffrée dans l'app.</div>`,`<p class="note" style="margin:0">Vue d'ensemble : ${esc(P.eco)} <a href="${esc(P.ecoUrl)}" target="_blank" rel="noopener">Source ↗</a></p>`));
+      `<div class="eco-big">${esc(e.chiffre||"Non chiffré")}</div><div class="eco-row"><div class="k">Coût</div><div class="v">${esc(e.cout||"—")}</div></div><div class="eco-row"><div class="k">Financement</div><div class="v">${esc(e.financement||"—")}</div></div><div class="eco-row"><div class="k">Rapporte</div><div class="v">${esc(e.rapporte||"—")}</div></div>${(e.sources||[]).map(srcA).join(" ")}<p class="note" style="margin:10px 0 0">Vue d'ensemble : ${esc(P.eco)}</p>`));
+  } else parts.push(fold(`${euro}Combien ça coûte ?`,`<div class="answer sm" style="color:var(--muted)">Pas encore chiffrée dans l'app.</div>`,`<div class="answer sm" style="color:var(--muted)">Pas encore chiffrée dans l'app.</div><p class="note" style="margin:10px 0 0">Vue d'ensemble : ${esc(P.eco)} <a href="${esc(P.ecoUrl)}" target="_blank" rel="noopener">Source ↗</a></p>`));
   if(F){
     /* critiques : camps en pastilles + la première en une phrase */
     const C=F.critiques||[], camps=[...new Set(C.map(c=>c.camp).filter(Boolean))];
@@ -597,8 +609,8 @@ function renderProfile(q){
   if(F&&F.genere) plus.push(`<p class="note">Fiche générée le ${esc(F.maj)} par IA à partir de recherches web. Vérifie les sources.</p>`);
   if(plus.length) parts.push(fold(`En savoir plus`,`<div class="answer sm" style="color:var(--muted)">Texte du programme, mesures proches, mesures voisines.</div>`,plus.join("")));
   /* débattre */
-  parts.push(`<div class="box prompt fold" style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap"><div class="label" style="margin:0">Une question sur cette mesure ?</div><div><button class="cta" id="b-chat">${IC.chat.replace('<svg','<svg width="18" height="18"')}Ouvrir la discussion</button></div></div>`);
-  parts.push(`<div class="box prompt fold" id="rq-box"><div class="label">Une erreur, un oubli ?</div><p class="note" style="margin:0">Signale une erreur, une source manquante ou un point de vue absent.</p>
+  parts.push(`<div class="box prompt" style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap"><div class="label" style="margin:0">Une question sur cette mesure ?</div><div><button class="cta" id="b-chat">${IC.chat.replace('<svg','<svg width="18" height="18"')}Ouvrir la discussion</button></div></div>`);
+  parts.push(`<div class="box prompt" id="rq-box" style="padding:22px 24px"><div class="label">Une erreur, un oubli ?</div><p class="note" style="margin:0">Signale une erreur, une source manquante ou un point de vue absent.</p>
     <div style="margin-top:12px"><button class="cta ghost" id="b-rq">Faire une remarque</button></div>
     <form id="f-rq" hidden style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
       <div class="chips" style="padding:0" id="rq-type">${[["erreur","Erreur"],["source","Source manquante"],["point_de_vue","Point de vue absent"],["mesure","Le texte de la mesure"],["autre","Autre"]].map(([k,l],i)=>`<button type="button" class="chip" data-t="${k}" aria-pressed="${i===0}">${l}</button>`).join("")}</div>
@@ -746,6 +758,39 @@ function bindChart(root){
   root.querySelectorAll(".hbar").forEach(b=>b.onclick=()=>{ FILTER=b.dataset.p; store.set("f2027b",FILTER); $$("#f-chips .chip").forEach(x=>x.setAttribute("aria-pressed",x.dataset.f===FILTER)); $("#info").classList.remove("on"); location.hash="swipe"; nextProfile(); });
 }
 
+/* ===== radar : proximité avec chaque famille politique ===== */
+const FAMILLES=[
+  {k:"eg",l:"Extrême gauche",x:-3,P:["ARTHAUD","KAZIB","LABIB"]},
+  {k:"gr",l:"Gauche radicale",x:-2,P:["LFI","ROUSSEL","RUFFIN"]},
+  {k:"eco",l:"Écologistes",x:-1.5,P:["TONDELIER","BATHO"]},
+  {k:"g",l:"Gauche",x:-1,P:["GLUCKSMANN","BOUAMRANE","CAZENEUVE"]},
+  {k:"c",l:"Centre",x:0.3,P:["ATTAL","PHILIPPE","BECHT"]},
+  {k:"d",l:"Droite",x:1.3,P:["RETAILLEAU","BERTRAND","LISNARD"]},
+  {k:"souv",l:"Souverainistes",x:2,P:["DUPONTAIGNAN","PHILIPPOT","ASSELINEAU"]},
+  {k:"ed",l:"Extrême droite",x:2.6,P:["RN","ZEMMOUR"]}];
+function radarHTML(pour,contre){
+  const st=FAMILLES.map(f=>{ const a=pour.filter(k=>f.P.includes(BYID[k].P)).length, b=contre.filter(k=>f.P.includes(BYID[k].P)).length; return {...f,a,b,t:a+b,p:a+b?a/(a+b):null}; });
+  const ok=st.filter(s=>s.t>=3);
+  if(ok.length<3) return `<div class="box prompt" style="padding-bottom:22px"><div class="label">Ton radar politique</div><div class="answer sm">Réponds à des mesures d'au moins 3 familles politiques (3 réponses chacune) pour voir ton radar.</div><p class="note" style="margin:10px 0 0">Astuce : le fil alterne les candidats, continue à swiper.</p></div>`;
+  const W=340,cx=170,cy=165,R=104,n=st.length, pt=(i,r)=>{ const a=-Math.PI/2+2*Math.PI*i/n; return [cx+r*Math.cos(a),cy+r*Math.sin(a)]; };
+  const grid=[.25,.5,.75,1].map(g=>`<polygon points="${st.map((_,i)=>pt(i,R*g).join(",")).join(" ")}" fill="none" stroke="var(--line)" stroke-width="1"/>`).join("");
+  const axes=st.map((_,i)=>{ const [x,y]=pt(i,R); return `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="var(--line)"/>`; }).join("");
+  const poly=st.map((s,i)=>pt(i,R*(s.p??0)).join(",")).join(" ");
+  const dots=st.map((s,i)=>{ if(s.p==null||s.t<3) return ""; const [x,y]=pt(i,R*s.p); return `<circle cx="${x}" cy="${y}" r="5" fill="var(--brand)" stroke="#fff" stroke-width="2"><title>${s.l} : ${Math.round(100*s.p)} % d'accord sur ${s.t} mesures</title></circle>`; }).join("");
+  const labels=st.map((s,i)=>{ const [x,y]=pt(i,R+26), anc=Math.abs(x-cx)<8?"middle":x>cx?"start":"end"; return `<text x="${x}" y="${y}" text-anchor="${anc}" dominant-baseline="middle" font-size="12" font-weight="600" fill="${s.t>=3?"var(--ink)":"var(--muted)"}">${s.l}</text><text x="${x}" y="${y+14}" text-anchor="${anc}" dominant-baseline="middle" font-size="11" fill="var(--muted)">${s.t>=3?Math.round(100*s.p)+" %":s.t?"trop peu":"—"}</text>`; }).join("");
+  // position gauche-droite : moyenne des familles pondérée par l'accord (au-dessus de 50 %) et le nombre de réponses
+  let sw=0,sx=0; ok.forEach(s=>{ const w=Math.max(0,s.p-0.35)*Math.sqrt(s.t); sw+=w; sx+=w*s.x; });
+  const pos=sw?sx/sw:0, pct=Math.round((pos+3)/6*100);
+  const near=ok.slice().sort((a,b)=>b.p-a.p||b.t-a.t)[0];
+  return `<div class="box prompt" style="padding-bottom:22px"><div class="label">Ton radar politique</div>
+   <p class="note" style="margin:-6px 0 6px">Ton taux d'accord avec les propositions de chaque famille politique.</p>
+   <svg viewBox="-62 0 ${W+124} 330" width="100%" style="overflow:visible" role="img" aria-label="Radar de proximité politique">${grid}${axes}<polygon points="${poly}" fill="var(--brand)" fill-opacity=".16" stroke="var(--brand)" stroke-width="2.5" stroke-linejoin="round"/>${dots}${labels}</svg>
+   <div class="label" style="margin:14px 0 8px">Ta position sur l'échiquier</div>
+   <div class="axis"><span class="axis-bar"></span><span class="axis-dot" style="left:${pct}%"></span></div>
+   <div class="axis-lbl"><span>Gauche</span><span>Centre</span><span>Droite</span></div>
+   <p class="answer sm" style="margin:14px 0 0">Tu es le plus souvent d'accord avec : <b>${esc(near.l)}</b> (${Math.round(100*near.p)} %).</p>
+   <p class="note" style="margin:10px 0 0">Estimation indicative, calculée sur ${ok.reduce((s,x)=>s+x.t,0)} réponses : elle change avec les mesures que tu vois. Le classement des candidats par famille suit les usages de la presse et ne juge personne. Les familles grisées n'ont pas encore assez de réponses.</p></div>`;
+}
 function renderProfil(){
   const ids=Object.keys(SW).filter(k=>BYID[k]), pour=ids.filter(k=>SW[k]===1), contre=ids.filter(k=>SW[k]===-1), passe=ids.filter(k=>SW[k]===0);
   const p=$("#profil");
@@ -761,6 +806,7 @@ function renderProfil(){
   p.innerHTML=`<h2 class="ptitle">Ton profil</h2><p class="psub">${ids.length} mesures vues sur ${M.length} · ${pour.length} pour · ${contre.length} contre · ${passe.length} sans avis</p>
   <div class="profile" style="animation:none">
   ${accountHTML()}
+  ${radarHTML(pour,contre)}
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">${PKEYS.slice().sort((a,b)=>(S[b].p??-1)-(S[a].p??-1)).map(tile).join("")}</div>
   <p class="note" style="margin:0">Les programmes n'ont pas tous la même taille : LFI a publié un programme complet (plus de 1 000 mesures), les autres candidats n'ont pour l'instant annoncé que quelques dizaines de propositions. Un score sur peu de mesures est moins solide.</p>
   ${secs.length?`<div class="box prompt" style="padding-bottom:22px"><div class="label">Là où tu adhères le plus</div>${top.map(x=>`<div class="item"><div class="txt">${esc(x.s)} <span class="note">${x.p}% sur ${x.t}</span></div></div>`).join("")}</div>

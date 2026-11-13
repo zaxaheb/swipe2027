@@ -56,6 +56,7 @@ export default async function handler(req, res) {
     if (mode !== "profil") await insert("chats", { mode, mesure_id: mode === "mesure" ? String(mesureId).slice(0, 160) : null, question: msgs[msgs.length - 1].content.slice(0, 1000), reponse: text.slice(0, 3000), v: PROMPT_VERSION }).catch(() => {});
     res.status(200).json({ text, v: PROMPT_VERSION });
   } catch (e) {
-    res.status(e.status || 500).json({ error: e.status === 429 ? "rate_limited" : "erreur" });
+    console.error("chat:", e.message);   // visible dans Vercel > Logs
+    res.status(e.status || 500).json({ error: e.status === 429 ? "rate_limited" : "erreur", detail: String(e.message || "").replace(/sk-ant-[\w-]+/g, "***").slice(0, 200) });
   }
 }
