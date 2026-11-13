@@ -533,7 +533,12 @@ function renderProfile(q){
   if(F) parts.push(`<div class="box prompt"><div class="label">Le débat en une phrase</div><div class="answer">${esc(F.resume)}</div></div>`);
   /* sous-points */
   if(m.sous.length) parts.push(`<div class="box photo small" style="background:${gradOf(m)};filter:saturate(.85) brightness(.95)"><ul>${m.sous.map(s=>`<li>${esc(s)}</li>`).join("")}</ul></div>`);
-  /* le raisonnement du candidat */
+  /* le raisonnement du candidat : toujours affiché */
+  if(!(F&&F.logique)){ const intro=(m.S.intro&&m.S.intro!==m.t+"."&&m.S.intro.length>40)?m.S.intro:""; const long=intro.length>600;
+    parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">Pourquoi ${esc(P.nom)} le propose</div>${intro
+      ?`<div class="intro ${long?"clamp":""}" id="intro">${esc(intro)}</div>${long?'<button class="linkbtn" id="b-intro">Lire tout</button>':""}<p class="note" style="margin:10px 0 0">Texte du programme de ${esc(P.cand)}.</p>`
+      :`<div class="answer sm" style="color:var(--muted)">${esc(P.cand)} n'a pas encore détaillé ses arguments pour cette mesure dans nos sources.</div><div style="margin-top:8px">${srcA({media:"Voir la source de la mesure",url:m.src||m.S.url})}</div>`}
+      ${F?"":`<p class="note" style="margin:10px 0 0">La fiche complète, avec les arguments détaillés, les mesures qui vont avec et les critiques, peut être générée plus bas.</p>`}</div>`); }
   if(F&&F.logique){ const L=F.logique;
     parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">Pourquoi ${esc(P.nom)} le propose</div><div class="answer sm">${esc(L.texte||"")}</div>
       ${(L.arguments||[]).map(a=>`<div class="item"><div class="txt" style="font-size:16px">${esc(a.texte)}</div>${srcA(a)}</div>`).join("")}</div>`);
@@ -549,9 +554,6 @@ function renderProfile(q){
       <div class="eco-row"><div class="k">Rapporte</div><div class="v">${esc(e.rapporte||"—")}</div></div>
       ${(e.sources||[]).map(srcA).join(" ")}<p class="note" style="margin:12px 0 0">Vue d'ensemble : ${esc(P.eco)}</p></div>`); }
   else parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">${IC.euro.replace('<svg','<svg width="16" height="16" style="vertical-align:-3px;margin-right:6px"')}Combien ça coûte ?</div><div class="answer sm" style="color:var(--muted)">Cette mesure n'est pas encore chiffrée dans l'app.</div><p class="note" style="margin:12px 0 0">Vue d'ensemble : ${esc(P.eco)} <a href="${esc(P.ecoUrl)}" target="_blank" rel="noopener">Source ↗</a></p></div>`);
-  /* contexte du parti (plus de détails) */
-  if(m.S.intro&&m.S.intro!==m.t+"."&&m.S.intro.length>40){ const long=m.S.intro.length>600;
-    parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">Le contexte selon ${esc(P.nom)}</div><div class="intro ${long?"clamp":""}" id="intro">${esc(m.S.intro)}</div>${long?'<button class="linkbtn" id="b-intro">Lire tout</button>':""}</div>`); }
   /* critiques */
   if(F){ parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">Ce qu'en disent les autres</div>${F.critiques.map(c=>`<div class="item"><div class="who">${esc(c.camp)}${c.qui?" · "+esc(c.qui):""}</div><div class="txt">${esc(c.texte)}</div>${srcA(c)}</div>`).join("")}</div>`);
     if(F.reponses.length) parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">Leur réponse</div>${F.reponses.map(c=>`<div class="item"><div class="who">${esc(c.qui)}</div><div class="txt">${esc(c.texte)}</div>${srcA(c)}</div>`).join("")}</div>`);
