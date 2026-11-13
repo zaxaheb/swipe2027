@@ -776,8 +776,11 @@ $("#cv-form").onsubmit=async e=>{ e.preventDefault(); const q=$("#cv-in").value.
   out.innerHTML=`<div class="steps"></div><div class="body caret"></div>`;
   const stepsEl=out.querySelector(".steps"), bodyEl=out.querySelector(".body");
   const addStep=(ic,txt,run)=>{ stepsEl.querySelectorAll(".step.run").forEach(s=>{ s.classList.remove("run"); s.querySelector(".ic").textContent="✓"; }); const d=document.createElement("div"); d.className="step"+(run?" run":""); d.innerHTML=`<span class="ic">${run?"◌":ic}</span><span>${txt}</span>`; stepsEl.appendChild(d); box.scrollTop=1e9; };
-  let txt="", raf=0;
-  const paint=()=>{ raf=0; bodyEl.innerHTML=md(txt); box.scrollTop=1e9; };
+  let txt="", shown=0, raf=0, ended=false, fin=null;
+  /* Affichage progressif : l'API envoie parfois le texte par gros paquets, on le déroule à vitesse régulière. */
+  const paint=()=>{ raf=0; const back=txt.length-shown; shown+=Math.max(2,Math.ceil(back/25)); if(shown>txt.length) shown=txt.length;
+    bodyEl.innerHTML=md(txt.slice(0,shown)); box.scrollTop=1e9;
+    if(shown<txt.length) raf=setTimeout(paint,16); else if(ended&&fin) fin(); };
   try{
     if(!API) throw Object.assign(new Error("off"),{code:"off"});
     let r; try{ r=await fetch(API+"/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({...payload,stream:true})}); }catch(e){ throw Object.assign(new Error("off"),{code:"off"}); }
@@ -787,12 +790,13 @@ $("#cv-form").onsubmit=async e=>{ e.preventDefault(); const q=$("#cv-in").value.
       while((i=buf.indexOf("\n\n"))>=0){ const line=buf.slice(0,i); buf=buf.slice(i+2); if(!line.startsWith("data: ")) continue; let ev; try{ ev=JSON.parse(line.slice(6)); }catch(e){ continue; }
         if(ev.type==="step") addStep("✓",esc(ev.label),true);
         else if(ev.type==="search") addStep("🔎",`Recherche web : « ${esc(ev.query)} »`,true);
-        else if(ev.type==="results") addStep("📄",`${ev.n} résultat${ev.n>1?"s":""}${ev.sites.length?" · "+esc(ev.sites.join(", ")):""}`,false);
-        else if(ev.type==="text"){ if(!txt) addStep("✍️","Rédaction de la réponse",false); txt+=ev.delta; if(!raf) raf=requestAnimationFrame(paint); }
+        else if(ev.type==="results"){ addStep("📄",`${ev.n} résultat${ev.n>1?"s":""}${ev.sites.length?" · "+esc(ev.sites.join(", ")):""}`,false); addStep("","Lecture des sources",true); }
+        else if(ev.type==="text"){ if(!txt) addStep("✍️","Rédaction de la réponse",false); txt+=ev.delta; if(!raf) raf=setTimeout(paint,16); }
         else if(ev.type==="error") throw Object.assign(new Error("x"),{code:ev.error==="indisponible"?"indispo":"http"});
         else if(ev.type==="done") done=true; } }
     stepsEl.querySelectorAll(".step.run").forEach(s=>{ s.classList.remove("run"); s.querySelector(".ic").textContent="✓"; });
-    paint(); bodyEl.classList.remove("caret");
+    ended=true; if(shown<txt.length) await new Promise(res=>{ fin=res; if(!raf) raf=setTimeout(paint,16); });
+    bodyEl.innerHTML=md(txt); bodyEl.classList.remove("caret"); box.scrollTop=1e9;
     if(!txt) throw Object.assign(new Error("vide"),{code:"http"});
     H.push({role:"assistant",content:txt}); store.set("chats2027",CHATS);
   }
