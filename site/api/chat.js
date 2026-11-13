@@ -57,6 +57,7 @@ export default async function handler(req, res) {
     res.status(200).json({ text, v: PROMPT_VERSION });
   } catch (e) {
     console.error("chat:", e.message);   // visible dans Vercel > Logs
-    res.status(e.status || 500).json({ error: e.status === 429 ? "rate_limited" : "erreur", detail: String(e.message || "").replace(/sk-ant-[\w-]+/g, "***").slice(0, 200) });
+    const credit = /credit balance/i.test(String(e.message));
+    res.status(credit ? 503 : e.status || 500).json({ error: credit ? "indisponible" : e.status === 429 ? "rate_limited" : "erreur", detail: String(e.message || "").replace(/sk-ant-[\w-]+/g, "***").slice(0, 200) });
   }
 }
