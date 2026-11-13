@@ -25,7 +25,7 @@ export default async function handler(req, res) {
   try {
     if (!(await consume(req, "fiche"))) return res.status(429).json({ error: "quota" });
     const tools = [
-      { type: "web_search_20250305", name: "web_search", max_uses: 6 },
+      { type: "web_search_20250305", name: "web_search", max_uses: Number(process.env.FICHE_MAX_SEARCHES || 3) },
       { name: "enregistrer_fiche", description: "Enregistre la fiche sourcée finale. À appeler une seule fois, à la fin.", input_schema: FICHE }
     ];
     const msgs = [{ role: "user", content: ficheUser(m) }];
