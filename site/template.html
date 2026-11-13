@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>Swipe 2027</title>
+<meta name="description" content="Swipe les propositions des candidats à la présidentielle 2027, avec leurs critiques, leur coût et les votes à l'Assemblée.">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icons/icon-192.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Swipe 2027">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Hinge-like : fond blanc, cartes arrondies empilées en scroll vertical, cœur sur chaque carte, X flottant, barre noire en bas */
+  --bg:#ffffff; --card:#ffffff; --soft:#f4f2ef; --ink:#111111; --muted:#6b6b6b; --line:#e8e6e2;
+  --brand:#7a3cff; --like:#e8455f; --pour:#1e8f55; --contre:#d63d36; --abst:#9a9a9a; --ia:#a3670b; --ia-soft:#fff3dd;
+  --serif:"Newsreader", Georgia, "Times New Roman", serif;
+  --sans:"DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --r:10px; --nav:64px;
+  --safe-b:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.45 var(--sans);display:flex;flex-direction:column;overflow:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none;padding:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+h1,h2,h3{margin:0;text-wrap:balance}
+main{flex:1;overflow-y:auto;overflow-x:hidden;min-height:0;scroll-behavior:smooth}
+.view{display:none;max-width:520px;margin:0 auto;padding:0 16px calc(110px + var(--safe-b))}
+.view.on{display:block}
+
+/* ---------- barre du haut ---------- */
+.topbar{position:sticky;top:0;z-index:5;background:var(--bg);display:flex;align-items:center;justify-content:space-between;padding:14px 0 10px}
+.topbar h1{font:700 26px/1 var(--sans);letter-spacing:-.03em}
+.topbar .tools{display:flex;gap:8px}
+.iconbtn{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--soft)}
+.iconbtn svg{width:20px;height:20px}
+
+/* ---------- profil (une mesure) ---------- */
+.profile{display:flex;flex-direction:column;gap:14px;animation:in .35s ease}
+@keyframes in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.ph-name{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;padding:6px 2px 0}
+.ph-name h2{font:700 30px/1.08 var(--sans);letter-spacing:-.02em}
+.ph-name .kicker{font-size:13px;color:var(--muted);font-weight:500;margin-bottom:4px}
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--soft);white-space:nowrap}
+.badge.brand{background:#efe8ff;color:var(--brand)}
+.badge.ok{background:#e4f4ea;color:var(--pour)}
+.badge.ia{background:var(--ia-soft);color:var(--ia)}
+.box{position:relative;background:var(--card);border-radius:var(--r);border:1px solid var(--line)}
+.photo{min-height:400px;border:0;color:#fff;padding:26px 22px 30px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+.photo .q{font:600 clamp(25px,6.6vw,32px)/1.18 var(--serif);letter-spacing:-.01em}
+.photo .over{position:absolute;top:18px;left:18px;right:18px;display:flex;gap:6px;flex-wrap:wrap}
+.photo .over .badge{background:rgba(255,255,255,.22);color:#fff;backdrop-filter:blur(6px)}
+.photo.small{min-height:260px}
+.photo ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font:500 18px/1.35 var(--serif)}
+.photo ul li::before{content:"— ";opacity:.7}
+.prompt{padding:26px 22px 22px}
+.prompt .label{font-size:15px;font-weight:600;margin-bottom:12px}
+.prompt .answer{font:500 24px/1.28 var(--serif);letter-spacing:-.005em}
+.prompt .answer.sm{font-size:19px;line-height:1.4}
+.prompt p{margin:0 0 10px}
+.prompt .src{display:inline-block;margin-top:8px;font:500 13px var(--sans);color:var(--muted);text-decoration:underline;text-underline-offset:2px}
+.heart{position:absolute;right:14px;bottom:14px;width:46px;height:46px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 2px 10px rgba(0,0,0,.14);color:var(--like);transition:transform .15s}
+.heart svg{width:24px;height:24px}
+.heart:active{transform:scale(.88)}
+.heart.on{background:var(--like);color:#fff}
+.vitals{display:flex;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--line)}
+.vitals::-webkit-scrollbar{display:none}
+.vital{display:flex;align-items:center;gap:8px;padding:16px 18px;white-space:nowrap;font-weight:500;font-size:15px;border-right:1px solid var(--line)}
+.vital:last-child{border-right:0}
+.vital svg{width:20px;height:20px;flex:none}
+.vrow{display:flex;align-items:center;gap:12px;padding:15px 18px;border-bottom:1px solid var(--line);font-size:15px}
+.vrow:last-child{border-bottom:0}
+.vrow svg{width:20px;height:20px;flex:none}
+.vrow a{text-decoration:underline;text-underline-offset:2px}
+.item{padding:14px 0;border-top:1px solid var(--line)}
+.item:first-of-type{border-top:0;padding-top:0}
+.item .who{font:600 13px var(--sans);color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.item .txt{font:500 18px/1.38 var(--serif)}
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--ink);color:#fff;border-radius:999px;padding:13px 22px;font-weight:600;font-size:15px}
+.cta.ghost{background:var(--soft);color:var(--ink)}
+.cta[disabled]{opacity:.5}
+.note{font-size:13px;color:var(--muted)}
+.endrow{display:flex;justify-content:center;gap:10px;padding:8px 0 4px}
+
+/* barre d'action : croix et cœur au centre, retour et passer discrets */
+.actbar{position:fixed;z-index:6;left:0;right:0;bottom:calc(var(--nav) + 14px + var(--safe-b));display:flex;justify-content:center;align-items:center;gap:22px;pointer-events:none}
+.actbar.hidden{display:none}
+.actbar button{pointer-events:auto;display:grid;place-items:center;border-radius:50%;background:#fff;box-shadow:0 4px 18px rgba(0,0,0,.16)}
+.actbar .big{width:68px;height:68px}
+.actbar .big svg{width:30px;height:30px}
+.actbar .no{color:#111}
+.actbar .yes{background:var(--like);color:#fff}
+.actbar .sm{width:42px;height:42px;background:rgba(255,255,255,.92);box-shadow:0 2px 8px rgba(0,0,0,.10);color:var(--muted)}
+.actbar .sm svg{width:18px;height:18px}
+.actbar .sm[disabled]{opacity:.35}
+.actbar button:active{transform:scale(.92)}
+.flash{position:fixed;inset:0;z-index:25;display:grid;place-items:center;pointer-events:none;opacity:0}
+.flash.on{animation:fl .5s ease}
+.flash svg{width:120px;height:120px;filter:drop-shadow(0 6px 20px rgba(0,0,0,.25))}
+@keyframes fl{0%{opacity:0;transform:scale(.6)}35%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.1)}}
+.eco-big{font:600 28px/1.1 var(--serif);letter-spacing:-.01em;margin-bottom:6px}
+.eco-row{display:grid;grid-template-columns:96px 1fr;gap:10px;padding:12px 0;border-top:1px solid var(--line)}
+.eco-row .k{font:600 13px var(--sans);color:var(--muted);text-transform:uppercase;letter-spacing:.04em;padding-top:3px}
+.eco-row .v{font:500 17px/1.38 var(--serif)}
+.sib{display:flex;flex-direction:column}
+.sib div{padding:10px 0;border-top:1px solid var(--line);font:500 16px/1.35 var(--serif)}
+.sib div.cur{font-weight:600}
+.sib div.cur::before{content:"● ";color:var(--brand)}
+.intro{font:500 17px/1.5 var(--serif);white-space:pre-line}
+.clamp{display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical;overflow:hidden}
+.linkbtn{font:600 14px var(--sans);text-decoration:underline;text-underline-offset:2px;margin-top:8px}
+.badge.lfi{background:#ffe6e1;color:#b8321c}
+.badge.rn{background:#e3e9ff;color:#1f3a9e}
+.badge.hor{background:#dff3f5;color:#0b6774}.badge.ren{background:#fdf1d6;color:#8a5a00}.badge.ps{background:#fde4ec;color:#a3164c}.badge.lr{background:#e2ebf8;color:#173f7a}
+.photo .over .badge.hor,.photo .over .badge.ren,.photo .over .badge.ps,.photo .over .badge.lr{background:#fff}
+.photo .over .badge.lfi{background:#fff;color:#b8321c}.photo .over .badge.rn{background:#fff;color:#1f3a9e}
+.hbar{display:grid;grid-template-columns:128px 1fr 44px;gap:8px;align-items:center;font-size:13px;padding:3px 0;width:100%;text-align:left}
+.hbar .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500}
+.hbar .tr{height:14px;background:var(--soft);border-radius:0 4px 4px 0}
+.hbar .tr i{display:block;height:100%;border-radius:0 4px 4px 0;min-width:2px}
+.hbar .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted);font-weight:600}
+.hbar:hover .nm{text-decoration:underline}
+/* toast */
+.toast{position:fixed;left:50%;top:18px;transform:translate(-50%,-80px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-weight:600;font-size:14px;z-index:30;transition:transform .25s;white-space:nowrap}
+.toast.on{transform:translate(-50%,0)}
+
+/* ---------- nav ---------- */
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:7;background:#000;color:#fff;height:calc(var(--nav) + var(--safe-b));padding-bottom:var(--safe-b);display:flex;justify-content:center}
+nav.tabs .in{display:grid;grid-template-columns:repeat(5,1fr);width:100%;max-width:520px}
+nav.tabs button{display:grid;place-items:center;color:#8d8d8d;position:relative}
+nav.tabs button svg{width:26px;height:26px}
+nav.tabs button[aria-current="page"]{color:#fff}
+nav.tabs .dot{position:absolute;top:14px;right:calc(50% - 18px);width:8px;height:8px;border-radius:50%;background:var(--like);display:none}
+
+/* ---------- écrans secondaires ---------- */
+.ptitle{font:700 30px/1.1 var(--sans);letter-spacing:-.02em;padding:14px 0 4px}
+.psub{color:var(--muted);font-size:14px;margin:0 0 16px}
+.field{width:100%;padding:13px 16px;border:1px solid var(--line);border-radius:999px;background:var(--soft);outline:none}
+.field:focus{border-color:var(--ink)}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:12px 0}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:8px 14px;border-radius:999px;border:1px solid var(--line);font-weight:600;font-size:14px;background:#fff}
+.chip[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.list{display:flex;flex-direction:column;gap:12px}
+.lcard{padding:18px;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+.lcard .meta{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:13px;color:var(--muted);margin-bottom:8px}
+.lcard .t{font:500 19px/1.32 var(--serif)}
+.lcard .s{font-size:14px;color:var(--muted);margin-top:6px}
+.gchips{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
+.gc{font-size:12px;font-weight:700;padding:4px 8px;border-radius:6px}
+.gc.pour{background:#e4f4ea;color:var(--pour)}
+.gc.contre{background:#fbe7e6;color:var(--contre)}
+.gc.abstention{background:var(--soft);color:var(--muted)}
+.gc.none{background:#fff;color:#bbb;border:1px dashed #ddd}
+.gc.dim{opacity:.3}
+.legend{display:flex;gap:12px;font-size:12px;color:var(--muted);flex-wrap:wrap}
+.legend b{font-weight:700}
+details.lcard summary{list-style:none;cursor:pointer}
+details.lcard summary::-webkit-details-marker{display:none}
+.more{display:block;margin:16px auto 0}
+.empty{text-align:center;padding:40px 10px;color:var(--muted)}
+.warn{background:var(--ia-soft);border-radius:var(--r);padding:14px 16px;font-size:14px;margin-bottom:6px}
+
+/* matrice */
+.matrix{overflow-x:auto;margin:0 -4px}
+.matrix table{border-collapse:separate;border-spacing:3px;font-size:11px;font-variant-numeric:tabular-nums}
+.matrix th{font-weight:700;color:var(--muted);padding:2px 3px}
+.matrix td{min-width:34px;height:30px;text-align:center;border-radius:6px;font-weight:700}
+
+/* barres */
+.bars{display:flex;flex-direction:column;gap:10px}
+.bar{display:grid;grid-template-columns:118px 1fr 48px;gap:10px;align-items:center;font-size:14px}
+.bar .track{height:12px;display:flex;gap:2px;background:var(--soft);border-radius:6px;overflow:hidden}
+.bar .track i{display:block;height:100%}
+.bar .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px}
+
+/* chat */
+.threads{display:flex;flex-direction:column}
+.thread{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line);text-align:left;width:100%}
+.av{width:56px;height:56px;border-radius:50%;flex:none;display:grid;place-items:center;color:#fff;font:600 20px var(--serif)}
+.thread .n{font-weight:700}
+.thread .l{color:var(--muted);font-size:14px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.convo{position:fixed;inset:0;z-index:20;background:#fff;display:none;flex-direction:column}
+.convo.on{display:flex}
+.convo header{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.convo header .n{font-weight:700;flex:1;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:8px;max-width:620px;width:100%;margin:0 auto}
+.quote{align-self:center;max-width:90%;background:var(--soft);border-radius:var(--r);padding:12px 14px;font:500 15px/1.4 var(--serif);color:var(--ink);margin-bottom:8px}
+.msg{max-width:82%;padding:10px 14px;border-radius:20px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px}
+.msg.u{align-self:flex-end;background:var(--brand);color:#fff;border-bottom-right-radius:6px}
+.msg.a{align-self:flex-start;background:var(--soft);border-bottom-left-radius:6px}
+.sugg{display:flex;gap:8px;overflow-x:auto;padding:4px 16px 8px;scrollbar-width:none;max-width:620px;width:100%;margin:0 auto}
+.sugg button{flex:none;border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:14px;font-weight:500}
+.composer{display:flex;gap:8px;padding:10px 16px calc(10px + var(--safe-b));border-top:1px solid var(--line);max-width:620px;width:100%;margin:0 auto}
+.composer input{flex:1}
+.send{width:46px;height:46px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;flex:none}
+.send svg{width:20px;height:20px}
+
+/* profil utilisateur */
+.score{font:600 64px/1 var(--serif);letter-spacing:-.03em}
+.liked{display:flex;flex-direction:column;gap:10px}
+.liked .row{display:flex;gap:10px;align-items:flex-start;font:500 16px/1.35 var(--serif)}
+.liked .row b{font:700 12px var(--sans);padding:3px 8px;border-radius:6px;flex:none;margin-top:2px}
+.confirm{display:none;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.confirm.on{display:flex}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<main id="main">
+
+<!-- ========== DÉCOUVRIR ========== -->
+<section class="view" id="v-swipe">
+  <div class="topbar">
+    <h1>Swipe 2027</h1>
+    <div class="tools">
+      <button class="iconbtn" id="b-filter" aria-label="Filtrer les mesures"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg></button>
+    </div>
+  </div>
+  <div id="filters" hidden>
+    <div class="chips" id="f-chips"></div>
+  </div>
+  <div id="feed"></div>
+</section>
+
+<!-- ========== VOTES ========== -->
+<section class="view" id="v-votes">
+  <h2 class="ptitle">À l'Assemblée</h2>
+  <p class="psub" id="votes-intro"></p>
+  <div class="box prompt" style="padding-bottom:22px">
+    <div class="label">Qui vote avec qui ?</div>
+    <p class="note" style="margin:0 0 12px">Part des votes clés où deux groupes ont eu la même position majoritaire.</p>
+    <div class="matrix" id="matrix"></div>
+  </div>
+  <div style="height:16px"></div>
+  <input id="v-q" class="field" placeholder="Chercher : retraites, budget, censure…" autocomplete="off">
+  <div class="chips" id="v-type">
+    <button class="chip" aria-pressed="true" data-t="all">Tous</button>
+    <button class="chip" aria-pressed="false" data-t="MOC">Motions de censure</button>
+    <button class="chip" aria-pressed="false" data-t="adopte">Adoptés</button>
+    <button class="chip" aria-pressed="false" data-t="rejete">Rejetés</button>
+  </div>
+  <div class="chips" id="v-g" style="padding-top:0"></div>
+  <div class="legend" style="margin-bottom:12px"><span><b style="color:var(--pour)">P</b> pour</span><span><b style="color:var(--contre)">C</b> contre</span><span><b>A</b> abstention</span><span>Position majoritaire de chaque groupe</span></div>
+  <div class="list" id="v-list"></div>
+  <button class="cta ghost more" id="v-more">Voir plus</button>
+</section>
+
+<!-- ========== JUSTICE ========== -->
+<section class="view" id="v-cond">
+  <h2 class="ptitle">Condamnations</h2>
+  <p class="psub">Élus et responsables politiques, par parti.</p>
+  <div class="warn">La présomption d'innocence s'applique à toute condamnation <b>non définitive</b> (appel ou pourvoi en cours). Liste non exhaustive : les chiffres reflètent ce que la source recense, pas un taux par parti.</div>
+  <div style="height:10px"></div>
+  <div class="box prompt" style="padding-bottom:22px">
+    <div class="label">Condamnations recensées par parti</div>
+    <div class="legend" style="margin-bottom:12px"><span><b style="color:var(--ink)">■</b> définitives</span><span><b style="color:#b9b4ad">■</b> non définitives</span></div>
+    <div class="bars" id="c-bars"></div>
+  </div>
+  <div style="height:16px"></div>
+  <input id="c-q" class="field" placeholder="Chercher un nom, une infraction…" autocomplete="off">
+  <div class="chips" id="c-statut">
+    <button class="chip" aria-pressed="true" data-s="">Toutes</button>
+    <button class="chip" aria-pressed="false" data-s="définitive">Définitives</button>
+    <button class="chip" aria-pressed="false" data-s="non définitive">Non définitives</button>
+  </div>
+  <div class="chips" id="c-fam" style="padding-top:0"></div>
+  <div class="list" id="c-list"></div>
+  <p class="note" style="margin-top:16px">Source principale : <a href="https://poligraph.fr/affaires/condamnations" target="_blank" rel="noopener">Poligraph</a>, complétée par les décisions de justice et articles cités sur chaque fiche. Données du <span id="c-date"></span>.</p>
+</section>
+
+<!-- ========== CHAT ========== -->
+<section class="view" id="v-chat">
+  <h2 class="ptitle">Discussions</h2>
+  <p class="psub">Parle politique, ou creuse une mesure que tu as aimée ou rejetée.</p>
+  <div class="threads" id="threads"></div>
+</section>
+
+<!-- ========== PROFIL ========== -->
+<section class="view" id="v-profil"><div id="profil"></div></section>
+</main>
+
+<div class="actbar hidden" id="actbar">
+  <button class="sm" id="b-undo" aria-label="Revenir à la mesure précédente" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 010 12h-3"/></svg></button>
+  <button class="big no" id="b-no" aria-label="Contre cette mesure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <button class="big yes" id="b-yes" aria-label="Pour cette mesure"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.1 4.3 2.4.7-1.3 2.2-2.4 4.3-2.4 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg></button>
+  <button class="sm" id="b-skip" aria-label="Passer sans avis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h12M13 7l5 5-5 5"/></svg></button>
+</div>
+<div class="flash" id="flash" aria-hidden="true"></div>
+
+<nav class="tabs" aria-label="Sections"><div class="in">
+  <button data-v="swipe" aria-label="Découvrir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></button>
+  <button data-v="votes" aria-label="Votes à l'Assemblée"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20h16M6 16V10M10 16V5M14 16v-7M18 16V8"/></svg></button>
+  <button data-v="cond" aria-label="Condamnations"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v17M7 20h10M5 7h14M5 7l-3 6a3 3 0 006 0zM19 7l-3 6a3 3 0 006 0z"/></svg></button>
+  <button data-v="chat" aria-label="Discussions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5h16v11H10l-5 4v-4H4z"/></svg><span class="dot" id="chat-dot"></span></button>
+  <button data-v="profil" aria-label="Mon profil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg></button>
+</div></nav>
+
+<div class="convo" id="convo" role="dialog" aria-modal="true" aria-labelledby="cv-name">
+  <header>
+    <button class="iconbtn" id="cv-back" aria-label="Retour"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <div class="av" id="cv-av" style="width:40px;height:40px;font-size:16px"></div>
+    <div class="n" id="cv-name"></div>
+  </header>
+  <div class="msgs" id="cv-msgs"></div>
+  <div class="sugg" id="cv-sugg"></div>
+  <form class="composer" id="cv-form">
+    <input id="cv-in" class="field" placeholder="Écris un message…" autocomplete="off">
+    <button class="send" aria-label="Envoyer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </form>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ======= CONFIG DÉPLOIEMENT =======
+   API_BASE : URL des fonctions serveur (voir api/chat.js). Laisser "/api" si déployé sur Vercel avec le dossier api/.
+   Mettre null pour désactiver toute l'IA (le site reste 100 % statique). */
+window.SWIPE_CONFIG = window.SWIPE_CONFIG || {
+  API_BASE: "/api",
+  /* Supabase > Project Settings > API : URL du projet et clé « anon public » (elle peut être publique) */
+  SUPABASE_URL: "",
+  SUPABASE_ANON_KEY: ""
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+const PROG = /*__PROG__*/null;
+const VOTES = /*__VOTES__*/null;
+const COND = /*__COND__*/null;
+const FICHES = /*__FICHES__*/null;
+</script>
+<script>
+"use strict";
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const norm=s=>String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}};
+function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("on");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove("on"),1600);}
+const SEC=PROG.sections, M=PROG.mesures;
+M.forEach((m,i)=>{m.i=i;m.S=SEC[m.s];m.P=m.S.prog;m.n=norm(m.t+" "+m.sous.join(" ")+" "+m.S.section+" "+m.S.chapitre);});
+const BYID=Object.fromEntries(M.map(m=>[m.id,m]));
+const PROGS={LFI:{nom:"LFI",long:"La France insoumise · L'Avenir en commun",cand:"Jean-Luc Mélenchon",badge:"lfi",
+   eco:"Pour tout son programme, LFI annonce 106,4 Md€ de recettes nouvelles et 81,7 Md€ de dépenses nouvelles en 2027, sans chiffrage mesure par mesure.",ecoUrl:"https://www.lavenirencommun.org/financement/"},
+  RN:{nom:"RN",long:"Rassemblement national · 22 mesures + contre-budget 2027",cand:"Marine Le Pen",badge:"rn",
+   note:"Candidature annoncée le 7 juillet 2026. Son éligibilité dépend de l'issue de son pourvoi en cassation. Le programme 2027 complet n'est pas encore publié.",eco:"Le contre-budget RN (6 oct. 2026) annonce 140 Md€ d'économies nettes d'ici 2032 et 30 Md€ de baisses d'impôts. L'Institut de l'Entreprise juge environ 7,5 Md€ de ces économies crédibles.",ecoUrl:"https://www.planetegrandesecoles.com/budget-marine-le-pen-2027-mesures-contre-budget-rn"}};
+Object.assign(PROGS,PROG.progs||{});
+const PKEYS=Object.keys(PROGS).filter(P=>M.some(m=>m.P===P));
+const short=p=>p.replace(/^\d+\.\s*/,"");
+const GR0={LFI:["#2f7d5b,#174a37","#c2552e,#7d2d17","#3d5bd9,#1f2f80","#8a4bd6,#4b2382","#c23b62,#6e1a35","#2a8aa3,#124b5c"],RN:["#1f3a9e,#0d1b4f","#2d5fbf,#13306b","#3a3f8f,#1a1d4d","#1d6f9e,#0c3550"]};
+const GR=Object.assign({},GR0,...Object.entries(PROG.progs||{}).map(([k,v])=>({[k]:v.grad})));
+const gradOf=m=>{ const L=GR[m.P]||GR0.RN; const idx=[...new Set(SEC.filter(s=>s.prog===m.P).map(s=>s.partie))].indexOf(m.S.partie); return "linear-gradient(160deg,"+L[Math.max(0,idx)%L.length]+")"; };
+
+/* ================= IA (serveur optionnel) ================= */
+const API=window.SWIPE_CONFIG.API_BASE;
+async function ai(payload){
+  if(!API) throw Object.assign(new Error("off"),{code:"off"});
+  let r; try{ r=await fetch(API+"/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)}); }
+  catch(e){ throw Object.assign(new Error("off"),{code:"off"}); }
+  if(r.status===429){ const d=await r.json().catch(()=>({})); throw Object.assign(new Error("rate"),{code:d.error==="quota"?"quota":"rate"}); }
+  if(!r.ok) throw Object.assign(new Error("http"),{code:r.status===404?"off":"http"});
+  return (await r.json()).text;
+}
+const aiErr=e=>e.code==="off"?"L'IA n'est pas encore branchée sur ce site (voir README).":e.code==="quota"?"Tu as atteint la limite d'utilisation de l'IA pour aujourd'hui. Reviens demain !":e.code==="rate"?"Trop de demandes, réessaie dans une minute.":e.code==="busy"?"Quelqu'un est déjà en train de générer cette fiche. Réessaie dans une minute.":"Ça n'a pas marché. Réessaie.";
+/* fiches partagées : générées une fois, puis servies à tous */
+const REMOTE={}; const REMOTE_MISS=new Set();
+async function fetchFiche(id){
+  if(!API||FICHES[id]||REMOTE[id]||REMOTE_MISS.has(id)) return REMOTE[id]||null;
+  try{ const r=await fetch(API+"/fiche?id="+encodeURIComponent(id)); if(r.ok){ REMOTE[id]=await r.json(); return REMOTE[id]; } REMOTE_MISS.add(id); }catch(e){ REMOTE_MISS.add(id); }
+  return null; }
+async function generateFiche(m){
+  if(!API) throw Object.assign(new Error("off"),{code:"off"});
+  let r; try{ r=await fetch(API+"/fiche",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id:m.id})}); }
+  catch(e){ throw Object.assign(new Error("off"),{code:"off"}); }
+  if(r.status===409) throw Object.assign(new Error("busy"),{code:"busy"});
+  if(r.status===429){ const d=await r.json().catch(()=>({})); throw Object.assign(new Error("rate"),{code:d.error==="quota"?"quota":"rate"}); }
+  if(!r.ok) throw Object.assign(new Error("http"),{code:r.status===404?"off":"http"});
+  const f=await r.json(); REMOTE[m.id]=f; REMOTE_MISS.delete(m.id); return f; }
+const ficheOf=id=>FICHES[id]||REMOTE[id]||null;
+
+/* ================= état ================= */
+let SW=store.get("sw2027",{});        // id -> 1 pour / -1 contre / 0 sans avis
+let CHATS=store.get("chats2027",{});  // clé -> [{role,content}]
+let HIST=[];
+let syncT=null;
+const save=()=>{ store.set("sw2027",SW); clearTimeout(syncT); syncT=setTimeout(pushRemote,1200); };
+/* ================= comptes (Supabase, lien magique par email) ================= */
+const CFG=window.SWIPE_CONFIG; let SB=null, USER=null;
+try{ if(CFG.SUPABASE_URL&&CFG.SUPABASE_ANON_KEY&&window.supabase) SB=window.supabase.createClient(CFG.SUPABASE_URL,CFG.SUPABASE_ANON_KEY); }catch(e){ SB=null; }
+async function pullRemote(){
+  if(!SB||!USER) return;
+  const {data}=await SB.from("profils").select("swipes").eq("user_id",USER.id).maybeSingle();
+  const remote=(data&&data.swipes)||{};
+  SW=Object.assign({},remote,SW); store.set("sw2027",SW); await pushRemote();
+  try{ nextProfile(); show(location.hash.slice(1)||"swipe"); }catch(e){}
+}
+async function pushRemote(){ if(!SB||!USER) return; try{ await SB.from("profils").upsert({user_id:USER.id,swipes:SW,updated_at:new Date().toISOString()}); }catch(e){} }
+if(SB){ SB.auth.onAuthStateChange((ev,session)=>{ const u=session?session.user:null; const changed=(u&&u.id)!==(USER&&USER.id); USER=u; if(changed){ if(USER) pullRemote(); if($("#v-profil").classList.contains("on")) renderProfil(); } }); }
+function accountHTML(){
+  if(!SB) return "";
+  if(USER) return `<div class="box prompt" style="padding-bottom:20px"><div class="label">Ton compte</div><div class="answer sm">Connecté avec ${esc(USER.email)}</div><p class="note" style="margin:8px 0 12px">Tes réponses sont sauvegardées et synchronisées sur tous tes appareils.</p><button class="cta ghost" id="b-logout">Se déconnecter</button></div>`;
+  return `<div class="box prompt" style="padding-bottom:20px"><div class="label">Garde tes réponses</div><div class="answer sm">Crée un compte avec ton email pour retrouver ton profil sur tous tes appareils.</div>
+   <form id="f-login" style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap"><input id="in-email" class="field" type="email" required placeholder="ton@email.fr" autocomplete="email" style="flex:1;min-width:200px"><button class="cta">Recevoir le lien</button></form>
+   <p class="note" id="login-st" style="margin:10px 0 0">Pas de mot de passe : tu reçois un lien de connexion par email.</p></div>`;
+}
+function bindAccount(root){
+  const f=root.querySelector("#f-login"); if(f) f.onsubmit=async e=>{ e.preventDefault(); const st=$("#login-st"); st.textContent="Envoi…";
+    const {error}=await SB.auth.signInWithOtp({email:$("#in-email").value.trim(),options:{emailRedirectTo:location.origin+"/#profil"}});
+    st.textContent=error?"Ça n'a pas marché : vérifie l'adresse et réessaie.":"C'est envoyé ! Ouvre le lien reçu par email sur cet appareil."; };
+  const o=root.querySelector("#b-logout"); if(o) o.onclick=async()=>{ await SB.auth.signOut(); USER=null; renderProfil(); };
+}
+
+/* ================= navigation ================= */
+const VIEWS=["swipe","votes","cond","chat","profil"];
+const curView=()=>{ const v=location.hash.slice(1); return VIEWS.includes(v)?v:"swipe"; };
+function show(v){ if(!VIEWS.includes(v)) v="swipe";
+  $$(".view").forEach(s=>s.classList.toggle("on",s.id==="v-"+v));
+  $$("nav.tabs button").forEach(b=>b.setAttribute("aria-current",b.dataset.v===v?"page":"false"));
+  $("#actbar").classList.toggle("hidden",v!=="swipe"||!CURM); $("#b-undo").disabled=!HIST.length;
+  if(v==="profil") renderProfil(); if(v==="chat") renderThreads(); }
+$$("nav.tabs button").forEach(b=>b.onclick=()=>{ if(location.hash==="#"+b.dataset.v){ show(b.dataset.v); $("#main").scrollTop=0; } else location.hash=b.dataset.v; });
+window.addEventListener("hashchange",()=>{ show(location.hash.slice(1)); $("#main").scrollTop=0; });
+
+/* ================= DÉCOUVRIR ================= */
+const FILTERS=[["mix","Tous les candidats, en alterné"],...PKEYS.map(P=>[P,PROGS[P].cand+" · "+PROGS[P].nom]),["fiches","Fiches sourcées"]];
+let FILTER=store.get("f2027b","mix");
+$("#f-chips").innerHTML=FILTERS.map(([k,l])=>`<button class="chip" data-f="${k}" aria-pressed="${k===FILTER}">${esc(l)}</button>`).join("");
+$$("#f-chips .chip").forEach(b=>b.onclick=()=>{FILTER=b.dataset.f;store.set("f2027b",FILTER);$$("#f-chips .chip").forEach(x=>x.setAttribute("aria-pressed",x===b));nextProfile();});
+$("#b-filter").onclick=()=>{const f=$("#filters");f.hidden=!f.hidden;};
+const rank=m=>(FICHES[m.id]?0:m.cle?1:2);
+function interleave(a,b){ const o=[]; for(let i=0;i<Math.max(a.length,b.length);i++){ if(a[i]) o.push(a[i]); if(b[i]) o.push(b[i]); } return o; }
+function queue(){
+  const sorted=P=>M.filter(m=>m.P===P).sort((a,b)=>rank(a)-rank(b)||a.i-b.i);
+  let l;
+  if(PROGS[FILTER]) l=sorted(FILTER);
+  else { const lists=PKEYS.map(sorted); l=[]; for(const r of [0,1,2]){ const L=lists.map(x=>x.filter(m=>rank(m)===r)); for(let i=0;i<Math.max(...L.map(x=>x.length));i++) for(const x of L) if(x[i]) l.push(x[i]); } }
+  if(FILTER==="fiches") l=l.filter(m=>FICHES[m.id]||REMOTE[m.id]);
+  return {all:l,left:l.filter(m=>!(m.id in SW))}; }
+let CURM=null;
+function nextProfile(){ const q=queue(); CURM=q.left[0]||null; renderProfile(q); $("#main").scrollTop=0; show(curView()); }
+
+const IC={
+  heart:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.1 4.3 2.4.7-1.3 2.2-2.4 4.3-2.4 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg>',
+  x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+  book:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2z"/><path d="M4 19V5"/></svg>',
+  key:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l8-8M16 7l2 2"/></svg>',
+  folder:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 7h7l2 2h9v10H3z"/></svg>',
+  list:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></svg>',
+  link:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 14a4 4 0 006 0l3-3a4 4 0 00-6-6l-1 1"/><path d="M14 10a4 4 0 00-6 0l-3 3a4 4 0 006 6l1-1"/></svg>',
+  flag:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 21V4h11l-2 4 2 4H5"/></svg>',
+  euro:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M17 6a7 7 0 100 12M4 10h9M4 14h9"/></svg>',
+  chat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5h16v11H10l-5 4v-4H4z"/></svg>',
+  spark:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg>'
+};
+const srcA=s=>s&&s.url?`<a class="src" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.media||"Source")} ↗</a>`:"";
+const bcol=P=>PROGS[P].badge?"":`style="background:#fff;color:#${(GR[P]||GR0.RN)[0].split(",")[1].slice(1)}"`;
+const pBadge=m=>`<span class="badge ${PROGS[m.P].badge}" ${bcol(m.P)}>${PROGS[m.P].nom} · ${esc(PROGS[m.P].cand)}</span>`;
+
+function renderProfile(q){
+  const feed=$("#feed"); const m=CURM;
+  if(!m){ feed.innerHTML=`<div class="box prompt" style="padding-bottom:26px;text-align:center"><div class="label">C'est tout pour ce filtre</div><div class="answer">Tu as vu ${q.all.length} mesures.</div><div class="endrow" style="margin-top:18px"><button class="cta" onclick="location.hash='profil'">Voir mon profil</button><button class="cta ghost" id="b-f2">Changer de filtre</button></div></div>`;
+    $("#b-f2").onclick=()=>{$("#filters").hidden=false;$("#main").scrollTop=0;}; show(curView()); return; }
+  const F=ficheOf(m.id), done=q.all.length-q.left.length, P=PROGS[m.P];
+  const sib=M.filter(x=>x.s===m.s);
+  const parts=[];
+  /* en-tête */
+  parts.push(`<div class="ph-name"><div><div class="kicker">${done+1} / ${q.all.length} · ${esc(short(m.S.partie))}</div><h2>${esc(m.S.section)}</h2></div></div>`);
+  /* la mesure */
+  parts.push(`<div class="box photo" style="background:${gradOf(m)}"><div class="over">${pBadge(m)}${m.cle?'<span class="badge">Mesure clé</span>':""}${F?`<span class="badge">${F.genere?"Fiche générée":"Fiche sourcée"}</span>`:""}</div><div class="q">${esc(m.t)}</div></div>`);
+  /* infos */
+  parts.push(`<div class="box"><div class="vitals"><div class="vital">${IC.flag}${esc(P.nom)} · 2027</div>${m.cle?`<div class="vital">${IC.key}Mesure clé</div>`:""}${m.page?`<div class="vital">${IC.book}Livre p. ${m.page}</div>`:""}<div class="vital">${IC.folder}${esc(m.S.chapitre)}</div></div>
+    <div class="vrow">${IC.list}<span>${esc(short(m.S.partie))}</span></div>
+    ${P.note?`<div class="vrow">${IC.spark}<span>${esc(P.note)}</span></div>`:""}<div class="vrow">${IC.link}<a href="${esc(m.src||(m.S.url+(m.P==="LFI"?"#"+m.id:"")))}" target="_blank" rel="noopener">${m.src&&!/rassemblementnational|lavenirencommun/.test(m.src)?"Voir la source":"Lire le texte officiel"}</a></div></div>`);
+  /* le débat en une phrase */
+  if(F) parts.push(`<div class="box prompt"><div class="label">Le débat en une phrase</div><div class="answer">${esc(F.resume)}</div></div>`);
+  /* sous-points */
+  if(m.sous.length) parts.push(`<div class="box photo small" style="background:${gradOf(m)};filter:saturate(.85) brightness(.95)"><ul>${m.sous.map(s=>`<li>${esc(s)}</li>`).join("")}</ul></div>`);
+  /* concrètement */
+  if(F) parts.push(`<div class="box prompt"><div class="label">Concrètement</div>${F.concret.map(x=>`<div class="item"><div class="txt">${esc(x)}</div></div>`).join("")}</div>`);
+  /* volet économique */
+  if(F&&F.eco){ const e=F.eco;
+    parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">${IC.euro.replace('<svg','<svg width="16" height="16" style="vertical-align:-3px;margin-right:6px"')}Combien ça coûte ?</div><div class="eco-big">${esc(e.chiffre||"Non chiffré")}</div>
+      <div class="eco-row"><div class="k">Coût</div><div class="v">${esc(e.cout||"—")}</div></div>
+      <div class="eco-row"><div class="k">Financement</div><div class="v">${esc(e.financement||"—")}</div></div>
+      <div class="eco-row"><div class="k">Rapporte</div><div class="v">${esc(e.rapporte||"—")}</div></div>
+      ${(e.sources||[]).map(srcA).join(" ")}<p class="note" style="margin:12px 0 0">Vue d'ensemble : ${esc(P.eco)}</p></div>`); }
+  else parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">${IC.euro.replace('<svg','<svg width="16" height="16" style="vertical-align:-3px;margin-right:6px"')}Combien ça coûte ?</div><div class="answer sm" style="color:var(--muted)">Cette mesure n'est pas encore chiffrée dans l'app.</div><p class="note" style="margin:12px 0 0">Vue d'ensemble : ${esc(P.eco)} <a href="${esc(P.ecoUrl)}" target="_blank" rel="noopener">Source ↗</a></p></div>`);
+  /* contexte du parti (plus de détails) */
+  if(m.S.intro&&m.S.intro!==m.t+"."&&m.S.intro.length>40){ const long=m.S.intro.length>600;
+    parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">Le contexte selon ${esc(P.nom)}</div><div class="intro ${long?"clamp":""}" id="intro">${esc(m.S.intro)}</div>${long?'<button class="linkbtn" id="b-intro">Lire tout</button>':""}</div>`); }
+  /* critiques */
+  if(F){ parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">Ce qu'en disent les autres</div>${F.critiques.map(c=>`<div class="item"><div class="who">${esc(c.camp)}${c.qui?" · "+esc(c.qui):""}</div><div class="txt">${esc(c.texte)}</div>${srcA(c)}</div>`).join("")}</div>`);
+    if(F.reponses.length) parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">Leur réponse</div>${F.reponses.map(c=>`<div class="item"><div class="who">${esc(c.qui)}</div><div class="txt">${esc(c.texte)}</div>${srcA(c)}</div>`).join("")}</div>`);
+    parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">Est-ce que d'autres pays le font ?</div>${F.monde.length?F.monde.map(c=>`<div class="item"><div class="who">${esc(c.pays)}</div><div class="txt">${esc(c.texte)}</div>${srcA(c)}</div>`).join(""):'<div class="answer sm" style="color:var(--muted)">Aucun exemple étranger sourcé trouvé pour l\'instant.</div>'}</div>`);
+    if(F.tensions.length) parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">Les points de tension</div>${F.tensions.map(x=>`<div class="item"><div class="txt">${esc(x)}</div></div>`).join("")}</div>`);
+    if(F.similaires.length) parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">Qui propose quelque chose de proche</div>${F.similaires.map(x=>`<div class="item"><div class="who">${esc(x.camp)}</div><div class="txt">${esc(x.prop)}</div></div>`).join("")}</div>`);
+    if(F.genere) parts.push(`<p class="note" style="text-align:center">Fiche générée le ${esc(F.maj)} par IA à partir de recherches web. Vérifie les sources.</p>`);
+  } else {
+    parts.push(`<div class="box prompt" style="padding-bottom:24px"><div class="label">Critiques, coût, exemples à l'étranger</div><div class="answer sm" style="color:var(--muted)" id="gen-msg">${API?"Recherche d'une fiche existante…":"Pas encore de fiche sourcée pour cette mesure."}</div><div style="margin-top:16px" id="gen-wrap" hidden><button class="cta" id="b-gen">${IC.spark.replace('<svg','<svg width="18" height="18"')}Générer la fiche sourcée</button></div><p class="note" id="gen-st" style="margin-top:10px">L'IA cherche de vraies sources (presse, think tanks, institutions). Une fois générée, la fiche est disponible pour tout le monde.</p></div>`);
+  }
+  /* même section */
+  if(sib.length>1) parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">Dans la même partie du programme (${sib.length})</div><div class="sib">${sib.slice(0,12).map(x=>`<div class="${x===m?"cur":""}">${esc(x.t)}</div>`).join("")}${sib.length>12?`<div class="note">+ ${sib.length-12} autres</div>`:""}</div></div>`);
+  /* débattre */
+  parts.push(`<div class="box prompt" style="padding-bottom:24px"><div class="label">Une question sur cette mesure ?</div><div class="answer sm">Demande qui paierait, ce que ça change pour toi, ou ce qu'en pensent les autres camps.</div><div style="margin-top:16px"><button class="cta" id="b-chat">${IC.chat.replace('<svg','<svg width="18" height="18"')}Ouvrir la discussion</button></div></div>`);
+  parts.push(`<div style="height:70px"></div>`);
+  feed.innerHTML=`<div class="profile">${parts.join("")}</div>`;
+  $("#b-chat").onclick=()=>openConvo("m:"+m.id);
+  const bi=$("#b-intro"); if(bi) bi.onclick=()=>{ $("#intro").classList.remove("clamp"); bi.remove(); };
+  const g=$("#b-gen"); if(g){ g.onclick=()=>generate(m);
+    if(API) fetchFiche(m.id).then(f=>{ if(CURM!==m) return; if(f){ const y=$("#main").scrollTop; renderProfile(queue()); $("#main").scrollTop=y; } else { $("#gen-msg").textContent="Pas encore de fiche sourcée pour cette mesure. Sois le premier à la générer."; $("#gen-wrap").hidden=false; } });
+    else $("#gen-wrap").hidden=false; }
+  show(curView());
+}
+function flash(v){ const f=$("#flash"); f.innerHTML=v===1?`<span style="color:var(--like)">${IC.heart}</span>`:v===-1?`<span style="color:#111">${IC.x}</span>`:""; f.classList.remove("on"); void f.offsetWidth; if(v) f.classList.add("on"); }
+function decide(v){
+  const m=CURM; if(!m) return;
+  SW[m.id]=v; save(); HIST.push(m.id); flash(v);
+  if(!v) toast("Passée");
+  setTimeout(nextProfile,v?260:80);
+}
+$("#b-yes").onclick=()=>decide(1); $("#b-no").onclick=()=>decide(-1); $("#b-skip").onclick=()=>decide(0);
+$("#b-undo").onclick=()=>{ const id=HIST.pop(); if(!id) return; delete SW[id]; save();
+  CURM=BYID[id]; renderProfile(queue()); $("#main").scrollTop=0; };
+document.addEventListener("keydown",e=>{ if(!$("#v-swipe").classList.contains("on")||$("#convo").classList.contains("on")||/INPUT|TEXTAREA/.test(document.activeElement.tagName)) return;
+  if(e.key==="ArrowRight") decide(1); if(e.key==="ArrowLeft") decide(-1); if(e.key==="ArrowDown") decide(0); });
+
+async function generate(m){
+  const g=$("#b-gen"), st=$("#gen-st"); g.disabled=true; st.textContent="Recherche des sources et rédaction… (jusqu'à une minute)";
+  try{ await generateFiche(m); if(CURM===m){ const y=$("#main").scrollTop; renderProfile(queue()); $("#main").scrollTop=y; } }
+  catch(e){ g.disabled=false; st.textContent=aiErr(e); }
+}
+
+/* ================= VOTES ================= */
+const G=VOTES.groupes, GORDER=["LFI-NFP","GDR","ECOS","SOC","LIOT","DEM","EPR","HOR","DR","UDR","RN","NI"].filter(g=>Object.values(G).some(x=>x.abrev===g));
+const GNAME=Object.fromEntries(Object.values(G).map(x=>[x.abrev,x.nom]));
+const SC=VOTES.scrutins; SC.forEach(s=>s.n_=norm(s.titre));
+const fmtD=d=>new Date(d+"T12:00").toLocaleDateString("fr-FR",{day:"numeric",month:"short",year:"numeric"});
+$("#votes-intro").textContent=`${SC.length} votes clés de la 17e législature, du ${fmtD(SC[SC.length-1].date)} au ${fmtD(SC[0].date)} : votes solennels, motions de censure et votes sur l'ensemble d'un texte. Données officielles de l'Assemblée nationale.`;
+const STOP=new Set("pour dans avec sans plus tous toutes leur leurs etre faire mettre creer une des les aux par sur qui que est son ses nos notre nous vous cette ces entre lors afin ainsi tout tres moins".split(" "));
+function voteItem(s,focus){ const titre=s.titre.charAt(0).toUpperCase()+s.titre.slice(1);
+  const chips=GORDER.filter(g=>s.g[g]).map(g=>{ const [p,po,co,ab,mb]=s.g[g]; const c=["pour","contre","abstention"].includes(p)?p:"none";
+    return `<span class="gc ${c}${focus&&focus!==g?" dim":""}" title="${esc(GNAME[g])} : ${po} pour, ${co} contre, ${ab} abst. sur ${mb} membres">${g} ${c==="pour"?"P":c==="contre"?"C":c==="abstention"?"A":"–"}</span>`; }).join("");
+  return `<div class="item"><div class="who">${fmtD(s.date)} · ${s.adopte?'<span style="color:var(--pour)">adopté</span>':'<span style="color:var(--contre)">rejeté</span>'}${s.type==="MOC"?" · censure":""}</div><div class="txt" style="font-size:17px">${esc(titre.length>220?titre.slice(0,218)+"…":titre)}</div><div class="gchips">${chips}</div><a class="src" href="${esc(s.url)}" target="_blank" rel="noopener">Scrutin n°${s.n} · ${s.pour} pour, ${s.contre} contre ↗</a></div>`; }
+(function matrix(){
+  const ag={},tot={};
+  for(const s of SC) for(const a of GORDER) for(const b of GORDER){ const pa=s.g[a]?.[0], pb=s.g[b]?.[0];
+    if(!pa||!pb||pa==="nonVotant"||pb==="nonVotant") continue; const k=a+"|"+b; tot[k]=(tot[k]||0)+1; if(pa===pb) ag[k]=(ag[k]||0)+1; }
+  let h="<table><thead><tr><th></th>"+GORDER.map(g=>`<th>${g.replace("-NFP","")}</th>`).join("")+"</tr></thead><tbody>";
+  for(const a of GORDER){ h+=`<tr><th style="text-align:right">${a.replace("-NFP","")}</th>`;
+    for(const b of GORDER){ const k=a+"|"+b, p=tot[k]?Math.round(100*(ag[k]||0)/tot[k]):null;
+      const t=a===b?1:p==null?0:Math.max(0,Math.min(1,(p-35)/65));
+      h+=`<td style="background:${a===b?"#111":`color-mix(in srgb, var(--brand) ${Math.round(t*90)}%, #f4f2ef)`};color:${a===b||t>.6?"#fff":"var(--ink)"}" title="${esc(GNAME[a])} et ${esc(GNAME[b])} : même position sur ${p}% des ${tot[k]||0} votes">${a===b?"":p??"–"}</td>`; }
+    h+="</tr>"; }
+  $("#matrix").innerHTML=h+"</tbody></table>";
+})();
+let VT="all", VN=25, VG="";
+$("#v-g").innerHTML=`<button class="chip" aria-pressed="true" data-g="">Tous les groupes</button>`+GORDER.map(g=>`<button class="chip" aria-pressed="false" data-g="${g}" title="${esc(GNAME[g])}">${g}</button>`).join("");
+$$("#v-g .chip").forEach(b=>b.onclick=()=>{VG=b.dataset.g;$$("#v-g .chip").forEach(x=>x.setAttribute("aria-pressed",x===b));renderVotes();});
+$$("#v-type .chip").forEach(b=>b.onclick=()=>{VT=b.dataset.t;$$("#v-type .chip").forEach(x=>x.setAttribute("aria-pressed",x===b));VN=25;renderVotes();});
+$("#v-q").oninput=()=>{VN=25;renderVotes();}; $("#v-more").onclick=()=>{VN+=25;renderVotes();};
+function searchV(q){ const w=norm(q).split(/\s+/).filter(x=>x.length>1); return SC.filter(s=>w.every(x=>s.n_.includes(x))); }
+function renderVotes(){ let L=$("#v-q").value.trim()?searchV($("#v-q").value):SC;
+  if(VT==="MOC") L=L.filter(s=>s.type==="MOC"); if(VT==="adopte") L=L.filter(s=>s.adopte); if(VT==="rejete") L=L.filter(s=>!s.adopte);
+  $("#v-list").innerHTML=L.slice(0,VN).map(s=>`<div class="lcard">${voteItem(s,VG)}</div>`).join("")||'<p class="empty">Aucun vote ne correspond.</p>';
+  $("#v-more").hidden=L.length<=VN; }
+renderVotes();
+
+/* ================= JUSTICE ================= */
+const CL=COND.condamnations;
+$("#c-date").textContent=new Date(COND.extrait_le+"T12:00").toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"});
+const FAMS=[...new Set(CL.map(c=>c.famille))].sort((a,b)=>CL.filter(c=>c.famille===b).length-CL.filter(c=>c.famille===a).length);
+(function(){ const max=Math.max(...FAMS.map(f=>CL.filter(c=>c.famille===f).length));
+  $("#c-bars").innerHTML=FAMS.map(f=>{ const d=CL.filter(c=>c.famille===f&&c.statut==="définitive").length, n=CL.filter(c=>c.famille===f&&c.statut!=="définitive").length;
+    return `<div class="bar" title="${esc(f)} : ${d} définitives, ${n} non définitives"><span>${esc(f)}</span><span class="track">${d?`<i style="width:${100*d/max}%;background:#111"></i>`:""}${n?`<i style="width:${100*n/max}%;background:#b9b4ad"></i>`:""}</span><span class="v">${d} + ${n}</span></div>`; }).join(""); })();
+let CS="", CF="";
+$("#c-fam").innerHTML=`<button class="chip" aria-pressed="true" data-f="">Tous les partis</button>`+FAMS.map(f=>`<button class="chip" aria-pressed="false" data-f="${esc(f)}">${esc(f)}</button>`).join("");
+$$("#c-fam .chip").forEach(b=>b.onclick=()=>{CF=b.dataset.f;$$("#c-fam .chip").forEach(x=>x.setAttribute("aria-pressed",x===b));renderCond();});
+$$("#c-statut .chip").forEach(b=>b.onclick=()=>{CS=b.dataset.s;$$("#c-statut .chip").forEach(x=>x.setAttribute("aria-pressed",x===b));renderCond();});
+$("#c-q").oninput=renderCond;
+function renderCond(){ const q=norm($("#c-q").value).split(/\s+/).filter(Boolean);
+  const L=CL.filter(c=>(!CS||c.statut===CS)&&(!CF||c.famille===CF)&&q.every(w=>norm(c.personne+" "+c.parti+" "+c.intitule+" "+c.categorie+" "+c.description).includes(w)));
+  $("#c-list").innerHTML=L.map(c=>`<details class="lcard"><summary><div class="meta"><span>${esc(c.parti)}${c.annee_faits?" · faits : "+esc(c.annee_faits):""}</span><span class="badge ${c.statut==="définitive"?"":"ia"}">${c.statut==="définitive"?"Définitive":"Non définitive"}</span></div>
+    <div style="font:700 18px var(--sans)">${esc(c.personne)}</div><div class="t" style="font-size:17px;margin-top:2px">${esc(c.intitule)}</div>${c.peine?`<div class="s"><b style="color:var(--ink)">Peine :</b> ${esc(c.peine)}</div>`:""}</summary>
+    <p style="font-size:14px;margin:12px 0 8px">${esc(c.description)}</p><div class="note"><a href="${esc(c.url)}" target="_blank" rel="noopener">Fiche détaillée ↗</a>${(c.sources||[]).slice(0,4).map(s=>{let h="source";try{h=new URL(s).hostname.replace("www.","");}catch(e){} return ` · <a href="${esc(s)}" target="_blank" rel="noopener">${esc(h)}</a>`;}).join("")}</div></details>`).join("")||'<p class="empty">Aucune condamnation ne correspond.</p>'; }
+renderCond();
+
+/* ================= CHAT ================= */
+function threadsList(){ const t=[{k:"g",name:"Parler politique",sub:"Programmes, votes, condamnations : pose ta question",av:"#111",l:"?"}];
+  const liked=Object.keys(SW).filter(k=>SW[k]===1).reverse();
+  const ids=[...new Set([...Object.keys(CHATS).filter(k=>k.startsWith("m:")).map(k=>k.slice(2)),...liked])].filter(id=>BYID[id]).slice(0,40);
+  ids.sort((a,b)=>(CHATS["m:"+b]?.length||0)-(CHATS["m:"+a]?.length||0));
+  for(const id of ids){ const m=BYID[id], h=CHATS["m:"+id]; t.push({k:"m:"+id,name:`${m.S.section} · ${m.P}`,sub:h&&h.length?h[h.length-1].content:"Tu as aimé : "+m.t,av:gradOf(m),l:m.P}); }
+  return t; }
+function renderThreads(){ $("#chat-dot").style.display="none";
+  $("#threads").innerHTML=threadsList().map(t=>`<button class="thread" data-k="${esc(t.k)}"><span class="av" style="background:${t.av};font-size:${t.l.length>1?"15px":"20px"}">${esc(t.l)}</span><span style="min-width:0"><span class="n">${esc(t.name)}</span><span class="l">${esc(t.sub)}</span></span></button>`).join("");
+  $$("#threads .thread").forEach(b=>b.onclick=()=>openConvo(b.dataset.k)); }
+let CK=null;
+function openConvo(k){ CK=k; const isG=k==="g", m=isG?null:BYID[k.slice(2)];
+  $("#cv-name").textContent=isG?"Parler politique":m.S.section+" · "+m.P;
+  $("#cv-av").style.background=isG?"#111":gradOf(m); $("#cv-av").textContent=isG?"?":m.P;
+  const H=CHATS[k]||[];
+  $("#cv-msgs").innerHTML=(m?`<div class="quote">${esc(m.t)}</div>`:`<div class="quote">Pose une question sur les programmes des candidats, les votes à l'Assemblée ou les condamnations. Réponses neutres, appuyées sur les données de l'app.</div>`)+H.map(x=>`<div class="msg ${x.role==="user"?"u":"a"}">${esc(x.content)}</div>`).join("");
+  const S=isG?["Que proposent les candidats sur les retraites ?","Comment le RN a voté sur le budget ?","Qui vote le plus souvent ensemble ?","C'est quoi la 6e République ?"]:["Qui paierait ?","Ça change quoi pour moi ?","Ça a marché ailleurs ?","Les principales critiques ?"];
+  $("#cv-sugg").innerHTML=S.map(s=>`<button>${esc(s)}</button>`).join("");
+  $$("#cv-sugg button").forEach(b=>b.onclick=()=>{$("#cv-in").value=b.textContent;$("#cv-form").requestSubmit();});
+  $("#convo").classList.add("on"); $("#cv-msgs").scrollTop=1e9; }
+$("#cv-back").onclick=()=>{ $("#convo").classList.remove("on"); if($("#v-chat").classList.contains("on")) renderThreads(); };
+$("#cv-form").onsubmit=async e=>{ e.preventDefault(); const q=$("#cv-in").value.trim(); if(!q||!CK) return; $("#cv-in").value="";
+  const k=CK, H=CHATS[k]||(CHATS[k]=[]), box=$("#cv-msgs");
+  H.push({role:"user",content:q}); box.insertAdjacentHTML("beforeend",`<div class="msg u">${esc(q)}</div>`);
+  const out=document.createElement("div"); out.className="msg a"; out.textContent="…"; box.appendChild(out); box.scrollTop=1e9;
+  const payload=k==="g"?{mode:"general",messages:H.slice(-12)}:{mode:"mesure",mesureId:k.slice(2),messages:H.slice(-12)};
+  try{ const t=await ai(payload); out.textContent=t; H.push({role:"assistant",content:t}); store.set("chats2027",CHATS); }
+  catch(err){ H.pop(); out.textContent=aiErr(err); }
+  box.scrollTop=1e9; };
+
+/* ================= PROFIL ================= */
+/* histogramme : nombre de propositions par candidat */
+let HIDE_LFI=false;
+function chartHTML(){
+  const rows=PKEYS.map(P=>({P,n:M.filter(m=>m.P===P).length})).sort((a,b)=>b.n-a.n);
+  const shown=HIDE_LFI?rows.filter(r=>r.P!=="LFI"):rows; const max=Math.max(...shown.map(r=>r.n));
+  return `<div class="box prompt" style="padding-bottom:20px"><div class="label">Nombre de propositions par candidat</div>
+  <p class="note" style="margin:-6px 0 12px">Mesures présentes dans l'app. Touche un candidat pour ne voir que ses propositions.</p>
+  <div>${shown.map(r=>`<button class="hbar" data-p="${r.P}" title="${esc(PROGS[r.P].cand)} : ${r.n} propositions"><span class="nm">${esc(PROGS[r.P].cand)}</span><span class="tr"><i style="width:${100*r.n/max}%;background:#${(GR[r.P]||GR0.RN)[0].split(",")[0].slice(1)}"></i></span><span class="v">${r.n}</span></button>`).join("")}</div>
+  <button class="linkbtn" id="b-hidelfi">${HIDE_LFI?"Réafficher LFI":"Masquer LFI pour mieux comparer les autres"}</button>
+  <p class="note" style="margin:10px 0 0">LFI est le seul à avoir publié un programme complet. Pour les autres, ce sont les propositions annoncées ou recensées à ce jour.</p></div>`;
+}
+function bindChart(root){
+  root.querySelectorAll(".hbar").forEach(b=>b.onclick=()=>{ FILTER=b.dataset.p; store.set("f2027b",FILTER); $$("#f-chips .chip").forEach(x=>x.setAttribute("aria-pressed",x.dataset.f===FILTER)); location.hash="swipe"; nextProfile(); });
+  const t=root.querySelector("#b-hidelfi"); if(t) t.onclick=()=>{ HIDE_LFI=!HIDE_LFI; renderProfil(); };
+}
+
+function renderProfil(){
+  const ids=Object.keys(SW).filter(k=>BYID[k]), pour=ids.filter(k=>SW[k]===1), contre=ids.filter(k=>SW[k]===-1), passe=ids.filter(k=>SW[k]===0);
+  const p=$("#profil");
+  if(pour.length+contre.length<5){ p.innerHTML=`<h2 class="ptitle">Ton profil</h2>${accountHTML()}${SB?'<div style="height:14px"></div>':""}${chartHTML()}<div style="height:14px"></div><div class="box prompt" style="padding-bottom:24px"><div class="label">Pas encore assez de réponses</div><div class="answer">Réagis à au moins 5 mesures pour voir ce qui ressort.</div><p class="note" style="margin-top:10px">${ids.length} mesure(s) vue(s) sur ${M.length}.</p><div style="margin-top:14px"><button class="cta" onclick="location.hash='swipe'">Découvrir des mesures</button></div></div>`; bindChart(p); bindAccount(p); return; }
+  const score=P=>{ const a=pour.filter(k=>BYID[k].P===P).length, b=contre.filter(k=>BYID[k].P===P).length; return {a,b,t:a+b,p:a+b?Math.round(100*a/(a+b)):null}; };
+  const S=Object.fromEntries(PKEYS.map(P=>[P,score(P)]));
+  const bySec={}; for(const k of [...pour,...contre]){const m=BYID[k],s=m.P+" · "+m.S.section;(bySec[s]=bySec[s]||{a:0,t:0});bySec[s].t++;if(SW[k]===1)bySec[s].a++;}
+  const secs=Object.entries(bySec).filter(([,v])=>v.t>=2).map(([s,v])=>({s,p:Math.round(100*v.a/v.t),t:v.t}));
+  const top=secs.slice().sort((a,b)=>b.p-a.p||b.t-a.t).slice(0,3), low=secs.slice().sort((a,b)=>a.p-b.p||b.t-a.t).slice(0,3);
+  const recent=[...pour,...contre].slice(-10).reverse();
+  const tile=P=>`<div class="box photo small" style="background:linear-gradient(160deg,${(GR[P]||GR0.RN)[0]});min-height:190px;padding-bottom:20px"><div class="over"><span class="badge" style="max-width:100%;overflow:hidden;text-overflow:ellipsis">${esc(PROGS[P].cand)}</span></div><div class="score" style="font-size:46px">${S[P].p!=null?S[P].p+"%":"–"}</div><div class="q" style="font-size:15px;margin-top:6px">${S[P].t?`d'accord, sur ${S[P].t} mesure${S[P].t>1?"s":""} tranchée${S[P].t>1?"s":""}`:"pas encore de réponse"}</div></div>`;
+  p.innerHTML=`<h2 class="ptitle">Ton profil</h2><p class="psub">${ids.length} mesures vues sur ${M.length} · ${pour.length} pour · ${contre.length} contre · ${passe.length} sans avis</p>
+  <div class="profile" style="animation:none">
+  ${accountHTML()}
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">${PKEYS.slice().sort((a,b)=>(S[b].p??-1)-(S[a].p??-1)).map(tile).join("")}</div>
+  <p class="note" style="margin:0">Les programmes n'ont pas tous la même taille : LFI a publié un programme complet (plus de 1 000 mesures), les autres candidats n'ont pour l'instant annoncé que quelques dizaines de propositions. Un score sur peu de mesures est moins solide.</p>
+  ${secs.length?`<div class="box prompt" style="padding-bottom:22px"><div class="label">Là où tu adhères le plus</div>${top.map(x=>`<div class="item"><div class="txt">${esc(x.s)} <span class="note">${x.p}% sur ${x.t}</span></div></div>`).join("")}</div>
+  <div class="box prompt" style="padding-bottom:22px"><div class="label">Là où tu décroches</div>${low.map(x=>`<div class="item"><div class="txt">${esc(x.s)} <span class="note">${x.p}% sur ${x.t}</span></div></div>`).join("")}</div>`:""}
+  ${chartHTML()}
+  <div class="box prompt" style="padding-bottom:22px"><div class="label">Tes derniers choix</div><div class="liked">${recent.map(k=>`<div class="row"><b style="background:${SW[k]===1?"#e4f4ea":"#fbe7e6"};color:${SW[k]===1?"var(--pour)":"var(--contre)"}">${SW[k]===1?"POUR":"CONTRE"}</b><span><span class="badge ${PROGS[BYID[k].P].badge}" style="margin-right:6px">${BYID[k].P}</span>${esc(BYID[k].t)}</span></div>`).join("")}</div></div>
+  <div class="box prompt" style="padding-bottom:22px"><div class="label">Ce que disent tes choix</div><p class="note" style="margin:0 0 12px">Un résumé neutre de tes réponses, sans te ranger dans un camp.</p><button class="cta" id="p-ai">Analyser mes choix</button><div class="answer sm" id="p-ai-out" style="margin-top:14px;white-space:pre-wrap"></div></div>
+  <div class="endrow"><button class="cta ghost" id="p-reset">Tout recommencer</button></div>
+  <div class="confirm" id="p-confirm"><span class="note">Effacer toutes tes réponses ?</span><button class="cta" id="p-yes" style="background:var(--contre)">Oui, effacer</button><button class="cta ghost" id="p-no">Annuler</button></div></div>`;
+  bindChart(p); bindAccount(p);
+  $("#p-reset").onclick=()=>$("#p-confirm").classList.add("on"); $("#p-no").onclick=()=>$("#p-confirm").classList.remove("on");
+  $("#p-yes").onclick=()=>{SW={};HIST=[];save();nextProfile();location.hash="swipe";};
+  $("#p-ai").onclick=async()=>{ const b=$("#p-ai"),o=$("#p-ai-out"); b.disabled=true; o.textContent="…"; const L=k=>`- [${BYID[k].P}] ${BYID[k].t}`;
+    try{ o.textContent=await ai({mode:"profil",choix:{pour,contre}}); }
+    catch(e){ o.textContent=aiErr(e); b.disabled=false; } };
+}
+
+/* ================= démarrage ================= */
+if("serviceWorker" in navigator && location.protocol==="https:") navigator.serviceWorker.register("/sw.js").catch(()=>{});
+nextProfile(); show(location.hash.slice(1)||"swipe");
+if(Object.values(SW).some(v=>v===1)) $("#chat-dot").style.display="block";
+</script>
+</body>
+</html>

@@ -1,0 +1,780 @@
+{
+ "augmenter-les-salaires-1": {
+  "maj": "13 nov. 2026",
+  "concret": [
+   "Smic net : 1 477,93 € aujourd'hui, 1 501,90 € au 1er décembre 2026 après la hausse de 1,6 % décidée par le gouvernement.",
+   "1 700 € net, c'est environ +200 € par mois, soit +13 à +15 % d'un coup.",
+   "Le programme ne chiffre pas le coût de cette mesure à part. LFI donne un total pour 2027 : 106,4 Md€ de recettes nouvelles et 81,7 Md€ de dépenses nouvelles.",
+   "Un chapitre « Nouveau pacte productif pour les petites entreprises » existe, mais l'aide prévue pour les TPE n'est pas encore détaillée ici."
+  ],
+  "similaires": [
+   {
+    "camp": "PS / Place publique (Glucksmann)",
+    "prop": "Smic à 1 700 € net, notamment via une baisse progressive de la CSG"
+   },
+   {
+    "camp": "Écologistes (Tondelier)",
+    "prop": "Smic à 2 000 € brut dès 2027, avec une compensation pour les TPE via l'impôt sur les sociétés"
+   },
+   {
+    "camp": "PCF (Roussel)",
+    "prop": "+5 % sur les salaires et pensions sous 2 500 € net, et indexation sur l'inflation"
+   },
+   {
+    "camp": "CGT / CFDT",
+    "prop": "+150 € / +100 € net par mois"
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Gouvernement",
+    "qui": "Jean-Pierre Farandou, ministre du Travail",
+    "texte": "Un Smic à 1 700 € net « détruirait plus de 230 000 emplois ». Le porte-parole Mathieu Lefèvre a repris ce chiffre. La note du ministère n'a pas été rendue publique.",
+    "media": "Quartz FR / franceinfo",
+    "url": "https://fr.qz.com/smic-1700-euros-230000-emplois-gouvernement-ofce-111126"
+   },
+   {
+    "camp": "Économistes",
+    "qui": "Gilbert Cette, ex-président du groupe d'experts Smic",
+    "texte": "Juge l'estimation du gouvernement « tout à fait réaliste ». Une forte hausse ferait monter la pauvreté : licenciements, CDD non renouvelés, moins d'embauches.",
+    "media": "franceinfo (Vrai ou faux)",
+    "url": "https://www.franceinfo.fr/vrai-ou-fake/vrai-ou-faux-une-hausse-du-smic-a-1-700-euros-entrainerait-elle-la-destruction-de-230-000-emplois-comme-l-affirme-le-gouvernement_8274335.html"
+   },
+   {
+    "camp": "Économistes",
+    "qui": "Stéphane Carcillo, Haut-commissariat au plan",
+    "texte": "Présenté par Atlantico comme jugeant la mesure destructrice d'emplois et fragilisante pour les entreprises. Citation exacte à vérifier (article payant).",
+    "media": "Atlantico, juin 2026",
+    "url": "https://atlantico.fr/article/rdv/smic-a-1-700-nets-le-cadeau-de-melenchon-qui-pourrait-couter-tres-cher-aux-smicards"
+   },
+   {
+    "camp": "RN",
+    "qui": "Sébastien Chenu",
+    "texte": "Ne vise pas directement les 1 700 €. Il reproche au gouvernement de « s'être enfermé dans cet enjeu d'augmentation du Smic » et propose plutôt +10 % sur les salaires jusqu'à 3 Smic, en échange d'un gel des cotisations patronales.",
+    "media": "LCP, 9 nov. 2026",
+    "url": "https://lcp.fr/actualites/la-hausse-du-smic-ne-satisfera-personne-reagit-sebastien-chenu-444936"
+   },
+   {
+    "camp": "Patronat (TPE)",
+    "qui": "Marc Sanchez, SDI",
+    "texte": "Sur la petite hausse actuelle : « Pour 22 € nets supplémentaires versés à un salarié, son employeur doit en débourser 55. » À +200 €, l'argument du coût pour les TPE pèse mécaniquement plus.",
+    "media": "TPE Actu, 7 nov. 2026",
+    "url": "https://tpeactu.fr/2026/11/07/smic-1500-euros-nets-hausse-tpe-syndicats/"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Jean-Luc Mélenchon",
+    "texte": "Sur la hausse proposée par le gouvernement (1 502 €) : « De qui se moque-t-il ? »",
+    "media": "L'insoumission",
+    "url": "https://linsoumission.fr/2026/11/12/smic-macron-lecornu-escroquerie/"
+   },
+   {
+    "qui": "Économistes en désaccord avec le gouvernement",
+    "texte": "Éric Heyer (OFCE) estime la perte à environ 34 500 emplois pour +15 %, en comptant l'effet du pouvoir d'achat. Clément Carbonnier (Paris 1) juge que les modèles surestiment l'effet sur l'emploi.",
+    "media": "franceinfo (Vrai ou faux)",
+    "url": "https://www.franceinfo.fr/vrai-ou-fake/vrai-ou-faux-une-hausse-du-smic-a-1-700-euros-entrainerait-elle-la-destruction-de-230-000-emplois-comme-l-affirme-le-gouvernement_8274335.html"
+   },
+   {
+    "qui": "Argument LFI",
+    "texte": "Les exonérations de cotisations patronales sont passées de 40 Md€ (2018) à 80 Md€ (2024) sans faire monter les salaires.",
+    "media": "L'insoumission",
+    "url": "https://linsoumission.fr/2026/11/12/smic-macron-lecornu-escroquerie/"
+   }
+  ],
+  "tensions": [
+   "La mesure est « immédiate », mais son coût n'est pas écrit : le financement n'est donné qu'en global.",
+   "Le gouvernement estime que sa propre hausse de 1,6 % coûte 5 000 à 20 000 emplois. Appliquer la même logique à +15 % donne un ordre de grandeur proche de 230 000, mais la méthode n'est pas publiée.",
+   "Le RN critique la hausse du Smic tout en proposant +10 % sur les salaires, financés par une exonération de charges, donc par l'État.",
+   "Les estimations vont de 34 500 à 230 000 emplois. Tout dépend d'une hypothèse : les allègements de charges suivent-ils le Smic ou restent-ils gelés ?"
+  ],
+  "monde": [
+   {
+    "pays": "Allemagne",
+    "texte": "Salaire minimum relevé d'environ 15 % en 2022 (à 12 € de l'heure). Selon Clément Carbonnier, aucune destruction massive d'emplois n'a été constatée.",
+    "media": "franceinfo",
+    "url": "https://www.franceinfo.fr/vrai-ou-fake/vrai-ou-faux-une-hausse-du-smic-a-1-700-euros-entrainerait-elle-la-destruction-de-230-000-emplois-comme-l-affirme-le-gouvernement_8274335.html"
+   },
+   {
+    "pays": "Espagne",
+    "texte": "+22 % en 2019. Les études sur l'effet sur l'emploi sont encore en cours.",
+    "media": "franceinfo",
+    "url": "https://www.franceinfo.fr/vrai-ou-fake/vrai-ou-faux-une-hausse-du-smic-a-1-700-euros-entrainerait-elle-la-destruction-de-230-000-emplois-comme-l-affirme-le-gouvernement_8274335.html"
+   },
+   {
+    "pays": "Royaume-Uni",
+    "texte": "+10 % en 2024. Les études sur l'effet sur l'emploi sont encore en cours.",
+    "media": "franceinfo",
+    "url": "https://www.franceinfo.fr/vrai-ou-fake/vrai-ou-faux-une-hausse-du-smic-a-1-700-euros-entrainerait-elle-la-destruction-de-230-000-emplois-comme-l-affirme-le-gouvernement_8274335.html"
+   }
+  ],
+  "resume": "À gauche, tout le monde veut environ 1 700 €. Le vrai désaccord porte sur le nombre d'emplois perdus (de 34 500 à 230 000 selon les hypothèses) et sur qui paie : l'employeur ou l'État.",
+  "eco": {
+   "cout": "Pour l'État, pas de coût direct : c'est l'employeur qui paie environ +200 € net par salarié au Smic. Mais si les allègements de cotisations suivent le Smic, ils coûtent plus cher aux comptes publics.",
+   "financement": "Payé par les entreprises. LFI ne chiffre pas d'aide spécifique aux TPE dans ce chapitre.",
+   "rapporte": "Plus de pouvoir d'achat, donc de consommation et de cotisations. Coût en emplois estimé entre ~34 500 (OFCE) et 230 000 (gouvernement).",
+   "chiffre": "Coût emplois : 34 500 à 230 000",
+   "sources": [
+    {
+     "media": "franceinfo",
+     "url": "https://www.franceinfo.fr/vrai-ou-fake/vrai-ou-faux-une-hausse-du-smic-a-1-700-euros-entrainerait-elle-la-destruction-de-230-000-emplois-comme-l-affirme-le-gouvernement_8274335.html"
+    }
+   ]
+  }
+ },
+ "garantir-une-retraite-digne-1": {
+  "maj": "13 nov. 2026",
+  "concret": [
+   "Aujourd'hui, l'âge légal monte progressivement vers 64 ans depuis la réforme de 2023.",
+   "LFI veut d'abord abroger la réforme de 2023, puis revenir pas à pas à 60 ans à taux plein après 40 annuités.",
+   "L'Institut Montaigne estimait en 2024 le paquet retraites du Nouveau Front populaire (60 ans, minimum de pension au Smic, années de RSA comptées) à environ 58 Md€ par an en 2027, avec une fourchette de 49 à 67 Md€.",
+   "Dans ce chiffrage, le retour sur la réforme de 2010 (62 ans) pèse 27 Md€ et l'abrogation de celle de 2023 pèse 8,2 Md€."
+  ],
+  "similaires": [
+   {
+    "camp": "RN",
+    "prop": "Départ à 62 ans, voire 60 ans pour ceux qui ont commencé à travailler tôt (avant 20 ans, avec 40 annuités)"
+   },
+   {
+    "camp": "PS / Écologistes / PCF",
+    "prop": "Abrogation de la réforme de 2023, inscrite dans le programme NFP de 2024"
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Économistes",
+    "qui": "Gilbert Cette, président du Conseil d'orientation des retraites",
+    "texte": "Cité par l'Institut Montaigne : le seul retour à 60 ans « pourrait induire un coût annuel pour les finances publiques compris entre 50 Md€ et 120 Md€ », si l'on compte la perte de recettes fiscales.",
+    "media": "Institut Montaigne",
+    "url": "https://www.institutmontaigne.org/legislatives-2024/nouveau-front-populaire/abroger-la-reforme-des-retraites-restaurer-la-retraite-a-60-ans-en-prenant-en-compte-le-rsa-en-portant-le-minimum-contributif-au-smic/"
+   },
+   {
+    "camp": "Think tank libéral",
+    "qui": "Institut Montaigne",
+    "texte": "Juge que la mesure « pourrait constituer une rupture importante ». Le financement devrait suivre le même calendrier que la dépense pour ne pas creuser le déficit, alors que la France est sous procédure européenne pour déficit excessif.",
+    "media": "Institut Montaigne",
+    "url": "https://www.institutmontaigne.org/legislatives-2024/nouveau-front-populaire/abroger-la-reforme-des-retraites-restaurer-la-retraite-a-60-ans-en-prenant-en-compte-le-rsa-en-portant-le-minimum-contributif-au-smic/"
+   },
+   {
+    "camp": "Faisabilité politique",
+    "qui": "Institut Montaigne",
+    "texte": "L'abrogation de 2023 peut rassembler au-delà de la gauche, mais le reste est moins consensuel : « En cas de majorité relative, il paraît improbable qu'ils puissent être votés. »",
+    "media": "Institut Montaigne",
+    "url": "https://www.institutmontaigne.org/legislatives-2024/nouveau-front-populaire/abroger-la-reforme-des-retraites-restaurer-la-retraite-a-60-ans-en-prenant-en-compte-le-rsa-en-portant-le-minimum-contributif-au-smic/"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Équipe de campagne (2024)",
+    "texte": "Elle juge la mesure applicable juridiquement et politiquement forte, surtout sur l'âge légal, même sans majorité absolue.",
+    "media": "Institut Montaigne",
+    "url": "https://www.institutmontaigne.org/legislatives-2024/nouveau-front-populaire/abroger-la-reforme-des-retraites-restaurer-la-retraite-a-60-ans-en-prenant-en-compte-le-rsa-en-portant-le-minimum-contributif-au-smic/"
+   },
+   {
+    "qui": "Analyse juridique",
+    "texte": "L'Institut Montaigne ne voit « pas de difficulté a priori » sur la constitutionnalité d'une telle loi.",
+    "media": "Institut Montaigne",
+    "url": "https://www.institutmontaigne.org/legislatives-2024/nouveau-front-populaire/abroger-la-reforme-des-retraites-restaurer-la-retraite-a-60-ans-en-prenant-en-compte-le-rsa-en-portant-le-minimum-contributif-au-smic/"
+   }
+  ],
+  "tensions": [
+   "Le chiffrage le plus cité date de 2024 : le programme 2027 n'est pas encore chiffré mesure par mesure.",
+   "Les estimations vont de 50 à 120 Md€ selon qu'on compte ou non les pertes d'impôts et de cotisations dues aux départs plus précoces.",
+   "Le RN promet aussi un retour vers 60-62 ans : le débat porte surtout sur l'ampleur et le financement."
+  ],
+  "monde": [],
+  "resume": "Revenir à 60 ans, c'est populaire mais cher : de 50 à 120 milliards par an selon les estimations. Tout dépend de qui paie.",
+  "eco": {
+   "cout": "Environ 58 Md€ par an en 2027 pour le paquet retraites NFP (fourchette 49 à 67 Md€). Jusqu'à 50 à 120 Md€ pour le seul retour à 60 ans selon Gilbert Cette, en comptant les recettes perdues.",
+   "financement": "LFI annonce, pour tout son programme, 106,4 Md€ de recettes nouvelles en 2027, sans financement fléché mesure par mesure. Le détail est sur son site.",
+   "rapporte": "Plus de temps libre et d'emplois libérés pour les jeunes selon LFI, mais moins d'actifs qui cotisent.",
+   "chiffre": "≈ 58 Md€ / an",
+   "sources": [
+    {
+     "media": "Institut Montaigne",
+     "url": "https://www.institutmontaigne.org/legislatives-2024/nouveau-front-populaire/abroger-la-reforme-des-retraites-restaurer-la-retraite-a-60-ans-en-prenant-en-compte-le-rsa-en-portant-le-minimum-contributif-au-smic/"
+    },
+    {
+     "media": "L'Avenir en commun",
+     "url": "https://www.lavenirencommun.org/financement/"
+    }
+   ]
+  }
+ },
+ "reunir-une-assemblee-constituante-pour-passer-a-la-6e-republique-1": {
+  "maj": "13 nov. 2026",
+  "concret": [
+   "LFI veut passer par un référendum (article 11 de la Constitution) pour convoquer une Assemblée constituante, qui écrirait une nouvelle Constitution.",
+   "Dans la 6e République proposée : proportionnelle à l'Assemblée, fin du 49.3, et débat obligatoire à l'Assemblée pour toute pétition de plus de 500 000 signatures.",
+   "Aujourd'hui, réviser la Constitution passe par l'article 89 : vote du même texte par l'Assemblée et le Sénat, puis référendum ou Congrès."
+  ],
+  "similaires": [
+   {
+    "camp": "RN",
+    "prop": "Référendums sur l'immigration et la préférence nationale, RIC et proportionnelle : il vise lui aussi l'article 11"
+   },
+   {
+    "camp": "LR (Retailleau)",
+    "prop": "Référendum sur l'immigration et le droit du sol"
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Juristes",
+    "qui": "110 constitutionnalistes, tribune dans Le Monde",
+    "texte": "L'article 11 ne permet pas de réviser la Constitution. « Que la Constitution soit complexe à réviser ne donne pas le droit de s'en affranchir. » Le Conseil constitutionnel peut contrôler un décret de référendum avant le vote (jurisprudence Hauchemaille, 2000).",
+    "media": "Public Sénat, 12 nov. 2026",
+    "url": "https://www.publicsenat.fr/actualites/politique/revision-de-la-constitution-110-constitutionnalistes-rappellent-a-marine-le-pen-et-jean-luc-melenchon-quils-ne-pourront-pas-avoir-recours-au-referendum-via-larticle-11"
+   },
+   {
+    "camp": "Juristes",
+    "qui": "Mathieu Carpentier, professeur à Toulouse Capitole",
+    "texte": "Estime que le sujet a été « capturé » par une partie de la droite et de la gauche à des fins électorales.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/revision-de-la-constitution-110-constitutionnalistes-rappellent-a-marine-le-pen-et-jean-luc-melenchon-quils-ne-pourront-pas-avoir-recours-au-referendum-via-larticle-11"
+   },
+   {
+    "camp": "Juristes",
+    "qui": "Julien Bonnet, initiateur de la tribune",
+    "texte": "La tribune « ne vise pas un candidat en particulier » : elle s'applique à Mélenchon comme à Le Pen.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/revision-de-la-constitution-110-constitutionnalistes-rappellent-a-marine-le-pen-et-jean-luc-melenchon-quils-ne-pourront-pas-avoir-recours-au-referendum-via-larticle-11"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Argument des partisans de l'article 11",
+    "texte": "Ils invoquent le précédent de 1962, quand de Gaulle a fait élire le président au suffrage universel par référendum (article 11). Les constitutionnalistes répondent que c'était déjà irrégulier à l'époque.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/revision-de-la-constitution-110-constitutionnalistes-rappellent-a-marine-le-pen-et-jean-luc-melenchon-quils-ne-pourront-pas-avoir-recours-au-referendum-via-larticle-11"
+   }
+  ],
+  "tensions": [
+   "Le RN et LFI défendent tous deux l'article 11 pour contourner le Sénat, sur des sujets opposés.",
+   "Le Conseil constitutionnel peut bloquer le décret de référendum avant le vote : la mesure pourrait s'arrêter avant d'avoir commencé.",
+   "Le contenu exact de la future Constitution dépend de l'Assemblée constituante, pas du programme."
+  ],
+  "monde": [
+   {
+    "pays": "France, 1962",
+    "texte": "De Gaulle utilise l'article 11 pour l'élection du président au suffrage universel. Le Conseil d'État avait rendu un avis défavorable.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/revision-de-la-constitution-110-constitutionnalistes-rappellent-a-marine-le-pen-et-jean-luc-melenchon-quils-ne-pourront-pas-avoir-recours-au-referendum-via-larticle-11"
+   },
+   {
+    "pays": "France, 1969",
+    "texte": "Le référendum de De Gaulle sur le Sénat et les régions échoue, et il démissionne.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/revision-de-la-constitution-110-constitutionnalistes-rappellent-a-marine-le-pen-et-jean-luc-melenchon-quils-ne-pourront-pas-avoir-recours-au-referendum-via-larticle-11"
+   }
+  ],
+  "resume": "LFI veut changer de République par référendum, mais 110 juristes rappellent que la voie choisie (l'article 11) n'est pas faite pour réviser la Constitution.",
+  "eco": {
+   "cout": "Faible : organiser un référendum puis élire une assemblée constituante (coût d'une élection nationale). Aucun chiffrage officiel.",
+   "financement": "Budget de l'État (organisation des scrutins).",
+   "rapporte": "Pas d'effet budgétaire direct.",
+   "chiffre": "Coût marginal",
+   "sources": []
+  }
+ },
+ "assumer-l-independance-de-la-france-dans-le-monde-1": {
+  "maj": "13 nov. 2026",
+  "concret": [
+   "L'OTAN a deux étages : l'Alliance (le traité, la défense mutuelle) et le commandement militaire intégré (états-majors et planification communs).",
+   "LFI veut quitter immédiatement le commandement intégré, puis sortir de l'Alliance par étapes.",
+   "Le même chapitre rejette l'objectif de 5 % du PIB pour la défense demandé par les États-Unis."
+  ],
+  "similaires": [
+   {
+    "camp": "RN",
+    "prop": "Programme 2022 : porter le budget de la défense à 55 Md€ et renforcer la souveraineté. Pas de sortie de l'OTAN dans les 22 mesures."
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Analyse défense",
+    "qui": "Armees.com",
+    "texte": "Quitter le commandement intégré ne veut pas dire quitter le traité. Le projet ne donne pas de calendrier opérationnel détaillé. Restent ouvertes la place des officiers français dans les structures alliées et la planification commune.",
+    "media": "Armees.com, 8 nov. 2026",
+    "url": "https://armees.com/melenchon-sortie-commandement-integre-otan-2027-8-novembre/"
+   },
+   {
+    "camp": "Experts défense",
+    "qui": "Gal Olivier Passot (Irsem) et Tsiporah Fried (Hudson Institute)",
+    "texte": "Ils estiment que la démarche de LFI « diffère profondément du réalisme gaullien » et pointent des risques pour l'armée, l'industrie et la crédibilité européenne de la France.",
+    "media": "Atlantico, 12 nov. 2026",
+    "url": "https://atlantico.fr/article/decryptage/pulsions-de-rupture-avec-otan-ces-4-dangers-auquel-lfi-exposerait-la-france-avec-son-programme-olivier-passot-tsiporah-fried"
+   },
+   {
+    "camp": "Gouvernement",
+    "qui": "Sébastien Lecornu",
+    "texte": "A rétorqué « Nous sommes souverains » face à Mélenchon sur l'OTAN (article non consulté en entier).",
+    "media": "Le JDD",
+    "url": "https://www.lejdd.fr/politique/nous-sommes-souverains-sebastien-lecornu-tance-jean-luc-melenchon-sur-lotan-144029"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "LFI",
+    "texte": "Revendique l'héritage de De Gaulle en 1966 et défend une diplomatie non alignée, critique des interventions militaires américaines.",
+    "media": "Atlantico / Armees.com",
+    "url": "https://armees.com/melenchon-sortie-commandement-integre-otan-2027-8-novembre/"
+   }
+  ],
+  "tensions": [
+   "En 1966, de Gaulle avait quitté le commandement intégré mais était resté dans l'Alliance. LFI va plus loin avec une sortie complète à terme.",
+   "La sortie arriverait dans un contexte de guerre en Ukraine et de réarmement européen."
+  ],
+  "monde": [
+   {
+    "pays": "France, 1966-2009",
+    "texte": "Retrait du commandement militaire intégré en 1966, tout en restant membre de l'Alliance. Retour complet dans les structures militaires en 2009.",
+    "media": "Armees.com",
+    "url": "https://armees.com/melenchon-sortie-commandement-integre-otan-2027-8-novembre/"
+   }
+  ],
+  "resume": "Sortir du commandement de l'OTAN, la France l'a déjà fait en 1966. Le débat porte sur la suite : une sortie complète de l'Alliance en pleine guerre en Europe.",
+  "eco": {
+   "cout": "Non chiffré. Le même chapitre rejette l'objectif de défense de 5 % du PIB, ce qui pèse sur la dépense militaire future.",
+   "financement": "Non précisé.",
+   "rapporte": "Non chiffré : les effets sur l'industrie de défense et les coopérations sont débattus.",
+   "chiffre": "Non chiffré",
+   "sources": [
+    {
+     "media": "LCP",
+     "url": "https://lcp.fr/actualites/presidentielle-2027-ce-qui-change-dans-le-nouveau-programme-de-jean-luc-melenchon-444841"
+    }
+   ]
+  }
+ },
+ "faire-la-revolution-fiscale-1": {
+  "maj": "13 nov. 2026",
+  "concret": [
+   "Le barème actuel de l'impôt sur le revenu a 5 tranches (0 %, 11 %, 30 %, 41 %, 45 %).",
+   "LFI veut 14 tranches pour rendre l'impôt plus progressif. Les seuils et taux du programme 2027 ne sont pas détaillés ici.",
+   "En 2022, l'Institut Montaigne n'avait pu chiffrer qu'une partie : passer le taux maximal de 45 % à 65 % rapporterait environ 4,7 Md€ par an.",
+   "Ce taux de 65 % toucherait environ 65 600 foyers (0,2 % des contribuables), au-delà d'environ 158 000 € par part."
+  ],
+  "similaires": [
+   {
+    "camp": "RN",
+    "prop": "Pas de hausse de l'impôt sur le revenu. Le RN veut exonérer d'impôt sur le revenu les moins de 30 ans et remplacer l'IFI par un impôt sur la fortune financière."
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Think tank libéral",
+    "qui": "Institut Montaigne",
+    "texte": "Plus d'impôt pèse sur la croissance, et l'effet augmente nettement au-delà de 60 % de taux marginal selon les études citées. Aucun pays de l'OCDE n'a gardé longtemps des taux maximaux nettement plus élevés ces vingt dernières années.",
+    "media": "Institut Montaigne (2022)",
+    "url": "https://www.institutmontaigne.org/presidentielle-2022/legislatives-2022/nupes/reformer-limpot-sur-le-revenu-et-creer-quatorze-tranches/"
+   },
+   {
+    "camp": "Think tank libéral",
+    "qui": "Institut Montaigne",
+    "texte": "Le taux maximal français, prélèvements sociaux compris, est déjà d'environ 55 %, contre environ 43 % en moyenne dans l'OCDE.",
+    "media": "Institut Montaigne (2022)",
+    "url": "https://www.institutmontaigne.org/presidentielle-2022/legislatives-2022/nupes/reformer-limpot-sur-le-revenu-et-creer-quatorze-tranches/"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Jean-Luc Mélenchon (2022)",
+    "texte": "« Ce n'est pas normal que la classe moyenne porte sur son dos toute la société. » Son équipe conteste l'effet négatif sur la croissance et compte sur l'investissement financé par ces recettes.",
+    "media": "Institut Montaigne, citant BFMTV",
+    "url": "https://www.institutmontaigne.org/presidentielle-2022/legislatives-2022/nupes/reformer-limpot-sur-le-revenu-et-creer-quatorze-tranches/"
+   },
+   {
+    "qui": "Travaux Piketty, Landais, Saez",
+    "texte": "Cités par l'Institut : le système fiscal français est peu progressif jusqu'aux classes moyennes et régressif pour les 5 % les plus riches.",
+    "media": "Institut Montaigne",
+    "url": "https://www.institutmontaigne.org/presidentielle-2022/legislatives-2022/nupes/reformer-limpot-sur-le-revenu-et-creer-quatorze-tranches/"
+   }
+  ],
+  "tensions": [
+   "Le chiffrage disponible date de 2022 et ne couvre que la tranche du haut.",
+   "Selon l'Institut Montaigne, l'injustice vient moins de l'impôt sur le revenu que du plafonnement des cotisations et des revenus du capital."
+  ],
+  "monde": [
+   {
+    "pays": "France, 1981",
+    "texte": "L'impôt sur le revenu comptait 14 tranches. Il en avait 7 en 1998 (taux max 54 %), puis 5 depuis Hollande.",
+    "media": "Institut Montaigne",
+    "url": "https://www.institutmontaigne.org/presidentielle-2022/legislatives-2022/nupes/reformer-limpot-sur-le-revenu-et-creer-quatorze-tranches/"
+   },
+   {
+    "pays": "Japon, Danemark",
+    "texte": "Seuls pays de l'OCDE avec un taux maximal légèrement supérieur à celui de la France.",
+    "media": "Institut Montaigne",
+    "url": "https://www.institutmontaigne.org/presidentielle-2022/legislatives-2022/nupes/reformer-limpot-sur-le-revenu-et-creer-quatorze-tranches/"
+   }
+  ],
+  "resume": "Revenir à 14 tranches comme en 1981 : LFI y voit de la justice fiscale, ses opposants un frein à la croissance dans un pays déjà très taxé.",
+  "eco": {
+   "cout": "C'est une recette, pas une dépense.",
+   "financement": "Payé par les hauts revenus : en 2022, une tranche à 65 % visait environ 65 600 foyers.",
+   "rapporte": "Environ 4,7 Md€ par an pour la seule hausse du taux maximal (chiffrage 2022, partiel). Les autres tranches ne sont pas chiffrées.",
+   "chiffre": "≈ +4,7 Md€ / an (partiel)",
+   "sources": [
+    {
+     "media": "Institut Montaigne",
+     "url": "https://www.institutmontaigne.org/presidentielle-2022/legislatives-2022/nupes/reformer-limpot-sur-le-revenu-et-creer-quatorze-tranches/"
+    }
+   ]
+  }
+ },
+ "rn-4": {
+  "maj": "13 nov. 2026",
+  "concret": [
+   "Faire passer la TVA de 20 % à 5,5 % sur carburants, fioul, gaz et électricité.",
+   "Coût estimé : 12 Md€ par an selon le RN, 10,3 Md€ selon l'Institut Montaigne (8,2 à 12,4 Md€), 16,8 Md€ selon Bercy en 2024.",
+   "Marine Le Pen promettait en 2021 un gain de « 340-350 euros par an » par ménage, un chiffre non vérifié."
+  ],
+  "similaires": [
+   {
+    "camp": "LFI",
+    "prop": "Bloquer les prix des produits de première nécessité, dont l'énergie"
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Économistes",
+    "qui": "Patrice Geoffron, Paris-Dauphine, Cercle des économistes",
+    "texte": "Les carburants ne sont pas éligibles aux taux réduits de TVA de la directive européenne : « une mesure que la France n'a pas le droit d'adopter seule ».",
+    "media": "Terra Nova, 11 nov. 2026",
+    "url": "https://tnova.fr/economie-social/finances-macro-economie/baisser-la-tva-sur-les-carburants/"
+   },
+   {
+    "camp": "Économistes",
+    "qui": "Patrice Geoffron",
+    "texte": "La baisse profite d'abord aux gros rouleurs. Lors de la remise de 2022, les 30 % les plus aisés ont reçu environ 50 € contre 23 € pour les 10 % les plus modestes.",
+    "media": "Terra Nova",
+    "url": "https://tnova.fr/economie-social/finances-macro-economie/baisser-la-tva-sur-les-carburants/"
+   },
+   {
+    "camp": "Économistes",
+    "qui": "Patrice Geoffron",
+    "texte": "Elle n'est pas entièrement répercutée à la pompe et soutient la demande quand l'offre manque. Selon le CAE, la remise de 2022 aurait ajouté 48 à 93 kg de CO₂ par foyer motorisé.",
+    "media": "Terra Nova",
+    "url": "https://tnova.fr/economie-social/finances-macro-economie/baisser-la-tva-sur-les-carburants/"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Renaud Labaye (RN)",
+    "texte": "Une partie du coût reviendrait à l'État en recettes, grâce au pouvoir d'achat rendu aux ménages.",
+    "media": "MoneyVox, juin 2024",
+    "url": "https://www.moneyvox.fr/votre-argent/actualites/98274/electricite-gaz-carburant-baisser-la-tva-a-5,5-comme-le-promet-le-rn-combien-ca-coute"
+   }
+  ],
+  "tensions": [
+   "Les entreprises récupèrent déjà la TVA : elles profitent peu de la mesure, alors que transporteurs, BTP et agriculteurs sont parmi les plus touchés.",
+   "Le RN promet aussi 140 Md€ d'économies : cette baisse de recettes s'ajoute au besoin d'économies."
+  ],
+  "monde": [
+   {
+    "pays": "Espagne et Pologne",
+    "texte": "Ont baissé la TVA sur les carburants. La Commission européenne leur a signalé en mars 2026 que cela enfreignait le droit européen.",
+    "media": "Terra Nova",
+    "url": "https://tnova.fr/economie-social/finances-macro-economie/baisser-la-tva-sur-les-carburants/"
+   },
+   {
+    "pays": "Allemagne",
+    "texte": "Rabais fiscal en 2026 : 12 des 17 centimes promis répercutés à la pompe.",
+    "media": "Terra Nova",
+    "url": "https://tnova.fr/economie-social/finances-macro-economie/baisser-la-tva-sur-les-carburants/"
+   },
+   {
+    "pays": "Hongrie",
+    "texte": "Plafond des prix à la pompe en 2021, abandonné fin 2022 quand des stations se sont retrouvées à sec.",
+    "media": "Terra Nova",
+    "url": "https://tnova.fr/economie-social/finances-macro-economie/baisser-la-tva-sur-les-carburants/"
+   }
+  ],
+  "resume": "Une baisse de TVA visible tout de suite sur la facture, mais coûteuse (10 à 17 Md€), mal ciblée et, pour les carburants, contraire au droit européen.",
+  "eco": {
+   "cout": "12 Md€ par an selon le RN, 10,3 Md€ selon l'Institut Montaigne, 16,8 Md€ selon Bercy (2024). Pour les seuls carburants : environ 5,7 Md€ nets selon Terra Nova.",
+   "financement": "Inclus dans les 30 Md€ de baisses d'impôts nettes du contre-budget, financées par les 140 Md€ d'économies annoncées.",
+   "rapporte": "Selon le RN, une partie revient en recettes grâce au pouvoir d'achat. Gain annoncé : « 340-350 euros par an » par ménage (2021, non vérifié).",
+   "chiffre": "10 à 17 Md€ / an",
+   "sources": [
+    {
+     "media": "MoneyVox",
+     "url": "https://www.moneyvox.fr/votre-argent/actualites/98274/electricite-gaz-carburant-baisser-la-tva-a-5,5-comme-le-promet-le-rn-combien-ca-coute"
+    },
+    {
+     "media": "Terra Nova",
+     "url": "https://tnova.fr/economie-social/finances-macro-economie/baisser-la-tva-sur-les-carburants/"
+    }
+   ]
+  }
+ },
+ "rn-5": {
+  "maj": "13 nov. 2026",
+  "concret": [
+   "Les entreprises qui augmentent les salaires de 10 % (jusqu'à 3 Smic) ne paieraient pas de cotisations patronales sur la hausse.",
+   "La hausse reste au choix de l'employeur : rien d'obligatoire.",
+   "Une proposition de loi RN dans ce sens (exonération pendant 3 ans) a été rejetée par l'Assemblée en 2023."
+  ],
+  "similaires": [
+   {
+    "camp": "LFI / PS",
+    "prop": "Smic à 1 700 € net, imposé et payé par l'employeur"
+   },
+   {
+    "camp": "Horizons / LR",
+    "prop": "Heures supplémentaires défiscalisées et sans cotisations"
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Débat de méthode",
+    "qui": "Public Sénat",
+    "texte": "Marine Le Pen s'est longtemps opposée aux hausses du Smic à cause du coût pour les entreprises, et elle a dit en 2025 qu'on ne peut plus baisser le coût du travail.",
+    "media": "Public Sénat, 30 oct. 2026",
+    "url": "https://www.publicsenat.fr/actualites/economie/presidentielle-que-proposent-les-candidats-pour-augmenter-les-salaires"
+   },
+   {
+    "camp": "Débat de méthode",
+    "qui": "Analyse",
+    "texte": "La hausse étant facultative, rien ne garantit que les entreprises l'appliquent. L'exonération reporte le coût sur les comptes sociaux, donc sur l'État."
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Sébastien Chenu (RN)",
+    "texte": "Reproche au gouvernement de « s'être enfermé dans cet enjeu d'augmentation du Smic ». Le RN veut une hausse jusqu'à 3 Smic, négociée avec les entreprises, pour ne pas oublier les salariés à 2 500-3 500 €.",
+    "media": "LCP, 9 nov. 2026",
+    "url": "https://lcp.fr/actualites/la-hausse-du-smic-ne-satisfera-personne-reagit-sebastien-chenu-444936"
+   }
+  ],
+  "tensions": [
+   "L'exonération de cotisations se heurte à l'objectif de 140 Md€ d'économies du contre-budget RN.",
+   "À la différence du Smic, le salarié n'a aucun droit à cette hausse."
+  ],
+  "monde": [],
+  "resume": "Le RN mise sur une hausse volontaire payée par l'État via les cotisations, quand la gauche veut une hausse obligatoire payée par l'employeur.",
+  "eco": {
+   "cout": "Non chiffré par le RN : l'État renoncerait aux cotisations patronales sur la hausse de salaire.",
+   "financement": "Pas de financement précis, à rapprocher des 140 Md€ d'économies du contre-budget.",
+   "rapporte": "Hausse de salaire nette pour les salariés concernés, si l'employeur le décide.",
+   "chiffre": "Non chiffré",
+   "sources": [
+    {
+     "media": "LCP",
+     "url": "https://lcp.fr/actualites/la-hausse-du-smic-ne-satisfera-personne-reagit-sebastien-chenu-444936"
+    }
+   ]
+  }
+ },
+ "rn-9-4": {
+  "maj": "13 nov. 2026",
+  "concret": [
+   "Ceux qui ont commencé à travailler avant 20 ans pourraient partir à 60 ans après 40 annuités.",
+   "Marine Le Pen a confirmé le 27 août 2026 un départ à 62 ans, « voire à 60 ans pour certaines carrières ».",
+   "Le RN refuse tout allongement de l'âge de départ et veut réindexer les retraites sur l'inflation."
+  ],
+  "similaires": [
+   {
+    "camp": "LFI",
+    "prop": "60 ans à taux plein pour tous après 40 annuités"
+   },
+   {
+    "camp": "Gouvernement",
+    "prop": "64 ans, réforme de 2023"
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Analyse",
+    "qui": "Parlons Politique",
+    "texte": "Le coût « inquiète les défenseurs de l'équilibre des comptes sociaux ». Le RN ne publie pas de chiffrage, et les actifs plus jeunes pourraient payer la note sans économies en face.",
+    "media": "Parlons Politique, 2 sept. 2026",
+    "url": "https://www.parlons-politique.fr/elections/marine-le-pen-impose-sa-ligne-au-rn-avant-2027-entre-interdiction-du-voile-et-promesse-de-retraite-a-60-ans_26214/"
+   },
+   {
+    "camp": "Interne au RN",
+    "qui": "Jordan Bardella",
+    "texte": "S'est montré plus ouvert à faire évoluer cette ligne, avec une place possible pour la capitalisation.",
+    "media": "Parlons Politique",
+    "url": "https://www.parlons-politique.fr/elections/marine-le-pen-impose-sa-ligne-au-rn-avant-2027-entre-interdiction-du-voile-et-promesse-de-retraite-a-60-ans_26214/"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "Marine Le Pen",
+    "texte": "Maintient la ligne de 2022 : la mesure vise d'abord les salariés entrés tôt dans la vie active et les métiers pénibles.",
+    "media": "Parlons Politique",
+    "url": "https://www.parlons-politique.fr/elections/marine-le-pen-impose-sa-ligne-au-rn-avant-2027-entre-interdiction-du-voile-et-promesse-de-retraite-a-60-ans_26214/"
+   },
+   {
+    "qui": "Contre-budget RN",
+    "texte": "Une réforme avec un « pilier de capitalisation » doit être présentée dans les prochaines semaines.",
+    "media": "Planète Grandes Écoles",
+    "url": "https://www.planetegrandesecoles.com/budget-marine-le-pen-2027-mesures-contre-budget-rn"
+   }
+  ],
+  "tensions": [
+   "Le Pen et Bardella ne disent pas la même chose sur les retraites.",
+   "Les conditions exactes (durée, pénibilité) et le coût ne sont pas publiés."
+  ],
+  "monde": [],
+  "resume": "Le RN promet 60 ans pour les carrières longues et 62 ans pour les autres, sans chiffrage, et avec un désaccord interne sur la capitalisation.",
+  "eco": {
+   "cout": "Non chiffré par le RN pour 2027.",
+   "financement": "Non précisé. Une réforme avec un « pilier de capitalisation » est annoncée.",
+   "rapporte": "—",
+   "chiffre": "Non chiffré",
+   "sources": [
+    {
+     "media": "Parlons Politique",
+     "url": "https://www.parlons-politique.fr/elections/marine-le-pen-impose-sa-ligne-au-rn-avant-2027-entre-interdiction-du-voile-et-promesse-de-retraite-a-60-ans_26214/"
+    },
+    {
+     "media": "Planète Grandes Écoles",
+     "url": "https://www.planetegrandesecoles.com/budget-marine-le-pen-2027-mesures-contre-budget-rn"
+    }
+   ]
+  }
+ },
+ "rn-cb-1": {
+  "maj": "13 nov. 2026",
+  "concret": [
+   "Présenté le 6 octobre 2026 : 140 Md€ d'économies nettes par an atteintes en 2032, par rapport à 2026.",
+   "Objectifs : 30 Md€ de baisses d'impôts nettes sur le quinquennat, déficit sous 3 % du PIB en 2030, dette à 112 % du PIB en 2032.",
+   "Principales sources : immigration et préférence nationale, contribution à l'UE plafonnée à 5 Md€, fin des aides aux renouvelables, agences et collectivités (environ 200 000 postes non remplacés), lutte contre la fraude."
+  ],
+  "similaires": [
+   {
+    "camp": "LFI",
+    "prop": "106,4 Md€ de recettes nouvelles et 81,7 Md€ de dépenses nouvelles en 2027, surtout par l'impôt sur les plus riches"
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Think tank patronal",
+    "qui": "Institut de l'Entreprise",
+    "texte": "Retrouve bien 140 Md€, mais juge environ 80 % du montant non documenté, juridiquement fragile ou sans effet sur le déficit. L'amélioration « crédible » serait d'environ 7,5 Md€ en 2031.",
+    "media": "Planète Grandes Écoles, 8 oct. 2026",
+    "url": "https://www.planetegrandesecoles.com/budget-marine-le-pen-2027-mesures-contre-budget-rn"
+   },
+   {
+    "camp": "Gouvernement",
+    "qui": "Roland Lescure, ministre de l'Économie",
+    "texte": "Juge le programme « irréaliste », avec des propositions inapplicables.",
+    "media": "Planète Grandes Écoles",
+    "url": "https://www.planetegrandesecoles.com/budget-marine-le-pen-2027-mesures-contre-budget-rn"
+   },
+   {
+    "camp": "Horizons",
+    "qui": "Édouard Philippe",
+    "texte": "Parle d'« une désinvolture spectaculaire » : selon lui, le principe de réalité finit toujours par s'imposer.",
+    "media": "Planète Grandes Écoles",
+    "url": "https://www.planetegrandesecoles.com/budget-marine-le-pen-2027-mesures-contre-budget-rn"
+   },
+   {
+    "camp": "Juridique",
+    "qui": "Institut de l'Entreprise",
+    "texte": "Baisser de 13,1 Md€ la contribution à l'UE exigerait l'unanimité des États membres.",
+    "media": "Planète Grandes Écoles",
+    "url": "https://www.planetegrandesecoles.com/budget-marine-le-pen-2027-mesures-contre-budget-rn"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "RN",
+    "texte": "La trajectoire actuelle mène au défaut de paiement : seule une rupture permet de l'éviter.",
+    "media": "Planète Grandes Écoles",
+    "url": "https://www.planetegrandesecoles.com/budget-marine-le-pen-2027-mesures-contre-budget-rn"
+   }
+  ],
+  "tensions": [
+   "Les promesses de dépenses (TVA énergie, retraites) s'ajoutent à l'effort d'économies.",
+   "Une grosse partie des économies dépend de la préférence nationale, elle-même fragile juridiquement."
+  ],
+  "monde": [],
+  "resume": "Le RN promet un redressement des comptes, mais la plupart des économistes doutent du chiffrage : 140 Md€ affichés, environ 7,5 jugés crédibles par l'Institut de l'Entreprise.",
+  "eco": {
+   "cout": "C'est le volet d'économies du programme.",
+   "financement": "Sécurité sociale 53,1 Md€, énergie et concessions 29 Md€, immigration 29 Md€, État et collectivités 29 Md€, fraude 23,8 Md€, UE 19,5 Md€ (en 2031, recalcul de l'Institut de l'Entreprise).",
+   "rapporte": "140 Md€ nets affichés en 2032. L'Institut de l'Entreprise en juge environ 7,5 Md€ crédibles (fourchette -25 à +50 Md€) et prévoit un déficit de 5,9 % du PIB en 2027.",
+   "chiffre": "140 Md€ annoncés / ~7,5 jugés crédibles",
+   "sources": [
+    {
+     "media": "Planète Grandes Écoles",
+     "url": "https://www.planetegrandesecoles.com/budget-marine-le-pen-2027-mesures-contre-budget-rn"
+    }
+   ]
+  }
+ },
+ "rn-1-3": {
+  "maj": "13 nov. 2026",
+  "concret": [
+   "C'est la « préférence » ou « priorité nationale » : réserver les aides sociales aux Français, et exiger 5 ans de travail en France aux étrangers pour les prestations de solidarité.",
+   "Le RN veut aussi la priorité nationale pour le logement social et l'emploi.",
+   "Marine Le Pen veut soumettre la préférence nationale à référendum si elle est élue."
+  ],
+  "similaires": [
+   {
+    "camp": "LR (2024)",
+    "prop": "Référendum d'initiative partagée sur l'accès des étrangers aux prestations sociales, censuré par le Conseil constitutionnel en avril 2024"
+   }
+  ],
+  "critiques": [
+   {
+    "camp": "Juristes",
+    "qui": "Les Surligneurs (Clotilde Jégousse)",
+    "texte": "La mesure heurte la Déclaration de 1789, le préambule de 1946 (« nul ne peut être lésé, dans son travail ou son emploi, en raison des origines ») et l'article 1er de la Constitution.",
+    "media": "Les Surligneurs, juin 2024",
+    "url": "https://lessurligneurs.eu/preference-nationale-limpossible-inscription-dans-la-constitution/"
+   },
+   {
+    "camp": "Conseil constitutionnel",
+    "qui": "Décision du 11 avril 2024",
+    "texte": "A rejeté un référendum sur l'accès des étrangers aux aides sociales : conditions jugées disproportionnées et contraires au principe de solidarité nationale.",
+    "media": "Les Surligneurs",
+    "url": "https://lessurligneurs.eu/preference-nationale-limpossible-inscription-dans-la-constitution/"
+   },
+   {
+    "camp": "Juristes",
+    "qui": "110 constitutionnalistes",
+    "texte": "L'article 11 ne peut pas servir à réviser la Constitution, et le Conseil constitutionnel peut contrôler le décret de référendum.",
+    "media": "Public Sénat, 12 nov. 2026",
+    "url": "https://www.publicsenat.fr/actualites/politique/revision-de-la-constitution-110-constitutionnalistes-rappellent-a-marine-le-pen-et-jean-luc-melenchon-quils-ne-pourront-pas-avoir-recours-au-referendum-via-larticle-11"
+   },
+   {
+    "camp": "Économistes",
+    "qui": "Institut de l'Entreprise",
+    "texte": "Sur les 18,1 Md€ d'économies attendues des prestations réservées, il estime qu'elles risquent de heurter le principe d'égalité et le droit européen.",
+    "media": "Planète Grandes Écoles",
+    "url": "https://www.planetegrandesecoles.com/budget-marine-le-pen-2027-mesures-contre-budget-rn"
+   }
+  ],
+  "reponses": [
+   {
+    "qui": "RN",
+    "texte": "Passer par une révision de la Constitution validée par référendum, pour que le peuple tranche directement.",
+    "media": "Public Sénat",
+    "url": "https://www.publicsenat.fr/actualites/politique/revision-de-la-constitution-110-constitutionnalistes-rappellent-a-marine-le-pen-et-jean-luc-melenchon-quils-ne-pourront-pas-avoir-recours-au-referendum-via-larticle-11"
+   }
+  ],
+  "tensions": [
+   "Sans révision de la Constitution, la mesure serait très probablement censurée.",
+   "Une révision par l'article 89 suppose l'accord du Sénat, aujourd'hui hostile au RN."
+  ],
+  "monde": [],
+  "resume": "La mesure phare du RN sur l'immigration se heurte à la Constitution : le débat porte autant sur le droit que sur le fond.",
+  "eco": {
+   "cout": "C'est une économie, pas une dépense.",
+   "financement": "—",
+   "rapporte": "Le contre-budget RN compte 18,1 Md€ d'économies sur les prestations réservées, et environ 29 Md€ en 2031 pour tout le volet immigration. L'Institut de l'Entreprise juge ces gains juridiquement fragiles.",
+   "chiffre": "≈ 18 Md€ d'économies annoncées",
+   "sources": [
+    {
+     "media": "Planète Grandes Écoles",
+     "url": "https://www.planetegrandesecoles.com/budget-marine-le-pen-2027-mesures-contre-budget-rn"
+    }
+   ]
+  }
+ }
+}

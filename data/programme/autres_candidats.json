@@ -1,0 +1,3487 @@
+{
+ "progs": {
+  "PHILIPPE": {
+   "nom": "Horizons",
+   "cand": "Édouard Philippe",
+   "long": "Horizons · propositions d'Édouard Philippe",
+   "badge": "hor",
+   "grad": [
+    "#0f7c8c,#06414a",
+    "#2b6f5e,#123b31"
+   ],
+   "eco": "Édouard Philippe mise sur la baisse des dépenses publiques, dont la moitié de l'effort sur les dépenses sociales, et sur le travail. Pas encore de chiffrage global publié dans nos sources.",
+   "ecoUrl": "https://fr.euronews.com/2026/10/09/presidentielle-2027-edouard-philippe-mise-sur-le-travail-et-la-reduction-des-depenses-publ",
+   "note": "Programme complet pas encore publié : propositions annoncées dans la presse."
+  },
+  "ATTAL": {
+   "nom": "Renaissance",
+   "cand": "Gabriel Attal",
+   "long": "Renaissance · propositions de Gabriel Attal",
+   "badge": "ren",
+   "grad": [
+    "#e0a21b,#7a5408",
+    "#c98a1c,#6b4507"
+   ],
+   "eco": "Gabriel Attal veut inscrire une règle d'or budgétaire dans la Constitution, sans hausse d'impôt pour les ménages, et baisser la dépense sociale pour investir dans l'éducation et l'innovation. Pas de chiffrage global publié dans nos sources.",
+   "ecoUrl": "https://www.elyseescope.com/le-radar/gabriel-attal-programme-propositions-presidentielle-2027",
+   "note": "Programme pas encore finalisé : propositions annoncées, recensées par Elyseescope et Public Sénat."
+  },
+  "GLUCKSMANN": {
+   "nom": "PS / Place publique",
+   "cand": "Raphaël Glucksmann",
+   "long": "Place publique / gauche sociale-démocrate · propositions de Raphaël Glucksmann (vainqueur de la primaire du 11 oct. 2026)",
+   "badge": "ps",
+   "grad": [
+    "#d6336c,#7a1236",
+    "#b02a5b,#5e0f2c"
+   ],
+   "eco": "Raphaël Glucksmann reconnaît que toutes ses propositions dépendent de leur financement. Il annonce 200 Md€ d'investissements publics dans l'énergie sur le quinquennat. Le PS proposait de financer ses mesures sans nouvelle dette, notamment par l'impôt sur les grosses successions.",
+   "ecoUrl": "https://www.gazdaujourdhui.fr/glucksmann-2027-nucleaire-renouvelable/",
+   "note": "Programme en cours de publication : propositions issues de son livre, de sa conférence énergie et de la presse."
+  },
+  "RETAILLEAU": {
+   "nom": "LR",
+   "cand": "Bruno Retailleau",
+   "long": "Les Républicains · propositions de Bruno Retailleau",
+   "badge": "lr",
+   "grad": [
+    "#1c4f91,#0b2346",
+    "#2f5aa8,#132b57"
+   ],
+   "eco": "Bruno Retailleau donne la priorité au désendettement, avec un plan d'économies budgétaires et une baisse des impôts de production. Pas de chiffrage global publié dans nos sources.",
+   "ecoUrl": "https://www.france-vote.fr/actualites/programme-bruno-retailleau-2027",
+   "note": "Programme détaillé pas encore publié en entier : propositions recensées par France-Vote, Public Sénat et la presse."
+  },
+  "ZEMMOUR": {
+   "nom": "Reconquête",
+   "cand": "Éric Zemmour",
+   "long": "Reconquête · Éric Zemmour",
+   "badge": "",
+   "grad": [
+    "#3b3b58,#14142a",
+    "#4a4a6a,#1d1d33"
+   ],
+   "eco": "Pas de chiffrage 2027 publié. En 2022, Éric Zemmour proposait de baisser les impôts de production d'environ 30 Md€.",
+   "ecoUrl": "https://www.france-vote.fr/candidats/eric-zemmour",
+   "note": "Programme 2027 pas encore publié : positions recensées par France-Vote à partir de déclarations, votes et documents de campagne."
+  },
+  "ROUSSEL": {
+   "nom": "PCF",
+   "cand": "Fabien Roussel",
+   "long": "PCF · Fabien Roussel",
+   "badge": "",
+   "grad": [
+    "#c0392b,#5e130b",
+    "#a93226,#4d0f08"
+   ],
+   "eco": "Pas de chiffrage 2027 publié. Le financement repose sur le rétablissement de l'ISF et la remise à plat des exonérations de cotisations patronales.",
+   "ecoUrl": "https://www.france-vote.fr/candidats/fabien-roussel",
+   "note": "Programme 2027 pas encore publié : positions recensées par France-Vote à partir de déclarations, votes et documents de campagne."
+  },
+  "RUFFIN": {
+   "nom": "Debout !",
+   "cand": "François Ruffin",
+   "long": "Debout ! · François Ruffin",
+   "badge": "",
+   "grad": [
+    "#e2723a,#7a320f",
+    "#c9612d,#68290b"
+   ],
+   "eco": "Pas de chiffrage 2027 publié.",
+   "ecoUrl": "https://www.france-vote.fr/candidats/francois-ruffin",
+   "note": "Programme 2027 pas encore publié : positions recensées par France-Vote à partir de déclarations, votes et documents de campagne."
+  },
+  "BERTRAND": {
+   "nom": "LR · Nous France",
+   "cand": "Xavier Bertrand",
+   "long": "LR · Nous France · Xavier Bertrand",
+   "badge": "",
+   "grad": [
+    "#2b4c7e,#101f38",
+    "#355a91,#142844"
+   ],
+   "eco": "Xavier Bertrand refuse de rétablir l'ISF et veut financer ses mesures par la baisse des dépenses publiques. Pas de chiffrage 2027 publié.",
+   "ecoUrl": "https://www.france-vote.fr/candidats/xavier-bertrand",
+   "note": "Programme 2027 pas encore publié : positions recensées par France-Vote à partir de déclarations, votes et documents de campagne."
+  },
+  "LISNARD": {
+   "nom": "Nouvelle Énergie",
+   "cand": "David Lisnard",
+   "long": "Nouvelle Énergie · David Lisnard",
+   "badge": "",
+   "grad": [
+    "#16697a,#07323a",
+    "#1b7a8c,#0a3a44"
+   ],
+   "eco": "David Lisnard propose 200 Md€ de baisse des dépenses publiques, dont 40 Md€ pour le désendettement et 40 Md€ pour baisser les impôts de production.",
+   "ecoUrl": "https://www.france-vote.fr/candidats/david-lisnard",
+   "note": "Programme 2027 pas encore publié : positions recensées par France-Vote à partir de déclarations, votes et documents de campagne."
+  },
+  "TONDELIER": {
+   "nom": "Les Écologistes",
+   "cand": "Marine Tondelier",
+   "long": "Les Écologistes · Marine Tondelier",
+   "badge": "",
+   "grad": [
+    "#2e8b57,#11402a",
+    "#3a9a64,#164a30"
+   ],
+   "eco": "Financement envisagé : taxe Zucman, ISF « vert », TVA verte. Pas de chiffrage global publié.",
+   "ecoUrl": "https://www.france-vote.fr/candidats/marine-tondelier",
+   "note": "Candidature maintenue par son parti, mais les adhérents votent du 10 au 13 décembre 2026 sur un éventuel soutien à un autre candidat de gauche. Positions recensées par France-Vote."
+  },
+  "CAZENEUVE": {
+   "nom": "La Convention",
+   "cand": "Bernard Cazeneuve",
+   "long": "La Convention · Bernard Cazeneuve",
+   "badge": "",
+   "grad": [
+    "#8e3b46,#3f171d",
+    "#9c4652,#46191f"
+   ],
+   "eco": "Bernard Cazeneuve défend la « vérité budgétaire » et une « règle d'or sociale » imposant l'équilibre des comptes sociaux sur cinq ans.",
+   "ecoUrl": "https://www.france-vote.fr/candidats/bernard-cazeneuve",
+   "note": "Programme 2027 pas encore publié : positions recensées par France-Vote à partir de déclarations, votes et documents de campagne."
+  },
+  "BOUAMRANE": {
+   "nom": "PS",
+   "cand": "Karim Bouamrane",
+   "long": "PS · Karim Bouamrane",
+   "badge": "",
+   "grad": [
+    "#e05a8a,#7a1f43",
+    "#d14b7c,#6d1a3b"
+   ],
+   "eco": "Pas de chiffrage publié.",
+   "ecoUrl": "https://www.france-vote.fr/candidats/karim-bouamrane",
+   "note": "Programme 2027 pas encore publié : positions recensées par France-Vote à partir de déclarations, votes et documents de campagne."
+  },
+  "BECHT": {
+   "nom": "Sans étiquette (ex-Renaissance)",
+   "cand": "Olivier Becht",
+   "long": "Sans étiquette (ex-Renaissance) · Olivier Becht",
+   "badge": "",
+   "grad": [
+    "#b08d2a,#4f3e0f",
+    "#c29b30,#584510"
+   ],
+   "eco": "Olivier Becht veut mettre fin à une dépense publique qu'il juge « irresponsable ». Pas de chiffrage publié.",
+   "ecoUrl": "https://www.france-vote.fr/candidats/olivier-becht",
+   "note": "Programme 2027 pas encore publié : positions recensées par France-Vote à partir de déclarations, votes et documents de campagne."
+  },
+  "BATHO": {
+   "nom": "Génération écologie",
+   "cand": "Delphine Batho",
+   "long": "Génération écologie · Delphine Batho",
+   "badge": "",
+   "grad": [
+    "#4c9a2a,#1f420f",
+    "#58a832,#244c12"
+   ],
+   "eco": "Pas de chiffrage publié.",
+   "ecoUrl": "https://www.france-vote.fr/candidats/delphine-batho",
+   "note": "Programme 2027 pas encore publié : positions recensées par France-Vote à partir de déclarations, votes et documents de campagne."
+  },
+  "ARTHAUD": {
+   "nom": "Lutte ouvrière",
+   "cand": "Nathalie Arthaud",
+   "long": "Lutte ouvrière · Nathalie Arthaud",
+   "badge": "",
+   "grad": [
+    "#b71c1c,#4a0a0a",
+    "#c62828,#540b0b"
+   ],
+   "eco": "Financement par l'expropriation des grandes fortunes. Pas de chiffrage.",
+   "ecoUrl": "https://www.france-vote.fr/candidats/nathalie-arthaud",
+   "note": "Programme 2027 pas encore publié : positions recensées par France-Vote à partir de déclarations, votes et documents de campagne."
+  },
+  "DUPONTAIGNAN": {
+   "nom": "Debout la France",
+   "cand": "Nicolas Dupont-Aignan",
+   "long": "Debout la France · Nicolas Dupont-Aignan",
+   "badge": "",
+   "grad": [
+    "#1a3c8a,#0a1a40",
+    "#2348a0,#0d2050"
+   ],
+   "eco": "Pas de chiffrage publié.",
+   "ecoUrl": "https://www.france-vote.fr/candidats/nicolas-dupont-aignan",
+   "note": "Programme 2027 pas encore publié : positions recensées par France-Vote à partir de déclarations, votes et documents de campagne."
+  },
+  "PHILIPPOT": {
+   "nom": "Les Patriotes",
+   "cand": "Florian Philippot",
+   "long": "Les Patriotes · Florian Philippot",
+   "badge": "",
+   "grad": [
+    "#1f3b73,#0a1733",
+    "#28478a,#0e1d40"
+   ],
+   "eco": "Pas de chiffrage publié.",
+   "ecoUrl": "https://www.france-vote.fr/candidats/florian-philippot",
+   "note": "Programme 2027 pas encore publié : positions recensées par France-Vote à partir de déclarations, votes et documents de campagne."
+  },
+  "ASSELINEAU": {
+   "nom": "UPR",
+   "cand": "François Asselineau",
+   "long": "UPR · François Asselineau",
+   "badge": "",
+   "grad": [
+    "#2c3e50,#0f161d",
+    "#34495e,#131b24"
+   ],
+   "eco": "Pas de chiffrage publié.",
+   "ecoUrl": "https://www.france-vote.fr/candidats/francois-asselineau",
+   "note": "Programme 2027 pas encore publié : positions recensées par France-Vote à partir de déclarations, votes et documents de campagne."
+  },
+  "KAZIB": {
+   "nom": "Révolution permanente",
+   "cand": "Anasse Kazib",
+   "long": "Révolution permanente · Anasse Kazib",
+   "badge": "",
+   "grad": [
+    "#a51d2d,#430b12",
+    "#b52232,#4d0d15"
+   ],
+   "eco": "Financement par la taxation des très grandes fortunes et l'expropriation des secteurs stratégiques.",
+   "ecoUrl": "https://www.france-vote.fr/candidats/anasse-kazib",
+   "note": "Programme 2027 pas encore publié : positions recensées par France-Vote à partir de déclarations, votes et documents de campagne."
+  },
+  "BRANCO": {
+   "nom": "Les Ruches",
+   "cand": "Juan Branco",
+   "long": "Les Ruches · Juan Branco",
+   "badge": "",
+   "grad": [
+    "#5d4037,#241814",
+    "#6d4c41,#2b1d18"
+   ],
+   "eco": "Pas de chiffrage publié.",
+   "ecoUrl": "https://www.france-vote.fr/candidats/juan-branco",
+   "note": "Programme 2027 pas encore publié : positions recensées par France-Vote à partir de déclarations, votes et documents de campagne."
+  },
+  "POLONY": {
+   "nom": "Nous sommes la France",
+   "cand": "Natacha Polony",
+   "long": "Nous sommes la France · Natacha Polony",
+   "badge": "",
+   "grad": [
+    "#6a1b9a,#2b0b40",
+    "#7b1fa2,#330d4a"
+   ],
+   "eco": "Pas de chiffrage publié.",
+   "ecoUrl": "https://www.france-vote.fr/candidats/natacha-polony",
+   "note": "Candidature déclarée le 14 octobre 2026 : très peu de propositions détaillées pour l'instant (France-Vote, LCP)."
+  },
+  "LALANNE": {
+   "nom": "France Libre",
+   "cand": "Francis Lalanne",
+   "long": "France Libre · Francis Lalanne",
+   "badge": "",
+   "grad": [
+    "#455a64,#1a2328",
+    "#546e7a,#20292e"
+   ],
+   "eco": "Pas de chiffrage publié.",
+   "ecoUrl": "https://www.france-vote.fr/candidats/francis-lalanne",
+   "note": "Candidature déclarée en août 2026 : programme très peu détaillé (France-Vote, Sud Radio)."
+  },
+  "LABIB": {
+   "nom": "NPA-Révolutionnaires",
+   "cand": "Selma Labib",
+   "long": "NPA-Révolutionnaires · Selma Labib",
+   "badge": "",
+   "grad": [
+    "#c62828,#4e0e0e",
+    "#d32f2f,#560f0f"
+   ],
+   "eco": "Pas de chiffrage publié.",
+   "ecoUrl": "https://www.france-vote.fr/candidats/selma-labib",
+   "note": "Programme 2027 pas encore publié : positions recensées par France-Vote à partir de déclarations, votes et documents de campagne."
+  }
+ },
+ "sections": [
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Retraites",
+   "section": "Retraites",
+   "intro": "",
+   "url": "https://fr.euronews.com/2026/10/09/presidentielle-2027-edouard-philippe-mise-sur-le-travail-et-la-reduction-des-depenses-publ",
+   "prog": "PHILIPPE"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Fonction publique",
+   "section": "Fonction publique",
+   "intro": "",
+   "url": "https://fr.euronews.com/2026/10/09/presidentielle-2027-edouard-philippe-mise-sur-le-travail-et-la-reduction-des-depenses-publ",
+   "prog": "PHILIPPE"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Chômage",
+   "section": "Chômage",
+   "intro": "",
+   "url": "https://fr.euronews.com/2026/10/09/presidentielle-2027-edouard-philippe-mise-sur-le-travail-et-la-reduction-des-depenses-publ",
+   "prog": "PHILIPPE"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Travail et pouvoir d'achat",
+   "section": "Travail et pouvoir d'achat",
+   "intro": "",
+   "url": "https://fr.euronews.com/2026/10/09/presidentielle-2027-edouard-philippe-mise-sur-le-travail-et-la-reduction-des-depenses-publ",
+   "prog": "PHILIPPE"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Familles",
+   "section": "Familles",
+   "intro": "",
+   "url": "https://fr.euronews.com/2026/10/09/presidentielle-2027-edouard-philippe-mise-sur-le-travail-et-la-reduction-des-depenses-publ",
+   "prog": "PHILIPPE"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Éducation",
+   "section": "Éducation",
+   "intro": "",
+   "url": "https://www.publicsenat.fr/actualites/economie/presidentielle-que-proposent-les-candidats-pour-augmenter-les-salaires",
+   "prog": "PHILIPPE"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Immigration",
+   "section": "Immigration",
+   "intro": "",
+   "url": "https://fr.euronews.com/2026/10/09/presidentielle-2027-edouard-philippe-mise-sur-le-travail-et-la-reduction-des-depenses-publ",
+   "prog": "PHILIPPE"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Climat",
+   "section": "Climat",
+   "intro": "",
+   "url": "https://fr.euronews.com/2026/10/09/presidentielle-2027-edouard-philippe-mise-sur-le-travail-et-la-reduction-des-depenses-publ",
+   "prog": "PHILIPPE"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Méthode",
+   "section": "Méthode",
+   "intro": "",
+   "url": "https://fr.euronews.com/2026/10/09/presidentielle-2027-edouard-philippe-mise-sur-le-travail-et-la-reduction-des-depenses-publ",
+   "prog": "PHILIPPE"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Immigration",
+   "section": "Immigration",
+   "intro": "",
+   "url": "https://www.elyseescope.com/le-radar/gabriel-attal-programme-propositions-presidentielle-2027",
+   "prog": "ATTAL"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Retraites",
+   "section": "Retraites",
+   "intro": "",
+   "url": "https://www.elyseescope.com/le-radar/gabriel-attal-programme-propositions-presidentielle-2027",
+   "prog": "ATTAL"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Santé",
+   "section": "Santé",
+   "intro": "",
+   "url": "https://www.elyseescope.com/le-radar/gabriel-attal-programme-propositions-presidentielle-2027",
+   "prog": "ATTAL"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Institutions",
+   "section": "Institutions",
+   "intro": "",
+   "url": "https://www.elyseescope.com/le-radar/gabriel-attal-programme-propositions-presidentielle-2027",
+   "prog": "ATTAL"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Budget",
+   "section": "Budget",
+   "intro": "",
+   "url": "https://www.elyseescope.com/le-radar/gabriel-attal-programme-propositions-presidentielle-2027",
+   "prog": "ATTAL"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Travail",
+   "section": "Travail",
+   "intro": "",
+   "url": "https://www.publicsenat.fr/actualites/economie/presidentielle-que-proposent-les-candidats-pour-augmenter-les-salaires",
+   "prog": "ATTAL"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Éducation",
+   "section": "Éducation",
+   "intro": "",
+   "url": "https://www.elyseescope.com/le-radar/gabriel-attal-programme-propositions-presidentielle-2027",
+   "prog": "ATTAL"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Société",
+   "section": "Société",
+   "intro": "",
+   "url": "https://www.elyseescope.com/le-radar/gabriel-attal-programme-propositions-presidentielle-2027",
+   "prog": "ATTAL"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Numérique",
+   "section": "Numérique",
+   "intro": "",
+   "url": "https://www.elyseescope.com/le-radar/gabriel-attal-programme-propositions-presidentielle-2027",
+   "prog": "ATTAL"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Salaires",
+   "section": "Salaires",
+   "intro": "",
+   "url": "https://www.publicsenat.fr/actualites/economie/presidentielle-que-proposent-les-candidats-pour-augmenter-les-salaires",
+   "prog": "GLUCKSMANN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Énergie et climat",
+   "section": "Énergie et climat",
+   "intro": "",
+   "url": "https://www.gazdaujourdhui.fr/glucksmann-2027-nucleaire-renouvelable/",
+   "prog": "GLUCKSMANN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Jeunesse",
+   "section": "Jeunesse",
+   "intro": "",
+   "url": "https://lcp.fr/actualites/presidentielle-raphael-glucksmann-devoile-les-premieres-lignes-de-son-possible-programme",
+   "prog": "GLUCKSMANN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Immigration",
+   "section": "Immigration",
+   "intro": "",
+   "url": "https://lcp.fr/actualites/presidentielle-raphael-glucksmann-devoile-les-premieres-lignes-de-son-possible-programme",
+   "prog": "GLUCKSMANN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "École",
+   "section": "École",
+   "intro": "",
+   "url": "https://lcp.fr/actualites/presidentielle-raphael-glucksmann-devoile-les-premieres-lignes-de-son-possible-programme",
+   "prog": "GLUCKSMANN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Fiscalité",
+   "section": "Fiscalité",
+   "intro": "",
+   "url": "https://lcp.fr/actualites/presidentielle-raphael-glucksmann-devoile-les-premieres-lignes-de-son-possible-programme",
+   "prog": "GLUCKSMANN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Retraites",
+   "section": "Retraites",
+   "intro": "",
+   "url": "https://lcp.fr/actualites/presidentielle-raphael-glucksmann-devoile-les-premieres-lignes-de-son-possible-programme",
+   "prog": "GLUCKSMANN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Europe",
+   "section": "Europe",
+   "intro": "",
+   "url": "https://lcp.fr/actualites/presidentielle-raphael-glucksmann-devoile-les-premieres-lignes-de-son-possible-programme",
+   "prog": "GLUCKSMANN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Immigration",
+   "section": "Immigration",
+   "intro": "",
+   "url": "https://www.parlons-politique.fr/actualite-nationale/fin-du-droit-du-sol-ce-que-le-referendum-voulu-par-retailleau-changerait-pour-les-jeunes-nes-en-france_26696/",
+   "prog": "RETAILLEAU"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Sécurité et justice",
+   "section": "Sécurité et justice",
+   "intro": "",
+   "url": "https://www.france-vote.fr/actualites/programme-bruno-retailleau-2027",
+   "prog": "RETAILLEAU"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Travail",
+   "section": "Travail",
+   "intro": "",
+   "url": "https://www.publicsenat.fr/actualites/economie/presidentielle-que-proposent-les-candidats-pour-augmenter-les-salaires",
+   "prog": "RETAILLEAU"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Retraites",
+   "section": "Retraites",
+   "intro": "",
+   "url": "https://www.france-vote.fr/actualites/programme-bruno-retailleau-2027",
+   "prog": "RETAILLEAU"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Économie",
+   "section": "Économie",
+   "intro": "",
+   "url": "https://www.france-vote.fr/actualites/programme-bruno-retailleau-2027",
+   "prog": "RETAILLEAU"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Énergie",
+   "section": "Énergie",
+   "intro": "",
+   "url": "https://www.france-vote.fr/actualites/programme-bruno-retailleau-2027",
+   "prog": "RETAILLEAU"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Europe",
+   "section": "Europe",
+   "intro": "",
+   "url": "https://www.france-vote.fr/actualites/programme-bruno-retailleau-2027",
+   "prog": "RETAILLEAU"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Défense",
+   "section": "Défense",
+   "intro": "",
+   "url": "https://www.france-vote.fr/actualites/programme-bruno-retailleau-2027",
+   "prog": "RETAILLEAU"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Immigration",
+   "section": "Immigration",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/eric-zemmour",
+   "prog": "ZEMMOUR"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Sécurité et justice",
+   "section": "Sécurité et justice",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/eric-zemmour",
+   "prog": "ZEMMOUR"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Économie",
+   "section": "Économie",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/eric-zemmour",
+   "prog": "ZEMMOUR"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Travail",
+   "section": "Travail",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/eric-zemmour",
+   "prog": "ZEMMOUR"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Énergie",
+   "section": "Énergie",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/eric-zemmour",
+   "prog": "ZEMMOUR"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Défense",
+   "section": "Défense",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/eric-zemmour",
+   "prog": "ZEMMOUR"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Institutions",
+   "section": "Institutions",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/eric-zemmour",
+   "prog": "ZEMMOUR"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Éducation",
+   "section": "Éducation",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/eric-zemmour",
+   "prog": "ZEMMOUR"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Santé",
+   "section": "Santé",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/eric-zemmour",
+   "prog": "ZEMMOUR"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Fiscalité",
+   "section": "Fiscalité",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/fabien-roussel",
+   "prog": "ROUSSEL"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Salaires",
+   "section": "Salaires",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/fabien-roussel",
+   "prog": "ROUSSEL"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Retraites",
+   "section": "Retraites",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/fabien-roussel",
+   "prog": "ROUSSEL"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Travail",
+   "section": "Travail",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/fabien-roussel",
+   "prog": "ROUSSEL"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Industrie",
+   "section": "Industrie",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/fabien-roussel",
+   "prog": "ROUSSEL"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Santé",
+   "section": "Santé",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/fabien-roussel",
+   "prog": "ROUSSEL"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Immigration",
+   "section": "Immigration",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/fabien-roussel",
+   "prog": "ROUSSEL"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Énergie",
+   "section": "Énergie",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/fabien-roussel",
+   "prog": "ROUSSEL"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Institutions",
+   "section": "Institutions",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/fabien-roussel",
+   "prog": "ROUSSEL"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "International",
+   "section": "International",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/fabien-roussel",
+   "prog": "ROUSSEL"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Retraites",
+   "section": "Retraites",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/francois-ruffin",
+   "prog": "RUFFIN"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Salaires",
+   "section": "Salaires",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/francois-ruffin",
+   "prog": "RUFFIN"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Social",
+   "section": "Social",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/francois-ruffin",
+   "prog": "RUFFIN"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Fiscalité",
+   "section": "Fiscalité",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/francois-ruffin",
+   "prog": "RUFFIN"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Industrie",
+   "section": "Industrie",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/francois-ruffin",
+   "prog": "RUFFIN"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Travail",
+   "section": "Travail",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/francois-ruffin",
+   "prog": "RUFFIN"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Immigration",
+   "section": "Immigration",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/francois-ruffin",
+   "prog": "RUFFIN"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Institutions",
+   "section": "Institutions",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/francois-ruffin",
+   "prog": "RUFFIN"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Énergie",
+   "section": "Énergie",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/francois-ruffin",
+   "prog": "RUFFIN"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Santé",
+   "section": "Santé",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/francois-ruffin",
+   "prog": "RUFFIN"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Europe",
+   "section": "Europe",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/francois-ruffin",
+   "prog": "RUFFIN"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Fin de vie",
+   "section": "Fin de vie",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/francois-ruffin",
+   "prog": "RUFFIN"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Économie",
+   "section": "Économie",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/xavier-bertrand",
+   "prog": "BERTRAND"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Salaires",
+   "section": "Salaires",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/xavier-bertrand",
+   "prog": "BERTRAND"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Social",
+   "section": "Social",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/xavier-bertrand",
+   "prog": "BERTRAND"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Immigration",
+   "section": "Immigration",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/xavier-bertrand",
+   "prog": "BERTRAND"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Sécurité et justice",
+   "section": "Sécurité et justice",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/xavier-bertrand",
+   "prog": "BERTRAND"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Énergie",
+   "section": "Énergie",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/xavier-bertrand",
+   "prog": "BERTRAND"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Institutions",
+   "section": "Institutions",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/xavier-bertrand",
+   "prog": "BERTRAND"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Éducation",
+   "section": "Éducation",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/xavier-bertrand",
+   "prog": "BERTRAND"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Industrie",
+   "section": "Industrie",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/xavier-bertrand",
+   "prog": "BERTRAND"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Budget",
+   "section": "Budget",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/david-lisnard",
+   "prog": "LISNARD"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Économie",
+   "section": "Économie",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/david-lisnard",
+   "prog": "LISNARD"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Salaires",
+   "section": "Salaires",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/david-lisnard",
+   "prog": "LISNARD"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Travail",
+   "section": "Travail",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/david-lisnard",
+   "prog": "LISNARD"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Retraites",
+   "section": "Retraites",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/david-lisnard",
+   "prog": "LISNARD"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Santé",
+   "section": "Santé",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/david-lisnard",
+   "prog": "LISNARD"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Éducation",
+   "section": "Éducation",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/david-lisnard",
+   "prog": "LISNARD"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Immigration",
+   "section": "Immigration",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/david-lisnard",
+   "prog": "LISNARD"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Institutions",
+   "section": "Institutions",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/david-lisnard",
+   "prog": "LISNARD"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Sécurité et justice",
+   "section": "Sécurité et justice",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/david-lisnard",
+   "prog": "LISNARD"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Fiscalité",
+   "section": "Fiscalité",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/marine-tondelier",
+   "prog": "TONDELIER"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Retraites",
+   "section": "Retraites",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/marine-tondelier",
+   "prog": "TONDELIER"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Salaires",
+   "section": "Salaires",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/marine-tondelier",
+   "prog": "TONDELIER"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Travail",
+   "section": "Travail",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/marine-tondelier",
+   "prog": "TONDELIER"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Énergie",
+   "section": "Énergie",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/marine-tondelier",
+   "prog": "TONDELIER"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Immigration",
+   "section": "Immigration",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/marine-tondelier",
+   "prog": "TONDELIER"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Institutions",
+   "section": "Institutions",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/marine-tondelier",
+   "prog": "TONDELIER"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Europe",
+   "section": "Europe",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/marine-tondelier",
+   "prog": "TONDELIER"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Santé",
+   "section": "Santé",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/marine-tondelier",
+   "prog": "TONDELIER"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Police",
+   "section": "Police",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/marine-tondelier",
+   "prog": "TONDELIER"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Fiscalité",
+   "section": "Fiscalité",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/bernard-cazeneuve",
+   "prog": "CAZENEUVE"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Budget",
+   "section": "Budget",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/bernard-cazeneuve",
+   "prog": "CAZENEUVE"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Retraites",
+   "section": "Retraites",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/bernard-cazeneuve",
+   "prog": "CAZENEUVE"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Institutions",
+   "section": "Institutions",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/bernard-cazeneuve",
+   "prog": "CAZENEUVE"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Énergie",
+   "section": "Énergie",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/bernard-cazeneuve",
+   "prog": "CAZENEUVE"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Europe",
+   "section": "Europe",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/bernard-cazeneuve",
+   "prog": "CAZENEUVE"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Défense",
+   "section": "Défense",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/bernard-cazeneuve",
+   "prog": "CAZENEUVE"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Santé",
+   "section": "Santé",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/bernard-cazeneuve",
+   "prog": "CAZENEUVE"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Fiscalité",
+   "section": "Fiscalité",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/karim-bouamrane",
+   "prog": "BOUAMRANE"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Retraites",
+   "section": "Retraites",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/karim-bouamrane",
+   "prog": "BOUAMRANE"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Salaires",
+   "section": "Salaires",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/karim-bouamrane",
+   "prog": "BOUAMRANE"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Santé",
+   "section": "Santé",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/karim-bouamrane",
+   "prog": "BOUAMRANE"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Europe",
+   "section": "Europe",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/karim-bouamrane",
+   "prog": "BOUAMRANE"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "International",
+   "section": "International",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/karim-bouamrane",
+   "prog": "BOUAMRANE"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Économie",
+   "section": "Économie",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/olivier-becht",
+   "prog": "BECHT"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Travail",
+   "section": "Travail",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/olivier-becht",
+   "prog": "BECHT"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Sécurité et justice",
+   "section": "Sécurité et justice",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/olivier-becht",
+   "prog": "BECHT"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Santé",
+   "section": "Santé",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/olivier-becht",
+   "prog": "BECHT"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Institutions",
+   "section": "Institutions",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/olivier-becht",
+   "prog": "BECHT"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Éducation",
+   "section": "Éducation",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/olivier-becht",
+   "prog": "BECHT"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Énergie",
+   "section": "Énergie",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/olivier-becht",
+   "prog": "BECHT"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Retraites",
+   "section": "Retraites",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/delphine-batho",
+   "prog": "BATHO"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Fiscalité",
+   "section": "Fiscalité",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/delphine-batho",
+   "prog": "BATHO"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Énergie",
+   "section": "Énergie",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/delphine-batho",
+   "prog": "BATHO"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Agriculture",
+   "section": "Agriculture",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/delphine-batho",
+   "prog": "BATHO"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Commerce",
+   "section": "Commerce",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/delphine-batho",
+   "prog": "BATHO"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Institutions",
+   "section": "Institutions",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/delphine-batho",
+   "prog": "BATHO"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Fin de vie",
+   "section": "Fin de vie",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/delphine-batho",
+   "prog": "BATHO"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Salaires",
+   "section": "Salaires",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/nathalie-arthaud",
+   "prog": "ARTHAUD"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Travail",
+   "section": "Travail",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/nathalie-arthaud",
+   "prog": "ARTHAUD"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Fiscalité",
+   "section": "Fiscalité",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/nathalie-arthaud",
+   "prog": "ARTHAUD"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Immigration",
+   "section": "Immigration",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/nathalie-arthaud",
+   "prog": "ARTHAUD"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Santé",
+   "section": "Santé",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/nathalie-arthaud",
+   "prog": "ARTHAUD"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Éducation",
+   "section": "Éducation",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/nathalie-arthaud",
+   "prog": "ARTHAUD"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Immigration",
+   "section": "Immigration",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/nicolas-dupont-aignan",
+   "prog": "DUPONTAIGNAN"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Sécurité et justice",
+   "section": "Sécurité et justice",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/nicolas-dupont-aignan",
+   "prog": "DUPONTAIGNAN"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Institutions",
+   "section": "Institutions",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/nicolas-dupont-aignan",
+   "prog": "DUPONTAIGNAN"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Europe",
+   "section": "Europe",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/nicolas-dupont-aignan",
+   "prog": "DUPONTAIGNAN"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Défense",
+   "section": "Défense",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/nicolas-dupont-aignan",
+   "prog": "DUPONTAIGNAN"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Retraites",
+   "section": "Retraites",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/nicolas-dupont-aignan",
+   "prog": "DUPONTAIGNAN"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Europe",
+   "section": "Europe",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/florian-philippot",
+   "prog": "PHILIPPOT"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Retraites",
+   "section": "Retraites",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/florian-philippot",
+   "prog": "PHILIPPOT"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Salaires",
+   "section": "Salaires",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/florian-philippot",
+   "prog": "PHILIPPOT"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Économie",
+   "section": "Économie",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/florian-philippot",
+   "prog": "PHILIPPOT"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Sécurité et justice",
+   "section": "Sécurité et justice",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/florian-philippot",
+   "prog": "PHILIPPOT"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Institutions",
+   "section": "Institutions",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/florian-philippot",
+   "prog": "PHILIPPOT"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Europe",
+   "section": "Europe",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/francois-asselineau",
+   "prog": "ASSELINEAU"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Salaires",
+   "section": "Salaires",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/francois-asselineau",
+   "prog": "ASSELINEAU"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Santé",
+   "section": "Santé",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/francois-asselineau",
+   "prog": "ASSELINEAU"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Immigration",
+   "section": "Immigration",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/francois-asselineau",
+   "prog": "ASSELINEAU"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Économie",
+   "section": "Économie",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/francois-asselineau",
+   "prog": "ASSELINEAU"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Institutions",
+   "section": "Institutions",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/francois-asselineau",
+   "prog": "ASSELINEAU"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Retraites",
+   "section": "Retraites",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/anasse-kazib",
+   "prog": "KAZIB"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Travail",
+   "section": "Travail",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/anasse-kazib",
+   "prog": "KAZIB"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Salaires",
+   "section": "Salaires",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/anasse-kazib",
+   "prog": "KAZIB"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Économie",
+   "section": "Économie",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/anasse-kazib",
+   "prog": "KAZIB"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Immigration",
+   "section": "Immigration",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/anasse-kazib",
+   "prog": "KAZIB"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "International",
+   "section": "International",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/anasse-kazib",
+   "prog": "KAZIB"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Fiscalité",
+   "section": "Fiscalité",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/juan-branco",
+   "prog": "BRANCO"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Santé",
+   "section": "Santé",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/juan-branco",
+   "prog": "BRANCO"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Éducation",
+   "section": "Éducation",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/juan-branco",
+   "prog": "BRANCO"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Institutions",
+   "section": "Institutions",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/juan-branco",
+   "prog": "BRANCO"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "International",
+   "section": "International",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/juan-branco",
+   "prog": "BRANCO"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Social",
+   "section": "Social",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/juan-branco",
+   "prog": "BRANCO"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Économie",
+   "section": "Économie",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/natacha-polony",
+   "prog": "POLONY"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Salaires",
+   "section": "Salaires",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/natacha-polony",
+   "prog": "POLONY"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Europe",
+   "section": "Europe",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/francis-lalanne",
+   "prog": "LALANNE"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "International",
+   "section": "International",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/francis-lalanne",
+   "prog": "LALANNE"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Institutions",
+   "section": "Institutions",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/francis-lalanne",
+   "prog": "LALANNE"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Salaires",
+   "section": "Salaires",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/selma-labib",
+   "prog": "LABIB"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Travail",
+   "section": "Travail",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/selma-labib",
+   "prog": "LABIB"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Retraites",
+   "section": "Retraites",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/selma-labib",
+   "prog": "LABIB"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Immigration",
+   "section": "Immigration",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/selma-labib",
+   "prog": "LABIB"
+  },
+  {
+   "partie": "Positions recensées",
+   "chapitre": "Énergie",
+   "section": "Énergie",
+   "intro": "",
+   "url": "https://www.france-vote.fr/candidats/selma-labib",
+   "prog": "LABIB"
+  }
+ ],
+ "mesures": [
+  {
+   "id": "philippe-1-1",
+   "s": 0,
+   "cle": true,
+   "t": "Relever progressivement l'âge légal de départ à 65 ans et porter la durée de cotisation à 45 annuités, en exemptant un tiers des salariés",
+   "sous": [],
+   "page": null,
+   "src": "https://fr.euronews.com/2026/10/09/presidentielle-2027-edouard-philippe-mise-sur-le-travail-et-la-reduction-des-depenses-publ"
+  },
+  {
+   "id": "philippe-2-1",
+   "s": 1,
+   "cle": true,
+   "t": "Ne pas remplacer un fonctionnaire sur trois partant à la retraite, soit environ 250 000 postes en moins sur cinq ans",
+   "sous": [],
+   "page": null,
+   "src": "https://fr.euronews.com/2026/10/09/presidentielle-2027-edouard-philippe-mise-sur-le-travail-et-la-reduction-des-depenses-publ"
+  },
+  {
+   "id": "philippe-3-1",
+   "s": 2,
+   "cle": true,
+   "t": "Réduire la durée maximale d'indemnisation chômage de 18 à 12 mois pour les moins de 50 ans",
+   "sous": [],
+   "page": null,
+   "src": "https://fr.euronews.com/2026/10/09/presidentielle-2027-edouard-philippe-mise-sur-le-travail-et-la-reduction-des-depenses-publ"
+  },
+  {
+   "id": "philippe-4-1",
+   "s": 3,
+   "cle": true,
+   "t": "Exonérer de cotisations sociales les salariés qui font deux heures supplémentaires par semaine (environ 1 000 € de plus par an au Smic, selon lui)",
+   "sous": [],
+   "page": null,
+   "src": "https://fr.euronews.com/2026/10/09/presidentielle-2027-edouard-philippe-mise-sur-le-travail-et-la-reduction-des-depenses-publ"
+  },
+  {
+   "id": "philippe-4-2",
+   "s": 3,
+   "cle": false,
+   "t": "Rendre les heures au-delà de 35 h par semaine défiscalisées et sans cotisations",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/economie/presidentielle-que-proposent-les-candidats-pour-augmenter-les-salaires"
+  },
+  {
+   "id": "philippe-5-1",
+   "s": 4,
+   "cle": true,
+   "t": "Remplacer les allocations familiales par une allocation unique de 350 € par mois dès le premier enfant, dégressive selon le revenu",
+   "sous": [],
+   "page": null,
+   "src": "https://fr.euronews.com/2026/10/09/presidentielle-2027-edouard-philippe-mise-sur-le-travail-et-la-reduction-des-depenses-publ"
+  },
+  {
+   "id": "philippe-5-2",
+   "s": 4,
+   "cle": false,
+   "t": "Accorder une réduction d'impôt d'environ 3 000 € aux familles qui travaillent et ont des enfants",
+   "sous": [],
+   "page": null,
+   "src": "https://fr.euronews.com/2026/10/09/presidentielle-2027-edouard-philippe-mise-sur-le-travail-et-la-reduction-des-depenses-publ"
+  },
+  {
+   "id": "philippe-5-3",
+   "s": 4,
+   "cle": false,
+   "t": "Créer un prêt à taux zéro pour acheter un logement plus grand à l'arrivée d'un enfant",
+   "sous": [],
+   "page": null,
+   "src": "https://fr.euronews.com/2026/10/09/presidentielle-2027-edouard-philippe-mise-sur-le-travail-et-la-reduction-des-depenses-publ"
+  },
+  {
+   "id": "philippe-5-4",
+   "s": 4,
+   "cle": false,
+   "t": "Exonérer d'impôt sur le revenu pendant trois ans après un premier enfant les ménages payant moins de 3 000 € d'impôt",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/economie/presidentielle-que-proposent-les-candidats-pour-augmenter-les-salaires"
+  },
+  {
+   "id": "philippe-6-1",
+   "s": 5,
+   "cle": false,
+   "t": "Augmenter de 20 % le salaire des enseignants sur cinq ans, financé par la baisse du nombre d'élèves et d'enseignants",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/economie/presidentielle-que-proposent-les-candidats-pour-augmenter-les-salaires"
+  },
+  {
+   "id": "philippe-7-1",
+   "s": 6,
+   "cle": true,
+   "t": "Diviser par deux l'immigration légale, pour revenir nettement sous 200 000 titres de séjour par an",
+   "sous": [],
+   "page": null,
+   "src": "https://fr.euronews.com/2026/10/09/presidentielle-2027-edouard-philippe-mise-sur-le-travail-et-la-reduction-des-depenses-publ"
+  },
+  {
+   "id": "philippe-7-2",
+   "s": 6,
+   "cle": false,
+   "t": "Établir une liste européenne commune de pays sûrs dont les ressortissants ne pourraient plus demander l'asile dans l'UE",
+   "sous": [],
+   "page": null,
+   "src": "https://fr.euronews.com/2026/10/09/presidentielle-2027-edouard-philippe-mise-sur-le-travail-et-la-reduction-des-depenses-publ"
+  },
+  {
+   "id": "philippe-8-1",
+   "s": 7,
+   "cle": false,
+   "t": "Créer un fonds unique d'adaptation au changement climatique doté de 2 milliards d'euros par an",
+   "sous": [],
+   "page": null,
+   "src": "https://fr.euronews.com/2026/10/09/presidentielle-2027-edouard-philippe-mise-sur-le-travail-et-la-reduction-des-depenses-publ"
+  },
+  {
+   "id": "philippe-9-1",
+   "s": 8,
+   "cle": false,
+   "t": "Adopter une vingtaine d'ordonnances en juillet 2027 lors d'une session extraordinaire, pour une entrée en vigueur dès l'automne",
+   "sous": [],
+   "page": null,
+   "src": "https://fr.euronews.com/2026/10/09/presidentielle-2027-edouard-philippe-mise-sur-le-travail-et-la-reduction-des-depenses-publ"
+  },
+  {
+   "id": "attal-10-1",
+   "s": 9,
+   "cle": true,
+   "t": "Fixer chaque année des quotas d'immigration économique votés par le Parlement, selon les besoins définis avec les partenaires sociaux",
+   "sous": [],
+   "page": null,
+   "src": "https://www.elyseescope.com/le-radar/gabriel-attal-programme-propositions-presidentielle-2027"
+  },
+  {
+   "id": "attal-10-2",
+   "s": 9,
+   "cle": false,
+   "t": "Privilégier l'immigration de travail plutôt que le regroupement familial",
+   "sous": [],
+   "page": null,
+   "src": "https://www.elyseescope.com/le-radar/gabriel-attal-programme-propositions-presidentielle-2027"
+  },
+  {
+   "id": "attal-11-1",
+   "s": 10,
+   "cle": true,
+   "t": "Créer un système de retraite universel où « un euro cotisé ouvre les mêmes droits » et harmoniser les régimes spéciaux",
+   "sous": [],
+   "page": null,
+   "src": "https://www.elyseescope.com/le-radar/gabriel-attal-programme-propositions-presidentielle-2027"
+  },
+  {
+   "id": "attal-12-1",
+   "s": 11,
+   "cle": true,
+   "t": "Créer une mutuelle publique à un euro par jour, d'abord pour les retraités et les revenus modestes",
+   "sous": [],
+   "page": null,
+   "src": "https://www.elyseescope.com/le-radar/gabriel-attal-programme-propositions-presidentielle-2027"
+  },
+  {
+   "id": "attal-13-1",
+   "s": 12,
+   "cle": false,
+   "t": "Réduire le nombre de parlementaires",
+   "sous": [],
+   "page": null,
+   "src": "https://www.elyseescope.com/le-radar/gabriel-attal-programme-propositions-presidentielle-2027"
+  },
+  {
+   "id": "attal-13-2",
+   "s": 12,
+   "cle": true,
+   "t": "Rendre le vote obligatoire et l'ouvrir dès 16 ans",
+   "sous": [],
+   "page": null,
+   "src": "https://www.elyseescope.com/le-radar/gabriel-attal-programme-propositions-presidentielle-2027"
+  },
+  {
+   "id": "attal-13-3",
+   "s": 12,
+   "cle": false,
+   "t": "Remplacer le « principe de précaution » par un « principe de progrès » dans la Constitution",
+   "sous": [],
+   "page": null,
+   "src": "https://www.elyseescope.com/le-radar/gabriel-attal-programme-propositions-presidentielle-2027"
+  },
+  {
+   "id": "attal-14-1",
+   "s": 13,
+   "cle": true,
+   "t": "Inscrire une règle d'or budgétaire dans la Constitution, sans hausse d'impôt pour les ménages",
+   "sous": [],
+   "page": null,
+   "src": "https://www.elyseescope.com/le-radar/gabriel-attal-programme-propositions-presidentielle-2027"
+  },
+  {
+   "id": "attal-14-2",
+   "s": 13,
+   "cle": false,
+   "t": "Baisser la dépense sociale pour réinvestir dans l'éducation et l'innovation",
+   "sous": [],
+   "page": null,
+   "src": "https://www.elyseescope.com/le-radar/gabriel-attal-programme-propositions-presidentielle-2027"
+  },
+  {
+   "id": "attal-15-1",
+   "s": 14,
+   "cle": true,
+   "t": "Baisser les charges sociales sur le travail, en compensant par une « TVA sociale » ou des règles d'assurance chômage plus strictes",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/economie/presidentielle-que-proposent-les-candidats-pour-augmenter-les-salaires"
+  },
+  {
+   "id": "attal-15-2",
+   "s": 14,
+   "cle": false,
+   "t": "Remplacer le Code du travail par une « Constitution du travail »",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/economie/presidentielle-que-proposent-les-candidats-pour-augmenter-les-salaires"
+  },
+  {
+   "id": "attal-16-1",
+   "s": 15,
+   "cle": false,
+   "t": "Renforcer les moyens humains et la pédagogie différenciée dans les établissements en difficulté",
+   "sous": [],
+   "page": null,
+   "src": "https://www.elyseescope.com/le-radar/gabriel-attal-programme-propositions-presidentielle-2027"
+  },
+  {
+   "id": "attal-17-1",
+   "s": 16,
+   "cle": true,
+   "t": "Légaliser la gestation pour autrui (GPA)",
+   "sous": [],
+   "page": null,
+   "src": "https://www.elyseescope.com/le-radar/gabriel-attal-programme-propositions-presidentielle-2027"
+  },
+  {
+   "id": "attal-17-2",
+   "s": 16,
+   "cle": false,
+   "t": "Interdire la chasse à courre et la mise à mort dans les corridas",
+   "sous": [],
+   "page": null,
+   "src": "https://www.elyseescope.com/le-radar/gabriel-attal-programme-propositions-presidentielle-2027"
+  },
+  {
+   "id": "attal-18-1",
+   "s": 17,
+   "cle": false,
+   "t": "Former 20 millions de salariés à l'intelligence artificielle en cinq ans",
+   "sous": [],
+   "page": null,
+   "src": "https://www.elyseescope.com/le-radar/gabriel-attal-programme-propositions-presidentielle-2027"
+  },
+  {
+   "id": "glucksmann-19-1",
+   "s": 18,
+   "cle": true,
+   "t": "Porter le Smic à 1 700 € net, notamment par une baisse progressive de la CSG sur les bas salaires",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/economie/presidentielle-que-proposent-les-candidats-pour-augmenter-les-salaires"
+  },
+  {
+   "id": "glucksmann-19-2",
+   "s": 18,
+   "cle": false,
+   "t": "Passer la gratification des stages de plus de deux mois de 683 € à 1 000 €",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/economie/presidentielle-que-proposent-les-candidats-pour-augmenter-les-salaires"
+  },
+  {
+   "id": "glucksmann-20-1",
+   "s": 19,
+   "cle": true,
+   "t": "Investir 200 milliards d'euros publics dans l'énergie sur le quinquennat, soit environ 40 Md€ par an",
+   "sous": [],
+   "page": null,
+   "src": "https://www.gazdaujourdhui.fr/glucksmann-2027-nucleaire-renouvelable/"
+  },
+  {
+   "id": "glucksmann-20-2",
+   "s": 19,
+   "cle": false,
+   "t": "Doubler la capacité de production d'énergies renouvelables d'ici 2035",
+   "sous": [],
+   "page": null,
+   "src": "https://www.gazdaujourdhui.fr/glucksmann-2027-nucleaire-renouvelable/"
+  },
+  {
+   "id": "glucksmann-20-3",
+   "s": 19,
+   "cle": false,
+   "t": "Maintenir et prolonger le nucléaire, avec de nouveaux réacteurs dont le nombre et le coût seraient évalués par la Cour des comptes",
+   "sous": [],
+   "page": null,
+   "src": "https://www.gazdaujourdhui.fr/glucksmann-2027-nucleaire-renouvelable/"
+  },
+  {
+   "id": "glucksmann-20-4",
+   "s": 19,
+   "cle": false,
+   "t": "Accélérer l'électrification des transports et du chauffage",
+   "sous": [],
+   "page": null,
+   "src": "https://www.gazdaujourdhui.fr/glucksmann-2027-nucleaire-renouvelable/"
+  },
+  {
+   "id": "glucksmann-21-1",
+   "s": 20,
+   "cle": true,
+   "t": "Créer un service civique obligatoire de dix mois pour les jeunes (Ehpad, écoles, services publics), la dimension militaire restant volontaire",
+   "sous": [],
+   "page": null,
+   "src": "https://lcp.fr/actualites/presidentielle-raphael-glucksmann-devoile-les-premieres-lignes-de-son-possible-programme"
+  },
+  {
+   "id": "glucksmann-21-2",
+   "s": 20,
+   "cle": false,
+   "t": "Garantir à chaque enfant un séjour collectif (« passeport pour l'émancipation »)",
+   "sous": [],
+   "page": null,
+   "src": "https://lcp.fr/actualites/presidentielle-raphael-glucksmann-devoile-les-premieres-lignes-de-son-possible-programme"
+  },
+  {
+   "id": "glucksmann-22-1",
+   "s": 21,
+   "cle": true,
+   "t": "Organiser une convention citoyenne sur l'immigration, avec des citoyens tirés au sort, dont les propositions seraient votées au Parlement",
+   "sous": [],
+   "page": null,
+   "src": "https://lcp.fr/actualites/presidentielle-raphael-glucksmann-devoile-les-premieres-lignes-de-son-possible-programme"
+  },
+  {
+   "id": "glucksmann-23-1",
+   "s": 22,
+   "cle": false,
+   "t": "Revaloriser fortement le salaire des enseignants et mettre plus d'adultes au contact des élèves",
+   "sous": [],
+   "page": null,
+   "src": "https://lcp.fr/actualites/presidentielle-raphael-glucksmann-devoile-les-premieres-lignes-de-son-possible-programme"
+  },
+  {
+   "id": "glucksmann-23-2",
+   "s": 22,
+   "cle": false,
+   "t": "Appliquer un principe de mixité sociale à l'enseignement privé",
+   "sous": [],
+   "page": null,
+   "src": "https://lcp.fr/actualites/presidentielle-raphael-glucksmann-devoile-les-premieres-lignes-de-son-possible-programme"
+  },
+  {
+   "id": "glucksmann-24-1",
+   "s": 23,
+   "cle": true,
+   "t": "Mettre fin à la « sécession des ultrariches » et rééquilibrer la taxation entre travail, capital, retraite et héritage",
+   "sous": [],
+   "page": null,
+   "src": "https://lcp.fr/actualites/presidentielle-raphael-glucksmann-devoile-les-premieres-lignes-de-son-possible-programme"
+  },
+  {
+   "id": "glucksmann-25-1",
+   "s": 24,
+   "cle": true,
+   "t": "Réformer les retraites en tenant compte de l'espérance de vie en bonne santé : départ plus tôt pour les carrières hachées et pénibles, plus tard pour les cadres",
+   "sous": [],
+   "page": null,
+   "src": "https://lcp.fr/actualites/presidentielle-raphael-glucksmann-devoile-les-premieres-lignes-de-son-possible-programme"
+  },
+  {
+   "id": "glucksmann-26-1",
+   "s": 25,
+   "cle": false,
+   "t": "Lancer un grand emprunt européen pour la souveraineté européenne",
+   "sous": [],
+   "page": null,
+   "src": "https://lcp.fr/actualites/presidentielle-raphael-glucksmann-devoile-les-premieres-lignes-de-son-possible-programme"
+  },
+  {
+   "id": "glucksmann-26-2",
+   "s": 25,
+   "cle": true,
+   "t": "Supprimer le droit de veto au sein de l'Union européenne",
+   "sous": [],
+   "page": null,
+   "src": "https://lcp.fr/actualites/presidentielle-raphael-glucksmann-devoile-les-premieres-lignes-de-son-possible-programme"
+  },
+  {
+   "id": "retailleau-27-1",
+   "s": 26,
+   "cle": true,
+   "t": "Supprimer le droit du sol par référendum",
+   "sous": [],
+   "page": null,
+   "src": "https://www.parlons-politique.fr/actualite-nationale/fin-du-droit-du-sol-ce-que-le-referendum-voulu-par-retailleau-changerait-pour-les-jeunes-nes-en-france_26696/"
+  },
+  {
+   "id": "retailleau-27-2",
+   "s": 26,
+   "cle": true,
+   "t": "Organiser un référendum sur l'immigration, avec des quotas migratoires",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/actualites/programme-bruno-retailleau-2027"
+  },
+  {
+   "id": "retailleau-27-3",
+   "s": 26,
+   "cle": false,
+   "t": "S'opposer à la régularisation des travailleurs sans papiers",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/actualites/programme-bruno-retailleau-2027"
+  },
+  {
+   "id": "retailleau-27-4",
+   "s": 26,
+   "cle": false,
+   "t": "Conditionner l'aide au développement à la coopération migratoire des pays d'origine",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/actualites/programme-bruno-retailleau-2027"
+  },
+  {
+   "id": "retailleau-28-1",
+   "s": 27,
+   "cle": true,
+   "t": "Rétablir les peines planchers",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/actualites/programme-bruno-retailleau-2027"
+  },
+  {
+   "id": "retailleau-28-2",
+   "s": 27,
+   "cle": false,
+   "t": "Supprimer l'« excuse de minorité » pour les mineurs récidivistes",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/actualites/programme-bruno-retailleau-2027"
+  },
+  {
+   "id": "retailleau-28-3",
+   "s": 27,
+   "cle": false,
+   "t": "Soumettre à référendum une « politique pénale de grande fermeté »",
+   "sous": [],
+   "page": null,
+   "src": "https://www.parlons-politique.fr/actualite-nationale/fin-du-droit-du-sol-ce-que-le-referendum-voulu-par-retailleau-changerait-pour-les-jeunes-nes-en-france_26696/"
+  },
+  {
+   "id": "retailleau-29-1",
+   "s": 28,
+   "cle": true,
+   "t": "Créer un seuil « zéro cotisation » au-delà de 1 623 heures par an : heures exonérées de cotisations et d'impôt sur le revenu (hors CSG-CRDS)",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/economie/presidentielle-que-proposent-les-candidats-pour-augmenter-les-salaires"
+  },
+  {
+   "id": "retailleau-29-2",
+   "s": 28,
+   "cle": true,
+   "t": "Plafonner le RSA et le conditionner à une activité ou une formation",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/actualites/programme-bruno-retailleau-2027"
+  },
+  {
+   "id": "retailleau-29-3",
+   "s": 28,
+   "cle": false,
+   "t": "Exonérer de cotisations retraite et chômage ceux qui ont tous leurs trimestres avant l'âge légal",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/economie/presidentielle-que-proposent-les-candidats-pour-augmenter-les-salaires"
+  },
+  {
+   "id": "retailleau-30-1",
+   "s": 29,
+   "cle": true,
+   "t": "Garder la réforme de 2023 (64 ans) et ajouter une dose de capitalisation",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/actualites/programme-bruno-retailleau-2027"
+  },
+  {
+   "id": "retailleau-31-1",
+   "s": 30,
+   "cle": true,
+   "t": "Ramener l'impôt sur les sociétés autour de 20 % et baisser les impôts de production",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/actualites/programme-bruno-retailleau-2027"
+  },
+  {
+   "id": "retailleau-31-2",
+   "s": 30,
+   "cle": false,
+   "t": "Refuser le retour de l'ISF et la taxe Zucman",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/actualites/programme-bruno-retailleau-2027"
+  },
+  {
+   "id": "retailleau-31-3",
+   "s": 30,
+   "cle": false,
+   "t": "S'opposer à l'accord UE-Mercosur",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/actualites/programme-bruno-retailleau-2027"
+  },
+  {
+   "id": "retailleau-32-1",
+   "s": 31,
+   "cle": true,
+   "t": "Miser sur le nucléaire et arrêter le financement public de l'éolien et du solaire",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/actualites/programme-bruno-retailleau-2027"
+  },
+  {
+   "id": "retailleau-33-1",
+   "s": 32,
+   "cle": false,
+   "t": "Affirmer la primauté du droit national, avec la possibilité de déroger aux règles européennes contraires à l'identité constitutionnelle",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/actualites/programme-bruno-retailleau-2027"
+  },
+  {
+   "id": "retailleau-34-1",
+   "s": 33,
+   "cle": false,
+   "t": "Augmenter le budget de la défense et soutenir l'aide militaire à l'Ukraine",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/actualites/programme-bruno-retailleau-2027"
+  },
+  {
+   "id": "zemmour-35-1",
+   "s": 34,
+   "cle": true,
+   "t": "Réduire fortement l'immigration légale avec des quotas annuels contraignants et restreindre le droit du sol",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/eric-zemmour"
+  },
+  {
+   "id": "zemmour-35-2",
+   "s": 34,
+   "cle": true,
+   "t": "Réserver les prestations non contributives aux Français et appliquer la préférence nationale dans la commande publique",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/eric-zemmour"
+  },
+  {
+   "id": "zemmour-36-1",
+   "s": 35,
+   "cle": true,
+   "t": "Instaurer des peines planchers automatiques pour les récidivistes, notamment contre le narcotrafic",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/eric-zemmour"
+  },
+  {
+   "id": "zemmour-36-2",
+   "s": 35,
+   "cle": false,
+   "t": "Abaisser la majorité pénale à 16 ans",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/eric-zemmour"
+  },
+  {
+   "id": "zemmour-37-1",
+   "s": 36,
+   "cle": false,
+   "t": "Baisser les impôts de production d'environ 30 milliards d'euros (programme 2022)",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/eric-zemmour"
+  },
+  {
+   "id": "zemmour-38-1",
+   "s": 37,
+   "cle": false,
+   "t": "Pas de hausse du Smic, mais une baisse de la CSG pour les travailleurs modestes (programme 2022)",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/eric-zemmour"
+  },
+  {
+   "id": "zemmour-38-2",
+   "s": 37,
+   "cle": false,
+   "t": "Conditionner le RSA à une activité ou une formation",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/eric-zemmour"
+  },
+  {
+   "id": "zemmour-39-1",
+   "s": 38,
+   "cle": false,
+   "t": "Construire une nouvelle génération de réacteurs nucléaires et s'opposer au développement de l'éolien",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/eric-zemmour"
+  },
+  {
+   "id": "zemmour-40-1",
+   "s": 39,
+   "cle": false,
+   "t": "Sortir du commandement intégré de l'OTAN et augmenter fortement le budget de la défense",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/eric-zemmour"
+  },
+  {
+   "id": "zemmour-41-1",
+   "s": 40,
+   "cle": false,
+   "t": "Recourir au référendum sur les grandes questions migratoires et de société",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/eric-zemmour"
+  },
+  {
+   "id": "zemmour-42-1",
+   "s": 41,
+   "cle": false,
+   "t": "Instaurer l'uniforme à l'école et mettre fin au collège unique",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/eric-zemmour"
+  },
+  {
+   "id": "zemmour-43-1",
+   "s": 42,
+   "cle": false,
+   "t": "Recruter 40 000 soignants",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/eric-zemmour"
+  },
+  {
+   "id": "roussel-44-1",
+   "s": 43,
+   "cle": true,
+   "t": "Rétablir un impôt sur la fortune (ISF)",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/fabien-roussel"
+  },
+  {
+   "id": "roussel-45-1",
+   "s": 44,
+   "cle": true,
+   "t": "Remettre à plat les exonérations de cotisations patronales et les conditionner à des engagements sur l'emploi et les salaires",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/fabien-roussel"
+  },
+  {
+   "id": "roussel-45-2",
+   "s": 44,
+   "cle": true,
+   "t": "Augmenter de 5 % les salaires et pensions sous 2 500 € net et indexer les salaires sur l'inflation (mai 2026)",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/economie/presidentielle-que-proposent-les-candidats-pour-augmenter-les-salaires"
+  },
+  {
+   "id": "roussel-46-1",
+   "s": 45,
+   "cle": true,
+   "t": "Abroger la réforme de 2023 et revenir à un départ à 60 ans",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/fabien-roussel"
+  },
+  {
+   "id": "roussel-47-1",
+   "s": 46,
+   "cle": false,
+   "t": "Passer à la semaine de 32 heures",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/fabien-roussel"
+  },
+  {
+   "id": "roussel-48-1",
+   "s": 47,
+   "cle": false,
+   "t": "Relocaliser la production en mobilisant les marchés publics",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/fabien-roussel"
+  },
+  {
+   "id": "roussel-49-1",
+   "s": 48,
+   "cle": true,
+   "t": "« 100 % Sécu » : la Sécurité sociale rembourse tous les soins prescrits et remplace les complémentaires",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/fabien-roussel"
+  },
+  {
+   "id": "roussel-50-1",
+   "s": 49,
+   "cle": false,
+   "t": "Régulariser les travailleurs sans papiers",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/fabien-roussel"
+  },
+  {
+   "id": "roussel-51-1",
+   "s": 50,
+   "cle": false,
+   "t": "Construire une nouvelle génération de réacteurs nucléaires publics",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/fabien-roussel"
+  },
+  {
+   "id": "roussel-52-1",
+   "s": 51,
+   "cle": false,
+   "t": "Passer à une 6e République avec proportionnelle intégrale et référendum d'initiative citoyenne",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/fabien-roussel"
+  },
+  {
+   "id": "roussel-53-1",
+   "s": 52,
+   "cle": false,
+   "t": "Sortir du commandement intégré de l'OTAN et rejeter les accords de type UE-Mercosur",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/fabien-roussel"
+  },
+  {
+   "id": "ruffin-54-1",
+   "s": 53,
+   "cle": true,
+   "t": "Abroger la réforme de 2023 et revenir à un départ à 62 ans ou moins",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/francois-ruffin"
+  },
+  {
+   "id": "ruffin-55-1",
+   "s": 54,
+   "cle": true,
+   "t": "Augmenter fortement le Smic et imposer des hausses de salaires",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/francois-ruffin"
+  },
+  {
+   "id": "ruffin-56-1",
+   "s": 55,
+   "cle": false,
+   "t": "Refuser de conditionner le RSA à une activité",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/francois-ruffin"
+  },
+  {
+   "id": "ruffin-57-1",
+   "s": 56,
+   "cle": true,
+   "t": "Rétablir l'ISF et instaurer la taxe Zucman sur les très grandes fortunes",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/francois-ruffin"
+  },
+  {
+   "id": "ruffin-58-1",
+   "s": 57,
+   "cle": true,
+   "t": "Protéger l'industrie par des droits de douane et une préférence nationale dans la commande publique",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/francois-ruffin"
+  },
+  {
+   "id": "ruffin-59-1",
+   "s": 58,
+   "cle": false,
+   "t": "Réduire le temps de travail (32 heures ou semaine de quatre jours)",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/francois-ruffin"
+  },
+  {
+   "id": "ruffin-60-1",
+   "s": 59,
+   "cle": false,
+   "t": "Régulariser les travailleurs sans papiers des métiers en tension",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/francois-ruffin"
+  },
+  {
+   "id": "ruffin-61-1",
+   "s": 60,
+   "cle": false,
+   "t": "Passer à une 6e République avec proportionnelle intégrale et référendum d'initiative citoyenne sur tous les sujets",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/francois-ruffin"
+  },
+  {
+   "id": "ruffin-62-1",
+   "s": 61,
+   "cle": false,
+   "t": "Sortir progressivement du nucléaire, après un référendum",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/francois-ruffin"
+  },
+  {
+   "id": "ruffin-63-1",
+   "s": 62,
+   "cle": false,
+   "t": "Réguler l'installation des médecins et rembourser 100 % des soins",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/francois-ruffin"
+  },
+  {
+   "id": "ruffin-64-1",
+   "s": 63,
+   "cle": false,
+   "t": "Pouvoir déroger au droit européen quand il contredit les intérêts nationaux et rejeter l'accord UE-Mercosur",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/francois-ruffin"
+  },
+  {
+   "id": "ruffin-65-1",
+   "s": 64,
+   "cle": false,
+   "t": "Légaliser une aide à mourir encadrée",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/francois-ruffin"
+  },
+  {
+   "id": "bertrand-66-1",
+   "s": 65,
+   "cle": true,
+   "t": "Baisser les impôts de production de 35 milliards d'euros sur le quinquennat",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/xavier-bertrand"
+  },
+  {
+   "id": "bertrand-67-1",
+   "s": 66,
+   "cle": true,
+   "t": "Garantir qu'aucun salarié à temps plein ne gagne moins de 1 500 € net, l'État complétant les bas salaires (prime au travail)",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/xavier-bertrand"
+  },
+  {
+   "id": "bertrand-68-1",
+   "s": 67,
+   "cle": false,
+   "t": "Conditionner le RSA à une activité ou une formation",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/xavier-bertrand"
+  },
+  {
+   "id": "bertrand-69-1",
+   "s": 68,
+   "cle": true,
+   "t": "Fixer des quotas migratoires votés chaque année par le Parlement, après une révision constitutionnelle par référendum",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/xavier-bertrand"
+  },
+  {
+   "id": "bertrand-69-2",
+   "s": 68,
+   "cle": false,
+   "t": "Mettre fin aux régularisations et durcir le regroupement familial",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/xavier-bertrand"
+  },
+  {
+   "id": "bertrand-70-1",
+   "s": 69,
+   "cle": true,
+   "t": "Rétablir les peines planchers et supprimer l'excuse de minorité pour les mineurs récidivistes",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/xavier-bertrand"
+  },
+  {
+   "id": "bertrand-71-1",
+   "s": 70,
+   "cle": false,
+   "t": "Donner la priorité au nucléaire et s'opposer aux projets éoliens terrestres",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/xavier-bertrand"
+  },
+  {
+   "id": "bertrand-72-1",
+   "s": 71,
+   "cle": false,
+   "t": "Réviser la Constitution par référendum sur l'immigration, le terrorisme et la laïcité",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/xavier-bertrand"
+  },
+  {
+   "id": "bertrand-73-1",
+   "s": 72,
+   "cle": false,
+   "t": "Laisser les établissements choisir l'uniforme et développer l'apprentissage",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/xavier-bertrand"
+  },
+  {
+   "id": "bertrand-74-1",
+   "s": 73,
+   "cle": false,
+   "t": "Appliquer des mesures de réciprocité commerciale face à la Chine et aux États-Unis",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/xavier-bertrand"
+  },
+  {
+   "id": "lisnard-75-1",
+   "s": 74,
+   "cle": true,
+   "t": "Réduire les dépenses publiques de 200 milliards d'euros, dont 80 milliards dès la première année",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/david-lisnard"
+  },
+  {
+   "id": "lisnard-76-1",
+   "s": 75,
+   "cle": false,
+   "t": "Baisser les impôts de production de 40 milliards d'euros, en commençant par la C3S",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/david-lisnard"
+  },
+  {
+   "id": "lisnard-77-1",
+   "s": 76,
+   "cle": true,
+   "t": "Augmenter le salaire net d'environ 400 € par mois en baissant les cotisations plutôt qu'en imposant des hausses",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/david-lisnard"
+  },
+  {
+   "id": "lisnard-78-1",
+   "s": 77,
+   "cle": false,
+   "t": "Laisser les accords d'entreprise fixer le temps de travail, sur le principe « 37 heures payées 37 »",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/david-lisnard"
+  },
+  {
+   "id": "lisnard-79-1",
+   "s": 78,
+   "cle": true,
+   "t": "Départ à 65 ans, complété par une part de capitalisation",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/david-lisnard"
+  },
+  {
+   "id": "lisnard-80-1",
+   "s": 79,
+   "cle": true,
+   "t": "Mettre la Sécurité sociale en concurrence sur le modèle néerlandais, avec un panier de soins obligatoire",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/david-lisnard"
+  },
+  {
+   "id": "lisnard-81-1",
+   "s": 80,
+   "cle": false,
+   "t": "Créer un chèque éducation, supprimer la carte scolaire et laisser les chefs d'établissement recruter les enseignants",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/david-lisnard"
+  },
+  {
+   "id": "lisnard-82-1",
+   "s": 81,
+   "cle": false,
+   "t": "Fixer des quotas annuels, restreindre le droit du sol et interdire la régularisation après une entrée irrégulière",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/david-lisnard"
+  },
+  {
+   "id": "lisnard-83-1",
+   "s": 82,
+   "cle": false,
+   "t": "Étendre l'article 11 pour que « tout sujet » puisse être soumis à référendum, et rétablir le septennat",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/david-lisnard"
+  },
+  {
+   "id": "lisnard-84-1",
+   "s": 83,
+   "cle": false,
+   "t": "Peines planchers automatiques pour les récidivistes",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/david-lisnard"
+  },
+  {
+   "id": "tondelier-85-1",
+   "s": 84,
+   "cle": true,
+   "t": "Taxe Zucman de 2 % sur les patrimoines de plus de 100 millions d'euros et ISF « vert »",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/marine-tondelier"
+  },
+  {
+   "id": "tondelier-86-1",
+   "s": 85,
+   "cle": true,
+   "t": "Abroger la réforme de 2023, revenir à 62 ans, avec 60 ans comme objectif à terme",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/marine-tondelier"
+  },
+  {
+   "id": "tondelier-87-1",
+   "s": 86,
+   "cle": true,
+   "t": "Porter le Smic à 2 000 € brut dès 2027, avec des aides ciblées pour les TPE et PME",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/marine-tondelier"
+  },
+  {
+   "id": "tondelier-88-1",
+   "s": 87,
+   "cle": false,
+   "t": "Passer à 32 heures sans perte de salaire dans les métiers pénibles ou de nuit",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/marine-tondelier"
+  },
+  {
+   "id": "tondelier-89-1",
+   "s": 88,
+   "cle": true,
+   "t": "Sortir progressivement du nucléaire en une vingtaine d'années et viser la neutralité carbone en 2040",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/marine-tondelier"
+  },
+  {
+   "id": "tondelier-90-1",
+   "s": 89,
+   "cle": false,
+   "t": "Régulariser les travailleurs sans papiers des métiers en tension",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/marine-tondelier"
+  },
+  {
+   "id": "tondelier-91-1",
+   "s": 90,
+   "cle": false,
+   "t": "Passer à une « Première République écologique » avec assemblée constituante et proportionnelle intégrale",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/marine-tondelier"
+  },
+  {
+   "id": "tondelier-92-1",
+   "s": 91,
+   "cle": false,
+   "t": "Aller vers une Europe fédérale avec budget et défense communs, et rejeter l'accord UE-Mercosur",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/marine-tondelier"
+  },
+  {
+   "id": "tondelier-93-1",
+   "s": 92,
+   "cle": false,
+   "t": "Rembourser 100 % des soins en remplaçant les complémentaires",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/marine-tondelier"
+  },
+  {
+   "id": "tondelier-94-1",
+   "s": 93,
+   "cle": false,
+   "t": "Supprimer le LBD, dissoudre la Brav-M et créer une autorité indépendante de contrôle",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/marine-tondelier"
+  },
+  {
+   "id": "cazeneuve-95-1",
+   "s": 94,
+   "cle": true,
+   "t": "Mettre en place une fiscalité qui touche « réellement les très grandes fortunes » et rééquilibrer travail et capital",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/bernard-cazeneuve"
+  },
+  {
+   "id": "cazeneuve-96-1",
+   "s": 95,
+   "cle": true,
+   "t": "Instaurer une « règle d'or sociale » : comptes sociaux à l'équilibre sur cinq ans",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/bernard-cazeneuve"
+  },
+  {
+   "id": "cazeneuve-97-1",
+   "s": 96,
+   "cle": true,
+   "t": "Jouer sur la durée de cotisation plutôt que sur le recul de l'âge légal",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/bernard-cazeneuve"
+  },
+  {
+   "id": "cazeneuve-98-1",
+   "s": 97,
+   "cle": true,
+   "t": "Rétablir le septennat et introduire une dose de proportionnelle aux législatives",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/bernard-cazeneuve"
+  },
+  {
+   "id": "cazeneuve-99-1",
+   "s": 98,
+   "cle": false,
+   "t": "Planifier le renouvellement du parc nucléaire",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/bernard-cazeneuve"
+  },
+  {
+   "id": "cazeneuve-100-1",
+   "s": 99,
+   "cle": false,
+   "t": "Remplacer l'unanimité par la majorité dans les décisions européennes",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/bernard-cazeneuve"
+  },
+  {
+   "id": "cazeneuve-101-1",
+   "s": 100,
+   "cle": false,
+   "t": "Réarmer « à proportion de la menace » et rester dans l'OTAN",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/bernard-cazeneuve"
+  },
+  {
+   "id": "cazeneuve-102-1",
+   "s": 101,
+   "cle": false,
+   "t": "Réguler l'installation des médecins et légaliser une aide à mourir encadrée",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/bernard-cazeneuve"
+  },
+  {
+   "id": "bouamrane-103-1",
+   "s": 102,
+   "cle": true,
+   "t": "Rétablir un impôt sur la fortune ou taxer les très grands patrimoines",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/karim-bouamrane"
+  },
+  {
+   "id": "bouamrane-104-1",
+   "s": 103,
+   "cle": true,
+   "t": "Abroger la réforme de 2023 et revenir à un départ à 62 ans ou moins",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/karim-bouamrane"
+  },
+  {
+   "id": "bouamrane-105-1",
+   "s": 104,
+   "cle": false,
+   "t": "Augmenter fortement le Smic",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/karim-bouamrane"
+  },
+  {
+   "id": "bouamrane-106-1",
+   "s": 105,
+   "cle": true,
+   "t": "Augmenter fortement le budget de l'hôpital public et le nombre de soignants",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/karim-bouamrane"
+  },
+  {
+   "id": "bouamrane-107-1",
+   "s": 106,
+   "cle": false,
+   "t": "Approfondir l'intégration européenne : budget commun, décisions à la majorité, défense intégrée",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/karim-bouamrane"
+  },
+  {
+   "id": "bouamrane-108-1",
+   "s": 107,
+   "cle": false,
+   "t": "Poursuivre le soutien militaire à l'Ukraine",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/karim-bouamrane"
+  },
+  {
+   "id": "becht-109-1",
+   "s": 108,
+   "cle": true,
+   "t": "Supprimer la moitié des 400 000 normes et baisser le coût de l'électricité",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/olivier-becht"
+  },
+  {
+   "id": "becht-110-1",
+   "s": 109,
+   "cle": true,
+   "t": "Obliger les chômeurs à accepter la première offre d'emploi correspondant à leur qualification",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/olivier-becht"
+  },
+  {
+   "id": "becht-111-1",
+   "s": 110,
+   "cle": true,
+   "t": "Recruter 10 000 policiers et créer des centres de rééducation encadrés par des militaires",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/olivier-becht"
+  },
+  {
+   "id": "becht-111-2",
+   "s": 110,
+   "cle": false,
+   "t": "Juger toutes les affaires en 18 mois maximum",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/olivier-becht"
+  },
+  {
+   "id": "becht-112-1",
+   "s": 111,
+   "cle": true,
+   "t": "Garantir un médecin généraliste à moins de 30 minutes, avec rendez-vous sous 48 heures",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/olivier-becht"
+  },
+  {
+   "id": "becht-113-1",
+   "s": 112,
+   "cle": false,
+   "t": "Créer un référendum d'initiative citoyenne et reconnaître le vote blanc",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/olivier-becht"
+  },
+  {
+   "id": "becht-114-1",
+   "s": 113,
+   "cle": false,
+   "t": "Augmenter le salaire des enseignants et créer un prêt étudiant garanti par l'État",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/olivier-becht"
+  },
+  {
+   "id": "becht-115-1",
+   "s": 114,
+   "cle": false,
+   "t": "Sortir des énergies fossiles avec le nucléaire, les renouvelables et les carburants de synthèse",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/olivier-becht"
+  },
+  {
+   "id": "batho-116-1",
+   "s": 115,
+   "cle": true,
+   "t": "Abroger la réforme de 2023 et revenir à un départ à 62 ans ou moins",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/delphine-batho"
+  },
+  {
+   "id": "batho-117-1",
+   "s": 116,
+   "cle": false,
+   "t": "Rétablir un impôt sur la fortune ou taxer fortement les très grands patrimoines",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/delphine-batho"
+  },
+  {
+   "id": "batho-118-1",
+   "s": 117,
+   "cle": true,
+   "t": "Ne pas construire de nouveaux réacteurs nucléaires",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/delphine-batho"
+  },
+  {
+   "id": "batho-119-1",
+   "s": 118,
+   "cle": true,
+   "t": "Réduire drastiquement les pesticides de synthèse",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/delphine-batho"
+  },
+  {
+   "id": "batho-120-1",
+   "s": 119,
+   "cle": false,
+   "t": "Rejeter les accords de libre-échange de type UE-Mercosur",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/delphine-batho"
+  },
+  {
+   "id": "batho-121-1",
+   "s": 120,
+   "cle": false,
+   "t": "Passer à une 6e République avec proportionnelle intégrale et moins de pouvoirs pour le président",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/delphine-batho"
+  },
+  {
+   "id": "batho-122-1",
+   "s": 121,
+   "cle": false,
+   "t": "Légaliser une aide active à mourir strictement encadrée",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/delphine-batho"
+  },
+  {
+   "id": "arthaud-123-1",
+   "s": 122,
+   "cle": true,
+   "t": "Aucun salaire sous 2 200 € net par mois",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/nathalie-arthaud"
+  },
+  {
+   "id": "arthaud-124-1",
+   "s": 123,
+   "cle": false,
+   "t": "Réduire le temps de travail sans perte de salaire",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/nathalie-arthaud"
+  },
+  {
+   "id": "arthaud-124-2",
+   "s": 123,
+   "cle": true,
+   "t": "Interdire les licenciements et instaurer un contrôle des travailleurs sur les entreprises",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/nathalie-arthaud"
+  },
+  {
+   "id": "arthaud-125-1",
+   "s": 124,
+   "cle": true,
+   "t": "Exproprier les grandes fortunes",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/nathalie-arthaud"
+  },
+  {
+   "id": "arthaud-126-1",
+   "s": 125,
+   "cle": false,
+   "t": "Régulariser tous les sans-papiers",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/nathalie-arthaud"
+  },
+  {
+   "id": "arthaud-127-1",
+   "s": 126,
+   "cle": false,
+   "t": "Embaucher massivement à l'hôpital et rembourser 100 % des soins",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/nathalie-arthaud"
+  },
+  {
+   "id": "arthaud-128-1",
+   "s": 127,
+   "cle": false,
+   "t": "Recruter massivement des enseignants et réduire le financement du privé sous contrat",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/nathalie-arthaud"
+  },
+  {
+   "id": "dupontaignan-129-1",
+   "s": 128,
+   "cle": true,
+   "t": "Supprimer le droit du sol par référendum, en gardant la naturalisation",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/nicolas-dupont-aignan"
+  },
+  {
+   "id": "dupontaignan-130-1",
+   "s": 129,
+   "cle": false,
+   "t": "Rétablir et élargir les peines planchers, notamment pour les agressions d'agents publics",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/nicolas-dupont-aignan"
+  },
+  {
+   "id": "dupontaignan-131-1",
+   "s": 130,
+   "cle": true,
+   "t": "Référendum d'initiative citoyenne dès qu'une pétition atteint un million d'inscrits",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/nicolas-dupont-aignan"
+  },
+  {
+   "id": "dupontaignan-131-2",
+   "s": 130,
+   "cle": false,
+   "t": "Rétablir le septennat et élire 100 députés sur 500 à la proportionnelle",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/nicolas-dupont-aignan"
+  },
+  {
+   "id": "dupontaignan-132-1",
+   "s": 131,
+   "cle": true,
+   "t": "Supprimer la Commission européenne et la Cour de justice de l'UE",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/nicolas-dupont-aignan"
+  },
+  {
+   "id": "dupontaignan-133-1",
+   "s": 132,
+   "cle": false,
+   "t": "Sortir du commandement intégré de l'OTAN et arrêter le soutien militaire à l'Ukraine",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/nicolas-dupont-aignan"
+  },
+  {
+   "id": "dupontaignan-134-1",
+   "s": 133,
+   "cle": false,
+   "t": "Abroger la réforme de 2023 et revenir à 62 ans ou moins",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/nicolas-dupont-aignan"
+  },
+  {
+   "id": "philippot-135-1",
+   "s": 134,
+   "cle": true,
+   "t": "Sortir de l'Union européenne, de l'euro et de l'OTAN, avec un référendum sur l'UE",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/florian-philippot"
+  },
+  {
+   "id": "philippot-136-1",
+   "s": 135,
+   "cle": false,
+   "t": "Abroger la réforme de 2023 et revenir à 62 ans ou moins",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/florian-philippot"
+  },
+  {
+   "id": "philippot-137-1",
+   "s": 136,
+   "cle": false,
+   "t": "Augmenter fortement le Smic",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/florian-philippot"
+  },
+  {
+   "id": "philippot-138-1",
+   "s": 137,
+   "cle": true,
+   "t": "Un « protectionnisme intelligent » : droits de douane et préférence nationale dans la commande publique",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/florian-philippot"
+  },
+  {
+   "id": "philippot-139-1",
+   "s": 138,
+   "cle": false,
+   "t": "Rétablir les peines planchers",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/florian-philippot"
+  },
+  {
+   "id": "philippot-140-1",
+   "s": 139,
+   "cle": false,
+   "t": "Référendum d'initiative citoyenne sur tous les sujets et proportionnelle intégrale",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/florian-philippot"
+  },
+  {
+   "id": "asselineau-141-1",
+   "s": 140,
+   "cle": true,
+   "t": "Sortir de l'UE (article 50), de l'euro et de l'OTAN : le « Frexit »",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/francois-asselineau"
+  },
+  {
+   "id": "asselineau-142-1",
+   "s": 141,
+   "cle": true,
+   "t": "Augmenter le Smic de 24 %",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/francois-asselineau"
+  },
+  {
+   "id": "asselineau-143-1",
+   "s": 142,
+   "cle": false,
+   "t": "Augmenter de 15 % le budget hospitalier",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/francois-asselineau"
+  },
+  {
+   "id": "asselineau-144-1",
+   "s": 143,
+   "cle": false,
+   "t": "Organiser des référendums sur le droit du sol et le regroupement familial",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/francois-asselineau"
+  },
+  {
+   "id": "asselineau-145-1",
+   "s": 144,
+   "cle": false,
+   "t": "Nationaliser des secteurs stratégiques et contrôler les mouvements de capitaux",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/francois-asselineau"
+  },
+  {
+   "id": "asselineau-146-1",
+   "s": 145,
+   "cle": false,
+   "t": "Inscrire le référendum d'initiative citoyenne dans la Constitution",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/francois-asselineau"
+  },
+  {
+   "id": "kazib-147-1",
+   "s": 146,
+   "cle": true,
+   "t": "Retraite à 60 ans",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/anasse-kazib"
+  },
+  {
+   "id": "kazib-148-1",
+   "s": 147,
+   "cle": true,
+   "t": "Semaine de 28 heures",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/anasse-kazib"
+  },
+  {
+   "id": "kazib-149-1",
+   "s": 148,
+   "cle": false,
+   "t": "Smic à 1 800 € et hausse générale des salaires",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/anasse-kazib"
+  },
+  {
+   "id": "kazib-150-1",
+   "s": 149,
+   "cle": true,
+   "t": "Exproprier sans indemnité les secteurs stratégiques",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/anasse-kazib"
+  },
+  {
+   "id": "kazib-151-1",
+   "s": 150,
+   "cle": false,
+   "t": "Régulariser tous les sans-papiers, liberté de circulation et d'installation",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/anasse-kazib"
+  },
+  {
+   "id": "kazib-152-1",
+   "s": 151,
+   "cle": false,
+   "t": "Sortir de l'OTAN",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/anasse-kazib"
+  },
+  {
+   "id": "branco-153-1",
+   "s": 152,
+   "cle": true,
+   "t": "Rétablir l'ISF et taxer très lourdement les héritages au-delà de 100 millions d'euros",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/juan-branco"
+  },
+  {
+   "id": "branco-154-1",
+   "s": 153,
+   "cle": true,
+   "t": "Supprimer les mutuelles privées au profit d'une Sécurité sociale unique et créer un corps de médecins salariés",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/juan-branco"
+  },
+  {
+   "id": "branco-155-1",
+   "s": 154,
+   "cle": true,
+   "t": "Intégrer l'enseignement privé au public, doubler les budgets et supprimer Parcoursup",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/juan-branco"
+  },
+  {
+   "id": "branco-156-1",
+   "s": 155,
+   "cle": false,
+   "t": "Convoquer une assemblée constituante et créer un référendum d'initiative citoyenne sur tous les sujets",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/juan-branco"
+  },
+  {
+   "id": "branco-157-1",
+   "s": 156,
+   "cle": false,
+   "t": "Arrêter le soutien militaire à l'Ukraine et sortir de l'OTAN",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/juan-branco"
+  },
+  {
+   "id": "branco-158-1",
+   "s": 157,
+   "cle": false,
+   "t": "Rendre le RSA inconditionnel et départementaliser le Smic",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/juan-branco"
+  },
+  {
+   "id": "polony-159-1",
+   "s": 158,
+   "cle": true,
+   "t": "Décréter un « état d'urgence de la production » : priorité aux produits français dans la commande publique",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/natacha-polony"
+  },
+  {
+   "id": "polony-159-2",
+   "s": 158,
+   "cle": false,
+   "t": "Supprimer les aides aux entreprises qui ne sont pas liées à la production en France",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/natacha-polony"
+  },
+  {
+   "id": "polony-160-1",
+   "s": 159,
+   "cle": true,
+   "t": "Augmenter les salaires de 20 à 30 %",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/natacha-polony"
+  },
+  {
+   "id": "lalanne-161-1",
+   "s": 160,
+   "cle": true,
+   "t": "Sortir de l'Union européenne et revenir au franc",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/francis-lalanne"
+  },
+  {
+   "id": "lalanne-162-1",
+   "s": 161,
+   "cle": false,
+   "t": "Sortir de l'OTAN",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/francis-lalanne"
+  },
+  {
+   "id": "lalanne-163-1",
+   "s": 162,
+   "cle": false,
+   "t": "Abroger les lois Pleven, Gayssot et Avia",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/francis-lalanne"
+  },
+  {
+   "id": "labib-164-1",
+   "s": 163,
+   "cle": true,
+   "t": "Augmenter tous les salaires et pensions de 400 € par mois",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/selma-labib"
+  },
+  {
+   "id": "labib-165-1",
+   "s": 164,
+   "cle": true,
+   "t": "Réduire drastiquement le temps de travail sans perte de salaire",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/selma-labib"
+  },
+  {
+   "id": "labib-166-1",
+   "s": 165,
+   "cle": false,
+   "t": "Abroger la réforme de 2023 et revenir à 62 ans ou moins",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/selma-labib"
+  },
+  {
+   "id": "labib-167-1",
+   "s": 166,
+   "cle": false,
+   "t": "Régulariser tous les sans-papiers et leurs familles",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/selma-labib"
+  },
+  {
+   "id": "labib-168-1",
+   "s": 167,
+   "cle": false,
+   "t": "Sortir du nucléaire et accélérer l'éolien et le solaire",
+   "sous": [],
+   "page": null,
+   "src": "https://www.france-vote.fr/candidats/selma-labib"
+  }
+ ]
+}
