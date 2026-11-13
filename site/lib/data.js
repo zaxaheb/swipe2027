@@ -1,11 +1,11 @@
 // Base de connaissances côté serveur (générée par build.py dans data/base.json).
 import { readFileSync } from "node:fs";
-import { join } from "node:path";
 
 let BASE = null;
 export function base() {
   if (!BASE) {
-    BASE = JSON.parse(readFileSync(join(process.cwd(), "data", "base.json"), "utf8"));
+    // Chemin relatif à ce fichier : Vercel l'inclut automatiquement dans la fonction.
+    BASE = JSON.parse(readFileSync(new URL("../data/base.json", import.meta.url), "utf8"));
     BASE.byId = Object.fromEntries(BASE.mesures.map((m) => [m.id, m]));
     const n = (s) => String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
     BASE.norm = n;

@@ -1,7 +1,7 @@
 {
   "functions": {
     "api/*.js": {
-      "includeFiles": "{data/**,lib/**}"
+      "includeFiles": "data/**"
     }
   },
   "headers": [
