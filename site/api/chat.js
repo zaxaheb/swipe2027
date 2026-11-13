@@ -10,7 +10,12 @@ const cleanMsgs = (arr) => (Array.isArray(arr) ? arr : []).slice(-12)
   .map((m) => ({ role: m.role === "assistant" ? "assistant" : "user", content: String(m.content || "").slice(0, 2000) }))
   .filter((m) => m.content);
 
-export const config = { maxDuration: 60 };
+export const config = { maxDuration: 120 };
+
+/** Les erreurs sont aussi rangées dans le journal des chats : elles apparaissent en rouge dans /admin. */
+const logErr = (mode, mesureId, msgs, e) => insert("chats", { mode: mode || "general", mesure_id: mode === "mesure" ? String(mesureId || "").slice(0, 160) : null,
+  question: String(msgs?.[msgs.length - 1]?.content || "").slice(0, 1000),
+  reponse: ("⚠️ ERREUR : " + String(e?.message || e)).replace(/sk-ant-[\w-]+/g, "***").slice(0, 600), v: PROMPT_VERSION }).catch(() => {});
 
 /** Réponse avec recherche web (outil serveur d'Anthropic) ; ajoute les sources citées si le texte n'en a pas. */
 async function withWeb(system, msgs) {
@@ -104,7 +109,7 @@ export default async function handler(req, res) {
       const send = (o) => res.write(`data: ${JSON.stringify(o)}\n\n`);
       send({ type: "step", label: mode === "mesure" ? "Lecture de la fiche de la mesure" : "Recherche dans la base de l'app" });
       try { text = await streamWeb(res, system, msgs, send); }
-      catch (e) { console.error("chat stream:", e.message); send({ type: "error", error: /credit balance/i.test(e.message) ? "indisponible" : "erreur" }); return res.end(); }
+      catch (e) { console.error("chat stream:", e.message); await logErr(mode, mesureId, msgs, e); send({ type: "error", error: /credit balance/i.test(e.message) ? "indisponible" : /overloaded|529/i.test(e.message) ? "surcharge" : "erreur", detail: String(e.status || "") }); return res.end(); }
       await insert("chats", { mode, mesure_id: mode === "mesure" ? String(mesureId).slice(0, 160) : null, question: msgs[msgs.length - 1].content.slice(0, 1000), reponse: text.slice(0, 3000), v: PROMPT_VERSION }).catch(() => {});
       send({ type: "done" }); return res.end();
     }
@@ -114,6 +119,7 @@ export default async function handler(req, res) {
     res.status(200).json({ text, v: PROMPT_VERSION });
   } catch (e) {
     console.error("chat:", e.message);   // visible dans Vercel > Logs
+    await logErr(req.body?.mode, req.body?.mesureId, req.body?.messages, e);
     const credit = /credit balance/i.test(String(e.message));
     res.status(credit ? 503 : e.status || 500).json({ error: credit ? "indisponible" : e.status === 429 ? "rate_limited" : "erreur", detail: String(e.message || "").replace(/sk-ant-[\w-]+/g, "***").slice(0, 200) });
   }
