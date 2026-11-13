@@ -11,3 +11,6 @@ create table if not exists public.remarques (
 );
 alter table public.remarques enable row level security;  -- aucune policy : seul le serveur lit et écrit
 create index if not exists remarques_statut on public.remarques(statut, created_at desc);
+
+-- Anonymisation : le pseudo n'est plus copié dans les profils (il ne reste que l'identifiant technique).
+update public.profils set username = null;

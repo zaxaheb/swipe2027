@@ -425,15 +425,15 @@ const pseudoOf=u=>u&&u.email?u.email.split("@")[0]:"";
 let AUTH_MODE="signup";
 function accountHTML(){
   if(!SB) return "";
-  if(USER) return `<div class="box prompt" style="padding-bottom:20px"><div class="label">Ton compte</div><div class="answer sm">Connecté en tant que <b>@${esc(pseudoOf(USER))}</b></div><p class="note" style="margin:8px 0 12px">Tes réponses sont sauvegardées et synchronisées sur tous tes appareils.</p>
+  if(USER) return `<div class="box prompt" style="padding-bottom:20px"><div class="label">Ton compte</div><div class="answer sm">Connecté en tant que <b>@${esc(pseudoOf(USER))}</b></div><p class="note" style="margin:8px 0 12px">Tes réponses sont sauvegardées de façon anonyme et synchronisées sur tous tes appareils.</p>
     <div class="row" style="display:flex;gap:8px;flex-wrap:wrap"><button class="cta ghost" id="b-logout">Se déconnecter</button><button class="cta ghost" id="b-del" style="color:var(--contre)">Supprimer mon compte</button></div>
     <div class="confirm" id="del-confirm"><span class="note">Ton compte et toutes tes réponses seront effacés définitivement.</span><button class="cta" id="b-del-yes" style="background:var(--contre)">Oui, tout supprimer</button><button class="cta ghost" id="b-del-no">Annuler</button></div><p class="note" id="del-st"></p></div>`;
   const su=AUTH_MODE==="signup";
   return `<div class="box prompt" style="padding-bottom:20px" id="compte"><div class="label">${su?"Crée ton compte":"Connexion"}</div><div class="answer sm">${su?"Choisis un pseudo et un mot de passe pour garder tes réponses sur tous tes appareils.":"Content de te revoir !"}</div>
    <form id="f-auth" style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
-     <input id="in-user" class="field" required minlength="3" maxlength="20" pattern="[a-zA-Z0-9_]{3,20}" placeholder="Pseudo (lettres, chiffres, _)" autocomplete="username" autocapitalize="none">
+     <input id="in-user" class="field" required minlength="3" maxlength="20" pattern="[a-zA-Z0-9_]{3,20}" placeholder="Pseudo (évite ton vrai nom)" autocomplete="username" autocapitalize="none">
      <input id="in-pass" class="field" type="password" required minlength="8" placeholder="Mot de passe (8 caractères min.)" autocomplete="${su?"new-password":"current-password"}">
-     ${su?`<label class="note" style="display:flex;gap:10px;align-items:flex-start;color:var(--ink)"><input type="checkbox" id="in-consent" required style="margin-top:3px;width:18px;height:18px;flex:none"><span>J'accepte que mes réponses pour ou contre les mesures soient enregistrées avec mon compte. Elles peuvent révéler des opinions politiques. Je peux supprimer mon compte à tout moment. <a href="/confidentialite.html" target="_blank">Confidentialité</a></span></label>`:""}
+     ${su?`<label class="note" style="display:flex;gap:10px;align-items:flex-start;color:var(--ink)"><input type="checkbox" id="in-consent" required style="margin-top:3px;width:18px;height:18px;flex:none"><span>J'accepte que mes réponses soient sauvegardées de façon anonyme pour les retrouver sur mes appareils : seulement sous mon pseudo, sans email ni nom ni adresse IP. L'équipe ne voit que des statistiques globales, et je peux tout effacer à tout moment. <a href="/confidentialite.html" target="_blank">Confidentialité</a></span></label>`:""}
      <button class="cta">${su?"Créer mon compte":"Se connecter"}</button></form>
    <p class="note" id="auth-st" style="margin:10px 0 0">${su?`Déjà un compte ? <button class="linkbtn" id="b-mode" style="margin:0">Se connecter</button>`:`Pas encore de compte ? <button class="linkbtn" id="b-mode" style="margin:0">Créer un compte</button>`}</p>
    <p class="note" style="margin:6px 0 0">Pas d'email demandé. Garde bien ton mot de passe : sans email, on ne peut pas le récupérer.</p></div>`;
@@ -449,7 +449,7 @@ function bindAccount(root){
       if(error){ st.textContent=/registered|exists/i.test(error.message)?"Ce pseudo est déjà pris.":/password/i.test(error.message)?"Mot de passe trop faible : 8 caractères minimum.":"Ça n'a pas marché : "+error.message; return; }
       if(!data.session){ st.textContent="Compte créé, mais la confirmation par email est activée dans Supabase : désactive-la (voir README)."; return; }
       USER=data.session.user;
-      try{ await SB.from("profils").upsert({user_id:USER.id,username:user,consent_at:new Date().toISOString(),swipes:SW,updated_at:new Date().toISOString()}); }catch(e){}
+      try{ await SB.from("profils").upsert({user_id:USER.id,consent_at:new Date().toISOString(),swipes:SW,updated_at:new Date().toISOString()}); }catch(e){}
       toast("Bienvenue @"+user+" !"); renderProfil();
     } else {
       const {error}=await SB.auth.signInWithPassword({email,password:pass});
