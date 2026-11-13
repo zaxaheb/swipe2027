@@ -29,6 +29,54 @@ async function withWeb(system, msgs) {
   return text;
 }
 
+/** Version en direct (SSE) : on montre au navigateur les étapes (recherches web) puis le texte au fil de l'eau. */
+async function streamWeb(res, system, msgs, send) {
+  const tools = [{ type: "web_search_20250305", name: "web_search", max_uses: Number(process.env.CHAT_MAX_SEARCHES || 3), user_location: { type: "approximate", country: "FR", timezone: "Europe/Paris" } }];
+  const conv = [...msgs]; let full = ""; const cites = new Map();
+  for (let turn = 0; turn < 3; turn++) {
+    const r = await fetch("https://api.anthropic.com/v1/messages", { method: "POST",
+      headers: { "x-api-key": process.env.ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01", "content-type": "application/json" },
+      body: JSON.stringify({ model: process.env.ANTHROPIC_MODEL, max_tokens: 1400, system, tools, messages: conv, stream: true }) });
+    if (!r.ok) { const e = new Error(`anthropic ${r.status}: ${await r.text()}`); e.status = r.status === 429 ? 429 : 502; throw e; }
+    const blocks = []; let stop = null, buf = "";
+    const dec = new TextDecoder();
+    for await (const chunk of r.body) {
+      buf += dec.decode(chunk, { stream: true });
+      let i;
+      while ((i = buf.indexOf("\n\n")) >= 0) {
+        const raw = buf.slice(0, i); buf = buf.slice(i + 2);
+        const line = raw.split("\n").find((l) => l.startsWith("data: ")); if (!line) continue;
+        let ev; try { ev = JSON.parse(line.slice(6)); } catch { continue; }
+        if (ev.type === "content_block_start") {
+          const b = { ...ev.content_block }; blocks[ev.index] = b;
+          if (b.type === "server_tool_use") b._json = "";
+          if (b.type === "text") b.text = b.text || "";
+          if (b.type === "web_search_tool_result") {
+            const res_ = Array.isArray(b.content) ? b.content : [];
+            send({ type: "results", n: res_.length, sites: [...new Set(res_.map((x) => { try { return new URL(x.url).hostname.replace(/^www\./, ""); } catch { return null; } }).filter(Boolean))].slice(0, 4) });
+          }
+        } else if (ev.type === "content_block_delta") {
+          const b = blocks[ev.index]; if (!b) continue;
+          if (ev.delta.type === "text_delta") { b.text += ev.delta.text; full += ev.delta.text; send({ type: "text", delta: ev.delta.text }); }
+          else if (ev.delta.type === "input_json_delta") b._json += ev.delta.partial_json;
+          else if (ev.delta.type === "citations_delta") { const ct = ev.delta.citation; (b.citations ||= []).push(ct); if (ct.url) cites.set(ct.url, ct.title || ct.url); }
+        } else if (ev.type === "content_block_stop") {
+          const b = blocks[ev.index];
+          if (b && b.type === "server_tool_use") { try { b.input = JSON.parse(b._json || "{}"); } catch { b.input = {}; } delete b._json; send({ type: "search", query: b.input.query || "" }); }
+        } else if (ev.type === "message_delta") stop = ev.delta.stop_reason;
+        else if (ev.type === "error") throw new Error("anthropic stream: " + JSON.stringify(ev.error));
+      }
+    }
+    if (stop !== "pause_turn") break;
+    conv.push({ role: "assistant", content: blocks.filter(Boolean).map((b) => { const o = { ...b }; delete o._json; return o; }) });
+  }
+  if (cites.size && !/\]\(https?:/.test(full)) {
+    const extra = "\n\nSources : " + [...cites.entries()].slice(0, 5).map(([u, t]) => `[${t}](${u})`).join(" · ");
+    full += extra; send({ type: "text", delta: extra });
+  }
+  return full.trim();
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
   const { mode = "general", mesureId, choix } = req.body || {};
@@ -51,6 +99,15 @@ export default async function handler(req, res) {
     }
     let text;
     if (mode === "profil") text = textOf(await messages({ max_tokens: 700, system, messages: msgs }));
+    else if (req.body?.stream) {
+      res.writeHead(200, { "Content-Type": "text/event-stream; charset=utf-8", "Cache-Control": "no-cache, no-transform", "X-Accel-Buffering": "no" });
+      const send = (o) => res.write(`data: ${JSON.stringify(o)}\n\n`);
+      send({ type: "step", label: mode === "mesure" ? "Lecture de la fiche de la mesure" : "Recherche dans la base de l'app" });
+      try { text = await streamWeb(res, system, msgs, send); }
+      catch (e) { console.error("chat stream:", e.message); send({ type: "error", error: /credit balance/i.test(e.message) ? "indisponible" : "erreur" }); return res.end(); }
+      await insert("chats", { mode, mesure_id: mode === "mesure" ? String(mesureId).slice(0, 160) : null, question: msgs[msgs.length - 1].content.slice(0, 1000), reponse: text.slice(0, 3000), v: PROMPT_VERSION }).catch(() => {});
+      send({ type: "done" }); return res.end();
+    }
     else text = await withWeb(system, msgs);
     // Journal anonyme : ni IP, ni compte, ni historique ; seulement la dernière question et la réponse.
     if (mode !== "profil") await insert("chats", { mode, mesure_id: mode === "mesure" ? String(mesureId).slice(0, 160) : null, question: msgs[msgs.length - 1].content.slice(0, 1000), reponse: text.slice(0, 3000), v: PROMPT_VERSION }).catch(() => {});

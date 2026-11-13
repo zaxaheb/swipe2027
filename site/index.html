@@ -165,6 +165,17 @@ details[open].fold>summary{margin-bottom:0}
 .less-btn{display:inline-flex;align-items:center;gap:6px;margin-top:14px;padding:8px 14px;border-radius:999px;background:var(--soft);font:600 14px var(--sans);color:var(--ink)}
 .less-btn::after{content:"";width:7px;height:7px;border-left:2px solid currentColor;border-top:2px solid currentColor;transform:rotate(45deg) translateY(2px)}
 details[open].fold>summary .label::after{content:"Réduire";float:right;font:600 13px var(--sans);color:var(--muted)}
+.msg.a{white-space:normal}
+.msg.a p{margin:0 0 8px}.msg.a p:last-child{margin-bottom:0}
+.msg.a ul,.msg.a ol{margin:4px 0 8px;padding-left:20px}.msg.a li{margin:2px 0}
+.steps{display:flex;flex-direction:column;gap:4px;margin-bottom:8px;font-size:13px;color:var(--muted)}
+.steps:empty{display:none}
+.step{display:flex;gap:7px;align-items:flex-start}
+.step .ic{flex:none;width:16px;text-align:center}
+.step.run .ic{animation:spin 1s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+.caret::after{content:"▍";animation:blink 1s steps(2) infinite;color:var(--muted)}
+@keyframes blink{50%{opacity:0}}
 /* toast */
 .toast{position:fixed;left:50%;top:18px;transform:translate(-50%,-80px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-weight:600;font-size:14px;z-index:30;transition:transform .25s;white-space:nowrap}
 .toast.on{transform:translate(-50%,0)}
@@ -413,7 +424,25 @@ async function ai(payload){
   if(!r.ok) throw Object.assign(new Error("http"),{code:r.status===404?"off":"http"});
   return (await r.json()).text;
 }
-function linkify(s){ return esc(s).replace(/\[([^\]]{1,120})\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>').replace(/(^|[\s(])(https?:\/\/[^\s<)]+)/g,'$1<a href="$2" target="_blank" rel="noopener">$2</a>'); }
+function mdInline(s){ return s
+  .replace(/\[([^\]]{1,140})\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>')
+  .replace(/(^|[\s(])(https?:\/\/[^\s<)]+)/g,'$1<a href="$2" target="_blank" rel="noopener">$2</a>')
+  .replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/(^|[^*])\*([^*\n]+)\*/g,'$1<i>$2</i>'); }
+/* Markdown simple et sûr : on échappe tout, puis gras, italique, liens, listes, paragraphes. */
+function md(s){
+  const L=esc(String(s||"")).split("\n"); let out="", list=null;
+  const close=()=>{ if(list){ out+=`</${list}>`; list=null; } };
+  for(const raw of L){ const l=raw.trimEnd();
+    let m;
+    if((m=l.match(/^\s*[-•*]\s+(.*)$/))){ if(list!=="ul"){ close(); out+="<ul>"; list="ul"; } out+=`<li>${mdInline(m[1])}</li>`; continue; }
+    if((m=l.match(/^\s*\d+[.)]\s+(.*)$/))){ if(list!=="ol"){ close(); out+="<ol>"; list="ol"; } out+=`<li>${mdInline(m[1])}</li>`; continue; }
+    close();
+    if((m=l.match(/^#{1,4}\s+(.*)$/))){ out+=`<p><b>${mdInline(m[1])}</b></p>`; continue; }
+    if(l.trim()) out+=`<p>${mdInline(l)}</p>`;
+  }
+  close(); return out;
+}
+const linkify=md;
 const aiErr=e=>e.code==="off"?"L'IA n'est pas encore branchée sur ce site (voir README).":e.code==="indispo"?"L'IA est momentanément indisponible. Réessaie un peu plus tard.":e.code==="quota"?"Tu as atteint la limite d'utilisation de l'IA pour aujourd'hui. Reviens demain !":e.code==="rate"?"Trop de demandes, réessaie dans une minute.":e.code==="busy"?"Quelqu'un est déjà en train de générer cette fiche. Réessaie dans une minute.":"Ça n'a pas marché. Réessaie.";
 /* fiches partagées : générées une fois, puis servies à tous */
 const REMOTE={}; const REMOTE_MISS=new Set();
@@ -718,19 +747,20 @@ function renderCond(){ const q=norm($("#c-q").value).split(/\s+/).filter(Boolean
 renderCond();
 
 /* ================= CHAT ================= */
+const initials=n=>String(n).split(/[\s-]+/).filter(w=>/^[A-ZÉÈ]/.test(w)).map(w=>w[0]).join("").slice(0,2)||"?";
 function threadsList(){ const t=[{k:"g",name:"Parler politique",sub:"Programmes, votes, condamnations : pose ta question",av:"#111",l:"?"}];
   const liked=Object.keys(SW).filter(k=>SW[k]===1).reverse();
   const ids=[...new Set([...Object.keys(CHATS).filter(k=>k.startsWith("m:")).map(k=>k.slice(2)),...liked])].filter(id=>BYID[id]).slice(0,40);
   ids.sort((a,b)=>(CHATS["m:"+b]?.length||0)-(CHATS["m:"+a]?.length||0));
-  for(const id of ids){ const m=BYID[id], h=CHATS["m:"+id]; t.push({k:"m:"+id,name:`${m.S.section} · ${m.P}`,sub:h&&h.length?h[h.length-1].content:"Tu as aimé : "+m.t,av:gradOf(m),l:m.P}); }
+  for(const id of ids){ const m=BYID[id], h=CHATS["m:"+id]; t.push({k:"m:"+id,name:`${m.S.section} · ${PROGS[m.P].cand}`,sub:h&&h.length?h[h.length-1].content:"Tu as aimé : "+m.t,av:gradOf(m),l:initials(PROGS[m.P].cand)}); }
   return t; }
 function renderThreads(){ $("#chat-dot").style.display="none";
   $("#threads").innerHTML=threadsList().map(t=>`<button class="thread" data-k="${esc(t.k)}"><span class="av" style="background:${t.av};font-size:${t.l.length>1?"15px":"20px"}">${esc(t.l)}</span><span style="min-width:0"><span class="n">${esc(t.name)}</span><span class="l">${esc(t.sub)}</span></span></button>`).join("");
   $$("#threads .thread").forEach(b=>b.onclick=()=>openConvo(b.dataset.k)); }
 let CK=null;
 function openConvo(k){ CK=k; const isG=k==="g", m=isG?null:BYID[k.slice(2)];
-  $("#cv-name").textContent=isG?"Parler politique":m.S.section+" · "+m.P;
-  $("#cv-av").style.background=isG?"#111":gradOf(m); $("#cv-av").textContent=isG?"?":m.P;
+  $("#cv-name").textContent=isG?"Parler politique":m.S.section+" · "+PROGS[m.P].cand;
+  $("#cv-av").style.background=isG?"#111":gradOf(m); $("#cv-av").textContent=isG?"?":initials(PROGS[m.P].cand);
   const H=CHATS[k]||[];
   $("#cv-msgs").innerHTML=(m?`<div class="quote">${esc(m.t)}</div>`:`<div class="quote">Pose une question sur les programmes des candidats, les votes à l'Assemblée ou les condamnations. Réponses neutres, appuyées sur les données de l'app.</div>`)+`<p class="note" style="text-align:center;margin:0 0 8px">Les questions sont enregistrées de façon anonyme pour améliorer l'app. N'y mets pas d'informations personnelles.</p>`+H.map(x=>`<div class="msg ${x.role==="user"?"u":"a"}">${x.role==="user"?esc(x.content):linkify(x.content)}</div>`).join("");
   const S=isG?["Que proposent les candidats sur les retraites ?","Comment le RN a voté sur le budget ?","Qui vote le plus souvent ensemble ?","C'est quoi la 6e République ?"]:["Qui paierait ?","Ça change quoi pour moi ?","Ça a marché ailleurs ?","Les principales critiques ?"];
@@ -743,9 +773,30 @@ $("#cv-form").onsubmit=async e=>{ e.preventDefault(); const q=$("#cv-in").value.
   H.push({role:"user",content:q}); box.insertAdjacentHTML("beforeend",`<div class="msg u">${esc(q)}</div>`);
   const out=document.createElement("div"); out.className="msg a"; out.textContent="…"; box.appendChild(out); box.scrollTop=1e9;
   const payload=k==="g"?{mode:"general",messages:H.slice(-12)}:{mode:"mesure",mesureId:k.slice(2),messages:H.slice(-12)};
-  out.textContent="Recherche en cours…";
-  try{ const t=await ai(payload); out.innerHTML=linkify(t); H.push({role:"assistant",content:t}); store.set("chats2027",CHATS); }
-  catch(err){ H.pop(); out.textContent=aiErr(err); }
+  out.innerHTML=`<div class="steps"></div><div class="body caret"></div>`;
+  const stepsEl=out.querySelector(".steps"), bodyEl=out.querySelector(".body");
+  const addStep=(ic,txt,run)=>{ stepsEl.querySelectorAll(".step.run").forEach(s=>{ s.classList.remove("run"); s.querySelector(".ic").textContent="✓"; }); const d=document.createElement("div"); d.className="step"+(run?" run":""); d.innerHTML=`<span class="ic">${run?"◌":ic}</span><span>${txt}</span>`; stepsEl.appendChild(d); box.scrollTop=1e9; };
+  let txt="", raf=0;
+  const paint=()=>{ raf=0; bodyEl.innerHTML=md(txt); box.scrollTop=1e9; };
+  try{
+    if(!API) throw Object.assign(new Error("off"),{code:"off"});
+    let r; try{ r=await fetch(API+"/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({...payload,stream:true})}); }catch(e){ throw Object.assign(new Error("off"),{code:"off"}); }
+    if(!r.ok||!/event-stream/.test(r.headers.get("content-type")||"")){ const d=await r.json().catch(()=>({})); throw Object.assign(new Error("http"),{code:r.status===429?(d.error==="quota"?"quota":"rate"):r.status===503?"indispo":r.status===404?"off":"http"}); }
+    const rd=r.body.getReader(), dec=new TextDecoder(); let buf="", done=false;
+    while(!done){ const {value,done:d}=await rd.read(); if(d) break; buf+=dec.decode(value,{stream:true}); let i;
+      while((i=buf.indexOf("\n\n"))>=0){ const line=buf.slice(0,i); buf=buf.slice(i+2); if(!line.startsWith("data: ")) continue; let ev; try{ ev=JSON.parse(line.slice(6)); }catch(e){ continue; }
+        if(ev.type==="step") addStep("✓",esc(ev.label),true);
+        else if(ev.type==="search") addStep("🔎",`Recherche web : « ${esc(ev.query)} »`,true);
+        else if(ev.type==="results") addStep("📄",`${ev.n} résultat${ev.n>1?"s":""}${ev.sites.length?" · "+esc(ev.sites.join(", ")):""}`,false);
+        else if(ev.type==="text"){ if(!txt) addStep("✍️","Rédaction de la réponse",false); txt+=ev.delta; if(!raf) raf=requestAnimationFrame(paint); }
+        else if(ev.type==="error") throw Object.assign(new Error("x"),{code:ev.error==="indisponible"?"indispo":"http"});
+        else if(ev.type==="done") done=true; } }
+    stepsEl.querySelectorAll(".step.run").forEach(s=>{ s.classList.remove("run"); s.querySelector(".ic").textContent="✓"; });
+    paint(); bodyEl.classList.remove("caret");
+    if(!txt) throw Object.assign(new Error("vide"),{code:"http"});
+    H.push({role:"assistant",content:txt}); store.set("chats2027",CHATS);
+  }
+  catch(err){ H.pop(); out.innerHTML=esc(aiErr(err)); }
   box.scrollTop=1e9; };
 
 /* ================= PROFIL ================= */
