@@ -399,7 +399,9 @@ const ficheOf=id=>FICHES[id]||REMOTE[id]||null;
 /* ================= état ================= */
 let SW=store.get("sw2027",{});        // id -> 1 pour / -1 contre / 0 sans avis
 let CHATS=store.get("chats2027",{});  // clé -> [{role,content}]
-let HIST=[];
+let HIST=store.get("hist2027",[]);                  // ordre des réponses (pour « revenir »)
+let REVIEW=null;                                    // { ids, i, label } : révision de réponses déjà données
+const saveHist=()=>store.set("hist2027",HIST.slice(-3000));
 let syncT=null;
 const save=()=>{ store.set("sw2027",SW); clearTimeout(syncT); syncT=setTimeout(pushRemote,1200); };
 /* ================= comptes (Supabase, lien magique par email) ================= */
@@ -455,7 +457,7 @@ function bindAccount(root){
   const d=root.querySelector("#b-del"); if(d){ d.onclick=()=>$("#del-confirm").classList.add("on"); $("#b-del-no").onclick=()=>$("#del-confirm").classList.remove("on");
     $("#b-del-yes").onclick=async()=>{ const st=$("#del-st"); st.textContent="Suppression…";
       try{ const {data}=await SB.auth.getSession(); const r=await fetch(API+"/compte",{method:"DELETE",headers:{Authorization:"Bearer "+data.session.access_token}});
-        if(!r.ok) throw new Error(); await SB.auth.signOut().catch(()=>{}); USER=null; SW={}; HIST=[]; store.set("sw2027",SW); toast("Compte supprimé"); nextProfile(); location.hash="profil"; renderProfil(); }
+        if(!r.ok) throw new Error(); await SB.auth.signOut().catch(()=>{}); USER=null; SW={}; HIST=[]; REVIEW=null; saveHist(); store.set("sw2027",SW); toast("Compte supprimé"); nextProfile(); location.hash="profil"; renderProfil(); }
       catch(e){ st.textContent="La suppression a échoué. Réessaie, ou écris-nous (voir la page Confidentialité)."; } }; }
 }
 /* ================= navigation ================= */
@@ -464,16 +466,16 @@ const curView=()=>{ const v=location.hash.slice(1); return VIEWS.includes(v)?v:"
 function show(v){ if(!VIEWS.includes(v)) v="swipe";
   $$(".view").forEach(s=>s.classList.toggle("on",s.id==="v-"+v));
   $$("nav.tabs button").forEach(b=>b.setAttribute("aria-current",b.dataset.v===v?"page":"false"));
-  $("#actbar").classList.toggle("hidden",v!=="swipe"||!CURM); $("#b-undo").disabled=!HIST.length;
+  $("#actbar").classList.toggle("hidden",v!=="swipe"||!CURM); $("#b-undo").disabled=REVIEW?REVIEW.i===0:!HIST.length;
   if(v==="profil") renderProfil(); if(v==="chat") renderThreads(); }
 $$("nav.tabs button").forEach(b=>b.onclick=()=>{ if(location.hash==="#"+b.dataset.v){ show(b.dataset.v); $("#main").scrollTop=0; } else location.hash=b.dataset.v; });
 window.addEventListener("hashchange",()=>{ show(location.hash.slice(1)); $("#main").scrollTop=0; });
 
 /* ================= DÉCOUVRIR ================= */
-const FILTERS=[["mix","Tous les candidats, en alterné"],...PKEYS.map(P=>[P,PROGS[P].cand+" · "+PROGS[P].nom]),["fiches","Fiches sourcées"]];
-let FILTER=store.get("f2027b","mix");
+const FILTERS=[["revoir","↺ Revoir mes réponses"],["mix","Tous les candidats, en alterné"],...PKEYS.map(P=>[P,PROGS[P].cand+" · "+PROGS[P].nom]),["fiches","Fiches sourcées"]];
+let FILTER=store.get("f2027b","mix"); if(FILTER==="revoir") FILTER="mix";
 $("#f-chips").innerHTML=FILTERS.map(([k,l])=>`<button class="chip" data-f="${k}" aria-pressed="${k===FILTER}">${esc(l)}</button>`).join("");
-$$("#f-chips .chip").forEach(b=>b.onclick=()=>{FILTER=b.dataset.f;store.set("f2027b",FILTER);$$("#f-chips .chip").forEach(x=>x.setAttribute("aria-pressed",x===b));nextProfile();});
+$$("#f-chips .chip").forEach(b=>b.onclick=()=>{ if(b.dataset.f==="revoir"){ const ids=answeredIds(); if(!ids.length){ toast("Tu n'as encore répondu à aucune mesure"); return; } startReview(ids,"toutes tes réponses"); $("#filters").hidden=true; return; } FILTER=b.dataset.f;store.set("f2027b",FILTER);$$("#f-chips .chip").forEach(x=>x.setAttribute("aria-pressed",x===b));nextProfile();});
 $("#b-filter").onclick=()=>{const f=$("#filters");f.hidden=!f.hidden;};
 const rank=m=>(FICHES[m.id]?0:m.cle?1:2);
 function interleave(a,b){ const o=[]; for(let i=0;i<Math.max(a.length,b.length);i++){ if(a[i]) o.push(a[i]); if(b[i]) o.push(b[i]); } return o; }
@@ -485,7 +487,12 @@ function queue(){
   if(FILTER==="fiches") l=l.filter(m=>FICHES[m.id]||REMOTE[m.id]);
   return {all:l,left:l.filter(m=>!(m.id in SW))}; }
 let CURM=null;
-function nextProfile(){ const q=queue(); CURM=q.left[0]||null; renderProfile(q); $("#main").scrollTop=0; show(curView()); }
+function nextProfile(){
+  if(REVIEW){ if(REVIEW.i>=REVIEW.ids.length){ const n=REVIEW.ids.length; REVIEW=null; toast("Révision terminée ("+n+")"); } else { CURM=BYID[REVIEW.ids[REVIEW.i]]; renderProfile({all:REVIEW.ids,left:REVIEW.ids.slice(REVIEW.i)}); $("#main").scrollTop=0; show(curView()); return; } }
+  const q=queue(); CURM=q.left[0]||null; renderProfile(q); $("#main").scrollTop=0; show(curView()); }
+/* Ordre des réponses : historique d'abord, puis les réponses synchronisées venues d'un autre appareil */
+function answeredIds(f){ const seen=new Set(), out=[]; for(const id of [...HIST].reverse().concat(Object.keys(SW).reverse())) if(BYID[id]&&(id in SW)&&!seen.has(id)&&(!f||f(SW[id]))){ seen.add(id); out.push(id); } return out; }
+function startReview(ids,label,start){ if(!ids.length) return; REVIEW={ids,i:start||0,label}; location.hash="swipe"; nextProfile(); }
 
 const IC={
   heart:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.1 4.3 2.4.7-1.3 2.2-2.4 4.3-2.4 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg>',
@@ -512,7 +519,8 @@ function renderProfile(q){
   const sib=M.filter(x=>x.s===m.s);
   const parts=[];
   /* en-tête */
-  parts.push(`<div class="ph-name"><div><div class="kicker">${done+1} / ${q.all.length} · ${esc(short(m.S.partie))}</div><h2>${esc(m.S.section)}</h2></div></div>`);
+  if(REVIEW){ const v=SW[m.id]; parts.push(`<div class="box" style="padding:12px 14px;display:flex;align-items:center;gap:10px;background:var(--soft);border:0"><div style="flex:1;font-size:14px"><b>Révision · ${esc(REVIEW.label)}</b> · ${REVIEW.i+1} / ${REVIEW.ids.length}<br><span class="note">Tu avais répondu : <b style="color:${v===1?"var(--pour)":v===-1?"var(--contre)":"var(--muted)"}">${v===1?"pour":v===-1?"contre":"sans avis"}</b>. ❤ ou ✕ pour changer, → pour garder.</span></div><button class="cta ghost" id="b-quit-rev" style="padding:8px 14px">Quitter</button></div>`); }
+  parts.push(`<div class="ph-name"><div><div class="kicker">${REVIEW?"Déjà vue":(done+1)+" / "+q.all.length} · ${esc(short(m.S.partie))}</div><h2>${esc(m.S.section)}</h2></div></div>`);
   /* la mesure */
   parts.push(`<div class="box photo" style="background:${gradOf(m)}"><div class="over">${pBadge(m)}${m.cle?'<span class="badge">Mesure clé</span>':""}${F?`<span class="badge">${F.genere?"Fiche générée":"Fiche sourcée"}</span>`:""}</div><div class="q">${esc(m.t)}</div></div>`);
   /* infos */
@@ -553,6 +561,7 @@ function renderProfile(q){
   parts.push(`<div style="height:70px"></div>`);
   feed.innerHTML=`<div class="profile">${parts.join("")}</div>`;
   $("#b-chat").onclick=()=>openConvo("m:"+m.id);
+  const qr=$("#b-quit-rev"); if(qr) qr.onclick=()=>{ REVIEW=null; nextProfile(); };
   const bi=$("#b-intro"); if(bi) bi.onclick=()=>{ $("#intro").classList.remove("clamp"); bi.remove(); };
   const g=$("#b-gen"); if(g){ g.onclick=()=>generate(m);
     if(API) fetchFiche(m.id).then(f=>{ if(CURM!==m) return; if(f){ const y=$("#main").scrollTop; renderProfile(queue()); $("#main").scrollTop=y; } else { $("#gen-msg").textContent="Pas encore de fiche sourcée pour cette mesure. Sois le premier à la générer."; $("#gen-wrap").hidden=false; } });
@@ -562,13 +571,16 @@ function renderProfile(q){
 function flash(v){ const f=$("#flash"); f.innerHTML=v===1?`<span style="color:var(--like)">${IC.heart}</span>`:v===-1?`<span style="color:#111">${IC.x}</span>`:""; f.classList.remove("on"); void f.offsetWidth; if(v) f.classList.add("on"); }
 function decide(v){
   const m=CURM; if(!m) return;
-  SW[m.id]=v; save(); HIST.push(m.id); flash(v);
+  if(REVIEW){ const keep=v===0; if(!keep){ const changed=SW[m.id]!==v; SW[m.id]=v; save(); flash(v); if(changed) toast("Réponse modifiée"); } REVIEW.i++; setTimeout(nextProfile,keep?60:260); return; }
+  SW[m.id]=v; save(); HIST=HIST.filter(x=>x!==m.id); HIST.push(m.id); saveHist(); flash(v);
   if(!v) toast("Passée");
   setTimeout(nextProfile,v?260:80);
 }
 $("#b-yes").onclick=()=>decide(1); $("#b-no").onclick=()=>decide(-1); $("#b-skip").onclick=()=>decide(0);
-$("#b-undo").onclick=()=>{ const id=HIST.pop(); if(!id) return; delete SW[id]; save();
-  CURM=BYID[id]; renderProfile(queue()); $("#main").scrollTop=0; };
+$("#b-undo").onclick=()=>{
+  if(REVIEW){ if(REVIEW.i>0){ REVIEW.i--; nextProfile(); } return; }
+  const id=HIST.pop(); if(!id) return; saveHist(); delete SW[id]; save();
+  CURM=BYID[id]; renderProfile(queue()); $("#main").scrollTop=0; show(curView()); };
 document.addEventListener("keydown",e=>{ if(!$("#v-swipe").classList.contains("on")||$("#convo").classList.contains("on")||/INPUT|TEXTAREA/.test(document.activeElement.tagName)) return;
   if(e.key==="ArrowRight") decide(1); if(e.key==="ArrowLeft") decide(-1); if(e.key==="ArrowDown") decide(0); });
 
@@ -686,7 +698,8 @@ function renderProfil(){
   const bySec={}; for(const k of [...pour,...contre]){const m=BYID[k],s=m.P+" · "+m.S.section;(bySec[s]=bySec[s]||{a:0,t:0});bySec[s].t++;if(SW[k]===1)bySec[s].a++;}
   const secs=Object.entries(bySec).filter(([,v])=>v.t>=2).map(([s,v])=>({s,p:Math.round(100*v.a/v.t),t:v.t}));
   const top=secs.slice().sort((a,b)=>b.p-a.p||b.t-a.t).slice(0,3), low=secs.slice().sort((a,b)=>a.p-b.p||b.t-a.t).slice(0,3);
-  const recent=[...pour,...contre].slice(-10).reverse();
+  const CAT={pour:{f:v=>v===1,l:"Pour",c:"var(--pour)",bg:"#e4f4ea"},contre:{f:v=>v===-1,l:"Contre",c:"var(--contre)",bg:"#fbe7e6"},sans:{f:v=>v===0,l:"Sans avis",c:"var(--muted)",bg:"var(--soft)"}};
+  if(!window.PCAT) window.PCAT="pour"; const cat=CAT[window.PCAT], list=answeredIds(cat.f);
   const tile=P=>`<div class="box photo small" style="background:linear-gradient(160deg,${(GR[P]||GR0.RN)[0]});min-height:190px;padding-bottom:20px"><div class="over"><span class="badge" style="max-width:100%;overflow:hidden;text-overflow:ellipsis">${esc(PROGS[P].cand)}</span></div><div class="score" style="font-size:46px">${S[P].p!=null?S[P].p+"%":"–"}</div><div class="q" style="font-size:15px;margin-top:6px">${S[P].t?`d'accord, sur ${S[P].t} mesure${S[P].t>1?"s":""} tranchée${S[P].t>1?"s":""}`:"pas encore de réponse"}</div></div>`;
   p.innerHTML=`<h2 class="ptitle">Ton profil</h2><p class="psub">${ids.length} mesures vues sur ${M.length} · ${pour.length} pour · ${contre.length} contre · ${passe.length} sans avis</p>
   <div class="profile" style="animation:none">
@@ -695,14 +708,22 @@ function renderProfil(){
   <p class="note" style="margin:0">Les programmes n'ont pas tous la même taille : LFI a publié un programme complet (plus de 1 000 mesures), les autres candidats n'ont pour l'instant annoncé que quelques dizaines de propositions. Un score sur peu de mesures est moins solide.</p>
   ${secs.length?`<div class="box prompt" style="padding-bottom:22px"><div class="label">Là où tu adhères le plus</div>${top.map(x=>`<div class="item"><div class="txt">${esc(x.s)} <span class="note">${x.p}% sur ${x.t}</span></div></div>`).join("")}</div>
   <div class="box prompt" style="padding-bottom:22px"><div class="label">Là où tu décroches</div>${low.map(x=>`<div class="item"><div class="txt">${esc(x.s)} <span class="note">${x.p}% sur ${x.t}</span></div></div>`).join("")}</div>`:""}
-  <div class="box prompt" style="padding-bottom:22px"><div class="label">Tes derniers choix</div><div class="liked">${recent.map(k=>`<div class="row"><b style="background:${SW[k]===1?"#e4f4ea":"#fbe7e6"};color:${SW[k]===1?"var(--pour)":"var(--contre)"}">${SW[k]===1?"POUR":"CONTRE"}</b><span><span class="badge ${PROGS[BYID[k].P].badge}" style="margin-right:6px">${BYID[k].P}</span>${esc(BYID[k].t)}</span></div>`).join("")}</div></div>
+  <div class="box prompt" style="padding-bottom:22px" id="mes-rep"><div class="label">Tes réponses</div>
+    <div class="chips" style="padding:0 0 10px">${Object.entries(CAT).map(([k,c])=>`<button class="chip" data-cat="${k}" aria-pressed="${k===window.PCAT}">${c.l} · ${answeredIds(c.f).length}</button>`).join("")}</div>
+    ${list.length?`<div class="liked">${list.slice(0,window.PALL?9999:15).map((k,i)=>`<button class="row" data-rev="${i}" style="text-align:left;width:100%;cursor:pointer"><b style="background:${cat.bg};color:${cat.c}">${cat.l.toUpperCase()}</b><span><span class="badge ${PROGS[BYID[k].P].badge}" ${bcol(BYID[k].P)} style="margin-right:6px">${esc(PROGS[BYID[k].P].cand)}</span>${esc(BYID[k].t)}</span></button>`).join("")}</div>
+      ${list.length>15&&!window.PALL?`<button class="linkbtn" id="b-pall">Voir les ${list.length}</button>`:""}
+      <div style="margin-top:14px"><button class="cta" id="b-rev">↺ Revoir ces ${list.length} réponses</button></div><p class="note" style="margin:8px 0 0">Touche une mesure pour la revoir et changer d'avis.</p>`:`<p class="note">Aucune réponse « ${cat.l.toLowerCase()} » pour l'instant.</p>`}</div>
   <div class="box prompt" style="padding-bottom:22px"><div class="label">Ce que disent tes choix</div><p class="note" style="margin:0 0 12px">Un résumé neutre de tes réponses, sans te ranger dans un camp.</p><button class="cta" id="p-ai">Analyser mes choix</button><div class="answer sm" id="p-ai-out" style="margin-top:14px;white-space:pre-wrap"></div></div>
   <div class="endrow"><button class="cta ghost" id="p-reset">Tout recommencer</button></div>
   <p class="note" style="text-align:center"><a href="/confidentialite.html">Confidentialité et données personnelles</a></p>
   <div class="confirm" id="p-confirm"><span class="note">Effacer toutes tes réponses ?</span><button class="cta" id="p-yes" style="background:var(--contre)">Oui, effacer</button><button class="cta ghost" id="p-no">Annuler</button></div></div>`;
   bindAccount(p);
+  $$("#mes-rep [data-cat]").forEach(b=>b.onclick=()=>{ window.PCAT=b.dataset.cat; window.PALL=false; renderProfil(); setTimeout(()=>$("#mes-rep").scrollIntoView({block:"start"}),30); });
+  $$("#mes-rep [data-rev]").forEach(b=>b.onclick=()=>startReview(list,"réponses « "+cat.l.toLowerCase()+" »",+b.dataset.rev));
+  const rv=$("#b-rev"); if(rv) rv.onclick=()=>startReview(list,"réponses « "+cat.l.toLowerCase()+" »");
+  const pa=$("#b-pall"); if(pa) pa.onclick=()=>{ window.PALL=true; renderProfil(); setTimeout(()=>$("#mes-rep").scrollIntoView({block:"start"}),30); };
   $("#p-reset").onclick=()=>$("#p-confirm").classList.add("on"); $("#p-no").onclick=()=>$("#p-confirm").classList.remove("on");
-  $("#p-yes").onclick=()=>{SW={};HIST=[];save();nextProfile();location.hash="swipe";};
+  $("#p-yes").onclick=()=>{SW={};HIST=[];REVIEW=null;saveHist();save();nextProfile();location.hash="swipe";};
   $("#p-ai").onclick=async()=>{ const b=$("#p-ai"),o=$("#p-ai-out"); b.disabled=true; o.textContent="…"; const L=k=>`- [${BYID[k].P}] ${BYID[k].t}`;
     try{ o.textContent=await ai({mode:"profil",choix:{pour,contre}}); }
     catch(e){ o.textContent=aiErr(e); b.disabled=false; } };
