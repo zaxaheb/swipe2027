@@ -22,7 +22,7 @@ supabase/schema.sql    les tables et règles de sécurité à créer dans Supaba
 2. **SQL Editor > New query** : colle `supabase/schema.sql`, puis clique sur **Run**.
 3. **Authentication > Sign In / Providers > Email** : laisse « Email » activé. Le lien magique est actif par défaut.
 4. **Authentication > URL Configuration** : mets l'URL de ton site (ex. `https://swipe2027.vercel.app`) dans *Site URL* et dans *Redirect URLs*.
-5. **Project Settings > API** : note :
+5. **Project Settings > API Keys** : note (les nouvelles clés `sb_publishable_…` / `sb_secret_…` et les anciennes `anon` / `service_role` marchent toutes les deux) :
    - `Project URL` (public) ;
    - la clé `anon public` (publique) ;
    - la clé `service_role` (**secrète**, seulement pour Vercel).

@@ -1,6 +1,9 @@
 // Accès Supabase côté serveur (clé service, jamais exposée au navigateur), via l'API REST.
 const URL_ = process.env.SUPABASE_URL, KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
-const H = () => ({ apikey: KEY, Authorization: `Bearer ${KEY}`, "Content-Type": "application/json" });
+// Compatible avec les nouvelles clés (sb_secret_…, à mettre seulement dans « apikey ») et les anciennes (service_role, JWT).
+const H = () => (String(KEY).startsWith("sb_")
+  ? { apikey: KEY, "Content-Type": "application/json" }
+  : { apikey: KEY, Authorization: `Bearer ${KEY}`, "Content-Type": "application/json" });
 
 export async function rpc(fn, args) {
   const r = await fetch(`${URL_}/rest/v1/rpc/${fn}`, { method: "POST", headers: H(), body: JSON.stringify(args) });
