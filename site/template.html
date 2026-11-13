@@ -133,6 +133,23 @@ main{flex:1;overflow-y:auto;overflow-x:hidden;min-height:0;scroll-behavior:smoot
 .hbar .tr{position:relative}
 .hbar .cut{position:absolute;right:14px;top:-3px;bottom:-3px;width:7px;background:var(--card);transform:skewX(-20deg)}
 #info .msgs{max-width:560px}
+/* cartes repliables */
+.fold{padding:18px 20px}
+.fold .label{margin-bottom:8px}
+.fold .answer.sm{font-size:18px;line-height:1.38}
+details.fold>summary{list-style:none;cursor:pointer;display:block}
+details.fold>summary::-webkit-details-marker{display:none}
+.more-btn{display:inline-flex;align-items:center;gap:4px;margin-top:10px;font:600 13px var(--sans);color:var(--muted)}
+.more-btn::after{content:"";width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .2s}
+details[open].fold .more-btn{font-size:0;margin:0}
+details[open].fold .more-btn::after{display:none}
+details[open].fold>summary{margin-bottom:4px}
+.det{border-top:1px solid var(--line);margin-top:12px;padding-top:4px}
+.det .item:first-child{padding-top:10px}
+.det-p{font:500 16px/1.5 var(--serif);margin:10px 0}
+.camps{display:flex;flex-wrap:wrap;gap:6px}
+.cnt{display:inline-block;min-width:20px;padding:1px 7px;border-radius:999px;background:var(--soft);font-size:12px;color:var(--muted);margin-left:4px;text-align:center}
+.fold .eco-big{margin:2px 0 0}
 /* toast */
 .toast{position:fixed;left:50%;top:18px;transform:translate(-50%,-80px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-weight:600;font-size:14px;z-index:30;transition:transform .25s;white-space:nowrap}
 .toast.on{transform:translate(-50%,0)}
@@ -529,47 +546,60 @@ function renderProfile(q){
   parts.push(`<div class="box"><div class="vitals"><div class="vital">${IC.flag}${esc(P.nom)} · 2027</div>${m.cle?`<div class="vital">${IC.key}Mesure clé</div>`:""}${m.page?`<div class="vital">${IC.book}Livre p. ${m.page}</div>`:""}<div class="vital">${IC.folder}${esc(m.S.chapitre)}</div></div>
     <div class="vrow">${IC.list}<span>${esc(short(m.S.partie))}</span></div>
     ${P.note?`<div class="vrow">${IC.spark}<span>${esc(P.note)}</span></div>`:""}<div class="vrow">${IC.link}<a href="${esc(m.src||(m.S.url+(m.P==="LFI"?"#"+m.id:"")))}" target="_blank" rel="noopener">${m.src&&!/rassemblementnational|lavenirencommun/.test(m.src)?"Voir la source":"Lire le texte officiel"}</a></div></div>`);
+  /* ===== cartes compactes : un résumé visible, le détail au toucher ===== */
+  const one=(s,n=170)=>{ s=String(s||"").trim(); const m1=s.match(/^.+?[.!?](\s|$)/); let o=(m1?m1[0]:s).trim(); if(o.length>n) o=o.slice(0,n-1).replace(/\s+\S*$/,"")+"…"; return o; };
+  const rest=(s)=>{ s=String(s||"").trim(); const f=one(s,10000); return s.length>f.length+2?s.slice(f.length).trim():""; };
+  const fold=(label,sum,det,cls="")=>det?`<details class="box prompt fold ${cls}"><summary><div class="label">${label}</div>${sum}<span class="more-btn">Voir plus</span></summary><div class="det">${det}</div></details>`:`<div class="box prompt fold ${cls}"><div class="label">${label}</div>${sum}</div>`;
+  const items=(arr,f)=>arr.map(f).join("");
+  const crit=c=>`<div class="item"><div class="who">${esc(c.camp||c.pays||c.qui||"")}${c.qui&&c.camp?" · "+esc(c.qui):""}</div><div class="txt">${esc(c.texte)}</div>${srcA(c)}</div>`;
   /* le débat en une phrase */
-  if(F) parts.push(`<div class="box prompt"><div class="label">Le débat en une phrase</div><div class="answer">${esc(F.resume)}</div></div>`);
+  if(F) parts.push(`<div class="box prompt fold"><div class="label">Le débat en une phrase</div><div class="answer sm">${esc(F.resume)}</div></div>`);
   /* sous-points */
   if(m.sous.length) parts.push(`<div class="box photo small" style="background:${gradOf(m)};filter:saturate(.85) brightness(.95)"><ul>${m.sous.map(s=>`<li>${esc(s)}</li>`).join("")}</ul></div>`);
-  /* le raisonnement du candidat : toujours affiché */
-  if(!(F&&F.logique)){ const intro=(m.S.intro&&m.S.intro!==m.t+"."&&m.S.intro.length>40)?m.S.intro:""; const long=intro.length>600;
-    parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">Pourquoi ${esc(P.nom)} le propose</div>${intro
-      ?`<div class="intro ${long?"clamp":""}" id="intro">${esc(intro)}</div>${long?'<button class="linkbtn" id="b-intro">Lire tout</button>':""}<p class="note" style="margin:10px 0 0">Texte du programme de ${esc(P.cand)}.</p>`
-      :`<div class="answer sm" style="color:var(--muted)">${esc(P.cand)} n'a pas encore détaillé ses arguments pour cette mesure dans nos sources.</div><div style="margin-top:8px">${srcA({media:"Voir la source de la mesure",url:m.src||m.S.url})}</div>`}
-      ${F?"":`<p class="note" style="margin:10px 0 0">La fiche complète, avec les arguments détaillés, les mesures qui vont avec et les critiques, peut être générée plus bas.</p>`}</div>`); }
-  if(F&&F.logique){ const L=F.logique;
-    parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">Pourquoi ${esc(P.nom)} le propose</div><div class="answer sm">${esc(L.texte||"")}</div>
-      ${(L.arguments||[]).map(a=>`<div class="item"><div class="txt" style="font-size:16px">${esc(a.texte)}</div>${srcA(a)}</div>`).join("")}</div>`);
-    if((L.accompagnement||[]).length) parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">Les mesures qui vont avec</div><p class="note" style="margin:-6px 0 8px">Dans le même programme, pour rendre la mesure possible.</p>
-      ${L.accompagnement.map(a=>`<div class="item">${a.id&&BYID[a.id]?`<button class="linkrow" data-open="${esc(a.id)}">${esc(a.texte)} <span class="note">→ voir la mesure</span></button>`:`<div class="txt" style="font-size:16px">${esc(a.texte)}</div>${a.url?srcA({media:"Source",url:a.url}):""}`}</div>`).join("")}</div>`); }
-  /* concrètement */
-  if(F) parts.push(`<div class="box prompt"><div class="label">Concrètement</div>${F.concret.map(x=>`<div class="item"><div class="txt">${esc(x)}</div></div>`).join("")}</div>`);
-  /* volet économique */
-  if(F&&F.eco){ const e=F.eco;
-    parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">${IC.euro.replace('<svg','<svg width="16" height="16" style="vertical-align:-3px;margin-right:6px"')}Combien ça coûte ?</div><div class="eco-big">${esc(e.chiffre||"Non chiffré")}</div>
-      <div class="eco-row"><div class="k">Coût</div><div class="v">${esc(e.cout||"—")}</div></div>
-      <div class="eco-row"><div class="k">Financement</div><div class="v">${esc(e.financement||"—")}</div></div>
-      <div class="eco-row"><div class="k">Rapporte</div><div class="v">${esc(e.rapporte||"—")}</div></div>
-      ${(e.sources||[]).map(srcA).join(" ")}<p class="note" style="margin:12px 0 0">Vue d'ensemble : ${esc(P.eco)}</p></div>`); }
-  else parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">${IC.euro.replace('<svg','<svg width="16" height="16" style="vertical-align:-3px;margin-right:6px"')}Combien ça coûte ?</div><div class="answer sm" style="color:var(--muted)">Cette mesure n'est pas encore chiffrée dans l'app.</div><p class="note" style="margin:12px 0 0">Vue d'ensemble : ${esc(P.eco)} <a href="${esc(P.ecoUrl)}" target="_blank" rel="noopener">Source ↗</a></p></div>`);
-  /* critiques */
-  if(F){ parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">Ce qu'en disent les autres</div>${F.critiques.map(c=>`<div class="item"><div class="who">${esc(c.camp)}${c.qui?" · "+esc(c.qui):""}</div><div class="txt">${esc(c.texte)}</div>${srcA(c)}</div>`).join("")}</div>`);
-    if(F.reponses.length) parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">Leur réponse</div>${F.reponses.map(c=>`<div class="item"><div class="who">${esc(c.qui)}</div><div class="txt">${esc(c.texte)}</div>${srcA(c)}</div>`).join("")}</div>`);
-    parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">Est-ce que d'autres pays le font ?</div>${F.monde.length?F.monde.map(c=>`<div class="item"><div class="who">${esc(c.pays)}</div><div class="txt">${esc(c.texte)}</div>${srcA(c)}</div>`).join(""):'<div class="answer sm" style="color:var(--muted)">Aucun exemple étranger sourcé trouvé pour l\'instant.</div>'}</div>`);
-    if(F.tensions.length) parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">Les points de tension</div>${F.tensions.map(x=>`<div class="item"><div class="txt">${esc(x)}</div></div>`).join("")}</div>`);
-    if(F.similaires.length) parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">Qui propose quelque chose de proche</div>${F.similaires.map(x=>`<div class="item"><div class="who">${esc(x.camp)}</div><div class="txt">${esc(x.prop)}</div></div>`).join("")}</div>`);
-    if(F.genere) parts.push(`<p class="note" style="text-align:center">Fiche générée le ${esc(F.maj)} par IA à partir de recherches web. Vérifie les sources.</p>`);
+  /* pourquoi le candidat le propose */
+  const intro=(m.S.intro&&m.S.intro!==m.t+"."&&m.S.intro.length>40)?m.S.intro:"";
+  if(F&&F.logique){ const L=F.logique, args=L.arguments||[];
+    parts.push(fold(`Pourquoi ${esc(P.nom)} le propose`,`<div class="answer sm">${esc(one(L.texte))}</div>`,
+      (rest(L.texte)?`<p class="det-p">${esc(rest(L.texte))}</p>`:"")+items(args,a=>`<div class="item"><div class="txt">${esc(a.texte)}</div>${srcA(a)}</div>`)));
+    const acc=L.accompagnement||[];
+    const accRow=a=>`<div class="item">${a.id&&BYID[a.id]?`<button class="linkrow" data-open="${esc(a.id)}">${esc(a.texte)} <span class="note">→ voir</span></button>`:`<div class="txt">${esc(a.texte)}</div>${a.url?srcA({media:"Source",url:a.url}):""}`}</div>`;
+    if(acc.length) parts.push(fold(`Les mesures qui vont avec <span class="cnt">${acc.length}</span>`,items(acc.slice(0,2),accRow),acc.length>2?items(acc.slice(2),accRow):""));
   } else {
-    parts.push(`<div class="box prompt" style="padding-bottom:24px"><div class="label">Critiques, coût, exemples à l'étranger</div><div class="answer sm" style="color:var(--muted)" id="gen-msg">${API?"Recherche d'une fiche existante…":"Pas encore de fiche sourcée pour cette mesure."}</div><div style="margin-top:16px" id="gen-wrap" hidden><button class="cta" id="b-gen">${IC.spark.replace('<svg','<svg width="18" height="18"')}Générer la fiche sourcée</button></div><p class="note" id="gen-st" style="margin-top:10px">L'IA cherche de vraies sources (presse, think tanks, institutions). Une fois générée, la fiche est disponible pour tout le monde.</p></div>`);
+    parts.push(fold(`Pourquoi ${esc(P.nom)} le propose`,intro?`<div class="answer sm">${esc(one(intro,200))}</div>`:`<div class="answer sm" style="color:var(--muted)">${esc(P.cand)} n'a pas encore détaillé ses arguments pour cette mesure.</div>`,
+      intro?(rest(intro)?`<p class="det-p">${esc(rest(intro))}</p>`:"")+`<p class="note">Texte du programme de ${esc(P.cand)}.</p>`:`<div>${srcA({media:"Voir la source de la mesure",url:m.src||m.S.url})}</div>`));
   }
-  /* même section */
-  if(sib.length>1) parts.push(`<div class="box prompt" style="padding-bottom:22px"><div class="label">Dans la même partie du programme (${sib.length})</div><div class="sib">${sib.slice(0,12).map(x=>`<div class="${x===m?"cur":""}">${esc(x.t)}</div>`).join("")}${sib.length>12?`<div class="note">+ ${sib.length-12} autres</div>`:""}</div></div>`);
+  /* combien ça coûte */
+  const euro=IC.euro.replace('<svg','<svg width="15" height="15" style="vertical-align:-2px;margin-right:5px"');
+  if(F&&F.eco){ const e=F.eco;
+    parts.push(fold(`${euro}Combien ça coûte ?`,`<div class="eco-big">${esc(e.chiffre||"Non chiffré")}</div>`,
+      `<div class="eco-row"><div class="k">Coût</div><div class="v">${esc(e.cout||"—")}</div></div><div class="eco-row"><div class="k">Financement</div><div class="v">${esc(e.financement||"—")}</div></div><div class="eco-row"><div class="k">Rapporte</div><div class="v">${esc(e.rapporte||"—")}</div></div>${(e.sources||[]).map(srcA).join(" ")}<p class="note" style="margin:10px 0 0">Vue d'ensemble : ${esc(P.eco)}</p>`));
+  } else parts.push(fold(`${euro}Combien ça coûte ?`,`<div class="answer sm" style="color:var(--muted)">Pas encore chiffrée dans l'app.</div>`,`<p class="note" style="margin:0">Vue d'ensemble : ${esc(P.eco)} <a href="${esc(P.ecoUrl)}" target="_blank" rel="noopener">Source ↗</a></p>`));
+  if(F){
+    /* critiques : camps en pastilles + la première en une phrase */
+    const C=F.critiques||[], camps=[...new Set(C.map(c=>c.camp).filter(Boolean))];
+    if(C.length) parts.push(fold(`Ce qu'en disent les autres <span class="cnt">${C.length}</span>`,`<div class="camps">${camps.map(c=>`<span class="badge">${esc(c)}</span>`).join("")}</div><div class="answer sm" style="margin-top:10px">${esc(one(C[0].texte))}</div>`,items(C,crit)));
+    const R=F.reponses||[];
+    if(R.length) parts.push(fold(`Leur réponse`,`<div class="answer sm">${esc(one(R[0].texte))}</div>`,items(R,crit)));
+    const W=F.monde||[];
+    parts.push(fold(`D'autres pays le font ?`,W.length?`<div class="answer sm">${esc(W.map(w=>w.pays).slice(0,4).join(" · "))}</div>`:`<div class="answer sm" style="color:var(--muted)">Aucun exemple sourcé pour l'instant.</div>`,W.length?items(W,c=>`<div class="item"><div class="who">${esc(c.pays)}</div><div class="txt">${esc(c.texte)}</div>${srcA(c)}</div>`):""));
+    const T=F.tensions||[];
+    if(T.length) parts.push(fold(`Les points de tension <span class="cnt">${T.length}</span>`,`<div class="answer sm">${esc(one(T[0]))}</div>`,items(T,x=>`<div class="item"><div class="txt">${esc(x)}</div></div>`)));
+    const K=F.concret||[];
+    if(K.length) parts.push(fold(`Concrètement`,`<div class="answer sm">${esc(one(K[0]))}</div>`,items(K,x=>`<div class="item"><div class="txt">${esc(x)}</div></div>`)));
+  } else {
+    parts.push(`<div class="box prompt fold"><div class="label">Critiques, coût, exemples à l'étranger</div><div class="answer sm" style="color:var(--muted)" id="gen-msg">${API?"Recherche d'une fiche existante…":"Pas encore de fiche sourcée pour cette mesure."}</div><div style="margin-top:14px" id="gen-wrap" hidden><button class="cta" id="b-gen">${IC.spark.replace('<svg','<svg width="18" height="18"')}Générer la fiche sourcée</button></div><p class="note" id="gen-st" style="margin-top:10px">L'IA cherche de vraies sources. Une fois générée, la fiche est disponible pour tout le monde.</p></div>`);
+  }
+  /* en savoir plus : tout le reste, replié */
+  const plus=[];
+  if(F&&F.logique&&intro) plus.push(`<div class="item"><div class="who">Le texte du programme</div><p class="det-p" style="margin:4px 0 0">${esc(intro)}</p></div>`);
+  if(F&&(F.similaires||[]).length) plus.push(`<div class="item"><div class="who">Qui propose quelque chose de proche</div>${F.similaires.map(x=>`<div class="txt" style="margin-top:4px"><b>${esc(x.camp)}</b> : ${esc(x.prop)}</div>`).join("")}</div>`);
+  if(sib.length>1) plus.push(`<div class="item"><div class="who">Dans la même partie du programme (${sib.length})</div><div class="sib">${sib.slice(0,12).map(x=>x===m?`<div class="cur">${esc(x.t)}</div>`:`<button class="linkrow" data-open="${esc(x.id)}">${esc(x.t)}</button>`).join("")}${sib.length>12?`<div class="note">+ ${sib.length-12} autres</div>`:""}</div></div>`);
+  if(F&&F.genere) plus.push(`<p class="note">Fiche générée le ${esc(F.maj)} par IA à partir de recherches web. Vérifie les sources.</p>`);
+  if(plus.length) parts.push(fold(`En savoir plus`,`<div class="answer sm" style="color:var(--muted)">Texte du programme, mesures proches, mesures voisines.</div>`,plus.join("")));
   /* débattre */
-  parts.push(`<div class="box prompt" style="padding-bottom:24px"><div class="label">Une question sur cette mesure ?</div><div class="answer sm">Demande qui paierait, ce que ça change pour toi, ou ce qu'en pensent les autres camps.</div><div style="margin-top:16px"><button class="cta" id="b-chat">${IC.chat.replace('<svg','<svg width="18" height="18"')}Ouvrir la discussion</button></div></div>`);
-  parts.push(`<div class="box prompt" style="padding-bottom:22px" id="rq-box"><div class="label">Une erreur, un oubli ?</div><div class="answer sm" style="font-size:17px">Signale une erreur, une source manquante ou un point de vue absent. Chaque remarque est lue.</div>
-    <div style="margin-top:14px"><button class="cta ghost" id="b-rq">Faire une remarque</button></div>
+  parts.push(`<div class="box prompt fold" style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap"><div class="label" style="margin:0">Une question sur cette mesure ?</div><div><button class="cta" id="b-chat">${IC.chat.replace('<svg','<svg width="18" height="18"')}Ouvrir la discussion</button></div></div>`);
+  parts.push(`<div class="box prompt fold" id="rq-box"><div class="label">Une erreur, un oubli ?</div><p class="note" style="margin:0">Signale une erreur, une source manquante ou un point de vue absent.</p>
+    <div style="margin-top:12px"><button class="cta ghost" id="b-rq">Faire une remarque</button></div>
     <form id="f-rq" hidden style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
       <div class="chips" style="padding:0" id="rq-type">${[["erreur","Erreur"],["source","Source manquante"],["point_de_vue","Point de vue absent"],["mesure","Le texte de la mesure"],["autre","Autre"]].map(([k,l],i)=>`<button type="button" class="chip" data-t="${k}" aria-pressed="${i===0}">${l}</button>`).join("")}</div>
       <textarea id="rq-txt" class="field" style="border-radius:14px;min-height:96px;resize:vertical" maxlength="1500" required placeholder="Explique ce qui ne va pas ou ce qui manque…"></textarea>
