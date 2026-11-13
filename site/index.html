@@ -232,6 +232,9 @@ details.lcard summary::-webkit-details-marker{display:none}
 
 /* chat */
 .threads{display:flex;flex-direction:column}
+.newchat{display:flex;gap:14px;align-items:center;padding:14px;margin:4px 0 8px;border:1.5px dashed var(--line);border-radius:16px;text-align:left;width:100%;background:#fff;cursor:pointer}
+.newchat .n{display:block;font-weight:700}.newchat .l{display:block;font-size:13px;color:var(--muted)}
+.newchat .av{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;color:#fff;flex:none}
 .thread{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line);text-align:left;width:100%}
 .av{width:56px;height:56px;border-radius:50%;flex:none;display:grid;place-items:center;color:#fff;font:600 20px var(--serif)}
 .thread .n{font-weight:700}
@@ -331,7 +334,8 @@ details.lcard summary::-webkit-details-marker{display:none}
 <!-- ========== CHAT ========== -->
 <section class="view" id="v-chat">
   <h2 class="ptitle">Discussions</h2>
-  <p class="psub">Parle politique, ou creuse une mesure que tu as aimée ou rejetée.</p>
+  <p class="psub">Parle politique, ou creuse une mesure avec le bouton chat de sa carte.</p>
+  <button class="newchat" id="new-chat"><span class="av" style="background:#111;font-size:22px">+</span><span><span class="n">Nouvelle conversation</span><span class="l">Programmes, votes, condamnations : pose ta question</span></span></button>
   <div class="threads" id="threads"></div>
 </section>
 
@@ -748,18 +752,23 @@ renderCond();
 
 /* ================= CHAT ================= */
 const initials=n=>String(n).split(/[\s-]+/).filter(w=>/^[A-ZÉÈ]/.test(w)).map(w=>w[0]).join("").slice(0,2)||"?";
-function threadsList(){ const t=[{k:"g",name:"Parler politique",sub:"Programmes, votes, condamnations : pose ta question",av:"#111",l:"?"}];
-  const liked=Object.keys(SW).filter(k=>SW[k]===1).reverse();
-  const ids=[...new Set([...Object.keys(CHATS).filter(k=>k.startsWith("m:")).map(k=>k.slice(2)),...liked])].filter(id=>BYID[id]).slice(0,40);
-  ids.sort((a,b)=>(CHATS["m:"+b]?.length||0)-(CHATS["m:"+a]?.length||0));
-  for(const id of ids){ const m=BYID[id], h=CHATS["m:"+id]; t.push({k:"m:"+id,name:`${m.S.section} · ${PROGS[m.P].cand}`,sub:h&&h.length?h[h.length-1].content:"Tu as aimé : "+m.t,av:gradOf(m),l:initials(PROGS[m.P].cand)}); }
-  return t; }
+let CHTS=store.get("chatsTs2027",{});  // clé -> date de dernière activité
+const isGen=k=>k==="g"||k.startsWith("g:");
+/* Seules les conversations commencées apparaissent (générales et sur une mesure), la plus récente en haut. */
+function threadsList(){
+  const ks=Object.keys(CHATS).filter(k=>(CHATS[k]||[]).length&&(isGen(k)||BYID[k.slice(2)]));
+  ks.sort((a,b)=>(CHTS[b]||+(b.split(":")[1])||0)-(CHTS[a]||+(a.split(":")[1])||0));
+  return ks.map(k=>{ const H=CHATS[k], last=H[H.length-1].content.replace(/[*_#>\[\]]/g,"");
+    if(isGen(k)){ const q=(H.find(x=>x.role==="user")||{}).content||"Parler politique"; return {k,name:q.length>60?q.slice(0,58)+"…":q,sub:last,av:"#111",l:"?"}; }
+    const m=BYID[k.slice(2)]; return {k,name:`${m.S.section} · ${PROGS[m.P].cand}`,sub:last,av:gradOf(m),l:initials(PROGS[m.P].cand)}; }); }
 function renderThreads(){ $("#chat-dot").style.display="none";
-  $("#threads").innerHTML=threadsList().map(t=>`<button class="thread" data-k="${esc(t.k)}"><span class="av" style="background:${t.av};font-size:${t.l.length>1?"15px":"20px"}">${esc(t.l)}</span><span style="min-width:0"><span class="n">${esc(t.name)}</span><span class="l">${esc(t.sub)}</span></span></button>`).join("");
+  const TL=threadsList(); if(!TL.length){ $("#threads").innerHTML='<p class="note" style="text-align:center;margin-top:18px">Aucune conversation pour l\'instant.</p>'; return; }
+  $("#threads").innerHTML=TL.map(t=>`<button class="thread" data-k="${esc(t.k)}"><span class="av" style="background:${t.av};font-size:${t.l.length>1?"15px":"20px"}">${esc(t.l)}</span><span style="min-width:0"><span class="n">${esc(t.name)}</span><span class="l">${esc(t.sub)}</span></span></button>`).join("");
   $$("#threads .thread").forEach(b=>b.onclick=()=>openConvo(b.dataset.k)); }
 let CK=null;
-function openConvo(k){ CK=k; const isG=k==="g", m=isG?null:BYID[k.slice(2)];
-  $("#cv-name").textContent=isG?"Parler politique":m.S.section+" · "+PROGS[m.P].cand;
+$("#new-chat").onclick=()=>openConvo("g:"+Date.now());
+function openConvo(k){ CK=k; const isG=isGen(k), m=isG?null:BYID[k.slice(2)];
+  $("#cv-name").textContent=isG?((CHATS[k]||[]).find(x=>x.role==="user")?.content||"Nouvelle conversation").slice(0,40):m.S.section+" · "+PROGS[m.P].cand;
   $("#cv-av").style.background=isG?"#111":gradOf(m); $("#cv-av").textContent=isG?"?":initials(PROGS[m.P].cand);
   const H=CHATS[k]||[];
   $("#cv-msgs").innerHTML=(m?`<div class="quote">${esc(m.t)}</div>`:`<div class="quote">Pose une question sur les programmes des candidats, les votes à l'Assemblée ou les condamnations. Réponses neutres, appuyées sur les données de l'app.</div>`)+`<p class="note" style="text-align:center;margin:0 0 8px">Les questions sont enregistrées de façon anonyme pour améliorer l'app. N'y mets pas d'informations personnelles.</p>`+H.map(x=>`<div class="msg ${x.role==="user"?"u":"a"}">${x.role==="user"?esc(x.content):linkify(x.content)}</div>`).join("");
@@ -772,7 +781,8 @@ $("#cv-form").onsubmit=async e=>{ e.preventDefault(); const q=$("#cv-in").value.
   const k=CK, H=CHATS[k]||(CHATS[k]=[]), box=$("#cv-msgs");
   H.push({role:"user",content:q}); box.insertAdjacentHTML("beforeend",`<div class="msg u">${esc(q)}</div>`);
   const out=document.createElement("div"); out.className="msg a"; out.textContent="…"; box.appendChild(out); box.scrollTop=1e9;
-  const payload=k==="g"?{mode:"general",messages:H.slice(-12)}:{mode:"mesure",mesureId:k.slice(2),messages:H.slice(-12)};
+  CHTS[k]=Date.now(); store.set("chatsTs2027",CHTS);
+  const payload=isGen(k)?{mode:"general",messages:H.slice(-12)}:{mode:"mesure",mesureId:k.slice(2),messages:H.slice(-12)};
   out.innerHTML=`<div class="steps"></div><div class="body caret"></div>`;
   const stepsEl=out.querySelector(".steps"), bodyEl=out.querySelector(".body");
   const addStep=(ic,txt,run)=>{ stepsEl.querySelectorAll(".step.run").forEach(s=>{ s.classList.remove("run"); s.querySelector(".ic").textContent="✓"; }); const d=document.createElement("div"); d.className="step"+(run?" run":""); d.innerHTML=`<span class="ic">${run?"◌":ic}</span><span>${txt}</span>`; stepsEl.appendChild(d); box.scrollTop=1e9; };
@@ -858,9 +868,10 @@ function renderProfil(){
   if(pour.length+contre.length<5){ p.innerHTML=`<h2 class="ptitle">Ton profil</h2>${accountHTML()}${SB?'<div style="height:14px"></div>':""}<div class="box prompt" style="padding-bottom:24px"><div class="label">Pas encore assez de réponses</div><div class="answer">Réagis à au moins 5 mesures pour voir ce qui ressort.</div><p class="note" style="margin-top:10px">${ids.length} mesure(s) vue(s) sur ${M.length}.</p><div style="margin-top:14px"><button class="cta" onclick="location.hash='swipe'">Découvrir des mesures</button></div></div>`; bindAccount(p); return; }
   const score=P=>{ const a=pour.filter(k=>BYID[k].P===P).length, b=contre.filter(k=>BYID[k].P===P).length; return {a,b,t:a+b,p:a+b?Math.round(100*a/(a+b)):null}; };
   const S=Object.fromEntries(PKEYS.map(P=>[P,score(P)]));
-  const bySec={}; for(const k of [...pour,...contre]){const m=BYID[k],s=m.P+" · "+m.S.section;(bySec[s]=bySec[s]||{a:0,t:0});bySec[s].t++;if(SW[k]===1)bySec[s].a++;}
-  const secs=Object.entries(bySec).filter(([,v])=>v.t>=2).map(([s,v])=>({s,p:Math.round(100*v.a/v.t),t:v.t}));
-  const top=secs.slice().sort((a,b)=>b.p-a.p||b.t-a.t).slice(0,3), low=secs.slice().sort((a,b)=>a.p-b.p||b.t-a.t).slice(0,3);
+  const bySec={}; for(const k of [...pour,...contre]){const m=BYID[k],s=PROGS[m.P].cand+" · "+m.S.section;(bySec[s]=bySec[s]||{a:0,t:0});bySec[s].t++;if(SW[k]===1)bySec[s].a++;}
+  const secs=Object.entries(bySec).filter(([,v])=>v.t>=2).map(([s,v])=>({s,a:v.a,p:Math.round(100*v.a/v.t),t:v.t}));
+  /* « adhères » : au moins 2 mesures aimées et plus de la moitié ; « décroches » : au moins 2 rejetées et plus de la moitié. */
+  const top=secs.filter(x=>x.p>50&&x.a>=2).sort((a,b)=>b.p-a.p||b.t-a.t).slice(0,3), low=secs.filter(x=>x.p<50&&x.t-x.a>=2).sort((a,b)=>a.p-b.p||b.t-a.t).slice(0,3);
   const CAT={pour:{f:v=>v===1,l:"Pour",c:"var(--pour)",bg:"#e4f4ea"},contre:{f:v=>v===-1,l:"Contre",c:"var(--contre)",bg:"#fbe7e6"},sans:{f:v=>v===0,l:"Sans avis",c:"var(--muted)",bg:"var(--soft)"}};
   if(!window.PCAT) window.PCAT="pour"; const cat=CAT[window.PCAT], list=answeredIds(cat.f);
   const tile=P=>`<div class="box photo small" style="background:linear-gradient(160deg,${(GR[P]||GR0.RN)[0]});min-height:190px;padding-bottom:20px"><div class="over"><span class="badge" style="max-width:100%;overflow:hidden;text-overflow:ellipsis">${esc(PROGS[P].cand)}</span></div><div class="score" style="font-size:46px">${S[P].p!=null?S[P].p+"%":"–"}</div><div class="q" style="font-size:15px;margin-top:6px">${S[P].t?`d'accord, sur ${S[P].t} mesure${S[P].t>1?"s":""} tranchée${S[P].t>1?"s":""}`:"pas encore de réponse"}</div></div>`;
@@ -870,8 +881,8 @@ function renderProfil(){
   ${radarHTML(pour,contre)}
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">${PKEYS.slice().sort((a,b)=>(S[b].p??-1)-(S[a].p??-1)).map(tile).join("")}</div>
   <p class="note" style="margin:0">Les programmes n'ont pas tous la même taille : LFI a publié un programme complet (plus de 1 000 mesures), les autres candidats n'ont pour l'instant annoncé que quelques dizaines de propositions. Un score sur peu de mesures est moins solide.</p>
-  ${secs.length?`<div class="box prompt" style="padding-bottom:22px"><div class="label">Là où tu adhères le plus</div>${top.map(x=>`<div class="item"><div class="txt">${esc(x.s)} <span class="note">${x.p}% sur ${x.t}</span></div></div>`).join("")}</div>
-  <div class="box prompt" style="padding-bottom:22px"><div class="label">Là où tu décroches</div>${low.map(x=>`<div class="item"><div class="txt">${esc(x.s)} <span class="note">${x.p}% sur ${x.t}</span></div></div>`).join("")}</div>`:""}
+  ${top.length?`<div class="box prompt" style="padding-bottom:22px"><div class="label">Là où tu adhères le plus</div>${top.map(x=>`<div class="item"><div class="txt">${esc(x.s)} <span class="note">${x.a} aimée${x.a>1?"s":""} sur ${x.t}</span></div></div>`).join("")}</div>`:""}
+  ${low.length?`<div class="box prompt" style="padding-bottom:22px"><div class="label">Là où tu décroches</div>${low.map(x=>`<div class="item"><div class="txt">${esc(x.s)} <span class="note">${x.t-x.a} rejetée${x.t-x.a>1?"s":""} sur ${x.t}</span></div></div>`).join("")}</div>`:""}
   <div class="box prompt" style="padding-bottom:22px" id="mes-rep"><div class="label">Tes réponses</div>
     <div class="chips" style="padding:0 0 10px">${Object.entries(CAT).map(([k,c])=>`<button class="chip" data-cat="${k}" aria-pressed="${k===window.PCAT}">${c.l} · ${answeredIds(c.f).length}</button>`).join("")}</div>
     ${list.length?`<div class="liked">${list.slice(0,window.PALL?9999:15).map((k,i)=>`<button class="row" data-rev="${i}" style="text-align:left;width:100%;cursor:pointer"><b style="background:${cat.bg};color:${cat.c}">${cat.l.toUpperCase()}</b><span><span class="badge ${PROGS[BYID[k].P].badge}" ${bcol(BYID[k].P)} style="margin-right:6px">${esc(PROGS[BYID[k].P].cand)}</span>${esc(BYID[k].t)}</span></button>`).join("")}</div>
