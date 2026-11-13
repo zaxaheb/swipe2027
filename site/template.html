@@ -232,6 +232,15 @@ details.lcard summary::-webkit-details-marker{display:none}
 
 /* chat */
 .threads{display:flex;flex-direction:column}
+.topics{display:grid;grid-auto-flow:column;grid-template-rows:1fr 1fr;grid-auto-columns:minmax(150px,44%);gap:10px;overflow-x:auto;margin:0 -16px 6px;padding:0 16px 6px;scroll-snap-type:x mandatory;scrollbar-width:none}
+.topics::-webkit-scrollbar{display:none}
+.topic{scroll-snap-align:start;border-radius:16px;padding:14px 14px 16px;text-align:left;color:#fff;min-height:104px;display:flex;flex-direction:column;justify-content:flex-end;cursor:pointer}
+.topic b{font:700 17px/1.15 var(--sans);letter-spacing:-.01em}.topic span{font-size:12.5px;opacity:.9;margin-top:4px;line-height:1.3}
+.quiz{display:flex;flex-direction:column;gap:14px}.quiz .qq{font-weight:700}
+.quiz .op{display:block;width:100%;text-align:left;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:6px;background:#fff;font:inherit;cursor:pointer}
+.quiz .op.ok{border-color:var(--pour);background:#e4f4ea}.quiz .op.ko{border-color:var(--contre);background:#fbe7e6}
+.quiz .op:disabled{cursor:default;color:var(--ink)}.quiz .ex{font-size:14px;color:var(--muted);margin-top:6px;display:none}.quiz .done .ex{display:block}
+.quiz .sc{font-weight:700;padding-top:4px}
 .newchat{display:flex;gap:14px;align-items:center;padding:14px;margin:4px 0 8px;border:1.5px dashed var(--line);border-radius:16px;text-align:left;width:100%;background:#fff;cursor:pointer}
 .newchat .n{display:block;font-weight:700}.newchat .l{display:block;font-size:13px;color:var(--muted)}
 .newchat .av{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;color:#fff;flex:none}
@@ -333,9 +342,12 @@ details.lcard summary::-webkit-details-marker{display:none}
 
 <!-- ========== CHAT ========== -->
 <section class="view" id="v-chat">
-  <h2 class="ptitle">Discussions</h2>
-  <p class="psub">Parle politique, ou creuse une mesure avec le bouton chat de sa carte.</p>
-  <button class="newchat" id="new-chat"><span class="av" style="background:#111;font-size:22px">+</span><span><span class="n">Nouvelle conversation</span><span class="l">Programmes, votes, condamnations : pose ta question</span></span></button>
+  <h2 class="ptitle">Comprendre</h2>
+  <p class="psub">Les mécanismes politiques expliqués simplement : mini-cours en 4 étapes, quiz, et réponses à tes questions.</p>
+  <button class="newchat" id="new-chat"><span class="av" style="background:#111;font-size:22px">+</span><span><span class="n">Pose ta question</span><span class="l">Un mécanisme, un programme, un vote, une affaire : demande</span></span></button>
+  <div class="label" style="margin:16px 0 8px">Apprendre un sujet · mini-cours et quiz</div>
+  <div class="topics" id="topics"></div>
+  <div class="label" style="margin:18px 0 2px" id="th-label">Tes conversations</div>
   <div class="threads" id="threads"></div>
 </section>
 
@@ -355,7 +367,7 @@ details.lcard summary::-webkit-details-marker{display:none}
   <button data-v="swipe" aria-label="Découvrir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></button>
   <button data-v="votes" aria-label="Votes à l'Assemblée"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20h16M6 16V10M10 16V5M14 16v-7M18 16V8"/></svg></button>
   <button data-v="cond" aria-label="Condamnations"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v17M7 20h10M5 7h14M5 7l-3 6a3 3 0 006 0zM19 7l-3 6a3 3 0 006 0z"/></svg></button>
-  <button data-v="chat" aria-label="Discussions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5h16v11H10l-5 4v-4H4z"/></svg><span class="dot" id="chat-dot"></span></button>
+  <button data-v="chat" aria-label="Comprendre"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5h16v11H10l-5 4v-4H4z"/></svg><span class="dot" id="chat-dot"></span></button>
   <button data-v="profil" aria-label="Mon profil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg></button>
 </div></nav>
 
@@ -756,35 +768,62 @@ renderCond();
 const initials=n=>String(n).split(/[\s-]+/).filter(w=>/^[A-ZÉÈ]/.test(w)).map(w=>w[0]).join("").slice(0,2)||"?";
 let CHTS=store.get("chatsTs2027",{});  // clé -> date de dernière activité
 const isGen=k=>k==="g"||k.startsWith("g:");
+const TOPICS=[["dette","La dette publique","Qui la détient, pourquoi elle monte, est-ce grave ?"],["budget","Budget et déficit","Comment l'État dépense et prélève"],["retraites","Les retraites","Répartition, âge de départ, réformes"],["isf","ISF et fortune","Impôt sur la fortune, IFI, exil fiscal"],["impots","Impôts et TVA","Qui paie quoi, progressivité"],["smic","Smic et salaires","Comment il est fixé, effets sur l'emploi"],["secu","La Sécurité sociale","Santé, famille, cotisations"],["chomage","L'assurance chômage","Qui paie, qui touche, les règles"],["inflation","Inflation et pouvoir d'achat","Prix, salaires, taux de la BCE"],["immigration","Immigration","Chiffres, droit d'asile, titres de séjour"],["institutions","Les institutions","49.3, dissolution, référendum, Ve République"],["europe","L'Union européenne","Qui décide quoi, traités, budget"],["energie","Énergie et nucléaire","Prix, mix électrique, marché européen"],["logement","Le logement","Loyers, HLM, accès à la propriété"]];
+const TOPIC=Object.fromEntries(TOPICS.map(([id,t,d],i)=>[id,{id,t,d,i}]));
+const TCOL=["#2b59c3,#6a8dff","#7a3cff,#b48cff","#d4572a,#f39a5b","#1e8f55,#5cc48c","#a8326e,#e07aa8","#c48a00,#f2c14e","#0f7c8a,#4fc1cf","#5b4636,#a8876c","#b8302a,#ef6f5e","#3d4a5c,#7e8ba0","#26246b,#5c59c9","#1f5fa8,#5aa0e6","#2e7d32,#8bc34a","#8a4f00,#d99a4e"];
+const isMes=k=>k.startsWith("m:"), isTop=k=>k.startsWith("t:"), topicOf=k=>TOPIC[k.split(":")[1]];
+const tgrad=tp=>`linear-gradient(150deg,${TCOL[tp.i%TCOL.length]})`;
+function renderTopics(){ $("#topics").innerHTML=TOPICS.map(([id])=>{ const tp=TOPIC[id]; return `<button class="topic" data-t="${id}" style="background:${tgrad(tp)}"><b>${esc(tp.t)}</b><span>${esc(tp.d)}</span></button>`; }).join("");
+  $$("#topics .topic").forEach(b=>b.onclick=()=>{ const id=b.dataset.t, k=Object.keys(CHATS).filter(x=>x.startsWith("t:"+id+":")&&CHATS[x].length).sort((a,b)=>(CHTS[b]||0)-(CHTS[a]||0))[0];
+    if(k) openConvo(k); else { openConvo("t:"+id+":"+Date.now()); $("#cv-in").value="Explique-moi les bases"; $("#cv-form").requestSubmit(); } }); }
 /* Seules les conversations commencées apparaissent (générales et sur une mesure), la plus récente en haut. */
 function threadsList(){
-  const ks=Object.keys(CHATS).filter(k=>(CHATS[k]||[]).length&&(isGen(k)||BYID[k.slice(2)]));
+  const ks=Object.keys(CHATS).filter(k=>(CHATS[k]||[]).length&&(isGen(k)||(isTop(k)&&topicOf(k))||BYID[k.slice(2)]));
   ks.sort((a,b)=>(CHTS[b]||+(b.split(":")[1])||0)-(CHTS[a]||+(a.split(":")[1])||0));
-  return ks.map(k=>{ const H=CHATS[k], last=H[H.length-1].content.replace(/[*_#>\[\]]/g,"");
+  return ks.map(k=>{ const H=CHATS[k], last=(H[H.length-1].quiz?"Quiz":H[H.length-1].content).replace(/[*_#>\[\]]/g,"");
+    if(isTop(k)){ const tp=topicOf(k); return {k,name:"Comprendre · "+tp.t,sub:H[H.length-1].quiz?"Quiz · "+H[H.length-1].quiz.filter(q=>q.r===q.bonne).length+"/"+H[H.length-1].quiz.length:last,av:tgrad(tp),l:"✦"}; }
     if(isGen(k)){ const q=(H.find(x=>x.role==="user")||{}).content||"Parler politique"; return {k,name:q.length>60?q.slice(0,58)+"…":q,sub:last,av:"#111",l:"?"}; }
     const m=BYID[k.slice(2)]; return {k,name:`${m.S.section} · ${PROGS[m.P].cand}`,sub:last,av:gradOf(m),l:initials(PROGS[m.P].cand)}; }); }
-function renderThreads(){ $("#chat-dot").style.display="none";
-  const TL=threadsList(); if(!TL.length){ $("#threads").innerHTML='<p class="note" style="text-align:center;margin-top:18px">Aucune conversation pour l\'instant.</p>'; return; }
+function renderThreads(){ $("#chat-dot").style.display="none"; renderTopics();
+  const TL=threadsList(); $("#th-label").style.display=TL.length?"":"none"; if(!TL.length){ $("#threads").innerHTML=""; return; }
   $("#threads").innerHTML=TL.map(t=>`<button class="thread" data-k="${esc(t.k)}"><span class="av" style="background:${t.av};font-size:${t.l.length>1?"15px":"20px"}">${esc(t.l)}</span><span style="min-width:0"><span class="n">${esc(t.name)}</span><span class="l">${esc(t.sub)}</span></span></button>`).join("");
   $$("#threads .thread").forEach(b=>b.onclick=()=>openConvo(b.dataset.k)); }
 let CK=null;
 $("#new-chat").onclick=()=>openConvo("g:"+Date.now());
-function openConvo(k){ CK=k; const isG=isGen(k), m=isG?null:BYID[k.slice(2)];
-  $("#cv-name").textContent=isG?((CHATS[k]||[]).find(x=>x.role==="user")?.content||"Nouvelle conversation").slice(0,40):m.S.section+" · "+PROGS[m.P].cand;
-  $("#cv-av").style.background=isG?"#111":gradOf(m); $("#cv-av").textContent=isG?"?":initials(PROGS[m.P].cand);
+function msgHTML(x,i){ if(x.role==="user") return `<div class="msg u">${esc(x.content)}</div>`; if(x.quiz) return `<div class="msg a">${quizHTML(x.quiz,i)}</div>`; return `<div class="msg a">${md(x.content)}</div>`; }
+function openConvo(k){ CK=k; const isG=isGen(k), isT=isTop(k), tp=isT?topicOf(k):null, m=(isG||isT)?null:BYID[k.slice(2)];
   const H=CHATS[k]||[];
-  $("#cv-msgs").innerHTML=(m?`<div class="quote">${esc(m.t)}</div>`:`<div class="quote">Pose une question sur les programmes des candidats, les votes à l'Assemblée ou les condamnations. Réponses neutres, appuyées sur les données de l'app.</div>`)+`<p class="note" style="text-align:center;margin:0 0 8px">Les questions sont enregistrées de façon anonyme pour améliorer l'app. N'y mets pas d'informations personnelles.</p>`+H.map(x=>`<div class="msg ${x.role==="user"?"u":"a"}">${x.role==="user"?esc(x.content):linkify(x.content)}</div>`).join("");
-  const S=isG?["Que proposent les candidats sur les retraites ?","Comment le RN a voté sur le budget ?","Qui vote le plus souvent ensemble ?","C'est quoi la 6e République ?"]:["Qui paierait ?","Ça change quoi pour moi ?","Ça a marché ailleurs ?","Les principales critiques ?"];
+  $("#cv-name").textContent=isT?tp.t:isG?((H.find(x=>x.role==="user")||{}).content||"Nouvelle conversation").slice(0,40):m.S.section+" · "+PROGS[m.P].cand;
+  $("#cv-av").style.background=isT?tgrad(tp):isG?"#111":gradOf(m); $("#cv-av").textContent=isT?"✦":isG?"?":initials(PROGS[m.P].cand);
+  const intro=m?esc(m.t):isT?`<b>${esc(tp.t)}</b><br>${esc(tp.d)}. Suis le mini-cours étape par étape, teste-toi avec un quiz, ou pose tes questions.`:"Pose une question : un mécanisme (dette, retraites, impôts…), les programmes des candidats, les votes à l'Assemblée ou les condamnations. Réponses neutres et sourcées.";
+  $("#cv-msgs").innerHTML=`<div class="quote">${intro}</div><p class="note" style="text-align:center;margin:0 0 8px">Les questions sont enregistrées de façon anonyme pour améliorer l'app. N'y mets pas d'informations personnelles.</p>`+H.map(msgHTML).join("");
+  bindQuiz($("#cv-msgs")); setSugg(); $("#convo").classList.add("on"); $("#cv-msgs").scrollTop=1e9; }
+function setSugg(){ const k=CK, isT=isTop(k), H=CHATS[k]||[];
+  const S=isT?(H.length?["Étape suivante","Je n'ai pas compris","Un exemple concret","Fais-moi un quiz","Ce que proposent les candidats"]:["Explique-moi les bases","Fais-moi un quiz","Les chiffres clés"])
+    :isGen(k)?["C'est quoi la dette publique ?","Comment marchent les retraites ?","Que proposent les candidats sur les retraites ?","C'est quoi le 49.3 ?","Fais-moi un quiz"]
+    :["Qui paierait ?","Ça change quoi pour moi ?","Ça a marché ailleurs ?","Les principales critiques ?"];
   $("#cv-sugg").innerHTML=S.map(s=>`<button>${esc(s)}</button>`).join("");
-  $$("#cv-sugg button").forEach(b=>b.onclick=()=>{$("#cv-in").value=b.textContent;$("#cv-form").requestSubmit();});
-  $("#convo").classList.add("on"); $("#cv-msgs").scrollTop=1e9; }
+  $$("#cv-sugg button").forEach(b=>b.onclick=()=>{$("#cv-in").value=b.textContent;$("#cv-form").requestSubmit();}); }
+function quizHTML(Q,i){ return `<div class="quiz" data-h="${i}"><div class="note" style="margin:0">Quiz · ${Q.length} questions</div>${Q.map((q,j)=>`<div class="qi${q.r!=null?" done":""}" data-j="${j}"><div class="qq">${j+1}. ${esc(q.q)}</div>${q.options.map((o,n)=>`<button class="op${q.r!=null&&n===q.bonne?" ok":""}${q.r!=null&&n===q.r&&n!==q.bonne?" ko":""}" data-n="${n}"${q.r!=null?" disabled":""}>${esc(o)}</button>`).join("")}<div class="ex">${q.r===q.bonne?"✓ Bonne réponse. ":q.r!=null?"✗ Raté. ":""}${esc(q.explication)}</div></div>`).join("")}<div class="sc">${Q.every(q=>q.r!=null)?`Score : ${Q.filter(q=>q.r===q.bonne).length}/${Q.length}`:""}</div></div>`; }
+function bindQuiz(root){ root.querySelectorAll(".quiz").forEach(z=>{ const H=CHATS[CK]||[], Q=(H[+z.dataset.h]||{}).quiz; if(!Q) return;
+  z.querySelectorAll(".op").forEach(b=>b.onclick=()=>{ const j=+b.closest(".qi").dataset.j; if(Q[j].r!=null) return; Q[j].r=+b.dataset.n; store.set("chats2027",CHATS); const nz=document.createElement("div"); nz.innerHTML=quizHTML(Q,+z.dataset.h); z.replaceWith(nz.firstChild); bindQuiz(root); }); }); }
 $("#cv-back").onclick=()=>{ $("#convo").classList.remove("on"); if($("#v-chat").classList.contains("on")) renderThreads(); };
 $("#cv-form").onsubmit=async e=>{ e.preventDefault(); const q=$("#cv-in").value.trim(); if(!q||!CK) return; $("#cv-in").value="";
   const k=CK, H=CHATS[k]||(CHATS[k]=[]), box=$("#cv-msgs");
   H.push({role:"user",content:q}); box.insertAdjacentHTML("beforeend",`<div class="msg u">${esc(q)}</div>`);
   const out=document.createElement("div"); out.className="msg a"; out.textContent="…"; box.appendChild(out); box.scrollTop=1e9;
   CHTS[k]=Date.now(); store.set("chatsTs2027",CHTS);
-  const payload=isGen(k)?{mode:"general",messages:H.slice(-12)}:{mode:"mesure",mesureId:k.slice(2),messages:H.slice(-12)};
+  const ctx=H.slice(-12).map(x=>({role:x.role,content:x.content}));
+  const sujet=isTop(k)?topicOf(k).t:"la politique française";
+  if(/quiz/i.test(q)&&q.length<40&&!isMes(k)){
+    out.innerHTML=`<div class="steps"><div class="step run"><span class="ic">◌</span><span>Préparation du quiz</span></div></div>`;
+    try{ const r=await fetch(API+"/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({mode:"quiz",sujet,messages:ctx})}); const d=await r.json().catch(()=>({}));
+      if(!r.ok||!d.quiz) throw Object.assign(new Error("q"),{code:r.status===429?(d.error==="quota"?"quota":"rate"):r.status===503?"indispo":"http",st:r.status});
+      const msg={role:"assistant",content:"Quiz : "+d.quiz.map((x,j)=>`${j+1}. ${x.q} (réponse : ${x.options[x.bonne]})`).join(" "),quiz:d.quiz}; H.push(msg); store.set("chats2027",CHATS);
+      out.innerHTML=quizHTML(d.quiz,H.length-1); bindQuiz(box); setSugg(); }
+    catch(err){ H.pop(); out.innerHTML=esc(aiErr(err)); }
+    box.scrollTop=1e9; return; }
+  const payload=isTop(k)?{mode:"prof",sujet,messages:ctx}:isGen(k)?{mode:"general",messages:ctx}:{mode:"mesure",mesureId:k.slice(2),messages:ctx};
   out.innerHTML=`<div class="steps"></div><div class="body caret"></div>`;
   const stepsEl=out.querySelector(".steps"), bodyEl=out.querySelector(".body");
   const addStep=(ic,txt,run)=>{ stepsEl.querySelectorAll(".step.run").forEach(s=>{ s.classList.remove("run"); s.querySelector(".ic").textContent="✓"; }); const d=document.createElement("div"); d.className="step"+(run?" run":""); d.innerHTML=`<span class="ic">${run?"◌":ic}</span><span>${txt}</span>`; stepsEl.appendChild(d); box.scrollTop=1e9; };
@@ -812,7 +851,7 @@ $("#cv-form").onsubmit=async e=>{ e.preventDefault(); const q=$("#cv-in").value.
     ended=true; if(shown<txt.length) await new Promise(res=>{ fin=res; if(!raf) raf=setTimeout(paint,16); });
     bodyEl.innerHTML=md(txt); bodyEl.classList.remove("caret"); box.scrollTop=1e9;
     if(!txt) throw Object.assign(new Error("vide"),{code:"http"});
-    H.push({role:"assistant",content:txt}); store.set("chats2027",CHATS);
+    H.push({role:"assistant",content:txt}); store.set("chats2027",CHATS); setSugg();
   }
   catch(err){ H.pop(); out.innerHTML=esc(aiErr(err)); }
   box.scrollTop=1e9; };
@@ -935,7 +974,7 @@ document.addEventListener("keydown",e=>{ if(e.key==="Escape") $("#info").classLi
 /* ================= démarrage ================= */
 if("serviceWorker" in navigator && location.protocol==="https:") navigator.serviceWorker.register("/sw.js").catch(()=>{});
 nextProfile(); show(location.hash.slice(1)||"swipe");
-if(Object.values(SW).some(v=>v===1)) $("#chat-dot").style.display="block";
+
 </script>
 </body>
 </html>

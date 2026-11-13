@@ -90,7 +90,21 @@ async function streamWeb(res, system, msgs, send) {
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
   const { mode = "general", mesureId, choix } = req.body || {};
+  const sujet = String(req.body?.sujet || "la politique française").replace(/[<>`]/g, "").slice(0, 80);
   try {
+    if (mode === "quiz") {                          // quiz QCM structuré, sans recherche web (rapide)
+      const msgs = cleanMsgs(req.body?.messages); if (!msgs.length || msgs[msgs.length - 1].role !== "user") return res.status(400).json({ error: "messages" });
+      if (!(await consume(req, "chat"))) return res.status(429).json({ error: "quota" });
+      const d = await messages({ max_tokens: 2000, system: SYSTEM.quiz(sujet), messages: msgs, tool_choice: { type: "tool", name: "quiz" },
+        tools: [{ name: "quiz", description: "Enregistre le quiz.", input_schema: { type: "object", required: ["questions"], properties: { questions: { type: "array", minItems: 3, maxItems: 5, items: { type: "object", required: ["q", "options", "bonne", "explication"], properties: {
+          q: { type: "string" }, options: { type: "array", minItems: 3, maxItems: 4, items: { type: "string" } }, bonne: { type: "integer", description: "index (0 = première option) de la bonne réponse" }, explication: { type: "string" } } } } } } }] });
+      const qs = ((d.content || []).find((b) => b.type === "tool_use")?.input?.questions || [])
+        .filter((x) => x && Array.isArray(x.options) && x.options.length >= 3 && Number.isInteger(x.bonne) && x.bonne >= 0 && x.bonne < x.options.length)
+        .map((x) => ({ q: String(x.q).slice(0, 300), options: x.options.map((o) => String(o).slice(0, 160)), bonne: x.bonne, explication: String(x.explication || "").slice(0, 500) }));
+      if (!qs.length) throw new Error("quiz vide");
+      await insert("chats", { mode: "quiz", mesure_id: null, question: "Quiz : " + sujet, reponse: qs.map((x) => x.q).join(" | ").slice(0, 3000), v: PROMPT_VERSION }).catch(() => {});
+      return res.status(200).json({ quiz: qs, v: PROMPT_VERSION });
+    }
     let system, msgs;
     if (mode === "profil") {
       if (!(await consume(req, "profil"))) return res.status(429).json({ error: "quota" });
@@ -105,14 +119,15 @@ export default async function handler(req, res) {
         let fiche = base().fiches[mesureId] || null;
         if (!fiche) { const r = await select("fiches", `id=eq.${encodeURIComponent(mesureId)}&select=data`).catch(() => []); fiche = r[0]?.data || null; }
         system = SYSTEM.mesure(m, fiche);
-      } else system = SYSTEM.general(retrieve(msgs[msgs.length - 1].content));
+      } else if (mode === "prof") system = SYSTEM.prof(sujet, retrieve(sujet + " " + msgs[msgs.length - 1].content));
+      else system = SYSTEM.general(retrieve(msgs[msgs.length - 1].content));
     }
     let text;
     if (mode === "profil") text = textOf(await messages({ max_tokens: 700, system, messages: msgs }));
     else if (req.body?.stream) {
       res.writeHead(200, { "Content-Type": "text/event-stream; charset=utf-8", "Cache-Control": "no-cache, no-transform", "X-Accel-Buffering": "no" });
       const send = (o) => res.write(`data: ${JSON.stringify(o)}\n\n`);
-      send({ type: "step", label: mode === "mesure" ? "Lecture de la fiche de la mesure" : "Recherche dans la base de l'app" });
+      send({ type: "step", label: mode === "mesure" ? "Lecture de la fiche de la mesure" : mode === "prof" ? "Préparation de l'explication" : "Recherche dans la base de l'app" });
       try { text = await streamWeb(res, system, msgs, send); }
       catch (e) { console.error("chat stream:", e.message); await logErr(mode, mesureId, msgs, e); send({ type: "error", error: /credit balance/i.test(e.message) ? "indisponible" : /overloaded|529/i.test(e.message) ? "surcharge" : "erreur", detail: String(e.status || "") }); return res.end(); }
       await insert("chats", { mode, mesure_id: mode === "mesure" ? String(mesureId).slice(0, 160) : null, question: msgs[msgs.length - 1].content.slice(0, 1000), reponse: text.slice(0, 3000), v: PROMPT_VERSION }).catch(() => {});
