@@ -15,6 +15,11 @@ export default async function handler(req, res) {
   // Seuls les essais ratés sont comptés (60 par jour et par IP) : l'admin connecté navigue sans limite.
   if (!ok(req)) return (await consume(req, "admin")) ? res.status(401).json({ error: "mot_de_passe" }) : res.status(429).json({ error: "quota" });
   try {
+    if (req.method === "PATCH" && req.query?.reset === "quotas") {   // remet à zéro les limites du jour de tous les visiteurs (IA, fiches, profil, remarques, inscriptions)
+      const jour = new Date().toISOString().slice(0, 10);
+      await patch("usage", `jour=eq.${jour}&kind=in.(chat,fiche,profil,remarque,inscription)`, { n: 0 });
+      return res.status(200).json({ ok: true, jour });
+    }
     if (req.method === "PATCH") {                     // ?remarque=<id>&statut=traite|nouveau|rejete
       const id = Number(req.query?.remarque), st = String(req.query?.statut || "");
       if (!id || !["traite", "nouveau", "rejete"].includes(st)) return res.status(400).json({ error: "param" });

@@ -49,7 +49,7 @@ select{font:inherit;padding:9px 10px;border:1px solid var(--line);border-radius:
 <main id="app" hidden>
   <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap">
     <div><h1>Tableau de bord</h1><div class="muted small" id="maj"></div></div>
-    <div><button id="reload">Actualiser</button> <button id="out">Se déconnecter</button></div>
+    <div><button id="reset-q" title="Remet à zéro les limites du jour (questions à l'IA, fiches, profil) pour tous les visiteurs">Remettre les limites à zéro</button> <button id="reload">Actualiser</button> <button id="out">Se déconnecter</button></div>
   </div>
   <div class="kpis" id="kpis"></div>
   <div class="card" style="margin-bottom:14px"><h2>Remarques des utilisateurs</h2>
@@ -84,6 +84,9 @@ async function api(method="GET",q=""){
   if(r.status===429) throw new Error("Trop de tentatives aujourd'hui.");
   const d=await r.json(); if(!r.ok) throw new Error(d.detail||d.error||"Erreur"); return d;
 }
+document.addEventListener("click",async e=>{ const b=e.target.closest("#reset-q"); if(!b) return;
+  if(b.dataset.ok!=="1"){ b.dataset.ok="1"; b.textContent="Confirmer : tout le monde repart à zéro aujourd'hui ?"; return; }
+  b.disabled=true; try{ await api("PATCH","?reset=quotas"); b.textContent="Limites remises à zéro ✓"; load(); }catch(err){ b.textContent="Erreur : "+err.message; } setTimeout(()=>{ b.disabled=false; b.dataset.ok=""; b.textContent="Remettre les limites à zéro"; },4000); });
 async function load(){
   try{ D=await api(); $("#login").hidden=true; $("#app").hidden=false; render(); }
   catch(e){ $("#login").hidden=false; $("#app").hidden=true; $("#err").textContent=e.message; }
