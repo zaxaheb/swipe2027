@@ -21,6 +21,10 @@ const MAX_SEARCH = () => Number(process.env.CHAT_MAX_SEARCHES || 10);
 const QUIZ = { type: "object", required: ["questions"], properties: { questions: { type: "array", minItems: 3, maxItems: 5, items: { type: "object", required: ["q", "options", "bonne", "explication"], properties: {
   q: { type: "string" }, options: { type: "array", minItems: 3, maxItems: 4, items: { type: "string" } }, bonne: { type: "integer", description: "index (0 = première option) de la bonne réponse" }, explication: { type: "string" } } } } } };
 const hide = (s) => String(s || "").replace(/(sk-[\w-]{8,}|AIza[\w-]{20,})/g, "***");
+const ITEMS = { type: "array", items: { type: "object", required: ["theme", "texte"], properties: { theme: { type: "string" }, texte: { type: "string" } } } };
+const PORTRAIT = { type: "object", required: ["en_un_mot", "approuves", "rejettes", "ressort", "candidats_proches"], properties: {
+  en_un_mot: { type: "string" }, approuves: ITEMS, rejettes: ITEMS, ressort: { type: "array", items: { type: "string" } },
+  candidats_proches: { type: "array", items: { type: "object", required: ["candidat", "pourquoi"], properties: { candidat: { type: "string" }, pourquoi: { type: "string" } } } } } };
 const errKind = (e) => e.code === "credit" ? "indisponible" : e.code === "overloaded" ? "surcharge" : e.status === 429 ? "rate_limited" : "erreur";
 
 export default async function handler(req, res) {
@@ -40,12 +44,37 @@ export default async function handler(req, res) {
       await insert("chats", { mode: "quiz", mesure_id: null, question: "Quiz : " + sujet, reponse: qs.map((x) => x.q).join(" | ").slice(0, 3000), v: S.version }).catch(() => {});
       return res.status(200).json({ quiz: qs, v: S.version });
     }
-    let S, msgs;
-    if (mode === "profil") {
+    if (mode === "profil") {                        // portrait structuré : chiffres calculés ici (exacts), texte rédigé par l'IA
       if (!(await consume(req, "profil"))) return res.status(429).json({ error: "quota" });
-      const B = base(); const L = (ids) => (ids || []).slice(-60).map((id) => B.byId[id]).filter(Boolean).map((m) => `- [${B.candidats[m.P]?.cand}] ${m.t}`).join("\n");
-      S = await build("profil", VARS.profil(L(choix?.pour), L(choix?.contre))); msgs = [{ role: "user", content: S.user }];
-    } else {
+      const B = base(), ok = (id) => B.byId[id] && !/ne se présente plus/.test(B.candidats[B.byId[id].P]?.cand || "");
+      const pour = (choix?.pour || []).filter(ok), contre = (choix?.contre || []).filter(ok);
+      const nomOf = (P) => (B.candidats[P]?.cand || P);
+      const L = (ids) => ids.slice(-80).map((id) => B.byId[id]).map((m) => `- [${nomOf(m.P)}] ${m.t} (thème : ${m.section})`).join("\n") || "(aucune)";
+      const st = {}, th = {};
+      for (const [ids, k] of [[pour, "a"], [contre, "b"]]) for (const id of ids) { const m = B.byId[id];
+        (st[m.P] ||= { P: m.P, cand: nomOf(m.P), nom: B.candidats[m.P]?.nom || m.P, a: 0, b: 0 })[k]++; (th[m.section] ||= { a: 0, b: 0 })[k]++; }
+      const C = Object.values(st).map((x) => ({ ...x, t: x.a + x.b, p: Math.round(100 * x.a / (x.a + x.b)) })).sort((x, y) => y.p - x.p || y.t - x.t);
+      const fiables = C.filter((x) => x.t >= 3), proches = (fiables.length ? fiables : C).slice(0, 3);
+      const stats = C.map((x) => `- ${x.cand} (${x.nom}) : ${x.a} pour, ${x.b} contre → ${x.p} % d'accord${x.t < 3 ? " (peu de réponses)" : ""}`).join("\n");
+      const themes = Object.entries(th).sort((x, y) => (y[1].a + y[1].b) - (x[1].a + x[1].b)).slice(0, 15).map(([s, v]) => `- ${s} : ${v.a} pour, ${v.b} contre`).join("\n");
+      const S = await build("profil", VARS.profil(L(pour), L(contre), stats, themes, proches.map((x) => `${x.cand} (${x.p} %)`).join(", ")));
+      const { data } = await llm.json({ usage: "chat", spec: S.config.model, reasoning: S.config.reasoning || "low", system: S.system, messages: [{ role: "user", content: S.user }],
+        schema: PORTRAIT, name: "portrait", description: "Enregistre le portrait.", maxTokens: Math.max(S.config.max_tokens || 0, 1500), trace: { name: "profil", prompt: S.prompt, tags: ["profil"] } });
+      const cut = (s, n) => String(s || "").slice(0, n), list = (a, n) => (Array.isArray(a) ? a : []).slice(0, n);
+      const why = Object.fromEntries(list(data?.candidats_proches, 5).map((x) => [String(x.candidat || "").toLowerCase(), cut(x.pourquoi, 300)]));
+      const portrait = {
+        en_un_mot: cut(data?.en_un_mot, 300),
+        approuves: list(data?.approuves, 5).map((x) => ({ theme: cut(x.theme, 60), texte: cut(x.texte, 400) })),
+        rejettes: list(data?.rejettes, 5).map((x) => ({ theme: cut(x.theme, 60), texte: cut(x.texte, 400) })),
+        ressort: list(data?.ressort, 4).map((x) => cut(x, 400)),
+        proches: proches.map((x) => ({ P: x.P, cand: x.cand, nom: x.nom, a: x.a, b: x.b, p: x.p,
+          pourquoi: why[x.cand.toLowerCase()] || Object.entries(why).find(([k]) => k.includes(x.cand.split(" ").pop().toLowerCase()))?.[1] || "" }))
+      };
+      if (!portrait.en_un_mot && !portrait.approuves.length) throw new Error("portrait vide");
+      return res.status(200).json({ portrait, n: pour.length + contre.length, v: S.version });
+    }
+    let S, msgs;
+    {
       msgs = cleanMsgs(req.body?.messages);
       if (!msgs.length || msgs[msgs.length - 1].role !== "user") return res.status(400).json({ error: "messages" });
       if (!(await consume(req, "chat"))) return res.status(429).json({ error: "quota" });

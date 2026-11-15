@@ -7,7 +7,7 @@
 // Change PROMPT_VERSION à chaque modification locale ; avec Langfuse, la version vient de Langfuse.
 import { getPrompt } from "./langfuse.js";
 
-export const PROMPT_VERSION = "2026-11-16.1";
+export const PROMPT_VERSION = "2026-11-16.2";
 
 export const TEMPLATES = {
   /* ===== prompt système, commun à tout ===== */
@@ -94,17 +94,30 @@ QUESTION
 DEMANDE
 {{question}}`,
 
-  profil: `TÂCHE : voici les mesures qu'un utilisateur a aimées (POUR) ou rejetées (CONTRE), avec le candidat qui les porte. Fais-lui un portrait neutre de ses choix.
-Réponds EXACTEMENT avec ces 4 titres markdown, dans cet ordre, et rien d'autre :
-## En un mot
-Une seule phrase qui résume ses choix, sans étiquette politique.
-## Ce que tu approuves
-3 à 5 puces : **thème** : ce qu'il soutient, avec 1 ou 2 exemples précis tirés de la liste.
-## Ce que tu rejettes
-2 à 4 puces, même format.
-## Ce qui ressort
-2 ou 3 puces : cohérences ou tensions intéressantes entre ses choix, et s'il pioche chez plusieurs candidats (cite-les).
-180 mots maximum au total. Ne le range dans aucun camp, aucune consigne de vote, aucun jugement.
+  profil: `TÂCHE : fais le portrait neutre et EXACT des choix d'un utilisateur, à partir des données ci-dessous (mesures qu'il a aimées ou rejetées, avec le candidat qui les porte entre crochets).
+
+RÈGLES D'EXACTITUDE (les plus importantes)
+- N'utilise QUE les mesures listées. N'invente aucune position, aucun thème, aucun chiffre qui n'y figure pas.
+- Une mesure appartient au candidat indiqué entre crochets, et à lui seul. Ne l'attribue jamais à un autre candidat, même si d'autres proposent quelque chose de proche.
+- Les pourcentages d'accord sont déjà calculés : reprends-les tels quels, ne les recalcule pas.
+- Ne généralise pas à partir d'une seule mesure (« tu refuses l'Europe » à partir d'une seule réponse). Si un thème ne repose que sur 1 réponse, dis « sur une mesure ».
+- Ne range pas l'utilisateur dans un camp, aucune consigne de vote, aucun jugement.
+
+À RENDRE (format structuré demandé)
+- en_un_mot : une phrase qui résume ses grandes priorités, sans étiquette politique.
+- approuves : 3 à 5 thèmes qu'il soutient (theme : 2 à 4 mots ; texte : ce qu'il soutient, avec 1 ou 2 mesures précises de la liste POUR et leur candidat).
+- rejettes : 2 à 5 thèmes qu'il rejette, même format, uniquement à partir de la liste CONTRE. S'il a peu de « contre », dis-le dans le texte plutôt que d'inventer.
+- ressort : 2 ou 3 constats intéressants : thèmes où il est le plus tranché, cohérences ou tensions entre ses choix, et s'il pioche chez des candidats de bords différents.
+- candidats_proches : pour chacun des candidats les plus proches indiqués ci-dessous, pourquoi en une phrase (les mesures communes les plus marquantes, et un désaccord notable s'il y en a).
+
+CANDIDATS LES PLUS PROCHES (calculé)
+{{proches}}
+
+ACCORD PAR CANDIDAT (calculé)
+{{stats}}
+
+THÈMES (calculé)
+{{themes}}
 
 POUR
 {{pour}}
@@ -147,7 +160,7 @@ export const VARS = {
   quiz: (sujet, question) => ({ sujet, question }),
   mesure: (m, fiche, question) => ({ ...mesureVars(m, 900), question,
     fiche: fiche ? `<fiche_sourcee>\n${JSON.stringify(fiche).slice(0, 7000)}\n</fiche_sourcee>\nUtilise la fiche en priorité et cite ses sources.` : "Pas de fiche sourcée pour cette mesure : sois prudent sur les chiffres et dis-le." }),
-  profil: (pour, contre) => ({ pour: pour || "(aucune)", contre: contre || "(aucune)" }),
+  profil: (pour, contre, stats = "", themes = "", proches = "") => ({ pour: pour || "(aucune)", contre: contre || "(aucune)", stats: stats || "(aucune)", themes: themes || "(aucun)", proches: proches || "(pas encore assez de réponses)" }),
   fiche: (m, autres = [], n = 3) => ({ ...mesureVars(m, 1500), max_recherches: n,
     autres_mesures: autres.length ? `\nAutres mesures du même candidat (pour accompagnement : reprends l'id exact) :\n${autres.map((x) => `- [${x.id}] ${x.t.slice(0, 180)}`).join("\n").slice(0, 14000)}` : "" })
 };
