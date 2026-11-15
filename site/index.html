@@ -156,6 +156,13 @@ details[open].fold>summary{margin-bottom:0}
 .det .item:first-child{border-top:0;padding-top:4px}
 .det .txt{font-size:19px;line-height:1.4}
 .det-p{font:500 18px/1.5 var(--serif);margin:0 0 10px}
+.det-lead{font:700 21px/1.35 var(--serif);margin:0 0 8px}
+.det-body{font:400 18px/1.5 var(--serif);margin:0 0 10px;color:var(--ink)}
+.det-h{font:700 13px var(--sans);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:18px 0 10px}
+.det-h:first-child{margin-top:0}
+.op{padding:12px 0;border-top:1px solid var(--line)}.op:first-of-type{border-top:0;padding-top:0}
+.op .who{font:600 13px var(--sans);color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+.op .det-lead{font-size:19px}
 .det-p.big{font:600 22px/1.35 var(--serif)}
 .det .eco-big{margin-bottom:12px}
 .camps{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
@@ -422,9 +429,10 @@ window.SWIPE_CONFIG = window.SWIPE_CONFIG || {
   SUPABASE_URL: "https://xlkljzocmcwcjixsqlzy.supabase.co",
   SUPABASE_ANON_KEY: "sb_publishable_SoJpBAJ9tC2Y7uq7KnVXRA_PoDGMuU9",
   /* Fonctionnalités activables. votes : onglet « À l'Assemblée » (désactivé pour l'instant, le code reste en place) */
-  FEATURES: { votes: false }
+  /* ficheComplete : anciennes fiches détaillées (coût, sources, tensions, mesures liées…) au lieu des 3 cartes allégées */
+  FEATURES: { votes: false, ficheComplete: false }
 };
-window.SWIPE_CONFIG.FEATURES = Object.assign({ votes: false }, window.SWIPE_CONFIG.FEATURES);
+window.SWIPE_CONFIG.FEATURES = Object.assign({ votes: false, ficheComplete: false }, window.SWIPE_CONFIG.FEATURES);
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script>
@@ -647,7 +655,7 @@ function renderProfile(q){
   /* la mesure */
   parts.push(`<div class="box photo" style="background:${gradOf(m)}"><div class="over">${pBadge(m)}${m.cle?'<span class="badge">Mesure clé</span>':""}${F?`<span class="badge">${F.genere?"Fiche générée":"Fiche sourcée"}</span>`:""}</div><div class="q">${esc(m.t)}</div></div>`);
   /* infos */
-  parts.push(`<div class="box"><div class="vitals"><div class="vital">${IC.flag}${esc(P.nom)} · 2027</div>${m.cle?`<div class="vital">${IC.key}Mesure clé</div>`:""}${m.page?`<div class="vital">${IC.book}Livre p. ${m.page}</div>`:""}<div class="vital">${IC.folder}${esc(m.S.chapitre)}</div></div>
+  if(FEAT.ficheComplete) parts.push(`<div class="box"><div class="vitals"><div class="vital">${IC.flag}${esc(P.nom)} · 2027</div>${m.cle?`<div class="vital">${IC.key}Mesure clé</div>`:""}${m.page?`<div class="vital">${IC.book}Livre p. ${m.page}</div>`:""}<div class="vital">${IC.folder}${esc(m.S.chapitre)}</div></div>
     <div class="vrow">${IC.list}<span>${esc(short(m.S.partie))}</span></div>
     ${P.note?`<div class="vrow">${IC.spark}<span>${esc(P.note)}</span></div>`:""}<div class="vrow">${IC.link}<a href="${esc(m.src||(m.S.url+(m.P==="LFI"?"#"+m.id:"")))}" target="_blank" rel="noopener">${m.src&&!/rassemblementnational|lavenirencommun/.test(m.src)?"Voir la source":"Lire le texte officiel"}</a></div></div>`);
   /* ===== cartes compactes : un résumé visible, le détail au toucher ===== */
@@ -656,6 +664,32 @@ function renderProfile(q){
   const fold=(label,sum,det,cls="")=>det?`<details class="box prompt fold ${cls}"><summary><div class="label">${label}</div><div class="pv">${sum}</div><span class="more-btn">Voir plus</span></summary><div class="det">${det}<button type="button" class="less-btn" onclick="const d=this.closest('details');d.open=false;d.scrollIntoView({block:'nearest',behavior:'smooth'})">Réduire</button></div></details>`:`<div class="box prompt fold ${cls}"><div class="label">${label}</div><div class="pv">${sum}</div></div>`;
   const items=(arr,f)=>arr.map(f).join("");
   const crit=c=>`<div class="item"><div class="who">${esc(c.camp||c.pays||c.qui||"")}${c.qui&&c.camp?" · "+esc(c.qui):""}</div><div class="txt">${esc(c.texte)}</div>${srcA(c)}</div>`;
+  if(!FEAT.ficheComplete){
+  /* ===== version allégée : 3 cartes (pourquoi / opposants / ailleurs), sans sources ni liens ===== */
+  const lead=(s)=>{ const o=one(s,10000), r=rest(s); return `<p class="det-lead">${esc(o)}</p>${r?`<p class="det-body">${esc(r)}</p>`:""}`; };
+  const offUrl=m.src||(m.S.url+(m.P==="LFI"?"#"+m.id:""));
+  if(m.sous.length) parts.push(`<div class="box photo small" style="background:${gradOf(m)};filter:saturate(.85) brightness(.95)"><ul>${m.sous.map(s=>`<li>${esc(s)}</li>`).join("")}</ul></div>`);
+  /* 1. pourquoi le parti le propose */
+  const intro=(m.S.intro&&m.S.intro!==m.t+"."&&m.S.intro.length>40)?m.S.intro:"";
+  const L=F&&F.logique, why=(L&&L.texte)||intro, args=(L&&L.arguments)||[];
+  parts.push(fold(`Pourquoi ${esc(P.nom)} le propose`,
+    why?`<div class="answer sm">${esc(one(why,220))}</div>`:`<div class="answer sm" style="color:var(--muted)">${esc(P.cand)} n'a pas encore détaillé ses arguments pour cette mesure.</div>`,
+    why?lead(why)+args.map(a=>`<p class="det-body">${esc(a.texte)}</p>`).join("")+`<p class="note" style="margin:6px 0 0"><a href="${esc(offUrl)}" target="_blank" rel="noopener">Texte officiel ↗</a></p>`:""));
+  if(F){
+    /* 2. les opposants : ce qui a été dit + les objections de fond */
+    const C=F.critiques||[], T=F.tensions||[], camps=[...new Set(C.map(c=>c.camp).filter(Boolean))];
+    if(C.length||T.length) parts.push(fold(`Ce qu'en disent les opposants`,
+      `${camps.length?`<div class="camps">${camps.map(c=>`<span class="badge">${esc(c)}</span>`).join("")}</div>`:""}<div class="answer sm" style="margin-top:10px">${esc(one(C.length?C[0].texte:T[0],200))}</div>`,
+      (C.length?`<div class="det-h">Ce qui a été dit</div>`+C.map(c=>`<div class="op"><div class="who">${esc(c.camp||"")}${c.qui?` · ${esc(c.qui)}`:""}</div>${lead(c.texte)}</div>`).join(""):"")+
+      (T.length?`<div class="det-h">Les objections de fond</div>`+T.map(x=>`<p class="det-body">• ${esc(x)}</p>`).join(""):"")));
+    /* 3. ailleurs dans le monde */
+    const W=F.monde||[];
+    if(W.length) parts.push(fold(`Et ailleurs dans le monde ?`,`<div class="answer sm">${esc(W.map(w=>w.pays).slice(0,4).join(" · "))}</div>`,
+      W.map(w=>`<div class="op"><div class="who">${esc(w.pays)}</div>${lead(w.texte)}</div>`).join("")));
+  } else {
+    parts.push(`<div class="box prompt fold"><div class="label">Les opposants, ailleurs dans le monde</div><div class="answer sm" style="color:var(--muted)" id="gen-msg">${API?"Recherche d'une fiche existante…":"Pas encore de fiche pour cette mesure."}</div><div style="margin-top:14px" id="gen-wrap" hidden><button class="cta" id="b-gen">${IC.spark.replace('<svg','<svg width="18" height="18"')}Générer la fiche</button></div><p class="note" id="gen-st" style="margin-top:10px">L'IA fait des recherches. Une fois générée, la fiche est disponible pour tout le monde.</p></div>`);
+  }
+  } else {
   /* le débat en une phrase */
   if(F) parts.push(`<div class="box prompt fold"><div class="label">Le débat en une phrase</div><div class="answer sm">${esc(F.resume)}</div></div>`);
   /* sous-points */
@@ -700,6 +734,7 @@ function renderProfile(q){
   if(sib.length>1) plus.push(`<div class="item"><div class="who">Dans la même partie du programme (${sib.length})</div><div class="sib">${sib.slice(0,12).map(x=>x===m?`<div class="cur">${esc(x.t)}</div>`:`<button class="linkrow" data-open="${esc(x.id)}">${esc(x.t)}</button>`).join("")}${sib.length>12?`<div class="note">+ ${sib.length-12} autres</div>`:""}</div></div>`);
   if(F&&F.genere) plus.push(`<p class="note">Fiche générée le ${esc(F.maj)} par IA à partir de recherches web. Vérifie les sources.</p>`);
   if(plus.length) parts.push(fold(`En savoir plus`,`<div class="answer sm" style="color:var(--muted)">Texte du programme, mesures proches, mesures voisines.</div>`,plus.join("")));
+  }
   /* débattre */
   parts.push(`<div class="box prompt" style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap"><div class="label" style="margin:0">Une question sur cette mesure ?</div><div><button class="cta" id="b-chat">${IC.chat.replace('<svg','<svg width="18" height="18"')}Ouvrir la discussion</button></div></div>`);
   parts.push(`<div class="box prompt" id="rq-box" style="padding:22px 24px"><div class="label">Une erreur, un oubli ?</div><p class="note" style="margin:0">Signale une erreur, une source manquante ou un point de vue absent.</p>
