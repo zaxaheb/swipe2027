@@ -34,6 +34,6 @@ export function retrieve(q) {
   const top = (arr, k) => arr.map((x) => [x, sc(x._n)]).filter((x) => x[1]).sort((a, b) => b[1] - a[1]).slice(0, k).map((x) => x[0]);
   const ms = top(B.mesures, 14).map((m) => `- [${B.candidats[m.P]?.cand}] ${m.t} (${m.section}) ${m.url}${B.fiches[m.id] ? ` — fiche : ${B.fiches[m.id].resume}` : ""}`);
   const vs = top(B.scrutins, 5).map((s) => `- ${s.date} ${s.titre} → ${s.adopte ? "adopté" : "rejeté"} ; ${Object.entries(s.g).map(([k, v]) => `${k} ${v[0]}`).join(", ")} ${s.url}`);
-  const cs = top(B.condamnations, 6).map((c) => `- ${c.personne} (${c.parti}) : ${c.intitule} — ${c.statut}${c.peine ? " — " + c.peine : ""} ${c.url}`);
+  const cs = top(B.condamnations, 6).map((c) => `- ${c.personne} (${c.parti}) : ${c.intitule}${c.annee ? " (jugement " + c.annee + ")" : ""} — ${c.statut}${c.recours && c.recours !== "definitif" ? " (" + c.recours + " en cours)" : ""}${c.peine ? " — " + c.peine : ""} — source : ${c.src === "casier" ? "Casier Politique, extrait de Wikipédia par IA, à vérifier" : "Poligraph"} ${c.url}`);
   return [ms.length && "MESURES\n" + ms.join("\n"), vs.length && "VOTES À L'ASSEMBLÉE\n" + vs.join("\n"), cs.length && "CONDAMNATIONS\n" + cs.join("\n")].filter(Boolean).join("\n\n").slice(0, 12000);
 }

@@ -249,6 +249,11 @@ details.lcard summary::-webkit-details-marker{display:none}
 .bar .track i{display:block;height:100%}
 .bar .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px}
 
+/* condamnations : graphique chronologique */
+#c-chart svg{display:block;width:100%;height:auto}
+#c-chart circle{cursor:pointer;stroke:#fff;stroke-width:.6}
+#c-chart circle.sel{stroke:#111;stroke-width:2}
+.cc-info{font-size:14px;margin-top:8px;min-height:20px}
 /* profil : histogramme par candidat */
 .hbars{display:flex;flex-direction:column;gap:9px}
 .hbar{display:grid;grid-template-columns:118px minmax(0,1fr) 40px;gap:10px;align-items:center}
@@ -356,6 +361,14 @@ details.lcard summary::-webkit-details-marker{display:none}
     <div class="legend" style="margin-bottom:12px"><span><b style="color:var(--ink)">■</b> définitives</span><span><b style="color:#b9b4ad">■</b> non définitives</span></div>
     <div class="bars" id="c-bars"></div>
   </div>
+  <div style="height:14px"></div>
+  <div class="box prompt" style="padding-bottom:20px">
+    <div class="label">Les condamnations dans le temps</div>
+    <p class="note" style="margin:0 0 10px">Chaque point est une condamnation, placée selon l'année du jugement et le positionnement du parti. Couleur : parti. Taille : durée de prison prononcée (ferme ou avec sursis). Touche un point pour le détail.</p>
+    <div id="c-chart"></div><div class="cc-info" id="c-chart-info"></div>
+    <div class="legend" id="c-chart-leg" style="margin-top:10px;flex-wrap:wrap"></div>
+    <p class="note" style="margin:10px 0 0" id="c-chart-note"></p>
+  </div>
   <div style="height:16px"></div>
   <input id="c-q" class="field" placeholder="Chercher un nom, une infraction…" autocomplete="off">
   <div class="chips" id="c-statut">
@@ -365,7 +378,7 @@ details.lcard summary::-webkit-details-marker{display:none}
   </div>
   <div class="chips" id="c-fam" style="padding-top:0"></div>
   <div class="list" id="c-list"></div>
-  <p class="note" style="margin-top:16px">Source principale : <a href="https://poligraph.fr/affaires/condamnations" target="_blank" rel="noopener">Poligraph</a>, complétée par les décisions de justice et articles cités sur chaque fiche. Données du <span id="c-date"></span>.</p>
+  <div class="box prompt" style="margin-top:18px;padding-bottom:20px"><div class="label">D'où viennent ces données</div><div class="note" id="c-src" style="margin:0;line-height:1.5"></div></div>
 </section>
 
 <!-- ========== CHAT ========== -->
@@ -458,7 +471,7 @@ const PROGS={LFI:{nom:"LFI",long:"La France insoumise · L'Avenir en commun",can
   RN:{nom:"RN",long:"Rassemblement national · 22 mesures + contre-budget 2027",cand:"Marine Le Pen",badge:"rn",
    note:"Candidature annoncée le 7 juillet 2026. Son éligibilité dépend de l'issue de son pourvoi en cassation. Le programme 2027 complet n'est pas encore publié.",eco:"Le contre-budget RN (6 oct. 2026) annonce 140 Md€ d'économies nettes d'ici 2032 et 30 Md€ de baisses d'impôts. L'Institut de l'Entreprise juge environ 7,5 Md€ de ces économies crédibles.",ecoUrl:"https://www.planetegrandesecoles.com/budget-marine-le-pen-2027-mesures-contre-budget-rn"}};
 Object.assign(PROGS,PROG.progs||{});
-const PKEYS=Object.keys(PROGS).filter(P=>M.some(m=>m.P===P));
+const PKEYS=Object.keys(PROGS).filter(P=>M.some(m=>m.P===P)&&!PROGS[P].retrait);   // les candidats qui se sont retirés restent dans les données, mais ne sont plus proposés
 const short=p=>p.replace(/^\d+\.\s*/,"");
 const GR0={LFI:["#2f7d5b,#174a37","#c2552e,#7d2d17","#3d5bd9,#1f2f80","#8a4bd6,#4b2382","#c23b62,#6e1a35","#2a8aa3,#124b5c"],RN:["#1f3a9e,#0d1b4f","#2d5fbf,#13306b","#3a3f8f,#1a1d4d","#1d6f9e,#0c3550"]};
 const GR=Object.assign({},GR0,...Object.entries(PROG.progs||{}).map(([k,v])=>({[k]:v.grad})));
@@ -827,11 +840,44 @@ renderVotes();
 
 /* ================= JUSTICE ================= */
 const CL=COND.condamnations;
-$("#c-date").textContent=new Date(COND.extrait_le+"T12:00").toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"});
+if($("#c-date")) $("#c-date").textContent=new Date(COND.extrait_le+"T12:00").toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"});
 const FAMS=[...new Set(CL.map(c=>c.famille))].sort((a,b)=>CL.filter(c=>c.famille===b).length-CL.filter(c=>c.famille===a).length);
 (function(){ const max=Math.max(...FAMS.map(f=>CL.filter(c=>c.famille===f).length));
   $("#c-bars").innerHTML=FAMS.map(f=>{ const d=CL.filter(c=>c.famille===f&&c.statut==="définitive").length, n=CL.filter(c=>c.famille===f&&c.statut!=="définitive").length;
     return `<div class="bar" title="${esc(f)} : ${d} définitives, ${n} non définitives"><span>${esc(f)}</span><span class="track">${d?`<i style="width:${100*d/max}%;background:#111"></i>`:""}${n?`<i style="width:${100*n/max}%;background:#b9b4ad"></i>`:""}</span><span class="v">${d} + ${n}</span></div>`; }).join(""); })();
+/* ---- graphique chronologique (inspiré de la vue de Casier Politique, redessiné ici à partir de ses données) ---- */
+const FCOL={"LR / UMP / RPR":"#2d6fd6","RN / FN":"#1b2a6b","PS":"#e0559b","LFI":"#c62828","Écologistes":"#2e9e57","UDI / UDF":"#ef7d22","Reconquête":"#5a3a22","Renaissance / LREM":"#e8b923","MoDem":"#8e5bd0","Horizons":"#0f8c9c","PCF":"#8b0000","Autres / non précisé":"#a3a3a3"};
+function condChart(){
+  const Y0=2000, Y1=Math.max(...CL.filter(c=>c.annee).map(c=>c.annee));
+  const all=CL.filter(c=>c.src==="casier"&&c.annee>=Y0), pts=all.filter(c=>c.x!=null);
+  const W=360, PL=30, PR=8, PT=32;
+  /* hauteur de chaque année proportionnelle au nombre de condamnations, pour que les années chargées ne débordent pas */
+  const RH={}, RY={}; let acc=PT; for(let y=Y0;y<=Y1;y++){ const n=pts.filter(c=>c.annee===y).length; RH[y]=Math.max(16,10+n*1.15); RY[y]=acc; acc+=RH[y]; }
+  const H=acc+8, sx=x=>PL+(x+2)/4*(W-PL-PR), sy=y=>RY[y]+RH[y]/2, rad=c=>Math.min(9,2.2+1.6*Math.sqrt((c.mois||0)/12));
+  const placed=[]; const P=pts.map((c,i)=>({c,i,r:rad(c),tx:sx(c.x),ty:sy(c.annee)})).sort((a,b)=>b.r-a.r);
+  for(const p of P){ let ok=false;
+    for(let k=0;k<400&&!ok;k++){ const dx=(k%2?1:-1)*Math.ceil(k/2)*1.4;
+      const lim=Math.max(0,RH[p.c.annee]/2-p.r-1), DY=[0,-4,4,-8,8,-12,12,-16,16,-20,20,-26,26].filter(d=>Math.abs(d)<=lim);
+      for(const dy of DY){ const x=p.tx+dx, y=p.ty+dy;
+        if(x<PL+p.r||x>W-PR-p.r) continue;
+        if(placed.every(q=>Math.abs(q.y-y)>q.r+p.r+0.6||Math.hypot(q.x-x,q.y-y)>q.r+p.r+0.6)){ p.x=x; p.y=y; placed.push(p); ok=true; break; } } }
+    if(!ok){ p.x=p.tx; p.y=p.ty; placed.push(p); } }
+  const cols=[[-2,"extrême gauche"],[-1,"gauche"],[0,"centre"],[1,"droite"],[2,"extrême droite"]];
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Condamnations par année et par positionnement politique du parti">`;
+  for(let y=Y0;y<=Y1;y++) if(y%5===0||y===Y1) s+=`<line x1="${PL}" x2="${W-PR}" y1="${RY[y]}" y2="${RY[y]}" stroke="#eee"/><text x="2" y="${sy(y)+4}" font-size="10" fill="#888">${y}</text>`;
+  cols.forEach(([x,l])=>{ const a=x===-2?"start":x===2?"end":"middle", tx=x===-2?PL:x===2?W-PR:sx(x); s+=`<line x1="${sx(x)}" x2="${sx(x)}" y1="${PT-4}" y2="${H}" stroke="#f1efec"/><text x="${tx}" y="${x%2?PT-18:PT-6}" font-size="9.5" fill="#666" text-anchor="${a}">${l}</text>`; });
+  s+=P.map(p=>`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${p.r.toFixed(1)}" fill="${FCOL[p.c.famille]||"#a3a3a3"}" data-i="${p.i}"${p.c.statut!=="définitive"?' fill-opacity=".45"':""}/>`).join("")+"</svg>";
+  $("#c-chart").innerHTML=s;
+  $$("#c-chart circle").forEach(el=>el.onclick=()=>{ $$("#c-chart circle.sel").forEach(x=>x.classList.remove("sel")); el.classList.add("sel"); const c=pts[+el.dataset.i];
+    $("#c-chart-info").innerHTML=`<b>${esc(c.personne)}</b> · ${esc(c.parti)} · ${c.annee}<br>${esc(c.intitule)}${c.peine?` <span class="note">(${esc(c.peine)})</span>`:""}${c.statut!=="définitive"?' <span class="badge ia">Non définitive</span>':""}`; });
+  const fams=[...new Set(pts.map(c=>c.famille))].sort((a,b)=>pts.filter(c=>c.famille===b).length-pts.filter(c=>c.famille===a).length);
+  $("#c-chart-leg").innerHTML=fams.map(f=>`<span><b style="color:${FCOL[f]||"#a3a3a3"}">●</b> ${esc(f)} ${pts.filter(c=>c.famille===f).length}</span>`).join("")+`<span style="opacity:.6"><b>●</b> pâle = non définitive</span>`;
+  const S=COND.sources.casier;
+  $("#c-chart-note").innerHTML=`${pts.length} condamnations prononcées depuis ${Y0}, recensées par <a href="${S.url}" target="_blank" rel="noopener">Casier Politique</a> (${all.length-pts.length} de petits partis régionaux ou non classés ne sont pas placées). Le placement gauche-droite est <b>notre</b> classement, d'après le positionnement des partis sur Wikipédia. Ce n'est pas un taux : un parti ancien, avec beaucoup d'élus, a mécaniquement plus de condamnations. Graphique inspiré de la vue chronologique de Casier Politique, redessiné à partir de ses données.`;
+}
+condChart();
+(function(){ const A=COND.sources.casier, B=COND.sources.poligraph, fd=d=>d?new Date(d+"T12:00").toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"}):"";
+  $("#c-src").innerHTML=`<b>${A.n} condamnations viennent de <a href="${A.url}" target="_blank" rel="noopener">Casier Politique</a></b>, un site personnel de ${esc(A.auteur)} (données du ${fd(A.maj)}). Ce n'est pas une source officielle : le site extrait automatiquement les pages Wikipédia et Wikidata des personnalités politiques, puis un modèle d'IA (Apertus) en tire la liste des condamnations. Il peut donc y avoir des oublis ou des erreurs de lecture : vérifie toujours la page Wikipédia liée sur chaque fiche. Son auteur signale lui-même un biais possible : les contributeurs de Wikipédia pourraient documenter plus vite certaines affaires que d'autres.<br><br><b>${B.n} condamnations viennent de <a href="${B.url}" target="_blank" rel="noopener">Poligraph</a></b> (fiches avec articles de presse, données du ${fd(B.maj)}), pour des personnes absentes de Casier Politique.<br><br>Données de Casier Politique sous licence <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> : réutilisation non commerciale, avec attribution et partage dans les mêmes conditions. Le classement gauche-droite et le regroupement par familles de partis sont les nôtres.`; })();
 let CS="", CF="";
 $("#c-fam").innerHTML=`<button class="chip" aria-pressed="true" data-f="">Tous les partis</button>`+FAMS.map(f=>`<button class="chip" aria-pressed="false" data-f="${esc(f)}">${esc(f)}</button>`).join("");
 $$("#c-fam .chip").forEach(b=>b.onclick=()=>{CF=b.dataset.f;$$("#c-fam .chip").forEach(x=>x.setAttribute("aria-pressed",x===b));renderCond();});
@@ -839,9 +885,9 @@ $$("#c-statut .chip").forEach(b=>b.onclick=()=>{CS=b.dataset.s;$$("#c-statut .ch
 $("#c-q").oninput=renderCond;
 function renderCond(){ const q=norm($("#c-q").value).split(/\s+/).filter(Boolean);
   const L=CL.filter(c=>(!CS||c.statut===CS)&&(!CF||c.famille===CF)&&q.every(w=>norm(c.personne+" "+c.parti+" "+c.intitule+" "+c.categorie+" "+c.description).includes(w)));
-  $("#c-list").innerHTML=L.map(c=>`<details class="lcard"><summary><div class="meta"><span>${esc(c.parti)}${c.annee_faits?" · faits : "+esc(c.annee_faits):""}</span><span class="badge ${c.statut==="définitive"?"":"ia"}">${c.statut==="définitive"?"Définitive":"Non définitive"}</span></div>
+  $("#c-list").innerHTML=L.map(c=>`<details class="lcard"><summary><div class="meta"><span>${esc(c.parti)}${c.annee?" · jugement : "+c.annee:c.annee_faits?" · faits : "+esc(c.annee_faits):""}</span><span class="badge ${c.statut==="définitive"?"":"ia"}">${c.statut==="définitive"?"Définitive":"Non définitive"}</span></div>
     <div style="font:700 18px var(--sans)">${esc(c.personne)}</div><div class="t" style="font-size:17px;margin-top:2px">${esc(c.intitule)}</div>${c.peine?`<div class="s"><b style="color:var(--ink)">Peine :</b> ${esc(c.peine)}</div>`:""}</summary>
-    <p style="font-size:14px;margin:12px 0 8px">${esc(c.description)}</p><div class="note"><a href="${esc(c.url)}" target="_blank" rel="noopener">Fiche détaillée ↗</a>${(c.sources||[]).slice(0,4).map(s=>{let h="source";try{h=new URL(s).hostname.replace("www.","");}catch(e){} return ` · <a href="${esc(s)}" target="_blank" rel="noopener">${esc(h)}</a>`;}).join("")}</div></details>`).join("")||'<p class="empty">Aucune condamnation ne correspond.</p>'; }
+    <p style="font-size:14px;margin:12px 0 8px">${esc(c.description)}</p><div class="note">${c.src==="casier"?`${c.recours==="appel"?"Appel en cours · ":c.recours==="cassation"?"Pourvoi en cassation · ":""}Source : Casier Politique (extrait de Wikipédia par IA) · `:"Source : Poligraph · "}<a href="${esc(c.url)}" target="_blank" rel="noopener">${c.src==="casier"?"Page Wikipédia ↗":"Fiche détaillée ↗"}</a>${(c.sources||[]).slice(0,4).map(s=>{let h="source";try{h=new URL(s).hostname.replace("www.","");}catch(e){} return ` · <a href="${esc(s)}" target="_blank" rel="noopener">${esc(h)}</a>`;}).join("")}</div></details>`).join("")||'<p class="empty">Aucune condamnation ne correspond.</p>'; }
 renderCond();
 
 /* ================= CHAT ================= */
@@ -1052,7 +1098,7 @@ function renderInfo(){
     <div class="item"><div class="who">Le chat</div><div class="txt" style="font-size:16px">Une IA (Claude) qui s'appuie sur la base de l'app et peut chercher sur internet. Consigne : rester neutre, citer ses sources, ne jamais dire pour qui voter.</div></div></div>
   <div class="box prompt" style="padding-bottom:20px"><div class="label">Les autres données</div>${FEAT.votes?`
     <div class="item"><div class="who">Votes à l'Assemblée</div><div class="txt" style="font-size:16px">Données officielles de l'Assemblée nationale (17e législature) : votes solennels, motions de censure, votes sur l'ensemble d'un texte.</div></div>`:""}
-    <div class="item"><div class="who">Condamnations</div><div class="txt" style="font-size:16px">Base Poligraph, complétée par les décisions de justice et la presse. Définitives et non définitives sont séparées ; la présomption d'innocence s'applique aux secondes.</div></div></div>
+    <div class="item"><div class="who">Condamnations</div><div class="txt" style="font-size:16px">Principalement <a href="https://casier-politique.fr" target="_blank" rel="noopener">Casier Politique</a> (site personnel, extraction automatique de Wikipédia et Wikidata par IA, licence CC BY-NC-SA 4.0), complété par Poligraph pour les personnes absentes. Définitives et non définitives sont séparées ; la présomption d'innocence s'applique aux secondes.</div></div></div>
   <div class="box prompt" style="padding-bottom:20px"><div class="label">Indépendance</div><div class="answer sm">Swipe 2027 n'est lié à aucun parti ni candidat, et ne donne aucune consigne de vote. Une erreur, une source manquante ? Dis-le nous.</div><p class="note" style="margin:10px 0 0"><a href="/confidentialite.html">Confidentialité et données personnelles</a></p></div>`;
   bindChart($("#info-body"));
 }

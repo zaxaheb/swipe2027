@@ -141,7 +141,12 @@
    ],
    "eco": "Bernard Cazeneuve défend la « vérité budgétaire » et une « règle d'or sociale » imposant l'équilibre des comptes sociaux sur cinq ans.",
    "ecoUrl": "https://www.france-vote.fr/candidats/bernard-cazeneuve",
-   "note": "Programme 2027 pas encore publié : positions recensées par France-Vote à partir de déclarations, votes et documents de campagne."
+   "note": "Programme 2027 pas encore publié : positions recensées par France-Vote à partir de déclarations, votes et documents de campagne.",
+   "retrait": {
+    "date": "2026-10-22",
+    "texte": "Ne se présente plus : soutient Raphaël Glucksmann depuis le 22 octobre 2026.",
+    "url": "https://elections2027.com/article/2026-10-22-cazeneuve-charge-emmanuel-macron-et-appuie-raphael-glucksmann"
+   }
   },
   "BOUAMRANE": {
    "nom": "PS",
@@ -298,6 +303,19 @@
    "eco": "Pas de chiffrage publié.",
    "ecoUrl": "https://www.france-vote.fr/candidats/selma-labib",
    "note": "Programme 2027 pas encore publié : positions recensées par France-Vote à partir de déclarations, votes et documents de campagne."
+  },
+  "RINER": {
+   "nom": "La France qu'on veut",
+   "cand": "Teddy Riner",
+   "long": "« La France qu'on veut » · Teddy Riner (sans parti)",
+   "badge": "",
+   "grad": [
+    "#3a3f47,#15181c",
+    "#4a5059,#1c1f24"
+   ],
+   "eco": "Pas encore de chiffrage publié : orientations générales (dette, pouvoir d'achat).",
+   "ecoUrl": "https://touch-actu.fr/actualites/portraits-politiques-8889-teddy-riner-candidat-a-la-presidentielle-2027-programme-reactions-et-parrainages",
+   "note": "Candidature annoncée le 9 novembre 2026, « ni de droite, ni de gauche ». Orientations générales pour l'instant, sans programme détaillé ni chiffré."
   }
  },
  "sections": [
@@ -1644,6 +1662,70 @@
    "intro": "",
    "url": "https://www.france-vote.fr/candidats/selma-labib",
    "prog": "LABIB"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Retraites",
+   "section": "Retraites",
+   "intro": "",
+   "url": "https://touch-actu.fr/actualites/portraits-politiques-8889-teddy-riner-candidat-a-la-presidentielle-2027-programme-reactions-et-parrainages",
+   "prog": "RINER"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Pouvoir d'achat",
+   "section": "Pouvoir d'achat",
+   "intro": "",
+   "url": "https://touch-actu.fr/actualites/portraits-politiques-8889-teddy-riner-candidat-a-la-presidentielle-2027-programme-reactions-et-parrainages",
+   "prog": "RINER"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Finances publiques",
+   "section": "Finances publiques",
+   "intro": "",
+   "url": "https://www.politiquematin.fr/zemmour-presidentielle-2027-confirme-candidature-tf1-programme-101126-2055",
+   "prog": "ZEMMOUR"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Fonction publique",
+   "section": "Fonction publique",
+   "intro": "",
+   "url": "https://fr.qz.com/eric-zemmour-800000-postes-fonction-publique-111226",
+   "prog": "ZEMMOUR"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Justice",
+   "section": "Justice",
+   "intro": "",
+   "url": "https://fr.qz.com/eric-zemmour-800000-postes-fonction-publique-111226",
+   "prog": "ZEMMOUR"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Fonction publique",
+   "section": "Fonction publique",
+   "intro": "",
+   "url": "https://fr.qz.com/eric-zemmour-800000-postes-fonction-publique-111226",
+   "prog": "RETAILLEAU"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Fonction publique",
+   "section": "Fonction publique",
+   "intro": "",
+   "url": "https://fr.qz.com/eric-zemmour-800000-postes-fonction-publique-111226",
+   "prog": "ATTAL"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Fonction publique",
+   "section": "Fonction publique",
+   "intro": "",
+   "url": "https://fr.qz.com/eric-zemmour-800000-postes-fonction-publique-111226",
+   "prog": "ROUSSEL"
   }
  ],
  "mesures": [
@@ -3482,6 +3564,114 @@
    "sous": [],
    "page": null,
    "src": "https://www.france-vote.fr/candidats/selma-labib"
+  },
+  {
+   "id": "riner-168-1",
+   "s": 168,
+   "cle": false,
+   "t": "Réformer les retraites en tenant compte de la démographie et de la pénibilité, en gardant la répartition (une part de capitalisation n'est pas exclue)",
+   "sous": [],
+   "page": null,
+   "src": "https://touch-actu.fr/actualites/portraits-politiques-8889-teddy-riner-candidat-a-la-presidentielle-2027-programme-reactions-et-parrainages"
+  },
+  {
+   "id": "riner-169-1",
+   "s": 169,
+   "cle": false,
+   "t": "Augmenter le salaire net en baissant les cotisations sociales",
+   "sous": [],
+   "page": null,
+   "src": "https://touch-actu.fr/actualites/portraits-politiques-8889-teddy-riner-candidat-a-la-presidentielle-2027-programme-reactions-et-parrainages"
+  },
+  {
+   "id": "zemmour-34-3",
+   "s": 34,
+   "cle": true,
+   "t": "Réduire de deux millions le nombre d'immigrés en France sur le quinquennat",
+   "sous": [],
+   "page": null,
+   "src": "https://www.politiquematin.fr/zemmour-presidentielle-2027-confirme-candidature-tf1-programme-101126-2055"
+  },
+  {
+   "id": "zemmour-34-4",
+   "s": 34,
+   "cle": false,
+   "t": "Expulser les étrangers condamnés ou détenus",
+   "sous": [],
+   "page": null,
+   "src": "https://www.politiquematin.fr/zemmour-presidentielle-2027-confirme-candidature-tf1-programme-101126-2055"
+  },
+  {
+   "id": "zemmour-34-5",
+   "s": 34,
+   "cle": false,
+   "t": "Expulser les étrangers au chômage depuis plus de six mois, y compris en situation régulière",
+   "sous": [],
+   "page": null,
+   "src": "https://www.politiquematin.fr/zemmour-presidentielle-2027-confirme-candidature-tf1-programme-101126-2055"
+  },
+  {
+   "id": "zemmour-170-1",
+   "s": 170,
+   "cle": true,
+   "t": "Un plan de redressement des finances publiques de 280 milliards d'euros, mêlant baisses de dépenses et baisses d'impôts",
+   "sous": [],
+   "page": null,
+   "src": "https://www.politiquematin.fr/zemmour-presidentielle-2027-confirme-candidature-tf1-programme-101126-2055"
+  },
+  {
+   "id": "zemmour-171-1",
+   "s": 171,
+   "cle": true,
+   "t": "Ne pas remplacer 800 000 fonctionnaires partant à la retraite, en sanctuarisant 2,2 millions de postes (enseignants, militaires, policiers, soignants)",
+   "sous": [],
+   "page": null,
+   "src": "https://fr.qz.com/eric-zemmour-800000-postes-fonction-publique-111226"
+  },
+  {
+   "id": "zemmour-42-2",
+   "s": 42,
+   "cle": false,
+   "t": "Faire revenir 100 000 médecins retraités, avec des revenus exonérés d'impôt sur le revenu, et supprimer le numerus clausus",
+   "sous": [],
+   "page": null,
+   "src": "https://fr.qz.com/eric-zemmour-800000-postes-fonction-publique-111226"
+  },
+  {
+   "id": "zemmour-172-1",
+   "s": 172,
+   "cle": false,
+   "t": "Recruter 40 000 surveillants pénitentiaires et cumuler les peines au lieu de les confondre",
+   "sous": [],
+   "page": null,
+   "src": "https://fr.qz.com/eric-zemmour-800000-postes-fonction-publique-111226"
+  },
+  {
+   "id": "retailleau-173-1",
+   "s": 173,
+   "cle": true,
+   "t": "Ne pas remplacer 400 000 postes de fonctionnaires sur le quinquennat",
+   "sous": [],
+   "page": null,
+   "src": "https://fr.qz.com/eric-zemmour-800000-postes-fonction-publique-111226"
+  },
+  {
+   "id": "attal-174-1",
+   "s": 174,
+   "cle": false,
+   "t": "Un plan de départs volontaires de 100 000 postes dans la fonction publique",
+   "sous": [],
+   "page": null,
+   "src": "https://fr.qz.com/eric-zemmour-800000-postes-fonction-publique-111226"
+  },
+  {
+   "id": "roussel-175-1",
+   "s": 175,
+   "cle": true,
+   "t": "Recruter 500 000 personnes dans les services publics",
+   "sous": [],
+   "page": null,
+   "src": "https://fr.qz.com/eric-zemmour-800000-postes-fonction-publique-111226"
   }
  ]
 }

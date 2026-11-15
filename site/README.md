@@ -64,6 +64,9 @@ Astuce : mets un plafond de dépense mensuel dans la console Anthropic (**Limits
 
 ## 3. Mettre à jour les données
 
+- **Condamnations** : source principale [Casier Politique](https://casier-politique.fr) (fichier `data/condamnations/casier-politique.json`, téléchargé depuis https://casier-politique.fr/data/affaires.json), complétée par Poligraph pour les personnes absentes (voir `build_cond.py`). **Licence CC BY-NC-SA 4.0** : usage non commercial seulement, avec attribution et partage aux mêmes conditions. Si l'app devient payante ou affiche de la publicité, il faudra demander l'accord de l'auteur ou retirer ces données.
+- **Candidats** : les mises à jour datées sont dans `data/programme/maj_AAAA_MM_JJ.py` (relançables sans doublon). Un candidat qui se retire garde ses mesures dans les données avec un champ `retrait`, mais n'est plus proposé dans l'app.
+
 ```bash
 python3 build.py          # relit ../data/ et régénère index.html + data/base.json
 npx vercel --prod

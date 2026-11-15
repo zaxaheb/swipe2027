@@ -13,7 +13,8 @@ for f in ('rn_programme.json', 'autres_candidats.json'):
 progs = json.load(open(D + 'programme/autres_candidats.json'))['progs']
 v = json.load(open(D + 'assemblee/scrutins_17e_cles.json'))
 for s in v['scrutins']: s.pop('cle', None)
-c = json.load(open(D + 'condamnations/condamnations.json'))
+from build_cond import build as build_cond
+c = build_cond(D)   # Casier Politique + Poligraph (voir build_cond.py)
 fi = json.load(open(D + 'fiches.json'))
 if os.path.exists(D + 'fiches_auto.json'):   # fiches générées par scripts/generer-fiches.mjs (les fiches écrites à la main restent prioritaires)
     auto = json.load(open(D + 'fiches_auto.json')); fi = {**{k: v for k, v in auto.items() if k in {m['id'] for m in Mz}}, **fi}
@@ -33,7 +34,7 @@ for k, o in [('PROG', {'progs': progs, 'sections': S, 'mesures': Mz}), ('VOTES',
 open(os.path.join(H, 'index.html'), 'w').write(h)
 # base serveur
 cand = {'LFI': {'nom': 'LFI', 'cand': 'Jean-Luc Mélenchon'}, 'RN': {'nom': 'RN', 'cand': 'Marine Le Pen'}}
-cand.update({k: {'nom': x['nom'], 'cand': x['cand']} for k, x in progs.items()})
+cand.update({k: {'nom': x['nom'], 'cand': x['cand'] + (' (' + x['retrait']['texte'] + ')' if x.get('retrait') else '')} for k, x in progs.items()})
 base = {'candidats': cand,
         'mesures': [{'id': m['id'], 'P': S[m['s']]['prog'], 't': m['t'] + (' (' + ' ; '.join(m['sous']) + ')' if m['sous'] else ''),
                      'section': S[m['s']]['section'], 'intro': S[m['s']]['intro'][:900],
