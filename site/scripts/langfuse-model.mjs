@@ -18,7 +18,7 @@ if (!spec) {
   for (const k of GROUPS.all) { const p = await fetchPrompt("swipe-" + k); console.log(`swipe-${k.padEnd(7)} ${p ? `v${p.version} · ${p.config?.model || "(modèle par défaut de Vercel)"}${p.config?.max_searches != null ? ` · ${p.config.max_searches} recherches max` : ""}` : "absent : lance d'abord langfuse-sync.mjs"}`); }
   process.exit(0);
 }
-const m = parseSpec(spec);                                   // vérifie le format fournisseur:modèle
+let m; try { m = parseSpec(spec); } catch (e) { console.error(e.message + ". Exemple : openai:gpt-6-luna"); process.exit(1); }   // vérifie le format fournisseur:modèle
 if (!GROUPS[target]) { console.error(`Cible inconnue « ${target} » : chat, fiche ou all.`); process.exit(1); }
 for (const k of GROUPS[target]) {
   const name = "swipe-" + k, cur = await fetchPrompt(name);

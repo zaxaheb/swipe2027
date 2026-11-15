@@ -78,7 +78,9 @@ Les fiches générées par les visiteurs sont dans la table `fiches` de Supabase
 - **Langfuse (facultatif)** : prompts et modèle modifiables sans redéployer, et suivi de chaque appel (modèle, tokens, coût, durée).
   1. Crée un projet sur https://cloud.langfuse.com (région UE), puis **Settings > API Keys**.
   2. Crée le fichier `../.env.langfuse` (ignoré par git) avec `LANGFUSE_PUBLIC_KEY=pk-lf-…`, `LANGFUSE_SECRET_KEY=sk-lf-…`, `LANGFUSE_BASE_URL=https://cloud.langfuse.com`.
-  3. Depuis `site/` : `node --env-file=../.env.langfuse scripts/langfuse-sync.mjs` copie les 7 prompts (`swipe-general`, `swipe-mesure`, `swipe-prof`, `swipe-quiz`, `swipe-profil`, `swipe-fiche`, `swipe-regles`).
+  3. Depuis `site/` : `node --env-file=../.env.langfuse scripts/langfuse-sync.mjs` envoie les 8 prompts. Relance-le après chaque modification de `lib/prompts.js` : il crée une nouvelle version seulement pour les prompts modifiés et garde le modèle réglé dans Langfuse (`--dry` pour voir sans envoyer).
+  - Structure : `swipe-system`, un prompt système court et commun (identité, neutralité, règles) ; `swipe-consignes_chat`, le bloc recherche web + format des 3 chats ; puis un prompt utilisateur par tâche (`swipe-general`, `swipe-mesure`, `swipe-prof`, `swipe-quiz`, `swipe-profil`, `swipe-fiche`), qui contient la consigne, les données et la question.
+  - Changer de modèle : `node --env-file=../.env.langfuse scripts/langfuse-model.mjs openai:gpt-6-luna chat` (cibles : `chat`, `fiche`, `all` ; `--searches N` en option ; sans argument, affiche les modèles actuels).
   4. Ajoute les 3 mêmes variables dans Vercel, puis redéploie.
   - Le modèle se règle dans la **Config** de chaque prompt : `{"model": "openai:gpt-6-luna", "max_searches": 10}`. Priorité : config Langfuse > `LLM_CHAT` / `LLM_FICHE`.
   - Le site lit la version au label `production`, avec un cache d'une minute. Si Langfuse ne répond pas, il garde la dernière version connue, sinon les prompts de `lib/prompts.js`.
