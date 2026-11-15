@@ -7,14 +7,15 @@
 // Les fiches sont ajoutées au fur et à mesure dans ../data/fiches_auto.json (on peut relancer : les fiches déjà faites sont sautées).
 // Coût maîtrisé : recherches plafonnées (sauf Gemini, qui n'a pas de plafond par requête), consigne système mise en cache, arrêt propre si le crédit est épuisé.
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
-import { SYSTEM, ficheUser, PROMPT_VERSION } from "../lib/prompts.js";
+import { getSystem, VARS, ficheUser } from "../lib/prompts.js";
 import { FICHE, cleanFiche } from "../lib/schemas.js";
 import { base, mesure } from "../lib/data.js";
 import * as llm from "../lib/llm.js";
 
 const arg = (k, d) => { const i = process.argv.indexOf("--" + k); return i > 0 ? process.argv[i + 1] : d; };
 const N = Number(arg("n", 100)), PAR = Number(arg("parallel", 4)), SEARCHES = Number(arg("recherches", 3));
-const M = llm.parseSpec(arg("model", process.env.LLM_FICHE || process.env.LLM_DEFAULT || "anthropic:" + (process.env.ANTHROPIC_MODEL || "claude-sonnet-5-5")));
+const S = await getSystem("fiche", VARS.fiche(SEARCHES));   // prompt Langfuse « swipe-fiche » si LANGFUSE_* est défini, sinon local
+const M = llm.parseSpec(arg("model", S.config.model || process.env.LLM_FICHE || process.env.LLM_DEFAULT || "anthropic:" + (process.env.ANTHROPIC_MODEL || "claude-sonnet-5-5")));
 const KEYVAR = { anthropic: "ANTHROPIC_API_KEY", openai: "OPENAI_API_KEY", gemini: "GEMINI_API_KEY" }[M.provider];
 if (!process.env[KEYVAR]) { console.error(`Il manque la clé : ${KEYVAR}=... node scripts/generer-fiches.mjs --model ${M.provider}:${M.model}`); process.exit(1); }
 const MODEL = `${M.provider}:${M.model}`;
@@ -41,7 +42,6 @@ console.log(`${todo.length} fiches à générer avec ${MODEL}, ${PAR} en parall�
 let STOP = false;
 const tot = { in: 0, out: 0, cacheRead: 0, cacheWrite: 0, searches: 0 };
 const add = (u) => { for (const k in tot) tot[k] += u?.[k] || 0; };
-const system = SYSTEM.fiche + `\n\nBudget : ${SEARCHES} recherches web maximum. Choisis des requêtes précises et lis les résultats les plus utiles.`;
 
 let ok = 0, ko = 0;
 async function one(id) {
@@ -50,7 +50,7 @@ async function one(id) {
   const msgs = [{ role: "user", content: ficheUser(m, autres) }];
   for (let attempt = 0; attempt < 2 && !STOP; attempt++) {
     let data;
-    try { const r = await llm.json({ ...M, system, messages: msgs, schema: FICHE, name: "enregistrer_fiche", description: "Enregistre la fiche sourcée finale. À appeler une seule fois, à la fin.", web: { maxSearches: SEARCHES }, maxTokens: 5000, retries: 8 }); add(r.usage); data = r.data; }
+    try { const r = await llm.json({ ...M, system: S.text, trace: { name: "fiche", prompt: S.prompt, tags: ["fiche", "lot"], metadata: { mesure: id } }, messages: msgs, schema: FICHE, name: "enregistrer_fiche", description: "Enregistre la fiche sourcée finale. À appeler une seule fois, à la fin.", web: { maxSearches: SEARCHES }, maxTokens: 5000, retries: 8 }); add(r.usage); data = r.data; }
     catch (e) {
       if (e.code === "credit") { STOP = true; throw new Error(`CRÉDIT ÉPUISÉ chez ${M.provider} : recharge ton compte, puis relance la même commande (les fiches déjà faites sont gardées).`); }
       if (e.code === "config") { STOP = true; throw e; }
@@ -60,7 +60,7 @@ async function one(id) {
       const f = cleanFiche(data);
       const ids = new Set(B.mesures.filter((x) => x.P === m.P).map((x) => x.id));
       if (f.logique) f.logique.accompagnement = (f.logique.accompagnement || []).filter((a) => !a.id || ids.has(a.id));
-      done[id] = { ...f, genere: true, statut: "documente", modele: MODEL, maj: new Date().toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" }), v: PROMPT_VERSION };
+      done[id] = { ...f, genere: true, statut: "documente", modele: MODEL, prompt: S.version, maj: new Date().toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" }), v: S.version };
       save(); ok++; console.log(`✓ ${ok + ko}/${todo.length} ${m.cand} — ${m.t.slice(0, 70)}`); return;
     } catch (e) {
       msgs.push({ role: "assistant", content: JSON.stringify(data).slice(0, 20000) }, { role: "user", content: "Fiche refusée : il faut au moins 2 critiques, chacune avec une URL réelle trouvée pendant la recherche. Cherche encore, puis renvoie la fiche complète." });

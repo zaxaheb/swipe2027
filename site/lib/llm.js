@@ -14,6 +14,8 @@
 // onEvent reçoit { type: "search", query } | { type: "fetch", url } | { type: "results", n, sites } | { type: "text", delta }.
 // Les erreurs portent e.status (429, 502, 503) et e.code : "credit" (crédit épuisé), "rate", "overloaded", "http", "config".
 
+import { traceGeneration } from "./langfuse.js";
+
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const err = (msg, status = 502, code = "http") => Object.assign(new Error(msg), { status, code });
 const host = (u) => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch { return null; } };
@@ -37,6 +39,7 @@ export function pick(usage = "default") {
 const KEYS = { anthropic: "ANTHROPIC_API_KEY", openai: "OPENAI_API_KEY", gemini: "GEMINI_API_KEY" };
 function keyOf(provider) { const k = process.env[KEYS[provider]]; if (!k) throw err(`clé manquante : ${KEYS[provider]}`, 500, "config"); return k; }
 const resolve = (o) => (o.provider && o.model ? { provider: o.provider, model: o.model } : o.spec ? parseSpec(o.spec) : pick(o.usage));
+// Ordre de priorité du modèle : config du prompt Langfuse (spec) > LLM_CHAT / LLM_FICHE > LLM_DEFAULT > ANTHROPIC_MODEL.
 
 /* ---------- HTTP commun ---------- */
 async function post(url, headers, body, retries = 0, tries = 0) {
@@ -234,17 +237,29 @@ const G = {
 
 const P = { anthropic: A, openai: O, gemini: G };
 
-/* ---------- interface publique ---------- */
-export async function text(o) { const m = resolve(o); return { ...(await P[m.provider].text({ ...o, ...m })), ...m }; }
-export async function json(o) { const m = resolve(o); return { ...(await P[m.provider].json({ ...o, ...m })), ...m }; }
+/* ---------- interface publique ----------
+   Options communes : spec ("openai:gpt-6-luna", prioritaire, ex. venant de la config Langfuse) ou usage ("chat" / "fiche"),
+   trace : { name, prompt: {name, version}, metadata, tags } pour le suivi Langfuse (ignoré si Langfuse n'est pas configuré). */
+async function traced(kind, o, run) {
+  const m = resolve(o), start = Date.now();
+  const base = { name: o.trace?.name || kind, model: m.model, provider: m.provider, prompt: o.trace?.prompt, tags: o.trace?.tags, metadata: o.trace?.metadata,
+    input: { system: String(o.system || "").slice(0, 8000), messages: (o.messages || []).slice(-6) } };
+  try {
+    const r = await run(m);
+    await traceGeneration({ ...base, output: r.text ?? r.data, usage: r.usage, cost: cost(m.model, r.usage), start, end: Date.now() });
+    return { ...r, ...m };
+  } catch (e) { await traceGeneration({ ...base, error: e.message, start, end: Date.now() }); throw e; }
+}
+export const text = (o) => traced("text", o, (m) => P[m.provider].text({ ...o, ...m }));
+export const json = (o) => traced("json", o, (m) => P[m.provider].json({ ...o, ...m }));
 /** Chat avec recherche web, en flux. Ajoute « Sources : … » à la fin si le texte n'a aucun lien. */
-export async function chat(o) {
-  const m = resolve(o), onEvent = o.onEvent || (() => {});
+export const chat = (o) => traced("chat", o, async (m) => {
+  const onEvent = o.onEvent || (() => {});
   const res = await P[m.provider].chat({ ...o, ...m, onEvent });
   let t = res.text;
   if (res.cites.size && !/\]\(https?:/.test(t)) { const extra = sourcesLine(res.cites); t += extra; onEvent({ type: "text", delta: extra }); }
-  return { text: t.trim(), usage: res.usage, ...m };
-}
+  return { text: t.trim(), usage: res.usage };
+});
 
 /** Prix indicatifs ($ par million de tokens entrée / sortie, $ par recherche web) pour les estimations du script. Vérifie sur le site du fournisseur. */
 export const PRICES = {

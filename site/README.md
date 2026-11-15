@@ -75,6 +75,13 @@ Les fiches générées par les visiteurs sont dans la table `fiches` de Supabase
 
 - **Indépendant du fournisseur** : tout passe par `lib/llm.js` (Claude, GPT ou Gemini). Pour changer de modèle, change `LLM_CHAT` ou `LLM_FICHE` dans Vercel, puis redéploie. `/api/health?key=<ADMIN_PASSWORD>` teste les deux modèles configurés.
 - Recherches web : plafonnées par `CHAT_MAX_SEARCHES` (10) et `FICHE_MAX_SEARCHES` (3) chez Anthropic et OpenAI. Gemini n'a pas de plafond par requête.
+- **Langfuse (facultatif)** : prompts et modèle modifiables sans redéployer, et suivi de chaque appel (modèle, tokens, coût, durée).
+  1. Crée un projet sur https://cloud.langfuse.com (région UE), puis **Settings > API Keys**.
+  2. Crée le fichier `../.env.langfuse` (ignoré par git) avec `LANGFUSE_PUBLIC_KEY=pk-lf-…`, `LANGFUSE_SECRET_KEY=sk-lf-…`, `LANGFUSE_BASE_URL=https://cloud.langfuse.com`.
+  3. Depuis `site/` : `node --env-file=../.env.langfuse scripts/langfuse-sync.mjs` copie les 7 prompts (`swipe-general`, `swipe-mesure`, `swipe-prof`, `swipe-quiz`, `swipe-profil`, `swipe-fiche`, `swipe-regles`).
+  4. Ajoute les 3 mêmes variables dans Vercel, puis redéploie.
+  - Le modèle se règle dans la **Config** de chaque prompt : `{"model": "openai:gpt-6-luna", "max_searches": 10}`. Priorité : config Langfuse > `LLM_CHAT` / `LLM_FICHE`.
+  - Le site lit la version au label `production`, avec un cache d'une minute. Si Langfuse ne répond pas, il garde la dernière version connue, sinon les prompts de `lib/prompts.js`.
 - Script de fiches en lot : `node scripts/generer-fiches.mjs --n 20 --model openai:gpt-6-luna` (affiche le coût estimé à la fin).
 
 - **Le navigateur n'envoie jamais de prompt.** Il envoie seulement `{ mode, mesureId, messages }`, et le serveur construit le prompt dans `lib/prompts.js`. Sans ça, n'importe qui pourrait utiliser ta clé comme un Claude gratuit.
