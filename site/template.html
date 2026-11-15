@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#ffffff">
 <title>Swipe 2027</title>
-<meta name="description" content="Swipe les propositions des candidats à la présidentielle 2027, avec leurs critiques, leur coût et les votes à l'Assemblée.">
+<meta name="description" content="Swipe les propositions des candidats à la présidentielle 2027, avec leurs critiques et leur coût.">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="icon" href="/icons/icon-192.png">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
@@ -177,12 +177,16 @@ details[open].fold>summary .label::after{content:"Réduire";float:right;font:600
 .caret::after{content:"▍";animation:blink 1s steps(2) infinite;color:var(--muted)}
 @keyframes blink{50%{opacity:0}}
 /* toast */
+.fab{position:fixed;z-index:8;right:16px;bottom:calc(var(--nav) + 14px + var(--safe-b));width:52px;height:52px;border-radius:50%;background:#fff;color:#111;display:grid;place-items:center;box-shadow:0 4px 18px rgba(0,0,0,.18);border:1px solid var(--line);cursor:pointer}
+.fab[hidden]{display:none}.fab svg{width:24px;height:24px}.fab:active{transform:scale(.92)}
+body.swiping .fab{bottom:calc(var(--nav) + 96px + var(--safe-b))}
+@media (min-width:700px){ body.swiping .fab{bottom:calc(var(--nav) + 14px + var(--safe-b))} }
 .toast{position:fixed;left:50%;top:18px;transform:translate(-50%,-80px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-weight:600;font-size:14px;z-index:30;transition:transform .25s;white-space:nowrap}
 .toast.on{transform:translate(-50%,0)}
 
 /* ---------- nav ---------- */
 nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:7;background:#000;color:#fff;height:calc(var(--nav) + var(--safe-b));padding-bottom:var(--safe-b);display:flex;justify-content:center}
-nav.tabs .in{display:grid;grid-template-columns:repeat(5,1fr);width:100%;max-width:520px}
+nav.tabs .in{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;width:100%;max-width:520px}
 nav.tabs button{display:grid;place-items:center;color:#8d8d8d;position:relative}
 nav.tabs button svg{width:26px;height:26px}
 nav.tabs button[aria-current="page"]{color:#fff}
@@ -264,8 +268,8 @@ details.lcard summary::-webkit-details-marker{display:none}
 .msg.a a{color:inherit;text-decoration:underline;text-underline-offset:2px;word-break:break-word}
 .sugg{display:flex;gap:8px;overflow-x:auto;padding:4px 16px 8px;scrollbar-width:none;max-width:620px;width:100%;margin:0 auto}
 .sugg button{flex:none;border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:14px;font-weight:500}
-.composer{display:flex;gap:8px;padding:10px 16px calc(10px + var(--safe-b));border-top:1px solid var(--line);max-width:620px;width:100%;margin:0 auto}
-.composer input{flex:1}
+.composer{display:flex;align-items:flex-end;gap:8px;padding:10px 16px calc(10px + var(--safe-b));border-top:1px solid var(--line);max-width:620px;width:100%;margin:0 auto}
+.composer textarea{flex:1;resize:none;border-radius:22px;line-height:1.35;max-height:9.5em;overflow-y:auto;white-space:pre-wrap;overflow-wrap:anywhere;display:block}
 .send{width:46px;height:46px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;flex:none}
 .send svg{width:20px;height:20px}
 
@@ -388,10 +392,11 @@ details.lcard summary::-webkit-details-marker{display:none}
   <div class="msgs" id="cv-msgs"></div>
   <div class="sugg" id="cv-sugg"></div>
   <form class="composer" id="cv-form">
-    <input id="cv-in" class="field" placeholder="Écris un message…" autocomplete="off">
+    <textarea id="cv-in" class="field" rows="1" placeholder="Écris un message…" autocomplete="off" enterkeyhint="send"></textarea>
     <button class="send" aria-label="Envoyer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </form>
 </div>
+<button class="fab" id="fab-chat" aria-label="Ouvrir la discussion" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5h16v11H10l-5 4v-4H4z"/></svg></button>
 <div class="toast" id="toast" role="status"></div>
 
 <script>
@@ -402,13 +407,18 @@ window.SWIPE_CONFIG = window.SWIPE_CONFIG || {
   API_BASE: "/api",
   /* Supabase > Project Settings > API : URL du projet et clé « anon public » (elle peut être publique) */
   SUPABASE_URL: "https://xlkljzocmcwcjixsqlzy.supabase.co",
-  SUPABASE_ANON_KEY: "sb_publishable_SoJpBAJ9tC2Y7uq7KnVXRA_PoDGMuU9"
+  SUPABASE_ANON_KEY: "sb_publishable_SoJpBAJ9tC2Y7uq7KnVXRA_PoDGMuU9",
+  /* Fonctionnalités activables. votes : onglet « À l'Assemblée » (désactivé pour l'instant, le code reste en place) */
+  FEATURES: { votes: false }
 };
+window.SWIPE_CONFIG.FEATURES = Object.assign({ votes: false }, window.SWIPE_CONFIG.FEATURES);
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script>
 const PROG = /*__PROG__*/null;
 const VOTES = /*__VOTES__*/null;
+const FEAT = window.SWIPE_CONFIG.FEATURES;
+if(!FEAT.votes){ document.querySelector('nav.tabs button[data-v="votes"]')?.remove(); document.getElementById("v-votes")?.remove(); }
 const COND = /*__COND__*/null;
 const FICHES = /*__FICHES__*/null;
 </script>
@@ -547,13 +557,15 @@ function bindAccount(root){
       catch(e){ st.textContent="La suppression a échoué. Réessaie, ou écris-nous (voir la page Confidentialité)."; } }; }
 }
 /* ================= navigation ================= */
-const VIEWS=["swipe","votes","cond","chat","profil"];
+const VIEWS=["swipe",...(FEAT.votes?["votes"]:[]),"cond","chat","profil"];
 const curView=()=>{ const v=location.hash.slice(1); return VIEWS.includes(v)?v:"swipe"; };
 function show(v){ if(!VIEWS.includes(v)) v="swipe";
   $$(".view").forEach(s=>s.classList.toggle("on",s.id==="v-"+v));
   $$("nav.tabs button").forEach(b=>b.setAttribute("aria-current",b.dataset.v===v?"page":"false"));
   $("#actbar").classList.toggle("hidden",v!=="swipe"||!CURM); $("#b-undo").disabled=REVIEW?REVIEW.i===0:!HIST.length;
+  $("#fab-chat").hidden=v==="chat"; document.body.classList.toggle("swiping",v==="swipe"&&!!CURM);
   if(v==="profil") renderProfil(); if(v==="chat") renderThreads(); }
+$("#fab-chat").onclick=()=>openConvo(curView()==="swipe"&&CURM?"m:"+CURM.id:"g:"+Date.now());
 $$("nav.tabs button").forEach(b=>b.onclick=()=>{ if(location.hash==="#"+b.dataset.v){ show(b.dataset.v); $("#main").scrollTop=0; } else location.hash=b.dataset.v; });
 window.addEventListener("hashchange",()=>{ show(location.hash.slice(1)); $("#main").scrollTop=0; });
 
@@ -714,7 +726,8 @@ async function generate(m){
   catch(e){ g.disabled=false; st.textContent=aiErr(e); }
 }
 
-/* ================= VOTES ================= */
+/* ================= VOTES (optionnel : SWIPE_CONFIG.FEATURES.votes) ================= */
+if(FEAT.votes){
 const G=VOTES.groupes, GORDER=["LFI-NFP","GDR","ECOS","SOC","LIOT","DEM","EPR","HOR","DR","UDR","RN","NI"].filter(g=>Object.values(G).some(x=>x.abrev===g));
 const GNAME=Object.fromEntries(Object.values(G).map(x=>[x.abrev,x.nom]));
 const SC=VOTES.scrutins; SC.forEach(s=>s.n_=norm(s.titre));
@@ -750,6 +763,7 @@ function renderVotes(){ let L=$("#v-q").value.trim()?searchV($("#v-q").value):SC
   $("#v-list").innerHTML=L.slice(0,VN).map(s=>`<div class="lcard">${voteItem(s,VG)}</div>`).join("")||'<p class="empty">Aucun vote ne correspond.</p>';
   $("#v-more").hidden=L.length<=VN; }
 renderVotes();
+}
 
 /* ================= JUSTICE ================= */
 const CL=COND.condamnations;
@@ -801,7 +815,7 @@ function openConvo(k){ CK=k; const isG=isGen(k), isT=isTop(k), tp=isT?topicOf(k)
   const H=CHATS[k]||[];
   $("#cv-name").textContent=isT?tp.t:isG?((H.find(x=>x.role==="user")||{}).content||"Nouvelle conversation").slice(0,40):m.S.section+" · "+PROGS[m.P].cand;
   $("#cv-av").style.background=isT?tgrad(tp):isG?"#111":gradOf(m); $("#cv-av").textContent=isT?"✦":isG?"?":initials(PROGS[m.P].cand);
-  const intro=m?esc(m.t):isT?`<b>${esc(tp.t)}</b><br>${esc(tp.d)}. Suis le mini-cours étape par étape, teste-toi avec un quiz, ou pose tes questions.`:"Pose une question : un mécanisme (dette, retraites, impôts…), les programmes des candidats, les votes à l'Assemblée ou les condamnations. Réponses neutres et sourcées.";
+  const intro=m?esc(m.t):isT?`<b>${esc(tp.t)}</b><br>${esc(tp.d)}. Suis le mini-cours étape par étape, teste-toi avec un quiz, ou pose tes questions.`:`Pose une question : un mécanisme (dette, retraites, impôts…), les programmes des candidats${FEAT.votes?", les votes à l'Assemblée":""} ou les condamnations. Réponses neutres et sourcées.`;
   $("#cv-msgs").innerHTML=`<div class="quote">${intro}</div><p class="note" style="text-align:center;margin:0 0 8px">Les questions sont enregistrées de façon anonyme pour améliorer l'app. N'y mets pas d'informations personnelles.</p>`+H.map(msgHTML).join("");
   bindQuiz($("#cv-msgs")); setSugg(); $("#convo").classList.add("on"); $("#cv-msgs").scrollTop=1e9; }
 function setSugg(){ const k=CK, isT=isTop(k), H=CHATS[k]||[];
@@ -814,7 +828,10 @@ function quizHTML(Q,i){ return `<div class="quiz" data-h="${i}"><div class="note
 function bindQuiz(root){ root.querySelectorAll(".quiz").forEach(z=>{ const H=CHATS[CK]||[], Q=(H[+z.dataset.h]||{}).quiz; if(!Q) return;
   z.querySelectorAll(".op").forEach(b=>b.onclick=()=>{ const j=+b.closest(".qi").dataset.j; if(Q[j].r!=null) return; Q[j].r=+b.dataset.n; store.set("chats2027",CHATS); const nz=document.createElement("div"); nz.innerHTML=quizHTML(Q,+z.dataset.h); z.replaceWith(nz.firstChild); bindQuiz(root); }); }); }
 $("#cv-back").onclick=()=>{ $("#convo").classList.remove("on"); if($("#v-chat").classList.contains("on")) renderThreads(); };
-$("#cv-form").onsubmit=async e=>{ e.preventDefault(); const q=$("#cv-in").value.trim(); if(!q||!CK) return; $("#cv-in").value="";
+const cvIn=$("#cv-in"), fitIn=()=>{ cvIn.style.height="auto"; cvIn.style.height=(cvIn.scrollHeight+2)+"px"; };
+cvIn.addEventListener("input",fitIn);
+cvIn.addEventListener("keydown",e=>{ if(e.key==="Enter"&&!e.shiftKey&&!e.isComposing&&!matchMedia("(pointer:coarse)").matches){ e.preventDefault(); $("#cv-form").requestSubmit(); } });
+$("#cv-form").onsubmit=async e=>{ e.preventDefault(); const q=$("#cv-in").value.trim(); if(!q||!CK) return; $("#cv-in").value=""; fitIn();
   const k=CK, H=CHATS[k]||(CHATS[k]=[]), box=$("#cv-msgs");
   H.push({role:"user",content:q}); box.insertAdjacentHTML("beforeend",`<div class="msg u">${esc(q)}</div>`);
   const out=document.createElement("div"); out.className="msg a"; out.textContent="…"; box.appendChild(out); box.scrollTop=1e9;
@@ -967,8 +984,8 @@ function renderInfo(){
     <div class="item"><div class="who">Fiches sourcées (${nFiches})</div><div class="txt" style="font-size:16px">Écrites à partir d'articles de presse, de think tanks de tous bords et d'institutions. Chaque critique a son lien.</div></div>
     <div class="item"><div class="who">Fiches générées</div><div class="txt" style="font-size:16px">Pour les autres mesures, l'IA fait des recherches web et rédige une fiche, partagée ensuite avec tout le monde. Elles sont marquées « Fiche générée » : vérifie les sources.</div></div>
     <div class="item"><div class="who">Le chat</div><div class="txt" style="font-size:16px">Une IA (Claude) qui s'appuie sur la base de l'app et peut chercher sur internet. Consigne : rester neutre, citer ses sources, ne jamais dire pour qui voter.</div></div></div>
-  <div class="box prompt" style="padding-bottom:20px"><div class="label">Les autres données</div>
-    <div class="item"><div class="who">Votes à l'Assemblée</div><div class="txt" style="font-size:16px">Données officielles de l'Assemblée nationale (17e législature) : votes solennels, motions de censure, votes sur l'ensemble d'un texte.</div></div>
+  <div class="box prompt" style="padding-bottom:20px"><div class="label">Les autres données</div>${FEAT.votes?`
+    <div class="item"><div class="who">Votes à l'Assemblée</div><div class="txt" style="font-size:16px">Données officielles de l'Assemblée nationale (17e législature) : votes solennels, motions de censure, votes sur l'ensemble d'un texte.</div></div>`:""}
     <div class="item"><div class="who">Condamnations</div><div class="txt" style="font-size:16px">Base Poligraph, complétée par les décisions de justice et la presse. Définitives et non définitives sont séparées ; la présomption d'innocence s'applique aux secondes.</div></div></div>
   <div class="box prompt" style="padding-bottom:20px"><div class="label">Indépendance</div><div class="answer sm">Swipe 2027 n'est lié à aucun parti ni candidat, et ne donne aucune consigne de vote. Une erreur, une source manquante ? Dis-le nous.</div><p class="note" style="margin:10px 0 0"><a href="/confidentialite.html">Confidentialité et données personnelles</a></p></div>`;
   bindChart($("#info-body"));

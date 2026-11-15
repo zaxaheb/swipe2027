@@ -29,6 +29,8 @@ supabase/schema.sql    les tables et règles de sécurité à créer dans Supaba
    - la clé `service_role` (**secrète**, seulement pour Vercel).
 6. Dans `template.html`, remplis `SUPABASE_URL` et `SUPABASE_ANON_KEY` (en haut du script), puis relance `python3 build.py`.
 
+**Fonctionnalités optionnelles** : dans `template.html`, `SWIPE_CONFIG.FEATURES`. `votes: true` réactive l'onglet « À l'Assemblée » (désactivé par défaut, le code et les données restent en place). Relance ensuite `python3 build.py`.
+
 Conseil : pour les vrais utilisateurs, configure un SMTP (Resend, Brevo…) dans **Authentication > SMTP**. L'envoi d'emails par défaut de Supabase est limité à quelques messages par heure.
 
 ## 2. Vercel (mise en ligne) : 5 min
