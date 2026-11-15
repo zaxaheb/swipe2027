@@ -363,8 +363,8 @@ details.lcard summary::-webkit-details-marker{display:none}
   </div>
   <div style="height:14px"></div>
   <div class="box prompt" style="padding-bottom:20px">
-    <div class="label">Les condamnations dans le temps</div>
-    <p class="note" style="margin:0 0 10px">Chaque point est une condamnation, placée selon l'année du jugement et le positionnement du parti. Couleur : parti. Taille : durée de prison prononcée (ferme ou avec sursis). Touche un point pour le détail.</p>
+    <div class="label">L'hémicycle des condamnations</div>
+    <p class="note" style="margin:0 0 10px">Chaque point est une condamnation. De gauche à droite : le positionnement du parti. Du centre vers l'extérieur : l'année du jugement (2000 au centre, aujourd'hui au bord). Couleur : parti. Taille : durée de prison prononcée (ferme ou avec sursis). Touche un point pour le détail.</p>
     <div id="c-chart"></div><div class="cc-info" id="c-chart-info"></div>
     <div class="legend" id="c-chart-leg" style="margin-top:10px;flex-wrap:wrap"></div>
     <p class="note" style="margin:10px 0 0" id="c-chart-note"></p>
@@ -848,24 +848,23 @@ const FAMS=[...new Set(CL.map(c=>c.famille))].sort((a,b)=>CL.filter(c=>c.famille
 /* ---- graphique chronologique (inspiré de la vue de Casier Politique, redessiné ici à partir de ses données) ---- */
 const FCOL={"LR / UMP / RPR":"#2d6fd6","RN / FN":"#1b2a6b","PS":"#e0559b","LFI":"#c62828","Écologistes":"#2e9e57","UDI / UDF":"#ef7d22","Reconquête":"#5a3a22","Renaissance / LREM":"#e8b923","MoDem":"#8e5bd0","Horizons":"#0f8c9c","PCF":"#8b0000","Autres / non précisé":"#a3a3a3"};
 function condChart(){
+  /* Hémicycle (inspiré de la vue de Casier Politique, redessiné à partir de ses données) :
+     angle = positionnement du parti (extrême gauche à gauche … extrême droite à droite), distance au centre = année du jugement. */
   const Y0=2000, Y1=Math.max(...CL.filter(c=>c.annee).map(c=>c.annee));
   const all=CL.filter(c=>c.src==="casier"&&c.annee>=Y0), pts=all.filter(c=>c.x!=null);
-  const W=360, PL=30, PR=8, PT=32;
-  /* hauteur de chaque année proportionnelle au nombre de condamnations, pour que les années chargées ne débordent pas */
-  const RH={}, RY={}; let acc=PT; for(let y=Y0;y<=Y1;y++){ const n=pts.filter(c=>c.annee===y).length; RH[y]=Math.max(16,10+n*1.15); RY[y]=acc; acc+=RH[y]; }
-  const H=acc+8, sx=x=>PL+(x+2)/4*(W-PL-PR), sy=y=>RY[y]+RH[y]/2, rad=c=>Math.min(9,2.2+1.6*Math.sqrt((c.mois||0)/12));
-  const placed=[]; const P=pts.map((c,i)=>({c,i,r:rad(c),tx:sx(c.x),ty:sy(c.annee)})).sort((a,b)=>b.r-a.r);
+  const W=400, CX=W/2, CY=212, R0=62, R1=192, H=CY+22;
+  const rY=y=>R0+(y-Y0)/(Y1-Y0)*(R1-R0), A0=0.2, th=x=>A0+(Math.PI-2*A0)*(1-(x+2)/4), rad=c=>Math.min(7.5,1.9+1.35*Math.sqrt((c.mois||0)/12));
+  const P=pts.map((c,i)=>({c,i,r:rad(c),t0:th(c.x),r0:rY(c.annee)})).sort((a,b)=>b.r-a.r), placed=[];
   for(const p of P){ let ok=false;
-    for(let k=0;k<400&&!ok;k++){ const dx=(k%2?1:-1)*Math.ceil(k/2)*1.4;
-      const lim=Math.max(0,RH[p.c.annee]/2-p.r-1), DY=[0,-4,4,-8,8,-12,12,-16,16,-20,20,-26,26].filter(d=>Math.abs(d)<=lim);
-      for(const dy of DY){ const x=p.tx+dx, y=p.ty+dy;
-        if(x<PL+p.r||x>W-PR-p.r) continue;
-        if(placed.every(q=>Math.abs(q.y-y)>q.r+p.r+0.6||Math.hypot(q.x-x,q.y-y)>q.r+p.r+0.6)){ p.x=x; p.y=y; placed.push(p); ok=true; break; } } }
-    if(!ok){ p.x=p.tx; p.y=p.ty; placed.push(p); } }
-  const cols=[[-2,"extrême gauche"],[-1,"gauche"],[0,"centre"],[1,"droite"],[2,"extrême droite"]];
-  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Condamnations par année et par positionnement politique du parti">`;
-  for(let y=Y0;y<=Y1;y++) if(y%5===0||y===Y1) s+=`<line x1="${PL}" x2="${W-PR}" y1="${RY[y]}" y2="${RY[y]}" stroke="#eee"/><text x="2" y="${sy(y)+4}" font-size="10" fill="#888">${y}</text>`;
-  cols.forEach(([x,l])=>{ const a=x===-2?"start":x===2?"end":"middle", tx=x===-2?PL:x===2?W-PR:sx(x); s+=`<line x1="${sx(x)}" x2="${sx(x)}" y1="${PT-4}" y2="${H}" stroke="#f1efec"/><text x="${tx}" y="${x%2?PT-18:PT-6}" font-size="9.5" fill="#666" text-anchor="${a}">${l}</text>`; });
+    for(let k=0;k<500&&!ok;k++){ const dA=(k%2?1:-1)*Math.ceil(k/2)*(1.3/p.r0);
+      for(const dR of [0,-3,3,-6,6]){ const t=p.t0+dA, R=p.r0+dR; if(t<0.05||t>Math.PI-0.05||R<R0-8) continue;
+        const x=CX+R*Math.cos(t), y=CY-R*Math.sin(t); if(y>CY-p.r-1) continue;
+        if(placed.every(q=>Math.hypot(q.x-x,q.y-y)>q.r+p.r+0.5)){ p.x=x; p.y=y; placed.push(p); ok=true; break; } } }
+    if(!ok){ p.x=CX+p.r0*Math.cos(p.t0); p.y=CY-p.r0*Math.sin(p.t0); placed.push(p); } }
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Hémicycle des condamnations : position du parti et année du jugement">`;
+  [Y0,2010,2020,Y1].forEach(y=>{ const R=rY(y); s+=`<path d="M${CX-R} ${CY} A${R} ${R} 0 0 1 ${CX+R} ${CY}" fill="none" stroke="#eee"/>`; if(y===Y1) return; s+=`<text x="${CX-R}" y="${CY+14}" font-size="9.5" fill="#888" text-anchor="middle">${y}</text><text x="${CX+R}" y="${CY+14}" font-size="9.5" fill="#888" text-anchor="middle">${y}</text>`; });
+  s+=`<line x1="${CX-R1-6}" x2="${CX+R1+6}" y1="${CY}" y2="${CY}" stroke="#ddd"/><text x="${CX-R1}" y="${CY+14}" font-size="9.5" fill="#888" text-anchor="middle">${Y1}</text>`;
+  s+=`<text x="4" y="12" font-size="10.5" fill="#666">← gauche</text><text x="${W-4}" y="12" font-size="10.5" fill="#666" text-anchor="end">droite →</text><text x="${CX}" y="${CY-R0+18}" font-size="9.5" fill="#888" text-anchor="middle">centre</text>`;
   s+=P.map(p=>`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${p.r.toFixed(1)}" fill="${FCOL[p.c.famille]||"#a3a3a3"}" data-i="${p.i}"${p.c.statut!=="définitive"?' fill-opacity=".45"':""}/>`).join("")+"</svg>";
   $("#c-chart").innerHTML=s;
   $$("#c-chart circle").forEach(el=>el.onclick=()=>{ $$("#c-chart circle.sel").forEach(x=>x.classList.remove("sel")); el.classList.add("sel"); const c=pts[+el.dataset.i];
@@ -873,7 +872,7 @@ function condChart(){
   const fams=[...new Set(pts.map(c=>c.famille))].sort((a,b)=>pts.filter(c=>c.famille===b).length-pts.filter(c=>c.famille===a).length);
   $("#c-chart-leg").innerHTML=fams.map(f=>`<span><b style="color:${FCOL[f]||"#a3a3a3"}">●</b> ${esc(f)} ${pts.filter(c=>c.famille===f).length}</span>`).join("")+`<span style="opacity:.6"><b>●</b> pâle = non définitive</span>`;
   const S=COND.sources.casier;
-  $("#c-chart-note").innerHTML=`${pts.length} condamnations prononcées depuis ${Y0}, recensées par <a href="${S.url}" target="_blank" rel="noopener">Casier Politique</a> (${all.length-pts.length} de petits partis régionaux ou non classés ne sont pas placées). Le placement gauche-droite est <b>notre</b> classement, d'après le positionnement des partis sur Wikipédia. Ce n'est pas un taux : un parti ancien, avec beaucoup d'élus, a mécaniquement plus de condamnations. Graphique inspiré de la vue chronologique de Casier Politique, redessiné à partir de ses données.`;
+  $("#c-chart-note").innerHTML=`${pts.length} condamnations prononcées depuis ${Y0}, recensées par <a href="${S.url}" target="_blank" rel="noopener">Casier Politique</a> (${all.length-pts.length} de petits partis régionaux ou non classés ne sont pas placées). Ce n'est pas l'Assemblée : chaque point est une condamnation, pas un siège. Le placement gauche-droite est <b>notre</b> classement, d'après le positionnement des partis sur Wikipédia. Ce n'est pas un taux : un parti ancien, avec beaucoup d'élus, a mécaniquement plus de condamnations. Graphique inspiré de la vue « hémicycle » de Casier Politique, redessiné à partir de ses données.`;
 }
 condChart();
 (function(){ const A=COND.sources.casier, B=COND.sources.poligraph, fd=d=>d?new Date(d+"T12:00").toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"}):"";
