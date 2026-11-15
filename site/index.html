@@ -241,6 +241,15 @@ details.lcard summary::-webkit-details-marker{display:none}
 .bar .track i{display:block;height:100%}
 .bar .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px}
 
+/* profil : histogramme par candidat */
+.hbars{display:flex;flex-direction:column;gap:9px}
+.hbar{display:grid;grid-template-columns:118px minmax(0,1fr) 40px;gap:10px;align-items:center}
+.hbar .nm{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hbar .pc{text-align:right;font-weight:700;font-size:14px;font-variant-numeric:tabular-nums}
+.hbar .tr{height:12px;background:var(--soft);border-radius:6px;overflow:hidden}
+.hbar .tr i{display:block;height:100%;border-radius:6px;min-width:4px}
+.hbars .sep{font-size:12.5px;color:var(--muted);margin-top:6px}
+.hbar.faible .tr i{opacity:.4}.hbar.vide{opacity:.55}.hbar.vide .tr i{display:none}
 /* chat */
 .threads{display:flex;flex-direction:column}
 .topics{display:grid;grid-auto-flow:column;grid-template-rows:1fr 1fr;grid-auto-columns:minmax(150px,44%);gap:10px;overflow-x:auto;margin:0 -16px 6px;padding:0 16px 6px;scroll-snap-type:x mandatory;scrollbar-width:none}
@@ -945,11 +954,17 @@ function renderProfil(){
   const CAT={pour:{f:v=>v===1,l:"Pour",c:"var(--pour)",bg:"#e4f4ea"},contre:{f:v=>v===-1,l:"Contre",c:"var(--contre)",bg:"#fbe7e6"},sans:{f:v=>v===0,l:"Sans avis",c:"var(--muted)",bg:"var(--soft)"}};
   if(!window.PCAT) window.PCAT="pour"; const cat=CAT[window.PCAT], list=answeredIds(cat.f);
   const tile=P=>`<div class="box photo small" style="background:linear-gradient(160deg,${(GR[P]||GR0.RN)[0]});min-height:190px;padding-bottom:20px"><div class="over"><span class="badge" style="max-width:100%;overflow:hidden;text-overflow:ellipsis">${esc(PROGS[P].cand)}</span></div><div class="score" style="font-size:46px">${S[P].p!=null?S[P].p+"%":"–"}</div><div class="q" style="font-size:15px;margin-top:6px">${S[P].t?`d'accord, sur ${S[P].t} mesure${S[P].t>1?"s":""} tranchée${S[P].t>1?"s":""}`:"pas encore de réponse"}</div></div>`;
+  const hbar=P=>{ const s=S[P], g=(GR[P]||GR0.RN)[0]; return `<div class="hbar${s.t&&s.t<5?" faible":""}${s.t?"":" vide"}" title="${esc(PROGS[P].cand)} : ${s.t?`${s.a} pour, ${s.b} contre`:"aucune réponse"}"><span class="nm">${esc(PROGS[P].cand)}</span><span class="tr"><i style="width:${s.p||0}%;background:linear-gradient(90deg,${g})"></i></span><span class="pc">${s.p!=null?s.p+"%":"–"}</span></div>`; };
+  /* ordre : scores fiables (5 réponses ou plus) d'abord, puis les scores fragiles, puis les candidats sans réponse ; décroissant dans chaque groupe */
+  const grp=P=>S[P].t>=5?0:S[P].t?1:2, ORD=PKEYS.slice().sort((a,b)=>grp(a)-grp(b)||(S[b].p??-1)-(S[a].p??-1)||S[b].t-S[a].t);
+  const hbarsHTML=ORD.map((P,i)=>(i&&grp(P)!==grp(ORD[i-1])?`<div class="sep">${grp(P)===1?"Moins de 5 réponses : score peu fiable":"Pas encore de réponse"}</div>`:"")+hbar(P)).join("");
   p.innerHTML=`<h2 class="ptitle">Ton profil</h2><p class="psub">${ids.length} mesures vues sur ${M.length} · ${pour.length} pour · ${contre.length} contre · ${passe.length} sans avis</p>
   <div class="profile" style="animation:none">
   ${accountHTML()}
   ${radarHTML(pour,contre)}
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">${PKEYS.slice().sort((a,b)=>(S[b].p??-1)-(S[a].p??-1)).map(tile).join("")}</div>
+  <div class="box prompt" style="padding-bottom:22px"><div class="label">Ton accord avec chaque candidat</div>
+    <div class="hbars">${hbarsHTML}</div>
+    <p class="note" style="margin:12px 0 0">% de mesures « pour » parmi celles où tu as tranché (pour ou contre).</p></div>
   <p class="note" style="margin:0">Les programmes n'ont pas tous la même taille : LFI a publié un programme complet (plus de 1 000 mesures), les autres candidats n'ont pour l'instant annoncé que quelques dizaines de propositions. Un score sur peu de mesures est moins solide.</p>
   ${top.length?`<div class="box prompt" style="padding-bottom:22px"><div class="label">Là où tu adhères le plus</div>${top.map(x=>`<div class="item"><div class="txt">${esc(x.s)} <span class="note">${x.a} aimée${x.a>1?"s":""} sur ${x.t}</span></div></div>`).join("")}</div>`:""}
   ${low.length?`<div class="box prompt" style="padding-bottom:22px"><div class="label">Là où tu décroches</div>${low.map(x=>`<div class="item"><div class="txt">${esc(x.s)} <span class="note">${x.t-x.a} rejetée${x.t-x.a>1?"s":""} sur ${x.t}</span></div></div>`).join("")}</div>`:""}
