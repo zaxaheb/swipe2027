@@ -1115,14 +1115,16 @@ function renderProfil(){
   const nRep=pour.length+contre.length, PT=store.get("portrait2027",null), btn=$("#p-ai"), body=$("#pt-body"), meta=$("#pt-meta");
   const setMeta=(x)=>{ if(!x){ meta.textContent=""; return; } const d=new Date(x.at).toLocaleDateString("fr-FR",{day:"numeric",month:"long"}), nv=nRep-x.n;
     meta.textContent=`Analyse du ${d}, sur ${x.n} réponses`+(nv>0?` · ${nv} nouvelle${nv>1?"s":""} depuis`:""); };
-  if(PT){ body.innerHTML=portraitHTML(PT.text,false); btn.textContent="↻ Refaire l'analyse"; setMeta(PT); } else btn.textContent="✦ Analyser mes choix";
+  /* mise à jour au fil des réponses : le bouton devient « Mettre à jour » dès qu'il y a de nouvelles réponses depuis la dernière analyse */
+  const label=(x)=>{ const nv=x?nRep-x.n:0; btn.classList.toggle("ghost",!!x&&nv<1); return !x?"✦ Analyser mes choix":nv>0?`↻ Mettre à jour avec tes ${nv} nouvelle${nv>1?"s":""} réponse${nv>1?"s":""}`:"↻ Refaire l'analyse"; };
+  if(PT){ body.innerHTML=portraitHTML(PT.text,false); setMeta(PT); } btn.textContent=label(PT);
   btn.onclick=async()=>{ btn.disabled=true; btn.textContent="Analyse en cours…"; meta.textContent="";
     body.innerHTML=`<div class="pt-wait"><span class="pt-spin"></span>Lecture de tes ${nRep} réponses…</div>`;
     let txt="", t=null; const paint=()=>{ t=null; body.innerHTML=portraitHTML(txt,true); };
     try{ await aiStream({mode:"profil",choix:{pour,contre}},ev=>{ if(ev.type==="text"){ txt+=ev.delta; if(!t) t=setTimeout(paint,40); } });
       clearTimeout(t); if(!txt.trim()) throw Object.assign(new Error("vide"),{code:"http"});
-      body.innerHTML=portraitHTML(txt,false); const x={text:txt,n:nRep,at:Date.now()}; store.set("portrait2027",x); setMeta(x); btn.textContent="↻ Refaire l'analyse"; }
-    catch(e){ clearTimeout(t); body.innerHTML=`<div class="pt-err">${esc(aiErr(e))}</div>`+(PT?portraitHTML(PT.text,false):""); btn.textContent=PT?"↻ Refaire l'analyse":"✦ Analyser mes choix"; setMeta(PT); }
+      body.innerHTML=portraitHTML(txt,false); const x={text:txt,n:nRep,at:Date.now()}; store.set("portrait2027",x); setMeta(x); btn.textContent=label(x); }
+    catch(e){ clearTimeout(t); body.innerHTML=`<div class="pt-err">${esc(aiErr(e))}</div>`+(PT?portraitHTML(PT.text,false):""); btn.textContent=label(PT); setMeta(PT); }
     btn.disabled=false; };
 }
 
