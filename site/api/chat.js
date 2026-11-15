@@ -2,7 +2,7 @@
 // Le navigateur n'envoie JAMAIS de prompt système : il est construit ici.
 import { build, VARS, withUser, PROMPT_VERSION } from "../lib/prompts.js";
 import { retrieve, mesure, base } from "../lib/data.js";
-import { consume } from "../lib/quota.js";
+import { consume, peek } from "../lib/quota.js";
 import * as llm from "../lib/llm.js";
 import { select, insert } from "../lib/supa.js";
 
@@ -34,7 +34,7 @@ export default async function handler(req, res) {
   try {
     if (mode === "quiz") {                          // quiz QCM structuré, sans recherche web (rapide)
       const msgs = cleanMsgs(req.body?.messages); if (!msgs.length || msgs[msgs.length - 1].role !== "user") return res.status(400).json({ error: "messages" });
-      if (!(await consume(req, "chat"))) return res.status(429).json({ error: "quota" });
+      if (!(await peek(req, "chat"))) return res.status(429).json({ error: "quota" });
       const S = await build("quiz", VARS.quiz(sujet, msgs[msgs.length - 1].content));
       const { data } = await llm.json({ usage: "chat", spec: S.config.model, system: S.system, messages: withUser(msgs, S.user), schema: QUIZ, name: "quiz", description: "Enregistre le quiz.", maxTokens: S.config.max_tokens || 2000, trace: { name: "quiz", prompt: S.prompt, tags: ["quiz"] } });
       const qs = (data?.questions || [])
@@ -42,10 +42,11 @@ export default async function handler(req, res) {
         .map((x) => ({ q: String(x.q).slice(0, 300), options: x.options.map((o) => String(o).slice(0, 160)), bonne: x.bonne, explication: String(x.explication || "").slice(0, 500) }));
       if (!qs.length) throw new Error("quiz vide");
       await insert("chats", { mode: "quiz", mesure_id: null, question: "Quiz : " + sujet, reponse: qs.map((x) => x.q).join(" | ").slice(0, 3000), v: S.version }).catch(() => {});
+      await consume(req, "chat").catch(() => {});
       return res.status(200).json({ quiz: qs, v: S.version });
     }
     if (mode === "profil") {                        // portrait structuré : chiffres calculés ici (exacts), texte rédigé par l'IA
-      if (!(await consume(req, "profil"))) return res.status(429).json({ error: "quota" });
+      if (!(await peek(req, "profil"))) return res.status(429).json({ error: "quota" });
       const B = base(), ok = (id) => B.byId[id] && !/ne se présente plus/.test(B.candidats[B.byId[id].P]?.cand || "");
       const pour = (choix?.pour || []).filter(ok), contre = (choix?.contre || []).filter(ok);
       const nomOf = (P) => (B.candidats[P]?.cand || P);
@@ -71,13 +72,14 @@ export default async function handler(req, res) {
           pourquoi: why[x.cand.toLowerCase()] || Object.entries(why).find(([k]) => k.includes(x.cand.split(" ").pop().toLowerCase()))?.[1] || "" }))
       };
       if (!portrait.en_un_mot && !portrait.approuves.length) throw new Error("portrait vide");
+      await consume(req, "profil").catch(() => {});   // compté seulement si l'analyse a réussi
       return res.status(200).json({ portrait, n: pour.length + contre.length, v: S.version });
     }
     let S, msgs;
     {
       msgs = cleanMsgs(req.body?.messages);
       if (!msgs.length || msgs[msgs.length - 1].role !== "user") return res.status(400).json({ error: "messages" });
-      if (!(await consume(req, "chat"))) return res.status(429).json({ error: "quota" });
+      if (!(await peek(req, "chat"))) return res.status(429).json({ error: "quota" });
       const last = () => msgs[msgs.length - 1].content;
       if (mode === "mesure") {
         const m = mesure(mesureId); if (!m) return res.status(404).json({ error: "mesure" });
@@ -98,11 +100,13 @@ export default async function handler(req, res) {
       try { text = (await llm.chat({ ...opts, ...(mode === "profil" ? { web: false } : {}), maxTokens: mode === "profil" ? Math.max(S.config.max_tokens || 0, 1500) : S.config.max_tokens || 3000, onEvent: send })).text; }
       catch (e) { console.error("chat stream:", e.message); await logErr(mode, mesureId, msgs, e); send({ type: "error", error: errKind(e), detail: String(e.status || "") }); return res.end(); }
       if (mode !== "profil") await insert("chats", { mode, mesure_id: mode === "mesure" ? String(mesureId).slice(0, 160) : null, question: msgs[msgs.length - 1].content.slice(0, 1000), reponse: text.slice(0, 3000), v: S.version }).catch(() => {});
+      await consume(req, "chat").catch(() => {});
       send({ type: "done" }); return res.end();
     }
     else text = (await llm.chat({ ...opts, maxTokens: S.config.max_tokens || 1200 })).text;
     // Journal anonyme : ni IP, ni compte, ni historique ; seulement la dernière question et la réponse.
     if (mode !== "profil") await insert("chats", { mode, mesure_id: mode === "mesure" ? String(mesureId).slice(0, 160) : null, question: msgs[msgs.length - 1].content.slice(0, 1000), reponse: text.slice(0, 3000), v: S.version }).catch(() => {});
+    await consume(req, "chat").catch(() => {});
     res.status(200).json({ text, v: S.version });
   } catch (e) {
     console.error("chat:", e.message);   // visible dans Vercel > Logs

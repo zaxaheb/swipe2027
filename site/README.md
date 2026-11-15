@@ -54,7 +54,7 @@ Puis dans le tableau de bord Vercel > ton projet > **Settings > Environment Vari
 | `SUPABASE_SERVICE_ROLE_KEY` | clé service_role (secrète) |
 | `QUOTA_SALT` | une phrase au hasard (sert à hacher les IP) |
 | `ADMIN_PASSWORD` | mot de passe de la page `/admin.html` (12 caractères minimum conseillés) |
-| `QUOTA_CHAT` / `QUOTA_FICHE` / `QUOTA_PROFIL` | optionnel : 30 / 3 / 5 par IP et par jour par défaut |
+| `QUOTA_CHAT` / `QUOTA_FICHE` / `QUOTA_PROFIL` | optionnel : 30 / 3 / 20 par IP et par jour par défaut (seules les réponses réussies sont comptées) |
 
 Ensuite, mets en production avec `npx vercel --prod`.
 
