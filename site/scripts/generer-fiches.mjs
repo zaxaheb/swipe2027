@@ -7,15 +7,15 @@
 // Les fiches sont ajoutées au fur et à mesure dans ../data/fiches_auto.json (on peut relancer : les fiches déjà faites sont sautées).
 // Coût maîtrisé : recherches plafonnées (sauf Gemini, qui n'a pas de plafond par requête), consigne système mise en cache, arrêt propre si le crédit est épuisé.
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
-import { getSystem, VARS, ficheUser } from "../lib/prompts.js";
+import { build, VARS } from "../lib/prompts.js";
 import { FICHE, cleanFiche } from "../lib/schemas.js";
 import { base, mesure } from "../lib/data.js";
 import * as llm from "../lib/llm.js";
 
 const arg = (k, d) => { const i = process.argv.indexOf("--" + k); return i > 0 ? process.argv[i + 1] : d; };
 const N = Number(arg("n", 100)), PAR = Number(arg("parallel", 4)), SEARCHES = Number(arg("recherches", 3));
-const S = await getSystem("fiche", VARS.fiche(SEARCHES));   // prompt Langfuse « swipe-fiche » si LANGFUSE_* est défini, sinon local
-const M = llm.parseSpec(arg("model", S.config.model || process.env.LLM_FICHE || process.env.LLM_DEFAULT || "anthropic:" + (process.env.ANTHROPIC_MODEL || "claude-sonnet-5-5")));
+const S0 = await build("fiche", { max_recherches: SEARCHES });   // prompts Langfuse « swipe-system » + « swipe-fiche » si LANGFUSE_* est défini, sinon locaux
+const M = llm.parseSpec(arg("model", S0.config.model || process.env.LLM_FICHE || process.env.LLM_DEFAULT || "anthropic:" + (process.env.ANTHROPIC_MODEL || "claude-sonnet-5-5")));
 const KEYVAR = { anthropic: "ANTHROPIC_API_KEY", openai: "OPENAI_API_KEY", gemini: "GEMINI_API_KEY" }[M.provider];
 if (!process.env[KEYVAR]) { console.error(`Il manque la clé : ${KEYVAR}=... node scripts/generer-fiches.mjs --model ${M.provider}:${M.model}`); process.exit(1); }
 const MODEL = `${M.provider}:${M.model}`;
@@ -47,10 +47,11 @@ let ok = 0, ko = 0;
 async function one(id) {
   const m = mesure(id); if (!m) return;
   const autres = B.mesures.filter((x) => x.P === m.P && x.id !== id && (m.P !== "LFI" || x.section === m.section || x._n.split(" ").some((w) => w.length > 6 && m._n?.includes(w)))).slice(0, 120);
-  const msgs = [{ role: "user", content: ficheUser(m, autres) }];
+  const S = await build("fiche", VARS.fiche(m, autres, SEARCHES));
+  const msgs = [{ role: "user", content: S.user }];
   for (let attempt = 0; attempt < 2 && !STOP; attempt++) {
     let data;
-    try { const r = await llm.json({ ...M, system: S.text, trace: { name: "fiche", prompt: S.prompt, tags: ["fiche", "lot"], metadata: { mesure: id } }, messages: msgs, schema: FICHE, name: "enregistrer_fiche", description: "Enregistre la fiche sourcée finale. À appeler une seule fois, à la fin.", web: { maxSearches: SEARCHES }, maxTokens: 5000, retries: 8 }); add(r.usage); data = r.data; }
+    try { const r = await llm.json({ ...M, system: S.system, trace: { name: "fiche", prompt: S.prompt, tags: ["fiche", "lot"], metadata: { mesure: id } }, messages: msgs, schema: FICHE, name: "enregistrer_fiche", description: "Enregistre la fiche sourcée finale. À appeler une seule fois, à la fin.", web: { maxSearches: SEARCHES }, maxTokens: 5000, retries: 8 }); add(r.usage); data = r.data; }
     catch (e) {
       if (e.code === "credit") { STOP = true; throw new Error(`CRÉDIT ÉPUISÉ chez ${M.provider} : recharge ton compte, puis relance la même commande (les fiches déjà faites sont gardées).`); }
       if (e.code === "config") { STOP = true; throw e; }

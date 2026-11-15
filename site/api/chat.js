@@ -1,6 +1,6 @@
 // POST /api/chat  { mode: "general" | "mesure" | "profil", mesureId?, messages?: [{role,content}], choix?: {pour:[ids], contre:[ids]} }
 // Le navigateur n'envoie JAMAIS de prompt système : il est construit ici.
-import { getSystem, VARS, PROMPT_VERSION } from "../lib/prompts.js";
+import { build, VARS, withUser, PROMPT_VERSION } from "../lib/prompts.js";
 import { retrieve, mesure, base } from "../lib/data.js";
 import { consume } from "../lib/quota.js";
 import * as llm from "../lib/llm.js";
@@ -31,8 +31,8 @@ export default async function handler(req, res) {
     if (mode === "quiz") {                          // quiz QCM structuré, sans recherche web (rapide)
       const msgs = cleanMsgs(req.body?.messages); if (!msgs.length || msgs[msgs.length - 1].role !== "user") return res.status(400).json({ error: "messages" });
       if (!(await consume(req, "chat"))) return res.status(429).json({ error: "quota" });
-      const S = await getSystem("quiz", VARS.quiz(sujet));
-      const { data } = await llm.json({ usage: "chat", spec: S.config.model, system: S.text, messages: msgs, schema: QUIZ, name: "quiz", description: "Enregistre le quiz.", maxTokens: S.config.max_tokens || 2000, trace: { name: "quiz", prompt: S.prompt, tags: ["quiz"] } });
+      const S = await build("quiz", VARS.quiz(sujet, msgs[msgs.length - 1].content));
+      const { data } = await llm.json({ usage: "chat", spec: S.config.model, system: S.system, messages: withUser(msgs, S.user), schema: QUIZ, name: "quiz", description: "Enregistre le quiz.", maxTokens: S.config.max_tokens || 2000, trace: { name: "quiz", prompt: S.prompt, tags: ["quiz"] } });
       const qs = (data?.questions || [])
         .filter((x) => x && Array.isArray(x.options) && x.options.length >= 3 && Number.isInteger(x.bonne) && x.bonne >= 0 && x.bonne < x.options.length)
         .map((x) => ({ q: String(x.q).slice(0, 300), options: x.options.map((o) => String(o).slice(0, 160)), bonne: x.bonne, explication: String(x.explication || "").slice(0, 500) }));
@@ -44,21 +44,22 @@ export default async function handler(req, res) {
     if (mode === "profil") {
       if (!(await consume(req, "profil"))) return res.status(429).json({ error: "quota" });
       const B = base(); const L = (ids) => (ids || []).slice(-60).map((id) => B.byId[id]).filter(Boolean).map((m) => `- [${B.candidats[m.P]?.cand}] ${m.t}`).join("\n");
-      S = await getSystem("profil"); msgs = [{ role: "user", content: `POUR :\n${L(choix?.pour)}\n\nCONTRE :\n${L(choix?.contre)}` }];
+      S = await build("profil", VARS.profil(L(choix?.pour), L(choix?.contre))); msgs = [{ role: "user", content: S.user }];
     } else {
       msgs = cleanMsgs(req.body?.messages);
       if (!msgs.length || msgs[msgs.length - 1].role !== "user") return res.status(400).json({ error: "messages" });
       if (!(await consume(req, "chat"))) return res.status(429).json({ error: "quota" });
+      const last = () => msgs[msgs.length - 1].content;
       if (mode === "mesure") {
         const m = mesure(mesureId); if (!m) return res.status(404).json({ error: "mesure" });
         let fiche = base().fiches[mesureId] || null;
         if (!fiche) { const r = await select("fiches", `id=eq.${encodeURIComponent(mesureId)}&select=data`).catch(() => []); fiche = r[0]?.data || null; }
-        S = await getSystem("mesure", VARS.mesure(m, fiche));
-      } else if (mode === "prof") S = await getSystem("prof", VARS.prof(sujet, retrieve(sujet + " " + msgs[msgs.length - 1].content)));
-      else S = await getSystem("general", VARS.general(retrieve(msgs[msgs.length - 1].content)));
+        S = await build("mesure", VARS.mesure(m, fiche, last()));
+      } else if (mode === "prof") S = await build("prof", VARS.prof(sujet, retrieve(sujet + " " + last()), last()));
+      else S = await build("general", VARS.general(retrieve(last()), last()));
     }
     let text;
-    const opts = { usage: "chat", spec: S.config.model, system: S.text, messages: msgs, maxSearches: S.config.max_searches ?? MAX_SEARCH(),
+    const opts = { usage: "chat", spec: S.config.model, system: S.system, messages: mode === "profil" ? msgs : withUser(msgs, S.user), maxSearches: S.config.max_searches ?? MAX_SEARCH(),
       trace: { name: "chat-" + mode, prompt: S.prompt, tags: [mode], metadata: mode === "mesure" ? { mesure: String(mesureId).slice(0, 160) } : {} } };
     if (mode === "profil") text = (await llm.text({ ...opts, maxTokens: S.config.max_tokens || 700 })).text;
     else if (req.body?.stream) {

@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   if (process.env.ADMIN_PASSWORD && req.query?.key !== process.env.ADMIN_PASSWORD) return res.status(200).json({ ...out, note: "ajoute ?key=<ADMIN_PASSWORD> pour tester Supabase et les modèles" });
   try { out.supabase = (await rpc("bump_usage", { p_key: "health", p_kind: "health", p_limit: 100000 })) === true ? "ok" : "réponse inattendue"; }
   catch (e) { out.supabase = "ERREUR : " + String(e.message).slice(0, 300); }
-  if (lfOn()) { out.langfuse = {}; for (const k of ["general", "mesure", "fiche"]) { const p = await getPrompt("swipe-" + k); out.langfuse[k] = p ? `v${p.version}${p.config?.model ? " · " + p.config.model : ""}` : "absent (prompt local utilisé)"; } }
+  if (lfOn()) { out.langfuse = {}; for (const k of ["system", "general", "mesure", "fiche"]) { const p = await getPrompt("swipe-" + k); out.langfuse[k] = p ? `v${p.version}${p.config?.model ? " · " + p.config.model : ""}` : "absent (prompt local utilisé)"; } }
   else out.langfuse = "désactivé (pas de clés LANGFUSE_*)";
   out.test = {};
   for (const u of ["chat", "fiche"]) {

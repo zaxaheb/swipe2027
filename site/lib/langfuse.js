@@ -68,15 +68,18 @@ export async function traceGeneration(g) {
   } catch (e) { console.warn("langfuse trace", e.message); }
 }
 
-/* ---------- création des prompts (utilisé par scripts/langfuse-sync.mjs) ---------- */
-export async function listPromptNames() {
-  const r = await fetch(`${BASE()}/api/public/v2/prompts?limit=100`, { headers: { authorization: auth() } });
+/* ---------- gestion des prompts (scripts/langfuse-sync.mjs et scripts/langfuse-model.mjs) ---------- */
+/** Version « production » actuelle d'un prompt, sans cache (null s'il n'existe pas). */
+export async function fetchPrompt(name) {
+  const r = await fetch(`${BASE()}/api/public/v2/prompts/${encodeURIComponent(name)}?label=${encodeURIComponent(LABEL())}`, { headers: { authorization: auth() } });
+  if (r.status === 404) return null;
   if (!r.ok) throw new Error(`Langfuse ${r.status} : ${(await r.text()).slice(0, 300)}`);
-  return new Set(((await r.json()).data || []).map((p) => p.name));
+  return r.json();
 }
+/** Crée une nouvelle version (étiquetée « production ») ; le prompt est créé s'il n'existe pas. */
 export async function createPrompt({ name, prompt, config, commitMessage }) {
   const r = await fetch(`${BASE()}/api/public/v2/prompts`, { method: "POST", headers: { authorization: auth(), "content-type": "application/json" },
-    body: JSON.stringify({ name, type: "text", prompt, config, labels: [LABEL()], commitMessage }) });
+    body: JSON.stringify({ name, type: "text", prompt, config: config || {}, labels: [LABEL()], commitMessage }) });
   if (!r.ok) throw new Error(`Langfuse ${r.status} : ${(await r.text()).slice(0, 300)}`);
   return r.json();
 }

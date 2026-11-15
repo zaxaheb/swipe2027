@@ -1,6 +1,6 @@
 // GET  /api/fiche?id=…  → fiche partagée si elle existe (404 sinon)
 // POST /api/fiche {id}  → génère la fiche (IA configurée dans LLM_FICHE + recherche web), l'enregistre pour tout le monde
-import { getSystem, VARS, ficheUser } from "../lib/prompts.js";
+import { build, VARS } from "../lib/prompts.js";
 import { FICHE, cleanFiche } from "../lib/schemas.js";
 import { mesure, base } from "../lib/data.js";
 import { consume } from "../lib/quota.js";
@@ -24,9 +24,9 @@ export default async function handler(req, res) {
   if (!(await rpc("take_lock", { p_id: id }))) return res.status(409).json({ error: "en_cours" });
   try {
     if (!(await consume(req, "fiche"))) return res.status(429).json({ error: "quota" });
-    const S0 = await getSystem("fiche", VARS.fiche(3)), n = Number(S0.config.max_searches ?? process.env.FICHE_MAX_SEARCHES ?? 3);
-    const S = n === 3 ? S0 : await getSystem("fiche", VARS.fiche(n));
-    const { data, provider, model } = await llm.json({ usage: "fiche", spec: S.config.model, system: S.text, messages: [{ role: "user", content: ficheUser(m) }], schema: FICHE, name: "enregistrer_fiche",
+    const S0 = await build("fiche", VARS.fiche(m)), n = Number(S0.config.max_searches ?? process.env.FICHE_MAX_SEARCHES ?? 3);
+    const S = n === 3 ? S0 : await build("fiche", VARS.fiche(m, [], n));
+    const { data, provider, model } = await llm.json({ usage: "fiche", spec: S.config.model, system: S.system, messages: [{ role: "user", content: S.user }], schema: FICHE, name: "enregistrer_fiche",
       description: "Enregistre la fiche sourcée finale.", web: { maxSearches: n }, maxTokens: S.config.max_tokens || 5000, trace: { name: "fiche", prompt: S.prompt, tags: ["fiche", "site"], metadata: { mesure: id } } });
     const fiche = { ...cleanFiche(data), genere: true, maj: new Date().toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" }), v: S.version, modele: `${provider}:${model}` };
     await upsert("fiches", { id, data: fiche });
