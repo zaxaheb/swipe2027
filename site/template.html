@@ -507,7 +507,7 @@ function md(s){
   close(); return out;
 }
 const linkify=md;
-const aiErr=e=>e.code==="off"?"L'IA n'est pas encore branchée sur ce site (voir README).":e.code==="indispo"?"L'IA est momentanément indisponible. Réessaie un peu plus tard.":e.code==="quota"?"Tu as atteint la limite d'utilisation de l'IA pour aujourd'hui. Reviens demain !":e.code==="rate"?"Trop de demandes, réessaie dans une minute.":e.code==="busy"?"Quelqu'un est déjà en train de générer cette fiche. Réessaie dans une minute.":e.code==="surcharge"?"L'IA est surchargée en ce moment. Réessaie dans quelques secondes.":"Ça n'a pas marché. Réessaie."+(e.st?` (code ${e.st})`:"");
+const aiErr=e=>e.code==="off"?"L'IA n'est pas encore branchée sur ce site (voir README).":e.code==="indispo"?"L'IA est momentanément indisponible. Réessaie un peu plus tard.":e.code==="quota"?"Tu as atteint ta limite de questions à l'IA pour aujourd'hui. Elle repart à zéro demain. En attendant, tu peux continuer à découvrir les mesures.":e.code==="rate"?"Beaucoup de monde utilise l'IA en ce moment. Réessaie dans une minute.":e.code==="busy"?"Quelqu'un est déjà en train de générer cette fiche. Réessaie dans une minute.":e.code==="surcharge"?"L'IA est surchargée en ce moment. Réessaie dans quelques secondes.":"Ça n'a pas marché. Réessaie."+(e.st?` (code ${e.st})`:"");
 /* fiches partagées : générées une fois, puis servies à tous */
 const REMOTE={}; const REMOTE_MISS=new Set();
 async function fetchFiche(id){
@@ -973,7 +973,7 @@ $("#cv-form").onsubmit=async e=>{ e.preventDefault(); const q=$("#cv-in").value.
         else if(ev.type==="fetch"){ let d=ev.url; try{ d=new URL(ev.url).hostname.replace(/^www\./,""); }catch(e){} addStep("📖",`Lecture de la page : ${esc(d)}`,true); }
         else if(ev.type==="results"){ addStep("📄",`${ev.n} résultat${ev.n>1?"s":""}${ev.sites.length?" · "+esc(ev.sites.join(", ")):""}`,false); addStep("","Lecture des sources",true); }
         else if(ev.type==="text"){ if(!txt) addStep("✍️","Rédaction de la réponse",false); txt+=ev.delta; if(!raf) raf=setTimeout(paint,16); }
-        else if(ev.type==="error") throw Object.assign(new Error("x"),{code:ev.error==="indisponible"?"indispo":ev.error==="surcharge"?"surcharge":"http",st:ev.detail});
+        else if(ev.type==="error") throw Object.assign(new Error("x"),{code:ev.error==="indisponible"?"indispo":ev.error==="surcharge"?"surcharge":ev.error==="rate_limited"?"rate":"http",st:ev.detail});
         else if(ev.type==="done") done=true; } }
     stepsEl.querySelectorAll(".step.run").forEach(s=>{ s.classList.remove("run"); s.querySelector(".ic").textContent="✓"; });
     if(!done&&!txt) throw Object.assign(new Error("coupé"),{code:"http",st:"coupure"});
