@@ -109,7 +109,11 @@ Points d'attention :
 - Les deux stores demandent une politique de confidentialité et la suppression de compte dans l'app. Les règles RLS du schéma permettent déjà de supprimer son profil : un bouton reste à ajouter.
 - Contenu politique : les stores l'acceptent pour l'information électorale, à condition de citer ses sources et de ne pas se faire passer pour un service officiel.
 
-## 6. Suivre l'activité : la page admin
+## 6. Suivre l'activité
+
+**Visiteurs (avec ou sans compte)** : Vercel > ton projet > onglet **Analytics** > **Enable** (gratuit, sans cookie). Le script est déjà dans le site ; les chiffres apparaissent après le prochain `npx vercel --prod`. On y voit les visiteurs uniques, les pages vues, les pays, les appareils et les sites d'origine.
+
+**La page admin**
 
 `https://<ton-site>/admin.html` → mot de passe = `ADMIN_PASSWORD`. On y voit :
 - inscrits, profils actifs, nombre de réponses ;
