@@ -43,15 +43,17 @@ export default async function handler(req, res) {
       return res.status(200).json({ mesure: { ...mm, cand: B.candidats[m.P]?.cand, nom: B.candidats[m.P]?.nom }, fiche, origine, remarques: rq });
     }
     const info = (id) => { const m = B.byId[id]; return m ? { t: m.t, cand: B.candidats[m.P]?.cand || m.P } : { t: id, cand: "?" }; };
-    const [stats, chats, fiches, remarques] = await Promise.all([
+    const [stats, chats, fiches, remarques, visites] = await Promise.all([
       rpc("admin_stats", {}),
       select("chats", "select=created_at,mode,mesure_id,question,reponse&order=created_at.desc&limit=150"),
       select("fiches", "select=id,created_at,data&order=created_at.desc&limit=200"),
-      select("remarques", "select=id,created_at,mesure_id,type,texte,source_url,statut,user_id&order=created_at.desc&limit=300").catch(() => [])
+      select("remarques", "select=id,created_at,mesure_id,type,texte,source_url,statut,user_id&order=created_at.desc&limit=300").catch(() => []),
+      rpc("admin_visites", {}).catch(() => null)          // null tant que migration-004.sql n'a pas été lancée
     ]);
     stats.top = (stats.top || []).map((x) => ({ ...x, ...info(x.id) }));
     res.status(200).json({
       stats,
+      visites,
       chats: chats.map((c) => ({ ...c, mesure: c.mesure_id ? info(c.mesure_id) : null })),
       remarques: remarques.map((r) => ({ ...r, compte: !!r.user_id, user_id: undefined, ...info(r.mesure_id) })),
       fiches: fiches.map((f) => ({ id: f.id, created_at: f.created_at, resume: f.data?.resume, ...info(f.id) })),

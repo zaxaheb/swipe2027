@@ -59,6 +59,9 @@ select{font:inherit;padding:9px 10px;border:1px solid var(--line);border-radius:
     <div class="filters"><input id="pq" placeholder="Rechercher une mesure…"><select id="pc"></select>
       <select id="pf"><option value="">Toutes</option><option value="any">Avec fiche</option><option value="base">Fiche relue (base)</option><option value="gen">Fiche générée</option><option value="none">Sans fiche</option></select></div>
     <div class="prop"><div class="scroll ml" id="plist"><p class="muted">Chargement…</p></div><div class="scroll" id="det"><p class="muted">Clique sur une mesure pour voir sa fiche.</p></div></div></div>
+  <div class="card" style="margin-bottom:14px"><h2>Visiteurs <span class="muted small">(avec ou sans compte · 30 derniers jours)</span></h2>
+    <div class="grid"><div class="scroll"><table id="visites"></table></div><div><table id="vues"></table>
+    <p class="muted small">Un visiteur = un appareil sur une journée (empreinte anonyme renouvelée chaque jour) : on ne peut donc pas dédoublonner d'un jour à l'autre, et « Visites (7 j) » additionne les visiteurs de chaque jour. Pages vues = onglets ouverts (une fois par onglet et par chargement).</p></div></div></div>
   <div class="grid">
     <div class="card"><h2>Mesures les plus vues</h2>
       <div class="tabs" id="tt"><button aria-pressed="true" data-s="vus">Les plus vues</button><button aria-pressed="false" data-s="pour">Les plus aimées</button><button aria-pressed="false" data-s="contre">Les plus rejetées</button></div>
@@ -99,9 +102,17 @@ document.querySelectorAll("#tt button").forEach(b=>b.onclick=()=>{ SORT=b.datase
 const fmt=d=>new Date(d).toLocaleString("fr-FR",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
 function render(){
   const s=D.stats; $("#maj").textContent="Mis à jour "+new Date().toLocaleTimeString("fr-FR");
-  const k=[["Remarques à traiter",(D.remarques||[]).filter(r=>r.statut==="nouveau").length],["Inscrits",s.inscrits],["Nouveaux (7 j)",s.inscrits_7j],["Profils actifs",s.profils_actifs],["Réponses (swipes)",s.reponses],["Questions à l'IA",s.chats_total],["Questions (7 j)",s.chats_7j],["Fiches générées",s.fiches]];
+  const V=D.visites, J=(V&&V.jours)||[], today=new Date().toISOString().slice(0,10), lim=new Date(Date.now()-6*864e5).toISOString().slice(0,10);
+  const auj=J.find(d=>d.jour===today)||{visiteurs:0,connectes:0}, j7=J.filter(d=>d.jour>=lim);
+  const PV={}; ((V&&V.vues)||[]).forEach(x=>{ (PV[x.jour]=PV[x.jour]||0); PV[x.jour]+=x.n; });
+  const k=[["Visiteurs aujourd'hui",auj.visiteurs],["dont sans compte",auj.visiteurs-auj.connectes],["Visites (7 j)",j7.reduce((a,d)=>a+d.visiteurs,0)],["Remarques à traiter",(D.remarques||[]).filter(r=>r.statut==="nouveau").length],["Inscrits",s.inscrits],["Nouveaux (7 j)",s.inscrits_7j],["Profils actifs",s.profils_actifs],["Réponses (swipes)",s.reponses],["Questions à l'IA",s.chats_total],["Questions (7 j)",s.chats_7j],["Fiches générées",s.fiches]];
   $("#kpis").innerHTML=k.map(([l,v])=>`<div class="kpi"><span class="muted small">${l}</span><b>${(v||0).toLocaleString("fr-FR")}</b></div>`).join("");
   renderTop(); renderRq();
+  const fd=d=>new Date(d).toLocaleDateString("fr-FR",{weekday:"short",day:"numeric",month:"short"});
+  $("#visites").innerHTML=!V?'<tr><td class="muted">Lance <b>supabase/migration-004.sql</b> dans Supabase pour activer le suivi des visiteurs.</td></tr>':
+    `<tr><th>Jour</th><th class="n">Visiteurs</th><th class="n">Sans compte</th><th class="n">Connectés</th><th class="n">Pages vues</th></tr>`+(J.map(d=>`<tr><td>${fd(d.jour)}</td><td class="n"><b>${d.visiteurs}</b></td><td class="n">${d.visiteurs-d.connectes}</td><td class="n">${d.connectes}</td><td class="n">${PV[d.jour]||0}</td></tr>`).join("")||'<tr><td colspan="5" class="muted">Pas encore de visite.</td></tr>');
+  const NV={swipe:"Découvrir",cond:"Condamnations",chat:"Comprendre",profil:"Profil",votes:"Votes",autre:"Autre"}, T={}; ((V&&V.vues)||[]).forEach(x=>T[x.vue]=(T[x.vue]||0)+x.n);
+  $("#vues").innerHTML=V?`<tr><th>Onglet</th><th class="n">Pages vues (30 j)</th></tr>`+(Object.entries(T).sort((a,b)=>b[1]-a[1]).map(([v,n])=>`<tr><td>${NV[v]||esc(v)}</td><td class="n">${n.toLocaleString("fr-FR")}</td></tr>`).join("")||'<tr><td colspan="2" class="muted">—</td></tr>'):"";
   $("#chats").innerHTML=D.chats.length?D.chats.map(c=>`<div class="q"${String(c.reponse||"").startsWith("⚠️ ERREUR")?' style="border-left:3px solid #d33;padding-left:8px;background:#fff4f4"':""}><div class="who">${fmt(c.created_at)} · ${c.mode==="mesure"?"sur la mesure : "+esc(c.mesure?.cand)+" — "+esc((c.mesure?.t||"").slice(0,80)):"chat général"}</div><div class="t">${esc(c.question)}</div><div class="a">${esc(c.reponse)}</div></div>`).join(""):'<p class="muted">Aucune question pour l\'instant.</p>';
   document.querySelectorAll(".q .t").forEach(t=>t.onclick=()=>t.parentElement.classList.toggle("open"));
   const u={}; (s.usage||[]).forEach(r=>{ (u[r.jour]=u[r.jour]||{}); u[r.jour][r.kind]=r.n; u[r.jour].ips=Math.max(u[r.jour].ips||0,r.ips); });

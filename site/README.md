@@ -20,7 +20,7 @@ supabase/schema.sql    les tables et règles de sécurité à créer dans Supaba
 
 1. Crée un compte sur https://supabase.com, puis un projet (région : Paris ou Francfort).
 2. **SQL Editor > New query** : colle `supabase/schema.sql`, puis clique sur **Run**.
-3. **SQL Editor** : lance aussi `supabase/migration-002.sql` puis `supabase/migration-003.sql` (remarques) (pseudos, consentement, journal des chats, tableau de bord).
+3. **SQL Editor** : lance aussi `supabase/migration-002.sql` puis `supabase/migration-003.sql` (remarques), puis `supabase/migration-004.sql` (visiteurs, pour la page admin) (pseudos, consentement, journal des chats, tableau de bord).
 3 bis. **Authentication > Sign In / Providers > Email** : laisse « Email » activé mais **désactive « Confirm email »**. Les comptes se créent avec un pseudo et un mot de passe ; l'app génère un e-mail technique `pseudo@users.swipe2027.app` auquel aucun mail n'est envoyé. Mets aussi la longueur minimale du mot de passe à 8.
 4. **Authentication > URL Configuration** : mets l'URL de ton site (ex. `https://swipe2027.vercel.app`) dans *Site URL* et dans *Redirect URLs*.
 5. **Project Settings > API Keys** : note (les nouvelles clés `sb_publishable_…` / `sb_secret_…` et les anciennes `anon` / `service_role` marchent toutes les deux) :
@@ -112,6 +112,8 @@ Points d'attention :
 ## 6. Suivre l'activité
 
 **Visiteurs (avec ou sans compte)** : Vercel > ton projet > onglet **Analytics** > **Enable** (gratuit, sans cookie). Le script est déjà dans le site ; les chiffres apparaissent après le prochain `npx vercel --prod`. On y voit les visiteurs uniques, les pages vues, les pays, les appareils et les sites d'origine.
+
+**Dans la page admin** (section « Visiteurs ») : visiteurs par jour, avec ou sans compte, et pages vues par onglet. Il faut avoir lancé `supabase/migration-004.sql`.
 
 **La page admin**
 
