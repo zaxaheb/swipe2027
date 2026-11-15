@@ -59,14 +59,14 @@ export default async function handler(req, res) {
       else S = await build("general", VARS.general(retrieve(last()), last()));
     }
     let text;
-    const opts = { usage: "chat", spec: S.config.model, system: S.system, messages: mode === "profil" ? msgs : withUser(msgs, S.user), maxSearches: S.config.max_searches ?? MAX_SEARCH(),
+    const opts = { usage: "chat", spec: S.config.model, reasoning: S.config.reasoning || (mode === "profil" ? "low" : undefined), system: S.system, messages: mode === "profil" ? msgs : withUser(msgs, S.user), maxSearches: S.config.max_searches ?? MAX_SEARCH(),
       trace: { name: "chat-" + mode, prompt: S.prompt, tags: [mode], metadata: mode === "mesure" ? { mesure: String(mesureId).slice(0, 160) } : {} } };
-    if (mode === "profil" && !req.body?.stream) text = (await llm.text({ ...opts, maxTokens: S.config.max_tokens || 1200 })).text;
+    if (mode === "profil" && !req.body?.stream) text = (await llm.text({ ...opts, maxTokens: Math.max(S.config.max_tokens || 0, 1500) })).text;
     else if (req.body?.stream) {
       res.writeHead(200, { "Content-Type": "text/event-stream; charset=utf-8", "Cache-Control": "no-cache, no-transform", "X-Accel-Buffering": "no" });
       const send = (o) => res.write(`data: ${JSON.stringify(o)}\n\n`);
       send({ type: "step", label: mode === "profil" ? "Lecture de tes réponses" : mode === "mesure" ? "Lecture de la fiche de la mesure" : mode === "prof" ? "Préparation de l'explication" : "Recherche dans la base de l'app" });
-      try { text = (await llm.chat({ ...opts, ...(mode === "profil" ? { web: false } : {}), maxTokens: S.config.max_tokens || (mode === "profil" ? 1200 : 3000), onEvent: send })).text; }
+      try { text = (await llm.chat({ ...opts, ...(mode === "profil" ? { web: false } : {}), maxTokens: mode === "profil" ? Math.max(S.config.max_tokens || 0, 1500) : S.config.max_tokens || 3000, onEvent: send })).text; }
       catch (e) { console.error("chat stream:", e.message); await logErr(mode, mesureId, msgs, e); send({ type: "error", error: errKind(e), detail: String(e.status || "") }); return res.end(); }
       if (mode !== "profil") await insert("chats", { mode, mesure_id: mode === "mesure" ? String(mesureId).slice(0, 160) : null, question: msgs[msgs.length - 1].content.slice(0, 1000), reponse: text.slice(0, 3000), v: S.version }).catch(() => {});
       send({ type: "done" }); return res.end();

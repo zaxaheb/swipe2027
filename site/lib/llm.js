@@ -149,9 +149,9 @@ const A = {
 const O = {
   url: "https://api.openai.com/v1/responses",
   h: () => ({ authorization: "Bearer " + keyOf("openai") }),
-  base({ model, system, messages, maxTokens }) {
-    const b = { model, instructions: system, input: messages.map((m) => ({ role: m.role, content: m.content })), max_output_tokens: Math.max(maxTokens * 3, maxTokens + 2000) };   // la réflexion interne du modèle compte dans ce plafond
-    if (process.env.OPENAI_REASONING_EFFORT) b.reasoning = { effort: process.env.OPENAI_REASONING_EFFORT };
+  base({ model, system, messages, maxTokens, reasoning }) {
+    const b = { model, instructions: system, input: messages.map((m) => ({ role: m.role, content: m.content })), max_output_tokens: maxTokens + 8000 };   // la réflexion interne du modèle compte dans ce plafond (seuls les tokens produits sont facturés)
+    const eff = reasoning || process.env.OPENAI_REASONING_EFFORT; if (eff) b.reasoning = { effort: eff };
     return b;
   },
   web: (n) => ({ tools: [{ type: "web_search", user_location: { type: "approximate", ...LOC } }], max_tool_calls: n }),
@@ -193,7 +193,7 @@ const O = {
         else if (a.type === "search" || a.query) { onEvent({ type: "search", query: a.query || "" }); if (a.sources?.length) onEvent({ type: "results", n: a.sources.length, sites: [...new Set(a.sources.map((s) => host(s.url)).filter(Boolean))].slice(0, 4) }); }
       }
       else if (ev.type === "response.output_text.annotation.added" && ev.annotation?.url) cites.set(ev.annotation.url, ev.annotation.title || host(ev.annotation.url));
-      else if (ev.type === "response.completed" || ev.type === "response.incomplete") O.addUsage(u, ev.response);
+      else if (ev.type === "response.completed" || ev.type === "response.incomplete") { O.addUsage(u, ev.response); if (ev.type === "response.incomplete") console.warn("openai : réponse tronquée", ev.response?.incomplete_details?.reason); }
       else if (ev.type === "response.failed" || ev.type === "error") throw err("flux interrompu : " + JSON.stringify(ev.response?.error || ev.error || ev).slice(0, 300));
     }
     return { text: full, cites, usage: u };
