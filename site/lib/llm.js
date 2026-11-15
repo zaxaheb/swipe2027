@@ -149,6 +149,26 @@ const A = {
 const O = {
   url: "https://api.openai.com/v1/responses",
   h: () => ({ authorization: "Bearer " + keyOf("openai") }),
+  drop: new Set(),                                    // paramètres refusés par le modèle (appris au premier refus)
+  /** Envoi tolérant : si OpenAI refuse un paramètre (400), on le retire et on réessaie, au plus 3 fois. */
+  async send(body, retries) {
+    const b = JSON.parse(JSON.stringify(body));
+    for (let i = 0; ; i++) {
+      for (const k of O.drop) { const [a, c] = k.split("."); if (c && b[a]) { delete b[a][c]; if (!Object.keys(b[a]).length) delete b[a]; } else delete b[k]; }
+      try { return await post(O.url, O.h(), b, retries); }
+      catch (e) {
+        if (e.status !== 400 || i >= 3) throw e;
+        const m = e.message.match(/(?:unsupported|unknown|unrecognized|invalid)[^']*'([\w.]+)'/i) || e.message.match(/"param"\s*:\s*"([\w.]+)"/);
+        let k = m && m[1];
+        if (!k && /json_schema|text\.format|response_format/i.test(e.message)) k = "text";
+        if (!k && /max_tool_calls/.test(e.message)) k = "max_tool_calls";
+        if (!k && /reasoning/i.test(e.message)) k = "reasoning";
+        if (!k || ["model", "input", "instructions", "stream"].includes(k.split(".")[0]) || O.drop.has(k)) throw e;
+        if (/^tools\[\d+\]\.(\w+)/.test(k)) { const f = k.match(/^tools\[\d+\]\.(\w+)/)[1]; (b.tools || []).forEach((t) => delete t[f]); continue; }
+        console.warn("openai : paramètre refusé, on réessaie sans :", k); O.drop.add(k.replace(/\[\d+\].*$/, ""));
+      }
+    }
+  },
   base({ model, system, messages, maxTokens, reasoning }) {
     const b = { model, instructions: system, input: messages.map((m) => ({ role: m.role, content: m.content })), max_output_tokens: maxTokens + 8000 };   // la réflexion interne du modèle compte dans ce plafond (seuls les tokens produits sont facturés)
     const eff = reasoning || process.env.OPENAI_REASONING_EFFORT; if (eff) b.reasoning = { effort: eff };
@@ -159,12 +179,12 @@ const O = {
   outText: (d) => (d.output || []).filter((o) => o.type === "message").flatMap((o) => o.content || []).filter((c) => c.type === "output_text").map((c) => c.text).join("").trim(),
   check(d) { if (d.status === "incomplete") throw err("réponse tronquée (" + (d.incomplete_details?.reason || "?") + ")"); },
 
-  async text(o) { const u = usage0(); const d = await (await post(O.url, O.h(), O.base({ maxTokens: 1000, ...o }), o.retries)).json(); O.check(d); O.addUsage(u, d); return { text: O.outText(d), usage: u }; },
+  async text(o) { const u = usage0(); const d = await (await O.send(O.base({ maxTokens: 1000, ...o }), o.retries)).json(); O.check(d); O.addUsage(u, d); return { text: O.outText(d), usage: u }; },
 
   async json(o) {
     const u = usage0(), { schema, name = "resultat", web } = o;
     const body = { ...O.base({ maxTokens: 4000, ...o, system: o.system + JSON_ONLY }), text: { format: { type: "json_schema", name, schema, strict: false } }, ...(web ? O.web(web.maxSearches || 3) : {}) };
-    const d = await (await post(O.url, O.h(), body, o.retries)).json(); O.check(d); O.addUsage(u, d);
+    const d = await (await O.send(body, o.retries)).json(); O.check(d); O.addUsage(u, d);
     return { data: parseJSON(O.outText(d)), usage: u };
   },
 
@@ -173,11 +193,11 @@ const O = {
     const body = { ...O.base({ maxTokens: 3000, ...o }), ...(o.web === false ? {} : O.web(maxSearches)) };
     let r;
     if (!O.noStream) {
-      try { r = await post(O.url, O.h(), { ...body, stream: true }, retries); }
+      try { r = await O.send({ ...body, stream: true }, retries); }
       catch (e) { if (e.status === 400 && /verif/i.test(e.message)) O.noStream = true; else throw e; }   // organisation OpenAI non vérifiée : pas de flux
     }
     if (O.noStream) {                                  // repli sans flux : même réponse, envoyée d'un bloc
-      const d = await (await post(O.url, O.h(), body, retries)).json(); O.check(d); O.addUsage(u, d);
+      const d = await (await O.send(body, retries)).json(); O.check(d); O.addUsage(u, d);
       for (const it of d.output || []) {
         if (it.type === "web_search_call") { const a = it.action || {}; if (a.type === "open_page") onEvent({ type: "fetch", url: a.url || "" }); else onEvent({ type: "search", query: a.query || "" }); }
         if (it.type === "message") for (const c of it.content || []) if (c.type === "output_text") { full += c.text; for (const an of c.annotations || []) if (an.url) cites.set(an.url, an.title || host(an.url)); }
