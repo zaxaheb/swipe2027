@@ -18,7 +18,7 @@ const CONFIG = {
   mesure:  { model: chat, max_searches: 10, max_tokens: 3000 },
   prof:    { model: chat, max_searches: 10, max_tokens: 3000 },
   quiz:    { model: chat, max_tokens: 2000 },
-  profil:  { model: chat, max_tokens: 700 },
+  profil:  { model: chat, max_tokens: 1200 },
   fiche:   { model: fiche, max_searches: 3, max_tokens: 5000 }
 };
 let n = 0;

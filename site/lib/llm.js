@@ -110,12 +110,12 @@ const A = {
     throw err("pas de résultat structuré");
   },
 
-  async chat({ model, system, messages, maxSearches = 10, maxTokens = 3000, onEvent = () => {}, retries }) {
+  async chat({ model, system, messages, maxSearches = 10, maxTokens = 3000, onEvent = () => {}, retries, web }) {
     const u = usage0(), conv = [...messages], cites = new Map(); let full = "";
     for (let turn = 0; turn < 8; turn++) {
-      const tools = [A.search(maxSearches), ...(A.fetchOk ? [{ type: "web_fetch_20250910", name: "web_fetch", max_uses: Number(process.env.CHAT_MAX_FETCHES || 3), max_content_tokens: 12000 }] : [])];
+      const tools = web === false ? [] : [A.search(maxSearches), ...(A.fetchOk ? [{ type: "web_fetch_20250910", name: "web_fetch", max_uses: Number(process.env.CHAT_MAX_FETCHES || 3), max_content_tokens: 12000 }] : [])];
       let r;
-      try { r = await post(A.url, A.h(A.fetchOk ? "web-fetch-2025-09-10" : ""), { model, max_tokens: maxTokens, system, tools, messages: conv, stream: true }, retries); }
+      try { r = await post(A.url, A.h(A.fetchOk && web !== false ? "web-fetch-2025-09-10" : ""), { model, max_tokens: maxTokens, system, ...(tools.length ? { tools } : {}), messages: conv, stream: true }, retries); }
       catch (e) { if (e.status === 400 && A.fetchOk && /fetch|beta|tool/i.test(e.message)) { A.fetchOk = false; turn--; continue; } throw e; }
       const blocks = []; let stop = null;
       for await (const ev of sse(r)) {
@@ -150,7 +150,7 @@ const O = {
   url: "https://api.openai.com/v1/responses",
   h: () => ({ authorization: "Bearer " + keyOf("openai") }),
   base({ model, system, messages, maxTokens }) {
-    const b = { model, instructions: system, input: messages.map((m) => ({ role: m.role, content: m.content })), max_output_tokens: maxTokens };
+    const b = { model, instructions: system, input: messages.map((m) => ({ role: m.role, content: m.content })), max_output_tokens: Math.max(maxTokens * 3, maxTokens + 2000) };   // la réflexion interne du modèle compte dans ce plafond
     if (process.env.OPENAI_REASONING_EFFORT) b.reasoning = { effort: process.env.OPENAI_REASONING_EFFORT };
     return b;
   },
@@ -170,7 +170,7 @@ const O = {
 
   async chat({ maxSearches = 10, onEvent = () => {}, retries, ...o }) {
     const u = usage0(), cites = new Map(); let full = "";
-    const r = await post(O.url, O.h(), { ...O.base({ maxTokens: 3000, ...o }), ...O.web(maxSearches), stream: true }, retries);
+    const r = await post(O.url, O.h(), { ...O.base({ maxTokens: 3000, ...o }), ...(o.web === false ? {} : O.web(maxSearches)), stream: true }, retries);
     for await (const ev of sse(r)) {
       if (ev.type === "response.output_text.delta") { full += ev.delta; onEvent({ type: "text", delta: ev.delta }); }
       else if (ev.type === "response.output_item.done" && ev.item?.type === "web_search_call") {
@@ -221,7 +221,7 @@ const G = {
 
   async chat({ onEvent = () => {}, retries, ...o }) {
     const u = usage0(), cites = new Map(), seen = new Set(); let full = "", last = null;
-    const r = await post(G.url(o.model, true), G.h(), { ...G.base({ maxTokens: 3000, ...o }), tools: [{ google_search: {} }] }, retries);
+    const r = await post(G.url(o.model, true), G.h(), { ...G.base({ maxTokens: 3000, ...o }), ...(o.web === false ? {} : { tools: [{ google_search: {} }] }) }, retries);
     for await (const ev of sse(r)) {
       if (ev.error) throw err("flux interrompu : " + JSON.stringify(ev.error).slice(0, 300));
       const gm = ev.candidates?.[0]?.groundingMetadata;

@@ -7,7 +7,7 @@
 // Change PROMPT_VERSION à chaque modification locale ; avec Langfuse, la version vient de Langfuse.
 import { getPrompt } from "./langfuse.js";
 
-export const PROMPT_VERSION = "2026-11-15.1";
+export const PROMPT_VERSION = "2026-11-16.1";
 
 export const TEMPLATES = {
   /* ===== prompt système, commun à tout ===== */
@@ -94,9 +94,17 @@ QUESTION
 DEMANDE
 {{question}}`,
 
-  profil: `TÂCHE : voici les mesures qu'un utilisateur a aimées (POUR) ou rejetées (CONTRE), avec le candidat qui les porte.
-Résume en 130 mots maximum : les thèmes où il adhère, ceux qu'il rejette, les cohérences ou tensions intéressantes, et s'il pioche chez plusieurs candidats.
-Ne le range dans aucun camp, aucune consigne de vote, aucun jugement.
+  profil: `TÂCHE : voici les mesures qu'un utilisateur a aimées (POUR) ou rejetées (CONTRE), avec le candidat qui les porte. Fais-lui un portrait neutre de ses choix.
+Réponds EXACTEMENT avec ces 4 titres markdown, dans cet ordre, et rien d'autre :
+## En un mot
+Une seule phrase qui résume ses choix, sans étiquette politique.
+## Ce que tu approuves
+3 à 5 puces : **thème** : ce qu'il soutient, avec 1 ou 2 exemples précis tirés de la liste.
+## Ce que tu rejettes
+2 à 4 puces, même format.
+## Ce qui ressort
+2 ou 3 puces : cohérences ou tensions intéressantes entre ses choix, et s'il pioche chez plusieurs candidats (cite-les).
+180 mots maximum au total. Ne le range dans aucun camp, aucune consigne de vote, aucun jugement.
 
 POUR
 {{pour}}

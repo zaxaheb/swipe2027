@@ -254,6 +254,25 @@ details.lcard summary::-webkit-details-marker{display:none}
 #c-chart circle{cursor:pointer;stroke:#fff;stroke-width:.6}
 #c-chart circle.sel{stroke:#111;stroke-width:2}
 .cc-info{font-size:14px;margin-top:8px;min-height:20px}
+/* profil : portrait IA */
+.portrait{border-radius:22px;overflow:hidden;border:1px solid var(--line);background:#fff}
+.pt-head{padding:22px 22px 18px;color:#fff;background:linear-gradient(135deg,#17172b 0%,#2c2357 55%,#5b3b8c 100%)}
+.pt-kick{font:600 12px var(--sans);letter-spacing:.08em;text-transform:uppercase;opacity:.75}
+.pt-title{font:700 22px/1.2 var(--sans);margin-top:4px}
+.pt-sub{font-size:14px;opacity:.8;margin-top:6px}
+.pt-body{padding:4px 14px 0}.pt-body:empty{display:none}
+.pt-lead{font:600 21px/1.38 var(--serif);padding:16px 8px 6px}
+.pt-sec{border-radius:16px;padding:14px 16px 6px;margin:10px 0;animation:in .35s ease}
+.pt-sec h4{margin:0 0 8px;font:700 12.5px var(--sans);letter-spacing:.06em;text-transform:uppercase;display:flex;gap:8px;align-items:center}
+.pt-sec h4 span{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:12px;flex:none}
+.pt-sec.ok{background:#eaf6ef}.pt-sec.ok h4{color:var(--pour)}.pt-sec.ok h4 span{background:var(--pour)}
+.pt-sec.ko{background:#fcecea}.pt-sec.ko h4{color:var(--contre)}.pt-sec.ko h4 span{background:var(--contre)}
+.pt-sec.info{background:var(--soft)}.pt-sec.info h4 span{background:#5b3b8c}
+.pt-sec ul,.pt-sec ol{margin:0;padding-left:18px}.pt-sec li{margin:0 0 8px;font-size:15.5px;line-height:1.45}.pt-sec p{margin:0 0 8px;font-size:15.5px}
+.pt-foot{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:14px 22px 20px}
+.pt-wait{display:flex;gap:10px;align-items:center;padding:18px 8px;color:var(--muted)}
+.pt-spin{width:16px;height:16px;border:2px solid var(--line);border-top-color:#5b3b8c;border-radius:50%;animation:spin .8s linear infinite;flex:none}
+.pt-err{padding:14px 8px 4px;color:var(--contre)}
 /* profil : histogramme par candidat */
 .hbars{display:flex;flex-direction:column;gap:9px}
 .hbar{display:grid;grid-template-columns:118px minmax(0,1fr) 40px;gap:10px;align-items:center}
@@ -492,6 +511,23 @@ function mdInline(s){ return s
   .replace(/\[([^\]]{1,140})\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>')
   .replace(/(^|[\s(])(https?:\/\/[^\s<)]+)/g,'$1<a href="$2" target="_blank" rel="noopener">$2</a>')
   .replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/(^|[^*])\*([^*\n]+)\*/g,'$1<i>$2</i>'); }
+/* Appel IA en direct (SSE) : on(ev) reçoit {type:"step"|"search"|"text"|…}. Lève une erreur au format de aiErr(). */
+async function aiStream(payload,on){
+  if(!API) throw Object.assign(new Error("off"),{code:"off"});
+  let r; try{ r=await fetch(API+"/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({...payload,stream:true})}); }catch(e){ throw Object.assign(new Error("off"),{code:"off"}); }
+  if(!r.ok||!/event-stream/.test(r.headers.get("content-type")||"")){ const d=await r.json().catch(()=>({})); throw Object.assign(new Error("http"),{code:r.status===429?(d.error==="quota"?"quota":"rate"):r.status===503?"indispo":r.status===404?"off":"http",st:r.status}); }
+  const rd=r.body.getReader(), dec=new TextDecoder(); let buf="";
+  for(;;){ const {value,done}=await rd.read(); if(done) return; buf+=dec.decode(value,{stream:true}); let i;
+    while((i=buf.indexOf("\n\n"))>=0){ const line=buf.slice(0,i); buf=buf.slice(i+2); if(!line.startsWith("data: ")) continue; let ev; try{ ev=JSON.parse(line.slice(6)); }catch(e){ continue; }
+      if(ev.type==="error") throw Object.assign(new Error("x"),{code:ev.error==="indisponible"?"indispo":ev.error==="surcharge"?"surcharge":ev.error==="rate_limited"?"rate":"http",st:ev.detail});
+      if(ev.type==="done") return; on(ev); } } }
+/* Portrait du profil : le texte (titres ## fixes) devient des blocs colorés ; live = curseur sur le dernier bloc. */
+function portraitHTML(text,live){
+  const secs=[]; let cur=null;
+  String(text||"").split("\n").forEach(l=>{ const m=l.match(/^#{1,4}\s*(.+?)\s*$/); if(m){ cur={t:m[1].replace(/\*/g,""),b:""}; secs.push(cur); } else { if(!cur){ cur={t:"",b:""}; secs.push(cur); } cur.b+=l+"\n"; } });
+  return secs.filter(s=>s.t||s.b.trim()).map((s,i,A)=>{ const k=/un mot|en bref|résumé/i.test(s.t)?"lead":/approuv|adh|soutien/i.test(s.t)?"ok":/rejet|refus/i.test(s.t)?"ko":"info", last=live&&i===A.length-1;
+    if(k==="lead") return `<div class="pt-lead${last?" caret":""}">${mdInline(esc(s.b.trim().replace(/\n+/g," ")))}</div>`;
+    return `<div class="pt-sec ${k}">${s.t?`<h4><span>${{ok:"✓",ko:"✕",info:"✦"}[k]}</span>${esc(s.t)}</h4>`:""}<div class="${last?"caret":""}">${md(s.b)}</div></div>`; }).join(""); }
 /* Markdown simple et sûr : on échappe tout, puis gras, italique, liens, listes, paragraphes. */
 function md(s){
   const L=esc(String(s||"")).split("\n"); let out="", list=null;
@@ -1063,7 +1099,8 @@ function renderProfil(){
     ${list.length?`<div class="liked">${list.slice(0,window.PALL?9999:15).map((k,i)=>`<button class="row" data-rev="${i}" style="text-align:left;width:100%;cursor:pointer"><b style="background:${cat.bg};color:${cat.c}">${cat.l.toUpperCase()}</b><span><span class="badge ${PROGS[BYID[k].P].badge}" ${bcol(BYID[k].P)} style="margin-right:6px">${esc(PROGS[BYID[k].P].cand)}</span>${esc(BYID[k].t)}</span></button>`).join("")}</div>
       ${list.length>15&&!window.PALL?`<button class="linkbtn" id="b-pall">Voir les ${list.length}</button>`:""}
       <div style="margin-top:14px"><button class="cta" id="b-rev">↺ Revoir ces ${list.length} réponses</button></div><p class="note" style="margin:8px 0 0">Touche une mesure pour la revoir et changer d'avis.</p>`:`<p class="note">Aucune réponse « ${cat.l.toLowerCase()} » pour l'instant.</p>`}</div>
-  <div class="box prompt" style="padding-bottom:22px"><div class="label">Ce que disent tes choix</div><p class="note" style="margin:0 0 12px">Un résumé neutre de tes réponses, sans te ranger dans un camp.</p><button class="cta" id="p-ai">Analyser mes choix</button><div class="answer sm" id="p-ai-out" style="margin-top:14px;white-space:pre-wrap"></div></div>
+  <div class="portrait" id="pt"><div class="pt-head"><div class="pt-kick">✦ Ton portrait</div><div class="pt-title">Ce que disent tes choix</div><div class="pt-sub">Une lecture neutre de tes ${pour.length+contre.length} réponses, sans te ranger dans un camp.</div></div>
+    <div class="pt-body" id="pt-body"></div><div class="pt-foot"><button class="cta" id="p-ai"></button><span class="note" id="pt-meta"></span></div></div>
   <div class="endrow"><button class="cta ghost" id="p-reset">Tout recommencer</button></div>
   <p class="note" style="text-align:center"><a href="/confidentialite.html">Confidentialité et données personnelles</a></p>
   <div class="confirm" id="p-confirm"><span class="note">Effacer toutes tes réponses ?</span><button class="cta" id="p-yes" style="background:var(--contre)">Oui, effacer</button><button class="cta ghost" id="p-no">Annuler</button></div></div>`;
@@ -1074,9 +1111,19 @@ function renderProfil(){
   const pa=$("#b-pall"); if(pa) pa.onclick=()=>{ window.PALL=true; renderProfil(); setTimeout(()=>$("#mes-rep").scrollIntoView({block:"start"}),30); };
   $("#p-reset").onclick=()=>$("#p-confirm").classList.add("on"); $("#p-no").onclick=()=>$("#p-confirm").classList.remove("on");
   $("#p-yes").onclick=()=>{SW={};HIST=[];REVIEW=null;saveHist();save();nextProfile();location.hash="swipe";};
-  $("#p-ai").onclick=async()=>{ const b=$("#p-ai"),o=$("#p-ai-out"); b.disabled=true; o.textContent="…"; const L=k=>`- [${BYID[k].P}] ${BYID[k].t}`;
-    try{ o.textContent=await ai({mode:"profil",choix:{pour,contre}}); }
-    catch(e){ o.textContent=aiErr(e); b.disabled=false; } };
+  /* portrait : analyse IA en direct, mise en forme par sections, gardée sur l'appareil */
+  const nRep=pour.length+contre.length, PT=store.get("portrait2027",null), btn=$("#p-ai"), body=$("#pt-body"), meta=$("#pt-meta");
+  const setMeta=(x)=>{ if(!x){ meta.textContent=""; return; } const d=new Date(x.at).toLocaleDateString("fr-FR",{day:"numeric",month:"long"}), nv=nRep-x.n;
+    meta.textContent=`Analyse du ${d}, sur ${x.n} réponses`+(nv>0?` · ${nv} nouvelle${nv>1?"s":""} depuis`:""); };
+  if(PT){ body.innerHTML=portraitHTML(PT.text,false); btn.textContent="↻ Refaire l'analyse"; setMeta(PT); } else btn.textContent="✦ Analyser mes choix";
+  btn.onclick=async()=>{ btn.disabled=true; btn.textContent="Analyse en cours…"; meta.textContent="";
+    body.innerHTML=`<div class="pt-wait"><span class="pt-spin"></span>Lecture de tes ${nRep} réponses…</div>`;
+    let txt="", t=null; const paint=()=>{ t=null; body.innerHTML=portraitHTML(txt,true); };
+    try{ await aiStream({mode:"profil",choix:{pour,contre}},ev=>{ if(ev.type==="text"){ txt+=ev.delta; if(!t) t=setTimeout(paint,40); } });
+      clearTimeout(t); if(!txt.trim()) throw Object.assign(new Error("vide"),{code:"http"});
+      body.innerHTML=portraitHTML(txt,false); const x={text:txt,n:nRep,at:Date.now()}; store.set("portrait2027",x); setMeta(x); btn.textContent="↻ Refaire l'analyse"; }
+    catch(e){ clearTimeout(t); body.innerHTML=`<div class="pt-err">${esc(aiErr(e))}</div>`+(PT?portraitHTML(PT.text,false):""); btn.textContent=PT?"↻ Refaire l'analyse":"✦ Analyser mes choix"; setMeta(PT); }
+    btn.disabled=false; };
 }
 
 /* ================= infos ================= */
