@@ -85,6 +85,7 @@ const A = {
   addUsage(u, d) { const x = d?.usage || {}; u.in += (x.input_tokens || 0) + (x.cache_read_input_tokens || 0) + (x.cache_creation_input_tokens || 0); u.out += x.output_tokens || 0; u.cacheRead += x.cache_read_input_tokens || 0; u.cacheWrite += x.cache_creation_input_tokens || 0; u.searches += x.server_tool_use?.web_search_requests || 0; },
   search: (n) => ({ type: "web_search_20250305", name: "web_search", max_uses: n, user_location: { type: "approximate", ...LOC } }),
   fetchOk: process.env.CHAT_WEB_FETCH !== "0",
+  noForce: new Set(),                                 // modèles qui refusent tool_choice « tool » / « any »
 
   async text({ model, system, messages, maxTokens = 1000, retries }) {
     const u = usage0(); const d = await (await post(A.url, A.h(), { model, max_tokens: maxTokens, system, messages }, retries)).json(); A.addUsage(u, d);
@@ -95,15 +96,20 @@ const A = {
     const u = usage0();
     const tool = { name, description, input_schema: schema, cache_control: { type: "ephemeral" } };
     const sys = [{ type: "text", text: system, cache_control: { type: "ephemeral" } }];   // cache : ~10 % du prix à partir du 2e appel
-    if (!web) {
-      const d = await (await post(A.url, A.h(), { model, max_tokens: maxTokens, system: sys, messages, tools: [tool], tool_choice: { type: "tool", name } }, retries)).json(); A.addUsage(u, d);
-      const c = (d.content || []).find((b) => b.type === "tool_use"); if (!c) throw err("pas de résultat structuré"); return { data: c.input, usage: u };
+    if (!web && !A.noForce.has(model)) {
+      try {
+        const d = await (await post(A.url, A.h(), { model, max_tokens: maxTokens, system: sys, messages, tools: [tool], tool_choice: { type: "tool", name } }, retries)).json(); A.addUsage(u, d);
+        const c = (d.content || []).find((b) => b.type === "tool_use"); if (c) return { data: c.input, usage: u };
+      } catch (e) { if (!(e.status === 400 && /tool_choice/i.test(e.message))) throw e; A.noForce.add(model); }   // modèle qui refuse l'outil imposé : on passe en mode libre ci-dessous
     }
-    const tools = [A.search(web.maxSearches || 3), tool], conv = [...messages];
+    const tools = web ? [A.search(web.maxSearches || 3), tool] : [tool], conv = [...messages];
+    sys[0] = { ...sys[0], text: sys[0].text + `\n\nTermine OBLIGATOIREMENT en appelant l'outil ${name} avec le résultat complet.` };
     for (let i = 0; i < 6; i++) {                      // la recherche peut demander plusieurs tours (pause_turn)
       const d = await (await post(A.url, A.h(), { model, max_tokens: maxTokens, system: sys, tools, messages: conv }, retries)).json(); A.addUsage(u, d);
       const c = (d.content || []).find((b) => b.type === "tool_use" && b.name === name);
       if (c) return { data: c.input, usage: u };
+      const txt = (d.content || []).filter((b) => b.type === "text").map((b) => b.text).join("");
+      if (d.stop_reason !== "pause_turn" && /\{[\s\S]*\}/.test(txt)) { try { return { data: parseJSON(txt), usage: u }; } catch { /* pas du JSON : on redemande l'outil */ } }
       conv.push({ role: "assistant", content: d.content });
       if (d.stop_reason !== "pause_turn") conv.push({ role: "user", content: `Appelle maintenant l'outil ${name} avec le résultat complet.` });
     }
