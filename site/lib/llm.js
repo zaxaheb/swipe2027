@@ -170,7 +170,21 @@ const O = {
 
   async chat({ maxSearches = 10, onEvent = () => {}, retries, ...o }) {
     const u = usage0(), cites = new Map(); let full = "";
-    const r = await post(O.url, O.h(), { ...O.base({ maxTokens: 3000, ...o }), ...(o.web === false ? {} : O.web(maxSearches)), stream: true }, retries);
+    const body = { ...O.base({ maxTokens: 3000, ...o }), ...(o.web === false ? {} : O.web(maxSearches)) };
+    let r;
+    if (!O.noStream) {
+      try { r = await post(O.url, O.h(), { ...body, stream: true }, retries); }
+      catch (e) { if (e.status === 400 && /verif/i.test(e.message)) O.noStream = true; else throw e; }   // organisation OpenAI non vérifiée : pas de flux
+    }
+    if (O.noStream) {                                  // repli sans flux : même réponse, envoyée d'un bloc
+      const d = await (await post(O.url, O.h(), body, retries)).json(); O.check(d); O.addUsage(u, d);
+      for (const it of d.output || []) {
+        if (it.type === "web_search_call") { const a = it.action || {}; if (a.type === "open_page") onEvent({ type: "fetch", url: a.url || "" }); else onEvent({ type: "search", query: a.query || "" }); }
+        if (it.type === "message") for (const c of it.content || []) if (c.type === "output_text") { full += c.text; for (const an of c.annotations || []) if (an.url) cites.set(an.url, an.title || host(an.url)); }
+      }
+      if (full) onEvent({ type: "text", delta: full });
+      return { text: full, cites, usage: u };
+    }
     for await (const ev of sse(r)) {
       if (ev.type === "response.output_text.delta") { full += ev.delta; onEvent({ type: "text", delta: ev.delta }); }
       else if (ev.type === "response.output_item.done" && ev.item?.type === "web_search_call") {

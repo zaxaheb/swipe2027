@@ -1088,6 +1088,8 @@ function renderProfil(){
   <div class="profile" style="animation:none">
   ${accountHTML()}
   ${radarHTML(pour,contre)}
+  <div class="portrait" id="pt"><div class="pt-head"><div class="pt-kick">✦ Ton portrait</div><div class="pt-title">Ce que disent tes choix</div><div class="pt-sub">Une lecture neutre de tes ${pour.length+contre.length} réponses, sans te ranger dans un camp.</div></div>
+    <div class="pt-body" id="pt-body"></div><div class="pt-foot"><button class="cta" id="p-ai"></button><span class="note" id="pt-meta"></span></div></div>
   <div class="box prompt" style="padding-bottom:22px"><div class="label">Ton accord avec chaque candidat</div>
     <div class="hbars">${hbarsHTML}</div>
     <p class="note" style="margin:12px 0 0">% de mesures « pour » parmi celles où tu as tranché (pour ou contre).</p></div>
@@ -1099,8 +1101,6 @@ function renderProfil(){
     ${list.length?`<div class="liked">${list.slice(0,window.PALL?9999:15).map((k,i)=>`<button class="row" data-rev="${i}" style="text-align:left;width:100%;cursor:pointer"><b style="background:${cat.bg};color:${cat.c}">${cat.l.toUpperCase()}</b><span><span class="badge ${PROGS[BYID[k].P].badge}" ${bcol(BYID[k].P)} style="margin-right:6px">${esc(PROGS[BYID[k].P].cand)}</span>${esc(BYID[k].t)}</span></button>`).join("")}</div>
       ${list.length>15&&!window.PALL?`<button class="linkbtn" id="b-pall">Voir les ${list.length}</button>`:""}
       <div style="margin-top:14px"><button class="cta" id="b-rev">↺ Revoir ces ${list.length} réponses</button></div><p class="note" style="margin:8px 0 0">Touche une mesure pour la revoir et changer d'avis.</p>`:`<p class="note">Aucune réponse « ${cat.l.toLowerCase()} » pour l'instant.</p>`}</div>
-  <div class="portrait" id="pt"><div class="pt-head"><div class="pt-kick">✦ Ton portrait</div><div class="pt-title">Ce que disent tes choix</div><div class="pt-sub">Une lecture neutre de tes ${pour.length+contre.length} réponses, sans te ranger dans un camp.</div></div>
-    <div class="pt-body" id="pt-body"></div><div class="pt-foot"><button class="cta" id="p-ai"></button><span class="note" id="pt-meta"></span></div></div>
   <div class="endrow"><button class="cta ghost" id="p-reset">Tout recommencer</button></div>
   <p class="note" style="text-align:center"><a href="/confidentialite.html">Confidentialité et données personnelles</a></p>
   <div class="confirm" id="p-confirm"><span class="note">Effacer toutes tes réponses ?</span><button class="cta" id="p-yes" style="background:var(--contre)">Oui, effacer</button><button class="cta ghost" id="p-no">Annuler</button></div></div>`;
@@ -1121,7 +1121,8 @@ function renderProfil(){
   btn.onclick=async()=>{ btn.disabled=true; btn.textContent="Analyse en cours…"; meta.textContent="";
     body.innerHTML=`<div class="pt-wait"><span class="pt-spin"></span>Lecture de tes ${nRep} réponses…</div>`;
     let txt="", t=null; const paint=()=>{ t=null; body.innerHTML=portraitHTML(txt,true); };
-    try{ await aiStream({mode:"profil",choix:{pour,contre}},ev=>{ if(ev.type==="text"){ txt+=ev.delta; if(!t) t=setTimeout(paint,40); } });
+    try{ try{ await aiStream({mode:"profil",choix:{pour,contre}},ev=>{ if(ev.type==="text"){ txt+=ev.delta; if(!t) t=setTimeout(paint,40); } }); }
+        catch(e){ if(e.code!=="http"||txt) throw e; clearTimeout(t); txt=await ai({mode:"profil",choix:{pour,contre}}); }   // repli : même demande, sans le direct
       clearTimeout(t); if(!txt.trim()) throw Object.assign(new Error("vide"),{code:"http"});
       body.innerHTML=portraitHTML(txt,false); const x={text:txt,n:nRep,at:Date.now()}; store.set("portrait2027",x); setMeta(x); btn.textContent=label(x); }
     catch(e){ clearTimeout(t); body.innerHTML=`<div class="pt-err">${esc(aiErr(e))}</div>`+(PT?portraitHTML(PT.text,false):""); btn.textContent=label(PT); setMeta(PT); }
