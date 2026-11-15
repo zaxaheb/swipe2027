@@ -46,8 +46,10 @@ Puis dans le tableau de bord Vercel > ton projet > **Settings > Environment Vari
 
 | Variable | Valeur |
 |---|---|
-| `ANTHROPIC_API_KEY` | ta clé API (console.anthropic.com) |
-| `ANTHROPIC_MODEL` | `claude-sonnet-5-5` (recommandé : bon rapport qualité/prix, gère la recherche web) |
+| `LLM_CHAT` | modèle du chat, des quiz et du profil, au format `fournisseur:modèle` (ex. `openai:gpt-6-luna`) |
+| `LLM_FICHE` | modèle des fiches générées (ex. `anthropic:claude-sonnet-5-5`) |
+| `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` / `GEMINI_API_KEY` | seulement les clés des fournisseurs utilisés |
+| `ANTHROPIC_MODEL` | ancien réglage, encore accepté si `LLM_CHAT` / `LLM_FICHE` sont absents |
 | `SUPABASE_URL` | Project URL |
 | `SUPABASE_SERVICE_ROLE_KEY` | clé service_role (secrète) |
 | `QUOTA_SALT` | une phrase au hasard (sert à hacher les IP) |
@@ -70,6 +72,10 @@ npx vercel --prod
 Les fiches générées par les visiteurs sont dans la table `fiches` de Supabase. Tu peux les relire, les corriger, ou supprimer une ligne pour forcer une nouvelle génération.
 
 ## 4. L'IA : prompts et objets
+
+- **Indépendant du fournisseur** : tout passe par `lib/llm.js` (Claude, GPT ou Gemini). Pour changer de modèle, change `LLM_CHAT` ou `LLM_FICHE` dans Vercel, puis redéploie. `/api/health?key=<ADMIN_PASSWORD>` teste les deux modèles configurés.
+- Recherches web : plafonnées par `CHAT_MAX_SEARCHES` (10) et `FICHE_MAX_SEARCHES` (3) chez Anthropic et OpenAI. Gemini n'a pas de plafond par requête.
+- Script de fiches en lot : `node scripts/generer-fiches.mjs --n 20 --model openai:gpt-6-luna` (affiche le coût estimé à la fin).
 
 - **Le navigateur n'envoie jamais de prompt.** Il envoie seulement `{ mode, mesureId, messages }`, et le serveur construit le prompt dans `lib/prompts.js`. Sans ça, n'importe qui pourrait utiliser ta clé comme un Claude gratuit.
 - **4 prompts :**

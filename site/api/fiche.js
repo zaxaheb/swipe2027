@@ -1,11 +1,11 @@
 // GET  /api/fiche?id=…  → fiche partagée si elle existe (404 sinon)
-// POST /api/fiche {id}  → génère la fiche (Claude + recherche web), l'enregistre pour tout le monde
+// POST /api/fiche {id}  → génère la fiche (IA configurée dans LLM_FICHE + recherche web), l'enregistre pour tout le monde
 import { SYSTEM, ficheUser, PROMPT_VERSION } from "../lib/prompts.js";
 import { FICHE, cleanFiche } from "../lib/schemas.js";
 import { mesure, base } from "../lib/data.js";
 import { consume } from "../lib/quota.js";
 import { rpc, select, upsert } from "../lib/supa.js";
-import { messages } from "../lib/anthropic.js";
+import * as llm from "../lib/llm.js";
 
 export const config = { maxDuration: 90 };
 const ID = /^[a-z0-9-]{2,160}$/;
@@ -24,24 +24,14 @@ export default async function handler(req, res) {
   if (!(await rpc("take_lock", { p_id: id }))) return res.status(409).json({ error: "en_cours" });
   try {
     if (!(await consume(req, "fiche"))) return res.status(429).json({ error: "quota" });
-    const tools = [
-      { type: "web_search_20250305", name: "web_search", max_uses: Number(process.env.FICHE_MAX_SEARCHES || 3) },
-      { name: "enregistrer_fiche", description: "Enregistre la fiche sourcée finale. À appeler une seule fois, à la fin.", input_schema: FICHE }
-    ];
-    const msgs = [{ role: "user", content: ficheUser(m) }];
-    let d, call;
-    for (let i = 0; i < 3 && !call; i++) {           // la recherche web peut demander plusieurs tours (pause_turn)
-      d = await messages({ max_tokens: 5000, system: SYSTEM.fiche, tools, messages: msgs });
-      call = (d.content || []).find((c) => c.type === "tool_use" && c.name === "enregistrer_fiche");
-      if (call || d.stop_reason !== "pause_turn") break;
-      msgs.push({ role: "assistant", content: d.content });
-    }
-    if (!call) throw Object.assign(new Error("pas_de_fiche"), { status: 502 });
-    const fiche = { ...cleanFiche(call.input), genere: true, maj: new Date().toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" }), v: PROMPT_VERSION };
+    const n = Number(process.env.FICHE_MAX_SEARCHES || 3);
+    const { data } = await llm.json({ usage: "fiche", system: SYSTEM.fiche + `\n\nBudget : ${n} recherches web maximum. Choisis des requêtes précises.`,
+      messages: [{ role: "user", content: ficheUser(m) }], schema: FICHE, name: "enregistrer_fiche", description: "Enregistre la fiche sourcée finale.", web: { maxSearches: n }, maxTokens: 5000 });
+    const fiche = { ...cleanFiche(data), genere: true, maj: new Date().toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" }), v: PROMPT_VERSION };
     await upsert("fiches", { id, data: fiche });
     res.status(200).json(fiche);
   } catch (e) {
-    res.status(e.status || 500).json({ error: e.message === "fiche_incomplete" ? "incomplete" : "erreur" });
+    res.status(e.code === "credit" ? 503 : e.status || 500).json({ error: e.message === "fiche_incomplete" ? "incomplete" : e.code === "credit" ? "indisponible" : "erreur" });
   } finally {
     await rpc("release_lock", { p_id: id }).catch(() => {});
   }
