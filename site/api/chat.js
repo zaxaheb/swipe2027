@@ -47,7 +47,7 @@ export default async function handler(req, res) {
     }
     if (mode === "profil") {                        // portrait structuré : chiffres calculés ici (exacts), texte rédigé par l'IA
       if (!(await peek(req, "profil"))) return res.status(429).json({ error: "quota" });
-      const B = base(), ok = (id) => B.byId[id] && !/ne se présente plus/.test(B.candidats[B.byId[id].P]?.cand || "");
+      const B = base(), ok = (id) => B.byId[id] && !/ne se présente plus/i.test(B.candidats[B.byId[id].P]?.cand || "");
       const pour = (choix?.pour || []).filter(ok), contre = (choix?.contre || []).filter(ok);
       const nomOf = (P) => (B.candidats[P]?.cand || P);
       const L = (ids) => ids.slice(-80).map((id) => B.byId[id]).map((m) => `- [${nomOf(m.P)}] ${m.t} (thème : ${m.section})`).join("\n") || "(aucune)";
@@ -55,10 +55,14 @@ export default async function handler(req, res) {
       for (const [ids, k] of [[pour, "a"], [contre, "b"]]) for (const id of ids) { const m = B.byId[id];
         (st[m.P] ||= { P: m.P, cand: nomOf(m.P), nom: B.candidats[m.P]?.nom || m.P, a: 0, b: 0 })[k]++; (th[m.section] ||= { a: 0, b: 0 })[k]++; }
       const C = Object.values(st).map((x) => ({ ...x, t: x.a + x.b, p: Math.round(100 * x.a / (x.a + x.b)) })).sort((x, y) => y.p - x.p || y.t - x.t);
-      const fiables = C.filter((x) => x.t >= 3), proches = (fiables.length ? fiables : C).slice(0, 3);
+      // « Proches » = au moins 50 % d'accord. D'abord ceux avec 3 réponses ou plus, puis on complète avec ceux à 2 réponses (marqués « peu »).
+      // Jamais un candidat majoritairement rejeté, même s'il est l'un des seuls avec assez de réponses.
+      const byP = (x, y) => y.p - x.p || y.a - x.a || y.t - x.t;
+      const fiables = C.filter((x) => x.t >= 3 && x.p >= 50).sort(byP), maigres = C.filter((x) => x.t === 2 && x.p >= 50).sort(byP);
+      const proches = [...fiables, ...maigres.map((x) => ({ ...x, peu: true }))].slice(0, 3);
       const stats = C.map((x) => `- ${x.cand} (${x.nom}) : ${x.a} pour, ${x.b} contre → ${x.p} % d'accord${x.t < 3 ? " (peu de réponses)" : ""}`).join("\n");
       const themes = Object.entries(th).sort((x, y) => (y[1].a + y[1].b) - (x[1].a + x[1].b)).slice(0, 15).map(([s, v]) => `- ${s} : ${v.a} pour, ${v.b} contre`).join("\n");
-      const S = await build("profil", VARS.profil(L(pour), L(contre), stats, themes, proches.map((x) => `${x.cand} (${x.p} %)`).join(", ")));
+      const S = await build("profil", VARS.profil(L(pour), L(contre), stats, themes, (proches.map((x) => `${x.cand} (${x.p} %${x.peu ? ", peu de réponses" : ""})`).join(", ") || "(aucun pour l'instant : pas assez de réponses ou aucun candidat à 50 % ou plus ; laisse candidats_proches vide)")));
       const { data } = await llm.json({ usage: "chat", spec: S.config.model, reasoning: S.config.reasoning || "low", system: S.system, messages: [{ role: "user", content: S.user }],
         schema: PORTRAIT, name: "portrait", description: "Enregistre le portrait.", maxTokens: Math.max(S.config.max_tokens || 0, 1500), trace: { name: "profil", prompt: S.prompt, tags: ["profil"] } });
       const cut = (s, n) => String(s || "").slice(0, n), list = (a, n) => (Array.isArray(a) ? a : []).slice(0, n);
@@ -68,7 +72,7 @@ export default async function handler(req, res) {
         approuves: list(data?.approuves, 5).map((x) => ({ theme: cut(x.theme, 60), texte: cut(x.texte, 400) })),
         rejettes: list(data?.rejettes, 5).map((x) => ({ theme: cut(x.theme, 60), texte: cut(x.texte, 400) })),
         ressort: list(data?.ressort, 4).map((x) => cut(x, 400)),
-        proches: proches.map((x) => ({ P: x.P, cand: x.cand, nom: x.nom, a: x.a, b: x.b, p: x.p,
+        proches: proches.map((x) => ({ P: x.P, cand: x.cand, nom: x.nom, a: x.a, b: x.b, p: x.p, peu: !!x.peu,
           pourquoi: why[x.cand.toLowerCase()] || Object.entries(why).find(([k]) => k.includes(x.cand.split(" ").pop().toLowerCase()))?.[1] || "" }))
       };
       if (!portrait.en_un_mot && !portrait.approuves.length) throw new Error("portrait vide");

@@ -594,7 +594,8 @@ function portraitHTML(p){
   if(!p) return ""; const t=s=>mdInline(esc(String(s||""))); let i=0; const d=()=>` style="animation-delay:${(i++)*90}ms"`;
   const items=a=>`<ul>${a.map(x=>`<li><b>${esc(x.theme)}</b> : ${t(x.texte)}</li>`).join("")}</ul>`;
   let s=p.en_un_mot?`<div class="pt-lead"${d()}>${t(p.en_un_mot)}</div>`:"";
-  if((p.proches||[]).length) s+=`<div class="pt-sec pro"${d()}><h4><span>★</span>Tes candidats les plus proches</h4>${p.proches.map((c,k)=>`<div class="pt-c"><div class="pt-cr"><b>${k+1}. ${esc(c.cand)}</b><span>${c.p} %</span></div><div class="pt-ct"><i style="width:${c.p}%;background:linear-gradient(90deg,${(GR[c.P]||GR0.RN)[0]})"></i></div><div class="pt-cn">${c.a} pour · ${c.b} contre${c.pourquoi?` · ${t(c.pourquoi)}`:""}</div></div>`).join("")}</div>`;
+  const PR=(p.proches||[]).filter(c=>c.p>=50);   // un candidat majoritairement rejeté n'est jamais « proche » (anciens portraits compris)
+  if(PR.length) s+=`<div class="pt-sec pro"${d()}><h4><span>★</span>Tes candidats les plus proches</h4>${PR.map((c,k)=>`<div class="pt-c"><div class="pt-cr"><b>${k+1}. ${esc(c.cand)}</b><span>${c.p} %</span></div><div class="pt-ct"><i style="width:${c.p}%;background:linear-gradient(90deg,${(GR[c.P]||GR0.RN)[0]})"></i></div><div class="pt-cn">${c.a} pour · ${c.b} contre${c.peu?" (peu de réponses)":""}${c.pourquoi?` · ${t(c.pourquoi)}`:""}</div></div>`).join("")}</div>`;
   if((p.approuves||[]).length) s+=`<div class="pt-sec ok"${d()}><h4><span>✓</span>Ce que tu approuves</h4>${items(p.approuves)}</div>`;
   if((p.rejettes||[]).length) s+=`<div class="pt-sec ko"${d()}><h4><span>✕</span>Ce que tu rejettes</h4>${items(p.rejettes)}</div>`;
   if((p.ressort||[]).length) s+=`<div class="pt-sec info"${d()}><h4><span>✦</span>Ce qui ressort</h4><ul>${p.ressort.map(x=>`<li>${t(x)}</li>`).join("")}</ul></div>`;
