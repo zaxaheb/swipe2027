@@ -59,7 +59,8 @@ main{flex:1;overflow-y:auto;overflow-x:hidden;min-height:0;scroll-behavior:smoot
 .box{position:relative;background:var(--card);border-radius:var(--r);border:1px solid var(--line)}
 .photo{min-height:400px;border:0;color:#fff;padding:26px 22px 30px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
 .photo .q{font:600 clamp(25px,6.6vw,32px)/1.18 var(--serif);letter-spacing:-.01em}
-.photo .over{position:absolute;top:18px;left:18px;right:18px;display:flex;gap:6px;flex-wrap:wrap}
+.photo .over{position:static;margin:-8px -4px auto;padding-bottom:22px;display:flex;gap:6px;flex-wrap:wrap}   /* dans le flux : un texte long pousse la carte au lieu de passer sous les badges */
+.photo .q.l{font-size:clamp(21px,5.4vw,26px)}.photo .q.xl{font-size:clamp(18px,4.6vw,22px);line-height:1.25}
 .photo .over .badge{background:rgba(255,255,255,.22);color:#fff;backdrop-filter:blur(6px)}
 .photo.small{min-height:260px}
 .photo ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font:500 18px/1.35 var(--serif)}
@@ -163,6 +164,7 @@ details[open].fold>summary{margin-bottom:0}
 .op{padding:12px 0;border-top:1px solid var(--line)}.op:first-of-type{border-top:0;padding-top:0}
 .op .who{font:600 13px var(--sans);color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
 .op .det-lead{font-size:19px}
+.op-s{font-size:14px;line-height:1.45;padding:9px 0;border-top:1px solid var(--line)}.op-s:first-of-type{border-top:0}.op-s .src{font-size:12.5px;color:var(--muted);white-space:nowrap;margin-top:0}
 .det-p.big{font:600 22px/1.35 var(--serif)}
 .det .eco-big{margin-bottom:12px}
 .camps{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
@@ -785,7 +787,7 @@ function renderProfile(q){
   if(REVIEW){ const v=SW[m.id]; parts.push(`<div class="box" style="padding:12px 14px;display:flex;align-items:center;gap:10px;background:var(--soft);border:0"><div style="flex:1;font-size:14px"><b>Révision · ${esc(REVIEW.label)}</b> · ${REVIEW.i+1} / ${REVIEW.ids.length}<br><span class="note">${v===undefined?"Pas encore de réponse. ❤ ou ✕ pour répondre, → pour passer.":`Tu avais répondu : <b style="color:${v===1?"var(--pour)":v===-1?"var(--contre)":"var(--muted)"}">${v===1?"pour":v===-1?"contre":"sans avis"}</b>. ❤ ou ✕ pour changer, → pour garder.`}</span></div><button class="cta ghost" id="b-quit-rev" style="padding:8px 14px">Quitter</button></div>`); }
   parts.push(`<div class="ph-name"><div><div class="kicker">${REVIEW?"Déjà vue":(done+1)+" / "+q.all.length} · ${esc(short(m.S.partie))}</div><h2>${esc(m.S.section)}</h2></div></div>`);
   /* la mesure */
-  parts.push(`<div class="box photo" style="background:${gradOf(m)}"><div class="over">${pBadge(m)}${m.cle?'<span class="badge">Mesure clé</span>':""}${F?`<span class="badge">${F.genere?"Fiche générée":"Fiche sourcée"}</span>`:""}</div><div class="q">${esc(m.t)}</div></div>`);
+  parts.push(`<div class="box photo" style="background:${gradOf(m)}"><div class="over">${pBadge(m)}${m.cle?'<span class="badge">Mesure clé</span>':""}${F?`<span class="badge">${F.genere?"Fiche générée":"Fiche sourcée"}</span>`:""}</div><div class="q${m.t.length>230?" xl":m.t.length>140?" l":""}">${esc(m.t)}</div></div>`);
   /* infos */
   if(FEAT.ficheComplete) parts.push(`<div class="box"><div class="vitals"><div class="vital">${IC.flag}${esc(P.nom)} · 2027</div>${m.cle?`<div class="vital">${IC.key}Mesure clé</div>`:""}${m.page?`<div class="vital">${IC.book}Livre p. ${m.page}</div>`:""}<div class="vital">${IC.folder}${esc(m.S.chapitre)}</div></div>
     <div class="vrow">${IC.list}<span>${esc(short(m.S.partie))}</span></div>
@@ -811,9 +813,9 @@ function renderProfile(q){
     /* 2. les opposants : ce qui a été dit + les objections de fond */
     const C=F.critiques||[], T=F.tensions||[], camps=[...new Set(C.map(c=>c.camp).filter(Boolean))];
     if(C.length||T.length) parts.push(fold(`Ce qu'en disent les opposants`,
-      `${camps.length?`<div class="camps">${camps.map(c=>`<span class="badge">${esc(c)}</span>`).join("")}</div>`:""}<div class="answer sm" style="margin-top:10px">${esc(one(C.length?C[0].texte:T[0],200))}</div>`,
-      (C.length?`<div class="det-h">Ce qui a été dit</div>`+C.map(c=>`<div class="op"><div class="who">${esc(c.camp||"")}${c.qui?` · ${esc(c.qui)}`:""}</div>${lead(c.texte)}</div>`).join(""):"")+
-      (T.length?`<div class="det-h">Les objections de fond</div>`+T.map(x=>`<p class="det-body">• ${esc(x)}</p>`).join(""):"")));
+      `${camps.length?`<div class="camps">${camps.map(c=>`<span class="badge">${esc(c)}</span>`).join("")}</div>`:""}<div class="answer sm" style="margin-top:10px">${esc(one(T.length?T[0]:C[0].texte,200))}</div>`,
+      (T.length?`<div class="det-h">Sur le fond</div>`+T.map((x,i)=>i===0?lead(x):`<p class="det-body">${esc(x)}</p>`).join(""):"")+
+      (C.length?`<div class="det-h">Ce qu'ils ont dit</div>`+C.slice(0,4).map(c=>`<div class="op-s"><b>${esc(c.camp||"")}${c.qui?` · ${esc(c.qui)}`:""}</b> : ${esc(one(c.texte,180))} ${srcA(c)}</div>`).join(""):"")));
     /* 3. ailleurs dans le monde */
     const W=F.monde||[];
     if(W.length) parts.push(fold(`Et ailleurs dans le monde ?`,`<div class="answer sm">${esc(W.map(w=>w.pays).slice(0,4).join(" · "))}</div>`,
