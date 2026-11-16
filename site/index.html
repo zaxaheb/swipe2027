@@ -350,7 +350,7 @@ details.lcard summary::-webkit-details-marker{display:none}
   #convo:not(.on) .cv-empty{display:flex}
   .cv-empty{flex:1;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;padding:40px;color:var(--muted)}
   .cv-empty b{color:var(--ink);font-size:17px}.cv-e-ic{font-size:34px}
-  #cv-back{display:none}
+  body:not(.chatv) #cv-back{display:none}
   #convo header{padding:16px 18px}
   .msgs,.sugg,.composer{max-width:none}
   .actbar{left:236px;right:min(440px,32vw);bottom:46px}
@@ -361,6 +361,14 @@ details.lcard summary::-webkit-details-marker{display:none}
   /* Profil et Condamnations : pleine largeur sur deux colonnes (pas de panneau de discussion) */
   body.wide{grid-template-columns:236px minmax(0,1fr)}
   body.wide #convo{display:none!important}
+  /* Comprendre : la conversation s'ouvre par-dessus, comme sur téléphone */
+  body.chatv{grid-template-columns:236px minmax(0,1fr)}
+  body.chatv #convo{position:fixed;left:236px;right:0;top:0;bottom:0;z-index:20;border-left:0;display:none}
+  body.chatv #convo.on{display:flex}
+  body.chatv .msgs,body.chatv .sugg,body.chatv .composer{max-width:760px}
+  .cv-open{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:26px 10px 14px}
+  .cv-open b{font-size:18px}.cv-open span{color:var(--muted);font-size:14px;max-width:320px}.cv-o-ic{font-size:30px}
+  .cv-resume{align-self:center;margin-top:4px}
   body.wide .view{max-width:1240px}
   #v-profil .profile{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
   #v-profil .profile>*{grid-column:1/-1}
@@ -697,7 +705,7 @@ function bindAccount(root){
 /* ================= navigation ================= */
 /* Version ordi : sur grand écran, la discussion à droite suit la mesure affichée (sauf si on est dans une autre conversation). */
 const DESK=matchMedia("(min-width:1100px)");
-function deskFollow(){ try{ if(!DESK.matches||!CURM||curView()!=="swipe") return; if(CK&&!isMes(CK)&&$("#convo").classList.contains("on")) return; if(CK!=="m:"+CURM.id) openConvo("m:"+CURM.id); }catch(e){ setTimeout(deskFollow,50); } }   // au chargement, le chat n'est pas encore prêt : on réessaie
+function deskFollow(){ try{ if(!DESK.matches||!CURM||curView()!=="swipe") return; if(CK!=="m:"+CURM.id||!$("#convo").classList.contains("on")) openConvo("m:"+CURM.id,{fresh:true}); }catch(e){ setTimeout(deskFollow,50); } }   // au chargement, le chat n'est pas encore prêt : on réessaie
 setTimeout(deskFollow,0);
 DESK.addEventListener("change",()=>{ if(!DESK.matches) $("#convo").classList.remove("on"); else deskFollow(); });
 const VIEWS=["swipe",...(FEAT.votes?["votes"]:[]),"cond","chat","profil"];
@@ -705,7 +713,8 @@ const curView=()=>{ const v=location.hash.slice(1); return VIEWS.includes(v)?v:"
 function show(v){ if(!VIEWS.includes(v)) v="swipe";
   $$(".view").forEach(s=>s.classList.toggle("on",s.id==="v-"+v));
   $$("nav.tabs button").forEach(b=>b.setAttribute("aria-current",b.dataset.v===v?"page":"false"));
-  document.body.classList.toggle("wide",v==="profil"||v==="cond");
+  document.body.classList.toggle("wide",v==="profil"||v==="cond"); document.body.classList.toggle("chatv",v==="chat");
+  if(DESK.matches&&v==="chat"&&CK&&isMes(CK)) $("#convo").classList.remove("on");
   $("#actbar").classList.toggle("hidden",v!=="swipe"||!CURM); $(".kbd-hint").classList.toggle("on",v==="swipe"&&!!CURM); $("#b-undo").disabled=REVIEW?REVIEW.i===0:!HIST.length;
   $("#fab-chat").hidden=v==="chat"; setTimeout(fabDock,50);
   if(v==="profil") renderProfil(); if(v==="chat") renderThreads(); if(v==="swipe") deskFollow(); setTimeout(()=>track(v),1500); }
@@ -1027,13 +1036,17 @@ function renderThreads(){ $("#chat-dot").style.display="none"; renderTopics();
 let CK=null;
 $("#new-chat").onclick=()=>openConvo("g:"+Date.now());
 function msgHTML(x,i){ if(x.role==="user") return `<div class="msg u">${esc(x.content)}</div>`; if(x.quiz) return `<div class="msg a">${quizHTML(x.quiz,i)}</div>`; return `<div class="msg a">${md(x.content)}</div>`; }
-function openConvo(k){ CK=k; const isG=isGen(k), isT=isTop(k), tp=isT?topicOf(k):null, m=(isG||isT)?null:BYID[k.slice(2)];
+function openConvo(k,opt={}){ CK=k; const isG=isGen(k), isT=isTop(k), tp=isT?topicOf(k):null, m=(isG||isT)?null:BYID[k.slice(2)];
   const H=CHATS[k]||[];
   $("#cv-name").textContent=isT?tp.t:isG?((H.find(x=>x.role==="user")||{}).content||"Nouvelle conversation").slice(0,40):m.S.section+" · "+PROGS[m.P].cand;
   $("#cv-av").style.background=isT?tgrad(tp):isG?"#111":gradOf(m); $("#cv-av").textContent=isT?"✦":isG?"?":initials(PROGS[m.P].cand);
   const intro=m?esc(m.t):isT?`<b>${esc(tp.t)}</b><br>${esc(tp.d)}. Suis le mini-cours étape par étape, teste-toi avec un quiz, ou pose tes questions.`:`Pose une question : un mécanisme (dette, retraites, impôts…), les programmes des candidats${FEAT.votes?", les votes à l'Assemblée":""} ou les condamnations. Réponses neutres et sourcées.`;
-  $("#cv-msgs").innerHTML=`<div class="quote">${intro}</div><p class="note" style="text-align:center;margin:0 0 8px">Les questions sont enregistrées de façon anonyme pour améliorer l'app. N'y mets pas d'informations personnelles.</p>`+H.map(msgHTML).join("");
-  bindQuiz($("#cv-msgs")); setSugg(); $("#convo").classList.add("on"); $("#cv-msgs").scrollTop=1e9; }
+  const fresh=opt.fresh&&m;   // ordi, onglet Découvrir : une ouverture de discussion sur la mesure, pas la conversation passée
+  $("#cv-msgs").innerHTML=(fresh?`<div class="cv-open"><div class="cv-o-ic">💬</div><b>Une question sur cette proposition ?</b><span>Coût, financement, critiques, exemples à l'étranger : demande, la réponse est neutre et sourcée.</span></div>`:"")
+    +`<div class="quote">${intro}</div><p class="note" style="text-align:center;margin:0 0 8px">Les questions sont enregistrées de façon anonyme pour améliorer l'app. N'y mets pas d'informations personnelles.</p>`
+    +(fresh?(H.length?`<button class="linkbtn cv-resume">Reprendre ta conversation sur cette mesure (${H.length} message${H.length>1?"s":""})</button>`:""):H.map(msgHTML).join(""));
+  const rb=$("#cv-msgs .cv-resume"); if(rb) rb.onclick=()=>openConvo(k);
+  bindQuiz($("#cv-msgs")); setSugg(); $("#convo").classList.add("on"); $("#cv-msgs").scrollTop=fresh?0:1e9; }
 function setSugg(){ const k=CK, isT=isTop(k), H=CHATS[k]||[];
   const S=isT?(H.length?["Étape suivante","Je n'ai pas compris","Un exemple concret","Fais-moi un quiz","Ce que proposent les candidats"]:["Explique-moi les bases","Fais-moi un quiz","Les chiffres clés"])
     :isGen(k)?["C'est quoi la dette publique ?","Comment marchent les retraites ?","Que proposent les candidats sur les retraites ?","C'est quoi le 49.3 ?","Fais-moi un quiz"]
