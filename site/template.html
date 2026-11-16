@@ -358,6 +358,18 @@ details.lcard summary::-webkit-details-marker{display:none}
   .kbd-hint{position:fixed;left:236px;right:min(440px,32vw);bottom:16px;text-align:center;font-size:12.5px;color:var(--muted);pointer-events:none;z-index:6}
   kbd{font:600 11px var(--sans);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 5px;background:#fff;color:var(--ink)}
   .fab{display:none!important}
+  /* Profil et Condamnations : pleine largeur sur deux colonnes (pas de panneau de discussion) */
+  body.wide{grid-template-columns:236px minmax(0,1fr)}
+  body.wide #convo{display:none!important}
+  body.wide .view{max-width:1240px}
+  #v-profil .profile{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+  #v-profil .profile>*{grid-column:1/-1}
+  #v-profil .profile>.radar-box{grid-column:1}
+  #v-profil .profile>#pt{grid-column:2;margin:0}
+  .c-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:24px;align-items:start;margin-top:10px}
+  .c-left{position:sticky;top:12px;max-height:calc(100vh - 24px);overflow-y:auto;scrollbar-width:none;padding-bottom:20px}
+  .c-left::-webkit-scrollbar{display:none}
+  .c-right #c-q{margin-top:0}
   .lcard,.box{transition:box-shadow .15s}
   .box.photo:hover{box-shadow:0 10px 30px rgba(0,0,0,.12)}
 }
@@ -412,12 +424,8 @@ details.lcard summary::-webkit-details-marker{display:none}
   <p class="psub">Élus et responsables politiques, par parti.</p>
   <div class="warn">La présomption d'innocence s'applique à toute condamnation <b>non définitive</b> (appel ou pourvoi en cours). Liste non exhaustive : les chiffres reflètent ce que la source recense, pas un taux par parti.</div>
   <div style="height:10px"></div>
-  <div class="box prompt" style="padding-bottom:22px">
-    <div class="label">Condamnations recensées par parti</div>
-    <div class="legend" style="margin-bottom:12px"><span><b style="color:var(--ink)">■</b> définitives</span><span><b style="color:#b9b4ad">■</b> non définitives</span></div>
-    <div class="bars" id="c-bars"></div>
-  </div>
-  <div style="height:14px"></div>
+<div class="c-grid">
+ <div class="c-left">
   <div class="box prompt" style="padding-bottom:20px">
     <div class="label">L'hémicycle des condamnations</div>
     <p class="note" style="margin:0 0 10px">Chaque point est une condamnation. De gauche à droite : le positionnement du parti. Du centre vers l'extérieur : l'année du jugement (2000 au centre, aujourd'hui au bord). Couleur : parti. Taille : durée de prison prononcée (ferme ou avec sursis). Touche un point pour le détail.</p>
@@ -425,7 +433,14 @@ details.lcard summary::-webkit-details-marker{display:none}
     <div class="legend" id="c-chart-leg" style="margin-top:10px;flex-wrap:wrap"></div>
     <p class="note" style="margin:10px 0 0" id="c-chart-note"></p>
   </div>
-  <div style="height:16px"></div>
+  <div style="height:14px"></div>
+  <div class="box prompt" style="padding-bottom:22px">
+    <div class="label">Condamnations recensées par parti</div>
+    <div class="legend" style="margin-bottom:12px"><span><b style="color:var(--ink)">■</b> définitives</span><span><b style="color:#b9b4ad">■</b> non définitives</span></div>
+    <div class="bars" id="c-bars"></div>
+  </div>
+ </div>
+ <div class="c-right">
   <input id="c-q" class="field" placeholder="Chercher un nom, une infraction…" autocomplete="off">
   <div class="chips" id="c-statut">
     <button class="chip" aria-pressed="true" data-s="">Toutes</button>
@@ -434,6 +449,8 @@ details.lcard summary::-webkit-details-marker{display:none}
   </div>
   <div class="chips" id="c-fam" style="padding-top:0"></div>
   <div class="list" id="c-list"></div>
+ </div>
+</div>
   <div class="box prompt" style="margin-top:18px;padding-bottom:20px"><div class="label">D'où viennent ces données</div><div class="note" id="c-src" style="margin:0;line-height:1.5"></div></div>
 </section>
 
@@ -688,6 +705,7 @@ const curView=()=>{ const v=location.hash.slice(1); return VIEWS.includes(v)?v:"
 function show(v){ if(!VIEWS.includes(v)) v="swipe";
   $$(".view").forEach(s=>s.classList.toggle("on",s.id==="v-"+v));
   $$("nav.tabs button").forEach(b=>b.setAttribute("aria-current",b.dataset.v===v?"page":"false"));
+  document.body.classList.toggle("wide",v==="profil"||v==="cond");
   $("#actbar").classList.toggle("hidden",v!=="swipe"||!CURM); $(".kbd-hint").classList.toggle("on",v==="swipe"&&!!CURM); $("#b-undo").disabled=REVIEW?REVIEW.i===0:!HIST.length;
   $("#fab-chat").hidden=v==="chat"; setTimeout(fabDock,50);
   if(v==="profil") renderProfil(); if(v==="chat") renderThreads(); if(v==="swipe") deskFollow(); setTimeout(()=>track(v),1500); }
@@ -956,7 +974,7 @@ function condChart(){
     if(!ok){ p.x=CX+p.r0*Math.cos(p.t0); p.y=CY-p.r0*Math.sin(p.t0); placed.push(p); } }
   let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Hémicycle des condamnations : position du parti et année du jugement">`;
   [Y0,2010,2020,Y1].forEach(y=>{ const R=rY(y); s+=`<path d="M${CX-R} ${CY} A${R} ${R} 0 0 1 ${CX+R} ${CY}" fill="none" stroke="#eee"/>`; if(y===Y1) return; s+=`<text x="${CX-R}" y="${CY+14}" font-size="9.5" fill="#888" text-anchor="middle">${y}</text><text x="${CX+R}" y="${CY+14}" font-size="9.5" fill="#888" text-anchor="middle">${y}</text>`; });
-  s+=`<line x1="${CX-R1-6}" x2="${CX+R1+6}" y1="${CY}" y2="${CY}" stroke="#ddd"/><text x="${CX-R1}" y="${CY+14}" font-size="9.5" fill="#888" text-anchor="middle">${Y1}</text>`;
+  s+=`<line x1="${CX-R1-6}" x2="${CX+R1+6}" y1="${CY}" y2="${CY}" stroke="#ddd"/><text x="${CX-R1-6}" y="${CY+14}" font-size="9.5" fill="#888" text-anchor="start">${Y1}</text>`;
   s+=`<text x="4" y="12" font-size="10.5" fill="#666">← gauche</text><text x="${W-4}" y="12" font-size="10.5" fill="#666" text-anchor="end">droite →</text><text x="${CX}" y="${CY-R0+18}" font-size="9.5" fill="#888" text-anchor="middle">centre</text>`;
   s+=P.map(p=>`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${p.r.toFixed(1)}" fill="${FCOL[p.c.famille]||"#a3a3a3"}" data-i="${p.i}"${p.c.statut!=="définitive"?' fill-opacity=".45"':""}/>`).join("")+"</svg>";
   $("#c-chart").innerHTML=s;
@@ -1104,7 +1122,7 @@ const FAMILLES=[
 function radarHTML(pour,contre){
   const st=FAMILLES.map(f=>{ const a=pour.filter(k=>f.P.includes(BYID[k].P)).length, b=contre.filter(k=>f.P.includes(BYID[k].P)).length; return {...f,a,b,t:a+b,p:a+b?a/(a+b):null}; });
   const ok=st.filter(s=>s.t>=3);
-  if(ok.length<3) return `<div class="box prompt" style="padding-bottom:22px"><div class="label">Ton radar politique</div><div class="answer sm">Réponds à des mesures d'au moins 3 familles politiques (3 réponses chacune) pour voir ton radar.</div><p class="note" style="margin:10px 0 0">Astuce : le fil alterne les candidats, continue à swiper.</p></div>`;
+  if(ok.length<3) return `<div class="box prompt radar-box" style="padding-bottom:22px"><div class="label">Ton radar politique</div><div class="answer sm">Réponds à des mesures d'au moins 3 familles politiques (3 réponses chacune) pour voir ton radar.</div><p class="note" style="margin:10px 0 0">Astuce : le fil alterne les candidats, continue à swiper.</p></div>`;
   /* axes répartis de -150° (bas gauche) à +150° (bas droite) : extrême gauche en bas à gauche, centre en haut, extrême droite en bas à droite */
   const W=340,cx=170,cy=165,R=104,n=st.length, pt=(i,r)=>{ const a=-Math.PI/2+(-150+300*i/(n-1))*Math.PI/180; return [cx+r*Math.cos(a),cy+r*Math.sin(a)]; };
   const grid=[.25,.5,.75,1].map(g=>`<polygon points="${st.map((_,i)=>pt(i,R*g).join(",")).join(" ")}" fill="none" stroke="var(--line)" stroke-width="1"/>`).join("");
@@ -1116,7 +1134,7 @@ function radarHTML(pour,contre){
   let sw=0,sx=0; ok.forEach(s=>{ const w=Math.max(0,s.p-0.35)*Math.sqrt(s.t); sw+=w; sx+=w*s.x; });
   const pos=sw?sx/sw:0, pct=Math.round((pos+3)/6*100);
   const near=ok.slice().sort((a,b)=>b.p-a.p||b.t-a.t)[0];
-  return `<div class="box prompt" style="padding-bottom:22px"><div class="label">Ton radar politique</div>
+  return `<div class="box prompt radar-box" style="padding-bottom:22px"><div class="label">Ton radar politique</div>
    <p class="note" style="margin:-6px 0 6px">Ton taux d'accord avec les propositions de chaque famille politique.</p>
    <svg viewBox="-62 0 ${W+124} 330" width="100%" style="overflow:visible" role="img" aria-label="Radar de proximité politique">${grid}${axes}<polygon points="${poly}" fill="var(--brand)" fill-opacity=".16" stroke="var(--brand)" stroke-width="2.5" stroke-linejoin="round"/>${dots}${labels}</svg>
    <div class="label" style="margin:14px 0 8px">Ta position sur l'échiquier</div>
