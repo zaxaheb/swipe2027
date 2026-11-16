@@ -77,7 +77,7 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 let KEY=""; try{KEY=sessionStorage.getItem("adm")||"";}catch(e){}
 let D=null, SORT="vus", RST="nouveau";
-const TYPES={erreur:"Erreur",source:"Source manquante",point_de_vue:"Point de vue absent",mesure:"Texte de la mesure",autre:"Autre"};
+const TYPES={erreur:"Erreur",source:"Source manquante",point_de_vue:"Point de vue absent",mesure:"Texte de la mesure",autre:"Autre",contact:"✉️ Contact",rejoindre:"🙋 Veut nous rejoindre"};
 async function api(method="GET",q=""){
   const r=await fetch("/api/admin"+q,{method,headers:{"x-admin-key":KEY}});
   if(r.status===401) throw new Error("Mot de passe incorrect.");
@@ -97,7 +97,7 @@ document.querySelectorAll("#rt button").forEach(b=>b.onclick=()=>{ RST=b.dataset
 function renderRq(){
   const L=(D.remarques||[]).filter(r=>r.statut===RST);
   document.querySelector('#rt [data-s="nouveau"]').textContent="À traiter ("+(D.remarques||[]).filter(r=>r.statut==="nouveau").length+")";
-  $("#remarques").innerHTML=L.length?L.map(r=>`<div class="q open"><div class="who">${fmt(r.created_at)} · <b>${esc(TYPES[r.type]||r.type)}</b> · ${r.compte?"utilisateur connecté":"anonyme"} · ${esc(r.cand)} — ${esc((r.t||"").slice(0,90))}</div><div style="margin:4px 0">${esc(r.texte)}</div>${r.source_url?`<a class="small" href="${esc(r.source_url)}" target="_blank" rel="noopener noreferrer">${esc(r.source_url)}</a>`:""}
+  $("#remarques").innerHTML=L.length?L.map(r=>`<div class="q open"><div class="who">${fmt(r.created_at)} · <b>${esc(TYPES[r.type]||r.type)}</b> · ${r.compte?"utilisateur connecté":"anonyme"} · ${esc(r.cand)} — ${esc((r.t||"").slice(0,90))}</div><div style="margin:4px 0">${esc(r.texte).replace(/\n/g,"<br>")}</div>${r.source_url?`<a class="small" href="${esc(r.source_url)}" target="_blank" rel="noopener noreferrer">${esc(r.source_url)}</a>`:""}
     <div style="margin-top:6px">${r.statut!=="traite"?`<button data-rq="${r.id}" data-st="traite">Marquer traitée</button> `:""}${r.statut!=="rejete"?`<button data-rq="${r.id}" data-st="rejete">Rejeter</button> `:""}${r.statut!=="nouveau"?`<button data-rq="${r.id}" data-st="nouveau">Remettre à traiter</button>`:""}</div></div>`).join(""):'<p class="muted">Rien ici.</p>';
   document.querySelectorAll("[data-rq]").forEach(b=>b.onclick=async()=>{ b.disabled=true; try{ await api("PATCH","?remarque="+b.dataset.rq+"&statut="+b.dataset.st); const r=D.remarques.find(x=>String(x.id)===b.dataset.rq); if(r) r.statut=b.dataset.st; renderRq(); }catch(e){ b.textContent="Erreur"; } });
 }

@@ -47,7 +47,7 @@ export default async function handler(req, res) {
       const { _n, ...mm } = m;
       return res.status(200).json({ mesure: { ...mm, cand: B.candidats[m.P]?.cand, nom: B.candidats[m.P]?.nom }, fiche, origine, remarques: rq });
     }
-    const info = (id) => { const m = B.byId[id]; return m ? { t: m.t, cand: B.candidats[m.P]?.cand || m.P } : { t: id, cand: "?" }; };
+    const info = (id) => { if (id === "_contact") return { t: "Message via « Nous contacter »", cand: "Contact" }; const m = B.byId[id]; return m ? { t: m.t, cand: B.candidats[m.P]?.cand || m.P } : { t: id, cand: "?" }; };
     const [stats, chats, fiches, remarques, visites] = await Promise.all([
       rpc("admin_stats", {}),
       select("chats", "select=created_at,mode,mesure_id,question,reponse&order=created_at.desc&limit=150"),
