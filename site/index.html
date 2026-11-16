@@ -330,6 +330,37 @@ details.lcard summary::-webkit-details-marker{display:none}
 .liked .row b{font:700 12px var(--sans);padding:3px 8px;border-radius:6px;flex:none;margin-top:2px}
 .confirm{display:none;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:10px}
 .confirm.on{display:flex}
+/* ===== version ordi : menu à gauche, cartes au centre, discussion toujours ouverte à droite ===== */
+.cv-empty,.kbd-hint{display:none}
+@media (min-width:1100px){
+  body{display:grid;grid-template-columns:236px minmax(0,1fr) min(440px,32vw);grid-template-rows:100vh;height:100vh}
+  main{grid-column:2;grid-row:1}
+  .view{max-width:660px;padding:0 32px 170px}
+  nav.tabs{position:static;grid-column:1;grid-row:1;height:100vh;padding:26px 14px;display:block;background:#0b0b0c}
+  nav.tabs::before{content:"Swipe 2027";display:block;font:800 24px/1 var(--sans);letter-spacing:-.03em;color:#fff;padding:4px 12px 26px}
+  nav.tabs .in{display:flex;flex-direction:column;gap:4px;max-width:none}
+  nav.tabs button{display:flex;align-items:center;gap:14px;justify-content:flex-start;padding:12px 14px;border-radius:12px;transition:background .15s,color .15s}
+  nav.tabs button svg{width:22px;height:22px;flex:none}
+  nav.tabs button::after{content:attr(aria-label);font:600 15px var(--sans)}
+  nav.tabs button:hover{background:#18181a;color:#fff}
+  nav.tabs button[aria-current="page"]{background:#232326;color:#fff}
+  nav.tabs .dot{top:12px;right:auto;left:30px}
+  #convo{position:static;display:flex;grid-column:3;grid-row:1;height:100vh;border-left:1px solid var(--line);z-index:1}
+  #convo:not(.on)>*:not(.cv-empty){display:none}
+  #convo:not(.on) .cv-empty{display:flex}
+  .cv-empty{flex:1;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;padding:40px;color:var(--muted)}
+  .cv-empty b{color:var(--ink);font-size:17px}.cv-e-ic{font-size:34px}
+  #cv-back{display:none}
+  #convo header{padding:16px 18px}
+  .msgs,.sugg,.composer{max-width:none}
+  .actbar{left:236px;right:min(440px,32vw);bottom:46px}
+  .kbd-hint.on{display:block}
+  .kbd-hint{position:fixed;left:236px;right:min(440px,32vw);bottom:16px;text-align:center;font-size:12.5px;color:var(--muted);pointer-events:none;z-index:6}
+  kbd{font:600 11px var(--sans);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 5px;background:#fff;color:var(--ink)}
+  .fab{display:none!important}
+  .lcard,.box{transition:box-shadow .15s}
+  .box.photo:hover{box-shadow:0 10px 30px rgba(0,0,0,.12)}
+}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -427,6 +458,7 @@ details.lcard summary::-webkit-details-marker{display:none}
   <button class="big yes" id="b-yes" aria-label="Pour cette mesure"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.1 4.3 2.4.7-1.3 2.2-2.4 4.3-2.4 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg></button>
   <button class="sm" id="b-skip" aria-label="Passer sans avis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h12M13 7l5 5-5 5"/></svg></button>
 </div>
+<div class="kbd-hint" aria-hidden="true"><kbd>←</kbd> contre · <kbd>→</kbd> pour · <kbd>↓</kbd> passer</div>
 <div class="flash" id="flash" aria-hidden="true"></div>
 
 <nav class="tabs" aria-label="Sections"><div class="in">
@@ -447,6 +479,7 @@ details.lcard summary::-webkit-details-marker{display:none}
     <div class="av" id="cv-av" style="width:40px;height:40px;font-size:16px"></div>
     <div class="n" id="cv-name"></div>
   </header>
+  <div class="cv-empty"><div class="cv-e-ic">💬</div><b>La discussion s'ouvre ici</b><span>Swipe une mesure : tu peux poser tes questions sur elle à droite, pendant que tu lis la carte. Ou ouvre un sujet dans « Comprendre ».</span></div>
   <div class="msgs" id="cv-msgs"></div>
   <div class="sugg" id="cv-sugg"></div>
   <form class="composer" id="cv-form">
@@ -645,14 +678,19 @@ function bindAccount(root){
       catch(e){ st.textContent="La suppression a échoué. Réessaie, ou écris-nous (voir la page Confidentialité)."; } }; }
 }
 /* ================= navigation ================= */
+/* Version ordi : sur grand écran, la discussion à droite suit la mesure affichée (sauf si on est dans une autre conversation). */
+const DESK=matchMedia("(min-width:1100px)");
+function deskFollow(){ try{ if(!DESK.matches||!CURM||curView()!=="swipe") return; if(CK&&!isMes(CK)&&$("#convo").classList.contains("on")) return; if(CK!=="m:"+CURM.id) openConvo("m:"+CURM.id); }catch(e){ setTimeout(deskFollow,50); } }   // au chargement, le chat n'est pas encore prêt : on réessaie
+setTimeout(deskFollow,0);
+DESK.addEventListener("change",()=>{ if(!DESK.matches) $("#convo").classList.remove("on"); else deskFollow(); });
 const VIEWS=["swipe",...(FEAT.votes?["votes"]:[]),"cond","chat","profil"];
 const curView=()=>{ const v=location.hash.slice(1); return VIEWS.includes(v)?v:"swipe"; };
 function show(v){ if(!VIEWS.includes(v)) v="swipe";
   $$(".view").forEach(s=>s.classList.toggle("on",s.id==="v-"+v));
   $$("nav.tabs button").forEach(b=>b.setAttribute("aria-current",b.dataset.v===v?"page":"false"));
-  $("#actbar").classList.toggle("hidden",v!=="swipe"||!CURM); $("#b-undo").disabled=REVIEW?REVIEW.i===0:!HIST.length;
+  $("#actbar").classList.toggle("hidden",v!=="swipe"||!CURM); $(".kbd-hint").classList.toggle("on",v==="swipe"&&!!CURM); $("#b-undo").disabled=REVIEW?REVIEW.i===0:!HIST.length;
   $("#fab-chat").hidden=v==="chat"; setTimeout(fabDock,50);
-  if(v==="profil") renderProfil(); if(v==="chat") renderThreads(); setTimeout(()=>track(v),1500); }
+  if(v==="profil") renderProfil(); if(v==="chat") renderThreads(); if(v==="swipe") deskFollow(); setTimeout(()=>track(v),1500); }
 /* mesure d'audience maison (api/visite.js) : une fois par onglet et par chargement, sans cookie */
 function track(v){ const S=track.s||(track.s=new Set()); if(!API||S.has(v)) return; S.add(v);
   try{ fetch(API+"/visite",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({vue:v,connecte:!!USER}),keepalive:true}).catch(()=>{}); }catch(e){} }
@@ -813,7 +851,8 @@ function renderProfile(q){
       <button class="cta">Envoyer</button><p class="note" id="rq-st" style="margin:0">Ta remarque est anonyme, sauf si tu es connecté. N'y mets pas d'informations personnelles.</p></form></div>`);
   parts.push(`<div style="height:70px"></div>`);
   feed.innerHTML=`<div class="profile">${parts.join("")}</div>`;
-  $("#b-chat").onclick=()=>openConvo("m:"+m.id);
+  $("#b-chat").onclick=()=>{ openConvo("m:"+m.id); if(DESK.matches) $("#cv-in").focus(); };
+  deskFollow();
   const qr=$("#b-quit-rev"); if(qr) qr.onclick=()=>{ REVIEW=null; nextProfile(); };
   $$("#feed [data-open]").forEach(b=>b.onclick=()=>startReview([b.dataset.open],"mesure liée"));
   $("#b-rq").onclick=()=>{ $("#f-rq").hidden=false; $("#b-rq").hidden=true; $("#rq-txt").focus(); };
@@ -844,7 +883,7 @@ $("#b-undo").onclick=()=>{
   if(REVIEW){ if(REVIEW.i>0){ REVIEW.i--; nextProfile(); } return; }
   const id=HIST.pop(); if(!id) return; saveHist(); delete SW[id]; save();
   CURM=BYID[id]; renderProfile(queue()); $("#main").scrollTop=0; show(curView()); };
-document.addEventListener("keydown",e=>{ if(!$("#v-swipe").classList.contains("on")||$("#convo").classList.contains("on")||/INPUT|TEXTAREA/.test(document.activeElement.tagName)) return;
+document.addEventListener("keydown",e=>{ if(!$("#v-swipe").classList.contains("on")||($("#convo").classList.contains("on")&&!DESK.matches)||/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
   if(e.key==="ArrowRight") decide(1); if(e.key==="ArrowLeft") decide(-1); if(e.key==="ArrowDown") decide(0); });
 
 async function generate(m){
@@ -1066,7 +1105,8 @@ function radarHTML(pour,contre){
   const st=FAMILLES.map(f=>{ const a=pour.filter(k=>f.P.includes(BYID[k].P)).length, b=contre.filter(k=>f.P.includes(BYID[k].P)).length; return {...f,a,b,t:a+b,p:a+b?a/(a+b):null}; });
   const ok=st.filter(s=>s.t>=3);
   if(ok.length<3) return `<div class="box prompt" style="padding-bottom:22px"><div class="label">Ton radar politique</div><div class="answer sm">Réponds à des mesures d'au moins 3 familles politiques (3 réponses chacune) pour voir ton radar.</div><p class="note" style="margin:10px 0 0">Astuce : le fil alterne les candidats, continue à swiper.</p></div>`;
-  const W=340,cx=170,cy=165,R=104,n=st.length, pt=(i,r)=>{ const a=-Math.PI/2+2*Math.PI*i/n; return [cx+r*Math.cos(a),cy+r*Math.sin(a)]; };
+  /* axes répartis de -150° (bas gauche) à +150° (bas droite) : extrême gauche en bas à gauche, centre en haut, extrême droite en bas à droite */
+  const W=340,cx=170,cy=165,R=104,n=st.length, pt=(i,r)=>{ const a=-Math.PI/2+(-150+300*i/(n-1))*Math.PI/180; return [cx+r*Math.cos(a),cy+r*Math.sin(a)]; };
   const grid=[.25,.5,.75,1].map(g=>`<polygon points="${st.map((_,i)=>pt(i,R*g).join(",")).join(" ")}" fill="none" stroke="var(--line)" stroke-width="1"/>`).join("");
   const axes=st.map((_,i)=>{ const [x,y]=pt(i,R); return `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="var(--line)"/>`; }).join("");
   const poly=st.map((s,i)=>pt(i,R*(s.p??0)).join(",")).join(" ");
