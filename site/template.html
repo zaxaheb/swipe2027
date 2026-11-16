@@ -296,6 +296,7 @@ details.lcard summary::-webkit-details-marker{display:none}
 .topics::-webkit-scrollbar{display:none}
 .topic{scroll-snap-align:start;border-radius:16px;padding:14px 14px 16px;text-align:left;color:#fff;min-height:104px;display:flex;flex-direction:column;justify-content:flex-end;cursor:pointer}
 .topic b{font:700 17px/1.15 var(--sans);letter-spacing:-.01em}.topic span{font-size:12.5px;opacity:.9;margin-top:4px;line-height:1.3}
+.rq-form{display:flex}.rq-form[hidden]{display:none}
 .quiz{display:flex;flex-direction:column;gap:14px}.quiz .qq{font-weight:700}
 .quiz .op{display:block;width:100%;text-align:left;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:6px;background:#fff;font:inherit;cursor:pointer}
 .quiz .op.ok{border-color:var(--pour);background:#e4f4ea}.quiz .op.ko{border-color:var(--contre);background:#fbe7e6}
@@ -873,7 +874,7 @@ function renderProfile(q){
   parts.push(`<div class="box prompt" style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap"><div class="label" style="margin:0">Une question sur cette mesure ?</div><div><button class="cta" id="b-chat">${IC.chat.replace('<svg','<svg width="18" height="18"')}Ouvrir la discussion</button></div></div>`);
   parts.push(`<div class="box prompt" id="rq-box" style="padding:22px 24px"><div class="label">Une erreur, un oubli ?</div><p class="note" style="margin:0">Signale une erreur, une source manquante ou un point de vue absent.</p>
     <div style="margin-top:12px"><button class="cta ghost" id="b-rq">Faire une remarque</button></div>
-    <form id="f-rq" hidden style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
+    <form id="f-rq" class="rq-form" hidden style="flex-direction:column;gap:10px;margin-top:14px">
       <div class="chips" style="padding:0" id="rq-type">${[["erreur","Erreur"],["source","Source manquante"],["point_de_vue","Point de vue absent"],["mesure","Le texte de la mesure"],["autre","Autre"]].map(([k,l],i)=>`<button type="button" class="chip" data-t="${k}" aria-pressed="${i===0}">${l}</button>`).join("")}</div>
       <textarea id="rq-txt" class="field" style="border-radius:14px;min-height:96px;resize:vertical" maxlength="1500" required placeholder="Explique ce qui ne va pas ou ce qui manque…"></textarea>
       <input id="rq-url" class="field" type="url" placeholder="Lien vers une source (facultatif)">

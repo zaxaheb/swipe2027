@@ -1,5 +1,5 @@
 // Service worker minimal : l'app s'ouvre même hors connexion (l'IA reste en ligne).
-const C = "swipe2027-v1";
+const C = "swipe2027-v2";
 self.addEventListener("install", (e) => { e.waitUntil(caches.open(C).then((c) => c.addAll(["/", "/manifest.webmanifest", "/icons/icon-192.png"]))); self.skipWaiting(); });
 self.addEventListener("activate", (e) => { e.waitUntil(caches.keys().then((k) => Promise.all(k.filter((x) => x !== C).map((x) => caches.delete(x))))); self.clients.claim(); });
 self.addEventListener("fetch", (e) => {
