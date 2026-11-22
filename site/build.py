@@ -43,3 +43,7 @@ base = {'candidats': cand,
 os.makedirs(os.path.join(H, 'data'), exist_ok=True)
 json.dump(base, open(os.path.join(H, 'data', 'base.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
 print('index.html', len(h), '| base.json', len(base['mesures']), 'mesures')
+
+# Version 2 (exploration UX sans swipe) : v2.html
+from build_v2 import build as build_v2
+build_v2(H, progs, S, Mz, fi)

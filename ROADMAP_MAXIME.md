@@ -63,3 +63,14 @@ The hardest part on a phone. To design:
 - **Candidate list changes:** withdrawals are already happening (Cazeneuve), and the official list only exists after the sponsorship deadline in March 2027. Plan to add and remove candidates easily.
 - **Learn from what people search:** log searches (anonymously) to see which measures people actually look for. That should decide which cards get checked first.
 - **Licences:** the convictions data (Casier Politique) is CC BY-NC-SA, non-commercial only. Remove or renegotiate it if the app ever has ads or a paid offer.
+
+---
+
+## v2 exploration (22/11/2026) · local branch `maxime/ux-exploration`
+A first version without swiping, next to the current app: `site/v2.html` (`/v2` once deployed), built by `python3 build.py` from `site/template_v2.html` and `site/build_v2.py`. The current app (`index.html`) is unchanged.
+- **Navigation (4):** home with search, subjects, candidates (alphabetical) and "most debated" (one measure per candidate). No "in the news" entry yet: it needs a press feed matched to measures.
+- **Measure page (3):** the essentials on one screen (summary, why defended, why criticised, cost, other candidates), then details in sections you open.
+- **Comparable measures (2):** matched automatically by shared words, with a few visible mistakes.
+- **Balance (1):** in a subject, one line per candidate (their best-documented measure), the rest folded.
+- **Reporting (6, light version):** one tap (Biased / Incomplete / Error / Source), then an optional sentence and link, sent to the existing `remarque` API.
+- **Limits:** the 14 subjects are assigned by keywords and some are wrong (to redo with an AI pass, then review). AI features (chat, on-demand fiches, sending reports) don't work locally.
