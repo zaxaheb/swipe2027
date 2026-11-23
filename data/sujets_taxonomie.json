@@ -1,0 +1,145 @@
+{
+  "_note": "Sujets communs à tous les candidats, découpés en points précis. Un point = une question sur laquelle on peut comparer les positions. Chaque sujet a un point « autres » pour les mesures qui ne se comparent à rien. Utilisé par data/sujets.json (classement de chaque mesure).",
+  "sujets": [
+    {"id": "salaires", "t": "Salaires et pouvoir d'achat", "d": "Smic, hausses de salaires, prix", "points": [
+      {"id": "smic", "t": "Smic et salaire minimum"},
+      {"id": "hausse-salaires", "t": "Hausse générale des salaires et des pensions"},
+      {"id": "net-cotisations", "t": "Salaire net par la baisse des cotisations ou de la CSG"},
+      {"id": "prix-blocage", "t": "Blocage des prix et produits de première nécessité"},
+      {"id": "egalite-salariale", "t": "Égalité salariale femmes-hommes"},
+      {"id": "salaires-autres", "t": "Autres mesures sur les salaires"}
+    ]},
+    {"id": "retraites", "t": "Retraites", "d": "Âge de départ, pensions, financement", "points": [
+      {"id": "age-depart", "t": "Âge de départ et durée de cotisation"},
+      {"id": "carrieres-longues", "t": "Carrières longues et pénibilité"},
+      {"id": "montant-pensions", "t": "Montant des pensions et minimum vieillesse"},
+      {"id": "systeme-retraites", "t": "Système et financement (répartition, capitalisation, régime universel)"},
+      {"id": "retraites-autres", "t": "Autres mesures sur les retraites"}
+    ]},
+    {"id": "impots", "t": "Impôts et budget", "d": "Fiscalité, dette, dépenses publiques", "points": [
+      {"id": "impot-fortune", "t": "Impôt sur la fortune (ISF, IFI, taxe Zucman)"},
+      {"id": "heritage", "t": "Héritage et donations"},
+      {"id": "impot-revenu", "t": "Impôt sur le revenu et revenus du capital"},
+      {"id": "impots-entreprises", "t": "Impôts des entreprises (impôt sur les sociétés, impôts de production)"},
+      {"id": "tva", "t": "TVA"},
+      {"id": "dette-deficit", "t": "Dette, déficit et économies"},
+      {"id": "fonctionnaires", "t": "Nombre de fonctionnaires"},
+      {"id": "fraude", "t": "Fraude et évasion fiscale ou sociale"},
+      {"id": "impots-autres", "t": "Autres mesures fiscales"}
+    ]},
+    {"id": "travail", "t": "Travail et chômage", "d": "Temps de travail, chômage, RSA, droits des salariés", "points": [
+      {"id": "temps-travail", "t": "Temps de travail (35 h, 32 h, heures supplémentaires)"},
+      {"id": "assurance-chomage", "t": "Assurance chômage"},
+      {"id": "rsa", "t": "RSA et ses conditions"},
+      {"id": "droits-salaries", "t": "Droits des salariés, licenciements, santé au travail"},
+      {"id": "emploi-garanti", "t": "Emploi stable et garantie d'emploi"},
+      {"id": "formation", "t": "Formation et apprentissage"},
+      {"id": "travail-autres", "t": "Autres mesures sur le travail"}
+    ]},
+    {"id": "economie", "t": "Économie et industrie", "d": "Industrie, commerce, finance, numérique", "points": [
+      {"id": "industrie", "t": "Industrie et relocalisation"},
+      {"id": "libre-echange", "t": "Libre-échange, Mercosur, protectionnisme"},
+      {"id": "nationalisations", "t": "Nationalisations et biens communs"},
+      {"id": "finance-banques", "t": "Finance et banques"},
+      {"id": "petites-entreprises", "t": "Petites entreprises et normes"},
+      {"id": "numerique-ia", "t": "Numérique et intelligence artificielle"},
+      {"id": "espace", "t": "Espace"},
+      {"id": "economie-autres", "t": "Autres mesures économiques"}
+    ]},
+    {"id": "agriculture", "t": "Agriculture et alimentation", "d": "Revenus agricoles, pesticides, alimentation, animaux", "points": [
+      {"id": "revenu-agricole", "t": "Revenus des agriculteurs et prix agricoles"},
+      {"id": "modele-agricole", "t": "Pesticides et modèle agricole"},
+      {"id": "alimentation", "t": "Alimentation, origine et qualité"},
+      {"id": "animaux", "t": "Bien-être animal, chasse et corrida"},
+      {"id": "agriculture-autres", "t": "Autres mesures agricoles"}
+    ]},
+    {"id": "ecologie", "t": "Écologie et énergie", "d": "Nucléaire, renouvelables, climat, transports", "points": [
+      {"id": "nucleaire", "t": "Nucléaire"},
+      {"id": "renouvelables", "t": "Éolien, solaire et énergies renouvelables"},
+      {"id": "prix-energie", "t": "Prix de l'énergie (électricité, carburants)"},
+      {"id": "climat", "t": "Objectifs climat et adaptation au changement climatique"},
+      {"id": "transports", "t": "Transports et voiture (train, ZFE, voiture thermique)"},
+      {"id": "renovation", "t": "Rénovation énergétique des logements"},
+      {"id": "nature", "t": "Eau, forêts, biodiversité et pollutions"},
+      {"id": "mer", "t": "Mer et océans"},
+      {"id": "dechets", "t": "Déchets et consommation"},
+      {"id": "ecologie-autres", "t": "Autres mesures écologiques"}
+    ]},
+    {"id": "sante", "t": "Santé", "d": "Hôpital, médecins, remboursements, fin de vie", "points": [
+      {"id": "hopital", "t": "Hôpital et soignants"},
+      {"id": "deserts-medicaux", "t": "Médecins et déserts médicaux"},
+      {"id": "remboursement", "t": "Remboursement des soins, mutuelles et Sécurité sociale"},
+      {"id": "fin-de-vie", "t": "Fin de vie"},
+      {"id": "prevention", "t": "Prévention, santé mentale et addictions"},
+      {"id": "sante-autres", "t": "Autres mesures de santé"}
+    ]},
+    {"id": "ecole", "t": "École et jeunesse", "d": "Enseignants, école, université, jeunes", "points": [
+      {"id": "enseignants", "t": "Enseignants (salaires, recrutement)"},
+      {"id": "autorite-programmes", "t": "Autorité, uniforme et programmes scolaires"},
+      {"id": "prive-public", "t": "École privée, mixité et carte scolaire"},
+      {"id": "superieur", "t": "Université, recherche et Parcoursup"},
+      {"id": "jeunesse", "t": "Jeunes, service civique et conscription"},
+      {"id": "ecole-autres", "t": "Autres mesures sur l'école"}
+    ]},
+    {"id": "logement", "t": "Logement", "d": "Logement social, loyers, propriété", "points": [
+      {"id": "logement-social", "t": "Construction et logement social"},
+      {"id": "loyers", "t": "Loyers, locataires et propriétaires"},
+      {"id": "propriete", "t": "Accès à la propriété"},
+      {"id": "logement-autres", "t": "Autres mesures sur le logement"}
+    ]},
+    {"id": "securite", "t": "Sécurité et justice", "d": "Peines, police, justice, drogue", "points": [
+      {"id": "peines-prisons", "t": "Peines planchers, prisons et exécution des peines"},
+      {"id": "mineurs", "t": "Justice des mineurs"},
+      {"id": "police", "t": "Police (effectifs, contrôle, armes)"},
+      {"id": "justice-moyens", "t": "Moyens et délais de la justice"},
+      {"id": "drogue", "t": "Drogue et narcotrafic"},
+      {"id": "islamisme", "t": "Islamisme et terrorisme"},
+      {"id": "violences-femmes", "t": "Violences sexistes et sexuelles"},
+      {"id": "libertes", "t": "Libertés publiques et surveillance"},
+      {"id": "securite-autres", "t": "Autres mesures de sécurité et justice"}
+    ]},
+    {"id": "immigration", "t": "Immigration", "d": "Quotas, asile, nationalité, régularisations", "points": [
+      {"id": "niveau-quotas", "t": "Niveau d'immigration et quotas"},
+      {"id": "referendum-immigration", "t": "Référendum sur l'immigration"},
+      {"id": "regroupement-familial", "t": "Regroupement familial"},
+      {"id": "droit-du-sol", "t": "Droit du sol et nationalité"},
+      {"id": "asile", "t": "Droit d'asile"},
+      {"id": "regularisations", "t": "Régularisation des sans-papiers"},
+      {"id": "expulsions", "t": "Expulsions et séjour irrégulier"},
+      {"id": "preference-nationale", "t": "Préférence nationale et aides aux étrangers (dont AME)"},
+      {"id": "immigration-autres", "t": "Autres mesures sur l'immigration"}
+    ]},
+    {"id": "institutions", "t": "Institutions et démocratie", "d": "Constitution, vote, référendum, État", "points": [
+      {"id": "6e-republique", "t": "6e République et assemblée constituante"},
+      {"id": "mode-de-scrutin", "t": "Proportionnelle et règles du vote"},
+      {"id": "referendum", "t": "Référendum et RIC"},
+      {"id": "president", "t": "Pouvoirs et mandat du président"},
+      {"id": "elus-ethique", "t": "Élus, privilèges et corruption"},
+      {"id": "laicite", "t": "Laïcité"},
+      {"id": "collectivites", "t": "Communes, collectivités et organisation de l'État"},
+      {"id": "outre-mer", "t": "Outre-mer"},
+      {"id": "institutions-autres", "t": "Autres mesures institutionnelles"}
+    ]},
+    {"id": "europe", "t": "Europe, monde et défense", "d": "UE, OTAN, armée, Ukraine, diplomatie", "points": [
+      {"id": "place-ue", "t": "Place de la France dans l'UE (Frexit, fédéralisme, primauté du droit)"},
+      {"id": "fonctionnement-ue", "t": "Fonctionnement et budget de l'UE"},
+      {"id": "otan", "t": "OTAN"},
+      {"id": "defense", "t": "Défense et armée"},
+      {"id": "ukraine", "t": "Ukraine et Russie"},
+      {"id": "proche-orient", "t": "Israël, Palestine et Proche-Orient"},
+      {"id": "diplomatie", "t": "Diplomatie, ONU et aide au développement"},
+      {"id": "europe-autres", "t": "Autres mesures internationales"}
+    ]},
+    {"id": "societe", "t": "Société et familles", "d": "Familles, égalité, handicap, culture", "points": [
+      {"id": "familles", "t": "Familles, natalité et allocations familiales"},
+      {"id": "pauvrete", "t": "Pauvreté et aides sociales"},
+      {"id": "handicap-autonomie", "t": "Handicap, dépendance et aidants"},
+      {"id": "discriminations", "t": "Racisme et discriminations"},
+      {"id": "droits-femmes-lgbt", "t": "Droits des femmes, LGBT, GPA et PMA"},
+      {"id": "enfance", "t": "Enfance et petite enfance"},
+      {"id": "medias", "t": "Médias et audiovisuel public"},
+      {"id": "culture-sport", "t": "Culture et sport"},
+      {"id": "societe-autres", "t": "Autres mesures de société"}
+    ]}
+  ]
+}

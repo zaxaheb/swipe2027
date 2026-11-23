@@ -95,8 +95,9 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .cblock{margin-top:10px}
 .cblock .list .row:first-child{border-top:0}
 .ch{display:flex;align-items:center;gap:8px;margin:18px 2px 8px;font-size:14px;font-weight:700}
+.cblock[id^="pt-"] .ch{display:block;font-size:15px;line-height:1.3}
 .ch a{display:flex;align-items:center;gap:8px}
-.ch .c{font-weight:500;color:var(--muted);font-size:13px}
+.ch .c{font-weight:500;color:var(--muted);font-size:13px;white-space:nowrap}
 .absent{font-size:14px;color:var(--ink2);background:var(--card);border:1px dashed var(--line);border-radius:var(--r);padding:12px 14px;margin-top:18px}
 .absent b{display:block;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
 
@@ -203,6 +204,8 @@ const DATA=/*__DATA__*/null;
 const API="/api";
 const C=DATA.cands, TH=DATA.themes, M=DATA.mes, F=DATA.fiches;
 const THM=Object.fromEntries(TH.map(t=>[t.id,t]));
+const PT={}; TH.forEach(t=>(t.pts||[]).forEach(([id,tt])=>PT[id]={id,t:tt,th:t.id}));   // points précis d'un sujet (« Âge de départ »…)
+const realPt=m=>m.pt&&!/-autres$/.test(m.pt)?m.pt:null;
 const MID=Object.fromEntries(M.map(m=>[m.id,m]));
 // Candidats proposés : pas les candidats retirés. Ordre alphabétique du nom de famille (neutre).
 const lastName=n=>{ const w=n.replace(/\s*\(.*\)$/,"").split(" "); return /^(le|la|de|du)$/i.test(w[w.length-2]||"")?w.slice(-2).join(" "):w[w.length-1]; };
@@ -233,11 +236,15 @@ const DF={}; for(const ts of TK.values()) for(const w of ts) DF[w]=(DF[w]||0)+1;
 const IDF=w=>Math.log(ML.length/(DF[w]||1));
 function simScore(a,b){ const A=new Set(TK.get(a.id)||[]); let s=0,n=0; for(const w of TK.get(b.id)||[]) if(A.has(w)){ s+=IDF(w); n++; } if(a.th===b.th) return n?s+2:0; return n>=2&&s>=9?s:0; }
 // Pour chaque autre candidat : sa mesure la plus proche (même point), sinon rien.
-function comparables(m){ const out=[];
-  for(const P of CK){ if(P===m.P) continue; let best=null,bs=0;
+function comparables(m){
+  const same=[], seen=new Set([m.P]), pt=realPt(m);
+  if(pt) for(const P of CK){ if(seen.has(P)) continue; const l=ML.filter(x=>x.P===P&&x.pt===pt); if(!l.length) continue;
+    let best=l[0],bs=-1; for(const x of l){ const sc=simScore(m,x)+rank(x)/1e4; if(sc>bs){ bs=sc; best=x; } } same.push(best); seen.add(P); }
+  const near=[];
+  if(same.length<3) for(const P of CK){ if(seen.has(P)) continue; let best=null,bs=0;   // rapprochement par mots seulement si le point compte peu de candidats
     for(const x of ML){ if(x.P!==P) continue; const sc=simScore(m,x); if(sc>bs){ bs=sc; best=x; } }
-    if(best&&bs>=6) out.push([bs,best]); }
-  return out.sort((a,b)=>b[0]-a[0]).map(x=>x[1]); }
+    if(best&&bs>=(pt?10:6)) near.push([bs,best]); }
+  const out=same.concat(near.sort((a,b)=>b[0]-a[0]).map(x=>x[1])); out.same=same.length; return out; }
 
 /* ---------- petits blocs ---------- */
 const who=P=>`<span class="who"><i class="dot" style="background:${C[P].color}"></i>${esc(C[P].cand)}</span>`;
@@ -297,20 +304,43 @@ function vSujets(){
     <p class="hint">Le classement des mesures par sujet est automatique : il peut y avoir des erreurs.</p>`;
 }
 
-function vSujet(id){
+function vSujet(id,focus){
   const t=THM[id]; if(!t) return vNotFound();
   backTop(t.t);
   const ms=ML.filter(m=>m.th===id);
   const has=CK.filter(P=>ms.some(m=>m.P===P)), none=CK.filter(P=>!ms.some(m=>m.P===P));
-  // Équilibre : une ligne par candidat (sa mesure la plus documentée) ; ses autres mesures se déplient sous elle.
-  const items=has.map(P=>{ const l=ms.filter(m=>m.P===P).sort(byRank), k="s-"+id+"-"+P;
-    let h=row(l[0]);
+  const candRow=(l,P,k)=>{ l=l.filter(m=>m.P===P).sort(byRank); let h=row(l[0]);
     if(l.length>1) h+=EXP[k]?l.slice(1).map(m=>row(m)).join(""):`<button class="more sm" data-more="${esc(k)}" data-step="1">+ ${plural(l.length-1,"autre mesure","autres mesures")} de ${esc(lastName(C[P].cand))}</button>`;
-    return h; }).join("");
+    return h; };
+  let body;
+  if(t.pts){
+    // Un bloc par point précis (« Âge de départ »), avec une ligne par candidat : on compare les positions sur la même question.
+    const groups=t.pts.map(([pid,pt])=>({pid,pt,l:ms.filter(m=>m.pt===pid)})).filter(g=>g.l.length).map(g=>({...g,cs:CK.filter(P=>g.l.some(m=>m.P===P))}));
+    const main=groups.filter(g=>!/-autres$/.test(g.pid)&&g.cs.length>=2).sort((a,b)=>b.cs.length-a.cs.length);
+    const rest=groups.filter(g=>!main.includes(g));
+    // Aperçu : 3 positions les plus différentes entre elles (pour voir l'éventail du débat) ; « voir tous » remet l'ordre alphabétique.
+    const diverse=(g,n)=>{ const best=P=>g.l.filter(m=>m.P===P).sort(byRank)[0];
+      const pool=g.cs.map(P=>({P,m:best(P)})); if(pool.length<=n) return g.cs;
+      const tk=x=>new Set(TK.get(x.m.id)||[]), jac=(a,b)=>{ const A=tk(a),B=tk(b); let i=0; A.forEach(w=>B.has(w)&&i++); return i/((A.size+B.size-i)||1); };
+      const pick=[pool.slice().sort((a,b)=>rank(b.m)-rank(a.m))[0]];
+      while(pick.length<n){ let bx=null,bs=2; for(const x of pool){ if(pick.includes(x)) continue; const sc=Math.max(...pick.map(y=>jac(x,y))); if(sc<bs){ bs=sc; bx=x; } } pick.push(bx); }
+      return CK.filter(P=>pick.some(x=>x.P===P)); };
+    const block=g=>{ const k="pc-"+g.pid, all=!!EXP[k], cs=all?g.cs:diverse(g,3);
+      return `<div class="cblock" id="pt-${g.pid}"><div class="ch">${esc(g.pt)} <span class="c">· ${plural(g.cs.length,"candidat","candidats")}</span></div><div class="list">${cs.map(P=>candRow(g.l,P,"pm-"+g.pid+"-"+P)).join("")}${g.cs.length>cs.length?`<button class="more" data-more="${k}" data-step="1">Voir les ${g.cs.length} candidats</button>`:""}</div></div>`; };
+    const restRows=rest.flatMap(g=>g.l.sort(byRank));
+    body=`${main.length?`<div class="hs" style="margin-top:12px">${main.map(g=>`<a class="chip" href="#" data-jump="${g.pid}">${esc(g.pt.replace(/\s*\(.*\)$/,""))} <small>${g.cs.length}</small></a>`).join("")}</div>`:""}
+      ${main.map(block).join("")}
+      ${restRows.length?`<div class="acc"><details${EXP["rest-"+id]?" open":""} id="rest"><summary><div class="s"><b>Autres mesures du sujet<em class="cnt" style="font-style:normal">${restRows.length}</em></b><span>Proposées par un seul candidat, ou difficiles à comparer</span></div>${ICO.down}</summary><div class="list" style="border:0;border-top:1px solid var(--line);border-radius:0">${restRows.slice(0,EXP["rest-"+id]||15).map(m=>row(m)).join("")}${restRows.length>(EXP["rest-"+id]||15)?`<button class="more" data-more="rest-${id}" data-step="15">Voir plus</button>`:""}</div></details></div>`:""}`;
+  } else {
+    body=`<div class="list" style="margin-top:12px">${has.map(P=>candRow(ms,P,"s-"+id+"-"+P)).join("")}</div>`;
+  }
   $("#app").innerHTML=`<p class="lead" style="margin-top:8px">${esc(t.d)}. ${plural(has.length,"candidat a","candidats ont")} fait des propositions.</p>
-    <div class="list" style="margin-top:12px">${items}</div>
+    ${body}
     ${none.length?`<div class="absent"><b>Rien trouvé dans nos sources</b>${none.map(P=>esc(C[P].cand)).join(", ")}</div>`:""}
-    <p class="hint">Une mesure par candidat (la plus documentée), par ordre alphabétique. Le classement par sujet est automatique : il peut y avoir des erreurs.</p>`;
+    <p class="hint">Pour chaque question, une mesure par candidat (la plus documentée), par ordre alphabétique. Le classement a été fait par une IA, puis vérifié par sondage : signalez les erreurs.</p>`;
+  const jump=pid=>{ const el=$("#pt-"+pid); if(el) window.scrollTo({top:el.getBoundingClientRect().top+scrollY-64,behavior:"smooth"}); };
+  document.querySelectorAll("[data-jump]").forEach(a=>a.onclick=e=>{ e.preventDefault(); jump(a.dataset.jump); });
+  if(focus) setTimeout(()=>jump(focus),30);
 }
 
 function vCandidats(){
@@ -340,7 +370,7 @@ function vCand(P){
 }
 
 /* Recherche : tous les mots doivent apparaître (début de mot) dans la mesure, sa section, le candidat ou le résumé de la fiche. */
-const IDX=ML.map(m=>{ const f=F[m.id]; return {m, a:norm(m.t+" "+m.sous.join(" ")), b:norm(m.sec+" "+C[m.P].cand+" "+C[m.P].nom+" "+THM[m.th].t+" "+(f?f.resume||"":""))}; });
+const IDX=ML.map(m=>{ const f=F[m.id]; return {m, a:norm(m.t+" "+m.sous.join(" ")), b:norm(m.sec+" "+C[m.P].cand+" "+C[m.P].nom+" "+THM[m.th].t+" "+(realPt(m)?PT[m.pt].t:"")+" "+(f?f.resume||"":""))}; });
 const SYN={retraite:["pension"],smic:["salaire minimum"],immigration:["immigr","etranger"],impot:["impots","fiscal","taxe"],ecole:["educat","eleve"],police:["securite"],climat:["ecolog"],chomage:["emploi"]};
 function search(q){
   const toks=norm(q).split(/[^a-z0-9€%]+/).filter(w=>w.length>1);
@@ -400,7 +430,7 @@ function vMesure(id){
   const det=(title,teaser,body,cnt,open)=>body?`<details${open?" open":""}><summary><div class="s"><b>${title}${cnt?`<em class="cnt" style="font-style:normal">${cnt}</em>`:""}</b>${teaser?`<span>${esc(teaser)}</span>`:""}</div>${ICO.down}</summary><div class="body">${body}</div></details>`:"";
   const srcl=(u,label)=>u?`<a class="src" href="${esc(u)}" target="_blank" rel="noopener">${esc(label||host(u))} ↗</a>`:"";
   const quote=(x,cls)=>`<div class="q ${cls}"><div class="h">${esc(x.qui||x.camp||x.pays||"")}${x.camp&&x.qui?` <i>· ${esc(x.camp)}</i>`:""}</div><div class="x">${esc(x.texte)}</div>${srcl(x.url,x.media?x.media:null)}</div>`;
-  let h=`<div class="m-top"><a href="#/c/${m.P}"><i class="dot" style="background:${c.color}"></i>${esc(c.cand)}</a></div>
+  let h=`<div class="m-top"><a href="#/c/${m.P}"><i class="dot" style="background:${c.color}"></i>${esc(c.cand)}</a>${realPt(m)?`<a href="#/s/${m.th}?p=${realPt(m)}">${esc(PT[realPt(m)].t)}</a>`:""}</div>
     <h2 class="m-q">${esc(m.t)}</h2>
     ${m.sous.length?`<ul class="m-sous">${m.sous.slice(0,4).map(s=>`<li>${esc(s)}</li>`).join("")}${m.sous.length>4?`<li>et ${m.sous.length-4} autres points</li>`:""}</ul>`:""}`;
   if(f){
@@ -440,9 +470,12 @@ function vMesure(id){
 }
 function simil(f,others,m){
   let h="";
-  if(others.length) h+=`<div class="sub" style="margin-top:0">Mesures proches <span style="text-transform:none;letter-spacing:0;font-weight:500">· rapprochement automatique</span></div>`+others.map(x=>`<a class="sim" href="#/m/${encodeURIComponent(x.id)}">${who(x.P)}<div class="x">${esc(x.t)}</div></a>`).join("");
+  const simRow=x=>`<a class="sim" href="#/m/${encodeURIComponent(x.id)}">${who(x.P)}<div class="x">${esc(x.t)}</div></a>`;
+  const ns=others.same||0, pt=m&&realPt(m);
+  if(ns) h+=`<div class="sub" style="margin-top:0">Sur le même point · ${esc(PT[pt].t)}</div>`+others.slice(0,ns).map(simRow).join("");
+  if(others.length>ns) h+=`<div class="sub"${ns?"":' style="margin-top:0"'}>Mesures proches <span style="text-transform:none;letter-spacing:0;font-weight:500">· rapprochement automatique</span></div>`+others.slice(ns).map(simRow).join("");
   if(f&&(f.similaires||[]).length) h+=`<div class="sub">Repéré dans la presse</div>`+f.similaires.map(x=>`<div class="sim"><div class="who">${esc(x.camp)}</div><div class="x">${esc(x.prop)}</div></div>`).join("");
-  if(m) h+=`<a class="src" href="#/s/${m.th}" style="margin-top:10px">Tout le sujet « ${esc(THM[m.th].t)} » →</a>`;
+  if(m) h+=`<a class="src" href="#/s/${m.th}${realPt(m)?"?p="+realPt(m):""}" style="margin-top:10px">Tout le sujet « ${esc(THM[m.th].t)} » →</a>`;
   return h;
 }
 
@@ -481,7 +514,7 @@ function route(){
   closeSheet();
   if(!p.length) vHome();
   else if(p[0]==="sujets") vSujets();
-  else if(p[0]==="s") vSujet(p[1]);
+  else if(p[0]==="s") vSujet(p[1],qs?new URLSearchParams(qs).get("p"):null);
   else if(p[0]==="candidats") vCandidats();
   else if(p[0]==="c") vCand(p[1]);
   else if(p[0]==="m") vMesure(p[1]);

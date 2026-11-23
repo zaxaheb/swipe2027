@@ -54,6 +54,18 @@ The hardest part on a phone. To design:
 - **The loop:** an accepted analysis improves the card, and the correction is visible.
 - **Getting started:** first invite 10 to 20 analysts from across the spectrum (X, Reddit, blogs), with credit and a link back to their work, before opening to everyone. A lighter version that fits the timeline: link existing analyses on each card. The "Remarque" feature (`api/remarque.js`) is already a starting point.
 
+## 7. Swipe comes back as a guided path, not the main mode
+For people who don't know where to start. Search, subjects and candidates stay the main navigation; the swipe becomes one way in among others ("Je ne sais pas par où commencer → Parcours découverte").
+- **An ordered path, not random cards:** a coherent sequence of subjects (e.g. pouvoir d'achat → retraites → impôts → santé → école → sécurité → immigration → écologie → Europe → institutions), each broken into precise points ("Âge de départ", "Smic", "Quotas"…). One step = one point.
+- **Swipe compares positions on the same point:** within a step, each card is one candidate's position on that point, swiped one after another (like stories). Moving forward goes to the next point. So swiping shows the range of positions ("from 60 to 65 years"), instead of judging isolated measures.
+- **Card = the quick read:** the point, the candidate's position in one line, "why defended" and "why criticised" in one line each. Tap to open the full measure page; come back to the path where you left it.
+- **No like/dislike by default:** the swipe means "next", not "I agree". This avoids the Elyze trap (biased questions, a profile that reveals political opinions, sensitive data under GDPR art. 9). If we keep a "this convinces me" signal, it stays on the phone and is optional.
+- **Option: blind mode.** Show positions without the candidate's name, reveal on demand. The current app already has it ("Mode à l'aveugle"); it reduces partisan reflexes.
+- **Balance built in:** every step shows every candidate who has a position, in a fixed neutral order (or shuffled per user), plus "no proposal found" for the others.
+- **Short paths too:** one path per subject ("Retraites in 3 minutes"), a progress bar, and the path resumes where you stopped.
+- **Depends on:** the subject → point classification (in progress), since a step is a point.
+- **Open questions:** the order of subjects (neutral, or by what people care about most in polls?); length of the full path; all candidates or the main ones only; what the end screen shows if there's no profile.
+
 ---
 
 ## Also to keep in mind
@@ -70,7 +82,8 @@ The hardest part on a phone. To design:
 A first version without swiping, next to the current app: `site/v2.html` (`/v2` once deployed), built by `python3 build.py` from `site/template_v2.html` and `site/build_v2.py`. The current app (`index.html`) is unchanged.
 - **Navigation (4):** home with search, subjects, candidates (alphabetical) and "most debated" (one measure per candidate). No "in the news" entry yet: it needs a press feed matched to measures.
 - **Measure page (3):** the essentials on one screen (summary, why defended, why criticised, cost, other candidates), then details in sections you open.
-- **Comparable measures (2):** matched automatically by shared words, with a few visible mistakes.
-- **Balance (1):** in a subject, one line per candidate (their best-documented measure), the rest folded.
+- **Comparable measures (2):** measures on the same precise point first (e.g. "Âge de départ": 14 candidates), then measures matched by shared words, labelled as automatic.
+- **Balance (1):** a subject page is split into precise points; each point previews the 3 most different positions (e.g. 62 / 60 / 65 years), then "see all candidates" in alphabetical order. Points with a single candidate are folded at the bottom.
 - **Reporting (6, light version):** one tap (Biased / Incomplete / Error / Source), then an optional sentence and link, sent to the existing `remarque` API.
-- **Limits:** the 14 subjects are assigned by keywords and some are wrong (to redo with an AI pass, then review). AI features (chat, on-demand fiches, sending reports) don't work locally.
+- **Subjects and points (23/11/2026):** 15 subjects and 116 points in `data/sujets_taxonomie.json`; every measure classified in `data/sujets.json` ([subject, point, confidence], one line per measure, easy to fix by hand). Done by AI; all 325 non-LFI measures reviewed by hand (8 fixes), LFI checked by sample. 104 measures are marked confidence 1 (to review). New measures without a classification fall back to keywords.
+- **Limits:** AI features (chat, on-demand fiches, sending reports) don't work locally. Classifier suggestions not yet applied: points for water, social and solidarity economy, francophonie, terrorism/intelligence, family taxation.

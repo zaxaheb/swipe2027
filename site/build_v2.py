@@ -61,7 +61,15 @@ LFI_RN = {
            "eco": "Le contre-budget RN (6 oct. 2026) annonce 140 Md€ d'économies nettes d'ici 2032 et 30 Md€ de baisses d'impôts. L'Institut de l'Entreprise juge environ 7,5 Md€ de ces économies crédibles."},
 }
 
+def load_sorting(H):
+    """data/sujets_taxonomie.json (sujets et points) + data/sujets.json (classement de chaque mesure), s'ils existent."""
+    D = os.path.join(H, "..", "data")
+    tx, cl = os.path.join(D, "sujets_taxonomie.json"), os.path.join(D, "sujets.json")
+    if not (os.path.exists(tx) and os.path.exists(cl)): return None, None
+    return json.load(open(tx))["sujets"], json.load(open(cl))["mesures"]
+
 def build(H, progs, S, Mz, fi):
+    TX, CL = load_sorting(H)
     cands = dict(LFI_RN)
     for k, x in progs.items():
         c = {f: x.get(f) for f in ("nom", "cand", "long", "note", "eco", "ecoUrl") if x.get(f)}
@@ -72,17 +80,20 @@ def build(H, progs, S, Mz, fi):
     for m in Mz:
         s = S[m["s"]]
         txt = m["t"] + (" " + " ".join(m["sous"]) if m["sous"] else "")
-        mes.append({"id": m["id"], "P": s["prog"], "t": m["t"], "sous": m["sous"], "cle": bool(m.get("cle")),
-                    "sec": s["section"], "th": theme_of(txt, s["section"] + " " + s.get("chapitre", ""), fi.get(m["id"], {}).get("resume") or "", 1 if s["prog"] == "LFI" else 4),
-                    "url": m.get("src") or s["url"]})
+        x = {"id": m["id"], "P": s["prog"], "t": m["t"], "sous": m["sous"], "cle": bool(m.get("cle")), "sec": s["section"], "url": m.get("src") or s["url"]}
+        c = CL.get(m["id"]) if CL else None
+        if c: x["th"], x["pt"] = c[0], c[1]
+        else: x["th"] = theme_of(txt, s["section"] + " " + s.get("chapitre", ""), fi.get(m["id"], {}).get("resume") or "", 1 if s["prog"] == "LFI" else 4)
+        mes.append(x)
     count = {k: sum(1 for m in mes if m["P"] == k) for k in cands}
     for k in cands: cands[k]["n"] = count[k]
     cands = {k: v for k, v in cands.items() if v["n"]}
-    themes = [{"id": tid, "t": t, "d": d} for tid, t, d, _ in THEMES]
+    themes = [{"id": x["id"], "t": x["t"], "d": x["d"], "pts": [[p["id"], p["t"]] for p in x["points"]]} for x in TX] if TX else [{"id": tid, "t": t, "d": d} for tid, t, d, _ in THEMES]
+    if CL: print("v2 : classement par sujet et point depuis data/sujets.json (" + str(sum(1 for m in mes if "pt" in m)) + "/" + str(len(mes)) + " mesures)")
     data = {"cands": cands, "themes": themes, "mes": mes, "fiches": fi}
     J = json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     h = open(os.path.join(H, "template_v2.html")).read().replace("/*__DATA__*/null", J)
     open(os.path.join(H, "v2.html"), "w").write(h)
     by = {}
     for m in mes: by.setdefault(m["th"], {}).setdefault(m["P"], 0); by[m["th"]][m["P"]] += 1
-    print("v2.html", len(h), "|", ", ".join(f"{tid}:{sum(by.get(tid, {}).values())}/{len(by.get(tid, {}))}c" for tid in THEME_IDS))
+    print("v2.html", len(h), "|", ", ".join(f"{t['id']}:{sum(by.get(t['id'], {}).values())}/{len(by.get(t['id'], {}))}c" for t in themes))
