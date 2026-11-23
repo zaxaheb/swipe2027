@@ -182,6 +182,44 @@ textarea{min-height:84px;resize:vertical}
 .nav .wrap{display:grid;grid-template-columns:repeat(4,1fr);height:var(--nav);padding:0}
 .nav a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11.5px;font-weight:600;color:#8d8982}
 .nav a.on{color:var(--ink)}
+/* parcours guidé (mode « stories ») */
+body.story-on{padding-bottom:0}
+body.story-on .nav, body.story-on .top{display:none}
+.story{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column;max-width:640px;margin:0 auto;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.st-bar{display:flex;gap:3px;padding:calc(10px + env(safe-area-inset-top)) var(--pad) 0}
+.st-bar i{flex:1;height:3px;border-radius:2px;background:var(--line);overflow:hidden;position:relative}
+.st-bar i b{position:absolute;inset:0;background:var(--ink);transform-origin:left;transform:scaleX(0);transition:transform .25s}
+.st-head{display:flex;align-items:center;gap:8px;padding:10px var(--pad) 6px}
+.st-head .lab{flex:1;min-width:0;font-size:13px;font-weight:600;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st-ico{height:34px;min-width:34px;padding:0 10px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:13px;font-weight:600;background:var(--card);border:1px solid var(--line)}
+.st-ico.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.st-body{flex:1;min-height:0;padding:6px var(--pad) 0;display:flex}
+.st-card{flex:1;min-height:0;overflow-y:auto;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 18px;display:flex;flex-direction:column;gap:14px;animation:stin .22s ease-out}
+.st-card.back{animation-name:stback}
+@keyframes stin{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+@keyframes stback{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
+.st-kick{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.st-q{font-family:var(--serif);font-weight:500;font-size:26px;line-height:1.2;margin:0}
+.st-m{font-family:var(--serif);font-weight:500;font-size:21px;line-height:1.3;margin:0}
+.st-who{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px}
+.st-who .av{width:40px;height:40px;font-size:14px}
+.st-who small{display:block;font-weight:500;font-size:13px;color:var(--muted)}
+.st-blind{display:flex;align-items:center;gap:10px}
+.st-blind .av{background:#9a968f}
+.st-p{font-size:15px;line-height:1.5;color:var(--ink2);margin:0}
+.st-avs{display:flex;flex-wrap:wrap;gap:6px}
+.st-avs .av{width:34px;height:34px;font-size:12px}
+.st-foot{display:flex;gap:8px;align-items:center;padding:12px var(--pad) calc(12px + env(safe-area-inset-bottom))}
+.st-foot .btn{flex:1;height:48px}
+.st-foot .nb{flex:none;width:48px;padding:0}
+.st-hint{font-size:12.5px;color:var(--muted);text-align:center;margin-top:auto}
+.st-rc{display:block;padding:10px 0;border-top:1px solid var(--line)}
+.st-rc:first-of-type{border-top:0}
+.st-rc .x{font-size:14.5px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.path-card{display:block;background:var(--ink);color:#fff;border-radius:var(--r);padding:16px;margin-top:16px}
+.path-card b{display:block;font-size:17px;margin-bottom:3px}
+.path-card span{display:block;font-size:14px;opacity:.8}
+.path-card .go{display:inline-flex;align-items:center;gap:6px;margin-top:12px;background:#fff;color:var(--ink);font-weight:700;font-size:14px;border-radius:999px;padding:8px 14px}
 .empty{text-align:center;color:var(--muted);font-size:15px;padding:30px 10px}
 .foot{font-size:12.5px;color:var(--muted);margin:26px 0 0;line-height:1.5}
 .foot a{text-decoration:underline}
@@ -246,6 +284,18 @@ function comparables(m){
     if(best&&bs>=(pt?10:6)) near.push([bs,best]); }
   const out=same.concat(near.sort((a,b)=>b[0]-a[0]).map(x=>x[1])); out.same=same.length; return out; }
 
+/* ---------- mesure des parcours ----------
+   Uniquement des compteurs agrégés : transitions « écran → écran » et événements (début/fin de parcours…).
+   Aucun identifiant, aucun cookie, rien d'enregistré sur le téléphone. Envoyé à /api/flux quand la page se ferme. */
+const FX={t:{},e:{},vide:""}; let LASTV=null;
+const track=e=>{ FX.e[e]=(FX.e[e]||0)+1; };
+function trackView(v){ if(LASTV===v) return; if(LASTV){ const k=LASTV+">"+v; FX.t[k]=(FX.t[k]||0)+1; } else track("entree:"+v); LASTV=v; }
+function flush(){ if(FX.vide){ track("recherche-vide:"+FX.vide); FX.vide=""; }
+  if(!Object.keys(FX.t).length&&!Object.keys(FX.e).length) return;
+  const body=JSON.stringify({t:FX.t,e:FX.e}); FX.t={}; FX.e={};
+  try{ if(!navigator.sendBeacon||!navigator.sendBeacon(API+"/flux",new Blob([body],{type:"application/json"}))) fetch(API+"/flux",{method:"POST",headers:{"Content-Type":"application/json"},body,keepalive:true}).catch(()=>{}); }catch(e){} }
+addEventListener("pagehide",flush); document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="hidden") flush(); });
+
 /* ---------- petits blocs ---------- */
 const who=P=>`<span class="who"><i class="dot" style="background:${C[P].color}"></i>${esc(C[P].cand)}</span>`;
 const ficheOf=id=>F[id]||REMOTE[id]||null;
@@ -285,7 +335,8 @@ function vHome(){
     .sort((a,b)=>(F[b.id].critiques||[]).length-(F[a.id].critiques||[]).length).slice(0,6);
   $("#app").innerHTML=`
     <a class="search" href="#/chercher" aria-label="Chercher une mesure">${ICO.search}<input placeholder="Une mesure entendue ? Smic, retraites…" readonly tabindex="-1"></a>
-    <section class="sec" style="margin-top:16px"><div class="sec-h"><h2>Par sujet</h2><a href="#/sujets">Tout voir</a></div>
+    <a class="path-card" href="#/parcours"><b>Pas d'idée par où commencer ?</b><span>Le parcours découverte : ${pathSteps(null).length} grandes questions, ce que propose chaque candidat. Environ 5 minutes.</span><span class="go">${resumeLabel()} →</span></a>
+    <section class="sec" style="margin-top:18px"><div class="sec-h"><h2>Par sujet</h2><a href="#/sujets">Tout voir</a></div>
       <div class="hs">${TH.map(t=>`<a class="chip" href="#/s/${t.id}">${esc(t.t)}</a>`).join("")}</div></section>
     <section class="sec" style="margin-top:18px"><div class="sec-h"><h2>Par candidat</h2><a href="#/candidats">Tous (${CK.length})</a></div>
       <div class="hs avs">${CK.map(P=>`<a href="#/c/${P}"><span class="av" style="background:${C[P].color}">${initials(C[P].cand)}</span><span>${esc(lastName(C[P].cand))}</span></a>`).join("")}</div></section>
@@ -334,7 +385,9 @@ function vSujet(id,focus){
   } else {
     body=`<div class="list" style="margin-top:12px">${has.map(P=>candRow(ms,P,"s-"+id+"-"+P)).join("")}</div>`;
   }
+  const nst=t.pts?pathSteps(id).length:0;
   $("#app").innerHTML=`<p class="lead" style="margin-top:8px">${esc(t.d)}. ${plural(has.length,"candidat a","candidats ont")} fait des propositions.</p>
+    ${nst?`<a class="path-card" href="#/parcours/${id}" style="margin-top:12px;padding:13px 16px"><b style="font-size:15px">Parcourir ce sujet question par question</b><span>${plural(nst,"question","questions")}, une position par candidat</span></a>`:""}
     ${body}
     ${none.length?`<div class="absent"><b>Rien trouvé dans nos sources</b>${none.map(P=>esc(C[P].cand)).join(", ")}</div>`:""}
     <p class="hint">Pour chaque question, une mesure par candidat (la plus documentée), par ordre alphabétique. Le classement a été fait par une IA, puis vérifié par sondage : signalez les erreurs.</p>`;
@@ -401,14 +454,14 @@ function results(){
   const qn=norm(SQ).trim();
   const cs=CK.filter(P=>norm(C[P].cand+" "+C[P].nom).split(/\s+/).some(w=>w.startsWith(qn))||norm(C[P].cand).includes(qn));
   const ts=TH.filter(t=>norm(t.t+" "+t.d).includes(qn));
-  const all=search(SQ); const per={}; all.forEach(m=>per[m.P]=(per[m.P]||0)+1);
+  const all=search(SQ); if(all.length) FX.vide=""; const per={}; all.forEach(m=>per[m.P]=(per[m.P]||0)+1);
   const res=SP?all.filter(m=>m.P===SP):all;
   const key="q-"+SQ+"-"+SP;
   $("#app").innerHTML=`
     ${cs.length||ts.length?`<div class="list cands" style="margin-top:12px">${cs.map(P=>candLine(P,"Candidat · "+status(P))).join("")}${ts.map(t=>`<a class="cand" href="#/s/${t.id}"><span class="n"><b>${esc(t.t)}</b><span>Sujet · ${esc(t.d)}</span></span>${ICO.chev}</a>`).join("")}</div>`:""}
     <section class="sec" style="margin-top:14px"><div class="sec-h"><h2>${plural(all.length,"mesure","mesures")}</h2></div>
     ${all.length?`<div class="hs" style="margin-bottom:10px"><a class="chip${SP?"":" on"}" href="#" data-sp="">Tous <small>${all.length}</small></a>${CK.filter(P=>per[P]).map(P=>`<a class="chip${SP===P?" on":""}" href="#" data-sp="${P}"><i class="dot" style="background:${C[P].color}"></i>${esc(lastName(C[P].cand))} <small>${per[P]}</small></a>`).join("")}</div>${rowsWithMore(res,20,true,key)}`
-      :`<div class="empty">Rien trouvé pour « ${esc(SQ)} ».<br>Essayez un mot plus simple, ou parcourez les sujets.</div>`}</section>`;
+      :(FX.vide=norm(SQ).trim().replace(/[^a-z0-9]+/g,"-").slice(0,40),"")+`<div class="empty">Rien trouvé pour « ${esc(SQ)} ».<br>Essayez un mot plus simple, ou parcourez les sujets.</div>`}</section>`;
   document.querySelectorAll("[data-sp]").forEach(a=>a.onclick=e=>{ e.preventDefault(); SP=a.dataset.sp; results(); });
 }
 
@@ -466,6 +519,7 @@ function vMesure(id){
   $("#app").innerHTML=h;
   document.querySelectorAll("[data-open]").forEach(a=>a.onclick=e=>{ e.preventDefault(); const anchor=$("#"+a.dataset.open), d=anchor&&anchor.nextElementSibling; if(d){ d.open=true; window.scrollTo({top:d.getBoundingClientRect().top+scrollY-64,behavior:"smooth"}); } });
   $("#b-flag").onclick=()=>openFlag(m);
+  document.querySelectorAll("#app details").forEach(d=>d.addEventListener("toggle",()=>{ if(d.open) track("volet:"+norm(d.querySelector("summary b").childNodes[0].textContent).trim().replace(/[^a-z0-9]+/g,"-").slice(0,40)); }));
   }
 }
 function simil(f,others,m){
@@ -502,6 +556,105 @@ function openFlag(m){
 function closeSheet(){ $("#sheet").classList.remove("on"); $("#sheet-bg").classList.remove("on"); }
 $("#sheet-bg").onclick=closeSheet;
 
+/* ---------- parcours guidé ----------
+   Une étape = un point précis (« Âge de départ »). On fait défiler la position de chaque candidat sur ce point,
+   puis un récapitulatif, puis la question suivante. Glisser = « suivant », jamais « j'aime ». */
+const ptCands=pid=>CK.filter(P=>ML.some(m=>m.P===P&&m.pt===pid));
+function pathSteps(sid){
+  const pts=t=>(t.pts||[]).map(p=>p[0]).filter(pid=>!/-autres$/.test(pid));
+  if(sid){ const t=THM[sid]; return t?pts(t).filter(pid=>ptCands(pid).length>=2).sort((a,b)=>ptCands(b).length-ptCands(a).length):[]; }
+  // Découverte : pour chaque sujet (dans l'ordre), la question sur laquelle le plus de candidats se sont prononcés (au moins 4).
+  return TH.map(t=>pts(t).map(pid=>[pid,ptCands(pid).length]).sort((a,b)=>b[1]-a[1])[0]).filter(x=>x&&x[1]>=4).map(x=>x[0]);
+}
+const LS={ get(k){ try{ return JSON.parse(localStorage.getItem(k)); }catch(e){ return null; } }, set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} } };
+function resumeLabel(){ const s=LS.get("parcours:"); return s&&s.i>0&&!s.done?"Reprendre à la question "+(s.i+1):"Commencer"; }
+// Ordre des candidats : mélangé une fois par parcours (personne n'est toujours en premier), puis stable.
+function shuffled(arr,seed){ const a=arr.slice(); let x=seed||1; for(let i=a.length-1;i>0;i--){ x=(x*9301+49297)%233280; const j=Math.floor(x/233280*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+let ST=null;
+function vParcours(sid){
+  sid=sid||"";
+  const steps=pathSteps(sid||null); if(!steps.length) return vNotFound();
+  const key="parcours:"+sid; let saved=LS.get(key);
+  if(!ST||ST.sid!==sid){ ST={sid,steps,i:0,j:0,seed:1+Math.floor(Math.random()*9999),blind:false,shown:new Set()};
+    if(saved&&!saved.done&&saved.i<steps.length){ Object.assign(ST,{i:saved.i,j:0,seed:saved.seed||ST.seed,blind:!!saved.blind}); }
+    track("parcours:debut"+(sid?":"+sid:"")); }
+  document.body.classList.add("story-on");
+  renderStory(0);
+}
+// Mode « noms masqués » : on retire aussi le nom du candidat et de son parti du texte des fiches.
+function maskName(txt,P){ if(!ST||!ST.blind) return txt; const c=C[P];
+  const names=[c.cand,lastName(c.cand),c.nom,(c.long||"").split(" · ")[0]].filter(x=>x&&x.length>1).sort((a,b)=>b.length-a.length);
+  let t=String(txt||""); for(const n of names) t=t.replace(new RegExp("(^|[^\\p{L}])"+n.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"(?=$|[^\\p{L}])","giu"),"$1[ce candidat]");
+  return t; }
+function storyCards(pid){
+  const cs=shuffled(ptCands(pid),ST.seed+pid.length*31);
+  return cs.map(P=>{ const l=ML.filter(m=>m.P===P&&m.pt===pid).sort(byRank); return {P,m:l[0],more:l.length-1}; });
+}
+function renderStory(dir){
+  const {steps,i}=ST, done=i>=steps.length;
+  const save=()=>LS.set("parcours:"+ST.sid,{i:ST.i,seed:ST.seed,blind:ST.blind,done:ST.i>=steps.length});
+  save();
+  let card, cards=[], total=1, frac=1;
+  if(done){
+    track("parcours:fin"+(ST.sid?":"+ST.sid:""));
+    card=`<div class="st-kick">Parcours terminé</div><h2 class="st-q">Vous avez fait le tour de ${plural(steps.length,"question","questions")}.</h2>
+      <p class="st-p">Chaque question regroupe ce que proposent les candidats sur le même point. Pour aller plus loin, ouvrez un sujet ou cherchez une mesure que vous avez entendue.</p>
+      <div style="display:grid;gap:8px">${ST.sid?`<a class="btn dark" href="#/s/${ST.sid}">Voir le sujet en détail</a>`:`<a class="btn dark" href="#/sujets">Explorer les sujets</a>`}<a class="btn" href="#/chercher">Chercher une mesure</a><button class="btn" id="st-restart">Recommencer</button></div>`;
+  } else {
+    const pid=steps[i], pt=PT[pid], th=THM[pt.th]; cards=storyCards(pid); total=cards.length+2;
+    const j=Math.min(ST.j,total-1); ST.j=j; frac=(j+1)/total;
+    if(j===0){
+      track("parcours:etape:"+(i+1));
+      card=`<div class="st-kick">${esc(th.t)} · question ${i+1} sur ${steps.length}</div>
+        <h2 class="st-q">${esc(pt.t)}&nbsp;: que proposent les candidats&nbsp;?</h2>
+        <p class="st-p">${plural(cards.length,"candidat a","candidats ont")} une position. Faites défiler pour les voir une par une${ST.blind?", sans les noms : ils sont révélés à la fin de la question":""}.</p>
+        <div class="st-avs">${cards.map(c=>`<span class="av" style="background:${ST.blind?"#9a968f":C[c.P].color}">${ST.blind?"?":initials(C[c.P].cand)}</span>`).join("")}</div>
+        <div class="st-hint">Touchez à droite ou glissez vers la gauche pour avancer</div>`;
+    } else if(j<=cards.length){
+      const c=cards[j-1], f=F[c.m.id], lg=f&&f.logique?(typeof f.logique==="string"?f.logique:f.logique.texte):"", cr=f&&(f.critiques||[])[0];
+      const hidden=ST.blind&&!ST.shown.has(c.m.id);
+      card=`<div class="st-kick">${esc(pt.t)} · ${j} / ${cards.length}</div>
+        ${hidden?`<div class="st-blind"><span class="av" style="width:40px;height:40px">?</span><div style="flex:1"><b>Qui propose ?</b></div><button class="st-ico" id="st-reveal">Révéler</button></div>`
+          :`<div class="st-who"><span class="av" style="background:${C[c.P].color}">${initials(C[c.P].cand)}</span><div>${esc(C[c.P].cand)}<small>${esc(C[c.P].nom)}</small></div></div>`}
+        <h2 class="st-m">${esc(hidden?maskName(c.m.t,c.P):c.m.t)}</h2>
+        ${f&&f.resume?`<p class="st-p">${esc(hidden?maskName(f.resume,c.P):f.resume)}</p>`:""}
+        ${lg||cr?`<div class="pc" style="margin-top:0">${lg?`<div class="p" style="border-radius:12px;padding:10px 12px"><b>Pourquoi c'est défendu</b><span>${esc(hidden?maskName(firstSentence(lg),c.P):firstSentence(lg))}</span></div>`:""}${cr?`<div class="c" style="border-radius:12px;padding:10px 12px"><b>Pourquoi c'est critiqué</b><span>${esc(hidden?maskName(firstSentence(cr.texte),c.P):firstSentence(cr.texte))}</span></div>`:""}</div>`:""}
+        ${f&&f.genere?`<span class="tag ia" style="align-self:flex-start">Rédigé par IA · à vérifier</span>`:""}
+        <a class="src" href="#/m/${encodeURIComponent(c.m.id)}" data-fiche="1">Voir la fiche complète${c.more>0?` · ${plural(c.more,"autre mesure","autres mesures")} sur ce point`:""} →</a>`;
+    } else {
+      card=`<div class="st-kick">${esc(pt.t)} · récapitulatif</div>
+        <h2 class="st-q" style="font-size:22px">${plural(cards.length,"position","positions")} sur cette question</h2>
+        <div>${cards.map(c=>`<a class="st-rc" href="#/m/${encodeURIComponent(c.m.id)}" data-fiche="1">${who(c.P)}<div class="x">${esc(c.m.t)}</div></a>`).join("")}</div>`;
+    }
+  }
+  const bar=steps.map((_,k)=>`<i><b style="transform:scaleX(${k<ST.i?1:k===ST.i&&!done?frac:0})"></b></i>`).join("");
+  const isLast=!done&&ST.j===total-1;
+  $("#app").innerHTML=`<div class="story" id="story">
+    <div class="st-bar">${bar}</div>
+    <div class="st-head"><span class="lab">${ST.sid?"Parcours · "+esc(THM[ST.sid].t):"Parcours découverte"}</span>
+      ${done?"":`<button class="st-ico${ST.blind?" on":""}" id="st-blind" aria-pressed="${ST.blind}">${ST.blind?"Noms masqués":"Masquer les noms"}</button>`}
+      <button class="st-ico" id="st-close" aria-label="Fermer le parcours">✕</button></div>
+    <div class="st-body"><div class="st-card${dir<0?" back":""}" id="st-card">${card}</div></div>
+    ${done?"":`<div class="st-foot"><button class="btn nb" id="st-prev" aria-label="Précédent"${ST.i===0&&ST.j===0?" disabled style=\"opacity:.35\"":""}>←</button><button class="btn dark" id="st-next">${isLast?(ST.i===steps.length-1?"Terminer":"Question suivante"):ST.j===0?"Voir les positions":"Suivant"} →</button></div>`}
+  </div>`;
+  const go=d=>{ if(done) return; if(d>0){ if(ST.j<total-1) ST.j++; else { ST.i++; ST.j=0; } } else { if(ST.j>0) ST.j--; else if(ST.i>0){ ST.i--; ST.j=storyCards(steps[ST.i]).length+1; } else return; } renderStory(d); };
+  if($("#st-next")) $("#st-next").onclick=()=>go(1);
+  if($("#st-prev")) $("#st-prev").onclick=()=>go(-1);
+  $("#st-close").onclick=()=>{ if(!done) track("parcours:quitte:"+(ST.i+1)); ST=null; document.body.classList.remove("story-on"); location.hash="#/"; };
+  if($("#st-blind")) $("#st-blind").onclick=()=>{ ST.blind=!ST.blind; track("parcours:aveugle:"+(ST.blind?"on":"off")); renderStory(0); };
+  if($("#st-reveal")) $("#st-reveal").onclick=e=>{ e.stopPropagation(); const c=storyCards(steps[ST.i])[ST.j-1]; ST.shown.add(c.m.id); renderStory(0); };
+  if($("#st-restart")) $("#st-restart").onclick=()=>{ ST.i=0; ST.j=0; ST.seed=1+Math.floor(Math.random()*9999); track("parcours:recommence"); renderStory(0); };
+  document.querySelectorAll("#story [data-fiche]").forEach(a=>a.addEventListener("click",()=>track("parcours:fiche")));
+  // Gestes : toucher à droite/gauche de la carte, ou glisser horizontalement.
+  const el=$("#st-card"); let x0=null,y0=null;
+  el.addEventListener("pointerdown",e=>{ x0=e.clientX; y0=e.clientY; });
+  el.addEventListener("pointerup",e=>{ if(x0==null) return; const dx=e.clientX-x0, dy=e.clientY-y0; x0=null;
+    if(e.target.closest("a,button")) return;
+    if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)) go(dx<0?1:-1);
+    else if(Math.abs(dx)<8&&Math.abs(dy)<8){ const r=el.getBoundingClientRect(); go(e.clientX-r.left<r.width/3?-1:1); } });
+}
+document.addEventListener("keydown",e=>{ if(!document.body.classList.contains("story-on")) return; if(e.key==="ArrowRight") $("#st-next")?.click(); if(e.key==="ArrowLeft") $("#st-prev")?.click(); if(e.key==="Escape") $("#st-close")?.click(); });
+
 function vNotFound(){ backTop("Introuvable"); $("#app").innerHTML=`<div class="empty">Cette page n'existe pas.<br><a href="#/" style="color:var(--accent);font-weight:600">Retour à l'accueil</a></div>`; }
 
 /* ---------- routeur ---------- */
@@ -512,7 +665,10 @@ function route(){
   const nav=p[0]==="chercher"?"chercher":p[0]==="sujets"||p[0]==="s"?"sujets":p[0]==="candidats"||p[0]==="c"?"candidats":"home";
   document.querySelectorAll(".nav a").forEach(a=>a.classList.toggle("on",a.dataset.n===nav));
   closeSheet();
+  if(p[0]!=="parcours") document.body.classList.remove("story-on");
+  trackView(!p.length?"accueil":{sujets:"sujets",s:"sujet",candidats:"candidats",c:"candidat",m:"mesure",chercher:"chercher",parcours:"parcours"}[p[0]]||"autre");
   if(!p.length) vHome();
+  else if(p[0]==="parcours") vParcours(p[1]);
   else if(p[0]==="sujets") vSujets();
   else if(p[0]==="s") vSujet(p[1],qs?new URLSearchParams(qs).get("p"):null);
   else if(p[0]==="candidats") vCandidats();

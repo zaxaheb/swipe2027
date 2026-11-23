@@ -63,8 +63,16 @@ For people who don't know where to start. Search, subjects and candidates stay t
 - **Option: blind mode.** Show positions without the candidate's name, reveal on demand. The current app already has it ("Mode à l'aveugle"); it reduces partisan reflexes.
 - **Balance built in:** every step shows every candidate who has a position, in a fixed neutral order (or shuffled per user), plus "no proposal found" for the others.
 - **Short paths too:** one path per subject ("Retraites in 3 minutes"), a progress bar, and the path resumes where you stopped.
-- **Depends on:** the subject → point classification (in progress), since a step is a point.
+- **Depends on:** the subject → point classification, since a step is a point (done 23/11/2026).
+- **Status (23/11/2026): prototype in v2** (`#/parcours`). Discovery path = for each subject, the question with the most candidates (12 questions today: Smic, âge de départ, impôt sur la fortune…), plus one path per subject from the subject page. Each question: intro, one card per candidate (order shuffled once per path), then a recap of all positions. Tap right / swipe left = next, tap left = back. "Masquer les noms" hides the candidate and also blanks their name and party inside the text; names come back in the recap. Resumes where you stopped (stored only on the phone).
 - **Open questions:** the order of subjects (neutral, or by what people care about most in polls?); length of the full path; all candidates or the main ones only; what the end screen shows if there's no profile.
+
+## 8. Measure which flows work · *needed before choosing between flows*
+We need to see where people go to know which navigation works best (search, subjects, candidates, guided path, swipe…).
+- **What to measure:** the entry point (home, search, subject, candidate, path, a shared link); the screen-to-screen transitions (e.g. search → measure → other candidate); for the path, start, each step reached, finish, and where people quit; which sections of a measure page get opened; searches that return nothing.
+- **How, without tracking people:** only aggregated daily counters, like the existing visit counter (`api/visite.js`, no cookie, daily hashed fingerprint). Transitions are counted as "from screen type → to screen type" (e.g. `chercher → mesure`: 412 today), never as one person's history. Search words are kept only when they return nothing, to fix the search.
+- **What we get:** a flow diagram per day/week (Sankey), path completion rate and drop-off step, top sections opened. Enough to compare flows, and A/B versions later.
+- **Status:** the v2 prototype records these counters in the page and sends them to a new `api/flux` endpoint (`supabase/migration-005.sql`). Not deployed: needs the migration on Supabase and a view in `admin.html`.
 
 ---
 
