@@ -68,6 +68,25 @@ def load_sorting(H):
     if not (os.path.exists(tx) and os.path.exists(cl)): return None, None
     return json.load(open(tx))["sujets"], json.load(open(cl))["mesures"]
 
+MOIS = {"janv": 1, "janvier": 1, "févr": 2, "fevr": 2, "février": 2, "mars": 3, "avr": 4, "avril": 4, "mai": 5, "juin": 6, "juil": 7, "juillet": 7,
+        "août": 8, "aout": 8, "sept": 9, "septembre": 9, "oct": 10, "octobre": 10, "nov": 11, "novembre": 11, "déc": 12, "dec": 12, "décembre": 12}
+RX_DATE = re.compile(r"(\d{1,2})(?:er)? (" + "|".join(sorted(MOIS, key=len, reverse=True)) + r")\.? (20\d\d)")
+
+def press_date(f, today):
+    """Date de l'article le plus récent cité dans une fiche (critiques, réponses, arguments), sans dépasser aujourd'hui."""
+    parts = (f.get("critiques") or []) + (f.get("reponses") or [])
+    lg = f.get("logique")
+    if isinstance(lg, dict): parts += lg.get("arguments") or []
+    ds = []
+    for x in parts:
+        for m in RX_DATE.finditer(" ".join(str(x.get(k) or "") for k in ("media", "texte"))):
+            d = "%s-%02d-%02d" % (m[3], MOIS[m[2]], int(m[1]))
+            if d <= today: ds.append(d)
+    return max(ds) if ds else None
+
+# Candidats principaux : affichés en premier (ordre alphabétique entre eux). Liste à valider ; la liste officielle n'existera qu'après les parrainages (mars 2027).
+PRINCIPAUX = ["LFI", "RN", "PHILIPPE", "RETAILLEAU", "ATTAL", "GLUCKSMANN", "ZEMMOUR", "BERTRAND", "TONDELIER", "ROUSSEL", "RUFFIN"]
+
 def build(H, progs, S, Mz, fi):
     TX, CL = load_sorting(H)
     cands = dict(LFI_RN)
@@ -87,6 +106,14 @@ def build(H, progs, S, Mz, fi):
         mes.append(x)
     count = {k: sum(1 for m in mes if m["P"] == k) for k in cands}
     for k in cands: cands[k]["n"] = count[k]
+    for k in PRINCIPAUX:
+        if k in cands: cands[k]["main"] = True
+    import datetime
+    today = datetime.date.today().isoformat()
+    for x in mes:
+        if x["id"] in fi:
+            d = press_date(fi[x["id"]], today)
+            if d: x["dp"] = d
     cands = {k: v for k, v in cands.items() if v["n"]}
     themes = [{"id": x["id"], "t": x["t"], "d": x["d"], "pts": [[p["id"], p["t"]] for p in x["points"]]} for x in TX] if TX else [{"id": tid, "t": t, "d": d} for tid, t, d, _ in THEMES]
     if CL: print("v2 : classement par sujet et point depuis data/sujets.json (" + str(sum(1 for m in mes if "pt" in m)) + "/" + str(len(mes)) + " mesures)")
