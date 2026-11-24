@@ -380,8 +380,6 @@ function vHome(){
     <div class="quick"><a href="#/hasard">🎲 Au hasard</a><a class="dark" href="#/parcours">${resume?"Reprendre le parcours":"Parcours découverte"}</a></div>
     <section class="sec" style="margin-top:20px"><div class="sec-h"><h2>Sujets du moment</h2><a href="#/sujets">Tous les sujets</a></div>
       <div class="sqs">${hot.map(x=>tile(x.t,false,x.note)).join("")}</div></section>
-    <section class="sec"><div class="sec-h"><h2>Par candidat</h2><a href="#/candidats">Tous (${CK.length})</a></div>
-      <div class="hs">${CMAIN.map(P=>`<a class="chip" href="#/c/${P}"><i class="dot" style="background:${C[P].color}"></i>${esc(lastName(C[P].cand))}</a>`).join("")}<a class="chip" href="#/candidats">+${COTHER.length} autres</a></div></section>
     <section class="sec"><div class="sec-h"><h2>Récemment dans la presse</h2></div>
       <div class="list">${recent.map(m=>row(m,true).replace('<div class="meta">',`<div class="meta"><span class="tag">${esc(dateFr(m.dp))}</span>`)).join("")}</div>
       <p class="hint">D'après la date des articles cités dans nos fiches, une mesure par candidat. Un vrai fil d'actualité viendra ensuite.</p></section>`;
@@ -399,7 +397,8 @@ const dateFr=d=>{ const [y,m,j]=d.split("-").map(Number); return j+" "+MOIS[m-1]
 
 function vSujets(){
   setTop("");
-  $("#app").innerHTML=`<div class="sqs" style="margin-top:calc(14px + env(safe-area-inset-top))">${TH.map(t=>tile(t,true)).join("")}</div>
+  $("#app").innerHTML=`<section class="sec" style="margin-top:calc(14px + env(safe-area-inset-top))"><div class="sec-h"><h2>Les principaux sujets</h2></div>
+    <div class="sqs">${TH.map(t=>tile(t,true)).join("")}</div></section>
     <p class="hint">Le classement des mesures a été fait par une IA, puis relu : signalez les erreurs.</p>`;
 }
 
