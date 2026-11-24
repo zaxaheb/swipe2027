@@ -603,10 +603,7 @@ function vMesure(id){
         ${lg?`<a href="#" data-tab="pour" class="p"><b>Pourquoi c'est défendu</b><span>${esc(firstSentence(lg.texte))}</span></a>`:""}
         ${crit.length?`<a href="#" data-tab="contre" class="c"><b>Pourquoi c'est critiqué · ${crit.length}</b><span>${esc(firstSentence(crit[0].texte))}</span></a>`:""}
       </div>
-      <div class="facts">
-        <a class="fact" href="#" data-tab="cout"><b>Coût</b><span>${esc(eco.chiffre||"Non chiffré dans nos sources")}</span></a>
-        <a class="fact" href="#" data-tab="autres"><b>Les autres candidats</b><span>${others.length?`<strong style="font-weight:600">${plural(others.length,"candidat","candidats")}</strong> · `+esc(others.map(x=>lastName(C[x.P].cand)).join(", ")):"Rien de comparable trouvé"}</span></a>
-      </div>${actions}`;
+      ${actions}`;
   } else {
     add("autres","Autres candidats",others.length?`<h3>Ce que proposent les autres candidats</h3>`+simil(null,others,m):"",others.length);
     add("source","Source",`<h3>Source de la mesure</h3><p>${esc(m.sec)}</p>${srcl(m.url,"Lire dans le programme")}`);
