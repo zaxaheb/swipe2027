@@ -119,7 +119,11 @@ def build(H, progs, S, Mz, fi):
     if CL: print("v2 : classement par sujet et point depuis data/sujets.json (" + str(sum(1 for m in mes if "pt" in m)) + "/" + str(len(mes)) + " mesures)")
     data = {"cands": cands, "themes": themes, "mes": mes, "fiches": fi}
     J = json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
-    h = open(os.path.join(H, "template_v2.html")).read().replace("/*__DATA__*/null", J)
+    # Comptes : même projet Supabase que l'app actuelle (clé publique, lue dans template.html)
+    t1 = open(os.path.join(H, "template.html")).read()
+    u, k = re.search(r'SUPABASE_URL:\s*"([^"]*)"', t1), re.search(r'SUPABASE_ANON_KEY:\s*"([^"]*)"', t1)
+    sb = json.dumps({"url": u[1], "key": k[1]}) if u and k and u[1] and k[1] else "null"
+    h = open(os.path.join(H, "template_v2.html")).read().replace("/*__DATA__*/null", J).replace("/*__SB__*/null", sb)
     open(os.path.join(H, "v2.html"), "w").write(h)
     by = {}
     for m in mes: by.setdefault(m["th"], {}).setdefault(m["P"], 0); by[m["th"]][m["P"]] += 1

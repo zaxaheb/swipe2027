@@ -209,6 +209,10 @@ details[open] summary span{display:none}
 .dive-h span{font-size:12.5px;color:var(--muted)}
 .tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 calc(-1*var(--pad));padding:2px var(--pad) 10px;position:sticky;top:54px;z-index:10;background:var(--bg)}
 .tabs::-webkit-scrollbar{display:none}
+.st-card{overflow-x:hidden}
+.st-card .tabs{top:-20px;background:var(--card);margin:0 -18px;padding:6px 18px 10px}
+.st-card .swiper{margin:0 -18px;padding:0 18px;scroll-padding:0 18px}
+.st-card .dive-h{margin-top:6px}
 .tabs .chip{font-size:13.5px;padding:7px 12px}
 .swiper{display:flex;align-items:flex-start;gap:12px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 calc(-1*var(--pad));padding:0 var(--pad);scroll-padding:0 var(--pad);transition:height .2s}
 .swiper::-webkit-scrollbar{display:none}
@@ -226,6 +230,30 @@ details[open] summary span{display:none}
 .stat span{font-size:12px;color:var(--muted);line-height:1.25;display:block;margin-top:2px}
 button.stat{text-align:left}
 button.stat.on{border-color:var(--ink);background:var(--soft)}
+/* avis et profil */
+.avis{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:8px}
+.avis button{height:38px;border-radius:10px;border:1px solid var(--line);background:var(--card);font-size:13.5px;font-weight:600}
+.avis button.on.p{background:var(--pro-soft);border-color:var(--pro);color:var(--pro)}
+.avis button.on.c{background:var(--con-soft);border-color:var(--con);color:var(--con)}
+.avis button.on.s{background:var(--soft);border-color:var(--ink2)}
+.avis-l{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-top:14px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-top:12px}
+.box h3{font-size:12px;font-weight:700;margin:0 0 8px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.field{width:100%;height:44px;border:1px solid var(--line);border-radius:10px;padding:0 12px;font:inherit;font-size:16px;background:var(--bg)}
+.bars{display:flex;flex-direction:column;gap:9px}
+.bar{display:grid;grid-template-columns:96px 1fr 44px;gap:8px;align-items:center;font-size:13.5px}
+.bar .n{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .t{height:9px;border-radius:5px;background:var(--soft);overflow:hidden}
+.bar .t i{display:block;height:100%;border-radius:5px}
+.bar .v{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.bar.faible{opacity:.55}
+.bar small{grid-column:2/4;font-size:11.5px;color:var(--muted);margin-top:-6px}
+.pt-l{font-size:16px;line-height:1.5;margin:0 0 10px;font-family:var(--serif)}
+.pt-s{margin-top:12px}.pt-s h4{font-size:13px;margin:0 0 4px}.pt-s ul{margin:0;padding-left:18px;font-size:14.5px}.pt-s li{margin:3px 0}
+.badge-p{color:var(--pro);background:var(--pro-soft)}.badge-c{color:var(--con);background:var(--con-soft)}
+.flash{position:fixed;left:50%;top:40%;transform:translate(-50%,-50%);z-index:60;font-size:22px;font-weight:800;padding:12px 22px;border-radius:999px;pointer-events:none;animation:fl .7s ease-out forwards}
+@keyframes fl{0%{opacity:0;transform:translate(-50%,-40%) scale(.9)}25%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-60%)}}
+.st-who .heart{margin-left:auto}
 /* actions */
 .actions{display:grid;gap:8px;margin-top:18px}
 .btn{display:flex;align-items:center;justify-content:center;gap:8px;height:46px;border-radius:12px;font-weight:600;font-size:15px;background:var(--card);border:1px solid var(--line)}
@@ -315,6 +343,7 @@ body.story-on .nav, body.story-on .top{display:none}
 <div class="sheet-bg" id="sheet-bg"></div>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sh-t"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script>
 const DATA=/*__DATA__*/null;
 const API="/api";
@@ -378,6 +407,22 @@ function flush(){ if(FX.vide){ track("recherche-vide:"+FX.vide); FX.vide=""; }
   try{ if(!navigator.sendBeacon||!navigator.sendBeacon(API+"/flux",new Blob([body],{type:"application/json"}))) fetch(API+"/flux",{method:"POST",headers:{"Content-Type":"application/json"},body,keepalive:true}).catch(()=>{}); }catch(e){} }
 addEventListener("pagehide",flush); document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="hidden") flush(); });
 
+/* ---------- réponses (pour / contre / sans avis) et compte ----------
+   Mêmes données que l'app actuelle : localStorage « sw2027 » = { idMesure: 1 | -1 | 0 }, synchronisées dans Supabase (table profils) si on a un compte. */
+const SBC=/*__SB__*/null; let SB=null, USER=null;
+try{ if(SBC&&window.supabase) SB=window.supabase.createClient(SBC.url,SBC.key); }catch(e){ SB=null; }
+const ANSK="sw2027";
+let ANS=(()=>{ try{ return JSON.parse(localStorage.getItem(ANSK))||{}; }catch(e){ return {}; } })();
+const saveAns=()=>{ try{ localStorage.setItem(ANSK,JSON.stringify(ANS)); }catch(e){} };
+let PUSHT; function setAns(id,v){ if(v==null) delete ANS[id]; else ANS[id]=v; saveAns(); track("avis:"+(v===1?"pour":v===-1?"contre":v===0?"sans":"efface")); clearTimeout(PUSHT); PUSHT=setTimeout(pushRemote,800); }
+async function pushRemote(){ if(!SB||!USER) return; try{ await SB.from("profils").upsert({user_id:USER.id,swipes:ANS,updated_at:new Date().toISOString()}); }catch(e){} }
+async function pullRemote(){ if(!SB||!USER) return; try{ const {data}=await SB.from("profils").select("swipes").eq("user_id",USER.id).maybeSingle(); ANS=Object.assign({},(data&&data.swipes)||{},ANS); saveAns(); await pushRemote(); }catch(e){} }
+if(SB){ SB.auth.getSession().then(({data})=>{ USER=data&&data.session?data.session.user:null; if(USER) pullRemote().then(()=>{ if(location.hash.startsWith("#/profil")) route(); }); }).catch(()=>{});
+  SB.auth.onAuthStateChange((ev,ses)=>{ const u=ses?ses.user:null, ch=(u&&u.id)!==(USER&&USER.id); USER=u; if(ch&&USER) pullRemote(); if(ch&&location.hash.startsWith("#/profil")) route(); }); }
+function flash(v){ const d=document.createElement("div"); d.className="flash "+(v===1?"badge-p":v===-1?"badge-c":""); d.style.background=v===0?"var(--soft)":""; d.textContent=v===1?"Pour":v===-1?"Contre":"Passée"; document.body.appendChild(d); setTimeout(()=>d.remove(),750); }
+const avisBtns=id=>{ const v=ANS[id]; return `<div class="avis" data-avis="${esc(id)}"><button class="p${v===1?" on":""}" data-v="1">👍 Pour</button><button class="c${v===-1?" on":""}" data-v="-1">👎 Contre</button><button class="s${v===0?" on":""}" data-v="0">Sans avis</button></div>`; };
+function bindAvis(root,after){ root.querySelectorAll("[data-avis]").forEach(box=>box.querySelectorAll("button").forEach(b=>b.onclick=()=>{ const id=box.dataset.avis, v=+b.dataset.v; setAns(id,ANS[id]===v?null:v); if(after) after(); else box.outerHTML=avisBtns(id), bindAvis(root); })); }
+
 /* ---------- mesures sauvegardées (cœur), gardées seulement sur le téléphone ---------- */
 const FAVK="favoris";
 const favs=()=>{ try{ return JSON.parse(localStorage.getItem(FAVK))||[]; }catch(e){ return []; } };
@@ -418,14 +463,13 @@ let HIST=0;
 
 /* ---------- vues ---------- */
 function vHome(){
-  setTop(`<div class="brand">Swipe 2027<small>Les mesures des candidats, expliquées simplement</small></div>`);
+  setTop(`<div class="brand" style="flex:1">Swipe 2027<small>Les mesures des candidats, expliquées simplement</small></div><a class="heart" href="#/profil" aria-label="Mon profil" style="background:var(--card);border:1px solid var(--line)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg></a>`);
   // Récemment dans la presse : une mesure par candidat, celle dont l'article cité le plus récent est le plus proche d'aujourd'hui.
   const recent=CK.map(P=>ML.filter(m=>m.P===P&&m.dp).sort((a,b)=>b.dp.localeCompare(a.dp))[0]).filter(Boolean).sort((a,b)=>b.dp.localeCompare(a.dp)).slice(0,6);
   const st=LS.get("parcours:"), resume=st&&st.i>0&&!st.done;
   const hot=hotSubjects(6);
   $("#app").innerHTML=`
     <a class="search" href="#/chercher" aria-label="Chercher une mesure">${ICO.search}<input placeholder="Une mesure entendue ? Smic, retraites…" readonly tabindex="-1"></a>
-    <div class="quick"><a href="#/swipe">Swipe</a><a class="dark" href="#/parcours">${resume?"Reprendre le parcours":"Parcours découverte"}</a></div>
     ${favs().length?`<section class="sec" style="margin-top:20px"><div class="sec-h"><h2>Mes mesures sauvegardées</h2><a href="#/favoris">Toutes (${favs().length})</a></div>${rowsWithMore(favs().map(id=>MID[id]).filter(Boolean),3,true,"home-fav")}</section>`:""}
     <section class="sec" style="margin-top:20px"><div class="sec-h"><h2>Sujets du moment</h2><a href="#/sujets">Tous les sujets</a></div>
       <div class="sqs">${hot.map(x=>tile(x.t,false,x.note)).join("")}</div></section>
@@ -616,7 +660,7 @@ function vMesure(id){
   let h=`<h2 class="m-q" style="margin-top:4px">${esc(m.t)}</h2>
     <div class="m-tags">${realPt(m)?`<a href="#/s/${m.th}?p=${realPt(m)}">${esc(PT[realPt(m)].t)}</a>`:""}<a href="#/s/${m.th}">${esc(t.t)}</a></div>
     ${m.sous.length?`<ul class="m-sous">${m.sous.slice(0,4).map(s=>`<li>${esc(s)}</li>`).join("")}${m.sous.length>4?`<li>et ${m.sous.length-4} autres points</li>`:""}</ul>`:""}`;
-  const actions=`<div class="mini-actions"><a class="btn dark" href="#/chat?m=${encodeURIComponent(m.id)}">💬 Poser une question</a><button class="btn" id="b-flag">${ICO.flag} Signaler</button></div>`;
+  const actions=`<div class="avis-l">Ton avis sur cette mesure</div>${avisBtns(m.id)}<div class="mini-actions"><a class="btn dark" href="#/chat?m=${encodeURIComponent(m.id)}">💬 Poser une question</a><button class="btn" id="b-flag">${ICO.flag} Signaler</button></div>`;
   const P=fichePanels(m,f,others);
   if(f){
     const eco=f.eco||{};
@@ -629,30 +673,38 @@ function vMesure(id){
   } else {
     h+=`<div class="brief"><h3>Pas encore de fiche détaillée</h3><p>Nous n'avons pas encore rassemblé les arguments et les critiques sur cette mesure.</p></div>${actions}`;
   }
-  h+=`<div class="dive-h"><h2>Pour aller plus loin</h2><span>Glissez →</span></div>
-    <div class="tabs" id="tabs">${P.map((x,i)=>`<button class="chip${i?"":" on"}" data-i="${i}">${esc(x.label)}${x.cnt?` <small>${x.cnt}</small>`:""}</button>`).join("")}</div>
-    <div class="swiper" id="sw">${P.map(x=>`<section class="panel" data-k="${x.k}"><div class="body">${x.html}</div></section>`).join("")}</div>
-    <div class="dots">${P.map((_,i)=>`<i class="${i?"":"on"}"></i>`).join("")}</div>`;
+  h+=diveHTML(P);
   $("#app").innerHTML=h;
-  // Onglets ⇄ volets : toucher un onglet fait glisser jusqu'au volet ; glisser met l'onglet à jour. La hauteur suit le volet visible.
-  const sw=$("#sw"), panels=[...sw.children], tabs=[...document.querySelectorAll("#tabs .chip")], dots=[...document.querySelectorAll(".dots i")];
+  mountDive($("#app"),{onCard:true});
+  bindAvis($("#app"));
+  $("#b-flag").onclick=()=>openFlag(m);
+  }
+}
+/* « Pour aller plus loin » : onglets + volets qu'on fait glisser de gauche à droite. Même composant sur la fiche et dans le Swipe. */
+const diveHTML=P=>`<div class="dive"><div class="dive-h"><h2>Pour aller plus loin</h2><span>Glissez →</span></div>
+    <div class="tabs">${P.map((x,i)=>`<button class="chip${i?"":" on"}">${esc(x.label)}${x.cnt?` <small>${x.cnt}</small>`:""}</button>`).join("")}</div>
+    <div class="swiper">${P.map(x=>`<section class="panel" data-k="${x.k}"><div class="body">${x.html}</div></section>`).join("")}</div>
+    <div class="dots">${P.map((_,i)=>`<i class="${i?"":"on"}"></i>`).join("")}</div></div>`;
+let DRAG=null;   // glisser à la souris (un seul à la fois)
+addEventListener("pointermove",e=>{ if(!DRAG) return; const dx=e.clientX-DRAG.x; if(Math.abs(dx)>4){ DRAG.moved=true; e.preventDefault(); } DRAG.sw.scrollLeft=DRAG.left-dx; });
+addEventListener("pointerup",()=>{ if(!DRAG) return; const d=DRAG; DRAG=null; d.sw.style.scrollSnapType=""; d.done(); });
+function mountDive(root,opt){
+  const dv=root.querySelector(".dive"); if(!dv) return;
+  const sw=dv.querySelector(".swiper"), panels=[...sw.children], tabs=[...dv.querySelectorAll(".tabs .chip")], dots=[...dv.querySelectorAll(".dots i")];
   const step=()=>panels.length>1?panels[1].offsetLeft-panels[0].offsetLeft:1;
   let cur=-1;
   const setActive=i=>{ if(i===cur) return; cur=i; tabs.forEach((b,k)=>b.classList.toggle("on",k===i)); dots.forEach((d,k)=>d.classList.toggle("on",k===i));
     sw.style.height=panels[i].offsetHeight+"px"; tabs[i]&&tabs[i].scrollIntoView({inline:"nearest",block:"nearest"}); track("onglet:"+panels[i].dataset.k); };
-  const goTab=(i,scroll)=>{ sw.scrollTo({left:i*step(),behavior:"smooth"}); if(scroll){ const y=$("#tabs").getBoundingClientRect().top+scrollY-60; window.scrollTo({top:y,behavior:"smooth"}); } };
+  const goTab=(i,scroll)=>{ sw.scrollTo({left:i*step(),behavior:"smooth"});
+    if(scroll){ const box=opt&&opt.scroller; if(box) box.scrollTo({top:dv.offsetTop-8,behavior:"smooth"}); else window.scrollTo({top:dv.getBoundingClientRect().top+scrollY-60,behavior:"smooth"}); } };
   let tm; sw.addEventListener("scroll",()=>{ clearTimeout(tm); tm=setTimeout(()=>setActive(Math.round(sw.scrollLeft/step())),60); },{passive:true});
   tabs.forEach((b,i)=>b.onclick=()=>goTab(i,false));
-  // Souris (ordinateur) : glisser pour changer de volet, comme au doigt.
-  let mx=null,ml=0,moved=false;
-  sw.addEventListener("pointerdown",e=>{ if(e.pointerType!=="mouse") return; mx=e.clientX; ml=sw.scrollLeft; moved=false; sw.style.scrollSnapType="none"; });
-  addEventListener("pointermove",e=>{ if(mx==null) return; const dx=e.clientX-mx; if(Math.abs(dx)>4){ moved=true; e.preventDefault(); } sw.scrollLeft=ml-dx; });
-  addEventListener("pointerup",()=>{ if(mx==null) return; mx=null; sw.style.scrollSnapType=""; const i=Math.max(0,Math.min(panels.length-1,Math.round(sw.scrollLeft/step()))); goTab(i,false); });
+  let moved=false;
+  sw.addEventListener("pointerdown",e=>{ if(e.pointerType!=="mouse") return; moved=false; sw.style.scrollSnapType="none";
+    DRAG={sw,x:e.clientX,left:sw.scrollLeft,get moved(){return moved;},set moved(v){moved=v;},done:()=>goTab(Math.max(0,Math.min(panels.length-1,Math.round(sw.scrollLeft/step()))),false)}; });
   sw.addEventListener("click",e=>{ if(moved){ e.preventDefault(); e.stopPropagation(); moved=false; } },true);
-  document.querySelectorAll("[data-tab]").forEach(a=>a.onclick=e=>{ e.preventDefault(); const i=panels.findIndex(p=>p.dataset.k===a.dataset.tab); if(i>=0) goTab(i,true); });
+  root.querySelectorAll("[data-tab]").forEach(a=>a.onclick=e=>{ e.preventDefault(); const i=panels.findIndex(p=>p.dataset.k===a.dataset.tab); if(i>=0) goTab(i,true); });
   setActive(0);
-  $("#b-flag").onclick=()=>openFlag(m);
-  }
 }
 function simil(f,others,m){
   let h="";
@@ -822,58 +874,142 @@ function vChat(mid){
 }
 // Au hasard : un candidat tiré au sort (chacun a la même chance), puis une de ses mesures avec fiche.
 /* ---------- Swipe ----------
-   Un fil de fiches à faire défiler, une carte à la fois. Équilibré : on tourne entre les candidats (ordre tiré au sort),
-   chacun donne une de ses mesures à tour de rôle. Glisser = « suivante », jamais « j'aime » ; le cœur sert à sauvegarder. */
+   Une mesure à la fois. Glisser à droite = pour, à gauche = contre (comme l'app d'origine), « Passer » = sans avis.
+   Équilibré : les candidats passent à tour de rôle (ordre tiré au sort), d'abord les mesures avec fiche, puis les autres.
+   Les réponses restent sur le téléphone (et dans le compte si on en a un) et nourrissent « Mon profil ». */
 let SW=null;
 function swipeDeck(){
-  const ps=shuffled(CK.filter(P=>ML.some(m=>m.P===P&&F[m.id])),1+Math.floor(Math.random()*9999));
-  const per=Object.fromEntries(ps.map(P=>[P,shuffled(ML.filter(m=>m.P===P&&F[m.id]),1+Math.floor(Math.random()*9999))]));
-  const deck=[]; let more=true;
-  while(more){ more=false; for(const P of ps){ const m=per[P].shift(); if(m){ deck.push(m); more=true; } } }
-  return deck;
+  const seed=()=>1+Math.floor(Math.random()*9999), todo=m=>!(m.id in ANS);
+  const rr=pool=>{ const ps=shuffled(CK.filter(P=>pool.some(m=>m.P===P)),seed()); const per=Object.fromEntries(ps.map(P=>[P,shuffled(pool.filter(m=>m.P===P),seed())]));
+    const out=[]; let more=true; while(more){ more=false; for(const P of ps){ const m=per[P].shift(); if(m){ out.push(m); more=true; } } } return out; };
+  return rr(ML.filter(m=>F[m.id]&&todo(m))).concat(rr(ML.filter(m=>!F[m.id]&&todo(m))));
 }
 function vSwipe(){
-  if(!SW) SW={deck:swipeDeck(),i:0,blind:false,shown:new Set()};
+  if(!SW||!SW.deck.length) SW={deck:swipeDeck(),i:0,blind:false,shown:new Set()};
   track("swipe:debut"); document.body.classList.add("story-on"); renderSwipe(0);
 }
 function renderSwipe(dir){
+  if(SW.i>=SW.deck.length){ SW.deck=SW.deck.concat(swipeDeck()); if(SW.i>=SW.deck.length){ $("#app").innerHTML=`<div class="story"><div class="st-head" style="padding-top:calc(12px + env(safe-area-inset-top))"><span class="lab">Swipe</span><button class="st-ico" onclick="location.hash='#/'">✕</button></div><div class="st-body"><div class="st-card"><h2 class="st-q">Vous avez répondu à toutes les mesures.</h2><a class="btn dark" href="#/profil">Voir mon profil</a></div></div></div>`; return; } }
   const m=SW.deck[SW.i], f=F[m.id], th=THM[m.th], pt=realPt(m)?PT[m.pt].t:th.t;
   const lg=f&&f.logique?(typeof f.logique==="string"?f.logique:f.logique.texte):"", cr=f&&(f.critiques||[])[0];
   const hidden=SW.blind&&!SW.shown.has(m.id), mk=t=>hidden?maskName(t,m.P,true):t;
-  const fav=isFav(m.id);
+  const fav=isFav(m.id), nRep=Object.keys(ANS).length, v=ANS[m.id];
+  const aide=!LS.get("swipe:aide");
   $("#app").innerHTML=`<div class="story" id="story">
-    <div class="st-head" style="padding-top:calc(12px + env(safe-area-inset-top))"><span class="lab">Swipe · ${SW.i+1} / ${SW.deck.length}</span>
+    <div class="st-head" style="padding-top:calc(12px + env(safe-area-inset-top))"><a class="lab" href="#/profil" style="color:var(--ink2)">${nRep?`${plural(nRep,"réponse","réponses")} · Mon profil →`:"Swipe"}</a>
       <button class="st-ico${SW.blind?" on":""}" id="sw-blind">${SW.blind?"Noms masqués":"Masquer les noms"}</button>
       <button class="st-ico" id="sw-close" aria-label="Fermer">✕</button></div>
     <div class="st-body"><div class="st-card${dir<0?" back":""}" id="st-card">
-      <div class="st-kick">${esc(th.t)} · ${esc(pt)}</div>
+      ${aide?`<div class="warn" style="margin:0;justify-content:space-between;align-items:center"><span>👉 Glissez à droite si vous êtes <b>pour</b>, à gauche si vous êtes <b>contre</b>. Vos réponses restent sur ce téléphone et construisent votre profil.</span><button class="st-ico" id="sw-ok">OK</button></div>`:""}
+      <div class="st-kick">${esc(th.t)} · ${esc(pt)}${v!=null?` · <span style="color:${v===1?"var(--pro)":v===-1?"var(--con)":"var(--muted)"}">déjà répondu : ${v===1?"pour":v===-1?"contre":"sans avis"}</span>`:""}</div>
       ${hidden?`<div class="st-blind"><span class="av" style="width:40px;height:40px">?</span><div style="flex:1"><b>Qui propose ?</b></div><button class="st-ico" id="sw-reveal">Révéler</button></div>`
-        :`<div class="st-who"><span class="av" style="background:${C[m.P].color}">${initials(C[m.P].cand)}</span><div>${esc(C[m.P].cand)}<small>${esc(C[m.P].nom)}</small></div></div>`}
+        :`<div class="st-who"><span class="av" style="background:${C[m.P].color}">${initials(C[m.P].cand)}</span><div>${esc(C[m.P].cand)}<small>${esc(C[m.P].nom)}</small></div><button class="heart${fav?" on":""}" id="sw-fav" aria-label="${fav?"Retirer des sauvegardes":"Sauvegarder"}" aria-pressed="${fav}">${HEART(fav)}</button></div>`}
       <h2 class="st-m">${esc(mk(m.t))}</h2>
-      ${f.resume?`<p class="st-p">${esc(mk(f.resume))}</p>`:""}
+      ${f&&f.resume?`<p class="st-p">${esc(mk(f.resume))}</p>`:f?"":`<p class="st-p" style="color:var(--muted)">Pas encore de fiche détaillée pour cette mesure.</p>`}
       ${lg||cr?`<div class="pc" style="margin-top:0">${lg?`<div class="p" style="border-radius:12px;padding:10px 12px"><b>Pourquoi c'est défendu</b><span>${esc(mk(firstSentence(lg)))}</span></div>`:""}${cr?`<div class="c" style="border-radius:12px;padding:10px 12px"><b>Pourquoi c'est critiqué</b><span>${esc(mk(firstSentence(cr.texte)))}</span></div>`:""}</div>`:""}
-      ${f.genere?`<span class="tag ia" style="align-self:flex-start">Rédigé par IA · à vérifier</span>`:""}
-      <div class="acc sw-acc" style="margin-top:2px">${fichePanels(m,f,comparables(m)).map(x=>`<details data-k="${x.k}"><summary><div class="s"><b>${esc(x.label)}${x.cnt?`<em class="cnt" style="font-style:normal">${x.cnt}</em>`:""}</b></div>${ICO.down}</summary><div class="body">${hidden?maskHtml(x.html,m.P):x.html}</div></details>`).join("")}</div>
+      ${f&&f.genere?`<span class="tag ia" style="align-self:flex-start">Rédigé par IA · à vérifier</span>`:""}
+      ${diveHTML(fichePanels(m,f,comparables(m)).map(x=>hidden?{...x,html:maskHtml(x.html,m.P)}:x))}
       <div class="mini-actions" style="margin-top:0"><a class="btn" href="#/chat?m=${encodeURIComponent(m.id)}">💬 Question</a><button class="btn" id="sw-flag">${ICO.flag} Signaler</button></div>
     </div></div>
     <div class="st-foot"><button class="btn nb" id="sw-prev" aria-label="Précédente"${SW.i?"":" disabled style=\"opacity:.35\""}>←</button>
-      <button class="btn nb heart${fav?" on":""}" id="sw-fav" aria-label="${fav?"Retirer des sauvegardes":"Sauvegarder"}" aria-pressed="${fav}">${HEART(fav)}</button>
-      <button class="btn dark" id="sw-next">Suivante →</button></div>
+      <button class="btn" id="sw-contre" style="color:var(--con)">👎 Contre</button>
+      <button class="btn" id="sw-pass" style="flex:.7">Passer</button>
+      <button class="btn" id="sw-pour" style="color:var(--pro)">👍 Pour</button></div>
   </div>`;
-  const go=d=>{ const n=SW.i+d; if(n<0) return; if(n>=SW.deck.length){ SW.deck=SW.deck.concat(swipeDeck()); } SW.i=n; if(d>0) track("swipe:suivante"); renderSwipe(d); };
-  $("#sw-next").onclick=()=>go(1); $("#sw-prev").onclick=()=>go(-1);
-  $("#sw-fav").onclick=()=>{ toggleFav(m.id); renderSwipe(0); };
+  const answer=v=>{ setAns(m.id,v); flash(v); if(v===0) track("swipe:passe"); SW.i++; renderSwipe(1); };
+  $("#sw-pour").onclick=()=>answer(1); $("#sw-contre").onclick=()=>answer(-1); $("#sw-pass").onclick=()=>answer(0);
+  $("#sw-prev").onclick=()=>{ if(SW.i>0){ SW.i--; renderSwipe(-1); } };
+  if($("#sw-fav")) $("#sw-fav").onclick=()=>{ toggleFav(m.id); renderSwipe(0); };
+  if($("#sw-ok")) $("#sw-ok").onclick=()=>{ LS.set("swipe:aide",1); renderSwipe(0); };
   $("#sw-close").onclick=()=>{ document.body.classList.remove("story-on"); location.hash="#/"; };
   $("#sw-blind").onclick=()=>{ SW.blind=!SW.blind; track("swipe:aveugle:"+(SW.blind?"on":"off")); renderSwipe(0); };
   if($("#sw-reveal")) $("#sw-reveal").onclick=e=>{ e.stopPropagation(); SW.shown.add(m.id); renderSwipe(0); };
   $("#sw-flag").onclick=()=>openFlag(m);
-  document.querySelectorAll("#st-card details").forEach(d=>d.addEventListener("toggle",()=>{ if(d.open) track("swipe:volet:"+d.dataset.k); }));
+  mountDive($("#st-card"),{scroller:$("#st-card")});
   const el=$("#st-card"); let x0=null,y0=null;
   el.addEventListener("pointerdown",e=>{ x0=e.clientX; y0=e.clientY; });
   el.addEventListener("pointerup",e=>{ if(x0==null) return; const dx=e.clientX-x0, dy=e.clientY-y0; x0=null; if(e.target.closest("a,button")) return;
-    if(Math.abs(dx)>60&&Math.abs(dx)>1.5*Math.abs(dy)) go(dx<0?1:-1); });
+    if(e.target.closest(".dive")) return;   // glisser dans « Pour aller plus loin » change d'onglet, pas de carte
+    if(Math.abs(dx)>60&&Math.abs(dx)>1.5*Math.abs(dy)) answer(dx>0?1:-1); });
 }
-document.addEventListener("keydown",e=>{ if(!SW||!location.hash.startsWith("#/swipe")) return; if(e.key==="ArrowRight") $("#sw-next")?.click(); if(e.key==="ArrowLeft") $("#sw-prev")?.click(); });
+document.addEventListener("keydown",e=>{ if(!SW||!location.hash.startsWith("#/swipe")) return; if(e.key==="ArrowRight") $("#sw-pour")?.click(); if(e.key==="ArrowLeft") $("#sw-contre")?.click(); if(e.key==="ArrowDown") $("#sw-pass")?.click(); });
+
+/* ---------- Mon profil ----------
+   Calculé sur le téléphone à partir des réponses : accord par candidat et par sujet. Le portrait rédigé passe par l'API (mode « profil »), comme dans l'app d'origine. */
+let AUTH_MODE="signup", PCAT="pour";
+const EMAIL_DOMAIN="users.swipe2027.app", pseudoOf=u=>u&&u.email?u.email.split("@")[0]:"";
+function accountBox(){
+  if(!SB) return "";
+  if(USER) return `<div class="box"><h3>Ton compte</h3><p style="margin:0 0 10px">Connecté en tant que <b>@${esc(pseudoOf(USER))}</b>. Tes réponses sont gardées sur tous tes appareils.</p>
+    <div class="mini-actions" style="margin:0"><button class="btn" id="b-logout">Se déconnecter</button><button class="btn" id="b-del" style="color:var(--con)">Supprimer mon compte</button></div><p class="hint" id="del-st"></p></div>`;
+  const su=AUTH_MODE==="signup";
+  return `<div class="box"><h3>${su?"Garder mes réponses":"Connexion"}</h3><p style="margin:0 0 10px;font-size:14.5px;color:var(--ink2)">${su?"Un pseudo et un mot de passe pour retrouver tes réponses sur tous tes appareils. Pas d'email.":"Retrouve tes réponses."}</p>
+    <form id="f-auth" style="display:grid;gap:8px"><input class="field" id="in-user" required minlength="3" maxlength="20" placeholder="Pseudo (évite ton vrai nom)" autocomplete="username" autocapitalize="none">
+      <input class="field" id="in-pass" type="password" required minlength="8" placeholder="Mot de passe (8 caractères min.)" autocomplete="${su?"new-password":"current-password"}">
+      ${su?`<label style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink2)"><input type="checkbox" id="in-consent" required style="margin-top:2px;width:18px;height:18px;flex:none"><span>J'accepte que mes réponses soient sauvegardées sous mon pseudo, sans email, nom ni adresse IP. Je peux tout effacer à tout moment. <a href="/confidentialite.html" target="_blank" style="text-decoration:underline">Confidentialité</a></span></label>`:""}
+      <button class="btn dark">${su?"Créer mon compte":"Se connecter"}</button></form>
+    <p class="hint" id="auth-st">${su?`Déjà un compte ? <button class="src" id="b-mode" style="margin:0">Se connecter</button>`:`Pas encore de compte ? <button class="src" id="b-mode" style="margin:0">En créer un</button>`}</p></div>`;
+}
+function bindAccount(){
+  const md=$("#b-mode"); if(md) md.onclick=()=>{ AUTH_MODE=AUTH_MODE==="signup"?"login":"signup"; vProfil(); };
+  const fm=$("#f-auth"); if(fm) fm.onsubmit=async e=>{ e.preventDefault(); const st=$("#auth-st");
+    const user=$("#in-user").value.trim().toLowerCase(), pass=$("#in-pass").value, email=user+"@"+EMAIL_DOMAIN;
+    if(!/^[a-z0-9_]{3,20}$/.test(user)){ st.textContent="Pseudo : 3 à 20 caractères, lettres, chiffres ou _."; return; }
+    st.textContent="Un instant…";
+    if(AUTH_MODE==="signup"){
+      let r,d={}; try{ r=await fetch(API+"/compte",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({pseudo:user,password:pass})}); d=await r.json().catch(()=>({})); }catch(e){ st.textContent="Pas de connexion au serveur."; return; }
+      if(!r.ok){ st.textContent=d.error==="pris"?"Ce pseudo est déjà pris.":d.error==="mot_de_passe"?"Mot de passe trop faible : 8 caractères minimum.":d.error==="quota"?"Trop de comptes créés depuis ce réseau aujourd'hui.":"La création du compte n'est pas disponible ici ("+r.status+")."; return; }
+      const {data,error}=await SB.auth.signInWithPassword({email,password:pass});
+      if(error||!data.session){ st.textContent="Compte créé, mais la connexion a échoué : réessaie via « Se connecter »."; return; }
+      USER=data.session.user; try{ await SB.from("profils").upsert({user_id:USER.id,consent_at:new Date().toISOString(),swipes:ANS,updated_at:new Date().toISOString()}); }catch(e){}
+      track("compte:cree"); vProfil();
+    } else { const {error}=await SB.auth.signInWithPassword({email,password:pass}); st.textContent=error?"Pseudo ou mot de passe incorrect.":"Connecté !"; } };
+  const lo=$("#b-logout"); if(lo) lo.onclick=async()=>{ await SB.auth.signOut(); USER=null; vProfil(); };
+  const dl=$("#b-del"); if(dl) dl.onclick=async()=>{ if(!confirm("Supprimer ton compte et toutes tes réponses enregistrées ? C'est définitif.")) return; const st=$("#del-st"); st.textContent="Suppression…";
+    try{ const {data}=await SB.auth.getSession(); const r=await fetch(API+"/compte",{method:"DELETE",headers:{Authorization:"Bearer "+data.session.access_token}}); if(!r.ok) throw 0;
+      await SB.auth.signOut().catch(()=>{}); USER=null; ANS={}; saveAns(); vProfil(); }catch(e){ st.textContent="La suppression a échoué. Réessaie plus tard."; } };
+}
+function vProfil(){
+  backTop("Mon profil");
+  const ids=Object.keys(ANS).filter(k=>MID[k]&&LIVE.has(MID[k].P));
+  const pour=ids.filter(k=>ANS[k]===1), contre=ids.filter(k=>ANS[k]===-1), sans=ids.filter(k=>ANS[k]===0), nT=pour.length+contre.length;
+  const sc=key=>{ const a=pour.filter(k=>key(MID[k])).length, b=contre.filter(k=>key(MID[k])).length; return {a,b,t:a+b,p:a+b?Math.round(100*a/(a+b)):null}; };
+  const cands=CK.map(P=>({P,...sc(m=>m.P===P)})).filter(x=>x.t).sort((x,y)=>(y.t>=3)-(x.t>=3)||y.p-x.p||y.t-x.t);
+  const subj=TH.map(t=>({t,...sc(m=>m.th===t.id)})).filter(x=>x.t>=2).sort((x,y)=>y.p-x.p||y.t-x.t);
+  const bar=(name,x,color)=>`<div class="bar${x.t<3?" faible":""}"><span class="n">${esc(name)}</span><span class="t"><i style="width:${x.p}%;background:${color}"></i></span><span class="v">${x.p} %</span><small>${x.a} pour · ${x.b} contre${x.t<3?" · peu de réponses":""}</small></div>`;
+  const CAT={pour:[pour,"Pour","badge-p"],contre:[contre,"Contre","badge-c"],sans:[sans,"Sans avis",""]};
+  const [lst]=CAT[PCAT], PTR=LS.get("portrait:v2");
+  $("#app").innerHTML=`
+    <div class="stats"><div class="stat"><b>${ids.length}</b><span>réponses</span></div><div class="stat"><b style="color:var(--pro)">${pour.length}</b><span>pour</span></div><div class="stat"><b style="color:var(--con)">${contre.length}</b><span>contre</span></div></div>
+    ${nT<5?`<div class="box"><h3>Ton profil</h3><p style="margin:0 0 10px">Réponds à au moins 5 mesures (pour ou contre) pour voir de quels candidats tu es le plus proche.</p><a class="btn dark" href="#/swipe">Swiper des mesures</a></div>`:`
+    <div class="box"><h3>Ton accord avec chaque candidat</h3><div class="bars">${cands.map(x=>bar(C[x.P].cand,x,C[x.P].color)).join("")}</div>
+      <p class="hint">% de mesures où tu es pour, parmi celles où tu as tranché. Les programmes n'ont pas la même taille : un score sur 1 ou 2 réponses dit peu de choses.</p></div>
+    ${subj.length?`<div class="box"><h3>Par sujet</h3><div class="bars">${subj.map(x=>bar(x.t.t,x,(TCOL[x.t.id]||[])[1]||"var(--ink)")).join("")}</div></div>`:""}
+    <div class="box"><h3>Ton portrait</h3><div id="pt-body">${PTR?portraitHTML(PTR.p):`<p style="margin:0;color:var(--ink2);font-size:14.5px">Une lecture neutre de tes réponses : ce que tu approuves, ce que tu rejettes, les candidats les plus proches.</p>`}</div>
+      <button class="btn dark" id="b-pt" style="width:100%;margin-top:12px">${PTR?(nT>PTR.n?`Mettre à jour (${nT-PTR.n} nouvelles réponses)`:"Refaire l'analyse"):"Analyser mes réponses"}</button><p class="hint" id="pt-st"></p></div>`}
+    ${accountBox()}
+    ${ids.length?`<div class="box"><h3>Mes réponses</h3><div class="hs" style="margin-bottom:8px">${Object.entries(CAT).map(([k,c])=>`<a class="chip${PCAT===k?" on":""}" href="#" data-cat="${k}">${c[1]} <small>${c[0].length}</small></a>`).join("")}</div>
+      ${lst.length?rowsWithMore(lst.slice().reverse().map(k=>MID[k]),10,true,"rep-"+PCAT):`<p class="hint">Aucune.</p>`}</div>`:""}
+    ${favs().length?`<a class="box" href="#/favoris" style="display:flex;justify-content:space-between;align-items:center"><b>Mes mesures sauvegardées</b><span class="tag">${favs().length}</span></a>`:""}
+    ${ids.length?`<button class="btn" id="b-reset" style="width:100%;margin-top:12px;color:var(--con)">Effacer toutes mes réponses</button>`:""}
+    <p class="hint" style="text-align:center">Tes réponses restent sur ce téléphone${USER?" et dans ton compte":""}. <a href="/confidentialite.html" style="text-decoration:underline">Confidentialité</a></p>`;
+  bindAccount();
+  document.querySelectorAll("[data-cat]").forEach(a=>a.onclick=e=>{ e.preventDefault(); PCAT=a.dataset.cat; const y=scrollY; vProfil(); window.scrollTo(0,y); });
+  const rs=$("#b-reset"); if(rs) rs.onclick=()=>{ if(!confirm("Effacer toutes tes réponses ?")) return; ANS={}; saveAns(); pushRemote(); SW=null; vProfil(); };
+  const bp=$("#b-pt"); if(bp) bp.onclick=async()=>{ bp.disabled=true; bp.textContent="Analyse en cours…"; $("#pt-st").textContent="";
+    try{ const r=await fetch(API+"/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({mode:"profil",choix:{pour,contre}})});
+      if(!r.ok) throw Object.assign(new Error(),{st:r.status}); const d=await r.json(); if(!d.portrait) throw new Error();
+      LS.set("portrait:v2",{p:d.portrait,n:nT,at:Date.now()}); track("profil:portrait"); vProfil(); }
+    catch(e){ $("#pt-st").textContent=e.st===429?"Limite atteinte pour aujourd'hui, réessaie demain.":"L'analyse n'est pas disponible pour le moment"+(e.st===404||e.st===501?" (le serveur n'est pas lancé ici)":"")+"."; bp.disabled=false; bp.textContent="Réessayer"; } };
+}
+function portraitHTML(p){ if(!p) return ""; const t=x=>mdInline(esc(String(x||"")));
+  const items=a=>`<ul>${a.map(x=>`<li><b>${esc(x.theme)}</b> : ${t(x.texte)}</li>`).join("")}</ul>`;
+  const PR=(p.proches||[]).filter(c=>c.p>=50);
+  return (p.en_un_mot?`<p class="pt-l">${t(p.en_un_mot)}</p>`:"")
+    +(PR.length?`<div class="pt-s"><h4>Tes candidats les plus proches</h4><ul>${PR.map(c=>`<li><b>${esc(c.cand)}</b> · ${c.p} %${c.pourquoi?` : ${t(c.pourquoi)}`:""}</li>`).join("")}</ul></div>`:"")
+    +((p.approuves||[]).length?`<div class="pt-s"><h4 style="color:var(--pro)">Ce que tu approuves</h4>${items(p.approuves)}</div>`:"")
+    +((p.rejettes||[]).length?`<div class="pt-s"><h4 style="color:var(--con)">Ce que tu rejettes</h4>${items(p.rejettes)}</div>`:"")
+    +((p.ressort||[]).length?`<div class="pt-s"><h4>Ce qui ressort</h4><ul>${p.ressort.map(x=>`<li>${t(x)}</li>`).join("")}</ul></div>`:""); }
 
 function vHasard(){ const ps=CK.filter(P=>ML.some(m=>m.P===P&&F[m.id])); const P=ps[Math.floor(Math.random()*ps.length)];
   const l=ML.filter(m=>m.P===P&&F[m.id]); track("hasard"); location.replace("#/m/"+encodeURIComponent(l[Math.floor(Math.random()*l.length)].id)); }
@@ -897,13 +1033,14 @@ function route(){
   closeSheet();
   if(p[0]!=="parcours"&&p[0]!=="swipe") document.body.classList.remove("story-on");
   if(p[0]!=="chat") document.body.classList.remove("chat-on");
-  trackView(!p.length?"accueil":{swipe:"swipe",sujets:"sujets",s:"sujet",candidats:"candidats",c:"candidat",m:"mesure",chercher:"chercher",parcours:"parcours",chat:"chat",hasard:"hasard"}[p[0]]||"autre");
+  trackView(!p.length?"accueil":{swipe:"swipe",profil:"profil",sujets:"sujets",s:"sujet",candidats:"candidats",c:"candidat",m:"mesure",chercher:"chercher",parcours:"parcours",chat:"chat",hasard:"hasard"}[p[0]]||"autre");
   if(!p.length) vHome();
   else if(p[0]==="parcours") vParcours(p[1]);
   else if(p[0]==="chat") vChat(qs?new URLSearchParams(qs).get("m"):null);
   else if(p[0]==="hasard") vHasard();
   else if(p[0]==="swipe") vSwipe();
   else if(p[0]==="favoris") vFavoris();
+  else if(p[0]==="profil") vProfil();
   else if(p[0]==="sujets") vSujets();
   else if(p[0]==="s") vSujet(p[1],qs?new URLSearchParams(qs).get("p"):null);
   else if(p[0]==="candidats") vCandidats();
