@@ -11,10 +11,11 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#faf9f7; --card:#ffffff; --soft:#f1efeb; --ink:#141414; --ink2:#3a3a3a; --muted:#6e6b66; --line:#e6e3de;
-  --accent:#3b4cca; --accent-soft:#eceefb; --pro:#1e7a4c; --pro-soft:#e7f4ec; --con:#b8402f; --con-soft:#fbecea; --ia:#94600a; --ia-soft:#fff4de;
+  /* Couleurs de l'app d'origine (Zak) : fond blanc, violet de marque, cœur rose, pour/contre vert/rouge */
+  --bg:#ffffff; --card:#ffffff; --soft:#f4f2ef; --ink:#111111; --ink2:#3a3a3a; --muted:#6b6b6b; --line:#e8e6e2;
+  --accent:#7a3cff; --accent-soft:#efe8ff; --like:#e8455f; --pro:#1e8f55; --pro-soft:#e4f4ea; --con:#d63d36; --con-soft:#fbe7e6; --ia:#a3670b; --ia-soft:#fff3dd;
   --serif:"Newsreader",Georgia,serif; --sans:"DM Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --r:14px; --nav:60px; --pad:16px;
+  --r:14px; --nav:62px; --pad:16px;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 var(--sans)}
@@ -328,6 +329,39 @@ body.story-on .nav, body.story-on .top{display:none}
 .empty{text-align:center;color:var(--muted);font-size:15px;padding:30px 10px}
 .foot{font-size:12.5px;color:var(--muted);margin:26px 0 0;line-height:1.5}
 .foot a{text-decoration:underline}
+/* ---------- direction artistique de l'app d'origine ---------- */
+.top{background:rgba(255,255,255,.95)}
+.brand{font:700 26px/1 var(--sans);letter-spacing:-.03em}
+.brand small{font-size:12.5px;letter-spacing:0;margin-top:4px}
+.sec-h h2,.dive-h h2,.box h3,.brief h3{font-size:15px;font-weight:600;text-transform:none;letter-spacing:0;color:var(--ink)}
+.brief p{font:500 19px/1.4 var(--serif)}
+.chip{background:#fff;border:1px solid var(--line);padding:8px 14px}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn.dark{border-radius:999px}.btn{border-radius:999px}
+.heart.on{color:var(--like)}
+/* barre du bas : pilule noire, Swipe au centre en rose */
+.nav{background:#000;border-color:#000;box-shadow:0 8px 28px rgba(0,0,0,.25)}
+.nav a{color:#8d8d8d}
+.nav a.on{color:#fff;background:rgba(255,255,255,.12)}
+.nav a.mid,.nav a.mid.on{background:var(--like);color:#fff}
+/* sujets : dégradés et texte blanc, comme les sujets de l'app d'origine */
+.sq{color:#fff!important;border-radius:16px;justify-content:flex-end;min-height:96px}
+.sq b{font-size:15.5px;letter-spacing:-.01em}
+.sq span,.sq em{opacity:.92}
+/* la carte « photo » d'une mesure : dégradé du candidat, texte en serif blanc */
+.photo{border-radius:16px;color:#fff;padding:18px 18px 22px;display:flex;flex-direction:column;gap:14px;min-height:220px;justify-content:space-between}
+.photo .badges{display:flex;flex-wrap:wrap;gap:6px}
+.photo .badges a,.photo .badges span{font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.22);color:#fff;backdrop-filter:blur(6px)}
+.photo .q{font:600 24px/1.22 var(--serif);letter-spacing:-.01em;margin:0}
+.photo .q.l{font-size:20px}
+.photo ul{margin:0;padding:0;list-style:none;font:500 15px/1.4 var(--serif);opacity:.92}
+.photo ul li::before{content:"— ";opacity:.7}
+.st-card .photo{margin:-20px -18px 0;border-radius:18px 18px 14px 14px;min-height:200px}
+.st-card .photo .st-who{color:#fff}
+.st-card .photo .st-who small{color:rgba(255,255,255,.8)}
+.st-card .photo .heart{color:#fff;background:rgba(255,255,255,.18)}
+.st-card .photo .heart.on{background:var(--like)}
+.cc{border-left-width:5px}
 </style>
 </head>
 <body>
@@ -352,7 +386,10 @@ const THM=Object.fromEntries(TH.map(t=>[t.id,t]));
 const PT={}; TH.forEach(t=>(t.pts||[]).forEach(([id,tt])=>PT[id]={id,t:tt,th:t.id}));   // points précis d'un sujet (« Âge de départ »…)
 // Une couleur douce par sujet (fond, texte).
 const TCOL={salaires:["#fdf0d5","#8a5a00"],retraites:["#e8eefc","#2f4a9e"],impots:["#efe9fb","#5b3b9e"],travail:["#fde8e1","#a3412a"],economie:["#e6f0f7","#1f5a80"],agriculture:["#eef5df","#4d6b16"],ecologie:["#e2f4ea","#1e7a4c"],sante:["#fbe6ec","#a3264f"],ecole:["#fff3d6","#86620a"],logement:["#f3ece4","#7a5530"],securite:["#e9ecf1","#2e3a4f"],immigration:["#e4f3f3","#1b6b6b"],institutions:["#f1e8f3","#7a2f80"],europe:["#e6eefb","#1d4fa3"],societe:["#fceee3","#9a4d17"]};
-const tile=(t,desc,note)=>{ const [bg,ink]=TCOL[t.id]||["#f1efeb","#141414"]; return `<a class="sq" href="#/s/${t.id}" style="background:${bg};color:${ink}"><b>${esc(t.t)}</b>${desc?`<span>${esc(t.d)}</span>`:""}${note?`<em>${esc(note)}</em>`:""}</a>`; };
+const TGRAD=["#d4572a,#f39a5b","#2b59c3,#6a8dff","#7a3cff,#b48cff","#b8302a,#ef6f5e","#1f5fa8,#5aa0e6","#2e7d32,#8bc34a","#1e8f55,#5cc48c","#a8326e,#e07aa8","#c48a00,#f2c14e","#5b4636,#a8876c","#3d4a5c,#7e8ba0","#0f7c8a,#4fc1cf","#26246b,#5c59c9","#1f5fa8,#26246b","#8a4f00,#d99a4e"];
+const tgrad=t=>`linear-gradient(150deg,${TGRAD[Math.max(0,TH.indexOf(t))%TGRAD.length]})`;
+const cgrad=P=>`linear-gradient(160deg,${C[P].grad||C[P].color+","+C[P].color})`;
+const tile=(t,desc,note)=>{ return `<a class="sq" href="#/s/${t.id}" style="background:${tgrad(t)}"><b>${esc(t.t)}</b>${desc?`<span>${esc(t.d)}</span>`:""}${note?`<em>${esc(note)}</em>`:""}</a>`; };
 const realPt=m=>m.pt&&!/-autres$/.test(m.pt)?m.pt:null;
 const MID=Object.fromEntries(M.map(m=>[m.id,m]));
 // Candidats proposés : pas les candidats retirés. Ordre alphabétique du nom de famille (neutre).
@@ -657,9 +694,11 @@ function vMesure(id){
   const lg=f&&f.logique?(typeof f.logique==="string"?{texte:f.logique}:f.logique):null;
   const srcl=(u,label)=>u?`<a class="src" href="${esc(u)}" target="_blank" rel="noopener">${esc(label||host(u))} ↗</a>`:"";
   const quote=(x,cls)=>`<div class="q ${cls}"><div class="h">${esc(x.qui||x.camp||x.pays||"")}${x.camp&&x.qui?` <i>· ${esc(x.camp)}</i>`:""}</div><div class="x">${esc(x.texte)}</div>${srcl(x.url,x.media?x.media:null)}</div>`;
-  let h=`<h2 class="m-q" style="margin-top:4px">${esc(m.t)}</h2>
-    <div class="m-tags">${realPt(m)?`<a href="#/s/${m.th}?p=${realPt(m)}">${esc(PT[realPt(m)].t)}</a>`:""}<a href="#/s/${m.th}">${esc(t.t)}</a></div>
-    ${m.sous.length?`<ul class="m-sous">${m.sous.slice(0,4).map(s=>`<li>${esc(s)}</li>`).join("")}${m.sous.length>4?`<li>et ${m.sous.length-4} autres points</li>`:""}</ul>`:""}`;
+  let h=`<div class="photo" style="background:${cgrad(m.P)};margin-top:6px">
+      <div class="badges">${realPt(m)?`<a href="#/s/${m.th}?p=${realPt(m)}">${esc(PT[realPt(m)].t)}</a>`:""}<a href="#/s/${m.th}">${esc(t.t)}</a>${m.cle?`<span>Mesure clé</span>`:""}</div>
+      <h2 class="q${m.t.length>160?" l":""}">${esc(m.t)}</h2>
+      ${m.sous.length?`<ul>${m.sous.slice(0,4).map(s=>`<li>${esc(s)}</li>`).join("")}${m.sous.length>4?`<li>et ${m.sous.length-4} autres points</li>`:""}</ul>`:""}
+    </div>`;
   const actions=`<div class="avis-l">Ton avis sur cette mesure</div>${avisBtns(m.id)}<div class="mini-actions"><a class="btn dark" href="#/chat?m=${encodeURIComponent(m.id)}">💬 Poser une question</a><button class="btn" id="b-flag">${ICO.flag} Signaler</button></div>`;
   const P=fichePanels(m,f,others);
   if(f){
@@ -900,11 +939,12 @@ function renderSwipe(dir){
       <button class="st-ico${SW.blind?" on":""}" id="sw-blind">${SW.blind?"Noms masqués":"Masquer les noms"}</button>
       <button class="st-ico" id="sw-close" aria-label="Fermer">✕</button></div>
     <div class="st-body"><div class="st-card${dir<0?" back":""}" id="st-card">
+      <div class="photo" style="background:${hidden?"linear-gradient(160deg,#4a4458,#1f1c27)":cgrad(m.P)}">
+      ${hidden?`<div class="st-blind" style="color:#fff"><span class="av" style="width:40px;height:40px;background:rgba(255,255,255,.2)">?</span><div style="flex:1"><b>Qui propose ?</b></div><button class="st-ico" id="sw-reveal">Révéler</button></div>`
+        :`<div class="st-who"><span class="av" style="background:rgba(255,255,255,.2)">${initials(C[m.P].cand)}</span><div>${esc(C[m.P].cand)}<small>${esc(C[m.P].nom)}</small></div><button class="heart${fav?" on":""}" id="sw-fav" aria-label="${fav?"Retirer des sauvegardes":"Sauvegarder"}" aria-pressed="${fav}">${HEART(fav)}</button></div>`}
+      <h2 class="q${m.t.length>160?" l":""}">${esc(mk(m.t))}</h2></div>
       ${aide?`<div class="warn" style="margin:0;justify-content:space-between;align-items:center"><span>👉 Glissez à droite si vous êtes <b>pour</b>, à gauche si vous êtes <b>contre</b>. Vos réponses restent sur ce téléphone et construisent votre profil.</span><button class="st-ico" id="sw-ok">OK</button></div>`:""}
       <div class="st-kick">${esc(th.t)} · ${esc(pt)}${v!=null?` · <span style="color:${v===1?"var(--pro)":v===-1?"var(--con)":"var(--muted)"}">déjà répondu : ${v===1?"pour":v===-1?"contre":"sans avis"}</span>`:""}</div>
-      ${hidden?`<div class="st-blind"><span class="av" style="width:40px;height:40px">?</span><div style="flex:1"><b>Qui propose ?</b></div><button class="st-ico" id="sw-reveal">Révéler</button></div>`
-        :`<div class="st-who"><span class="av" style="background:${C[m.P].color}">${initials(C[m.P].cand)}</span><div>${esc(C[m.P].cand)}<small>${esc(C[m.P].nom)}</small></div><button class="heart${fav?" on":""}" id="sw-fav" aria-label="${fav?"Retirer des sauvegardes":"Sauvegarder"}" aria-pressed="${fav}">${HEART(fav)}</button></div>`}
-      <h2 class="st-m">${esc(mk(m.t))}</h2>
       ${f&&f.resume?`<p class="st-p">${esc(mk(f.resume))}</p>`:f?"":`<p class="st-p" style="color:var(--muted)">Pas encore de fiche détaillée pour cette mesure.</p>`}
       ${lg||cr?`<div class="pc" style="margin-top:0">${lg?`<div class="p" style="border-radius:12px;padding:10px 12px"><b>Pourquoi c'est défendu</b><span>${esc(mk(firstSentence(lg)))}</span></div>`:""}${cr?`<div class="c" style="border-radius:12px;padding:10px 12px"><b>Pourquoi c'est critiqué</b><span>${esc(mk(firstSentence(cr.texte)))}</span></div>`:""}</div>`:""}
       ${f&&f.genere?`<span class="tag ia" style="align-self:flex-start">Rédigé par IA · à vérifier</span>`:""}

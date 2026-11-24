@@ -53,10 +53,10 @@ def theme_of(text, section, extra="", w_sec=1):
     return best or "societe"
 
 LFI_RN = {
-    "LFI": {"nom": "LFI", "cand": "Jean-Luc Mélenchon", "long": "La France insoumise · L'Avenir en commun", "color": "#2f7d5b",
+    "LFI": {"nom": "LFI", "cand": "Jean-Luc Mélenchon", "long": "La France insoumise · L'Avenir en commun", "color": "#2f7d5b", "grad": "#2f7d5b,#174a37",
             "eco": "Pour tout son programme, LFI annonce 106,4 Md€ de recettes nouvelles et 81,7 Md€ de dépenses nouvelles en 2027, sans chiffrage mesure par mesure.",
             "ecoUrl": "https://www.lavenirencommun.org/financement/", "complet": True},
-    "RN": {"nom": "RN", "cand": "Marine Le Pen", "long": "Rassemblement national", "color": "#1f3a9e",
+    "RN": {"nom": "RN", "cand": "Marine Le Pen", "long": "Rassemblement national", "color": "#1f3a9e", "grad": "#1f3a9e,#0d1b4f",
            "note": "Candidature annoncée le 7 juillet 2026. Son éligibilité dépend de l'issue de son pourvoi en cassation. Le programme 2027 complet n'est pas encore publié.",
            "eco": "Le contre-budget RN (6 oct. 2026) annonce 140 Md€ d'économies nettes d'ici 2032 et 30 Md€ de baisses d'impôts. L'Institut de l'Entreprise juge environ 7,5 Md€ de ces économies crédibles."},
 }
@@ -93,6 +93,7 @@ def build(H, progs, S, Mz, fi):
     for k, x in progs.items():
         c = {f: x.get(f) for f in ("nom", "cand", "long", "note", "eco", "ecoUrl") if x.get(f)}
         c["color"] = (x.get("grad") or ["#555555,#222222"])[0].split(",")[0]
+        c["grad"] = (x.get("grad") or ["#555555,#222222"])[0]   # dégradé des cartes, comme dans l'app d'origine
         if x.get("retrait"): c["retrait"] = x["retrait"].get("texte", "retiré")
         cands[k] = c
     mes = []
