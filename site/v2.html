@@ -254,6 +254,11 @@ textarea{min-height:84px;resize:vertical}
 .nav a.on{color:var(--ink);background:var(--soft)}
 .nav a.mid{color:#fff;background:var(--ink);margin:6px 4px}
 .nav a.mid.on{background:var(--ink);color:#fff}
+.sw-acc{border-radius:12px}
+.sw-acc summary{padding:11px 12px}
+.sw-acc summary b{font-size:14.5px}
+.sw-acc .body{padding:0 12px 12px;font-size:14.5px}
+.sw-acc .body h3{display:none}
 /* parcours guidé (mode « stories ») */
 body.story-on{padding-bottom:0}
 body.story-on .nav, body.story-on .top{display:none}
@@ -567,6 +572,31 @@ function results(){
 /* Page mesure : l'essentiel d'abord, le détail en volets. */
 const REMOTE={};
 async function fetchFiche(id){ try{ const r=await fetch(API+"/fiche?id="+encodeURIComponent(id)); if(r.ok){ const f=await r.json(); if(f&&f.resume){ REMOTE[id]=f; return f; } } }catch(e){} return null; }
+/* Volets d'une fiche (Concrètement, Pourquoi, Critiques…) : utilisés par la page mesure (onglets qui glissent) et par le Swipe (volets dépliables). */
+function fichePanels(m,f,others){
+  const c=C[m.P], crit=f?(f.critiques||[]):[], camps=[...new Set(crit.map(x=>x.camp))];
+  const lg=f&&f.logique?(typeof f.logique==="string"?{texte:f.logique}:f.logique):null;
+  const srcl=(u,label)=>u?`<a class="src" href="${esc(u)}" target="_blank" rel="noopener">${esc(label||host(u))} ↗</a>`:"";
+  const quote=(x,cls)=>`<div class="q ${cls}"><div class="h">${esc(x.qui||x.camp||x.pays||"")}${x.camp&&x.qui?` <i>· ${esc(x.camp)}</i>`:""}</div><div class="x">${esc(x.texte)}</div>${srcl(x.url,x.media?x.media:null)}</div>`;
+  const P=[];
+  const add=(k,label,html,cnt)=>{ if(html) P.push({k,label,html,cnt}); };
+  if(f){
+    const eco=f.eco||{};
+    add("concret","Concrètement",(f.concret||[]).length?`<h3>Ce que ça change concrètement</h3><ul>${f.concret.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:"");
+    add("pour","Pourquoi",lg?`<h3>Pourquoi ${esc(c.cand)} le propose</h3><p>${esc(lg.texte)}</p>${(lg.arguments||[]).length?`<div class="sub">Les arguments</div>`+lg.arguments.map(x=>quote(x,"p")).join(""):""}`:"");
+    add("contre","Critiques",crit.length?`<h3>Les critiques</h3><div class="camps">${camps.map(x=>`<span class="tag con">${esc(x)}</span>`).join("")}</div>`+crit.map(x=>quote(x,"c")).join(""):"",crit.length);
+    add("reponses","Réponses",(f.reponses||[]).length?`<h3>Ce que répondent les défenseurs</h3>`+f.reponses.map(x=>quote(x,"p")).join(""):"",(f.reponses||[]).length);
+    add("autres","Autres candidats",others.length||(f.similaires||[]).length?`<h3>Ce que proposent les autres candidats</h3>`+simil(f,others,m):"",others.length);
+    add("cout","Coût",[eco.chiffre&&`<h3>${esc(eco.chiffre)}</h3>`,eco.cout&&`<div class="sub">Coût</div><p>${esc(eco.cout)}</p>`,eco.financement&&`<div class="sub">Financement</div><p>${esc(eco.financement)}</p>`,c.eco&&`<div class="sub">Le programme dans son ensemble</div><p>${esc(c.eco)}</p>`].filter(Boolean).join(""));
+    add("flou","Points flous",(f.tensions||[]).length?`<h3>Ce qui reste flou</h3><ul>${f.tensions.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:"",(f.tensions||[]).length);
+    add("monde","Ailleurs",(f.monde||[]).length?`<h3>Ailleurs dans le monde</h3>`+f.monde.map(x=>quote(x,"")).join(""):"");
+    add("source","Source",`<h3>Source et méthode</h3><p>${esc(m.sec)}</p>${srcl(m.url,"Lire dans le programme")}<p class="hint">${f.genere?"Fiche rédigée par une IA à partir de sources publiques lues et citées. Elle peut contenir des erreurs : signalez-les.":"Fiche rédigée et vérifiée à la main."}${f.maj?` Mise à jour le ${esc(f.maj)}.`:""}</p>`);
+  } else {
+    add("autres","Autres candidats",others.length?`<h3>Ce que proposent les autres candidats</h3>`+simil(null,others,m):"",others.length);
+    add("source","Source",`<h3>Source de la mesure</h3><p>${esc(m.sec)}</p>${srcl(m.url,"Lire dans le programme")}`);
+  }
+  return P;
+}
 function vMesure(id){
   const m=MID[id]; if(!m) return vNotFound();
   const c=C[m.P], t=THM[m.th]; track("vue:sujet:"+m.th);
@@ -587,20 +617,9 @@ function vMesure(id){
     <div class="m-tags">${realPt(m)?`<a href="#/s/${m.th}?p=${realPt(m)}">${esc(PT[realPt(m)].t)}</a>`:""}<a href="#/s/${m.th}">${esc(t.t)}</a></div>
     ${m.sous.length?`<ul class="m-sous">${m.sous.slice(0,4).map(s=>`<li>${esc(s)}</li>`).join("")}${m.sous.length>4?`<li>et ${m.sous.length-4} autres points</li>`:""}</ul>`:""}`;
   const actions=`<div class="mini-actions"><a class="btn dark" href="#/chat?m=${encodeURIComponent(m.id)}">💬 Poser une question</a><button class="btn" id="b-flag">${ICO.flag} Signaler</button></div>`;
-  // Volets à approfondir, qu'on fait glisser de gauche à droite.
-  const P=[];
-  const add=(k,label,html,cnt)=>{ if(html) P.push({k,label,html,cnt}); };
+  const P=fichePanels(m,f,others);
   if(f){
     const eco=f.eco||{};
-    add("concret","Concrètement",(f.concret||[]).length?`<h3>Ce que ça change concrètement</h3><ul>${f.concret.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:"");
-    add("pour","Pourquoi",lg?`<h3>Pourquoi ${esc(c.cand)} le propose</h3><p>${esc(lg.texte)}</p>${(lg.arguments||[]).length?`<div class="sub">Les arguments</div>`+lg.arguments.map(x=>quote(x,"p")).join(""):""}`:"");
-    add("contre","Critiques",crit.length?`<h3>Les critiques</h3><div class="camps">${camps.map(x=>`<span class="tag con">${esc(x)}</span>`).join("")}</div>`+crit.map(x=>quote(x,"c")).join(""):"",crit.length);
-    add("reponses","Réponses",(f.reponses||[]).length?`<h3>Ce que répondent les défenseurs</h3>`+f.reponses.map(x=>quote(x,"p")).join(""):"",(f.reponses||[]).length);
-    add("autres","Autres candidats",others.length||(f.similaires||[]).length?`<h3>Ce que proposent les autres candidats</h3>`+simil(f,others,m):"",others.length);
-    add("cout","Coût",[eco.chiffre&&`<h3>${esc(eco.chiffre)}</h3>`,eco.cout&&`<div class="sub">Coût</div><p>${esc(eco.cout)}</p>`,eco.financement&&`<div class="sub">Financement</div><p>${esc(eco.financement)}</p>`,c.eco&&`<div class="sub">Le programme dans son ensemble</div><p>${esc(c.eco)}</p>`].filter(Boolean).join(""));
-    add("flou","Points flous",(f.tensions||[]).length?`<h3>Ce qui reste flou</h3><ul>${f.tensions.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:"",(f.tensions||[]).length);
-    add("monde","Ailleurs",(f.monde||[]).length?`<h3>Ailleurs dans le monde</h3>`+f.monde.map(x=>quote(x,"")).join(""):"");
-    add("source","Source",`<h3>Source et méthode</h3><p>${esc(m.sec)}</p>${srcl(m.url,"Lire dans le programme")}<p class="hint">${f.genere?"Fiche rédigée par une IA à partir de sources publiques lues et citées. Elle peut contenir des erreurs : signalez-les.":"Fiche rédigée et vérifiée à la main."}${f.maj?` Mise à jour le ${esc(f.maj)}.`:""}</p>`);
     h+=`<div class="brief"><h3 style="display:flex;justify-content:space-between;gap:8px;align-items:center">En bref${f.genere?`<span class="tag ia" style="text-transform:none;letter-spacing:0">${f.statut==="peu_documente"?"IA · peu de sources":"Rédigé par IA · à vérifier"}</span>`:`<span class="tag ok" style="text-transform:none;letter-spacing:0">Vérifié</span>`}</h3><p>${esc(f.resume||firstSentence(lg&&lg.texte))}</p></div>
       <div class="pc">
         ${lg?`<a href="#" data-tab="pour" class="p"><b>Pourquoi c'est défendu</b><span>${esc(firstSentence(lg.texte))}</span></a>`:""}
@@ -608,8 +627,6 @@ function vMesure(id){
       </div>
       ${actions}`;
   } else {
-    add("autres","Autres candidats",others.length?`<h3>Ce que proposent les autres candidats</h3>`+simil(null,others,m):"",others.length);
-    add("source","Source",`<h3>Source de la mesure</h3><p>${esc(m.sec)}</p>${srcl(m.url,"Lire dans le programme")}`);
     h+=`<div class="brief"><h3>Pas encore de fiche détaillée</h3><p>Nous n'avons pas encore rassemblé les arguments et les critiques sur cette mesure.</p></div>${actions}`;
   }
   h+=`<div class="dive-h"><h2>Pour aller plus loin</h2><span>Glissez →</span></div>
@@ -701,6 +718,8 @@ function maskName(txt,P,on){ if(!(on??(ST&&ST.blind))) return txt; const c=C[P];
   const names=[c.cand,lastName(c.cand),c.nom,(c.long||"").split(" · ")[0]].filter(x=>x&&x.length>1).sort((a,b)=>b.length-a.length);
   let t=String(txt||""); for(const n of names) t=t.replace(new RegExp("(^|[^\\p{L}])"+n.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"(?=$|[^\\p{L}])","giu"),"$1[ce candidat]");
   return t; }
+// Masque les noms dans du HTML (texte seulement, pas les liens).
+const maskHtml=(html,P)=>html.replace(/>([^<]+)</g,(x,t)=>">"+maskName(t,P,true)+"<");
 function storyCards(pid){
   const cs=shuffled(ptCands(pid),ST.seed+pid.length*31);
   return cs.map(P=>{ const l=ML.filter(m=>m.P===P&&m.pt===pid).sort(byRank); return {P,m:l[0],more:l.length-1}; });
@@ -834,7 +853,8 @@ function renderSwipe(dir){
       ${f.resume?`<p class="st-p">${esc(mk(f.resume))}</p>`:""}
       ${lg||cr?`<div class="pc" style="margin-top:0">${lg?`<div class="p" style="border-radius:12px;padding:10px 12px"><b>Pourquoi c'est défendu</b><span>${esc(mk(firstSentence(lg)))}</span></div>`:""}${cr?`<div class="c" style="border-radius:12px;padding:10px 12px"><b>Pourquoi c'est critiqué</b><span>${esc(mk(firstSentence(cr.texte)))}</span></div>`:""}</div>`:""}
       ${f.genere?`<span class="tag ia" style="align-self:flex-start">Rédigé par IA · à vérifier</span>`:""}
-      <a class="src" href="#/m/${encodeURIComponent(m.id)}" id="sw-open">Voir la fiche complète →</a>
+      <div class="acc sw-acc" style="margin-top:2px">${fichePanels(m,f,comparables(m)).map(x=>`<details data-k="${x.k}"><summary><div class="s"><b>${esc(x.label)}${x.cnt?`<em class="cnt" style="font-style:normal">${x.cnt}</em>`:""}</b></div>${ICO.down}</summary><div class="body">${hidden?maskHtml(x.html,m.P):x.html}</div></details>`).join("")}</div>
+      <div class="mini-actions" style="margin-top:0"><a class="btn" href="#/chat?m=${encodeURIComponent(m.id)}">💬 Question</a><button class="btn" id="sw-flag">${ICO.flag} Signaler</button></div>
     </div></div>
     <div class="st-foot"><button class="btn nb" id="sw-prev" aria-label="Précédente"${SW.i?"":" disabled style=\"opacity:.35\""}>←</button>
       <button class="btn nb heart${fav?" on":""}" id="sw-fav" aria-label="${fav?"Retirer des sauvegardes":"Sauvegarder"}" aria-pressed="${fav}">${HEART(fav)}</button>
@@ -846,12 +866,12 @@ function renderSwipe(dir){
   $("#sw-close").onclick=()=>{ document.body.classList.remove("story-on"); location.hash="#/"; };
   $("#sw-blind").onclick=()=>{ SW.blind=!SW.blind; track("swipe:aveugle:"+(SW.blind?"on":"off")); renderSwipe(0); };
   if($("#sw-reveal")) $("#sw-reveal").onclick=e=>{ e.stopPropagation(); SW.shown.add(m.id); renderSwipe(0); };
-  $("#sw-open").onclick=()=>track("swipe:fiche");
+  $("#sw-flag").onclick=()=>openFlag(m);
+  document.querySelectorAll("#st-card details").forEach(d=>d.addEventListener("toggle",()=>{ if(d.open) track("swipe:volet:"+d.dataset.k); }));
   const el=$("#st-card"); let x0=null,y0=null;
   el.addEventListener("pointerdown",e=>{ x0=e.clientX; y0=e.clientY; });
   el.addEventListener("pointerup",e=>{ if(x0==null) return; const dx=e.clientX-x0, dy=e.clientY-y0; x0=null; if(e.target.closest("a,button")) return;
-    if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)) go(dx<0?1:-1);
-    else if(Math.abs(dx)<8&&Math.abs(dy)<8){ const r=el.getBoundingClientRect(); go(e.clientX-r.left<r.width/3?-1:1); } });
+    if(Math.abs(dx)>60&&Math.abs(dx)>1.5*Math.abs(dy)) go(dx<0?1:-1); });
 }
 document.addEventListener("keydown",e=>{ if(!SW||!location.hash.startsWith("#/swipe")) return; if(e.key==="ArrowRight") $("#sw-next")?.click(); if(e.key==="ArrowLeft") $("#sw-prev")?.click(); });
 
