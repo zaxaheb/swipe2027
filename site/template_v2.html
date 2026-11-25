@@ -436,6 +436,44 @@ body.frame-on .top{display:none}
 .askm .in{display:block;background:#fff;border-radius:999px;padding:10px 14px;margin-top:10px;color:var(--muted);font-size:15px}
 .st-card .photo.swc{min-height:0}
 .st-card .askm{margin-top:4px}
+/* ---------- retours de Maxime (25/11) ---------- */
+/* gris foncé à la place du noir, partout où il sert de fond */
+:root{--dark:#44444c}
+.nav{background:rgba(48,48,56,.8);border-color:rgba(255,255,255,.08);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:0 8px 24px rgba(0,0,0,.14)}
+.nav a{color:#dcdce2}.nav a.on{color:#fff;background:rgba(255,255,255,.14)}
+.chip.on,.btn.dark,.st-ico.on,.quick a.dark{background:var(--dark);border-color:var(--dark)}
+.composer button,.msg.u,.path-card{background:var(--dark)}
+.dots i.on,.st-bar i b{background:var(--dark)}
+/* accueil : plus compact, tient sur un écran */
+.brand{font-size:23px;padding-bottom:4px}
+.search{height:42px;margin-top:4px}
+.sec{margin-top:18px}
+.daily .photo{flex:0 0 80%;min-height:148px;padding:14px 15px 15px;gap:10px}
+.daily .photo .q{font-size:18px;line-height:1.25}.daily .photo .q.l{font-size:16px}
+.sqs .sq{min-height:82px}
+.ask{display:block;background:var(--soft);border-radius:16px;padding:6px 6px 4px;margin-top:16px}
+.ask .in{display:block;background:#fff;border:1px solid var(--line);border-radius:999px;padding:10px 14px;font-size:15px;color:var(--muted)}
+.ask .ex{display:block;font-size:13px;color:var(--muted);padding:6px 10px 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ask .ex span{color:var(--accent);font-weight:600}
+.ask .ex span.fade{animation:askin .35s ease-out}
+@keyframes askin{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+/* swipe et carte d'une mesure : la carte colorée prend la place de son texte, pas plus */
+.swc{min-height:0;gap:12px;padding:16px 16px 18px}
+.swc .q{font-size:22px}.swc .q.l{font-size:19px}
+.askm{padding:10px;margin-top:16px}
+.askm .in{margin-top:0;background:#fff;border-radius:999px;padding:10px 14px;color:var(--ink2);font-weight:600;font-size:14.5px}
+.askm .hs{margin-top:8px}
+/* page candidat : parti dans l'en-tête, puis une carte d'identité toujours visible */
+.tn small{font-size:13px;font-weight:600;color:var(--muted)}
+.idc{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;margin-top:4px}
+.idc-p{font-size:13.5px;color:var(--muted);line-height:1.35}.idc-p i{font-style:normal;color:var(--ink2);font-weight:600}
+.idc-s{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:8px;font-size:13.5px;color:var(--muted)}.idc-s b{color:var(--ink)}
+.idc-p+.idc-s{margin-top:8px}.idc-s:first-child{margin-top:0}
+.pill{font-size:12px;font-weight:700;padding:4px 9px;border-radius:999px;line-height:1.2}
+.pill.ok{background:var(--pro-soft);color:var(--pro)}.pill.wait{background:var(--ia-soft);color:var(--ia)}.pill.off{background:var(--con-soft);color:var(--con)}
+.idc-r{border-top:1px solid var(--line);margin-top:11px;padding-top:10px}
+.idc-r b{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:2px}
+.idc-r p{margin:0;font-size:14.5px;line-height:1.45;color:var(--ink2)}.idc-r p.mute{color:var(--muted)}
 </style>
 </head>
 <body>
@@ -597,12 +635,14 @@ function vHome(){
     <a class="search" href="#/chercher" aria-label="Chercher une mesure">${ICO.search}<input placeholder="Une mesure entendue ? Smic, retraites…" readonly tabindex="-1"></a>
     ${d.length?`<section class="sec" style="margin-top:18px"><div class="sec-h"><h2>Les mesures du jour</h2><span style="font-size:13px;color:var(--muted)">dans l'actualité</span></div>
       <div class="daily">${d.map(m=>{ const f=F[m.id], nc=(f.critiques||[]).length; return `<a class="photo" href="#/m/${encodeURIComponent(m.id)}" style="background:${cgrad(m.P)}"><div class="who2">${esc(C[m.P].cand)}<small>· ${esc(C[m.P].nom)}</small></div><h2 class="q${m.t.length>150?" l":""}">${esc(m.t)}</h2><div class="meta2">${esc(THM[m.th].t)} · dans la presse le ${esc(dateFr(m.dp))}${nc?" · "+plural(nc,"critique","critiques"):""}</div></a>`; }).join("")}</div></section>`:""}
-    <div class="ask"><a href="#/chat/new" style="display:block"><b>Une question sur la présidentielle ?</b><div class="in">💬 Pose ta question…</div></a>
-      <div class="sg">${GSUGG.slice(0,3).map(q=>`<a href="#/chat/new?q=${encodeURIComponent(q)}"><span>${esc(q)}</span></a>`).join("")}<a href="#/chat"><span>Mini-cours et quiz →</span></a></div></div>
-    <section class="sec"><div class="sec-h"><h2>Explorer les sujets</h2><a href="#/explorer">Tous les sujets</a></div>
-      <div style="font-size:13.5px;color:var(--muted)">Tu as exploré ${nEx} sujet${nEx>1?"s":""} sur ${TH.length}</div><div class="prog"><i style="width:${Math.round(100*nEx/TH.length)}%"></i></div>
-      ${sugg.length?`<div class="sqs" style="margin-top:12px">${sugg.map(t=>tile(t,true)).join("")}</div>`:""}</section>
+    <div class="ask"><a class="in" href="#/chat/new">💬 Pose ta question sur la présidentielle…</a><a class="ex" id="ask" href="#/chat/new">Ex. : <span id="ask-q">${esc(GSUGG[0])}</span></a></div>
+    <section class="sec"><div class="sec-h"><h2>Explorer les sujets</h2><a href="#/explorer">${nEx}/${TH.length} explorés</a></div>
+      ${sugg.length?`<div class="sqs">${sugg.map(t=>tile(t,true)).join("")}</div>`:""}</section>
     ${favs().length?`<section class="sec"><div class="sec-h"><h2>Mes mesures sauvegardées</h2><a href="#/favoris">Toutes (${favs().length})</a></div>${rowsWithMore(favs().map(id=>MID[id]).filter(Boolean),3,true,"home-fav")}</section>`:""}`;
+  // Une seule case pour le chat, et un exemple de question qui change toutes les 3 secondes (le toucher pose cette question).
+  const qs=[...GSUGG,...d.map(m=>"Que propose "+C[m.P].cand+" sur « "+THM[m.th].t.toLowerCase()+" » ?")];
+  let qi=0; const a=$("#ask"), s=$("#ask-q"); const set=()=>{ a.href="#/chat/new?q="+encodeURIComponent(qs[qi]); s.textContent=qs[qi]; };
+  set(); clearInterval(window.ASKT); window.ASKT=setInterval(()=>{ if(!document.body.contains(s)) return clearInterval(window.ASKT); qi=(qi+1)%qs.length; s.classList.remove("fade"); void s.offsetWidth; s.classList.add("fade"); set(); },3200);
 }
 /* Sujets du moment : d'après les articles cités dans nos fiches (gardé pour plus tard). */
 function hotSubjects(n){
@@ -622,14 +662,9 @@ function vExplorer(tab){
   let body="";
   if(tab==="candidats"){
     const L=CK.slice().sort((a,b)=>C[b].n-C[a].n||lastName(C[a].cand).localeCompare(lastName(C[b].cand),"fr")), max=C[L[0]].n;
-    body=`<p class="hint">Tous les candidats déclarés, au même rang, classés par nombre de propositions recensées. L'écart vient surtout de l'état des programmes : certains ont publié un programme complet, d'autres seulement quelques annonces.</p>
-      <div class="list" style="margin-top:10px">${L.map(P=>`<a class="crow" href="#/c/${P}"><b><i class="dot" style="background:${C[P].color}"></i>${esc(C[P].cand)}</b><span class="nb">${C[P].n}</span><span class="tr"><i style="width:${Math.max(1.5,100*C[P].n/max)}%;background:${C[P].color}"></i></span><small>${esc(C[P].nom)} · ${C[P].complet?"programme complet publié":"propositions annoncées"}</small></a>`).join("")}</div>
-      <p class="hint">La liste officielle des candidats sera connue après les parrainages, en mars 2027.</p>`;
-  } else if(tab==="condamnations"){ $("#app").innerHTML=seg; v1Frame("cond",null,$("#app .seg").getBoundingClientRect().bottom+4); return; }
-  else { const nEx=TH.filter(t=>explored(t.id)).length;
-    body=`<p class="hint">Touche un sujet : tu le découvres question par question, puis tu arrives sur sa synthèse. Tu as exploré ${nEx} sujet${nEx>1?"s":""} sur ${TH.length}.</p><div class="prog"><i style="width:${Math.round(100*nEx/TH.length)}%"></i></div>
-      <div class="sqs" style="margin-top:12px">${TH.map(t=>tile(t,true)).join("")}</div>
-      <p class="hint">Le classement des mesures a été fait par une IA, puis relu : signale les erreurs.</p>`; }
+    body=`<div class="list" style="margin-top:12px">${L.map(P=>`<a class="crow" href="#/c/${P}"><b><i class="dot" style="background:${C[P].color}"></i>${esc(C[P].cand)}</b><span class="nb">${C[P].n}</span><span class="tr"><i style="width:${Math.max(1.5,100*C[P].n/max)}%;background:${C[P].color}"></i></span><small>${esc(C[P].nom)} · ${C[P].complet?"programme complet publié":"propositions annoncées"}</small></a>`).join("")}</div>`;
+  } else if(tab==="condamnations"){ $("#app").innerHTML=seg; v1Frame("cond",condTidy,$("#app .seg").getBoundingClientRect().bottom+4); return; }
+  else body=`<div class="sqs" style="margin-top:12px">${TH.map(t=>tile(t,true)).join("")}</div>`;
   $("#app").innerHTML=seg+body;
 }
 function condHTML(){
@@ -637,7 +672,7 @@ function condHTML(){
   const max=Math.max(...K.fams.map(x=>x[1]+x[2]));
   return `<div class="warn" style="margin-top:12px">La présomption d'innocence s'applique à toute condamnation non définitive (appel ou pourvoi en cours). Liste non exhaustive : les chiffres reflètent ce que la source recense, pas un taux par parti.</div>
     <div class="box"><h3>Condamnations recensées par parti</h3><div style="display:flex;gap:14px;font-size:12.5px;color:var(--muted)"><span><b style="color:#111">■</b> définitives</span><span><b style="color:#b9b4ad">■</b> non définitives</span></div>
-      ${K.fams.map(([f,d,n])=>`<div class="cbar"><span>${esc(f)}</span><span class="tr"><i style="width:${100*d/max}%;background:#111"></i><i style="width:${100*n/max}%;background:#b9b4ad"></i></span><span class="v">${d} + ${n}</span></div>`).join("")}</div>
+      ${K.fams.map(([f,d,n])=>`<div class="cbar"><span>${esc(f)}</span><span class="tr"><i style="width:${100*d/max}%;background:var(--dark)"></i><i style="width:${100*n/max}%;background:#b9b4ad"></i></span><span class="v">${d} + ${n}</span></div>`).join("")}</div>
     <p class="hint">${K.total} condamnations d'élus et de responsables politiques recensées par <a href="https://casier-politique.fr" target="_blank" rel="noopener" style="text-decoration:underline">Casier Politique</a> (site personnel, extraction automatique depuis Wikipédia, licence CC BY-NC-SA), complété par Poligraph. Données du ${esc(dateFr(K.extrait))}.</p>
     <a class="btn" href="/#cond" style="margin-top:10px">Voir l'hémicycle et la liste détaillée</a>`;
 }
@@ -680,24 +715,36 @@ function vSujet(id,focus){
   if(focus) setTimeout(()=>{ const el=$("#pt-"+focus); if(el) window.scrollTo({top:el.getBoundingClientRect().top+scrollY-64,behavior:"smooth"}); },30);
 }
 
+/* Carte d'identité d'un candidat : parti, état du programme, d'où viennent ses mesures, financement. Toujours visible, sans volet à déplier. */
+function candCard(P,n,nf){
+  const c=C[P], parts=(c.long||"").split(" · "), party=parts[0]!==c.nom?parts[0]:"";
+  const prog=parts[1]&&parts[1]!==c.cand&&!/^propositions|^\(|vainqueur/i.test(parts[1])?parts[1]:"";
+  // « Programme 2027 pas encore publié : positions recensées par… » → l'état va dans la pastille, le reste dans le texte
+  let note=c.note||"", st=c.retrait?"Ne se présente plus":c.complet?"Programme complet publié":"Programme pas encore publié", noteL="Candidature";
+  const m=note.match(/^(Programme[^:]{0,60}?)\s*:\s*(.+)$/);
+  if(m&&!c.retrait){ st=m[1]; note=m[2].charAt(0).toUpperCase()+m[2].slice(1); noteL="D'où viennent ses mesures"; }
+  if(c.retrait) note=c.retrait;
+  const tone=c.retrait?"off":c.complet?"ok":"wait";
+  const noEco=!c.eco||/^pas (encore )?de chiffrage[^.]*\.?$/i.test(c.eco.trim());
+  return `<div class="idc">
+    ${party||prog?`<div class="idc-p">${esc(party||c.nom)}${prog?` · <i>${esc(prog)}</i>`:""}</div>`:""}
+    <div class="idc-s"><span class="pill ${tone}">${esc(st)}</span><span><b>${n}</b> ${n>1?"mesures":"mesure"} · <b>${nf}</b> ${nf>1?"fiches":"fiche"}</span></div>
+    ${note?`<div class="idc-r"><b>${esc(c.retrait?"Candidature":noteL)}</b><p>${esc(note)}</p></div>`:""}
+    ${c.eco?`<div class="idc-r"><b>Financement</b><p${noEco?' class="mute"':""}>${esc(noEco?"Pas de chiffrage publié pour l'instant.":c.eco)}</p>${c.ecoUrl&&!noEco?`<a class="src" href="${esc(c.ecoUrl)}" target="_blank" rel="noopener">${esc(host(c.ecoUrl))} ↗</a>`:""}</div>`:""}
+  </div>`;
+}
 const CF={};   // filtre choisi sur chaque page candidat
 function vCand(P){
   const c=C[P]; if(!c) return vNotFound();
-  setTop(`<button class="back" aria-label="Retour" onclick="goBack()">${ICO.back}</button><div class="tn"><i class="dot" style="background:${c.color}"></i>${esc(c.cand)}</div>`);
+  setTop(`<button class="back" aria-label="Retour" onclick="goBack()">${ICO.back}</button><div class="tn"><i class="dot" style="background:${c.color}"></i>${esc(c.cand)}<small>${esc(c.nom)}</small></div>`);
   const ms=ML.filter(m=>m.P===P), nf=ms.filter(m=>F[m.id]).length;
   const ths=TH.map(t=>({t,n:ms.filter(m=>m.th===t.id).length})).filter(x=>x.n);
   const draw=()=>{
     const fl=CF[P]||"tout";
     const list=(fl==="fiches"?ms.filter(m=>F[m.id]):fl==="tout"?ms:ms.filter(m=>m.th===fl)).slice().sort(byRank);
-    $("#app").innerHTML=`<div style="font-size:14px;color:var(--muted);margin-top:2px">${esc(c.nom)}${c.long&&c.long.split(" · ")[0]!==c.nom?" · "+esc(c.long.split(" · ")[0]):""}</div>
-      <div class="stats">
-        <button class="stat${fl==="tout"?" on":""}" data-f="tout"><b>${ms.length}</b><span>${ms.length>1?"mesures":"mesure"}</span></button>
-        <button class="stat${fl==="fiches"?" on":""}" data-f="fiches"><b>${nf}</b><span>${nf>1?"fiches détaillées":"fiche détaillée"}</span></button>
-        <div class="stat"><b style="font-size:15px;line-height:1.3">${c.complet?"Complet":"Annoncé"}</b><span>${c.complet?"programme publié":"programme pas encore publié"}</span></div>
-      </div>
-      ${c.note||c.eco?`<div class="acc" style="margin-top:10px"><details><summary><div class="s"><b>À savoir</b><span>${esc(firstSentence(c.note||c.eco))}</span></div>${ICO.down}</summary><div class="body">${c.note?`<p>${esc(c.note)}</p>`:""}${c.eco?`<div class="sub">Chiffrage global</div><p>${esc(c.eco)}</p>${c.ecoUrl?`<a class="src" href="${esc(c.ecoUrl)}" target="_blank" rel="noopener">${esc(host(c.ecoUrl))} ↗</a>`:""}`:""}</div></details></div>`:""}
+    $("#app").innerHTML=`${candCard(P,ms.length,nf)}
       <div class="dive-h"><h2>Ses mesures par sujet</h2></div>
-      <div class="hs" style="margin-bottom:10px"><a class="chip${fl==="tout"?" on":""}" href="#" data-f="tout">Toutes <small>${ms.length}</small></a>${ths.map(x=>`<a class="chip${fl===x.t.id?" on":""}" href="#" data-f="${x.t.id}">${esc(x.t.t)} <small>${x.n}</small></a>`).join("")}</div>
+      <div class="hs" style="margin-bottom:10px"><a class="chip${fl==="tout"?" on":""}" href="#" data-f="tout">Toutes <small>${ms.length}</small></a>${nf&&nf<ms.length?`<a class="chip${fl==="fiches"?" on":""}" href="#" data-f="fiches">Avec fiche <small>${nf}</small></a>`:""}${ths.map(x=>`<a class="chip${fl===x.t.id?" on":""}" href="#" data-f="${x.t.id}">${esc(x.t.t)} <small>${x.n}</small></a>`).join("")}</div>
       ${rowsWithMore(list,20,false,"c-"+P+"-"+fl)}`;
     document.querySelectorAll("[data-f]").forEach(a=>a.onclick=e=>{ e.preventDefault(); CF[P]=a.dataset.f; track("candidat:filtre"); const y=scrollY; draw(); window.scrollTo(0,y); });
   };
@@ -954,7 +1001,16 @@ document.addEventListener("keydown",e=>{ if(!document.body.classList.contains("s
 /* ---------- l'app d'origine, intégrée telle quelle ----------
    Chat (mini-cours, quiz, conversations), Profil, Condamnations (hémicycle) et Infos : on affiche les écrans de l'app actuelle
    dans un cadre (même site, donc mêmes réponses et mêmes conversations), sans sa barre du bas. */
-const V1CSS="nav.tabs,.fab{display:none!important}";
+const V1CSS=`nav.tabs,.fab{display:none!important}
+  .newchat .av{background:#44444c!important}
+  #v-chat .psub{display:none}
+  #v-chat .topics{grid-auto-flow:row;grid-template-columns:1fr 1fr;grid-template-rows:none;grid-auto-columns:auto;overflow:visible;margin:0 0 6px;padding:0}
+  #v-chat .topic{min-height:80px;padding:11px 12px 12px}
+  #v-cond .ptitle,#v-cond .psub{display:none}
+  #v-cond .warn{font-size:12.5px;line-height:1.4;padding:8px 11px;margin-top:4px}
+  #v-cond .lire{margin:0 0 10px}#v-cond .lire summary{cursor:pointer;font-size:13px;font-weight:600;color:var(--muted)}#v-cond .lire .note{margin:6px 0 0!important}`;
+// Condamnations : l'explication de l'hémicycle et sa note de source se déplient au besoin (« Comment le lire ? »).
+function condTidy(w,d){ const n=d.querySelector("#v-cond .c-left .note"); if(!n||n.closest(".lire")) return; const det=d.createElement("details"); det.className="lire"; det.innerHTML="<summary>Comment le lire ?</summary>"; n.replaceWith(det); det.appendChild(n); const cn=d.getElementById("c-chart-note"); if(cn) det.appendChild(cn); }
 function v1Frame(view,after,top){
   const f=$("#v1"); document.body.classList.add("frame-on"); f.hidden=false; f.style.top=(top||0)+"px";
   const go=()=>{ try{ const w=f.contentWindow, d=w.document;
@@ -978,7 +1034,8 @@ const PRINCIPE=`<div class="label">Le principe</div><div class="answer sm">Swipe
   <div class="item"><div class="who">Explorer</div><div class="txt" style="font-size:16px">Choisis un sujet : tu découvres question par question ce que propose chaque candidat, puis tu retrouves la synthèse. Une pastille te signale les nouvelles propositions.</div></div>
   <div class="item"><div class="who">Une carte par proposition</div><div class="txt" style="font-size:16px">Ce qu'elle change concrètement, pourquoi elle est défendue, ce qu'on lui reproche.</div></div>
   <div class="item"><div class="who">Le chat</div><div class="txt" style="font-size:16px">Pose n'importe quelle question sur une mesure ou un sujet, suis un mini-cours ou teste-toi avec un quiz. Les réponses sont neutres et sourcées.</div></div>
-  <div class="item"><div class="who">Le Swipe</div><div class="txt" style="font-size:16px">Pour te faire un avis carte après carte : ♥ pour, ✕ contre. Ton profil montre ensuite de quels candidats tu es proche.</div></div>`;
+  <div class="item"><div class="who">Le Swipe</div><div class="txt" style="font-size:16px">Pour te faire un avis carte après carte : ♥ pour, ✕ contre. Ton profil montre ensuite de quels candidats tu es proche.</div></div>
+  <div class="item"><div class="who">D'où viennent les fiches</div><div class="txt" style="font-size:16px">Les résumés, les critiques et le classement par sujet sont préparés avec l'aide d'une IA à partir des sources citées, puis relus au fur et à mesure. Une erreur ? Signale-la depuis la carte.</div></div>`;
 function vInfo(){ setTop(""); $("#app").innerHTML=""; v1Frame(null,(w,d)=>{ w.renderInfo(); const b0=d.querySelector("#info-body .box"); if(b0) b0.innerHTML=PRINCIPE; d.getElementById("info").classList.add("on"); d.getElementById("info-body").scrollTop=0;
   const x=d.getElementById("info-x"); if(!x.dataset.v2){ x.dataset.v2=1; x.addEventListener("click",()=>{ if(location.hash.startsWith("#/info")) goBack(); }); } }); }
 function mdInline(s){ return s.replace(/^#{1,4}\s*(.+)$/gm,'<b>$1</b>').replace(/\[([^\]]{1,140})\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>')
@@ -997,11 +1054,9 @@ function propCard(m,o={}){
       <h2 class="q${m.t.length>170?" l":""}">${esc(mk(m.t))}</h2>
       ${o.sous&&m.sous.length?`<ul>${m.sous.slice(0,4).map(s=>`<li>${esc(s)}</li>`).join("")}${m.sous.length>4?`<li>et ${m.sous.length-4} autres points</li>`:""}</ul>`:""}</div>
     ${f&&f.resume?`<p class="sw-res">${esc(mk(f.resume))}</p>`:`<p class="hint">Pas encore de fiche détaillée pour cette mesure.</p>`}
-    ${f&&f.genere?`<span class="tag ia" style="display:inline-block;margin-top:10px">Rédigé par IA · à vérifier</span>`:""}
     ${o.closed?"":`${P3.length?diveHTML(P3):""}
-    <div class="askm"><b>💬 Une question sur cette proposition ?</b><span>Réponse neutre et sourcée, en quelques secondes.</span>
-      <div class="hs">${ASKM.map(q=>`<a class="chip" href="#/chat?m=${id}&q=${encodeURIComponent(q)}">${esc(q)}</a>`).join("")}</div>
-      <a class="in" href="#/chat?m=${id}">Pose ta question…</a></div>`}`;
+    <div class="askm"><a class="in" href="#/chat?m=${id}">💬 Une question sur cette proposition ?</a>
+      <div class="hs">${ASKM.map(q=>`<a class="chip" href="#/chat?m=${id}&q=${encodeURIComponent(q)}">${esc(q)}</a>`).join("")}</div></div>`}`;
 }
 
 /* ---------- Swipe ----------
@@ -1026,7 +1081,7 @@ function swipePanels(m,f,hidden){
   if(crit.length) P.push({k:"contre",label:"Critiques",cnt:crit.length,html:mk(crit.slice(0,5).map(x=>`<div class="q c"><div class="h">${esc(x.camp||x.qui||"")}</div><div class="x">${esc(firstSentence(x.texte))}</div></div>`).join(""))});
   return P;
 }
-function toast(t){ const d=document.createElement("div"); d.className="flash"; d.style.cssText="background:#111;color:#fff;font-size:15px;top:22%;animation-duration:2.2s"; d.textContent=t; document.body.appendChild(d); setTimeout(()=>d.remove(),2300); }
+function toast(t){ const d=document.createElement("div"); d.className="flash"; d.style.cssText="background:var(--dark);color:#fff;font-size:15px;top:22%;animation-duration:2.2s"; d.textContent=t; document.body.appendChild(d); setTimeout(()=>d.remove(),2300); }
 function renderSwipe(dir){
   setTop(`<h1 style="font-size:18px">Swipe</h1><button class="chip${SW.blind?" on":""}" id="sw-blind" style="font-size:13px;padding:6px 11px">🙈 ${SW.blind?"Noms masqués":"Masquer les noms"}</button>`);
   $("#sw-blind").onclick=()=>{ SW.blind=!SW.blind; LS.set("swipe:blind",SW.blind); track("swipe:aveugle:"+(SW.blind?"on":"off")); renderSwipe(0); };
@@ -1038,8 +1093,7 @@ function renderSwipe(dir){
     ${aide?`<div class="warn" style="margin:4px 0 8px;justify-content:space-between;align-items:center"><span>♥ ou glisse à droite si tu es <b>pour</b>, ✕ ou à gauche si tu es <b>contre</b>. Tes réponses restent sur ce téléphone et construisent ton profil.</span><button class="st-ico" id="sw-ok">OK</button></div>`:""}
     ${propCard(m,{hidden,id:"swc"})}
     <div style="display:flex;justify-content:space-between;gap:10px;margin-top:14px"><a class="src" href="#/m/${encodeURIComponent(m.id)}">Page de la mesure →</a><button class="src" id="sw-flag">Signaler une erreur</button></div>
-    <div class="sw-btns"><button class="sm" id="sw-prev" aria-label="Mesure précédente"${SW.i?"":" disabled style=\"opacity:.4\""}>↶</button><button class="big" id="sw-no" aria-label="Contre">✕</button><button class="big yes" id="sw-yes" aria-label="Pour">${HEART(true)}</button><button class="sm" id="sw-pass" aria-label="Passer">→</button></div>
-    <a class="bubble" href="#/chat?m=${encodeURIComponent(m.id)}" aria-label="Poser une question sur cette mesure"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg></a>`;
+    <div class="sw-btns"><button class="sm" id="sw-prev" aria-label="Mesure précédente"${SW.i?"":" disabled style=\"opacity:.4\""}>↶</button><button class="big" id="sw-no" aria-label="Contre">✕</button><button class="big yes" id="sw-yes" aria-label="Pour">${HEART(true)}</button><button class="sm" id="sw-pass" aria-label="Passer">→</button></div>`;
   window.scrollTo(0,0);
   const answer=v=>{ setAns(m.id,v); if(hidden&&v!==0) toast((v===1?"♥ ":"✕ ")+"C'était "+C[m.P].cand+" ("+C[m.P].nom+")"); else flash(v); if(v===0) track("swipe:passe"); SW.i++; renderSwipe(1); };
   $("#sw-yes").onclick=()=>answer(1); $("#sw-no").onclick=()=>answer(-1); $("#sw-pass").onclick=()=>answer(0);
