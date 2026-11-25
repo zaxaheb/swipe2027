@@ -116,3 +116,7 @@ Pris en compte dans la v2 :
 - **Condamnations :** la répartition par parti revient (onglet Explorer), avec un lien vers l'hémicycle de l'app actuelle.
 - **Parcours :** le bouton de fermeture ramène à la synthèse du sujet, pas à l'accueil.
 Encore à discuter : le contenu et la place de la page Profil.
+
+Deuxième tour de retours (25/11) :
+- **Une seule carte de proposition partout** (Swipe, parcours d'un sujet, page de la mesure) : la grande carte du Swipe, le résumé, « Pour aller plus loin » en 3 volets, et un bloc « Une question sur cette proposition ? » avec des questions prêtes qui ouvrent le chat. Dans le parcours, la carte est repliée avec « Ouvrir la carte ».
+- **Chat, Profil, Infos et Condamnations (avec l'hémicycle) = les écrans de l'app actuelle**, affichés tels quels dans la v2 (même site, mêmes réponses et conversations), sans leur barre du bas. Bouton « i » sur l'accueil pour les infos.
