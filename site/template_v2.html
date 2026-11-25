@@ -532,7 +532,7 @@ async function pullRemote(){ if(!SB||!USER) return; try{ const {data}=await SB.f
 if(SB){ SB.auth.getSession().then(({data})=>{ USER=data&&data.session?data.session.user:null; if(USER) pullRemote().then(()=>{ if(location.hash.startsWith("#/profil")) route(); }); }).catch(()=>{});
   SB.auth.onAuthStateChange((ev,ses)=>{ const u=ses?ses.user:null, ch=(u&&u.id)!==(USER&&USER.id); USER=u; if(ch&&USER) pullRemote(); if(ch&&location.hash.startsWith("#/profil")) route(); }); }
 function flash(v){ const d=document.createElement("div"); d.className="flash "+(v===1?"badge-p":v===-1?"badge-c":""); d.style.background=v===0?"var(--soft)":""; d.textContent=v===1?"Pour":v===-1?"Contre":"Passée"; document.body.appendChild(d); setTimeout(()=>d.remove(),750); }
-const avisBtns=id=>{ const v=ANS[id]; return `<div class="avis" data-avis="${esc(id)}"><button class="p${v===1?" on":""}" data-v="1">👍 Pour</button><button class="c${v===-1?" on":""}" data-v="-1">👎 Contre</button><button class="s${v===0?" on":""}" data-v="0">Sans avis</button></div>`; };
+const avisBtns=id=>{ const v=ANS[id]; return `<div class="avis" data-avis="${esc(id)}"><button class="p${v===1?" on":""}" data-v="1"><span style="color:var(--like)">♥</span> Pour</button><button class="c${v===-1?" on":""}" data-v="-1">✕ Contre</button><button class="s${v===0?" on":""}" data-v="0">Sans avis</button></div>`; };
 function bindAvis(root,after){ root.querySelectorAll("[data-avis]").forEach(box=>box.querySelectorAll("button").forEach(b=>b.onclick=()=>{ const id=box.dataset.avis, v=+b.dataset.v; setAns(id,ANS[id]===v?null:v); if(after) after(); else box.outerHTML=avisBtns(id), bindAvis(root); })); }
 
 /* ---------- mesures sauvegardées (cœur), gardées seulement sur le téléphone ---------- */
@@ -661,12 +661,13 @@ function vSujet(id,focus){
   let body="";
   if(t.pts){
     const groups=t.pts.map(([pid,pt])=>({pid,pt,l:vis.filter(m=>m.pt===pid)})).filter(g=>g.l.length).map(g=>({...g,cs:CK.filter(P=>g.l.some(m=>m.P===P))}));
-    const main=groups.filter(g=>!/-autres$/.test(g.pid)&&(g.cs.length>=2||fc)).sort((a,b)=>b.cs.length-a.cs.length);
-    const rest=groups.filter(g=>!main.includes(g)), restRows=rest.flatMap(g=>g.l.sort(byRank));
+    // Toutes les mesures au même niveau : une question par point, même si un seul candidat s'est prononcé ; le « fourre-tout » du sujet en dernier.
+    const isRest=g=>/-autres$/.test(g.pid);
+    const main=groups.sort((a,b)=>isRest(a)-isRest(b)||b.cs.length-a.cs.length).map(g=>isRest(g)?{...g,pt:"D'autres propositions sur ce sujet"}:g);
     const block=g=>{ const nn=g.l.filter(m=>nw.has(m.id)).length;
       return `<details id="pt-${g.pid}"${g.pid===focus||fc?" open":""}><summary><div class="s"><b>${esc(g.pt)}</b><span>${fc?plural(g.l.length,"mesure","mesures"):plural(g.cs.length,"candidat","candidats")}${nn?` · ${nn} nouvelle${nn>1?"s":""}`:""}</span>${fc?"":`<div class="mini">${g.cs.map(P=>`<i style="background:${C[P].color}"></i>`).join("")}</div>`}</div>${ICO.down}</summary><div class="list">${g.cs.map(P=>candRow(g.l,P,"pm-"+g.pid+"-"+P)).join("")}</div></details>`; };
     body=`${main.length?`<div class="pts">${main.map(block).join("")}</div>`:""}
-      ${restRows.length?`<div class="pts"><details${EXP["rest-"+id]||fc?" open":""}><summary><div class="s"><b>Autres mesures du sujet <em class="cnt" style="font-style:normal">${restRows.length}</em></b><span>Proposées par un seul candidat, ou difficiles à comparer</span></div>${ICO.down}</summary><div class="list">${restRows.slice(0,EXP["rest-"+id]||15).map(rowN).join("")}${restRows.length>(EXP["rest-"+id]||15)?`<button class="more" data-more="rest-${id}" data-step="15">Voir plus</button>`:""}</div></details></div>`:""}`;
+`;
   } else body=`<div class="list" style="margin-top:12px">${has.filter(P=>!fc||P===fc).map(P=>candRow(vis,P,"s-"+id+"-"+P)).join("")}</div>`;
   $("#app").innerHTML=`<p class="lead" style="margin-top:8px">${esc(t.d)}. ${plural(has.length,"candidat a","candidats ont")} fait des propositions.</p>
     <div class="mini-actions">${t.pts&&pathSteps(id).length?`<a class="btn dark" href="#/parcours/${id}">▶ ${wasEx?"Revoir en carrousel":"Parcourir en carrousel"}</a>`:""}<a class="btn" href="#/chat/new?q=${encodeURIComponent("Explique-moi simplement le débat sur : "+t.t)}">💬 Poser une question</a></div>
@@ -782,10 +783,8 @@ function vMesure(id){
   top(); render();
   if(!ficheOf(id)) fetchFiche(id).then(f=>{ if(f&&location.hash==="#/m/"+encodeURIComponent(id)) render(); });
   function render(){
-    const f=ficheOf(id), P=fichePanels(m,f,comparables(m)).filter(x=>!["concret","pour","contre"].includes(x.k));
     $("#app").innerHTML=`<div style="margin-top:6px"></div>${propCard(m,{sous:true})}
       <div class="avis-l">Ton avis sur cette proposition</div>${avisBtns(m.id)}
-      ${P.length?`<div class="acc">${P.map(x=>`<details><summary><div class="s"><b>${esc(x.label)}${x.cnt?`<em class="cnt" style="font-style:normal">${x.cnt}</em>`:""}</b></div>${ICO.down}</summary><div class="body">${x.html}</div></details>`).join("")}</div>`:""}
       <button class="src" id="b-flag" style="margin-top:14px">${ICO.flag} Signaler une erreur</button>
       <a class="bubble" href="#/chat?m=${encodeURIComponent(m.id)}" aria-label="Poser une question sur cette proposition" style="bottom:calc(var(--nav) + 30px + env(safe-area-inset-bottom))"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg></a>`;
     mountDive($("#app")); bindAvis($("#app")); $("#b-flag").onclick=()=>openFlag(m);
@@ -975,7 +974,12 @@ function vChat(arg,qs){
 function vProfilV1(){ setTop(""); $("#app").innerHTML="";
   // les réponses données dans la v2 (Swipe) sont relues avant d'afficher le profil
   v1Frame("profil",w=>{ try{ w.eval('SW=store.get("sw2027",{}); renderProfil();'); }catch(e){} }); }
-function vInfo(){ setTop(""); $("#app").innerHTML=""; v1Frame(null,(w,d)=>{ w.renderInfo(); d.getElementById("info").classList.add("on"); d.getElementById("info-body").scrollTop=0;
+const PRINCIPE=`<div class="label">Le principe</div><div class="answer sm">Swipe 2027 t'aide à comprendre ce que proposent les candidats à la présidentielle, sans parti pris et en citant ses sources.</div>
+  <div class="item"><div class="who">Explorer</div><div class="txt" style="font-size:16px">Choisis un sujet : tu découvres question par question ce que propose chaque candidat, puis tu retrouves la synthèse. Une pastille te signale les nouvelles propositions.</div></div>
+  <div class="item"><div class="who">Une carte par proposition</div><div class="txt" style="font-size:16px">Ce qu'elle change concrètement, pourquoi elle est défendue, ce qu'on lui reproche.</div></div>
+  <div class="item"><div class="who">Le chat</div><div class="txt" style="font-size:16px">Pose n'importe quelle question sur une mesure ou un sujet, suis un mini-cours ou teste-toi avec un quiz. Les réponses sont neutres et sourcées.</div></div>
+  <div class="item"><div class="who">Le Swipe</div><div class="txt" style="font-size:16px">Pour te faire un avis carte après carte : ♥ pour, ✕ contre. Ton profil montre ensuite de quels candidats tu es proche.</div></div>`;
+function vInfo(){ setTop(""); $("#app").innerHTML=""; v1Frame(null,(w,d)=>{ w.renderInfo(); const b0=d.querySelector("#info-body .box"); if(b0) b0.innerHTML=PRINCIPE; d.getElementById("info").classList.add("on"); d.getElementById("info-body").scrollTop=0;
   const x=d.getElementById("info-x"); if(!x.dataset.v2){ x.dataset.v2=1; x.addEventListener("click",()=>{ if(location.hash.startsWith("#/info")) goBack(); }); } }); }
 function mdInline(s){ return s.replace(/^#{1,4}\s*(.+)$/gm,'<b>$1</b>').replace(/\[([^\]]{1,140})\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>')
   .replace(/(^|[\s(])(https?:\/\/[^\s<)]+)/g,'$1<a href="$2" target="_blank" rel="noopener">$2</a>').replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>'); }
