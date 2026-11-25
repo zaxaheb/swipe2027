@@ -1003,6 +1003,7 @@ document.addEventListener("keydown",e=>{ if(!document.body.classList.contains("s
    dans un cadre (même site, donc mêmes réponses et mêmes conversations), sans sa barre du bas. */
 const V1CSS=`nav.tabs,.fab{display:none!important}
   .newchat .av{background:#44444c!important}
+  .convo .composer{padding-bottom:calc(86px + var(--safe-b))}   /* la barre pour écrire passe au-dessus de la navigation de la v2 */
   #v-chat .psub{display:none}
   #v-chat .topics{grid-auto-flow:row;grid-template-columns:1fr 1fr;grid-template-rows:none;grid-auto-columns:auto;overflow:visible;margin:0 0 6px;padding:0}
   #v-chat .topic{min-height:80px;padding:11px 12px 12px}
