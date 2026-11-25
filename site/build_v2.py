@@ -87,7 +87,7 @@ def press_date(f, today):
 # Candidats principaux : affichés en premier (ordre alphabétique entre eux). Liste à valider ; la liste officielle n'existera qu'après les parrainages (mars 2027).
 PRINCIPAUX = ["LFI", "RN", "PHILIPPE", "RETAILLEAU", "ATTAL", "GLUCKSMANN", "ZEMMOUR", "BERTRAND", "TONDELIER", "ROUSSEL", "RUFFIN"]
 
-def build(H, progs, S, Mz, fi):
+def build(H, progs, S, Mz, fi, cond=None):
     TX, CL = load_sorting(H)
     cands = dict(LFI_RN)
     for k, x in progs.items():
@@ -118,7 +118,14 @@ def build(H, progs, S, Mz, fi):
     cands = {k: v for k, v in cands.items() if v["n"]}
     themes = [{"id": x["id"], "t": x["t"], "d": x["d"], "pts": [[p["id"], p["t"]] for p in x["points"]]} for x in TX] if TX else [{"id": tid, "t": t, "d": d} for tid, t, d, _ in THEMES]
     if CL: print("v2 : classement par sujet et point depuis data/sujets.json (" + str(sum(1 for m in mes if "pt" in m)) + "/" + str(len(mes)) + " mesures)")
-    data = {"cands": cands, "themes": themes, "mes": mes, "fiches": fi}
+    # Condamnations : répartition par famille politique (définitives / non définitives), comme dans l'app d'origine.
+    cd = None
+    if cond and cond.get("condamnations"):
+        L = cond["condamnations"]; fams = {}
+        for x in L:
+            f = fams.setdefault(x.get("famille") or "Autres / non précisé", [0, 0]); f[0 if x.get("statut") == "définitive" else 1] += 1
+        cd = {"extrait": cond.get("extrait_le") or "", "total": len(L), "fams": sorted([[k, v[0], v[1]] for k, v in fams.items()], key=lambda r: -(r[1] + r[2]))}
+    data = {"cands": cands, "themes": themes, "mes": mes, "fiches": fi, "cond": cd}
     J = json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     # Comptes : même projet Supabase que l'app actuelle (clé publique, lue dans template.html)
     t1 = open(os.path.join(H, "template.html")).read()

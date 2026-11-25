@@ -46,4 +46,4 @@ print('index.html', len(h), '| base.json', len(base['mesures']), 'mesures')
 
 # Version 2 (exploration UX sans swipe) : v2.html
 from build_v2 import build as build_v2
-build_v2(H, progs, S, Mz, fi)
+build_v2(H, progs, S, Mz, fi, c)

@@ -101,3 +101,18 @@ A first version without swiping, next to the current app: `site/v2.html` (`/v2` 
 - **Swipe, profile and account (24/11/2026) — decision change on point 7:** Swipe records an opinion again, like the original app: swipe right = pour, left = contre, "Passer" = sans avis (each also moves to the next card). Swiping inside "Pour aller plus loin" changes tab instead. Answers use the same storage as the original app (`sw2027`), stay on the phone by default, and sync to the account (Supabase `profils`) only after sign-up with explicit consent. **Mon profil** (person icon on the home screen): agreement % per candidate and per subject, the AI portrait (existing `api/chat` mode `profil`), my answers, saved measures, account (sign up / log in / delete), erase all. Each fiche also has "Ton avis : Pour / Contre / Sans avis". Home no longer shows Swipe or the discovery path (Swipe is the centre tab). **Privacy reminder:** answers reveal political opinions (GDPR art. 9): keep them local unless the person consents, never publish aggregates like "our users prefer X".
 - **Visual style back to Zak's (24/11/2026):** same colors as the original app (white, purple accent, pink heart, green/red for pour/contre), big title, black bottom bar (as a floating pill, Swipe in pink in the middle), subject tiles with his topic gradients, and the measure shown on the candidate's gradient card in white serif, on the measure page and in Swipe.
 - **Limits:** AI features (chat, on-demand fiches, sending reports) don't work locally. Classifier suggestions not yet applied: points for water, social and solidarity economy, francophonie, terrorism/intelligence, family taxation.
+
+---
+
+## Retours de Zak (25/11/2026) · branche `zak/v2-retours`
+Pris en compte dans la v2 :
+- **Accueil plus simple :** recherche, « Les mesures du jour » (3 mesures récentes dans la presse, un candidat différent chacune, en carrousel), un gros bloc pour poser une question au chat, la progression des sujets explorés.
+- **Explorer = Sujets + Candidats + Condamnations** au même endroit (onglets). Barre du bas : Accueil · Explorer · Swipe · Chat · Profil.
+- **Cinématique d'un sujet :** première visite → carrousel question par question → synthèse. Ensuite on revient directement sur la synthèse (bouton « Revoir en carrousel »). Sujets marqués « ✓ Exploré » ; pastille « N nouv. » quand des mesures sont ajoutées, avec un carrousel des seules nouveautés. Gardé sur le téléphone (`vus:sujets`).
+- **Synthèse d'un sujet plus digeste :** filtre par candidat, questions en accordéon (titre, nombre de candidats, pastilles de couleur), nouveautés marquées.
+- **Candidats :** tous au même rang (plus de « principaux »), classés par nombre de propositions avec une barre, pour garder la distribution visible.
+- **Chat remis au centre :** mini-cours en 4 étapes et quiz, plusieurs conversations, questions sur une mesure.
+- **Swipe comme l'app d'origine :** grande carte, ✕ et ♥ en bas, bulle pour discuter, la barre du bas reste. Plus de cœur « sauvegarder » (redondant), plus de blocs vert/rouge tronqués ; « Pour aller plus loin » réduit à Concrètement / Pourquoi / Critiques.
+- **Condamnations :** la répartition par parti revient (onglet Explorer), avec un lien vers l'hémicycle de l'app actuelle.
+- **Parcours :** le bouton de fermeture ramène à la synthèse du sujet, pas à l'accueil.
+Encore à discuter : le contenu et la place de la page Profil.
