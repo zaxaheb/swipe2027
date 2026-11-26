@@ -865,6 +865,16 @@ body[data-v="home"] .live{margin-top:30px}
 .dbrow .dbtags .dbtag.m{max-width:260px}
 @media (min-width:1100px){ body[data-v="forum"] .wrap{max-width:900px!important} }
 
+/* forum dans le volet de la carte */
+.dbpanel .dbc{border-top:1px solid var(--line)}
+.dbpanel>.dbc:first-of-type{border-top:0}
+.dbpanel .dbfoot{margin:6px 0 0;padding:10px 0 0}
+.dbsorts{display:flex;gap:12px;font-size:13px;font-weight:600;margin:0 0 4px}
+.dbsorts a{color:var(--muted)}.dbsorts a.on{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+.dbrel{display:flex;flex-direction:column;gap:4px;margin:14px 0 6px;font-size:14px}
+.dbrel b{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.dbrel a{color:var(--ink);font:600 15px/1.35 var(--serif)}
+
 </style>
 </head>
 <body>
@@ -1248,10 +1258,9 @@ function vMesure(id){
     $("#app").innerHTML=`<div style="margin-top:6px"></div>${propCard(m,{sous:true,noName:true})}
       <div class="avis-l">Ton avis sur cette proposition</div>${avisBtns(m.id)}
       <button class="src" id="b-flag" style="margin-top:14px">${ICO.flag} Signaler une erreur</button>
-      ${dbDiscussion(m.id)}
       <a class="bubble" style="bottom:calc(var(--nav) + 30px + env(safe-area-inset-bottom))" href="#/chat?m=${encodeURIComponent(m.id)}" aria-label="Poser une question sur cette proposition"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg></a>`;
     mountDive($("#app")); bindAvis($("#app")); $("#b-flag").onclick=()=>openFlag(m); deskPanel(m);
-    if(/\?forum/.test(location.hash)) setTimeout(()=>{ const d=$("#forum"); if(d) scrollTo({top:d.getBoundingClientRect().top+scrollY-70,behavior:"smooth"}); },60);
+    if(/\?forum/.test(location.hash)) setTimeout(dbOpenForumTab,60);
   }
 }
 /* « Pour aller plus loin » : onglets + volets qu'on fait glisser de gauche à droite. Même composant sur la fiche et dans le Swipe. */
@@ -1532,12 +1541,11 @@ function vSwipe(){
   track("swipe:debut"); document.body.classList.add("sw-on"); renderSwipe(0);
 }
 function swipePanels(m,f,hidden){
-  if(!f) return []; const lg=f.logique?(typeof f.logique==="string"?{texte:f.logique}:f.logique):null, crit=f.critiques||[], mk=h=>hidden?maskHtml(h,m.P):h, P=[];
+  if(!f) return hidden?[]:[dbPanelSpec(m)]; const lg=f.logique?(typeof f.logique==="string"?{texte:f.logique}:f.logique):null, crit=f.critiques||[], mk=h=>hidden?maskHtml(h,m.P):h, P=[];
   if((f.concret||[]).length) P.push({k:"concret",label:"Concrètement",html:mk(`<ul>${f.concret.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`)});
   if(lg) P.push({k:"pour",label:"Pourquoi",html:mk(`<p>${esc(lg.texte)}</p>`)});
   if(crit.length) P.push({k:"contre",label:"Critiques",cnt:crit.length,html:mk(crit.slice(0,5).map(x=>`<div class="q c"><div class="h">${esc(x.camp||x.qui||"")}</div><div class="x">${esc(firstSentence(x.texte))}</div></div>`).join(""))});
-  if(!hidden){ const top=(DB_COM[m.id]||[]).slice().sort((a,b)=>dbV(b)-dbV(a))[0], n=dbAll(m.id), u="#/m/"+encodeURIComponent(m.id)+"?forum";
-    P.push({k:"forum",label:"Forum",cnt:n,html:(top?`<div class="q"><div class="h">@${esc(top.u)} · ▲ ${dbV(top)}</div><div class="x">${esc(firstSentence(top.t))}</div></div><a class="src" href="${u}">Lire les ${n} messages →</a>`:`<p>Pas encore de message sur cette mesure.</p><a class="src" href="${u}">Lancer la discussion →</a>`)+` <span class="dbdemo">Démo</span>`}); }
+  if(!hidden) P.push(dbPanelSpec(m));
   return P;
 }
 function toast(t){ const d=document.createElement("div"); d.className="flash"; d.style.cssText="background:var(--dark);color:#fff;font-size:15px;top:22%;animation-duration:2.2s"; d.textContent=t; document.body.appendChild(d); setTimeout(()=>d.remove(),2300); }
@@ -1782,17 +1790,25 @@ function dbBox(cible,parent,ph,open){
       <div class="dbmsg"></div></div></div>`;
 }
 let DBSORT="utile";
-function dbDiscussion(mid){
+/* Le forum d'une mesure vit dans le volet « Forum » de la carte (fiche, Swipe, carrousel) : on y lit, vote, répond et écrit sans quitter la carte. */
+function dbPanel(mid){
   const L=(DB_COM[mid]||[]).slice().sort((a,b)=>DBSORT==="utile"?dbV(b)-dbV(a):0), mine=dbMine().filter(x=>x.cible===mid&&!x.parent), n=dbAll(mid);
   const th=DB_TH.filter(t=>t.m.includes(mid));
-  return `<div class="dbhead" id="forum"><h2>Forum${n?` <small>${n}</small>`:""}</h2>${DBDEMO}</div>
-    <p class="hint" style="margin:0 0 10px">Les messages sont relus avant d'être publiés. ▲ veut dire « utile », pas « d'accord ».</p>
-    ${n>1?`<div class="hs" style="margin-bottom:8px"><a class="chip${DBSORT==="utile"?" on":""}" href="#" data-dbsort="utile">Les plus utiles</a><a class="chip${DBSORT==="rec"?" on":""}" href="#" data-dbsort="rec">Récents</a></div>`:""}
-    <div class="dbl">${mine.map(dbPend).join("")}${L.map(c=>dbCom(c,mid,0)).join("")||(mine.length?"":`<p class="dbempty">Pas encore de message sur cette mesure.</p>`)}
-      <div class="dbfoot">${dbBox(mid,"",n?"Ajouter un message…":"Lancer la discussion sur cette mesure…")}</div></div>
-    ${th.length?`<div class="dbhead" style="margin-top:18px"><h2>Discussions liées</h2><a href="#/forum">Tout le forum →</a></div><div class="list">${th.map(t=>dbRow({k:"fil",t})).join("")}</div>`:""}
-    <a class="src" href="#/forum/nouveau?m=${encodeURIComponent(mid)}" style="margin-top:10px">+ Ouvrir une discussion plus large à partir de cette mesure</a>`;
+  return `<div class="dbpanel" data-mid="${esc(mid)}">
+    <p class="hint" style="margin:0 0 8px">Messages relus avant publication · <a href="#" data-dbrules>Règles du forum</a> · ▲ = utile ${DBDEMO}</p>
+    ${n>1?`<div class="dbsorts"><a class="${DBSORT==="utile"?"on":""}" href="#" data-dbsort="utile">Les plus utiles</a><a class="${DBSORT==="rec"?"on":""}" href="#" data-dbsort="rec">Récents</a></div>`:""}
+    ${mine.map(dbPend).join("")}${L.map(c=>dbCom(c,mid,0)).join("")||(mine.length?"":`<p class="dbempty" style="margin:4px 0 10px">Pas encore de message sur cette mesure.</p>`)}
+    <div class="dbfoot">${dbBox(mid,"",n?"Ajouter un message…":"Lancer la discussion…")}</div>
+    ${th.length?`<div class="dbrel"><b>Discussions liées</b>${th.map(t=>`<a href="#/forum/${t.id}">${esc(t.t)}</a>`).join("")}</div>`:""}
+    <a class="src" href="#/forum/nouveau?m=${encodeURIComponent(mid)}">+ Ouvrir une discussion plus large</a></div>`;
 }
+const dbPanelSpec=m=>({k:"forum",label:"Forum",cnt:dbAll(m.id),html:dbPanel(m.id)});
+/* le volet s'adapte à son contenu (réponse ouverte, message envoyé…) sans qu'on change d'onglet */
+function dbFit(){ document.querySelectorAll('.panel[data-k="forum"]').forEach(p=>{ if(p._ro) return; p._ro=new ResizeObserver(()=>{ const sw=p.parentElement, ps=[...sw.children], st=ps.length>1?ps[1].offsetLeft-ps[0].offsetLeft:1;
+  if(Math.round(sw.scrollLeft/st)===ps.indexOf(p)) sw.style.height=p.offsetHeight+"px"; }); p._ro.observe(p); }); }
+new MutationObserver(()=>dbFit()).observe(document.documentElement,{childList:true,subtree:true});
+function dbOpenForumTab(){ const dv=document.querySelector(".dive"); if(!dv) return; const tabs=[...dv.querySelectorAll(".tabs .chip")], i=[...dv.querySelectorAll(".swiper .panel")].findIndex(p=>p.dataset.k==="forum");
+  if(i<0) return; tabs[i].click(); setTimeout(()=>scrollTo({top:dv.getBoundingClientRect().top+scrollY-64,behavior:"smooth"}),80); }
 /* Le forum mélange deux choses : les discussions créées par les lecteurs, et les cartes de mesures où l'on discute. */
 function dbItems(f){
   f=f||{};
@@ -1889,11 +1905,11 @@ function dbSubmit(tx,src,msgEl,done){
 }
 const DB_REGLES=[["On analyse, on ne milite pas.","Pas de « votez X » : explique ce que change une mesure, pour qui, et pourquoi."],["On donne ses sources quand on peut.","Un lien aide les autres à vérifier un fait ou un chiffre."],["On respecte les gens.","On critique des idées, jamais des personnes, ni les candidats, ni les autres membres."],["On reste sur le sujet.","Celui de la mesure ou de la discussion."],["Pas de données personnelles.","Ni les tiennes, ni celles des autres."]];
 function dbSheet(h){ $("#sheet").innerHTML=`<div class="grab"></div>`+h; $("#sheet").classList.add("on"); $("#sheet-bg").classList.add("on"); }
-const dbRefresh=()=>{ const y=scrollY; route(); scrollTo(0,y); };
+const dbRefresh=el=>{ const pn=el&&el.closest&&el.closest(".dbpanel"); if(pn){ pn.outerHTML=dbPanel(pn.dataset.mid); return; } const y=scrollY; route(); scrollTo(0,y); };
 document.addEventListener("click",e=>{
   const v=e.target.closest("[data-dbv]");
   if(v){ e.preventDefault(); if(!USER&&!LS.get("debat:essai")){ LS.set("debat:essai",1); }   // démo : on laisse voter
-    const V=dbVotes(), id=v.dataset.dbv, d=+v.dataset.d; V[id]=V[id]===d?0:d; LS.set("debat:votes",V); return dbRefresh(); }
+    const V=dbVotes(), id=v.dataset.dbv, d=+v.dataset.d; V[id]=V[id]===d?0:d; LS.set("debat:votes",V); return dbRefresh(v); }
   const rp=e.target.closest("[data-dbreply]");
   if(rp){ e.preventDefault(); document.querySelectorAll(".dbrbox").forEach(b=>{ if(b.id!=="dbr-"+rp.dataset.dbreply) b.innerHTML=""; });
     const b=$("#dbr-"+rp.dataset.dbreply); if(b.innerHTML){ b.innerHTML=""; return; } b.innerHTML=dbBox(rp.dataset.cible,rp.dataset.dbreply,"Ta réponse…",true); b.querySelector("textarea").focus(); return; }
@@ -1902,12 +1918,12 @@ document.addEventListener("click",e=>{
   if(e.target.closest("[data-dbtry]")){ e.preventDefault(); LS.set("debat:essai",1); const m=e.target.closest(".dbmsg"); if(m) m.innerHTML=""; return; }
   const sd=e.target.closest("[data-dbsend]");
   if(sd){ e.preventDefault(); const box=sd.closest(".dbbox"), tx=box.querySelector("textarea").value, src=box.querySelector("input").value;
-    return dbSubmit(tx,src,box.querySelector(".dbmsg"),()=>{ const L=dbMine(); L.unshift({id:"m"+Date.now(),cible:box.dataset.cible,parent:box.dataset.parent,texte:tx,u:USER?pseudoOf(USER):"toi"}); LS.set("debat:mine",L.slice(0,30)); dbRefresh(); }); }
+    return dbSubmit(tx,src,box.querySelector(".dbmsg"),()=>{ const L=dbMine(); L.unshift({id:"m"+Date.now(),cible:box.dataset.cible,parent:box.dataset.parent,texte:tx,u:USER?pseudoOf(USER):"toi"}); LS.set("debat:mine",L.slice(0,30)); dbRefresh(box); }); }
   const lk=e.target.closest("[data-dblink]");
   if(lk){ e.preventDefault(); const [k,val]=lk.dataset.dblink.split("|"); if(!DBNEW.links.some(x=>x[0]===k&&x[1]===val)) DBNEW.links.push([k,val]); const keep={t:$("#dbn-t").value,x:$("#dbn-x").value,u:$("#dbn-u").value}; vForumNouveau(DBNEW.qs); $("#dbn-t").value=keep.t; $("#dbn-x").value=keep.x; $("#dbn-u").value=keep.u; $("#dbn-q").focus(); return; }
   const ul=e.target.closest("[data-dbunlink]");
   if(ul){ e.preventDefault(); DBNEW.links.splice(+ul.dataset.dbunlink,1); const keep={t:$("#dbn-t").value,x:$("#dbn-x").value,u:$("#dbn-u").value}; vForumNouveau(DBNEW.qs); $("#dbn-t").value=keep.t; $("#dbn-x").value=keep.x; $("#dbn-u").value=keep.u; return; }
-  const s=e.target.closest("[data-dbsort]"); if(s){ e.preventDefault(); DBSORT=s.dataset.dbsort; return dbRefresh(); }
+  const s=e.target.closest("[data-dbsort]"); if(s){ e.preventDefault(); DBSORT=s.dataset.dbsort; return dbRefresh(s); }
   const t=e.target.closest("[data-dbtri]"); if(t){ e.preventDefault(); DBF.tri=t.dataset.dbtri; return dbRefresh(); }
   const ty=e.target.closest("[data-dbtype]"); if(ty){ e.preventDefault(); DBF.type=ty.dataset.dbtype; return dbRefresh(); }
   if(e.target.closest("[data-dbrules]")){ e.preventDefault(); return dbSheet(`<h3>Les règles du forum</h3><ol class="dbrules">${DB_REGLES.map(([a,b])=>`<li><b>${a}</b> ${b}</li>`).join("")}</ol><p>Chaque message est relu par l'équipe de modération avant d'être publié. Un message signalé plusieurs fois est masqué en attendant d'être revu.</p><div class="actions"><button class="btn dark" style="width:100%" onclick="closeSheet()">OK</button></div>`); }
