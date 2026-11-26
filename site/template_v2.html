@@ -301,7 +301,7 @@ body.story-on .top{display:none}
 .st-ico.on{background:var(--ink);color:#fff;border-color:var(--ink)}
 .st-body{flex:1;min-height:0;padding:6px var(--pad) 0;display:flex}
 .st-card{flex:1;min-height:0;overflow-y:auto;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 18px;display:flex;flex-direction:column;gap:14px;animation:stin .22s ease-out}
-.st-card.back{animation-name:stback}
+.st-card.st-rev{animation-name:stback}
 @keyframes stin{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
 @keyframes stback{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
 .st-kick{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
@@ -442,6 +442,7 @@ body.frame-on .top{display:none}
 .nav{background:rgba(48,48,56,.8);border-color:rgba(255,255,255,.08);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:0 8px 24px rgba(0,0,0,.14)}
 .nav a{color:#dcdce2}.nav a.on{color:#fff;background:rgba(255,255,255,.14)}
 .chip.on,.btn.dark,.st-ico.on,.quick a.dark{background:var(--dark);border-color:var(--dark)}
+.st-foot .btn.dark{background:#111;border-color:#111}
 .composer button,.msg.u,.path-card{background:var(--dark)}
 .dots i.on,.st-bar i b{background:var(--dark)}
 /* accueil : plus compact, tient sur un écran */
@@ -744,6 +745,26 @@ body[data-v="home"] .live{margin-top:30px}
   .story .st-card .photo{margin:-32px -36px 0;border-radius:24px 24px 16px 16px}
   body[data-v="swipe"] .wrap{padding-bottom:130px!important}
   .story .st-card h2,.story .st-card h1{font-size:32px;line-height:1.2}
+}
+
+@media (min-width:1100px){
+  :root{--ed:max(36px,calc((100vw - 1128px)/2))}
+  /* logo à côté du titre */
+  .nav::after{content:"";order:-1;flex:none;width:34px;height:34px;margin-right:11px;border-radius:9px;background:url(/icons/icon-192.png) center/cover no-repeat;box-shadow:0 2px 8px rgba(31,28,39,.18)}
+  .nav{left:0!important;right:0!important;padding:0 var(--ed)!important}
+  body.panel-on{padding-right:0!important}
+  /* chat, profil, infos : une carte de la même largeur que l'accueil */
+  .appframe:not(.panel){left:var(--ed)!important;right:auto!important;bottom:auto!important;border:1px solid #ebe7df!important;border-radius:24px;box-shadow:0 1px 2px rgba(31,28,39,.04),0 18px 50px rgba(31,28,39,.08);background:#fff}
+  /* swipe : la carte à gauche, le chat de la mesure à droite, dans le même conteneur */
+  .appframe.panel{left:auto!important;right:var(--ed)!important;width:400px!important;top:88px!important;bottom:auto!important;border:1px solid #ebe7df!important;border-radius:24px;box-shadow:0 1px 2px rgba(31,28,39,.04),0 18px 50px rgba(31,28,39,.08)}
+  body.panel-on .wrap{max-width:none!important;padding-left:var(--ed)!important;padding-right:calc(var(--ed) + 428px)!important}
+  body.panel-on .sw-btns{left:var(--ed)!important;right:calc(var(--ed) + 428px)!important}
+  body.panel-on .appframe.panel{z-index:30}
+  body.panel-on .top{padding-left:calc(var(--ed) - 36px);padding-right:calc(var(--ed) + 428px)}
+  body.panel-on .nav .wrap,body.panel-on .top .wrap{padding:0!important}
+  .tabs{background:#f6f4ef}
+  .appframe:not(.panel){width:calc(100vw - 2*var(--ed))!important}
+  .nav::before{white-space:nowrap}
 }
 </style>
 </head>
@@ -1270,7 +1291,7 @@ function renderStory(dir){
     <div class="st-head"><button class="st-ico" id="st-close" aria-label="Quitter le carrousel">✕ Quitter</button><span class="lab">${ST.sid?(ST.only?"Nouveautés · ":"")+esc(THM[ST.sid].t):"Parcours découverte"}</span>
       ${done?"":`<button class="st-ico${ST.blind?" on":""}" id="st-blind" aria-pressed="${ST.blind}">${ST.blind?"Noms masqués":"Masquer les noms"}</button>`}
 </div>
-    <div class="st-body"><div class="st-card${dir<0?" back":""}" id="st-card">${card}</div></div>
+    <div class="st-body"><div class="st-card${dir<0?" st-rev":""}" id="st-card">${card}</div></div>
     ${done?"":`<div class="st-foot"><button class="btn nb" id="st-prev" aria-label="Précédent"${ST.i===0&&ST.j===0?" disabled style=\"opacity:.35\"":""}>←</button><button class="btn dark" id="st-next">${isLast?(ST.i===steps.length-1?"Terminer":"Question suivante"):ST.j===0?"Voir les positions":"Suivant"} →</button></div>`}
   </div>`;
   const go=d=>{ if(done) return; ST.open=false; if(d>0){ if(ST.j<total-1) ST.j++; else { ST.i++; ST.j=0; } } else { if(ST.j>0) ST.j--; else if(ST.i>0){ ST.i--; ST.j=storyCards(steps[ST.i]).length+1; } else return; } renderStory(d); };
@@ -1297,6 +1318,16 @@ document.addEventListener("keydown",e=>{ if(!document.body.classList.contains("s
    Chat (mini-cours, quiz, conversations), Profil, Condamnations (hémicycle) et Infos : on affiche les écrans de l'app actuelle
    dans un cadre (même site, donc mêmes réponses et mêmes conversations), sans sa barre du bas. */
 const V1CSS=`nav.tabs,.fab{display:none!important}
+  @media (min-width:900px){
+    .view{max-width:880px!important;padding-top:26px!important}
+    #v-chat .topics{grid-template-columns:repeat(3,1fr)!important}
+    .convo .msgs{max-width:780px!important}
+    #info{background:#f6f4ef!important}
+    #info header{background:#f6f4ef!important}
+    #info .msgs{display:block!important;max-width:900px!important;padding:24px 40px 60px!important}
+    #info .msgs>.box{break-inside:avoid;margin:0 0 22px!important;background:#fff;border:1px solid #ebe7df;border-radius:22px;box-shadow:0 1px 2px rgba(31,28,39,.04),0 10px 30px rgba(31,28,39,.05);padding:26px 28px!important}
+    #info .prompt .label{font:600 23px/1.2 "Newsreader",Georgia,serif;letter-spacing:-.01em}
+  }
   :root{--safe-b:0px!important}   /* l'app intégrée s'arrête au-dessus de la barre du bas : pas de marge « iPhone » en plus */
   .view{padding-bottom:28px!important}
   .topics{grid-auto-flow:row!important;grid-template-rows:none!important;grid-template-columns:1fr 1fr!important;grid-auto-columns:auto!important;overflow:visible!important;margin:0 0 6px!important;padding:0!important}
@@ -1314,7 +1345,7 @@ function condTidy(w,d){ const n=d.querySelector("#v-cond .c-left .note"); if(!n|
 const DESK=matchMedia("(min-width:1100px)");
 function v1Frame(view,after,top,panel){
   const f=$("#v1"); document.body.classList.toggle("frame-on",!panel); document.body.classList.toggle("panel-on",!!panel); f.classList.toggle("panel",!!panel);
-  f.hidden=false; f.style.top=((panel?0:top||0)+(DESK.matches?64:0))+"px";   // sur ordi, sous la barre du haut
+  f.hidden=false; const t=DESK.matches?(panel||!top?88:top+8):(panel?0:top||0); f.style.top=t+"px"; f.style.height=DESK.matches?`calc(100vh - ${t+24}px)`:"";   // sur ordi, sous la barre du haut
   const go=()=>{ try{ const w=f.contentWindow, d=w.document; if(!/\/app$/.test(w.location.pathname)) return;   // pas encore chargée
       if(!d.getElementById("v1-embed")){ const st=d.createElement("style"); st.id="v1-embed"; st.textContent=V1CSS; d.head.appendChild(st); }
       ["convo","info"].forEach(k=>{ const e=d.getElementById(k); if(e) e.classList.remove("on"); });   // on repart d'un écran propre
