@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Maquette : espace participatif · Swipe 2027</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#7a3cff;--like:#e8455f;--ink:#1f1c27;--muted:#6b6b6b;--line:#e8e6e2;--soft:#f4f2ef;--bg:#f6f4ef;--card:#fff;--ok:#1f8a5b;--warn:#c98a00;--ko:#d0453b;
+  --sans:"DM Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--serif:"Newsreader",Georgia,serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 var(--sans)}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+.mq{background:#1f1c27;color:#fff;font-size:13px;text-align:center;padding:7px 12px}
+.mq b{color:#ffd56b}
+nav.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav.top .in{max-width:1128px;margin:0 auto;display:flex;align-items:center;gap:6px;padding:10px 18px;overflow-x:auto;scrollbar-width:none}
+nav.top .logo{font:800 19px/1 var(--sans);letter-spacing:-.03em;margin-right:14px;white-space:nowrap}
+nav.top a{white-space:nowrap;text-decoration:none;padding:8px 14px;border-radius:999px;font-size:14px;color:#5c5a66}
+nav.top a.on{background:var(--ink);color:#fff}
+nav.top .me{margin-left:auto;font-size:13px;color:var(--muted);white-space:nowrap}
+main{max-width:1128px;margin:0 auto;padding:26px 18px 90px}
+h1{font:600 34px/1.15 var(--serif);letter-spacing:-.01em;margin:0 0 6px}
+h2{font:600 24px/1.2 var(--serif);margin:0 0 12px}
+.sub{color:var(--muted);margin:0 0 22px}
+.card{background:#fff;border:1px solid #ebe7df;border-radius:20px;box-shadow:0 1px 2px rgba(31,28,39,.04),0 10px 30px rgba(31,28,39,.05)}
+.pad{padding:22px 24px}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;align-items:start}
+@media (max-width:900px){.grid2{grid-template-columns:1fr}}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--soft);color:#4a4752;text-decoration:none;white-space:nowrap}
+.pill.s{background:#efe8ff;color:#5b2fd1}.pill.c{background:#e8f3ee;color:#1f6b4b}.pill.m{background:#fff2e2;color:#9a5a00}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 16px;font-weight:600;font-size:14px;text-decoration:none;color:var(--ink)}
+.btn.dark{background:#111;color:#fff;border-color:#111}
+.btn.acc{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn.sm{padding:6px 12px;font-size:13px}
+.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}.btn.ko{background:#fff;color:var(--ko);border-color:#f0c9c5}
+.muted{color:var(--muted)}.small{font-size:13px}
+.hero{background:linear-gradient(160deg,#2a2160,#1f1c27);color:#fff;border-radius:20px;padding:22px 24px 26px;position:relative;overflow:hidden}
+.hero .who{font-size:13px;font-weight:600;opacity:.9}
+.hero h3{font:600 25px/1.25 var(--serif);margin:12px 0 0;border-left:3px solid rgba(255,255,255,.7);padding-left:14px}
+.tabs{display:flex;gap:6px;margin:18px 0 12px;flex-wrap:wrap}
+.tabs button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 13px;font-size:13.5px;font-weight:600;color:#4a4752}
+.tabs button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+/* commentaires */
+.cm{display:flex;gap:12px;padding:16px 0;border-top:1px solid var(--line)}
+.cm:first-child{border-top:0}
+.vote{display:flex;flex-direction:column;align-items:center;gap:2px;flex:none;width:34px}
+.vote button{border:0;background:none;width:30px;height:26px;border-radius:8px;color:#8d8a94;font-size:15px;line-height:1}
+.vote button:hover{background:var(--soft)}
+.vote button.up.on{color:var(--accent)}.vote button.dn.on{color:var(--like)}
+.vote b{font-size:14px}
+.cb{flex:1;min-width:0}
+.cb .h{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px}
+.cb .h .u{font-weight:700}
+.q{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px}
+.q.hi{background:#e3f4ec;color:var(--ok)}.q.mid{background:#fff4d9;color:#8a6200}
+.cb .t{margin:6px 0 8px;font-size:15.5px;line-height:1.55}
+.srcs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.src{font-size:12.5px;padding:3px 9px;border-radius:8px;background:#f1f6ff;color:#2b56b8;text-decoration:none;border:1px solid #dfe8fb}
+.acts{display:flex;gap:14px;font-size:13px;color:var(--muted)}
+.acts button{border:0;background:none;color:var(--muted);padding:0;font-size:13px;font-weight:600}
+.acts button:hover{color:var(--ink)}
+.rep{margin-left:46px;border-left:2px solid var(--line);padding-left:14px}
+.rep .cm{padding:12px 0}
+/* composer */
+.comp textarea,.comp input,.comp select{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px 13px;font:15px/1.45 var(--sans);background:#fff;color:var(--ink)}
+.comp textarea{min-height:120px;resize:vertical}
+.comp label{display:block;font-size:13px;font-weight:700;margin:12px 0 6px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.hint{font-size:12.5px;color:var(--muted);margin-top:6px}
+/* évaluation */
+.eval{margin-top:16px;border-radius:16px;padding:18px 20px;border:1px solid var(--line);background:#fcfbf9}
+.eval .big{font:600 40px/1 var(--serif)}
+.bar{height:8px;border-radius:99px;background:#ece9e3;overflow:hidden}.bar i{display:block;height:100%;border-radius:99px}
+.crit{display:grid;grid-template-columns:150px 1fr 48px;gap:10px;align-items:center;font-size:13.5px;margin:7px 0}
+.verdict{margin-top:12px;padding:12px 14px;border-radius:12px;font-size:14.5px}
+.verdict.ko{background:#fdecea;color:#8f2a22}.verdict.mod{background:#eef6ff;color:#1d4c94}.verdict.ok{background:#e6f5ee;color:#16603f}
+.sidebox h4{margin:0 0 8px;font-size:15px}
+.sidebox ul{margin:0;padding-left:18px;font-size:14px;color:#4a4752}
+.sidebox li{margin:4px 0}
+/* forum */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.filters select{border:1px solid var(--line);border-radius:999px;padding:8px 12px;font:600 13.5px var(--sans);background:#fff}
+.th{display:flex;gap:14px;padding:18px 20px;border-top:1px solid var(--line);text-decoration:none;color:inherit}
+.th:first-child{border-top:0}
+.th:hover{background:#fcfbf9}
+.th h3{margin:0 0 6px;font:600 19px/1.3 var(--serif)}
+.th .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.th .meta{font-size:12.5px;color:var(--muted)}
+.stat{flex:none;text-align:center;width:52px;font-size:12px;color:var(--muted)}
+.stat b{display:block;font-size:17px;color:var(--ink)}
+/* modération */
+.mod{padding:18px 20px;border-top:1px solid var(--line)}
+.mod:first-child{border-top:0}
+.mod .x{font-size:15px;margin:8px 0;background:#fcfbf9;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+@media (max-width:700px){.kpis{grid-template-columns:1fr 1fr}.crit{grid-template-columns:110px 1fr 40px}}
+.kpi{padding:14px 16px}.kpi b{display:block;font:600 26px/1.1 var(--serif)}.kpi span{font-size:12.5px;color:var(--muted)}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:8px 0 4px}
+@media (max-width:800px){.flow{grid-template-columns:1fr 1fr}}
+.flow div{background:#fff;border:1px solid #ebe7df;border-radius:14px;padding:12px 14px;font-size:13.5px}
+.flow b{display:block;font-size:14px;margin-bottom:3px}
+.note{font-size:13px;color:var(--muted);background:var(--soft);border-radius:12px;padding:10px 12px;margin-top:12px}
+.hidden{display:none!important}
+.chk{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;margin-top:10px;line-height:1.4}.chk input{margin-top:3px;flex:none}
+</style>
+</head>
+<body>
+<div class="mq"><b>Maquette</b> · pseudos, messages et sources sont fictifs, rien n'est enregistré. Elle sert à discuter de l'espace participatif.</div>
+<nav class="top"><div class="in">
+  <span class="logo">Swipe 2027</span>
+  <a href="#/carte" data-r="carte">Carte + discussion</a>
+  <a href="#/forum" data-r="forum">Forum</a>
+  <a href="#/fil" data-r="fil">Un fil</a>
+  <a href="#/poster" data-r="poster">Poster (filtre IA)</a>
+  <a href="#/moderation" data-r="moderation">Modération</a>
+  <a href="#/regles" data-r="regles">Règles</a>
+  <span class="me">Connecté : <b>lea_m</b></span>
+</div></nav>
+<main id="app"></main>
+
+<script>
+const $=s=>document.querySelector(s), esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const MESURE={P:"La France insoumise · Jean-Luc Mélenchon",t:"Porter immédiatement le SMIC mensuel à 1 700 euros net et indexer les salaires sur l’inflation dans le privé comme dans la fonction publique",sujet:"Salaires et pouvoir d'achat"};
+// Commentaires fictifs : ils illustrent le format attendu (une analyse, une source), pas des faits à reprendre.
+let COMS=[
+ {id:1,u:"thomas_eco",q:88,v:42,ago:"il y a 3 h",t:"Le point clé, c'est l'effet sur les petites entreprises. Le programme prévoit une caisse de péréquation financée par les grands groupes pour aider les TPE-PME à absorber la hausse : sans ce mécanisme, la mesure ne se lit pas de la même façon. Il manque encore un chiffrage public de cette caisse.",src:[["Programme LFI : salaires","#"],["Rapport du groupe d'experts sur le Smic","#"]],rep:[
+   {id:11,u:"camille_r",q:81,v:17,ago:"il y a 2 h",t:"Pour compléter : l'indexation sur l'inflation existe déjà pour le Smic, la nouveauté est de l'étendre à tous les salaires. C'est cette extension qui fait le plus débat chez les économistes.",src:[["Code du travail, revalorisation du Smic","#"]]},
+   {id:12,u:"jb_lyon",q:74,v:5,ago:"il y a 1 h",t:"D'accord sur la caisse, mais l'effet dépend du secteur : l'hôtellerie-restauration et le commerce ont beaucoup de salariés au Smic. Une analyse par branche serait utile.",src:[["Dares : salariés au Smic par secteur","#"]]}]},
+ {id:2,u:"nadia_k",q:79,v:23,ago:"il y a 5 h",t:"Comparaison utile avec l'Allemagne : le salaire minimum y est fixé par une commission où siègent syndicats et patronat. Ce choix de méthode change beaucoup la façon dont une hausse est acceptée par les entreprises.",src:[["Mindestlohnkommission (site officiel)","#"]],rep:[]},
+ {id:3,u:"paul_d",q:66,v:-2,ago:"il y a 6 h",t:"Les études sur les hausses rapides du salaire minimum ne concluent pas toutes pareil sur l'emploi : ça dépend du niveau de départ par rapport au salaire médian. Il faudrait regarder où se situerait la France après la hausse.",src:[["OCDE : salaires minimums","#"]],rep:[]}
+];
+const VOTES={};
+const qClass=q=>q>=80?"hi":"mid";
+function com(c,lvl=0){
+  const my=VOTES[c.id]||0;
+  return `<div class="cm" id="c${c.id}">
+   <div class="vote"><button class="up${my>0?" on":""}" data-v="${c.id}" data-d="1" aria-label="Utile">▲</button><b>${c.v+my}</b><button class="dn${my<0?" on":""}" data-v="${c.id}" data-d="-1" aria-label="Pas utile">▼</button></div>
+   <div class="cb"><div class="h"><span class="u">${esc(c.u)}</span><span class="muted">${c.ago}</span><span class="q ${qClass(c.q)}" title="Score du filtre IA : sources, profondeur, ton, pertinence">◆ Analyse ${c.q}/100</span></div>
+   <div class="t">${esc(c.t)}</div>
+   <div class="srcs">${c.src.map(s=>`<a class="src" href="${s[1]}">↗ ${esc(s[0])}</a>`).join("")}</div>
+   <div class="acts">${lvl<1?`<button data-rep="${c.id}">Répondre</button>`:""}<button>Partager</button><button>Signaler</button></div>
+   <div id="rf${c.id}"></div></div></div>
+   ${(c.rep||[]).length?`<div class="rep">${c.rep.map(r=>com(r,1)).join("")}</div>`:""}`;
+}
+function bindVotes(root){
+  root.querySelectorAll("[data-v]").forEach(b=>b.onclick=()=>{const id=+b.dataset.v,d=+b.dataset.d;VOTES[id]=VOTES[id]===d?0:d;render();});
+  root.querySelectorAll("[data-rep]").forEach(b=>b.onclick=()=>{const box=$("#rf"+b.dataset.rep);box.innerHTML=composer("r"+b.dataset.rep,true);bindComposer(box);});
+}
+let SORT="pert";
+function vCarte(){
+  const list=[...COMS].sort((a,b)=>SORT==="pert"?(b.v+(VOTES[b.id]||0)+b.q/10)-(a.v+(VOTES[a.id]||0)+a.q/10):a.id-b.id);
+  return `<h1>Une discussion sous chaque carte</h1><p class="sub">Sous la fiche d'une mesure, on lit les analyses des autres, on vote pour les plus utiles et on répond.</p>
+  <div class="grid2"><div>
+   <div class="hero"><div class="who">${MESURE.P}</div><h3>${esc(MESURE.t)}</h3></div>
+   <div class="tabs"><button>Concrètement</button><button>Pourquoi</button><button>Critiques</button><button class="on">Discussion · ${COMS.length+COMS.reduce((n,c)=>n+c.rep.length,0)}</button></div>
+   <div class="card pad">
+    <div class="row" style="justify-content:space-between;margin-bottom:6px"><b>Analyses des lecteurs</b>
+     <div class="row"><button class="btn sm ${SORT==="pert"?"dark":""}" data-sort="pert">Les plus utiles</button><button class="btn sm ${SORT==="rec"?"dark":""}" data-sort="rec">Récentes</button></div></div>
+    ${list.map(c=>com(c)).join("")}
+    <div style="margin-top:12px">${composer("main")}</div>
+   </div></div>
+   <aside class="card pad sidebox"><h4>Ce que montre l'écran</h4><ul>
+    <li><b>▲ ▼</b> : « utile » ou « pas utile », pas « d'accord » ou « pas d'accord ». On vote pour la qualité de l'analyse.</li>
+    <li><b>◆ Analyse 88/100</b> : le score du filtre IA, visible par tous.</li>
+    <li>Tri <b>« Les plus utiles »</b> : votes et score IA ensemble.</li>
+    <li>Réponses sur <b>un seul niveau</b>, pour garder des échanges lisibles sur mobile.</li>
+    <li>Un fil du forum peut citer cette carte : il s'affiche alors en lien sous la discussion.</li></ul>
+    <div class="note">Lien vers le forum : <a href="#/fil">« Smic à 1 700 € : quels effets selon les secteurs ? »</a> · 14 messages</div></aside>
+  </div>`;
+}
+function composer(id,small){
+  return `<div class="comp" data-comp="${id}">
+   <label>${small?"Ta réponse":"Ton analyse"}</label>
+   <textarea placeholder="Explique ton raisonnement : ce que la mesure changerait, pour qui, avec quelles données…"></textarea>
+   <label>Sources (une par ligne)</label>
+   <input placeholder="https://… (presse, étude, rapport public, texte de loi)">
+   <div class="row" style="margin-top:12px"><button class="btn acc" data-send="${id}">Soumettre au filtre</button><span class="hint">Ton message est noté avant publication : il faut au moins 60/100.</span></div>
+   <div data-res="${id}"></div></div>`;
+}
+// Démo : une évaluation simulée et grossière (dans la vraie version, c'est l'IA qui note avec une grille).
+function evaluate(txt,src){
+  const t=txt.trim(), n=t.split(/\s+/).filter(Boolean).length, hasSrc=/https?:\/\//.test(src)||/https?:\/\//.test(t);
+  const insult=/\b(con|nul|idiot|crétin|débile|pourri|menteur|honte)\b/i.test(t), caps=(t.match(/[A-Z]{5,}/g)||[]).length, bang=(t.match(/!{2,}/g)||[]).length;
+  const opinion=/\b(je pense|à mon avis|j'adore|je déteste|votez|il faut voter|meilleur candidat|n'importe quoi)\b/i.test(t);
+  const data=/\d/.test(t)||/\b(étude|rapport|insee|ocde|cour des comptes|selon|données|chiffr)/i.test(t);
+  const S={sources:hasSrc?(src.split(/\n|\s+/).filter(x=>/https?:/.test(x)).length>1?30:24):0,
+           profondeur:Math.min(30,Math.round(n/4)+(data?8:0)),
+           ton:Math.max(0,20-(insult?18:0)-caps*4-bang*4),
+           pertinence:t.length<20?4:(opinion?8:18)};
+  const total=S.sources+S.profondeur+S.ton+S.pertinence;
+  const why=[];
+  if(!hasSrc) why.push("Ajoute au moins une source vérifiable (article, étude, rapport, texte officiel).");
+  if(n<40) why.push("Développe : explique le mécanisme, pour qui ça change quelque chose, et à quelle échelle.");
+  if(opinion) why.push("Évite les avis et les consignes de vote : l'espace sert à analyser la mesure, pas à dire pour qui voter.");
+  if(insult||caps||bang) why.push("Garde un ton respectueux : pas d'insultes, de majuscules ou de points d'exclamation en série.");
+  return {S,total,why};
+}
+const SEUIL={v:60};
+function showEval(box,r){
+  const col=v=>v>=80?"var(--ok)":v>=60?"#3a6fd8":v>=40?"var(--warn)":"var(--ko)";
+  const crit=[["Sources","sources",30],["Profondeur","profondeur",30],["Ton et respect","ton",20],["Pertinence","pertinence",20]];
+  const ok=r.total>=SEUIL.v;
+  box.innerHTML=`<div class="eval"><div class="row" style="justify-content:space-between"><div><div class="small muted">Score du filtre</div><div class="big" style="color:${col(r.total)}">${r.total}<span class="small muted">/100</span></div></div><div class="small muted" style="text-align:right">Seuil : ${SEUIL.v}/100</div></div>
+   ${crit.map(([l,k,m])=>`<div class="crit"><span>${l}</span><div class="bar"><i style="width:${r.S[k]/m*100}%;background:${col(r.S[k]/m*100)}"></i></div><span class="small">${r.S[k]}/${m}</span></div>`).join("")}
+   <div class="verdict ${ok?"mod":"ko"}">${ok?"<b>Envoyé en modération.</b> Un modérateur le relit et il sera publié en général dans les 24 h. Tu seras prévenu.":"<b>Pas publié.</b> Ton message est conservé en brouillon : modifie-le puis soumets-le à nouveau."}
+   ${r.why.length?`<ul style="margin:8px 0 0;padding-left:18px">${r.why.map(w=>`<li>${w}</li>`).join("")}</ul>`:""}</div></div>`;
+}
+function bindComposer(root){
+  root.querySelectorAll("[data-send]").forEach(b=>b.onclick=()=>{const c=b.closest(".comp");showEval(c.querySelector("[data-res]"),evaluate(c.querySelector("textarea").value,c.querySelector("input").value));});
+}
+// ---------- Forum
+const THREADS=[
+ {id:1,t:"Smic à 1 700 € : quels effets selon les secteurs ?",u:"thomas_eco",v:58,n:14,ago:"il y a 2 h",tags:[["s","Salaires et pouvoir d'achat"],["c","Mélenchon"],["m","Smic à 1 700 € net"]],q:86},
+ {id:2,t:"Âge de départ : comparer les propositions des candidats",u:"camille_r",v:41,n:22,ago:"il y a 5 h",tags:[["s","Retraites"],["c","Le Pen"],["c","Philippe"],["c","Mélenchon"]],q:82},
+ {id:3,t:"Peines planchers : que disent les évaluations de 2007-2014 ?",u:"jb_lyon",v:33,n:9,ago:"hier",tags:[["s","Sécurité et justice"],["c","Le Pen"],["c","Retailleau"],["m","Rétablir les peines planchers"]],q:84},
+ {id:4,t:"Comment lire un sondage à 6 mois de l'élection ?",u:"nadia_k",v:27,n:6,ago:"hier",tags:[["s","Général"]],q:90},
+ {id:5,t:"Nucléaire et renouvelables : quels coûts de production comparer ?",u:"paul_d",v:12,n:3,ago:"il y a 2 j",tags:[["s","Écologie et énergie"],["c","Tondelier"],["c","Bertrand"]],q:71}
+];
+let FS="pop";
+function vForum(){
+  const L=[...THREADS].sort((a,b)=>FS==="pop"?b.v-a.v:FS==="rec"?a.id-b.id:a.n-b.n);
+  return `<div class="row" style="justify-content:space-between;align-items:flex-end"><div><h1>Le forum</h1><p class="sub" style="margin-bottom:16px">Un espace à part, pour les discussions qui dépassent une seule mesure. Chaque fil peut être relié à un sujet, à un ou plusieurs candidats et à des mesures.</p></div><a class="btn dark" href="#/poster">+ Nouvelle discussion</a></div>
+  <div class="filters"><select><option>Tous les sujets</option><option>Salaires et pouvoir d'achat</option><option>Retraites</option><option>Sécurité et justice</option><option>Général</option></select>
+   <select><option>Tous les candidats</option><option>Le Pen</option><option>Mélenchon</option><option>Philippe</option><option>Retailleau</option></select>
+   <select><option>Toutes les mesures</option><option>Smic à 1 700 € net</option><option>Rétablir les peines planchers</option></select>
+   <span style="flex:1"></span>
+   ${[["pop","Populaires"],["rec","Récents"],["sans","Peu de réponses"]].map(([k,l])=>`<button class="btn sm ${FS===k?"dark":""}" data-fs="${k}">${l}</button>`).join("")}</div>
+  <div class="card">${L.map(x=>`<a class="th" href="#/fil"><div class="stat"><b>${x.v}</b>votes</div><div style="flex:1;min-width:0"><h3>${esc(x.t)}</h3><div class="meta">par ${x.u} · ${x.ago} · ${x.n} messages · <span class="q ${qClass(x.q)}">◆ ${x.q}</span></div>
+   <div class="tags">${x.tags.map(([k,l])=>`<span class="pill ${k}">${k==="s"?"#":k==="c"?"👤":"📄"} ${esc(l)}</span>`).join("")}</div></div></a>`).join("")}</div>
+  <div class="note">Les trois rangements coexistent : <b>par sujet</b> (onglet de chaque sujet), <b>par candidat</b> (onglet de la fiche candidat), <b>par mesure</b> (lien sous la carte). Le même fil s'affiche partout où il est relié.</div>`;
+}
+function vFil(){
+  const x=THREADS[0];
+  return `<a href="#/forum" class="small muted" style="text-decoration:none">← Forum</a>
+  <div class="grid2" style="margin-top:10px"><div>
+   <div class="card pad"><div class="tags row" style="margin-bottom:10px">${x.tags.map(([k,l])=>`<a class="pill ${k}" href="${k==="m"?"#/carte":"#/forum"}">${k==="s"?"#":k==="c"?"👤":"📄"} ${esc(l)}</a>`).join("")}</div>
+    <h1 style="font-size:30px">${esc(x.t)}</h1><div class="small muted">par ${x.u} · ${x.ago} · <span class="q hi">◆ Analyse ${x.q}/100</span></div>
+    <p style="font-size:16px;line-height:1.6">Ouvrons un fil pour regarder secteur par secteur. Dans certaines branches, une grande part des salariés est payée au Smic : l'effet d'une hausse n'y est pas le même que dans l'industrie. Je propose de rassembler ici les données par branche et les mesures d'accompagnement prévues par les candidats qui veulent augmenter le Smic.</p>
+    <div class="srcs"><a class="src" href="#">↗ Dares : salariés au Smic par secteur</a><a class="src" href="#">↗ Programme LFI : salaires</a></div>
+    <div class="acts"><button>▲ 58</button><button>Répondre</button><button>Suivre</button><button>Signaler</button></div></div>
+   <div class="card pad" style="margin-top:16px">${COMS.map(c=>com(c)).join("")}<div style="margin-top:12px">${composer("fil")}</div></div></div>
+   <aside class="card pad sidebox"><h4>Mesures reliées</h4>
+    <a href="#/carte" class="card pad" style="display:block;text-decoration:none;padding:14px 16px;margin-bottom:10px"><div class="small muted">Mélenchon · LFI</div><div style="font:600 16px/1.3 var(--serif)">Porter immédiatement le SMIC mensuel à 1 700 euros net…</div></a>
+    <h4 style="margin-top:16px">Fils proches</h4><ul><li><a href="#/forum">Âge de départ : comparer les propositions</a></li><li><a href="#/forum">Indexer les salaires : déjà essayé ?</a></li></ul></aside></div>`;
+}
+function vPoster(){
+  return `<h1>Poster : le filtre IA</h1><p class="sub">Avant d'être visible, chaque message (commentaire, réponse, nouveau fil) reçoit une note sur 100. Essaie avec un message sans source, puis avec une source.</p>
+  <div class="grid2"><div class="card pad">
+   <div class="comp" data-comp="new"><label>Titre (nouveau fil)</label><input placeholder="Une question précise, ex. « Peines planchers : que disent les évaluations ? »">
+    <label>Relier à</label><div class="row"><span class="pill s"># Sécurité et justice ✕</span><span class="pill c">👤 Le Pen ✕</span><span class="pill m">📄 Rétablir les peines planchers ✕</span><button class="btn sm">+ Ajouter</button></div>
+    <label>Ton analyse</label><textarea placeholder="Explique ton raisonnement, avec des faits…"></textarea>
+    <label>Sources (une par ligne)</label><input placeholder="https://…">
+    <div class="row" style="margin-top:12px"><button class="btn acc" data-send="new">Soumettre au filtre</button><span class="hint">Seuil actuel : <b id="seuil-lab">${SEUIL.v}</b>/100</span></div><div data-res="new"></div></div></div>
+   <aside class="card pad sidebox"><h4>La grille de notation</h4><ul>
+    <li><b>Sources (30)</b> : au moins une source vérifiable, de préférence publique (étude, rapport, presse, texte officiel).</li>
+    <li><b>Profondeur (30)</b> : mécanisme expliqué, ordres de grandeur, qui gagne et qui perd.</li>
+    <li><b>Ton et respect (20)</b> : pas d'insulte, d'attaque contre une personne ni de majuscules qui crient.</li>
+    <li><b>Pertinence (20)</b> : parle de la mesure ou du sujet, pas « votez X » ni un simple avis.</li></ul>
+    <div class="note">Le filtre ne juge pas l'opinion politique. Une analyse sourcée contre une mesure et une analyse sourcée pour la mesure doivent avoir la même note.</div></aside></div>`;
+}
+const QUEUE=[
+ {u:"marc_v",q:72,ago:"il y a 12 min",where:"Carte · Rétablir les peines planchers",t:"Les peines planchers ont déjà existé en France. Avant d'en débattre, il faudrait regarder les évaluations publiées sur leur application et leur effet sur la récidive : je mets en lien le rapport que j'ai trouvé.",flags:0,ia:"Bien sourcé, ton neutre. Vérifier que le lien pointe vers l'évaluation officielle."},
+ {u:"sofia_b",q:64,ago:"il y a 40 min",where:"Forum · Âge de départ",t:"Les trois candidats ne partent pas de la même base de calcul : âge légal, durée de cotisation ou les deux. Le tableau du COR permet de comparer les effets sur le solde du système.",flags:1,ia:"Argument pertinent, mais une seule source. Le signalement (« hors sujet ») semble infondé."},
+ {u:"anonyme_42",q:61,ago:"il y a 1 h",where:"Carte · Smic à 1 700 € net",t:"Mesure intéressante, mais le chiffrage du parti n'est pas repris par les économistes que j'ai lus. Voir l'article ci-dessous.",flags:2,ia:"Juste au-dessus du seuil : source de presse unique, l'argument reste général."}
+];
+function vMod(){
+  return `<h1>Modération</h1><p class="sub">Dans la page admin. Les messages sous le seuil sont refusés automatiquement, avec une explication à l'auteur. Ceux au-dessus arrivent ici.</p>
+  <div class="kpis"><div class="card kpi"><b>3</b><span>en attente</span></div><div class="card kpi"><b>41</b><span>publiés (7 j)</span></div><div class="card kpi"><b>118</b><span>refusés par le filtre (7 j)</span></div><div class="card kpi"><b>2</b><span>signalements à traiter</span></div></div>
+  <div class="grid2"><div class="card">${QUEUE.map((m,i)=>`<div class="mod"><div class="row" style="justify-content:space-between"><div class="small"><b>${m.u}</b> · ${m.ago} · ${m.where}</div><span class="q ${qClass(m.q)}">◆ ${m.q}/100</span></div>
+    <div class="x">${esc(m.t)}</div><div class="small muted">Avis IA : ${esc(m.ia)}${m.flags?` · <b style="color:var(--ko)">${m.flags} signalement${m.flags>1?"s":""}</b>`:""}</div>
+    <div class="row" style="margin-top:10px"><button class="btn sm ok">Publier</button><button class="btn sm">Demander une source</button><button class="btn sm ko">Refuser</button><button class="btn sm ko">Bloquer l'auteur</button></div></div>`).join("")}</div>
+   <aside class="card pad sidebox"><h4>Réglages</h4>
+    <label class="small"><b>Seuil de refus automatique : <span id="sv">${SEUIL.v}</span>/100</b></label><input type="range" min="30" max="90" value="${SEUIL.v}" id="seuil">
+    <label class="chk" style="margin-top:14px"><input type="checkbox"> Publier directement au-dessus de <b>85/100</b> (relu ensuite)</label>
+    <label class="chk"><input type="checkbox" checked> Masquer un message publié après 3 signalements</label>
+    <label class="chk"><input type="checkbox" checked> Nouveaux comptes : 3 messages max par jour</label>
+    <div class="note">Le refus automatique et l'avis IA ne remplacent pas un humain : toute publication passe par cette file, sauf si la publication directe est activée.</div></aside></div>`;
+}
+function vRegles(){
+  return `<h1>Les règles</h1><p class="sub">Affichées et acceptées avant le premier message.</p>
+  <div class="card pad" style="max-width:760px"><ol style="padding-left:20px;line-height:1.7">
+   <li><b>On analyse, on ne milite pas.</b> Pas de « votez X », pas de slogan : explique ce que change une mesure, pour qui, et pourquoi.</li>
+   <li><b>On source.</b> Un fait chiffré ou une affirmation vérifiable doit venir avec un lien.</li>
+   <li><b>On respecte les gens.</b> On critique des idées, jamais des personnes, ni les candidats, ni les autres membres.</li>
+   <li><b>On reste sur le sujet</b> de la carte ou du fil.</li>
+   <li><b>Pas de données personnelles</b>, ni les tiennes ni celles des autres.</li></ol>
+   <div class="note">Le parcours d'un message :</div>
+   <div class="flow"><div><b>1. Écriture</b>Texte, sources, liens vers des sujets, candidats ou mesures.</div><div><b>2. Filtre IA</b>Note sur 100. Sous le seuil : refusé, avec des conseils pour l'améliorer.</div><div><b>3. Modération</b>Au-dessus du seuil : relu par un humain, publié ou refusé.</div><div><b>4. Communauté</b>Votes « utile » et réponses. Signalement possible à tout moment.</div></div>
+   <div class="row" style="margin-top:16px"><button class="btn dark">J'ai lu et j'accepte</button></div></div>`;
+}
+function render(){
+  const r=(location.hash.match(/^#\/(\w+)/)||[])[1]||"carte";
+  document.querySelectorAll("nav.top a").forEach(a=>a.classList.toggle("on",a.dataset.r===r));
+  const V={carte:vCarte,forum:vForum,fil:vFil,poster:vPoster,moderation:vMod,regles:vRegles}[r]||vCarte;
+  const app=$("#app"); app.innerHTML=V(); bindVotes(app); bindComposer(app);
+  app.querySelectorAll("[data-sort]").forEach(b=>b.onclick=()=>{SORT=b.dataset.sort;render();});
+  app.querySelectorAll("[data-fs]").forEach(b=>b.onclick=()=>{FS=b.dataset.fs;render();});
+  const s=$("#seuil"); if(s) s.oninput=()=>{SEUIL.v=+s.value;$("#sv").textContent=s.value;};
+}
+addEventListener("hashchange",()=>{render();scrollTo(0,0);}); render();
+</script>
+</body>
+</html>
