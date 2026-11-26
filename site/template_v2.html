@@ -636,6 +636,17 @@ body[data-v="home"] .live{margin-top:30px}
 .hero-ask form{align-items:center}.hero-ask input#ha-in{flex:1;min-width:0;border:0;outline:0;background:transparent;font:500 16.5px/1.2 var(--sans);color:#1f1c27;height:46px;padding:0;margin:0}.hero-ask input#ha-in::placeholder{color:#8d8982}
 @media (min-width:1100px){.hero-ask input#ha-in{font-size:19px;height:54px}}
 .heart.bm.on{color:var(--accent)}
+
+/* 27/11 : barre du bas plus fine, carte du swipe un peu moins haute */
+:root{--nav:54px}
+@media (max-width:1099px){
+  .nav{padding-bottom:max(6px,calc(env(safe-area-inset-bottom) - 14px))}
+  .nav a{font-size:10.5px;gap:1px;margin:5px 2px}
+  .nav a svg{width:20px;height:20px}
+  .appframe:not(.panel){height:calc(100% - var(--nav) - max(6px,calc(env(safe-area-inset-bottom) - 14px)))}
+  body{padding-bottom:calc(var(--nav) + env(safe-area-inset-bottom) + 20px)}
+}
+.swc{min-height:min(46vh,380px)}
 </style>
 </head>
 <body>
@@ -1185,6 +1196,11 @@ document.addEventListener("keydown",e=>{ if(!document.body.classList.contains("s
    Chat (mini-cours, quiz, conversations), Profil, Condamnations (hémicycle) et Infos : on affiche les écrans de l'app actuelle
    dans un cadre (même site, donc mêmes réponses et mêmes conversations), sans sa barre du bas. */
 const V1CSS=`nav.tabs,.fab{display:none!important}
+  :root{--safe-b:0px!important}   /* l'app intégrée s'arrête au-dessus de la barre du bas : pas de marge « iPhone » en plus */
+  .view{padding-bottom:28px!important}
+  .topics{grid-auto-flow:row!important;grid-template-rows:none!important;grid-template-columns:1fr 1fr!important;grid-auto-columns:auto!important;overflow:visible!important;margin:0 0 6px!important;padding:0!important}
+  .topic{min-height:96px!important}
+  @media (min-width:700px){.topics{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))!important}}
   @media (min-width:1100px){body{grid-template-columns:0 minmax(0,1fr) min(440px,32vw)!important}body.wide,body.chatv{grid-template-columns:0 minmax(0,1fr)!important}body.chatv #convo{left:0!important}.actbar,.kbd-hint{left:0!important}#v-chat.view,#v-profil.view{max-width:none!important;margin:0!important;padding-left:40px!important;padding-right:40px!important}}
   #v-cond .ptitle,#v-cond .psub{display:none}
   #v-cond .warn{font-size:12.5px;line-height:1.4;padding:8px 11px;margin-top:4px}
