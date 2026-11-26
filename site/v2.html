@@ -474,6 +474,11 @@ body.frame-on .top{display:none}
 .idc-r{border-top:1px solid var(--line);margin-top:11px;padding-top:10px}
 .idc-r b{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:2px}
 .idc-r p{margin:0;font-size:14.5px;line-height:1.45;color:var(--ink2)}.idc-r p.mute{color:var(--muted)}
+/* tuiles de sujet : la pastille « Exploré » prend sa place en haut, elle ne recouvre plus le titre */
+.sq .st{position:static;align-self:flex-start;margin-bottom:auto;line-height:1.2}
+.sq .st+b{margin-top:6px}
+/* résumé sous la carte : un peu plus petit */
+.sw-res{font-size:16px;line-height:1.45}
 </style>
 </head>
 <body>
@@ -681,7 +686,6 @@ function condHTML(){
 const SF={}; let NEWV={id:null,set:new Set()};
 function vSujet(id,focus){
   const t=THM[id]; if(!t) return vNotFound();
-  if(!explored(id)&&!focus&&!LS.get("parcours:"+id)&&t.pts&&pathSteps(id).length){ location.replace("#/parcours/"+id); return; }
   track("vue:sujet:"+id);
   backTop(t.t);
   if(NEWV.id!==id){ const nw=explored(id)?newIn(id):[]; NEWV={id,set:new Set(nw)}; if(nw.length) LS.set("parcours:new:"+id,nw); }
@@ -830,10 +834,9 @@ function vMesure(id){
   top(); render();
   if(!ficheOf(id)) fetchFiche(id).then(f=>{ if(f&&location.hash==="#/m/"+encodeURIComponent(id)) render(); });
   function render(){
-    $("#app").innerHTML=`<div style="margin-top:6px"></div>${propCard(m,{sous:true})}
+    $("#app").innerHTML=`<div style="margin-top:6px"></div>${propCard(m,{sous:true,noName:true})}
       <div class="avis-l">Ton avis sur cette proposition</div>${avisBtns(m.id)}
-      <button class="src" id="b-flag" style="margin-top:14px">${ICO.flag} Signaler une erreur</button>
-      <a class="bubble" href="#/chat?m=${encodeURIComponent(m.id)}" aria-label="Poser une question sur cette proposition" style="bottom:calc(var(--nav) + 30px + env(safe-area-inset-bottom))"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg></a>`;
+      <button class="src" id="b-flag" style="margin-top:14px">${ICO.flag} Signaler une erreur</button>`;
     mountDive($("#app")); bindAvis($("#app")); $("#b-flag").onclick=()=>openFlag(m);
   }
 }
@@ -1051,7 +1054,7 @@ function propCard(m,o={}){
   const f=ficheOf(m.id), th=THM[m.th], pt=realPt(m)?PT[m.pt].t:th.t, hidden=!!o.hidden, mk=t=>hidden?maskName(t,m.P,true):t, id=encodeURIComponent(m.id);
   const P3=o.closed?[]:swipePanels(m,f,hidden);
   return `<div class="photo swc"${o.id?` id="${o.id}"`:""} style="background:${hidden?BLINDG:cgrad(m.P)}${o.compact?";min-height:0":""}">
-      <div class="badges">${hidden?`<button data-reveal style="font:700 12px var(--sans);padding:5px 11px;border-radius:999px;background:#fff;color:#1f1c27">🙈 Qui propose ? Révéler</button>`:`<a href="#/c/${m.P}" style="background:#fff;color:${C[m.P].color}">${esc(C[m.P].nom)} · ${esc(C[m.P].cand)}</a>`}${o.kick?`<span>${esc(o.kick)}</span>`:`<a href="#/s/${m.th}${realPt(m)?"?p="+realPt(m):""}">${esc(pt)}</a>`}${m.cle?`<span>Mesure clé</span>`:""}</div>
+      <div class="badges">${hidden?`<button data-reveal style="font:700 12px var(--sans);padding:5px 11px;border-radius:999px;background:#fff;color:#1f1c27">🙈 Qui propose ? Révéler</button>`:`<a href="#/c/${m.P}" style="background:#fff;color:${C[m.P].color}">${esc(C[m.P].nom)}${o.noName?"":" · "+esc(C[m.P].cand)}</a>`}${o.kick?`<span>${esc(o.kick)}</span>`:`<a href="#/s/${m.th}${realPt(m)?"?p="+realPt(m):""}">${esc(pt)}</a>`}</div>
       <h2 class="q${m.t.length>170?" l":""}">${esc(mk(m.t))}</h2>
       ${o.sous&&m.sous.length?`<ul>${m.sous.slice(0,4).map(s=>`<li>${esc(s)}</li>`).join("")}${m.sous.length>4?`<li>et ${m.sous.length-4} autres points</li>`:""}</ul>`:""}</div>
     ${f&&f.resume?`<p class="sw-res">${esc(mk(f.resume))}</p>`:`<p class="hint">Pas encore de fiche détaillée pour cette mesure.</p>`}
