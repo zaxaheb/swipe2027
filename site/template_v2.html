@@ -875,6 +875,11 @@ body[data-v="home"] .live{margin-top:30px}
 .dbrel b{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
 .dbrel a{color:var(--ink);font:600 15px/1.35 var(--serif)}
 
+/* boutons du forum en noir franc */
+#db-pub,.dbgo .btn.dark,#dbn-go,.dbpanel .btn.dark,body[data-v="explorer"] a.btn.dark[href^="#/forum/nouveau"],.dbl~.btn.dark{background:#111!important;border-color:#111!important;color:#fff!important}
+/* pendant qu'on écrit sur téléphone : on cache la barre du bas et la bulle de chat pour libérer la place au-dessus du clavier */
+body.db-typing .nav,body.db-typing .bubble{display:none!important}
+
 </style>
 </head>
 <body>
@@ -1889,6 +1894,11 @@ function dbSubmit(tx,src,msgEl,done){
     msgEl.innerHTML=`<div class="dbwarn"><b>Il faut un compte pour publier.</b> Un pseudo suffit, sans e-mail. <div class="dbgo" style="margin-top:8px"><a class="btn dark" href="#/profil">Me connecter</a><button class="btn" data-dbtry>Continuer (démo)</button></div></div>`; return; }
   if(tx.trim().length<3){ msgEl.innerHTML=`<div class="dbwarn">Ton message est vide.</div>`; return; }
   msgEl.innerHTML="";
+  // Téléphone : on ferme d'abord le clavier, puis on ouvre les règles une fois l'écran stabilisé.
+  const ae=document.activeElement; if(ae&&ae.blur) ae.blur(); document.body.classList.remove("db-typing");
+  setTimeout(()=>dbRulesThen(done), ae&&/TEXTAREA|INPUT/.test(ae.tagName)?280:0);
+}
+function dbRulesThen(done){
   // Au moment de publier : les règles, puis le message part en relecture. (Le contrôle de qualité se fait côté modération, jamais devant le lecteur.)
   dbSheet(`<h3>Avant de publier</h3><ol class="dbrules">${DB_REGLES.map(([a,b])=>`<li><b>${a}</b> ${b}</li>`).join("")}</ol>
     <p>Ton message sera visible par tous après relecture par l'équipe de modération.</p>
@@ -1923,7 +1933,11 @@ document.addEventListener("click",e=>{
   if(e.target.closest("[data-dbflag]")){ e.preventDefault(); dbSheet(`<h3>Signaler ce message</h3><div class="opts">${["Hors sujet","Irrespectueux","Fausse information","Données personnelles","Spam"].map(x=>`<button class="opt" onclick="closeSheet()">${x}</button>`).join("")}</div><p class="hint">Un message signalé plusieurs fois est masqué en attendant que l'équipe de modération le relise. (Démo : rien n'est envoyé.)</p>`); }
 });
 /* la zone d'écriture s'ouvre quand on clique dedans */
-document.addEventListener("focusin",e=>{ const t=e.target.closest("[data-dbgrow]"); if(t){ t.closest(".dbbox").classList.add("open"); if(t.rows<4) t.rows=4; } });
+document.addEventListener("focusin",e=>{ const t=e.target.closest("[data-dbgrow]"); if(t){ t.closest(".dbbox").classList.add("open"); if(t.rows<4) t.rows=4; }
+  if(e.target.closest(".dbbox,.dbnew")&&matchMedia("(max-width:1099px)").matches) document.body.classList.add("db-typing"); });
+document.addEventListener("focusout",e=>{ if(e.target.closest(".dbbox,.dbnew")) setTimeout(()=>{ if(!document.activeElement||!document.activeElement.closest(".dbbox,.dbnew")) document.body.classList.remove("db-typing"); },150); });
+/* toucher « Publier » avec le clavier ouvert : on garde le focus jusqu'au clic (sinon le clavier se ferme, l'écran saute et le clic tombe à côté) */
+document.addEventListener("pointerdown",e=>{ if(e.target.closest("[data-dbsend],#dbn-go")) e.preventDefault(); });
 document.addEventListener("change",e=>{ const s=e.target.closest("[data-dbf]"); if(!s) return; DBF[s.dataset.dbf]=s.value; dbRefresh(); });
 
 function route(){
