@@ -1322,12 +1322,25 @@ function renderSwipe(dir){
   mountDive($("#app"));
   // Glisser la carte : elle suit le doigt, et part à droite (pour) ou à gauche (contre).
   const el=$("#swc");
-  el.addEventListener("pointerdown",e=>{ if(e.target.closest("button,a")) return; SWD={el,x0:e.clientX,y0:e.clientY,dx:0,answer}; el.style.transition="none"; });
+  // Souris : événements « pointer ». Doigt : événements « touch », avec verrouillage du sens dès les premiers pixels :
+  // si le geste part plutôt de côté, on bloque le défilement de la page et la carte suit le doigt ; s'il part vers le bas, on laisse défiler.
+  el.addEventListener("pointerdown",e=>{ if(e.pointerType!=="mouse"||e.target.closest("button,a")) return; SWD={el,x0:e.clientX,y0:e.clientY,dx:0,answer,lock:"x"}; el.style.transition="none"; });
+  el.addEventListener("touchstart",e=>{ if(e.touches.length!==1||e.target.closest("button")) return; const t=e.touches[0]; SWD={el,x0:t.clientX,y0:t.clientY,dx:0,answer,lock:null,touch:true}; },{passive:true});
+  el.addEventListener("touchmove",e=>{ const d=SWD; if(!d||!d.touch) return; const t=e.touches[0], dx=t.clientX-d.x0, dy=t.clientY-d.y0;
+    if(!d.lock){ if(Math.abs(dx)<8&&Math.abs(dy)<8) return; d.lock=Math.abs(dx)>=Math.abs(dy)*0.75?"x":"y"; if(d.lock==="x") el.style.transition="none"; }
+    if(d.lock==="y"){ SWD=null; return; }
+    if(e.cancelable) e.preventDefault(); d.dx=dx; el.style.transform=`translateX(${dx}px) rotate(${dx/22}deg)`; },{passive:false});
+  el.addEventListener("touchend",()=>{ if(SWD&&SWD.touch) swEnd(); });
+  el.addEventListener("touchcancel",()=>{ if(SWD&&SWD.touch){ SWD.dx=0; swEnd(); } });
 }
+// après un glissement parti d'un lien de la carte (parti, sujet), on n'ouvre pas ce lien
+document.addEventListener("click",e=>{ if(window.SWJUST&&Date.now()-window.SWJUST<400&&e.target.closest("#swc")){ e.preventDefault(); e.stopPropagation(); } },true);
+function swEnd(){ const d=SWD; SWD=null; if(!d) return; d.el.style.transition=""; if(d.lock==="x"&&Math.abs(d.dx)>10) window.SWJUST=Date.now();
+  if(d.lock==="x"&&Math.abs(d.dx)>70){ d.el.style.transform=`translateX(${d.dx>0?600:-600}px) rotate(${d.dx>0?20:-20}deg)`; setTimeout(()=>d.answer(d.dx>0?1:-1),180); } else d.el.style.transform=""; }
 let SWD=null;   // carte en cours de glissement
-addEventListener("pointermove",e=>{ if(!SWD) return; const d=SWD; d.dx=e.clientX-d.x0; if(Math.abs(d.dx)>Math.abs(e.clientY-d.y0)) d.el.style.transform=`translateX(${d.dx}px) rotate(${d.dx/22}deg)`; });
-addEventListener("pointerup",()=>{ if(!SWD) return; const d=SWD; SWD=null; d.el.style.transition="";
-  if(Math.abs(d.dx)>80){ d.el.style.transform=`translateX(${d.dx>0?600:-600}px) rotate(${d.dx>0?20:-20}deg)`; setTimeout(()=>d.answer(d.dx>0?1:-1),180); } else d.el.style.transform=""; });
+addEventListener("pointermove",e=>{ const d=SWD; if(!d||d.touch) return; d.dx=e.clientX-d.x0; d.el.style.transform=`translateX(${d.dx}px) rotate(${d.dx/22}deg)`; });
+addEventListener("pointerup",()=>{ if(SWD&&!SWD.touch) swEnd(); });
+addEventListener("pointercancel",()=>{ if(SWD&&!SWD.touch){ SWD.dx=0; swEnd(); } });
 document.addEventListener("keydown",e=>{ if(!SW||!location.hash.startsWith("#/swipe")) return; if(e.key==="ArrowRight") $("#sw-yes")?.click(); if(e.key==="ArrowLeft") $("#sw-no")?.click(); if(e.key==="ArrowDown") $("#sw-pass")?.click(); });
 
 /* ---------- Mon profil ----------
