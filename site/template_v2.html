@@ -513,7 +513,7 @@ body.frame-on .top{display:none}
 @media (min-width:1100px){
   .story{left:236px;right:0;bottom:0;max-width:760px}
   .wrap{max-width:none;padding:0 40px}
-  body[data-v="m"] .wrap,body[data-v="swipe"] .wrap,body[data-v="s"] .wrap,body[data-v="c"] .wrap,body[data-v="chercher"] .wrap,body[data-v="favoris"] .wrap,body[data-v="sondages"] .wrap,body[data-v="agenda"] .wrap,body[data-v="actus"] .wrap,body[data-v="vs"] .wrap{max-width:860px;padding:0 32px}
+  body[data-v="m"] .wrap,body[data-v="swipe"] .wrap,body[data-v="s"] .wrap,body[data-v="c"] .wrap,body[data-v="chercher"] .wrap,body[data-v="favoris"] .wrap,body[data-v="sondages"] .wrap,body[data-v="guide"] .wrap,body[data-v="actus"] .wrap{max-width:860px;padding:0 32px}
   .sqs{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
   .tiles-h .sq{flex:0 0 230px}
   .daily .photo{flex:0 0 calc(33.3% - 8px)}
@@ -566,6 +566,23 @@ body.frame-on .top{display:none}
 .pick{display:flex;flex-wrap:wrap;gap:6px}.pick a{font-size:13px;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:inherit;text-decoration:none}
 .disc{font-size:12.5px;color:var(--muted);line-height:1.45}
 h1.ttl{font-family:var(--serif);font-weight:600;font-size:28px;line-height:1.1;margin:14px 0 6px;letter-spacing:-.01em}
+
+.tile.gd{position:relative}.tile.gd .gi{font-size:24px;display:block;margin-bottom:6px}.tile.gd .st{position:absolute;top:10px;right:10px;font-size:11px;font-weight:700;background:rgba(255,255,255,.2);padding:3px 8px;border-radius:999px}
+.gd-p{display:flex;gap:4px;margin:12px 0}.gd-p i{flex:1;height:4px;border-radius:4px;background:var(--line)}.gd-p i.on{background:var(--accent)}
+.gd-c{border-radius:22px;color:#fff;padding:22px 20px 18px;min-height:46vh;display:flex;flex-direction:column}
+.gd-c small{font-size:12px;font-weight:700;opacity:.8;text-transform:uppercase;letter-spacing:.06em}
+.gd-big{font-family:var(--serif);font-weight:700;font-size:46px;line-height:1;margin:18px 0 0;letter-spacing:-.02em}
+.gd-c h2{font-family:var(--serif);font-weight:600;font-size:27px;line-height:1.15;margin:16px 0 10px}
+.gd-c p{font-size:16.5px;line-height:1.55;margin:0;opacity:.95;flex:1}
+.gd-s{color:#fff;opacity:.8;font-size:12.5px;margin-top:16px;text-decoration:underline;text-underline-offset:3px}
+.gd-b{display:grid;grid-template-columns:1fr 1.4fr;gap:10px;margin-top:14px}.gd-b .ghost{border:1px solid var(--line);background:var(--card);border-radius:999px;font:600 15px var(--sans);padding:12px;color:inherit}
+.gd-b .cta{border:0;border-radius:999px;background:var(--ink,#1f1c27);color:#fff;font:700 15px var(--sans);padding:12px}
+.gd-ask{display:block;text-align:center;margin-top:14px;font-size:14px;color:var(--accent);font-weight:600;text-decoration:none}
+.gd-q{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-top:10px}.gd-q b{display:block;font-size:15.5px;line-height:1.4;margin-bottom:8px}
+.gd-q button{display:block;width:100%;text-align:left;border:1px solid var(--line);background:var(--bg,#fff);border-radius:12px;padding:10px 12px;margin-top:6px;font:500 14.5px var(--sans);color:inherit}
+.gd-q button.ok{background:var(--pro-soft);border-color:var(--pro);color:var(--pro);font-weight:700}.gd-q button.ko{background:var(--con-soft);border-color:var(--con);color:var(--con)}
+.gd-end{text-align:center;font-size:16px;margin-top:16px}.gd-end b{font-family:var(--serif);font-size:30px}
+.tile.gd{color:#fff;border:0;text-decoration:none;min-height:150px}.tile.gd b{font-family:var(--serif);font-size:18px;line-height:1.2}.tile.gd small{opacity:.85;font-size:12.5px;margin-top:4px}
 </style>
 </head>
 <body>
@@ -729,9 +746,8 @@ function vHome(){
     <div class="ask"><a class="in" href="#/chat/new">💬 Pose ta question sur la présidentielle…</a><a class="ex" id="ask" href="#/chat/new">Ex. : <span id="ask-q">${esc(GSUGG[0])}</span></a></div>
     <section class="sec"><div class="sec-h"><h2>Explorer les sujets</h2><a href="#/explorer">${nEx}/${TH.length} explorés</a></div>
       <div class="tiles-h">${sugg.map(t=>tile(t,true)).join("")}</div></section>
-    ${upcoming().length?`<section class="sec"><div class="sec-h"><h2>À venir</h2><a href="#/agenda">Tout l'agenda</a></div><div class="card-l">${upcoming().slice(0,3).map(agRow).join("")}</div></section>`:""}
     <section class="sec"><div class="sec-h"><h2>L'actu de la campagne</h2><a href="#/actus">Tout le fil</a></div><div class="card-l" id="home-act"></div></section>
-    <section class="sec"><div class="sec-h"><h2>Comparer deux candidats</h2><a href="#/vs">Choisir</a></div><div class="pick">${[["RN","LFI"],["PHILIPPE","GLUCKSMANN"],["RETAILLEAU","ATTAL"],["LISNARD","PHILIPPE"]].filter(([x,y])=>C[x]&&C[y]).map(([x,y])=>`<a href="#/vs/${x}/${y}">${esc(lastName(C[x].cand))} / ${esc(lastName(C[y].cand))}</a>`).join("")}</div></section>
+    ${GD.length?`<section class="sec"><div class="sec-h"><h2>Comprendre l'élection</h2><span style="font-size:13px;color:var(--muted)">en 2 minutes</span></div><div class="tiles-h">${GD.map(g=>`<a class="tile gd" href="#/guide/${g.id}" style="background:linear-gradient(160deg,${g.grad})"><span class="gi">${g.ic}</span><b>${esc(g.t)}</b><small>${esc(g.d)}</small>${GDONE()[g.id]?`<span class="st">✓ Fait</span>`:""}</a>`).join("")}</div></section>`:""}
     ${favs().length?`<section class="sec"><div class="sec-h"><h2>Mes mesures sauvegardées</h2><a href="#/favoris">Toutes (${favs().length})</a></div>${rowsWithMore(favs().map(id=>MID[id]).filter(Boolean),3,true,"home-fav")}</section>`:""}`;
   fillActus($("#home-act"),"",5);
   // Une seule case pour le chat, et un exemple de question qui change toutes les 3 secondes (le toucher pose cette question).
@@ -1317,7 +1333,7 @@ function vNotFound(){ backTop("Introuvable"); $("#app").innerHTML=`<div class="e
 /* ---------- routeur ---------- */
 const POS={};
 /* ===== v3 : sondages, agenda, actu, comparateur ===== */
-const SD=(DATA.sondages||[]).slice().sort((a,b)=>b.date.localeCompare(a.date)), AG=(DATA.agenda||[]).slice().sort((a,b)=>a.date.localeCompare(b.date));
+const SD=(DATA.sondages||[]).slice().sort((a,b)=>b.date.localeCompare(a.date)), GD=DATA.guides||[];
 const POLL=SD.find(s=>s.complet)||SD[0];
 const T1=new Date("2027-04-18T08:00:00+02:00");
 const jLeft=()=>Math.max(0,Math.ceil((T1-Date.now())/864e5));
@@ -1328,8 +1344,6 @@ const polCol=P=>(C[P]&&C[P].color)||"#888";
 const pollRows=(s,n,big)=>{ const L=Object.entries(s.scores).sort((a,b)=>b[1]-a[1]).slice(0,n||99), mx=Math.max(...L.map(x=>x[1]));
   return L.map(([P,v])=>`<div class="pr${big?" big":""}"><span class="n">${esc(C[P]?(big?C[P].cand:lastName(C[P].cand)):P)}</span><span class="b"><i style="width:${100*v/mx}%;background:${polCol(P)}"></i></span><span class="v">${pct(v)}</span></div>`).join(""); };
 const pollOf=P=>POLL&&POLL.scores[P]!=null?POLL.scores[P]:null;
-const agRow=a=>{ const x=new Date(a.date+"T12:00:00"); return `<a class="ag${a.tour?" tour":""}" href="${esc(a.url)}" target="_blank" rel="noopener"><span class="d"><b>${x.getDate()}</b><small>${MOIS[x.getMonth()]}</small></span><span class="x">${a.P&&C[a.P]?`<b>${esc(C[a.P].cand)}</b> · `:""}${esc(a.t)}<small>${dLong(a.date)}${a.fin?" → "+dLong(a.fin):""} · ${esc(host(a.url))} ↗</small></span></a>`; };
-const upcoming=()=>{ const t=new Date().toISOString().slice(0,10); return AG.filter(a=>(a.fin||a.date)>=t); };
 const ACT={};
 function actus(q){ q=q||""; if(!ACT[q]) ACT[q]=fetch(API+"/actus?q="+encodeURIComponent(q)).then(r=>r.ok?r.json():{items:[]}).then(j=>j.items||[]).catch(()=>[]); return ACT[q]; }
 const ago=d=>{ if(!d) return ""; const h=Math.round((Date.now()-new Date(d))/36e5); return h<1?"à l'instant":h<24?"il y a "+h+" h":h<48?"hier":"il y a "+Math.round(h/24)+" j"; };
@@ -1337,7 +1351,7 @@ const nwRow=x=>`<a class="nw" href="${esc(x.url)}" target="_blank" rel="noopener
 function fillActus(el,q,n){ if(!el) return; el.innerHTML=`<p class="disc" style="padding:10px 0">Chargement de l'actu…</p>`;
   actus(q).then(L=>{ if(!document.body.contains(el)) return; el.innerHTML=L.length?L.slice(0,n).map(nwRow).join(""):`<p class="disc" style="padding:10px 0">L'actu n'est pas disponible pour le moment.</p>`; }); }
 function liveBlock(){
-  return `<section class="live"><a class="cd" href="#/agenda"><b>J−${jLeft()}</b><span>avant le 1<sup>er</sup> tour<br><small>${dLong("2027-04-18")}</small></span></a>
+  return `<section class="live"><div class="cd"><b>J−${jLeft()}</b><span>avant le 1<sup>er</sup> tour<br><small>${dLong("2027-04-18")}</small></span></div>
     ${POLL?`<a class="poll" href="#/sondages"><div class="k">Dernier sondage · ${esc(POLL.institut)} · ${dateFr(POLL.date)}</div>${pollRows(POLL,4)}</a>`:""}</section>`;
 }
 function vSondages(){
@@ -1352,14 +1366,6 @@ function vSondages(){
     ${prev.length?`<section class="sec"><div class="sec-h"><h2>Les sondages précédents</h2></div><div class="card-l">${prev.map(s=>`<a class="nw" href="${esc(s.url)}" target="_blank" rel="noopener"><b>${esc(s.institut)}${s.pour?" · "+esc(s.pour):""}</b><small>${dLong(s.date)} · ${Object.entries(s.scores).sort((a,b)=>b[1]-a[1]).map(([P,v])=>esc(C[P]?lastName(C[P].cand):P)+" "+pct(v)).join(", ")}${s.complet?"":" (premiers scores seulement)"} ↗</small></a>`).join("")}</div></section>`:""}
     <p class="disc" style="margin-top:14px">Les sondages sont repris avec leur source. Une erreur ? Écris-nous depuis la page Infos.</p>`;
 }
-function vAgenda(){
-  backTop("Agenda");
-  const L=upcoming(), past=AG.filter(a=>!L.includes(a)).reverse();
-  $("#app").innerHTML=`${liveBlock().replace('class="cd" href="#/agenda"','class="cd"')}
-    <section class="sec"><div class="sec-h"><h2>À venir</h2></div><div class="card-l">${L.map(agRow).join("")||`<p class="disc">Rien de prévu pour l'instant.</p>`}</div></section>
-    ${past.length?`<section class="sec"><div class="sec-h"><h2>Déjà passé</h2></div><div class="card-l">${past.map(agRow).join("")}</div></section>`:""}
-    <p class="disc" style="margin-top:14px">Dates du scrutin fixées par le Gouvernement (service-public.fr). Chaque date a sa source.</p>`;
-}
 function vActus(P){
   backTop("L'actu de la campagne");
   const main=CK.filter(k=>C[k].main);
@@ -1368,48 +1374,45 @@ function vActus(P){
     <p class="disc" style="margin-top:12px">Titres de presse des 14 derniers jours, via Google Actualités. Swipe 2027 ne choisit pas les articles : l'article se lit sur le site du média.</p>`;
   fillActus($("#act-l"),P&&C[P]?C[P].cand:"",20);
 }
-function vVs(A,B){
-  backTop("Comparer");
-  const pick=(other,slot)=>`<div class="pick">${CK.filter(k=>k!==other).map(k=>`<a href="#/vs/${slot==="A"?k+"/"+(other||""):other+"/"+k}">${esc(C[k].cand)}</a>`).join("")}</div>`;
-  if(!C[A]||!C[B]){ const have=C[A]?A:C[B]?B:null;
-    $("#app").innerHTML=`<h1 class="ttl">Comparer deux candidats</h1><p class="disc">Leurs propositions sujet par sujet, côte à côte, avec tes réponses du swipe.</p>
-      <section class="sec"><div class="sec-h"><h2>${have?"Comparer "+esc(C[have].cand)+" avec…":"Choisis un premier candidat"}</h2></div>${have?pick(have,"B"):`<div class="pick">${CK.map(k=>`<a href="#/vs/${k}">${esc(C[k].cand)}</a>`).join("")}</div>`}</section>`; return; }
-  const ms=P=>ML.filter(m=>m.P===P), a=ms(A), b=ms(B);
-  const card=P=>`<a class="vs-c" href="#/c/${P}" style="background:${cgrad(P)}"><span style="font-size:12px;font-weight:700;opacity:.85">${esc(C[P].nom)}</span><b>${esc(C[P].cand)}</b><small>${ms(P).length} mesures${pollOf(P)!=null?" · "+pct(pollOf(P))+" au dernier sondage":""}</small></a>`;
-  const ths=TH.map(t=>({t,na:a.filter(m=>m.th===t.id).length,nb:b.filter(m=>m.th===t.id).length})).filter(x=>x.na||x.nb);
-  const mx=Math.max(1,...ths.map(x=>Math.max(x.na,x.nb)));
-  const me=m=>ANS[m.id]===1?`<span class="me" style="color:var(--like)">♥ toi</span>`:ANS[m.id]===-1?`<span class="me" style="color:var(--con)">✕ toi</span>`:"";
-  const agree=P=>{ const L=ms(P).filter(m=>ANS[m.id]===1||ANS[m.id]===-1); return [L.filter(m=>ANS[m.id]===1).length,L.length]; };
-  const [pa,ta]=agree(A),[pb,tb]=agree(B);
-  const box=L=>L.length?L.map(m=>`<a href="#/m/${encodeURIComponent(m.id)}">${esc(m.t.length>170?m.t.slice(0,168)+"…":m.t)}${me(m)}</a>`).join(""):`<div class="none">Rien sur ce point</div>`;
-  const theme=t=>{ const pts=(t.pts||[]).map(([id,tt])=>({id,tt,a:a.filter(m=>m.pt===id).sort(byRank),b:b.filter(m=>m.pt===id).sort(byRank)})).filter(x=>(x.a.length||x.b.length)&&!/-autres$/.test(x.id));
-    return pts.map(x=>`<div class="vp"><h4>${esc(x.tt)}</h4><div class="cols"><div>${box(x.a.slice(0,2))}</div><div>${box(x.b.slice(0,2))}</div></div></div>`).join("")||`<p class="disc">Pas de point commun précis sur ce sujet.</p>`; };
-  const sel=VSF[A+B]||ths[0]&&ths[0].t.id;
-  const draw=()=>{ const t=THM[VSF[A+B]||sel];
-    $("#app").innerHTML=`<div class="vs-h">${card(A)}<span class="vs-x">vs</span>${card(B)}</div>
-      ${ta||tb?`<p class="disc" style="margin:10px 2px 0">Tes réponses du swipe : tu es pour ${pa} des ${ta} mesures de ${esc(lastName(C[A].cand))} que tu as vues, et ${pb} des ${tb} de ${esc(lastName(C[B].cand))}.</p>`:`<p class="disc" style="margin:10px 2px 0"><a href="#/swipe">Fais quelques swipes</a> pour voir où tu te situes entre les deux.</p>`}
-      <section class="sec"><div class="sec-h"><h2>Nombre de mesures par sujet</h2></div><div class="card-l" style="padding:10px 12px">
-        ${ths.map(x=>`<a class="vb" href="#" data-vt="${x.t.id}" style="color:inherit;text-decoration:none${x.t.id===t.id?";font-weight:700":""}"><span class="nl">${x.na}</span><span class="l"><i style="width:${100*x.na/mx}%;background:${polCol(A)}"></i></span><span class="t">${esc(x.t.t)}</span><span class="r"><i style="width:${100*x.nb/mx}%;background:${polCol(B)}"></i></span><span class="nr">${x.nb}</span></a>`).join("")}
-        <p class="disc" style="margin:8px 0 2px">Plus de mesures ne veut pas dire un meilleur programme : certains programmes sont plus détaillés que d'autres.</p></div></section>
-      ${t?`<section class="sec"><div class="sec-h"><h2>${esc(t.t)} : point par point</h2></div>${theme(t)}</section>`:""}
-      <section class="sec"><div class="sec-h"><h2>Changer de comparaison</h2></div>${pick(A,"B")}</section>`;
-    document.querySelectorAll("[data-vt]").forEach(x=>x.onclick=e=>{ e.preventDefault(); VSF[A+B]=x.dataset.vt; const y=scrollY; draw(); window.scrollTo(0,y); });
+
+const GDK="guides2027", GDONE=()=>{ try{ return JSON.parse(localStorage.getItem(GDK))||{}; }catch(e){ return {}; } };
+function vGuide(id,qs){
+  const g=GD.find(x=>x.id===id); if(!g) return vNotFound();
+  const n=g.etapes.length, e=Math.min(n,Math.max(0,+(new URLSearchParams(qs||"").get("e")||0)));
+  backTop(g.t);
+  const go=k=>location.replace("#/guide/"+id+"?e="+k);
+  const dots=`<div class="gd-p">${Array.from({length:n+1},(_,k)=>`<i class="${k<=e?"on":""}"></i>`).join("")}</div>`;
+  if(e<n){ const s=g.etapes[e];
+    $("#app").innerHTML=`${dots}<div class="gd-c" style="background:linear-gradient(160deg,${g.grad})"><small>Étape ${e+1} sur ${n}</small>${s.big?`<div class="gd-big">${esc(s.big)}</div>`:""}<h2>${esc(s.t)}</h2><p>${esc(s.x)}</p>
+      <a class="gd-s" href="${esc(s.url||g.src)}" target="_blank" rel="noopener">Source : ${esc(host(s.url||g.src))} ↗</a></div>
+      <div class="gd-b">${e?`<button class="ghost" id="gd-prev">← Précédent</button>`:"<span></span>"}<button class="cta" id="gd-next">${e<n-1?"Suivant →":"Le quiz →"}</button></div>
+      <a class="gd-ask" href="#/chat/new?q=${encodeURIComponent(s.t+" (présidentielle 2027)")}">💬 Une question sur ce point ? Demande au chat</a>`;
+    $("#gd-next").onclick=()=>go(e+1); const pv=$("#gd-prev"); if(pv) pv.onclick=()=>go(e-1);
+    return; }
+  const R={};
+  const draw=()=>{ const done=g.quiz.every((_,j)=>R[j]!=null), ok=g.quiz.filter((q,j)=>R[j]===q.r).length;
+    if(done){ const d=GDONE(); d[id]=1; try{ localStorage.setItem(GDK,JSON.stringify(d)); }catch(x){} }
+    $("#app").innerHTML=`${dots}<h1 class="ttl">Le quiz</h1>${g.quiz.map((q,j)=>`<div class="gd-q"><b>${j+1}. ${esc(q.q)}</b>${q.o.map((o,k)=>`<button data-q="${j}" data-k="${k}" class="${R[j]!=null?(k===q.r?"ok":k===R[j]?"ko":""):""}"${R[j]!=null?" disabled":""}>${esc(o)}</button>`).join("")}</div>`).join("")}
+      ${done?`<div class="gd-end"><b>${ok}/${g.quiz.length}</b> bonnes réponses${ok===g.quiz.length?" : bravo !":"."}</div>`:""}
+      <div class="gd-b"><button class="ghost" id="gd-prev">← Revoir</button>${done?`<a class="cta" href="#/" style="text-align:center;text-decoration:none">Terminer</a>`:"<span></span>"}</div>
+      ${done?`<div class="sec-h" style="margin-top:20px"><h2>Les autres guides</h2></div><div class="pick">${GD.filter(x=>x.id!==id).map(x=>`<a href="#/guide/${x.id}">${x.ic} ${esc(x.t)}</a>`).join("")}</div>`:""}`;
+    document.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>{ R[+b.dataset.q]=+b.dataset.k; const y=scrollY; draw(); window.scrollTo(0,y); });
+    $("#gd-prev").onclick=()=>go(n-1);
   };
   draw();
 }
-const VSF={};
 function candHero(P){
   const c=C[P], age=c.ne?(new Date().getFullYear()-c.ne)+" ans":"", rank=POLL?Object.entries(POLL.scores).sort((a,b)=>b[1]-a[1]).findIndex(([k])=>k===P)+1:0;
   return `<div class="hero" style="background:${cgrad(P)}">${rank>0?`<span class="num">${String(rank).padStart(2,"0")}</span>`:""}<div class="ini">${initials(c.cand)}</div>
     <h2>${esc(c.cand)}</h2><p>${esc([c.role,age].filter(Boolean).join(" · ")||c.nom)}</p>
-    <div class="pills"><span>${esc(c.nom)}</span>${pollOf(P)!=null?`<a href="#/sondages">${pct(pollOf(P))} · ${esc(POLL.institut)}</a>`:""}<a class="w" href="#/vs/${P}">Comparer avec…</a><a href="#/actus/${P}">Son actu</a></div></div>`;
+    <div class="pills"><span>${esc(c.nom)}</span>${pollOf(P)!=null?`<a href="#/sondages">${pct(pollOf(P))} · ${esc(POLL.institut)}</a>`:""}<a href="#/actus/${P}">Son actu</a></div></div>`;
 }
 
 function route(){
   const h=location.hash.replace(/^#/,"")||"/";
   const [path,qs]=h.split("?"); const p=path.split("/").filter(Boolean).map(decodeURIComponent);
   document.body.dataset.v=p[0]||"home";
-  const nav=p[0]==="swipe"?"swipe":p[0]==="chat"?"chat":p[0]==="profil"?"profil":["explorer","sujets","s","candidats","c","vs"].includes(p[0])?"explorer":"home";
+  const nav=p[0]==="swipe"?"swipe":p[0]==="chat"?"chat":p[0]==="profil"?"profil":["explorer","sujets","s","candidats","c"].includes(p[0])?"explorer":"home";
   document.querySelectorAll(".nav a").forEach(a=>a.classList.toggle("on",a.dataset.n===nav));
   closeSheet(); if(!["chat","profil","info"].includes(p[0])&&!(p[0]==="explorer"&&p[1]==="condamnations")&&!(DESK.matches&&["m","swipe"].includes(p[0]))) v1Hide();
   if(p[0]!=="parcours") document.body.classList.remove("story-on");
@@ -1431,9 +1434,8 @@ function route(){
   else if(p[0]==="c") vCand(p[1]);
   else if(p[0]==="m") vMesure(p[1]);
   else if(p[0]==="sondages") vSondages();
-  else if(p[0]==="agenda") vAgenda();
   else if(p[0]==="actus") vActus(p[1]);
-  else if(p[0]==="vs") vVs(p[1],p[2]);
+  else if(p[0]==="guide") vGuide(p[1],qs);
   else if(p[0]==="chercher") vChercher(qs?new URLSearchParams(qs).get("q")||"":null);
   else vNotFound();
 }
