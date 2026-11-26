@@ -128,7 +128,14 @@ def build(H, progs, S, Mz, fi, cond=None):
         for x in L:
             f = fams.setdefault(x.get("famille") or "Autres / non précisé", [0, 0]); f[0 if x.get("statut") == "définitive" else 1] += 1
         cd = {"extrait": cond.get("extrait_le") or "", "total": len(L), "fams": sorted([[k, v[0], v[1]] for k, v in fams.items()], key=lambda r: -(r[1] + r[2]))}
-    data = {"cands": cands, "themes": themes, "mes": mes, "fiches": fi, "cond": cd}
+    # Sondages, dates clés et repères biographiques (data/actu/*.json, mis à jour à la main avec leurs sources)
+    A = os.path.join(H, "..", "data", "actu")
+    rd = lambda f, d: json.load(open(os.path.join(A, f))) if os.path.exists(os.path.join(A, f)) else d
+    bio = rd("candidats.json", {})
+    for k, v in bio.items():
+        if k in cands and isinstance(v, dict): cands[k].update({"role": v.get("role"), "ne": v.get("ne")} if v.get("ne") else {"role": v.get("role")})
+    data = {"cands": cands, "themes": themes, "mes": mes, "fiches": fi, "cond": cd,
+            "sondages": rd("sondages.json", {}).get("sondages", []), "agenda": rd("agenda.json", {}).get("dates", [])}
     J = json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     # Comptes : même projet Supabase que l'app actuelle (clé publique, lue dans template.html)
     t1 = open(os.path.join(H, "template.html")).read()

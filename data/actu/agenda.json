@@ -1,0 +1,11 @@
+{
+ "_note": "Dates clés de la campagne, chacune avec sa source. « fin » pour un événement sur plusieurs jours. P = candidat concerné (facultatif).",
+ "dates": [
+  {"date": "2026-12-10", "fin": "2026-12-13", "P": "TONDELIER", "t": "Vote des adhérents des Écologistes : candidature autonome, soutien à Jean-Luc Mélenchon ou à Raphaël Glucksmann", "url": "https://www.lagazettefrance.fr/article/presidentielle-ruffin-renonce-le-paysage-se-clarifie-a-gauche"},
+  {"date": "2027-01-24", "P": "PHILIPPE", "t": "Grande réunion publique d'Édouard Philippe à Arras", "url": "https://lcp.fr/actualites/presidentielle-2027-promettant-des-reformes-radicales-edouard-philippe-cherche-une"},
+  {"date": "2027-04-17", "t": "Premier tour en Guadeloupe, Martinique, Guyane, Saint-Pierre-et-Miquelon, Saint-Barthélemy, Saint-Martin et Polynésie française", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A15053"},
+  {"date": "2027-04-18", "t": "Premier tour de l'élection présidentielle", "tour": 1, "url": "https://www.service-public.gouv.fr/particuliers/actualites/A15053"},
+  {"date": "2027-05-01", "t": "Second tour dans ces mêmes territoires d'outre-mer", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A15053"},
+  {"date": "2027-05-02", "t": "Second tour de l'élection présidentielle", "tour": 2, "url": "https://www.service-public.gouv.fr/particuliers/actualites/A15053"}
+ ]
+}

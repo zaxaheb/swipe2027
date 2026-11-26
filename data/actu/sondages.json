@@ -1,0 +1,12 @@
+{
+ "_note": "Sondages d'intentions de vote au 1er tour. Un sondage n'est pas une prévision : chaque institut teste une hypothèse (liste de candidats) à une date donnée. « complet » = tous les scores publiés ; sinon seuls les premiers sont repris. Mettre à jour à la main, en gardant le lien vers la source.",
+ "sondages": [
+  {"institut": "Harris Interactive", "pour": "M6, RTL et L'Express", "date": "2026-11-19", "terrain": "18 et 19 novembre 2026", "echantillon": "2 378 personnes, dont 1 451 exprimant une intention de vote",
+   "hypothese": "avec Édouard Philippe et Gabriel Attal", "complet": true,
+   "scores": {"RN": 31, "LFI": 18, "GLUCKSMANN": 11, "LISNARD": 11, "PHILIPPE": 9, "ATTAL": 4, "RETAILLEAU": 4, "RINER": 4, "ZEMMOUR": 3, "ARTHAUD": 1, "ROUSSEL": 1, "TONDELIER": 1, "VILLEPIN": 1, "DUPONTAIGNAN": 1},
+   "url": "https://sondage-presidentielle.fr/dernier-sondage"},
+  {"institut": "YouGov", "pour": "HuffPost", "date": "2026-11-17", "complet": false, "scores": {"RN": 32, "LFI": 17, "GLUCKSMANN": 9}, "url": "https://sondage-presidentielle.fr/dernier-sondage"},
+  {"institut": "Ifop", "date": "2026-11-16", "complet": false, "scores": {"RN": 32, "LFI": 17, "PHILIPPE": 10}, "url": "https://sondage-presidentielle.fr/dernier-sondage"},
+  {"institut": "Elabe", "pour": "BFMTV et La Tribune Dimanche", "date": "2026-11-13", "complet": false, "scores": {"RN": 31, "LFI": 17, "GLUCKSMANN": 10.5}, "url": "https://sondage-presidentielle.fr/dernier-sondage"}
+ ]
+}
