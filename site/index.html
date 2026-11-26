@@ -1884,24 +1884,17 @@ function vForumNouveau(qs){
   };
 }
 const dbNorm=s=>String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
-/* Avant publication : un contrôle de qualité (simulé ici), invisible pour le lecteur. Sous le seuil, on explique quelle règle n'est pas respectée ; au-dessus, file de relecture. */
-function dbEval(txt,src){
-  const t=txt.trim(), n=t.split(/\s+/).filter(Boolean).length, url=/https?:\/\//.test(src+" "+t);
-  const insult=/\b(con|cons|nul|nulle|idiot|crétin|débile|pourri|menteur|honte|clown)\b/i.test(t), caps=(t.match(/\b[A-ZÉÈ]{5,}\b/g)||[]).length, bang=(t.match(/!{2,}/g)||[]).length;
-  const vote=/(votez|il faut voter|meilleur candidat|ne votez pas)/i.test(t), avis=/(je pense que c'est|j'adore|je déteste|n'importe quoi)/i.test(t);
-  const total=(url?30:18)+Math.min(30,Math.round(n/4)+(/\d|étude|rapport|selon|données|chiffr/i.test(t)?8:0))+Math.max(0,20-(insult?18:0)-caps*4-bang*4)+(t.length<20?4:vote||avis?8:18), why=[];
-  if(n<25) why.push(["On explique.","Développe un peu : ce que la mesure changerait, pour qui, pourquoi."]);
-  if(vote||avis) why.push(["On analyse, on ne milite pas.","Évite les avis tranchés et les consignes de vote."]);
-  if(insult||caps||bang) why.push(["On respecte les gens.","Pas d'insulte, ni de majuscules ou de « !! »."]);
-  return {ok:total>=DB_SEUIL,why};
-}
 function dbSubmit(tx,src,msgEl,done){
   if(!USER&&!LS.get("debat:essai")){
     msgEl.innerHTML=`<div class="dbwarn"><b>Il faut un compte pour publier.</b> Un pseudo suffit, sans e-mail. <div class="dbgo" style="margin-top:8px"><a class="btn dark" href="#/profil">Me connecter</a><button class="btn" data-dbtry>Continuer (démo)</button></div></div>`; return; }
   if(tx.trim().length<3){ msgEl.innerHTML=`<div class="dbwarn">Ton message est vide.</div>`; return; }
-  const r=dbEval(tx,src); track("forum:envoi:"+(r.ok?"relecture":"refuse"));
-  if(!r.ok){ msgEl.innerHTML=`<div class="dbwarn"><b>Ton message ne respecte pas encore les règles du forum.</b> Tu peux le modifier et le republier :<ul>${r.why.map(([a,b])=>`<li><b>${a}</b> ${b}</li>`).join("")}</ul></div>`; return; }
-  done();
+  msgEl.innerHTML="";
+  // Au moment de publier : les règles, puis le message part en relecture. (Le contrôle de qualité se fait côté modération, jamais devant le lecteur.)
+  dbSheet(`<h3>Avant de publier</h3><ol class="dbrules">${DB_REGLES.map(([a,b])=>`<li><b>${a}</b> ${b}</li>`).join("")}</ol>
+    <p>Ton message sera visible par tous après relecture par l'équipe de modération.</p>
+    <div class="actions" style="display:grid;gap:8px"><button class="btn dark" id="db-pub">Je respecte les règles, publier</button><button class="btn" id="db-back">Modifier mon message</button></div>`);
+  $("#db-back").onclick=()=>closeSheet();
+  $("#db-pub").onclick=()=>{ closeSheet(); track("forum:envoi"); done(); };
 }
 const DB_REGLES=[["On analyse, on ne milite pas.","Pas de « votez X » : explique ce que change une mesure, pour qui, et pourquoi."],["On donne ses sources quand on peut.","Un lien aide les autres à vérifier un fait ou un chiffre."],["On respecte les gens.","On critique des idées, jamais des personnes, ni les candidats, ni les autres membres."],["On reste sur le sujet.","Celui de la mesure ou de la discussion."],["Pas de données personnelles.","Ni les tiennes, ni celles des autres."]];
 function dbSheet(h){ $("#sheet").innerHTML=`<div class="grab"></div>`+h; $("#sheet").classList.add("on"); $("#sheet-bg").classList.add("on"); }
