@@ -290,7 +290,7 @@ textarea{min-height:84px;resize:vertical}
 .sw-acc .body h3{display:none}
 /* parcours guidé (mode « stories ») */
 body.story-on{padding-bottom:0}
-body.story-on .nav, body.story-on .top{display:none}
+body.story-on .top{display:none}
 .story{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column;max-width:640px;margin:0 auto;touch-action:pan-y;user-select:none;-webkit-user-select:none}
 .st-bar{display:flex;gap:3px;padding:calc(10px + env(safe-area-inset-top)) var(--pad) 0}
 .st-bar i{flex:1;height:3px;border-radius:2px;background:var(--line);overflow:hidden;position:relative}
@@ -503,6 +503,22 @@ body.frame-on .top{display:none}
   .sheet{left:236px}
   .story{left:236px;right:0}
 }
+/* ---------- retours du 26/11 ---------- */
+.tiles-h{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 calc(-1*var(--pad));padding:2px var(--pad) 4px;scroll-padding:0 var(--pad)}
+.tiles-h::-webkit-scrollbar{display:none}
+.tiles-h .sq{flex:0 0 42%;scroll-snap-align:start;min-height:96px}
+.st-card>*{flex-shrink:0}   /* la carte ouverte ne se fait plus écraser */
+.story{bottom:calc(var(--nav) + 20px + env(safe-area-inset-bottom));z-index:25}
+.st-foot{padding-bottom:12px}
+@media (min-width:1100px){
+  .story{left:236px;right:0;bottom:0;max-width:760px}
+  .wrap{max-width:none;padding:0 40px}
+  body[data-v="m"] .wrap,body[data-v="swipe"] .wrap,body[data-v="s"] .wrap,body[data-v="c"] .wrap,body[data-v="chercher"] .wrap,body[data-v="favoris"] .wrap{max-width:860px;padding:0 32px}
+  .sqs{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+  .tiles-h .sq{flex:0 0 230px}
+  .daily .photo{flex:0 0 calc(33.3% - 8px)}
+  .seg{max-width:520px}
+}
 </style>
 </head>
 <body>
@@ -614,9 +630,7 @@ const who=P=>`<span class="who"><i class="dot" style="background:${C[P].color}">
 const ficheOf=id=>F[id]||REMOTE[id]||null;
 function tagsOf(m){
   const f=ficheOf(m.id), out=[];
-  if(f){ const n=(f.critiques||[]).length; if(n) out.push(`<span class="tag con">${plural(n,"critique","critiques")}</span>`);
-    if(!f.genere) out.push(`<span class="tag ok">Fiche vérifiée</span>`); }
-  else if(m.cle) out.push(`<span class="tag">Mesure clé</span>`);
+  if(!f&&m.cle) out.push(`<span class="tag">Mesure clé</span>`);
   return `<div class="meta">${out.join("")}</div>`;
 }
 const row=(m,showWho=true)=>`<a class="row" href="#/m/${encodeURIComponent(m.id)}">${showWho?who(m.P):""}<div class="t">${esc(m.t)}</div>${tagsOf(m)}</a>`;
@@ -659,14 +673,14 @@ const GSUGG=["C'est quoi le 49.3 ?","Qui veut revenir à la retraite à 60 ans ?
 function vHome(){
   setTop(`<div class="brand" style="flex:1">Swipe 2027<small>Les mesures des candidats, expliquées simplement</small></div><a class="heart" href="#/info" aria-label="Comment ça marche ?" style="background:var(--card);border:1px solid var(--line);font:700 17px var(--serif)">i</a>`);
   const d=dailyMeasures(3), nEx=TH.filter(t=>explored(t.id)).length;
-  const sugg=[...TH.filter(t=>newIn(t.id).length),...TH.filter(t=>!explored(t.id))].slice(0,2);
+  const sugg=[...TH.filter(t=>newIn(t.id).length),...TH.filter(t=>!explored(t.id)),...TH.filter(t=>explored(t.id)&&!newIn(t.id).length)];
   $("#app").innerHTML=`
     <a class="search" href="#/chercher" aria-label="Chercher une mesure">${ICO.search}<input placeholder="Une mesure entendue ? Smic, retraites…" readonly tabindex="-1"></a>
     ${d.length?`<section class="sec" style="margin-top:18px"><div class="sec-h"><h2>Les mesures du jour</h2><span style="font-size:13px;color:var(--muted)">dans l'actualité</span></div>
       <div class="daily">${d.map(m=>{ const f=F[m.id], nc=(f.critiques||[]).length; return `<a class="photo" href="#/m/${encodeURIComponent(m.id)}" style="background:${cgrad(m.P)}"><div class="who2">${esc(C[m.P].cand)}<small>· ${esc(C[m.P].nom)}</small></div><h2 class="q${m.t.length>150?" l":""}">${esc(m.t)}</h2><div class="meta2">${esc(THM[m.th].t)} · dans la presse le ${esc(dateFr(m.dp))}${nc?" · "+plural(nc,"critique","critiques"):""}</div></a>`; }).join("")}</div></section>`:""}
     <div class="ask"><a class="in" href="#/chat/new">💬 Pose ta question sur la présidentielle…</a><a class="ex" id="ask" href="#/chat/new">Ex. : <span id="ask-q">${esc(GSUGG[0])}</span></a></div>
     <section class="sec"><div class="sec-h"><h2>Explorer les sujets</h2><a href="#/explorer">${nEx}/${TH.length} explorés</a></div>
-      ${sugg.length?`<div class="sqs">${sugg.map(t=>tile(t,true)).join("")}</div>`:""}</section>
+      <div class="tiles-h">${sugg.map(t=>tile(t,true)).join("")}</div></section>
     ${favs().length?`<section class="sec"><div class="sec-h"><h2>Mes mesures sauvegardées</h2><a href="#/favoris">Toutes (${favs().length})</a></div>${rowsWithMore(favs().map(id=>MID[id]).filter(Boolean),3,true,"home-fav")}</section>`:""}`;
   // Une seule case pour le chat, et un exemple de question qui change toutes les 3 secondes (le toucher pose cette question).
   const qs=[...GSUGG,...d.map(m=>"Que propose "+C[m.P].cand+" sur « "+THM[m.th].t.toLowerCase()+" » ?")];
@@ -734,7 +748,7 @@ function vSujet(id,focus){
 `;
   } else body=`<div class="list" style="margin-top:12px">${has.filter(P=>!fc||P===fc).map(P=>candRow(vis,P,"s-"+id+"-"+P)).join("")}</div>`;
   $("#app").innerHTML=`<p class="lead" style="margin-top:8px">${esc(t.d)}. ${plural(has.length,"candidat a","candidats ont")} fait des propositions.</p>
-    <div class="mini-actions">${t.pts&&pathSteps(id).length?`<a class="btn dark" href="#/parcours/${id}">▶ ${wasEx?"Revoir en carrousel":"Parcourir en carrousel"}</a>`:""}<a class="btn" href="#/chat/new?q=${encodeURIComponent("Explique-moi simplement le débat sur : "+t.t)}">💬 Poser une question</a></div>
+    <div class="mini-actions">${t.pts&&pathSteps(id).length?`<a class="btn dark" href="#/parcours/${id}">▶ ${(()=>{ const sv=LS.get("parcours:"+id); return sv&&!sv.done&&sv.i>0?`Reprendre (question ${sv.i+1}/${pathSteps(id).length})`:wasEx?"Revoir en carrousel":"Parcourir en carrousel"; })()}</a>`:""}<a class="btn" href="#/chat/new?q=${encodeURIComponent("Explique-moi simplement le débat sur : "+t.t)}">💬 Poser une question</a></div>
     ${nw.size?`<div class="banner"><div style="flex:1"><b>${plural(nw.size,"nouvelle proposition","nouvelles propositions")}</b> depuis ta dernière visite</div><a class="btn" href="#/parcours/${id}?new=1">Les voir</a></div>`:""}
     <div class="hs" style="margin-top:14px"><a class="chip${fc?"":" on"}" href="#" data-sf="">Tous <small>${ms.length}</small></a>${has.map(P=>`<a class="chip${fc===P?" on":""}" href="#" data-sf="${P}"><i class="dot" style="background:${C[P].color}"></i>${esc(lastName(C[P].cand))} <small>${ms.filter(m=>m.P===P).length}</small></a>`).join("")}</div>
     ${body}
@@ -932,7 +946,10 @@ $("#sheet-bg").onclick=closeSheet;
 const ptCands=pid=>CK.filter(P=>ML.some(m=>m.P===P&&m.pt===pid));
 function pathSteps(sid){
   const pts=t=>(t.pts||[]).map(p=>p[0]).filter(pid=>!/-autres$/.test(pid));
-  if(sid){ const t=THM[sid]; return t?pts(t).filter(pid=>ptCands(pid).length>=2).sort((a,b)=>ptCands(b).length-ptCands(a).length):[]; }
+  if(sid){ const t=THM[sid]; if(!t) return []; const st=pts(t).filter(pid=>ptCands(pid).length>=2).sort((a,b)=>ptCands(b).length-ptCands(a).length);
+    // Les mesures qui ne tombent dans aucune de ces questions ont leur propre étape, à la fin : personne n'est laissé de côté.
+    const rid="rest:"+sid, set=new Set(st); if(ML.some(m=>m.th===sid&&!set.has(m.pt))){ PT[rid]={id:rid,t:"D'autres propositions sur ce sujet",th:sid,cov:set}; st.push(rid); }
+    return st; }
   // Découverte : pour chaque sujet (dans l'ordre), la question sur laquelle le plus de candidats se sont prononcés (au moins 4).
   return TH.map(t=>pts(t).map(pid=>[pid,ptCands(pid).length]).sort((a,b)=>b[1]-a[1])[0]).filter(x=>x&&x[1]>=4).map(x=>x[0]);
 }
@@ -947,6 +964,7 @@ function vParcours(sid,onlyNew){
   const only=onlyNew&&sid?new Set(LS.get("parcours:new:"+sid)||[]):null;
   const steps=only?newSteps(sid,only):pathSteps(sid||null); if(!steps.length) return location.replace(sid?"#/s/"+sid:"#/");
   const key="parcours:"+sid+(only?":new":""); let saved=only?null:LS.get(key);
+  if(ST&&ST.sid===sid&&!only&&ST.i>=ST.steps.length) ST=null;
   if(!ST||ST.sid!==sid||!!ST.only!==!!only){ ST={sid,steps,only,i:0,j:0,seed:1+Math.floor(Math.random()*9999),blind:false,shown:new Set()};
     if(saved&&!saved.done&&saved.i<steps.length){ Object.assign(ST,{i:saved.i,j:0,seed:saved.seed||ST.seed,blind:!!saved.blind}); }
     track("parcours:debut"+(sid?":"+sid:"")); }
@@ -960,7 +978,10 @@ function maskName(txt,P,on){ if(!(on??(ST&&ST.blind))) return txt; const c=C[P];
   return t; }
 // Masque les noms dans du HTML (texte seulement, pas les liens).
 const maskHtml=(html,P)=>html.replace(/>([^<]+)</g,(x,t)=>">"+maskName(t,P,true)+"<");
+const restPool=pid=>{ const r=PT[pid]; return ML.filter(m=>m.th===r.th&&!r.cov.has(m.pt)); };
 function storyCards(pid){
+  if(pid.startsWith("rest:")){ const pool=restPool(pid), cs=shuffled(CK.filter(P=>pool.some(m=>m.P===P)),ST.seed+7);
+    return cs.map(P=>{ const l=pool.filter(m=>m.P===P).sort(byRank); return {P,m:l[0],more:l.length-1}; }); }
   const ok=m=>m.pt===pid&&(!ST.only||ST.only.has(m.id));
   const cs=shuffled(CK.filter(P=>ML.some(m=>m.P===P&&ok(m))),ST.seed+pid.length*31);
   return cs.map(P=>{ const l=ML.filter(m=>m.P===P&&ok(m)).sort(byRank); return {P,m:l[0],more:ML.filter(m=>m.P===P&&m.pt===pid).length-1}; });
@@ -975,42 +996,42 @@ function renderStory(dir){
     track("parcours:fin"+(ST.sid?":"+ST.sid:"")); if(ST.sid) markSeen(ST.sid);
     card=`<div class="st-kick">${ST.only?"Nouveautés vues":"Sujet exploré ✓"}</div><h2 class="st-q">Tu as fait le tour de ${plural(steps.length,"question","questions")}.</h2>
       <p class="st-p">${ST.sid?"La synthèse du sujet rassemble toutes les positions, question par question. Tu peux y revenir quand tu veux : une pastille te signalera les nouvelles propositions.":"Chaque question regroupe ce que proposent les candidats sur le même point. Pour aller plus loin, ouvre un sujet ou cherche une mesure que tu as entendue."}</p>
-      <div style="display:grid;gap:8px">${ST.sid?`<a class="btn dark" href="#/s/${ST.sid}">Voir la synthèse du sujet</a><a class="btn" href="#/explorer/sujets">Explorer un autre sujet</a>`:`<a class="btn dark" href="#/explorer/sujets">Explorer les sujets</a><a class="btn" href="#/chercher">Chercher une mesure</a>`}${ST.only?"":`<button class="btn" id="st-restart">Recommencer</button>`}</div>`;
+      <div style="display:grid;gap:8px">${ST.sid?`<a class="btn dark" href="#/s/${ST.sid}" onclick="event.preventDefault();ST=null;location.replace('#/s/${ST.sid}')">Voir la synthèse du sujet</a><a class="btn" href="#/explorer/sujets">Explorer un autre sujet</a>`:`<a class="btn dark" href="#/explorer/sujets">Explorer les sujets</a><a class="btn" href="#/chercher">Chercher une mesure</a>`}${ST.only?"":`<button class="btn" id="st-restart">Recommencer</button>`}</div>`;
   } else {
     const pid=steps[i], pt=PT[pid], th=THM[pt.th]; cards=storyCards(pid); total=cards.length+2;
     const j=Math.min(ST.j,total-1); ST.j=j; frac=(j+1)/total;
     if(j===0){
       track("parcours:etape:"+(i+1));
       card=`<div class="st-kick">${esc(th.t)} · question ${i+1} sur ${steps.length}</div>
-        <h2 class="st-q">${esc(pt.t)}&nbsp;: que proposent les candidats&nbsp;?</h2>
-        <p class="st-p">${plural(cards.length,"candidat a","candidats ont")} une position. Fais défiler pour les voir une par une${ST.blind?", sans les noms : ils sont révélés à la fin de la question":""}.</p>
+        <h2 class="st-q">${pid.startsWith("rest:")?"Les autres propositions sur ce sujet":esc(pt.t)+"&nbsp;: que proposent les candidats&nbsp;?"}</h2>
+        <p class="st-p">${pid.startsWith("rest:")?`Des mesures sur lesquelles peu de candidats se sont prononcés. ${plural(cards.length,"candidat","candidats")}.`:plural(cards.length,"candidat a","candidats ont")+" une position."} Fais défiler pour les voir une par une${ST.blind?", sans les noms : ils sont révélés à la fin de la question":""}.</p>
         <div class="st-avs">${cards.map(c=>`<span class="av" style="background:${ST.blind?"#9a968f":C[c.P].color}">${ST.blind?"?":initials(C[c.P].cand)}</span>`).join("")}</div>
         <div class="st-hint">Touche à droite ou glisse vers la gauche pour avancer</div>`;
     } else if(j<=cards.length){
       const c=cards[j-1], hidden=ST.blind&&!ST.shown.has(c.m.id);
       card=`${propCard(c.m,{hidden,compact:true,closed:!ST.open,kick:pt.t+" · "+j+" / "+cards.length})}
         ${ST.open?"":`<button class="btn" id="st-open" style="margin-top:4px">Ouvrir la carte ▾</button>`}
-        ${c.more>0?`<a class="src" href="#/s/${pt.th}?p=${pt.id}" data-fiche="1">${plural(c.more,"autre mesure","autres mesures")} de ce candidat sur ce point →</a>`:""}`;
+        ${c.more>0?`<span class="hint" style="margin:0">+ ${plural(c.more,"autre mesure","autres mesures")} de ce candidat ici : dans le récapitulatif.</span>`:""}`;
     } else {
       card=`<div class="st-kick">${esc(pt.t)} · récapitulatif</div>
-        <h2 class="st-q" style="font-size:22px">${plural(cards.length,"position","positions")} sur cette question</h2>
-        <div>${cards.map(c=>`<a class="st-rc" href="#/m/${encodeURIComponent(c.m.id)}" data-fiche="1">${who(c.P)}<div class="x">${esc(c.m.t)}</div></a>`).join("")}</div>`;
+        <h2 class="st-q" style="font-size:22px">${pid.startsWith("rest:")?"Toutes les autres propositions":plural(cards.length,"position","positions")+" sur cette question"}</h2>
+        <div>${(pid.startsWith("rest:")?restPool(pid).sort((a,b)=>lastName(C[a.P].cand).localeCompare(lastName(C[b.P].cand),"fr")||byRank(a,b)):cards.flatMap(c=>ML.filter(m=>m.P===c.P&&m.pt===pid&&(!ST.only||ST.only.has(m.id))).sort((a,b)=>(b===c.m)-(a===c.m)||byRank(a,b)))).map(m=>`<a class="st-rc" href="#/m/${encodeURIComponent(m.id)}" data-fiche="1">${who(m.P)}<div class="x">${esc(m.t)}</div></a>`).join("")}</div>`;
     }
   }
   const bar=steps.map((_,k)=>`<i><b style="transform:scaleX(${k<ST.i?1:k===ST.i&&!done?frac:0})"></b></i>`).join("");
   const isLast=!done&&ST.j===total-1;
   $("#app").innerHTML=`<div class="story" id="story">
     <div class="st-bar">${bar}</div>
-    <div class="st-head"><span class="lab">${ST.sid?(ST.only?"Nouveautés · ":"")+esc(THM[ST.sid].t):"Parcours découverte"}</span>
+    <div class="st-head"><button class="st-ico" id="st-close" aria-label="Quitter le carrousel">✕ Quitter</button><span class="lab">${ST.sid?(ST.only?"Nouveautés · ":"")+esc(THM[ST.sid].t):"Parcours découverte"}</span>
       ${done?"":`<button class="st-ico${ST.blind?" on":""}" id="st-blind" aria-pressed="${ST.blind}">${ST.blind?"Noms masqués":"Masquer les noms"}</button>`}
-      <button class="st-ico" id="st-close" aria-label="Fermer le parcours">${ST.sid?"Synthèse ✕":"✕"}</button></div>
+</div>
     <div class="st-body"><div class="st-card${dir<0?" back":""}" id="st-card">${card}</div></div>
     ${done?"":`<div class="st-foot"><button class="btn nb" id="st-prev" aria-label="Précédent"${ST.i===0&&ST.j===0?" disabled style=\"opacity:.35\"":""}>←</button><button class="btn dark" id="st-next">${isLast?(ST.i===steps.length-1?"Terminer":"Question suivante"):ST.j===0?"Voir les positions":"Suivant"} →</button></div>`}
   </div>`;
   const go=d=>{ if(done) return; ST.open=false; if(d>0){ if(ST.j<total-1) ST.j++; else { ST.i++; ST.j=0; } } else { if(ST.j>0) ST.j--; else if(ST.i>0){ ST.i--; ST.j=storyCards(steps[ST.i]).length+1; } else return; } renderStory(d); };
   if($("#st-next")) $("#st-next").onclick=()=>go(1);
   if($("#st-prev")) $("#st-prev").onclick=()=>go(-1);
-  $("#st-close").onclick=()=>{ if(!done) track("parcours:quitte:"+(ST.i+1)); const sid=ST.sid; ST=null; document.body.classList.remove("story-on"); location.hash=sid?"#/s/"+sid:"#/"; };
+  $("#st-close").onclick=()=>{ if(!done) track("parcours:quitte:"+(ST.i+1)); const sid=ST.sid; ST=null; document.body.classList.remove("story-on"); location.replace(sid?"#/s/"+sid:"#/"); };
   if($("#st-blind")) $("#st-blind").onclick=()=>{ ST.blind=!ST.blind; track("parcours:aveugle:"+(ST.blind?"on":"off")); renderStory(0); };
   document.querySelectorAll("#story [data-reveal]").forEach(b=>b.onclick=e=>{ e.stopPropagation(); const c=storyCards(steps[ST.i])[ST.j-1]; ST.shown.add(c.m.id); renderStory(0); });
   if($("#st-open")) $("#st-open").onclick=e=>{ e.stopPropagation(); ST.open=true; renderStory(0); };
@@ -1031,7 +1052,7 @@ document.addEventListener("keydown",e=>{ if(!document.body.classList.contains("s
    Chat (mini-cours, quiz, conversations), Profil, Condamnations (hémicycle) et Infos : on affiche les écrans de l'app actuelle
    dans un cadre (même site, donc mêmes réponses et mêmes conversations), sans sa barre du bas. */
 const V1CSS=`nav.tabs,.fab{display:none!important}
-  @media (min-width:1100px){body{grid-template-columns:0 minmax(0,1fr) min(440px,32vw)!important}body.wide,body.chatv{grid-template-columns:0 minmax(0,1fr)!important}body.chatv #convo{left:0!important}.actbar,.kbd-hint{left:0!important}}
+  @media (min-width:1100px){body{grid-template-columns:0 minmax(0,1fr) min(440px,32vw)!important}body.wide,body.chatv{grid-template-columns:0 minmax(0,1fr)!important}body.chatv #convo{left:0!important}.actbar,.kbd-hint{left:0!important}#v-chat.view,#v-profil.view{max-width:none!important;margin:0!important;padding-left:40px!important;padding-right:40px!important}}
   .convo .composer{padding-bottom:calc(86px + var(--safe-b))}   /* la barre pour écrire passe au-dessus de la navigation de la v2 */
   #v-cond .ptitle,#v-cond .psub{display:none}
   #v-cond .warn{font-size:12.5px;line-height:1.4;padding:8px 11px;margin-top:4px}
@@ -1243,6 +1264,7 @@ const POS={};
 function route(){
   const h=location.hash.replace(/^#/,"")||"/";
   const [path,qs]=h.split("?"); const p=path.split("/").filter(Boolean).map(decodeURIComponent);
+  document.body.dataset.v=p[0]||"home";
   const nav=p[0]==="swipe"?"swipe":p[0]==="chat"?"chat":p[0]==="profil"?"profil":["explorer","sujets","s","candidats","c"].includes(p[0])?"explorer":"home";
   document.querySelectorAll(".nav a").forEach(a=>a.classList.toggle("on",a.dataset.n===nav));
   closeSheet(); if(!["chat","profil","info"].includes(p[0])&&!(p[0]==="explorer"&&p[1]==="condamnations")&&!(DESK.matches&&["m","swipe"].includes(p[0]))) v1Hide();
