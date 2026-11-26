@@ -615,6 +615,15 @@ body[data-v="home"] .live{margin-top:30px}
 .ha-sg{margin-top:14px}
 .ha-c{display:block;margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.12);font-size:13px;color:rgba(255,255,255,.75);text-decoration:none}
 @media (min-width:1100px){.hero-ask{padding:44px 48px 32px}.hero-ask h1{font-size:42px}body[data-v="home"] .sec{margin-top:44px}}
+
+/* couverture mobile (27/11) : tout tient dans la largeur */
+.ha-sg{flex-wrap:wrap;overflow:visible;margin:14px 0 0;padding:0}
+.ha-sg a{white-space:normal}
+.ha-c{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.12)}
+.ha-c span{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;opacity:.65;margin-right:2px;width:100%}
+.ha-c a{font-size:12.5px;font-weight:600;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);border-radius:999px;padding:6px 11px}
+@media (min-width:1100px){.ha-c span{width:auto}}
+.ha-sg a{font-size:13px;padding:7px 11px}
 </style>
 </head>
 <body>
@@ -771,13 +780,13 @@ function vHome(){
   const d=dailyMeasures(3), nEx=TH.filter(t=>explored(t.id)).length;
   const sugg=[...TH.filter(t=>newIn(t.id).length),...TH.filter(t=>!explored(t.id)),...TH.filter(t=>explored(t.id)&&!newIn(t.id).length)];
   $("#app").innerHTML=`
-    <a class="search" href="#/chercher" aria-label="Chercher une mesure" style="margin-top:6px">${ICO.search}<input placeholder="Chercher une mesure : Smic, retraites…" readonly tabindex="-1"></a>
+    <a class="search" href="#/chercher" aria-label="Chercher une mesure" style="margin-top:6px">${ICO.search}<input placeholder="Chercher une mesure…" readonly tabindex="-1"></a>
     <section class="hero-ask">
       <h1>Une question sur la présidentielle&nbsp;?</h1>
       <p>La réponse est neutre et sourcée.</p>
-      <form id="ha-f" autocomplete="off"><textarea id="ha-in" rows="1" maxlength="500" placeholder="${esc(GSUGG[0])}"></textarea><button aria-label="Envoyer">→</button></form>
-      <div class="ha-sg">${GSUGG.slice(0,3).map(q=>`<a href="#/chat/new?q=${encodeURIComponent(q)}">${esc(q)}</a>`).join("")}</div>
-      <a class="ha-c" href="#/chat">Ou suis un mini-cours : voter, la présidentielle, la dette… →</a>
+      <form id="ha-f" autocomplete="off"><textarea id="ha-in" rows="1" maxlength="500" placeholder="Pose ta question…"></textarea><button aria-label="Envoyer">→</button></form>
+      <div class="ha-sg">${["C'est quoi le 49.3 ?","Qui veut la retraite à 60 ans ?","ISF ou taxe Zucman ?"].map(q=>`<a href="#/chat/new?q=${encodeURIComponent(q)}">${esc(q)}</a>`).join("")}</div>
+      <div class="ha-c"><span>Mini-cours</span>${COURS.slice(0,4).map(([id,t,e])=>`<a href="#/chat/cours:${id}">${e} ${esc(t)}</a>`).join("")}<a href="#/chat">Tous →</a></div>
     </section>
     ${liveBlock()}
     ${d.length?`<section class="sec"><div class="sec-h"><h2>Les mesures du jour</h2><span style="font-size:13px;color:var(--muted)">dans l'actualité</span></div>
@@ -791,10 +800,10 @@ function vHome(){
   // Une seule case pour le chat, et un exemple de question qui change toutes les 3 secondes (le toucher pose cette question).
   const qs=[...GSUGG,...d.map(m=>"Que propose "+C[m.P].cand+" sur « "+THM[m.th].t.toLowerCase()+" » ?")];
   const fi=$("#ha-in"); let qi=0;
-  const send=()=>{ const v=fi.value.trim()||fi.placeholder; location.hash="#/chat/new?q="+encodeURIComponent(v); };
+  const send=()=>{ const v=fi.value.trim(); if(!v) return fi.focus(); location.hash="#/chat/new?q="+encodeURIComponent(v); };
   $("#ha-f").onsubmit=e=>{ e.preventDefault(); send(); };
   fi.onkeydown=e=>{ if(e.key==="Enter"&&!e.shiftKey){ e.preventDefault(); send(); } };
-  clearInterval(window.ASKT); window.ASKT=setInterval(()=>{ if(!document.body.contains(fi)) return clearInterval(window.ASKT); if(document.activeElement===fi||fi.value) return; qi=(qi+1)%qs.length; fi.placeholder=qs[qi]; },3200);
+  clearInterval(window.ASKT);
 }
 /* Sujets du moment : d'après les articles cités dans nos fiches (gardé pour plus tard). */
 function hotSubjects(n){
