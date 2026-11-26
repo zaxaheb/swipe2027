@@ -862,7 +862,7 @@ function vSujet(id,focus){
   const has=CK.filter(P=>ms.some(m=>m.P===P)), none=CK.filter(P=>!ms.some(m=>m.P===P));
   const rowN=m=>{ let h=row(m); if(nw.has(m.id)) h=h.replace('class="row"','class="row isnew"').replace('<div class="meta">','<div class="meta"><span class="tag new">Nouveau</span>'); return h; };
   const candRow=(l,P,k)=>{ l=l.filter(m=>m.P===P).sort((a,b)=>nw.has(b.id)-nw.has(a.id)||byRank(a,b)); let h=rowN(l[0]);
-    if(l.length>1) h+=EXP[k]?l.slice(1).map(rowN).join(""):`<button class="more sm" data-more="${esc(k)}" data-step="1">+ ${plural(l.length-1,"autre mesure","autres mesures")} de ${esc(lastName(C[P].cand))}</button>`;
+    if(l.length>1) h+=l.slice(1).map(rowN).join("");   // toutes les mesures, sans bouton « + x autres »
     return h; };
   let body="";
   if(t.pts){
@@ -881,7 +881,7 @@ function vSujet(id,focus){
     <div class="hs" style="margin-top:14px"><a class="chip${fc?"":" on"}" href="#" data-sf="">Tous <small>${ms.length}</small></a>${has.map(P=>`<a class="chip${fc===P?" on":""}" href="#" data-sf="${P}"><i class="dot" style="background:${C[P].color}"></i>${esc(lastName(C[P].cand))} <small>${ms.filter(m=>m.P===P).length}</small></a>`).join("")}</div>
     ${body}
     ${none.length&&!fc?`<div class="absent"><b>Rien trouvé dans nos sources</b>${none.map(P=>esc(C[P].cand)).join(", ")}</div>`:""}
-    <p class="hint">Pour chaque question, une mesure par candidat (la plus documentée), par ordre alphabétique. Le classement a été fait par une IA, puis vérifié : signale les erreurs.</p>`;
+    <p class="hint">Pour chaque question, toutes les mesures de chaque candidat, par ordre alphabétique des candidats. Le classement a été fait par une IA, puis vérifié : signale les erreurs.</p>`;
   document.querySelectorAll("[data-sf]").forEach(a=>a.onclick=e=>{ e.preventDefault(); SF[id]=a.dataset.sf; const y=scrollY; vSujet(id); window.scrollTo(0,y); });
   if(focus) setTimeout(()=>{ const el=$("#pt-"+focus); if(el) window.scrollTo({top:el.getBoundingClientRect().top+scrollY-64,behavior:"smooth"}); },30);
 }
