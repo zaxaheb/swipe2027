@@ -31,11 +31,14 @@ export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
   const { mode = "general", mesureId, choix } = req.body || {};
   const sujet = String(req.body?.sujet || "la politique française").replace(/[<>`]/g, "").slice(0, 80);
+  // Repères officiels d'un cours sur l'élection (dates, règles), envoyés par l'app : le cours doit partir de ces faits.
+  const reperes = String(req.body?.reperes || "").replace(/[<>`]/g, "").slice(0, 1500);
+  const avecReperes = (b) => (reperes ? "REPÈRES OFFICIELS (à respecter, dates comprises) : " + reperes + "\n\n" : "") + b;
   try {
     if (mode === "quiz") {                          // quiz QCM structuré, sans recherche web (rapide)
       const msgs = cleanMsgs(req.body?.messages); if (!msgs.length || msgs[msgs.length - 1].role !== "user") return res.status(400).json({ error: "messages" });
       if (!(await peek(req, "chat"))) return res.status(429).json({ error: "quota" });
-      const S = await build("quiz", VARS.quiz(sujet, msgs[msgs.length - 1].content));
+      const S = await build("quiz", VARS.quiz(sujet, avecReperes(msgs[msgs.length - 1].content)));
       const { data } = await llm.json({ usage: "chat", spec: S.config.model, system: S.system, messages: withUser(msgs, S.user), schema: QUIZ, name: "quiz", description: "Enregistre le quiz.", maxTokens: S.config.max_tokens || 2000, trace: { name: "quiz", prompt: S.prompt, tags: ["quiz"] } });
       const qs = (data?.questions || [])
         .filter((x) => x && Array.isArray(x.options) && x.options.length >= 3 && Number.isInteger(x.bonne) && x.bonne >= 0 && x.bonne < x.options.length)
@@ -90,7 +93,7 @@ export default async function handler(req, res) {
         let fiche = base().fiches[mesureId] || null;
         if (!fiche) { const r = await select("fiches", `id=eq.${encodeURIComponent(mesureId)}&select=data`).catch(() => []); fiche = r[0]?.data || null; }
         S = await build("mesure", VARS.mesure(m, fiche, last()));
-      } else if (mode === "prof") S = await build("prof", VARS.prof(sujet, retrieve(sujet + " " + last()), last()));
+      } else if (mode === "prof") S = await build("prof", VARS.prof(sujet, avecReperes(retrieve(sujet + " " + last())), last()));
       else S = await build("general", VARS.general(retrieve(last()), last()));
     }
     let text;

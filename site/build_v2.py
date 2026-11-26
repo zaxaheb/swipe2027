@@ -135,7 +135,7 @@ def build(H, progs, S, Mz, fi, cond=None):
     for k, v in bio.items():
         if k in cands and isinstance(v, dict): cands[k].update({"role": v.get("role"), "ne": v.get("ne")} if v.get("ne") else {"role": v.get("role")})
     data = {"cands": cands, "themes": themes, "mes": mes, "fiches": fi, "cond": cd,
-            "sondages": rd("sondages.json", {}).get("sondages", []), "guides": rd("guides.json", {}).get("guides", [])}
+            "sondages": rd("sondages.json", {}).get("sondages", [])}
     J = json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     # Comptes : même projet Supabase que l'app actuelle (clé publique, lue dans template.html)
     t1 = open(os.path.join(H, "template.html")).read()
