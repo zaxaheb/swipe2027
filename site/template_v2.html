@@ -1199,7 +1199,10 @@ const V1CSS=`nav.tabs,.fab{display:none!important}
   :root{--safe-b:0px!important}   /* l'app intégrée s'arrête au-dessus de la barre du bas : pas de marge « iPhone » en plus */
   .view{padding-bottom:28px!important}
   .topics{grid-auto-flow:row!important;grid-template-rows:none!important;grid-template-columns:1fr 1fr!important;grid-auto-columns:auto!important;overflow:visible!important;margin:0 0 6px!important;padding:0!important}
-  .topic{min-height:96px!important}
+  .topics{gap:8px!important}
+  .topic{min-height:96px!important;padding:11px 12px 12px!important;border-radius:16px!important}   /* même format que les cartes des sujets (Explorer) */
+  .topic b{font-size:15.5px!important;line-height:1.2!important}
+  .topic span{font-size:12px!important;line-height:1.3!important;margin-top:3px!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   @media (min-width:700px){.topics{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))!important}}
   @media (min-width:1100px){body{grid-template-columns:0 minmax(0,1fr) min(440px,32vw)!important}body.wide,body.chatv{grid-template-columns:0 minmax(0,1fr)!important}body.chatv #convo{left:0!important}.actbar,.kbd-hint{left:0!important}#v-chat.view,#v-profil.view{max-width:none!important;margin:0!important;padding-left:40px!important;padding-right:40px!important}}
   #v-cond .ptitle,#v-cond .psub{display:none}
