@@ -880,6 +880,24 @@ body[data-v="home"] .live{margin-top:30px}
 /* pendant qu'on écrit sur téléphone : on cache la barre du bas et la bulle de chat pour libérer la place au-dessus du clavier */
 body.db-typing .nav,body.db-typing .bubble{display:none!important}
 
+/* suivre, notifications, activité */
+.dbtop2{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 8px}
+.dbfollow{flex:none;border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 12px;font:600 12.5px var(--sans);color:var(--ink);cursor:pointer;white-space:nowrap}
+.dbfollow.on{background:#efe8ff;border-color:#d9ccff;color:#5b2fd1}
+.dba .dbfollow{margin-left:auto}
+.nav a{position:relative}
+.dbbadge{position:absolute;top:2px;right:calc(50% - 22px);min-width:17px;height:17px;padding:0 5px;border-radius:99px;background:var(--like);color:#fff;font:700 10.5px/17px var(--sans);text-align:center}
+.dbbadge.in{position:static;display:inline-block;margin-left:4px}
+@media (min-width:1100px){ .nav a .dbbadge{top:2px;right:2px} }
+.dbact{display:inline-flex;align-items:center;gap:4px;margin-top:12px;font-size:14px;font-weight:600;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 13px;text-decoration:none}
+.dbnotif{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-top:1px solid var(--line);color:inherit;text-decoration:none;font-size:14.5px;line-height:1.4}
+.list>.dbnotif:first-child{border-top:0}
+.dbnotif.new{background:#f6f2ff}
+.dbnotif .ic{flex:none;width:28px;height:28px;border-radius:50%;background:var(--soft,#f4f2ef);display:grid;place-items:center;font-size:13px}
+.dbnotif small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.dbpref{display:flex;gap:10px;align-items:center;font-size:14.5px;padding:7px 0}
+.dbpref input{width:18px;height:18px;accent-color:var(--accent)}
+
 </style>
 </head>
 <body>
@@ -1496,7 +1514,7 @@ function vChat(arg,qs){
 }
 function vProfilV1(){ setTop(""); $("#app").innerHTML="";
   // les réponses données dans la v2 (Swipe) sont relues avant d'afficher le profil
-  v1Frame("profil",w=>{ try{ w.eval('SW=store.get("sw2027",{}); renderProfil();'); }catch(e){} }); }
+  v1Frame("profil",w=>{ try{ w.eval('SW=store.get("sw2027",{}); renderProfil();'); }catch(e){} dbProfilBlock(w); }); }
 const PRINCIPE=`<div class="label">Le principe</div><div class="answer sm">Swipe 2027 t'aide à comprendre ce que proposent les candidats à la présidentielle, sans parti pris et en citant ses sources.</div>
   <div class="item"><div class="who">Explorer</div><div class="txt" style="font-size:16px">Choisis un sujet : tu découvres question par question ce que propose chaque candidat, puis tu retrouves la synthèse. Une pastille te signale les nouvelles propositions.</div></div>
   <div class="item"><div class="who">Une carte par proposition</div><div class="txt" style="font-size:16px">Ce qu'elle change concrètement, pourquoi elle est défendue, ce qu'on lui reproche.</div></div>
@@ -1785,7 +1803,12 @@ function dbCom(c,cible,lvl){
     <div class="dbrbox" id="dbr-${c.id}"></div></div></div>
     ${(c.rep||[]).length||dbMine().some(x=>x.parent===c.id)?`<div class="dbrep">${(c.rep||[]).map(r=>dbCom(r,cible,1)).join("")}${dbMine().filter(x=>x.parent===c.id).map(dbPend).join("")}</div>`:""}`;
 }
-const dbPend=x=>`<div class="dbc pend"><div class="dbv"><b>·</b></div><div class="dbb"><div class="dbh"><b>@${esc(x.u)}</b><span class="dbst">En attente de relecture</span></div>${x.titre?`<p><b>${esc(x.titre)}</b></p>`:""}<p>${esc(x.texte)}</p><p class="hint" style="margin:0">Toi seul le vois pour l'instant : il sera publié après relecture par l'équipe de modération.</p></div></div>`;
+const DB_PUB=8000, DB_REP=25000;   // démo : publication 8 s après l'envoi, une réponse 25 s après
+const dbIsPub=x=>x.ts&&Date.now()>x.ts+DB_PUB;
+function dbPend(x){
+  if(dbIsPub(x)&&!x.fil) return dbCom({id:x.id,u:x.u,v:0,ago:dbAgo(x.ts),t:x.texte,mine:1,rep:x.repN&&!x.parent?[{id:"r"+x.id,u:"nadia_k",v:2,ago:dbAgo(x.ts+DB_REP),t:"Merci, c'est un point intéressant. Tu as un lien vers ce que tu cites ?"}]:[]},x.cible,x.parent?1:0);
+  return `<div class="dbc pend"><div class="dbv"><b>·</b></div><div class="dbb"><div class="dbh"><b>@${esc(x.u)}</b><span class="dbst">${dbIsPub(x)?"Publiée":"En attente de relecture"}</span></div>${x.titre?`<p><b>${esc(x.titre)}</b></p>`:""}<p>${esc(x.texte)}</p>${dbIsPub(x)?"":`<p class="hint" style="margin:0">Toi seul le vois pour l'instant : il sera publié après relecture par l'équipe de modération.</p>`}</div></div>`;
+}
 /* La zone d'écriture, directement dans la page (plus de panneau qui s'ouvre) */
 function dbBox(cible,parent,ph,open){
   return `<div class="dbbox${open?" open":""}" data-cible="${esc(cible)}" data-parent="${esc(parent||"")}">
@@ -1800,7 +1823,7 @@ function dbPanel(mid){
   const L=(DB_COM[mid]||[]).slice().sort((a,b)=>DBSORT==="utile"?dbV(b)-dbV(a):0), mine=dbMine().filter(x=>x.cible===mid&&!x.parent), n=dbAll(mid);
   const th=DB_TH.filter(t=>t.m.includes(mid));
   return `<div class="dbpanel" data-mid="${esc(mid)}">
-    <p class="hint" style="margin:0 0 8px">Messages relus avant publication · <a href="#" data-dbrules>Règles du forum</a> · ▲ = utile ${DBDEMO}</p>
+    <div class="dbtop2"><p class="hint" style="margin:0">Messages relus avant publication · <a href="#" data-dbrules>Règles du forum</a> · ▲ = utile ${DBDEMO}</p>${dbFollowBtn(mid)}</div>
     ${n>1?`<div class="dbsorts"><a class="${DBSORT==="utile"?"on":""}" href="#" data-dbsort="utile">Les plus utiles</a><a class="${DBSORT==="rec"?"on":""}" href="#" data-dbsort="rec">Récents</a></div>`:""}
     ${mine.map(dbPend).join("")}${L.map(c=>dbCom(c,mid,0)).join("")||(mine.length?"":`<p class="dbempty" style="margin:4px 0 10px">Pas encore de message sur cette mesure.</p>`)}
     <div class="dbfoot">${dbBox(mid,"",n?"Ajouter un message…":"Lancer la discussion…")}</div>
@@ -1841,7 +1864,7 @@ const DBF={th:"",P:"",type:"",tri:"pop"};
 function dbList(){
   const L=dbItems(DBF).sort((a,b)=>DBF.tri==="pop"?b.hot-a.hot:DBF.tri==="peu"?a.n-b.n:a.i-b.i);
   const mine=dbMine().filter(x=>x.fil);
-  return `<p class="lead" style="margin-top:12px">Les discussions des lecteurs : sur une mesure, ou plus larges, sur un sujet ou un candidat. Les messages sont relus avant publication. ${DBDEMO}</p>
+  return `${dbActLink()}<p class="lead" style="margin-top:12px">Les discussions des lecteurs : sur une mesure, ou plus larges, sur un sujet ou un candidat. Les messages sont relus avant publication. ${DBDEMO}</p>
     <div class="dbfil"><select data-dbf="th"><option value="">Tous les sujets</option><option value="general"${DBF.th==="general"?" selected":""}>Général</option>${TH.map(t=>`<option value="${t.id}"${DBF.th===t.id?" selected":""}>${esc(t.t)}</option>`).join("")}</select>
       <select data-dbf="P"><option value="">Tous les candidats</option>${CK.map(P=>`<option value="${P}"${DBF.P===P?" selected":""}>${esc(C[P].cand)}</option>`).join("")}</select></div>
     <div class="hs" style="margin:10px 0">${[["","Tout"],["fil","Discussions"],["carte","Mesures commentées"]].map(([k,l])=>`<a class="chip${DBF.type===k?" on":""}" href="#" data-dbtype="${k}">${l}</a>`).join("")}<span style="flex:none;width:8px"></span>${[["pop","Populaires"],["rec","Récents"],["peu","Peu de réponses"]].map(([k,l])=>`<a class="chip${DBF.tri===k?" on":""}" href="#" data-dbtri="${k}">${l}</a>`).join("")}</div>
@@ -1856,7 +1879,7 @@ function vForumFil(id){
   $("#app").innerHTML=`<div class="dbtags" style="margin-top:10px">${dbTags(t)}</div>
     <h1 class="dbtitle">${esc(t.t)}</h1><div class="dbm">@${esc(t.u)} · ${esc(t.ago)} ${DBDEMO}</div>
     <p class="dbtxt">${esc(t.texte)}</p>${(t.src||[]).length?`<div class="dbs">${t.src.map(s=>`<span>↗ ${esc(s)}</span>`).join("")}</div>`:""}
-    <div class="dba" style="margin-top:8px"><button data-dbv="${t.id}" data-d="1" class="vb${my>0?" on":""}">▲ ${dbV(t)} utile</button><button data-dbfocus>Répondre</button><button data-dbflag>Signaler</button></div>
+    <div class="dba" style="margin-top:8px"><button data-dbv="${t.id}" data-d="1" class="vb${my>0?" on":""}">▲ ${dbV(t)} utile</button><button data-dbfocus>Répondre</button><button data-dbflag>Signaler</button>${dbFollowBtn(cible)}</div>
     ${t.m.filter(x=>MID[x]).length?`<div class="sec-h" style="margin-top:22px"><h2>Mesures reliées</h2></div><div class="list">${t.m.filter(x=>MID[x]).map(x=>row(MID[x])).join("")}</div>`:""}
     <div class="sec-h" style="margin-top:22px"><h2>${plural(t.n,"message","messages")}</h2></div>
     <div class="dbl">${mine.map(dbPend).join("")}${rep.map(c=>dbCom(c,cible,0)).join("")}<div class="dbfoot">${dbBox(cible,"","Répondre à la discussion…")}</div></div>`;
@@ -1885,7 +1908,7 @@ function vForumNouveau(qs){
   $("#dbn-go").onclick=()=>{
     const ti=$("#dbn-t").value.trim(), tx=$("#dbn-x").value, src=$("#dbn-u").value;
     if(ti.length<8){ $("#dbn-m").innerHTML=`<div class="dbwarn">Donne un titre à ta discussion (une question précise marche bien).</div>`; return; }
-    dbSubmit(tx,src,$("#dbn-m"),()=>{ const L=dbMine(); L.unshift({id:"m"+Date.now(),fil:true,titre:ti,texte:tx,u:USER?pseudoOf(USER):"toi",links:DBNEW.links}); LS.set("debat:mine",L.slice(0,30)); DBNEW=null; location.hash="#/forum"; });
+    dbSubmit(tx,src,$("#dbn-m"),()=>{ const L=dbMine(); L.unshift({id:"m"+Date.now(),ts:Date.now(),fil:true,titre:ti,texte:tx,u:USER?pseudoOf(USER):"toi",links:DBNEW.links}); LS.set("debat:mine",L.slice(0,30)); DBNEW=null; location.hash="#/forum"; });
   };
 }
 const dbNorm=s=>String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
@@ -1921,7 +1944,7 @@ document.addEventListener("click",e=>{
   if(e.target.closest("[data-dbtry]")){ e.preventDefault(); LS.set("debat:essai",1); const m=e.target.closest(".dbmsg"); if(m) m.innerHTML=""; return; }
   const sd=e.target.closest("[data-dbsend]");
   if(sd){ e.preventDefault(); const box=sd.closest(".dbbox"), tx=box.querySelector("textarea").value, src=box.querySelector("input").value;
-    return dbSubmit(tx,src,box.querySelector(".dbmsg"),()=>{ const L=dbMine(); L.unshift({id:"m"+Date.now(),cible:box.dataset.cible,parent:box.dataset.parent,texte:tx,u:USER?pseudoOf(USER):"toi"}); LS.set("debat:mine",L.slice(0,30)); dbRefresh(box); }); }
+    return dbSubmit(tx,src,box.querySelector(".dbmsg"),()=>{ const L=dbMine(); L.unshift({id:"m"+Date.now(),ts:Date.now(),cible:box.dataset.cible,parent:box.dataset.parent,texte:tx,u:USER?pseudoOf(USER):"toi"}); dbFollow(box.dataset.cible,true); LS.set("debat:mine",L.slice(0,30)); dbRefresh(box); }); }
   const lk=e.target.closest("[data-dblink]");
   if(lk){ e.preventDefault(); const [k,val]=lk.dataset.dblink.split("|"); if(!DBNEW.links.some(x=>x[0]===k&&x[1]===val)) DBNEW.links.push([k,val]); const keep={t:$("#dbn-t").value,x:$("#dbn-x").value,u:$("#dbn-u").value}; vForumNouveau(DBNEW.qs); $("#dbn-t").value=keep.t; $("#dbn-x").value=keep.x; $("#dbn-u").value=keep.u; $("#dbn-q").focus(); return; }
   const ul=e.target.closest("[data-dbunlink]");
@@ -1939,6 +1962,63 @@ document.addEventListener("focusout",e=>{ if(e.target.closest(".dbbox,.dbnew")) 
 /* toucher « Publier » avec le clavier ouvert : on garde le focus jusqu'au clic (sinon le clavier se ferme, l'écran saute et le clic tombe à côté) */
 document.addEventListener("pointerdown",e=>{ if(e.target.closest("[data-dbsend],#dbn-go")) e.preventDefault(); });
 document.addEventListener("change",e=>{ const s=e.target.closest("[data-dbf]"); if(!s) return; DBF[s.dataset.dbf]=s.value; dbRefresh(); });
+
+/* ---------- Suivre, notifications, « Mon activité » (démo) ---------- */
+const dbNotifs=()=>LS.get("debat:notifs")||[], dbSuivis=()=>LS.get("debat:suivis")||[];
+const dbShort=t=>t.length>60?t.slice(0,58)+"…":t;
+const dbAgo=ts=>{ const s=Math.max(0,(Date.now()-ts)/1000); return s<60?"à l'instant":s<3600?"il y a "+Math.round(s/60)+" min":s<86400?"il y a "+Math.round(s/3600)+" h":"il y a "+Math.round(s/86400)+" j"; };
+function dbLabel(c){ if(String(c).startsWith("fil:")){ const t=DB_TH.find(x=>"fil:"+x.id===c); return t?t.t:"une discussion"; } return MID[c]?MID[c].t:"une mesure"; }
+const dbHref=c=>String(c).startsWith("fil:")?"#/forum/"+c.slice(4):"#/m/"+encodeURIComponent(c)+"?forum";
+function dbFollow(c,on){ if(!c) return; const S=dbSuivis().filter(x=>x!==c); if(on){ S.unshift(c); const f=LS.get("debat:fts")||{}; if(!(c in f)){ f[c]=Date.now(); LS.set("debat:fts",f); } } LS.set("debat:suivis",S); }
+const dbFollowBtn=c=>{ const on=dbSuivis().includes(c); return `<button class="dbfollow${on?" on":""}" data-dbfollow="${esc(c)}" title="${on?"Ne plus suivre":"Être prévenu des nouveaux messages"}">${on?"🔔 Suivi":"Suivre"}</button>`; };
+function dbNotify(n){ const N=dbNotifs(); if(N.some(x=>x.id===n.id)) return; N.unshift({...n,ts:Date.now(),lu:false}); LS.set("debat:notifs",N.slice(0,50)); }
+const dbUnread=()=>dbNotifs().filter(x=>!x.lu).length;
+function dbSync(){
+  const now=Date.now(), L=dbMine(); let ch=false;
+  for(const x of L){ if(!x.ts) continue;
+    if(now>x.ts+DB_PUB&&!x.pubN){ x.pubN=1; ch=true; dbNotify({id:"pub-"+x.id,ic:"✓",txt:x.fil?`Ta discussion « ${dbShort(x.titre)} » a été publiée`:`Ton message dans « ${dbShort(dbLabel(x.cible))} » a été publié`,href:x.fil?"#/forum/activite":dbHref(x.cible)}); }
+    if(now>x.ts+DB_REP&&!x.repN&&!x.parent&&!x.fil){ x.repN=1; ch=true; dbNotify({id:"rep-"+x.id,ic:"↩",txt:`@nadia_k a répondu à ton message dans « ${dbShort(dbLabel(x.cible))} »`,href:dbHref(x.cible)}); } }
+  if(ch) LS.set("debat:mine",L);
+  const f=LS.get("debat:fts")||{}; let cf=false;
+  for(const c of dbSuivis()){ if(f[c]&&now>f[c]+15000&&!dbMine().some(x=>x.cible===c)){ dbNotify({id:"new-"+c,ic:"💬",txt:`2 nouveaux messages dans « ${dbShort(dbLabel(c))} », que tu suis`,href:dbHref(c)}); f[c]=0; cf=true; } }
+  if(cf) LS.set("debat:fts",f);
+  dbBadge(); return ch;
+}
+function dbBadge(){ const n=dbUnread();
+  document.querySelectorAll('.nav a[data-n="profil"]').forEach(a=>{ let b=a.querySelector(".dbbadge"); if(!n){ if(b) b.remove(); return; } if(!b){ b=document.createElement("span"); b.className="dbbadge"; a.appendChild(b); } b.textContent=n>9?"9+":n; });
+  const fr=$("#v1"); try{ const d=fr&&fr.contentDocument, x=d&&d.getElementById("dbp-n"); if(x) x.textContent=n?plural(n,"nouvelle notification","nouvelles notifications"):"Aucune nouvelle notification"; }catch(e){} }
+setInterval(()=>{ if(dbSync()&&/^#\/(forum|m\/)/.test(location.hash)&&!document.activeElement.closest?.(".dbbox,.dbnew")) dbRefreshSoft(); },3000);
+function dbRefreshSoft(){ const pn=document.querySelector(".dbpanel"); if(pn){ pn.outerHTML=dbPanel(pn.dataset.mid); return; } if(/^#\/forum/.test(location.hash)){ const y=scrollY; route(); scrollTo(0,y); } }
+const dbActLink=()=>{ const n=dbUnread(); return `<a class="dbact" href="#/forum/activite">🔔 Mon activité${n?` <span class="dbbadge in">${n}</span>`:""}</a>`; };
+function vForumActivite(){
+  backTop("Mon activité"); dbSync();
+  const N=dbNotifs(), M=dbMine(), S=dbSuivis(), P=LS.get("debat:prefs")||{rep:1,suivi:1,pub:1,push:0};
+  $("#app").innerHTML=`<p class="lead" style="margin-top:10px">Tes messages, ce que tu suis, et les notifications du forum. ${DBDEMO}</p>
+    <div class="sec-h" style="margin-top:18px"><h2>Notifications</h2>${N.some(x=>!x.lu)?`<a href="#" data-dbreadall>Tout marquer comme lu</a>`:""}</div>
+    <div class="list">${N.map(x=>`<a class="dbnotif${x.lu?"":" new"}" href="${x.href}" data-dbread="${x.id}"><span class="ic">${x.ic||"•"}</span><span style="flex:1;min-width:0">${esc(x.txt)}<small>${dbAgo(x.ts)}</small></span></a>`).join("")||`<p class="dbempty" style="padding:12px 14px;margin:0">Rien pour l'instant. Tu seras prévenu ici quand on te répond, quand ton message est publié, et quand il y a du nouveau dans ce que tu suis.</p>`}</div>
+    <div class="sec-h" style="margin-top:22px"><h2>Mes messages</h2></div>
+    <div class="list">${M.map(x=>`<a class="dbrow" href="${x.fil?"#/forum":dbHref(x.cible)}"><div style="min-width:0;flex:1"><div class="dbkind">${x.fil?"Discussion":"Message"} · <span style="color:${dbIsPub(x)?"#1f8a5b":"#3a6fd8"}">${dbIsPub(x)?"Publié":"En attente de relecture"}</span></div>
+      <div class="dbt dbclamp">${esc(x.titre||x.texte)}</div><div class="dbm">${x.fil?"":"dans « "+esc(dbShort(dbLabel(x.cible)))+" » · "}${x.ts?dbAgo(x.ts):""}${x.repN?" · 1 réponse":""}</div></div></a>`).join("")||`<p class="dbempty" style="padding:12px 14px;margin:0">Tu n'as encore rien publié.</p>`}</div>
+    <div class="sec-h" style="margin-top:22px"><h2>Je suis</h2></div>
+    <div class="list">${S.map(c=>`<div class="dbrow"><div style="min-width:0;flex:1"><div class="dbkind">${String(c).startsWith("fil:")?"Discussion":"Mesure"}</div><a class="dbt dbclamp" href="${dbHref(c)}" style="color:inherit">${esc(dbLabel(c))}</a></div>${dbFollowBtn(c)}</div>`).join("")||`<p class="dbempty" style="padding:12px 14px;margin:0">Touche « Suivre » sur une carte ou une discussion pour être prévenu des nouveaux messages. Ce que tu commentes est suivi automatiquement.</p>`}</div>
+    <div class="sec-h" style="margin-top:22px"><h2>Me prévenir</h2></div>
+    <div class="box">${[["rep","Quand on répond à mes messages"],["suivi","Quand il y a du nouveau dans ce que je suis"],["pub","Quand mon message est publié"],["push","Aussi par notification sur ce téléphone"]].map(([k,l])=>`<label class="dbpref"><input type="checkbox" data-dbpref="${k}"${P[k]?" checked":""}> ${l}</label>`).join("")}</div>`;
+  // ouvrir la page vaut lecture : le badge disparaît, les nouveautés restent surlignées jusqu'à la prochaine visite
+  LS.set("debat:notifs",N.map(x=>({...x,lu:true}))); dbBadge();
+}
+/* dans le profil (app intégrée) : un encart « Forum » en haut */
+function dbProfilBlock(w){ try{ const d=w.document, host=d.getElementById("profil"); if(!host) return; const old=d.getElementById("dbp"); if(old) old.remove();
+  const n=dbUnread(), el=d.createElement("div"); el.id="dbp";
+  el.style.cssText="display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e8e6e2;border-radius:14px;padding:14px 16px;margin:14px 0 4px;cursor:pointer;font:15px/1.4 'DM Sans',system-ui,sans-serif";
+  el.innerHTML=`<span style="font-size:22px">🔔</span><span style="flex:1"><b style="display:block">Mon activité sur le forum</b><span id="dbp-n" style="color:#6b6b6b;font-size:13.5px">${n?plural(n,"nouvelle notification","nouvelles notifications"):"Aucune nouvelle notification"}</span></span><span style="color:#7a3cff;font-weight:600">Voir →</span>`;
+  el.onclick=()=>{ location.hash="#/forum/activite"; };
+  host.insertBefore(el,host.firstChild); }catch(e){} }
+document.addEventListener("click",e=>{
+  const f=e.target.closest("[data-dbfollow]"); if(f){ e.preventDefault(); e.stopPropagation(); const c=f.dataset.dbfollow; dbFollow(c,!dbSuivis().includes(c)); f.outerHTML=dbFollowBtn(c); return; }
+  if(e.target.closest("[data-dbreadall]")){ e.preventDefault(); LS.set("debat:notifs",dbNotifs().map(x=>({...x,lu:true}))); dbBadge(); return dbRefresh(); }
+},true);
+document.addEventListener("change",e=>{ const k=e.target.dataset&&e.target.dataset.dbpref; if(!k) return; const P=LS.get("debat:prefs")||{rep:1,suivi:1,pub:1,push:0}; P[k]=e.target.checked?1:0; LS.set("debat:prefs",P); });
+addEventListener("load",()=>setTimeout(dbSync,500));
 
 function route(){
   const h=location.hash.replace(/^#/,"")||"/";
@@ -1965,7 +2045,7 @@ function route(){
   else if(p[0]==="candidats") vExplorer("candidats");
   else if(p[0]==="c") vCand(p[1]);
   else if(p[0]==="m") vMesure(p[1]);
-  else if(p[0]==="forum") p[1]==="nouveau"?vForumNouveau(qs||""):p[1]?vForumFil(p[1]):vExplorer("forum");
+  else if(p[0]==="forum") p[1]==="nouveau"?vForumNouveau(qs||""):p[1]==="activite"?vForumActivite():p[1]?vForumFil(p[1]):vExplorer("forum");
   else if(p[0]==="sondages") vSondages();
   else if(p[0]==="actus") vActus(p[1]);
   else if(p[0]==="chercher") vChercher(qs?new URLSearchParams(qs).get("q")||"":null);
