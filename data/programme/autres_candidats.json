@@ -9,9 +9,9 @@
     "#0f7c8c,#06414a",
     "#2b6f5e,#123b31"
    ],
-   "eco": "Édouard Philippe vise un déficit public sous 2,5 % du PIB en 2032, avec une « double règle d'or » et une baisse « massive » des dépenses publiques, dont les dépenses sociales hors santé. Plan de redressement détaillé annoncé après le programme.",
-   "ecoUrl": "https://lcp.fr/actualites/presidentielle-2027-promettant-des-reformes-radicales-edouard-philippe-cherche-une",
-   "note": "Programme « Croire en nous » (volume 1, 142 propositions) présenté le 18 novembre 2026. Un volume 2 (culture, sport, santé, institutions) est annoncé pour début 2027."
+   "eco": "Édouard Philippe vise un déficit public sous 2,5 % du PIB en fin de quinquennat, soit près de 150 milliards d'euros d'économies : moitié sur les dépenses sociales, un quart sur l'État et les collectivités, un quart sur la croissance. Règle d'or constitutionnelle et aucun nouvel impôt pendant cinq ans.",
+   "ecoUrl": "https://www.edouardphilippe.fr/programme/comptes-publics",
+   "note": "Programme « Croire en nous » (volume 1, 142 propositions) présenté le 18 novembre 2026, détaillé sur son site en 17 thèmes. Un volume 2 (culture, sport, santé, institutions) est annoncé pour début 2027."
   },
   "ATTAL": {
    "nom": "Renaissance",
@@ -331,9 +331,9 @@
     "#1d3557,#0b1a2e",
     "#264a73,#10233d"
    ],
-   "eco": "Dominique de Villepin vise un déficit public de 3 % du PIB en 2031, financé surtout par la suppression des niches fiscales et sociales et un « big bang » fiscal (neuf grands impôts, CSG à taux unique). Pas de chiffrage global détaillé publié.",
-   "ecoUrl": "https://lcp.fr/actualites/presidentielle-2027-dominique-villepin-veut-une-nouvelle-abolition-des-privileges-et-un",
-   "note": "Candidature annoncée le 20 novembre 2026. Propositions issues de ses textes de 2026 et de sa déclaration de candidature : pas encore de programme complet chiffré."
+   "eco": "Dominique de Villepin vise un déficit public de 2,9 % du PIB en 2031 (croissance supposée de 0,8 %), financé surtout par l'extinction des niches fiscales et sociales (environ 35 Md€ par an) et un « big bang » fiscal : neuf impôts, ISF rétabli, CSG élargie.",
+   "ecoUrl": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-1.html",
+   "note": "Candidature annoncée le 20 novembre 2026. Programme « Réussir à nouveau » : 258 propositions publiées sur le site de La France humaniste."
   }
  },
  "sections": [
@@ -1747,42 +1747,50 @@
   },
   {
    "partie": "Propositions annoncées",
+   "chapitre": "Sécurité",
+   "section": "Sécurité",
+   "intro": "",
+   "url": "https://www.edouardphilippe.fr/programme/securite",
+   "prog": "PHILIPPE"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Justice",
+   "section": "Justice",
+   "intro": "",
+   "url": "https://www.edouardphilippe.fr/programme/justice",
+   "prog": "PHILIPPE"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Défense",
+   "section": "Défense",
+   "intro": "",
+   "url": "https://www.edouardphilippe.fr/programme/defense",
+   "prog": "PHILIPPE"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Entreprises et industrie",
+   "section": "Entreprises et industrie",
+   "intro": "",
+   "url": "https://www.edouardphilippe.fr/programme/entreprises",
+   "prog": "PHILIPPE"
+  },
+  {
+   "partie": "Propositions annoncées",
    "chapitre": "Finances publiques",
    "section": "Finances publiques",
    "intro": "",
-   "url": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et",
+   "url": "https://www.edouardphilippe.fr/programme/comptes-publics",
    "prog": "PHILIPPE"
   },
   {
    "partie": "Propositions annoncées",
-   "chapitre": "Économie",
-   "section": "Économie",
+   "chapitre": "Protection de l'enfance",
+   "section": "Protection de l'enfance",
    "intro": "",
-   "url": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et",
-   "prog": "PHILIPPE"
-  },
-  {
-   "partie": "Propositions annoncées",
-   "chapitre": "Énergie",
-   "section": "Énergie",
-   "intro": "",
-   "url": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et",
-   "prog": "PHILIPPE"
-  },
-  {
-   "partie": "Propositions annoncées",
-   "chapitre": "Sécurité et justice",
-   "section": "Sécurité et justice",
-   "intro": "",
-   "url": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et",
-   "prog": "PHILIPPE"
-  },
-  {
-   "partie": "Propositions annoncées",
-   "chapitre": "Enseignement supérieur",
-   "section": "Enseignement supérieur",
-   "intro": "",
-   "url": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et",
+   "url": "https://www.edouardphilippe.fr/programme/protection-de-l-enfance",
    "prog": "PHILIPPE"
   },
   {
@@ -1790,7 +1798,39 @@
    "chapitre": "Logement",
    "section": "Logement",
    "intro": "",
-   "url": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et",
+   "url": "https://www.edouardphilippe.fr/programme/logement",
+   "prog": "PHILIPPE"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Handicap",
+   "section": "Handicap",
+   "intro": "",
+   "url": "https://www.edouardphilippe.fr/programme/handicap",
+   "prog": "PHILIPPE"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Intelligence artificielle",
+   "section": "Intelligence artificielle",
+   "intro": "",
+   "url": "https://www.edouardphilippe.fr/programme/intelligence-artificielle",
+   "prog": "PHILIPPE"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Énergie",
+   "section": "Énergie",
+   "intro": "",
+   "url": "https://www.edouardphilippe.fr/programme/energie",
+   "prog": "PHILIPPE"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Outre-mer",
+   "section": "Outre-mer",
+   "intro": "",
+   "url": "https://www.edouardphilippe.fr/programme/outre-mer",
    "prog": "PHILIPPE"
   },
   {
@@ -1798,7 +1838,15 @@
    "chapitre": "Finances publiques",
    "section": "Finances publiques",
    "intro": "",
-   "url": "https://www.publicsenat.fr/actualites/politique/dominique-de-villepin-annonce-sa-candidature-a-lelection-presidentielle-une-decision-lourde-et-difficile-declare-t-il",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-1.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Écologie",
+   "section": "Écologie",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-1.html",
    "prog": "VILLEPIN"
   },
   {
@@ -1806,23 +1854,7 @@
    "chapitre": "Fiscalité",
    "section": "Fiscalité",
    "intro": "",
-   "url": "https://lcp.fr/actualites/presidentielle-2027-dominique-villepin-veut-une-nouvelle-abolition-des-privileges-et-un",
-   "prog": "VILLEPIN"
-  },
-  {
-   "partie": "Propositions annoncées",
-   "chapitre": "Pouvoir d'achat",
-   "section": "Pouvoir d'achat",
-   "intro": "",
-   "url": "https://fr.headtopics.com/news/dominique-de-villepin-devoile-son-programme-economique-pour-90197322",
-   "prog": "VILLEPIN"
-  },
-  {
-   "partie": "Propositions annoncées",
-   "chapitre": "Retraites",
-   "section": "Retraites",
-   "intro": "",
-   "url": "https://www.lagazettefrance.fr/article/villepin-veut-inscrire-le-principe-de-la-negociation-sociale-dans-la-constitution",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-1.html",
    "prog": "VILLEPIN"
   },
   {
@@ -1830,15 +1862,223 @@
    "chapitre": "Institutions",
    "section": "Institutions",
    "intro": "",
-   "url": "https://www.lagazettefrance.fr/article/villepin-veut-inscrire-le-principe-de-la-negociation-sociale-dans-la-constitution",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-2.html",
    "prog": "VILLEPIN"
   },
   {
    "partie": "Propositions annoncées",
-   "chapitre": "Europe et défense",
-   "section": "Europe et défense",
+   "chapitre": "Justice",
+   "section": "Justice",
    "intro": "",
-   "url": "https://www.publicsenat.fr/actualites/politique/dominique-de-villepin-annonce-sa-candidature-a-lelection-presidentielle-une-decision-lourde-et-difficile-declare-t-il",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-3.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Médias",
+   "section": "Médias",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-3.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Sécurité",
+   "section": "Sécurité",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-3.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Intelligence artificielle",
+   "section": "Intelligence artificielle",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-4.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Défense",
+   "section": "Défense",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-6.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Immigration",
+   "section": "Immigration",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-6.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Fonction publique",
+   "section": "Fonction publique",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-6.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Territoires",
+   "section": "Territoires",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-8.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Outre-mer",
+   "section": "Outre-mer",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-9.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Europe et international",
+   "section": "Europe et international",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-10.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Pouvoir d'achat",
+   "section": "Pouvoir d'achat",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-12.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Logement",
+   "section": "Logement",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-12.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Transports",
+   "section": "Transports",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-12.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Énergie",
+   "section": "Énergie",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-12.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Agriculture et alimentation",
+   "section": "Agriculture et alimentation",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-12.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Santé",
+   "section": "Santé",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-13.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Solidarités et handicap",
+   "section": "Solidarités et handicap",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-14.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Enfance et jeunesse",
+   "section": "Enfance et jeunesse",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-15.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Grand âge",
+   "section": "Grand âge",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-15.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Travail et dialogue social",
+   "section": "Travail et dialogue social",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-16.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Retraites",
+   "section": "Retraites",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-16.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Vie associative et sport",
+   "section": "Vie associative et sport",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-17.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Égalité femmes-hommes",
+   "section": "Égalité femmes-hommes",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-18.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Économie et industrie",
+   "section": "Économie et industrie",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-19.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Éducation",
+   "section": "Éducation",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-20.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Recherche et université",
+   "section": "Recherche et université",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-21.html",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Culture",
+   "section": "Culture",
+   "intro": "",
+   "url": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-24.html",
    "prog": "VILLEPIN"
   },
   {
@@ -3796,332 +4036,3437 @@
    "src": "https://fr.qz.com/eric-zemmour-800000-postes-fonction-publique-111226"
   },
   {
-   "id": "philippe-0-2",
-   "s": 0,
-   "cle": false,
-   "t": "Introduire une dose de capitalisation dans le système de retraite",
-   "sous": [],
-   "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
-  },
-  {
-   "id": "philippe-0-3",
-   "s": 0,
-   "cle": false,
-   "t": "Après la réforme, confier le pilotage des retraites aux partenaires sociaux, avec une règle d'or d'équilibre",
-   "sous": [],
-   "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
-  },
-  {
    "id": "philippe-176-1",
    "s": 176,
    "cle": true,
-   "t": "Instaurer une « double règle d'or » obligeant le gouvernement et le Parlement à revenir vers l'équilibre budgétaire",
+   "t": "Instaurer un « état d'urgence narco » donnant des moyens exceptionnels dans les zones les plus touchées par le narcotrafic, jusqu'à l'usage ciblé de la reconnaissance faciale",
    "sous": [],
    "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+   "src": "https://www.edouardphilippe.fr/programme/securite"
   },
   {
    "id": "philippe-176-2",
    "s": 176,
    "cle": false,
-   "t": "Ramener le déficit public sous 2,5 % du PIB en 2032",
+   "t": "Utiliser la vidéoprotection avec intelligence artificielle pour identifier les casseurs et les criminels",
    "sous": [],
    "page": null,
-   "src": "https://lcp.fr/actualites/presidentielle-2027-promettant-des-reformes-radicales-edouard-philippe-cherche-une"
+   "src": "https://www.edouardphilippe.fr/programme/securite"
   },
   {
-   "id": "philippe-3-3",
-   "s": 3,
-   "cle": true,
-   "t": "Revenir sur les 35 heures",
-   "sous": [],
-   "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
-  },
-  {
-   "id": "philippe-3-4",
-   "s": 3,
-   "cle": true,
-   "t": "Instaurer trois jours de carence pour tous les arrêts maladie, dans le public comme dans le privé",
-   "sous": [],
-   "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
-  },
-  {
-   "id": "philippe-2-2",
-   "s": 2,
+   "id": "philippe-176-3",
+   "s": 176,
    "cle": false,
-   "t": "Réduire de 30 % le nombre d'allocataires du RSA",
+   "t": "Saisir l'argent et les biens des trafiquants (« fiche S financière ») et alourdir les amendes des consommateurs de drogue",
    "sous": [],
    "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+   "src": "https://www.edouardphilippe.fr/programme/securite"
   },
   {
-   "id": "philippe-2-3",
-   "s": 2,
-   "cle": false,
-   "t": "Suspendre automatiquement le RSA des délinquants condamnés",
+   "id": "philippe-176-4",
+   "s": 176,
+   "cle": true,
+   "t": "Donner aux maires un pouvoir de sanction renforcé contre les incivilités du quotidien",
    "sous": [],
    "page": null,
-   "src": "https://lcp.fr/actualites/presidentielle-2027-promettant-des-reformes-radicales-edouard-philippe-cherche-une"
+   "src": "https://www.edouardphilippe.fr/programme/securite"
+  },
+  {
+   "id": "philippe-176-5",
+   "s": 176,
+   "cle": true,
+   "t": "Prélever les amendes impayées directement sur les aides sociales",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/securite"
+  },
+  {
+   "id": "philippe-176-6",
+   "s": 176,
+   "cle": false,
+   "t": "Suspendre automatiquement le RSA des délinquants condamnés, sauf décision contraire du maire",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/securite"
+  },
+  {
+   "id": "philippe-176-7",
+   "s": 176,
+   "cle": false,
+   "t": "Appliquer aux casseurs les mêmes mesures de prévention que contre le terrorisme : fichier dédié, visites domiciliaires, contrôle administratif",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/securite"
+  },
+  {
+   "id": "philippe-176-8",
+   "s": 176,
+   "cle": false,
+   "t": "Mener des opérations « place nette » contre la drogue dans les boîtes de nuit et les festivals",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/securite"
+  },
+  {
+   "id": "philippe-176-9",
+   "s": 176,
+   "cle": false,
+   "t": "Combattre l'islamisme et éradiquer les Frères musulmans et les organisations qui y sont affiliées",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/securite"
   },
   {
    "id": "philippe-177-1",
    "s": 177,
    "cle": true,
-   "t": "Baisser de 50 milliards d'euros les impôts de production, financés par une baisse de 50 milliards d'euros des aides aux entreprises",
+   "t": "Prononcer des peines de prison courtes dès la première infraction",
    "sous": [],
    "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+   "src": "https://www.edouardphilippe.fr/programme/justice"
   },
   {
    "id": "philippe-177-2",
    "s": 177,
    "cle": false,
-   "t": "Supprimer l'objectif « zéro artificialisation nette » (ZAN)",
+   "t": "Supprimer le juge d'application des peines : une peine prononcée serait une peine exécutée",
    "sous": [],
    "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+   "src": "https://www.edouardphilippe.fr/programme/justice"
   },
   {
-   "id": "philippe-178-1",
-   "s": 178,
-   "cle": true,
-   "t": "Construire 8 réacteurs nucléaires en plus des 6 déjà annoncés, soit 14 au total",
+   "id": "philippe-177-3",
+   "s": 177,
+   "cle": false,
+   "t": "Construire 30 000 places de prison pour les peines courtes, avec une loi d'accélération des prisons",
    "sous": [],
    "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+   "src": "https://www.edouardphilippe.fr/programme/justice"
+  },
+  {
+   "id": "philippe-177-4",
+   "s": 177,
+   "cle": false,
+   "t": "Rétablir les juges de paix pour une justice civile plus rapide et plus proche",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/justice"
+  },
+  {
+   "id": "philippe-177-5",
+   "s": 177,
+   "cle": false,
+   "t": "Interdire aux magistrats de se syndiquer",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/justice"
+  },
+  {
+   "id": "philippe-177-6",
+   "s": 177,
+   "cle": false,
+   "t": "Refondre le code de procédure pénale en 100 jours et utiliser l'IA pour accélérer l'instruction des dossiers",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/justice"
+  },
+  {
+   "id": "philippe-177-7",
+   "s": 177,
+   "cle": false,
+   "t": "Instaurer des peines minimales pour les violences graves contre les policiers, les élus et les enseignants",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/justice"
+  },
+  {
+   "id": "philippe-177-8",
+   "s": 177,
+   "cle": false,
+   "t": "Lever l'excuse de minorité et permettre la comparution immédiate des mineurs pour les faits de narcotrafic",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/justice"
+  },
+  {
+   "id": "philippe-177-9",
+   "s": 177,
+   "cle": false,
+   "t": "Permettre au garde des Sceaux d'adresser des instructions individuelles écrites aux procureurs",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/justice"
+  },
+  {
+   "id": "philippe-177-10",
+   "s": 177,
+   "cle": false,
+   "t": "Permettre aux justiciables de saisir directement le Conseil supérieur de la magistrature",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/justice"
   },
   {
    "id": "philippe-6-3",
    "s": 6,
    "cle": false,
-   "t": "Fixer des quotas d'immigration « choisie » pour la restauration, les hôpitaux et l'agriculture",
+   "t": "Instaurer des quotas pour choisir l'immigration de travail",
    "sous": [],
    "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+   "src": "https://www.edouardphilippe.fr/programme/immigration"
   },
   {
    "id": "philippe-6-4",
    "s": 6,
    "cle": true,
-   "t": "Instaurer un moratoire sur le regroupement familial",
+   "t": "Suspendre le regroupement familial pendant tout le quinquennat",
    "sous": [],
    "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+   "src": "https://www.edouardphilippe.fr/programme/immigration"
+  },
+  {
+   "id": "philippe-6-5",
+   "s": 6,
+   "cle": false,
+   "t": "Utiliser des « centres de retour » à l'étranger pour éloigner les étrangers en situation irrégulière",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/immigration"
+  },
+  {
+   "id": "philippe-6-6",
+   "s": 6,
+   "cle": true,
+   "t": "Dénoncer l'accord franco-algérien de 1968",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/immigration"
+  },
+  {
+   "id": "philippe-6-7",
+   "s": 6,
+   "cle": false,
+   "t": "Rétablir la double peine : un étranger qui commet un délit serait expulsé et perdrait ses aides sociales",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/immigration"
+  },
+  {
+   "id": "philippe-6-8",
+   "s": 6,
+   "cle": false,
+   "t": "Mettre fin à toute acquisition automatique de la nationalité française",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/immigration"
+  },
+  {
+   "id": "philippe-6-9",
+   "s": 6,
+   "cle": false,
+   "t": "Faire voter chaque année par le Parlement la liste des pays sûrs et supprimer l'asile à vie",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/immigration"
+  },
+  {
+   "id": "philippe-6-10",
+   "s": 6,
+   "cle": false,
+   "t": "Aligner les aides sociales versées aux étrangers sur la moyenne européenne",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/immigration"
+  },
+  {
+   "id": "philippe-6-11",
+   "s": 6,
+   "cle": false,
+   "t": "Vérifier les ressources des étudiants étrangers et appliquer la hausse des frais d'inscription hors Union européenne",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/immigration"
+  },
+  {
+   "id": "philippe-6-12",
+   "s": 6,
+   "cle": false,
+   "t": "Créer un régime européen de sanctions contre les passeurs : gel des avoirs et interdiction de territoire",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/immigration"
+  },
+  {
+   "id": "philippe-178-1",
+   "s": 178,
+   "cle": true,
+   "t": "Adopter une loi de « massification » des armées : plus de soldats, de réservistes, de munitions et de drones",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/defense"
+  },
+  {
+   "id": "philippe-178-2",
+   "s": 178,
+   "cle": true,
+   "t": "Rétablir un service national obligatoire et universel, avec une option militaire et plusieurs options civiles",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/defense"
+  },
+  {
+   "id": "philippe-178-3",
+   "s": 178,
+   "cle": false,
+   "t": "Passer de 45 000 à 250 000 réservistes",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/defense"
+  },
+  {
+   "id": "philippe-178-4",
+   "s": 178,
+   "cle": false,
+   "t": "Consacrer au moins 1 % du PIB des pays de l'Union européenne à des armements fabriqués en Europe",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/defense"
+  },
+  {
+   "id": "philippe-178-5",
+   "s": 178,
+   "cle": false,
+   "t": "Soutenir pleinement l'Ukraine, qui a vocation à intégrer l'OTAN",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/defense"
+  },
+  {
+   "id": "philippe-178-6",
+   "s": 178,
+   "cle": false,
+   "t": "Moderniser la dissuasion nucléaire",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/defense"
+  },
+  {
+   "id": "philippe-178-7",
+   "s": 178,
+   "cle": false,
+   "t": "Construire en France des avions bombardiers d'eau (« Canadairs ») contre les incendies",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/defense"
+  },
+  {
+   "id": "philippe-3-3",
+   "s": 3,
+   "cle": true,
+   "t": "Laisser chaque entreprise fixer sa durée du travail par accord : fin du caractère obligatoire des 35 heures",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/travail"
+  },
+  {
+   "id": "philippe-3-4",
+   "s": 3,
+   "cle": false,
+   "t": "Supprimer les cotisations patronales au-delà de la 37e heure",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/travail"
+  },
+  {
+   "id": "philippe-3-5",
+   "s": 3,
+   "cle": true,
+   "t": "Instaurer trois jours de carence pour tous les arrêts maladie, dans le privé comme dans le public",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/travail"
+  },
+  {
+   "id": "philippe-3-6",
+   "s": 3,
+   "cle": false,
+   "t": "Augmenter le salaire net grâce aux économies sur la dépense sociale (retraites, chômage, arrêts maladie)",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/travail"
+  },
+  {
+   "id": "philippe-3-7",
+   "s": 3,
+   "cle": false,
+   "t": "Développer l'apprentissage",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/travail"
+  },
+  {
+   "id": "philippe-3-8",
+   "s": 3,
+   "cle": false,
+   "t": "Imposer un délai de 3 à 6 mois entre un arrêt maladie et une rupture conventionnelle",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/travail"
+  },
+  {
+   "id": "philippe-3-9",
+   "s": 3,
+   "cle": false,
+   "t": "Créer un droit à la reconversion pour les salariés dont le métier est menacé par l'IA",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/travail"
+  },
+  {
+   "id": "philippe-3-10",
+   "s": 3,
+   "cle": false,
+   "t": "Mieux former, recruter et accompagner les salariés de plus de 50 ans, et développer retraite progressive et cumul emploi-retraite",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/travail"
   },
   {
    "id": "philippe-179-1",
    "s": 179,
    "cle": true,
-   "t": "Autoriser la reconnaissance faciale, de façon ciblée et strictement encadrée",
+   "t": "Baisser de 50 milliards d'euros les impôts de production, financés par 50 milliards d'euros d'aides aux entreprises en moins",
    "sous": [],
    "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+   "src": "https://www.edouardphilippe.fr/programme/entreprises"
   },
   {
    "id": "philippe-179-2",
    "s": 179,
    "cle": false,
-   "t": "Utiliser la vidéoprotection assistée par l'IA pour identifier casseurs et criminels",
+   "t": "Ne créer aucune nouvelle norme pendant le quinquennat et en finir avec la surtransposition des règles européennes",
    "sous": [],
    "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+   "src": "https://www.edouardphilippe.fr/programme/entreprises"
   },
   {
    "id": "philippe-179-3",
    "s": 179,
    "cle": false,
-   "t": "Construire 30 000 places de prison supplémentaires",
+   "t": "Créer un « livret Capital France » et des fonds de capitalisation pour orienter l'épargne vers les entreprises françaises",
    "sous": [],
    "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+   "src": "https://www.edouardphilippe.fr/programme/entreprises"
   },
   {
    "id": "philippe-179-4",
    "s": 179,
    "cle": false,
-   "t": "Interdire aux magistrats de se syndiquer",
+   "t": "Protéger le marché européen face à la concurrence chinoise : transferts de technologie, quotas de production et coentreprises imposés",
    "sous": [],
    "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+   "src": "https://www.edouardphilippe.fr/programme/entreprises"
+  },
+  {
+   "id": "philippe-179-5",
+   "s": 179,
+   "cle": false,
+   "t": "Achever le marché unique européen et l'Union des marchés de capitaux",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/entreprises"
+  },
+  {
+   "id": "philippe-179-6",
+   "s": 179,
+   "cle": false,
+   "t": "Supprimer la Commission nationale du débat public (CNDP) et diviser par deux les délais des projets",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/entreprises"
+  },
+  {
+   "id": "philippe-179-7",
+   "s": 179,
+   "cle": false,
+   "t": "Créer un « super Dutreil agricole » pour défiscaliser la transmission des exploitations",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/entreprises"
+  },
+  {
+   "id": "philippe-179-8",
+   "s": 179,
+   "cle": false,
+   "t": "Remplacer les négociations commerciales annuelles par des accords pluriannuels",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/entreprises"
+  },
+  {
+   "id": "philippe-179-9",
+   "s": 179,
+   "cle": false,
+   "t": "Créer 100 « territoires de souveraineté alimentaire »",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/entreprises"
+  },
+  {
+   "id": "philippe-180-1",
+   "s": 180,
+   "cle": true,
+   "t": "Inscrire une règle d'or budgétaire dans la Constitution, adoptée par référendum dès le début du quinquennat",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/comptes-publics"
+  },
+  {
+   "id": "philippe-180-2",
+   "s": 180,
+   "cle": true,
+   "t": "Ramener le déficit public sous 2,5 % du PIB d'ici la fin du quinquennat, soit près de 150 milliards d'euros d'économies",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/comptes-publics"
+  },
+  {
+   "id": "philippe-180-3",
+   "s": 180,
+   "cle": true,
+   "t": "Ne créer aucun nouvel impôt pendant cinq ans",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/comptes-publics"
+  },
+  {
+   "id": "philippe-180-4",
+   "s": 180,
+   "cle": false,
+   "t": "Fusionner, supprimer ou privatiser une trentaine d'agences et d'opérateurs de l'État, dont France Travail (privatisé) et le CESE (supprimé)",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/comptes-publics"
+  },
+  {
+   "id": "philippe-180-5",
+   "s": 180,
+   "cle": false,
+   "t": "Réduire de 30 % le nombre d'allocataires du RSA par un suivi renforcé, l'orientation vers les métiers en tension et la lutte contre les abus",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/comptes-publics"
+  },
+  {
+   "id": "philippe-180-6",
+   "s": 180,
+   "cle": false,
+   "t": "Ne pas réduire les dépenses de santé, mais mieux les dépenser (prévention, technologies)",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/comptes-publics"
+  },
+  {
+   "id": "philippe-0-2",
+   "s": 0,
+   "cle": true,
+   "t": "Généraliser la capitalisation collective à tous les salariés et ouvrir un plan d'épargne retraite à chaque Français",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/retraites"
+  },
+  {
+   "id": "philippe-0-3",
+   "s": 0,
+   "cle": false,
+   "t": "Verser 500 € de l'État sur un plan d'épargne retraite pour chaque Français dès son premier emploi",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/retraites"
+  },
+  {
+   "id": "philippe-0-4",
+   "s": 0,
+   "cle": false,
+   "t": "Confier la gestion des retraites aux partenaires sociaux une fois le système revenu à l'équilibre",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/retraites"
+  },
+  {
+   "id": "philippe-0-5",
+   "s": 0,
+   "cle": false,
+   "t": "Ne pas augmenter les cotisations retraite ni baisser les pensions",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/retraites"
+  },
+  {
+   "id": "philippe-0-6",
+   "s": 0,
+   "cle": false,
+   "t": "Maintenir les départs anticipés : 55 ans pour les personnes handicapées, 60 ans en cas d'incapacité permanente, 62 ans en cas d'invalidité, carrières longues",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/retraites"
+  },
+  {
+   "id": "philippe-5-5",
+   "s": 5,
+   "cle": true,
+   "t": "Créer un statut d'« école publique autonome » : méthodes, horaires, organisation, uniforme et participation au recrutement des équipes",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/ecole"
   },
   {
    "id": "philippe-5-6",
    "s": 5,
-   "cle": true,
-   "t": "Donner plus d'autonomie aux établissements : rythmes, horaires, discipline, recrutement des équipes, choix de l'uniforme",
+   "cle": false,
+   "t": "Ouvrir un soutien scolaire universel, avec d'anciens professeurs, des étudiants volontaires et un assistant IA",
    "sous": [],
    "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+   "src": "https://www.edouardphilippe.fr/programme/ecole"
   },
   {
    "id": "philippe-5-7",
    "s": 5,
    "cle": false,
-   "t": "Publier les évaluations de chaque établissement scolaire",
+   "t": "Réduire la taille des classes en maternelle et en primaire",
    "sous": [],
    "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+   "src": "https://www.edouardphilippe.fr/programme/ecole"
   },
   {
    "id": "philippe-5-8",
    "s": 5,
    "cle": false,
-   "t": "Réduire le nombre d'élèves par classe en maternelle et en primaire",
+   "t": "Apprendre à lire dès la maternelle et recentrer le primaire sur lire, écrire, compter",
    "sous": [],
    "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+   "src": "https://www.edouardphilippe.fr/programme/ecole"
   },
   {
-   "id": "philippe-5-5",
+   "id": "philippe-5-9",
    "s": 5,
    "cle": false,
-   "t": "Recréer des écoles normales pour former les enseignants et reconnaître le métier d'AESH",
+   "t": "Recréer des écoles normales et ouvrir le métier d'enseignant à des professionnels extérieurs",
    "sous": [],
    "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+   "src": "https://www.edouardphilippe.fr/programme/ecole"
   },
   {
-   "id": "philippe-180-1",
-   "s": 180,
+   "id": "philippe-5-10",
+   "s": 5,
    "cle": false,
-   "t": "Laisser les universités choisir leur mode de sélection des étudiants",
+   "t": "Interdire le téléphone portable à l'école, au collège et au lycée, avec confiscation immédiate",
    "sous": [],
    "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+   "src": "https://www.edouardphilippe.fr/programme/ecole"
   },
   {
-   "id": "philippe-180-2",
-   "s": 180,
+   "id": "philippe-5-11",
+   "s": 5,
    "cle": false,
-   "t": "Fermer les formations aux faibles taux de diplomation et d'insertion",
+   "t": "Aucune IA à l'école avant le collège, puis une intégration progressive au lycée",
    "sous": [],
    "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+   "src": "https://www.edouardphilippe.fr/programme/ecole"
+  },
+  {
+   "id": "philippe-5-12",
+   "s": 5,
+   "cle": true,
+   "t": "Créer une « amende de responsabilisation scolaire » pour les parents d'enfants harceleurs, perturbateurs ou absentéistes",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/ecole"
+  },
+  {
+   "id": "philippe-5-13",
+   "s": 5,
+   "cle": false,
+   "t": "Publier les évaluations de chaque établissement auprès des parents et des élus",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/ecole"
+  },
+  {
+   "id": "philippe-5-14",
+   "s": 5,
+   "cle": false,
+   "t": "Faire compter les notes de juin dans le bulletin de l'année suivante",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/ecole"
+  },
+  {
+   "id": "philippe-5-15",
+   "s": 5,
+   "cle": false,
+   "t": "Assumer la sélection à l'université et fermer les formations aux faibles taux de diplomation et d'insertion",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/ecole"
+  },
+  {
+   "id": "philippe-5-16",
+   "s": 5,
+   "cle": false,
+   "t": "Former 100 000 ingénieurs par an d'ici cinq ans, contre 40 000 aujourd'hui",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/ecole"
+  },
+  {
+   "id": "philippe-5-17",
+   "s": 5,
+   "cle": false,
+   "t": "Reconnaître le métier d'AESH (accompagnant d'élèves en situation de handicap)",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/ecole"
+  },
+  {
+   "id": "philippe-4-5",
+   "s": 4,
+   "cle": true,
+   "t": "Permettre un temps partiel parental payé à 100 % pour un travail à 80 %, pendant deux mois après le congé parental",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/famille"
+  },
+  {
+   "id": "philippe-4-6",
+   "s": 4,
+   "cle": false,
+   "t": "Lancer un « plan Marshall » pour la garde d'enfants",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/famille"
+  },
+  {
+   "id": "philippe-4-7",
+   "s": 4,
+   "cle": false,
+   "t": "Doubler les plafonds de donation du vivant aux enfants et petits-enfants pendant les trois premières années du quinquennat",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/famille"
   },
   {
    "id": "philippe-181-1",
    "s": 181,
    "cle": true,
-   "t": "Supprimer les frais de notaire pour le premier achat d'une résidence principale par les moins de 35 ans",
+   "t": "Créer un « droit de savoir » : les parents pourraient faire vérifier par la police les antécédents d'un adulte proche de leur enfant",
    "sous": [],
    "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+   "src": "https://www.edouardphilippe.fr/programme/protection-de-l-enfance"
   },
   {
-   "id": "villepin-182-1",
+   "id": "philippe-181-2",
+   "s": 181,
+   "cle": true,
+   "t": "Rendre imprescriptibles les crimes commis sur des mineurs",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/protection-de-l-enfance"
+  },
+  {
+   "id": "philippe-181-3",
+   "s": 181,
+   "cle": false,
+   "t": "Écarter immédiatement un adulte visé par une plainte concernant un enfant, sans attendre la fin de l'enquête",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/protection-de-l-enfance"
+  },
+  {
+   "id": "philippe-181-4",
+   "s": 181,
+   "cle": false,
+   "t": "Contrôler tous les lieux d'accueil d'enfants au moins tous les 3 ans, contre 6 aujourd'hui, avec pouvoir de fermeture",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/protection-de-l-enfance"
+  },
+  {
+   "id": "philippe-181-5",
+   "s": 181,
+   "cle": false,
+   "t": "Vérifier les antécédents de tous les adultes qui encadrent des enfants (certificats d'honorabilité)",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/protection-de-l-enfance"
+  },
+  {
+   "id": "philippe-181-6",
+   "s": 181,
+   "cle": false,
+   "t": "Renforcer la responsabilité pénale des plateformes pour les contenus pédopornographiques",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/protection-de-l-enfance"
+  },
+  {
+   "id": "philippe-181-7",
+   "s": 181,
+   "cle": false,
+   "t": "Réécrire la loi d'interdiction des réseaux sociaux aux moins de 15 ans avec un groupe transpartisan",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/protection-de-l-enfance"
+  },
+  {
+   "id": "philippe-182-1",
    "s": 182,
    "cle": true,
-   "t": "Ramener le déficit public à 3 % du PIB d'ici 2031",
+   "t": "Construire 4 millions de logements en dix ans, soit 400 000 par an",
    "sous": [],
    "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/dominique-de-villepin-annonce-sa-candidature-a-lelection-presidentielle-une-decision-lourde-et-difficile-declare-t-il"
+   "src": "https://www.edouardphilippe.fr/programme/logement"
   },
   {
-   "id": "villepin-182-2",
+   "id": "philippe-182-2",
    "s": 182,
    "cle": true,
-   "t": "Supprimer progressivement toutes les niches fiscales et sociales par une « grande loi d'extinction » (« nouvelle nuit du 4 août »)",
+   "t": "Supprimer les « frais de notaire » pour le premier achat des moins de 35 ans",
    "sous": [],
    "page": null,
-   "src": "https://lcp.fr/actualites/presidentielle-2027-dominique-villepin-veut-une-nouvelle-abolition-des-privileges-et-un"
+   "src": "https://www.edouardphilippe.fr/programme/logement"
   },
   {
-   "id": "villepin-183-1",
-   "s": 183,
+   "id": "philippe-182-3",
+   "s": 182,
    "cle": false,
-   "t": "Simplifier le système fiscal autour de neuf grands impôts",
+   "t": "Instaurer un moratoire de cinq ans sur les normes de construction et d'habitation",
    "sous": [],
    "page": null,
-   "src": "https://lcp.fr/actualites/presidentielle-2027-dominique-villepin-veut-une-nouvelle-abolition-des-privileges-et-un"
+   "src": "https://www.edouardphilippe.fr/programme/logement"
   },
   {
-   "id": "villepin-183-2",
+   "id": "philippe-182-4",
+   "s": 182,
+   "cle": false,
+   "t": "Affecter aux maires la TVA sur les logements neufs de leur commune",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/logement"
+  },
+  {
+   "id": "philippe-182-5",
+   "s": 182,
+   "cle": false,
+   "t": "Appliquer un prélèvement forfaitaire unique aux revenus de la location longue durée",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/logement"
+  },
+  {
+   "id": "philippe-182-6",
+   "s": 182,
+   "cle": false,
+   "t": "Supprimer l'IFI sur les logements loués en longue durée",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/logement"
+  },
+  {
+   "id": "philippe-182-7",
+   "s": 182,
+   "cle": true,
+   "t": "Geler pendant le quinquennat les paliers de la RE2020 et l'interdiction de louer les passoires thermiques",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/logement"
+  },
+  {
+   "id": "philippe-182-8",
+   "s": 182,
+   "cle": false,
+   "t": "Laisser les maires décider d'encadrer ou non les loyers et attribuer les logements sociaux",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/logement"
+  },
+  {
+   "id": "philippe-182-9",
+   "s": 182,
+   "cle": false,
+   "t": "Appliquer des surloyers aux locataires du parc social qui dépassent les plafonds de revenus",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/logement"
+  },
+  {
+   "id": "philippe-182-10",
+   "s": 182,
+   "cle": false,
+   "t": "Permettre aux préfets d'expulser un locataire HLM condamné pour des troubles graves et répétés à l'ordre public",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/logement"
+  },
+  {
+   "id": "philippe-183-1",
    "s": 183,
    "cle": true,
-   "t": "Rétablir un impôt sur la fortune, sous la forme d'un impôt unique sur toutes les formes de patrimoine",
+   "t": "Garantir une solution d'accompagnement à chaque enfant et adulte handicapé, avec une loi sur l'école inclusive",
    "sous": [],
    "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/dominique-de-villepin-annonce-sa-candidature-a-lelection-presidentielle-une-decision-lourde-et-difficile-declare-t-il"
+   "src": "https://www.edouardphilippe.fr/programme/handicap"
   },
   {
-   "id": "villepin-183-3",
+   "id": "philippe-183-2",
    "s": 183,
    "cle": false,
-   "t": "Taxer plus fortement les successions, en exonérant totalement les transmissions faites de son vivant",
+   "t": "Garantir 15 jours de répit par an aux proches aidants les plus mobilisés",
    "sous": [],
    "page": null,
-   "src": "https://lcp.fr/actualites/presidentielle-2027-dominique-villepin-veut-une-nouvelle-abolition-des-privileges-et-un"
+   "src": "https://www.edouardphilippe.fr/programme/handicap"
   },
   {
-   "id": "villepin-183-4",
+   "id": "philippe-183-3",
    "s": 183,
-   "cle": true,
-   "t": "Basculer plus de 200 milliards d'euros de cotisations salariales et patronales vers une CSG à taux unique, élargie aux dépenses d'intelligence artificielle",
+   "cle": false,
+   "t": "Permettre le cumul intégral de l'AAH et d'un salaire pendant un an après une reprise d'emploi, contre 6 mois aujourd'hui",
    "sous": [],
    "page": null,
-   "src": "https://lcp.fr/actualites/presidentielle-2027-dominique-villepin-veut-une-nouvelle-abolition-des-privileges-et-un"
+   "src": "https://www.edouardphilippe.fr/programme/handicap"
   },
   {
-   "id": "villepin-184-1",
+   "id": "philippe-183-4",
+   "s": 183,
+   "cle": false,
+   "t": "Imposer à la MDPH une première réponse sous 2 mois et une décision définitive sous 3 mois",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/handicap"
+  },
+  {
+   "id": "philippe-183-5",
+   "s": 183,
+   "cle": false,
+   "t": "Créer 100 000 places en habitat partagé et inclusif d'ici 2035",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/handicap"
+  },
+  {
+   "id": "philippe-184-1",
    "s": 184,
    "cle": false,
-   "t": "Augmenter le salaire net d'environ 200 € par mois en moyenne en rapprochant le brut du net",
+   "t": "Instaurer une préférence européenne dans les achats technologiques (« Buy European Tech Act »)",
    "sous": [],
    "page": null,
-   "src": "https://fr.headtopics.com/news/dominique-de-villepin-devoile-son-programme-economique-pour-90197322"
+   "src": "https://www.edouardphilippe.fr/programme/intelligence-artificielle"
   },
   {
-   "id": "villepin-185-1",
+   "id": "philippe-184-2",
+   "s": 184,
+   "cle": true,
+   "t": "Créer des « zones d'accélération de l'IA » pour faire de la France le leader européen des data centers",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/intelligence-artificielle"
+  },
+  {
+   "id": "philippe-184-3",
+   "s": 184,
+   "cle": false,
+   "t": "Lancer un grand plan de transformation des services publics par l'IA",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/intelligence-artificielle"
+  },
+  {
+   "id": "philippe-184-4",
+   "s": 184,
+   "cle": false,
+   "t": "Lancer un plan « Horizon 2050 » pour succéder à France 2030 : un euro public pour un euro privé",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/intelligence-artificielle"
+  },
+  {
+   "id": "philippe-184-5",
+   "s": 184,
+   "cle": false,
+   "t": "Créer un « bouclier cyber » et lutter contre la désinformation et les ingérences étrangères",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/intelligence-artificielle"
+  },
+  {
+   "id": "philippe-185-1",
    "s": 185,
    "cle": true,
-   "t": "Passer à une retraite par points où chacun choisit son âge de départ, la valeur du point étant fixée par les partenaires sociaux",
+   "t": "Lancer 8 EPR en plus des 6 déjà prévus, soit 14 nouveaux réacteurs nucléaires",
    "sous": [],
    "page": null,
-   "src": "https://www.lagazettefrance.fr/article/villepin-veut-inscrire-le-principe-de-la-negociation-sociale-dans-la-constitution"
+   "src": "https://www.edouardphilippe.fr/programme/energie"
   },
   {
-   "id": "villepin-185-2",
+   "id": "philippe-185-2",
    "s": 185,
    "cle": false,
-   "t": "Préparer la réforme des retraites par une conférence sociale, une convention citoyenne et, si nécessaire, un référendum",
+   "t": "Porter la part du fret ferroviaire à 20 % d'ici la fin du quinquennat, contre moins de 10 % aujourd'hui",
    "sous": [],
    "page": null,
-   "src": "https://www.lagazettefrance.fr/article/villepin-veut-inscrire-le-principe-de-la-negociation-sociale-dans-la-constitution"
+   "src": "https://www.edouardphilippe.fr/programme/energie"
   },
   {
-   "id": "villepin-186-1",
-   "s": 186,
+   "id": "philippe-185-3",
+   "s": 185,
    "cle": false,
-   "t": "Inscrire le principe de la négociation sociale dans la loi, voire dans la Constitution, via une « charte sociale »",
+   "t": "Verser la même aide à l'achat d'une voiture électrique d'occasion que pour une neuve",
    "sous": [],
    "page": null,
-   "src": "https://www.lagazettefrance.fr/article/villepin-veut-inscrire-le-principe-de-la-negociation-sociale-dans-la-constitution"
+   "src": "https://www.edouardphilippe.fr/programme/energie"
   },
   {
-   "id": "villepin-186-2",
-   "s": 186,
+   "id": "philippe-185-4",
+   "s": 185,
    "cle": false,
-   "t": "Rompre avec l'« hyperprésidentialité » et relancer le référendum pour consulter directement les citoyens",
+   "t": "Lancer un plan « Messmer » de la géothermie et du biométhane avec les collectivités et les agriculteurs",
    "sous": [],
    "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/dominique-de-villepin-annonce-sa-candidature-a-lelection-presidentielle-une-decision-lourde-et-difficile-declare-t-il"
+   "src": "https://www.edouardphilippe.fr/programme/energie"
+  },
+  {
+   "id": "philippe-185-5",
+   "s": 185,
+   "cle": false,
+   "t": "Renforcer le prix du carbone aux frontières européennes",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/energie"
+  },
+  {
+   "id": "philippe-7-3",
+   "s": 7,
+   "cle": false,
+   "t": "Climatiser massivement les lieux accueillant des personnes fragiles et rafraîchir Ehpad et logements sociaux par des réseaux de froid",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/adaptation-climatique"
+  },
+  {
+   "id": "philippe-7-4",
+   "s": 7,
+   "cle": false,
+   "t": "Réutiliser 10 % des eaux usées traitées, contre moins de 1 % aujourd'hui",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/adaptation-climatique"
+  },
+  {
+   "id": "philippe-7-5",
+   "s": 7,
+   "cle": false,
+   "t": "Accélérer le stockage de l'eau agricole",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/adaptation-climatique"
+  },
+  {
+   "id": "philippe-7-6",
+   "s": 7,
+   "cle": false,
+   "t": "Ne plus ajouter de règles françaises aux normes européennes en agriculture (« zéro surtransposition »)",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/adaptation-climatique"
+  },
+  {
+   "id": "philippe-7-7",
+   "s": 7,
+   "cle": false,
+   "t": "Lancer un plan national pour rendre les rivières baignables",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/adaptation-climatique"
+  },
+  {
+   "id": "philippe-186-1",
+   "s": 186,
+   "cle": true,
+   "t": "Instaurer un moratoire total sur l'immigration à Mayotte pendant le quinquennat, immigration familiale comprise",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/outre-mer"
+  },
+  {
+   "id": "philippe-186-2",
+   "s": 186,
+   "cle": false,
+   "t": "Suspendre l'enregistrement des demandes d'asile à Mayotte et en Guyane pendant le quinquennat",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/outre-mer"
+  },
+  {
+   "id": "philippe-186-3",
+   "s": 186,
+   "cle": false,
+   "t": "Suspendre le droit du sol à Mayotte pendant plusieurs années",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/outre-mer"
+  },
+  {
+   "id": "philippe-186-4",
+   "s": 186,
+   "cle": false,
+   "t": "Construire une nouvelle piste d'aéroport sur Grande-Terre et un deuxième hôpital à Mayotte",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/outre-mer"
+  },
+  {
+   "id": "philippe-186-5",
+   "s": 186,
+   "cle": false,
+   "t": "Moderniser l'octroi de mer et ouvrir les transports à la concurrence contre la vie chère",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/outre-mer"
+  },
+  {
+   "id": "philippe-186-6",
+   "s": 186,
+   "cle": false,
+   "t": "Faire converger le Smic et les retraites de Mayotte vers le niveau de l'Hexagone",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/outre-mer"
+  },
+  {
+   "id": "philippe-186-7",
+   "s": 186,
+   "cle": false,
+   "t": "Doubler le nombre de navires de la Marine aux Antilles contre le narcotrafic",
+   "sous": [],
+   "page": null,
+   "src": "https://www.edouardphilippe.fr/programme/outre-mer"
   },
   {
    "id": "villepin-187-1",
    "s": 187,
-   "cle": false,
-   "t": "Créer un Conseil de sécurité européen réunissant les cinq principaux pays européens, pour un « pacte de souveraineté »",
+   "cle": true,
+   "t": "Inscrire dans une loi organique une trajectoire des déficits sur cinq ans, contrôlée par le Conseil constitutionnel",
    "sous": [],
    "page": null,
-   "src": "https://www.publicsenat.fr/actualites/politique/dominique-de-villepin-annonce-sa-candidature-a-lelection-presidentielle-une-decision-lourde-et-difficile-declare-t-il"
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-1.html"
   },
   {
-   "id": "attal-188-1",
+   "id": "villepin-187-2",
+   "s": 187,
+   "cle": true,
+   "t": "Ramener le déficit public à 2,9 % du PIB en 2031",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-1.html"
+  },
+  {
+   "id": "villepin-187-3",
+   "s": 187,
+   "cle": false,
+   "t": "Créer une commission d'enquête sur la dégradation des comptes publics depuis dix ans",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-1.html"
+  },
+  {
+   "id": "villepin-187-4",
+   "s": 187,
+   "cle": false,
+   "t": "Mesurer l'impact social des lois de finances, décile par décile",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-1.html"
+  },
+  {
+   "id": "villepin-188-1",
    "s": 188,
+   "cle": false,
+   "t": "Encadrer le prix du carbone : carburant plafonné à 2,50 € le litre, gaz encadré",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-1.html"
+  },
+  {
+   "id": "villepin-188-2",
+   "s": 188,
+   "cle": false,
+   "t": "Inscrire dans la Constitution la neutralité carbone en 2050 (2 tonnes de CO2 par habitant)",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-1.html"
+  },
+  {
+   "id": "villepin-188-3",
+   "s": 188,
+   "cle": false,
+   "t": "Produire une électricité abondante et décarbonée : poursuivre les six EPR2 et évaluer les coûts avant d'aller plus loin",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-1.html"
+  },
+  {
+   "id": "villepin-188-4",
+   "s": 188,
+   "cle": false,
+   "t": "Faire publier la trajectoire carbone nationale par le Haut Conseil des finances publiques",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-1.html"
+  },
+  {
+   "id": "villepin-188-5",
+   "s": 188,
+   "cle": false,
+   "t": "Financer la décarbonation à environ 200 € la tonne évitée, soit environ 4,5 milliards d'euros de plus par an",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-1.html"
+  },
+  {
+   "id": "villepin-189-1",
+   "s": 189,
+   "cle": true,
+   "t": "Exonérer les héritages jusqu'à 1 million d'euros en ligne directe, avec des taux de 50 à 60 % au-delà de 5 millions, versés sur des comptes pour chaque naissance",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-1.html"
+  },
+  {
+   "id": "villepin-189-2",
+   "s": 189,
+   "cle": true,
+   "t": "Rétablir l'impôt sur la fortune (barème proche de 2016) dans un impôt unique sur le patrimoine des 1 % les plus riches, hors biens professionnels",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-1.html"
+  },
+  {
+   "id": "villepin-190-1",
+   "s": 190,
+   "cle": false,
+   "t": "Créer quatre conseils présidentiels réguliers : territoires, outre-mer, intelligence artificielle et sécurité nationale",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-2.html"
+  },
+  {
+   "id": "villepin-190-2",
+   "s": 190,
+   "cle": false,
+   "t": "Étendre le domaine réservé du Président à l'outre-mer, à la culture et à l'IA",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-2.html"
+  },
+  {
+   "id": "villepin-190-3",
+   "s": 190,
+   "cle": false,
+   "t": "Lancer cinq chantiers présidentiels pilotés par l'Élysée : pauvreté, savoirs fondamentaux, violences faites aux femmes et aux enfants, morts au travail, biodiversité",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-2.html"
+  },
+  {
+   "id": "villepin-190-4",
+   "s": 190,
+   "cle": false,
+   "t": "Nommer un gouvernement provisoire resserré dès la passation de pouvoir",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-2.html"
+  },
+  {
+   "id": "villepin-190-5",
+   "s": 190,
+   "cle": false,
+   "t": "Réunir le Parlement en Congrès puis laisser 15 jours aux blocs pour former un gouvernement de compromis, avant une dissolution en cas d'échec",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-2.html"
+  },
+  {
+   "id": "villepin-190-6",
+   "s": 190,
+   "cle": true,
+   "t": "Organiser des référendums réguliers, chacun précédé d'un an de débat avec experts, convention citoyenne et conférence sociale",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-2.html"
+  },
+  {
+   "id": "villepin-191-1",
+   "s": 191,
+   "cle": false,
+   "t": "Recruter des magistrats pour rattraper en dix ans la moyenne européenne, et des juges de paix bénévoles",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-3.html"
+  },
+  {
+   "id": "villepin-191-2",
+   "s": 191,
+   "cle": false,
+   "t": "Simplifier le code de procédure pénale",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-3.html"
+  },
+  {
+   "id": "villepin-191-3",
+   "s": 191,
+   "cle": false,
+   "t": "Relever les plafonds et le barème de l'aide juridictionnelle",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-3.html"
+  },
+  {
+   "id": "villepin-191-4",
+   "s": 191,
+   "cle": false,
+   "t": "Juger toutes les affaires de viol devant des cours d'assises avec jurés populaires",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-3.html"
+  },
+  {
+   "id": "villepin-191-5",
+   "s": 191,
+   "cle": false,
+   "t": "Ajouter un juge professionnel aux prud'hommes",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-3.html"
+  },
+  {
+   "id": "villepin-191-6",
+   "s": 191,
+   "cle": false,
+   "t": "Créer une juridiction des biens communs (eau, air, sol, vivant)",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-3.html"
+  },
+  {
+   "id": "villepin-191-7",
+   "s": 191,
+   "cle": true,
+   "t": "Élire un Procureur général de la Nation, indépendant de l'exécutif, pour six ans",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-3.html"
+  },
+  {
+   "id": "villepin-191-8",
+   "s": 191,
+   "cle": false,
+   "t": "Fixer comme priorités pénales les violences sexuelles, le narcotrafic, la délinquance des mineurs et la corruption",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-3.html"
+  },
+  {
+   "id": "villepin-191-9",
+   "s": 191,
+   "cle": false,
+   "t": "Créer un secrétariat d'État à la Police judiciaire",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-3.html"
+  },
+  {
+   "id": "villepin-191-10",
+   "s": 191,
+   "cle": false,
+   "t": "Créer un répertoire central des travaux d'intérêt général pour une affectation dès l'audience",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-3.html"
+  },
+  {
+   "id": "villepin-191-11",
+   "s": 191,
+   "cle": false,
+   "t": "Mettre fin aux peines non exécutées : incarcérations courtes systématiques, semi-liberté, bracelet électronique",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-3.html"
+  },
+  {
+   "id": "villepin-191-12",
+   "s": 191,
+   "cle": false,
+   "t": "Créer une commission de sages, sur le modèle Stasi, contre l'antisémitisme, le racisme et l'islamophobie",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-3.html"
+  },
+  {
+   "id": "villepin-191-13",
+   "s": 191,
+   "cle": false,
+   "t": "Donner au Défenseur des droits un pouvoir de sanction financière contre les discriminations",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-3.html"
+  },
+  {
+   "id": "villepin-191-14",
+   "s": 191,
+   "cle": false,
+   "t": "Rendre le CV anonyme obligatoire dans les entreprises de plus de 50 salariés",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-3.html"
+  },
+  {
+   "id": "villepin-192-1",
+   "s": 192,
+   "cle": false,
+   "t": "Permettre à l'Arcom de suspendre des contenus et rendre les plateformes responsables comme des éditeurs",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-3.html"
+  },
+  {
+   "id": "villepin-192-2",
+   "s": 192,
+   "cle": false,
+   "t": "Encadrer par contrat les relations entre l'Élysée et les journalistes accrédités",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-3.html"
+  },
+  {
+   "id": "villepin-192-3",
+   "s": 192,
+   "cle": false,
+   "t": "Réorienter les aides à la presse vers l'information plutôt que l'opinion, via une commission citoyenne",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-3.html"
+  },
+  {
+   "id": "villepin-192-4",
+   "s": 192,
+   "cle": false,
+   "t": "Revoir les seuils de concentration des médias",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-3.html"
+  },
+  {
+   "id": "villepin-192-5",
+   "s": 192,
+   "cle": false,
+   "t": "Financer l'audiovisuel public par une part fixe de 4 % de l'impôt sur le revenu",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-3.html"
+  },
+  {
+   "id": "villepin-192-6",
+   "s": 192,
+   "cle": false,
+   "t": "Créer une commission citoyenne permanente d'audit éditorial de l'audiovisuel public",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-3.html"
+  },
+  {
+   "id": "villepin-193-1",
+   "s": 193,
+   "cle": false,
+   "t": "Renforcer les polices municipales par des contrats locaux pluriannuels entre l'État et les collectivités",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-3.html"
+  },
+  {
+   "id": "villepin-194-1",
+   "s": 194,
+   "cle": true,
+   "t": "Créer un consortium européen d'IA souveraine, sûre et sobre, doté d'1 milliard d'euros par État membre au départ",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-4.html"
+  },
+  {
+   "id": "villepin-194-2",
+   "s": 194,
+   "cle": false,
+   "t": "Faire du quantique un pilier de souveraineté, avec des achats européens groupés de semi-conducteurs",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-4.html"
+  },
+  {
+   "id": "villepin-194-3",
+   "s": 194,
+   "cle": false,
+   "t": "Créer une autorité de sûreté de l'IA, avec évaluation indépendante des modèles avant leur mise en service",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-4.html"
+  },
+  {
+   "id": "villepin-194-4",
+   "s": 194,
+   "cle": false,
+   "t": "Obliger à afficher le coût énergétique des requêtes d'IA (tokens) auprès des consommateurs",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-4.html"
+  },
+  {
+   "id": "villepin-194-5",
+   "s": 194,
+   "cle": false,
+   "t": "Soumettre les modèles d'IA non européens au mécanisme d'ajustement carbone aux frontières",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-4.html"
+  },
+  {
+   "id": "villepin-194-6",
+   "s": 194,
+   "cle": false,
+   "t": "Lancer un plan de simplification des démarches administratives grâce à l'IA",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-4.html"
+  },
+  {
+   "id": "villepin-194-7",
+   "s": 194,
+   "cle": false,
+   "t": "Obliger les fournisseurs d'IA à offrir à chacun un forfait gratuit de requêtes (tokens)",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-4.html"
+  },
+  {
+   "id": "villepin-194-8",
+   "s": 194,
+   "cle": false,
+   "t": "Former massivement les agents publics à l'IA",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-4.html"
+  },
+  {
+   "id": "villepin-189-3",
+   "s": 189,
+   "cle": true,
+   "t": "Supprimer toutes les niches fiscales et sociales en cinq ans par une « loi d'extinction » (environ 35 milliards d'euros par an)",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-5.html"
+  },
+  {
+   "id": "villepin-189-4",
+   "s": 189,
+   "cle": true,
+   "t": "Passer de plus de 400 taxes à neuf impôts, avec une CSG élargie aux dépenses d'IA",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-5.html"
+  },
+  {
+   "id": "villepin-189-5",
+   "s": 189,
+   "cle": false,
+   "t": "Réécrire les codes de l'environnement, de l'urbanisme et du travail en divisant leur volume par quatre (« méthode Code Napoléon »)",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-5.html"
+  },
+  {
+   "id": "villepin-195-1",
+   "s": 195,
+   "cle": false,
+   "t": "Préparer une loi de programmation militaire 2031-2036 visant 3,5 % du PIB pour la défense",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-6.html"
+  },
+  {
+   "id": "villepin-195-2",
+   "s": 195,
+   "cle": false,
+   "t": "Consolider les filières de défense (IA, biotechnologies, drones) et financer des champions européens",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-6.html"
+  },
+  {
+   "id": "villepin-195-3",
+   "s": 195,
+   "cle": false,
+   "t": "Porter le service militaire volontaire de 1 600 à 5 000 places et développer les réserves",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-6.html"
+  },
+  {
+   "id": "villepin-196-1",
+   "s": 196,
+   "cle": false,
+   "t": "Négocier des accords bilatéraux pour augmenter les réadmissions de personnes sous OQTF",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-6.html"
+  },
+  {
+   "id": "villepin-196-2",
+   "s": 196,
+   "cle": false,
+   "t": "Spécialiser la moitié des centres de rétention pour les personnes sous OQTF qui troublent l'ordre public",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-6.html"
+  },
+  {
+   "id": "villepin-196-3",
+   "s": 196,
+   "cle": false,
+   "t": "Rendre obligatoire l'enregistrement biométrique des étrangers sans titre de séjour",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-6.html"
+  },
+  {
+   "id": "villepin-196-4",
+   "s": 196,
+   "cle": true,
+   "t": "Voter une loi de programmation pluriannuelle de l'immigration après un an de concertation",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-6.html"
+  },
+  {
+   "id": "villepin-196-5",
+   "s": 196,
+   "cle": false,
+   "t": "Créer une autorité indépendante de l'information sur les migrations",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-6.html"
+  },
+  {
+   "id": "villepin-196-6",
+   "s": 196,
+   "cle": false,
+   "t": "Créer un secrétariat général à l'intégration auprès du Premier ministre",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-6.html"
+  },
+  {
+   "id": "villepin-196-7",
+   "s": 196,
+   "cle": false,
+   "t": "Décentraliser l'intégration au niveau du département et renforcer l'apprentissage du français",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-6.html"
+  },
+  {
+   "id": "villepin-197-1",
+   "s": 197,
+   "cle": false,
+   "t": "Rétablir l'ENA et ouvrir socialement les concours de catégorie A",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-6.html"
+  },
+  {
+   "id": "villepin-197-2",
+   "s": 197,
+   "cle": false,
+   "t": "Créer un corps d'ingénieurs chargés de l'IA dans les administrations",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-6.html"
+  },
+  {
+   "id": "villepin-197-3",
+   "s": 197,
+   "cle": false,
+   "t": "Créer une inspection générale interministérielle indépendante",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-6.html"
+  },
+  {
+   "id": "villepin-197-4",
+   "s": 197,
+   "cle": false,
+   "t": "Stabiliser les effectifs des trois fonctions publiques et réindexer le point d'indice sur l'inflation",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-6.html"
+  },
+  {
+   "id": "villepin-197-5",
+   "s": 197,
+   "cle": false,
+   "t": "Donner à la HATVP un pouvoir de sanction sur les mobilités irrégulières",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-6.html"
+  },
+  {
+   "id": "villepin-197-6",
+   "s": 197,
+   "cle": false,
+   "t": "Sanctionner pénalement l'entreprise qui recrute illégalement un agent public",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-6.html"
+  },
+  {
+   "id": "villepin-193-2",
+   "s": 193,
+   "cle": false,
+   "t": "Créer environ 75 brigades spécialisées (1 000 fonctionnaires) dans les territoires touchés par le narcotrafic",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-7.html"
+  },
+  {
+   "id": "villepin-193-3",
+   "s": 193,
+   "cle": true,
+   "t": "Créer une agence de renseignement contre le narcotrafic, sur le modèle de la DEA américaine",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-7.html"
+  },
+  {
+   "id": "villepin-193-4",
+   "s": 193,
+   "cle": true,
+   "t": "Voter une loi de programmation de 3 milliards d'euros par an contre les violences faites aux femmes et aux enfants",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-7.html"
+  },
+  {
+   "id": "villepin-193-5",
+   "s": 193,
+   "cle": false,
+   "t": "Créer un parquet national contre les violences faites aux femmes et aux enfants",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-7.html"
+  },
+  {
+   "id": "villepin-193-6",
+   "s": 193,
+   "cle": false,
+   "t": "Rendre obligatoire un contrat local de sécurité piloté par le maire et le préfet",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-7.html"
+  },
+  {
+   "id": "villepin-193-7",
+   "s": 193,
+   "cle": false,
+   "t": "Créer 5 000 places supplémentaires en EPIDE",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-7.html"
+  },
+  {
+   "id": "villepin-193-8",
+   "s": 193,
+   "cle": false,
+   "t": "Créer 15 000 places dans des structures éducatives fermées pour les primo-délinquants",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-7.html"
+  },
+  {
+   "id": "villepin-193-9",
+   "s": 193,
+   "cle": false,
+   "t": "Doubler le nombre de médiateurs sociaux dans les quartiers prioritaires",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-7.html"
+  },
+  {
+   "id": "villepin-190-7",
+   "s": 190,
+   "cle": true,
+   "t": "Créer un référendum d'initiative citoyenne contraignant, déclenché par une pétition de 5 millions de signatures",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-8.html"
+  },
+  {
+   "id": "villepin-190-8",
+   "s": 190,
+   "cle": true,
+   "t": "Abaisser le droit de vote à 16 ans",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-8.html"
+  },
+  {
+   "id": "villepin-190-9",
+   "s": 190,
+   "cle": false,
+   "t": "Rendre le vote obligatoire, sans sanction, et reconnaître le vote blanc : à 50 %, l'élection serait refaite",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-8.html"
+  },
+  {
+   "id": "villepin-198-1",
+   "s": 198,
+   "cle": false,
+   "t": "Affecter aux collectivités une nouvelle taxe sur le foncier nu, dont elles fixeraient le taux",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-8.html"
+  },
+  {
+   "id": "villepin-198-2",
+   "s": 198,
+   "cle": false,
+   "t": "Nommer un délégué de l'État par commune (« sous-préfet aux champs »), avec un contrôle a posteriori",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-8.html"
+  },
+  {
+   "id": "villepin-198-3",
+   "s": 198,
+   "cle": false,
+   "t": "Créer un Conseil des communes mensuel avec l'Élysée",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-8.html"
+  },
+  {
+   "id": "villepin-198-4",
+   "s": 198,
+   "cle": false,
+   "t": "Confier aux régions l'aménagement du territoire, avec une DATAR régionale",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-8.html"
+  },
+  {
+   "id": "villepin-198-5",
+   "s": 198,
+   "cle": false,
+   "t": "Jumeler communes urbaines et communes rurales",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-8.html"
+  },
+  {
+   "id": "villepin-199-1",
+   "s": 199,
+   "cle": false,
+   "t": "Voter une loi-programme de 15 ans pour le développement des outre-mer",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-9.html"
+  },
+  {
+   "id": "villepin-199-2",
+   "s": 199,
+   "cle": false,
+   "t": "Nommer un secrétaire général aux outre-mer à l'Élysée",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-9.html"
+  },
+  {
+   "id": "villepin-199-3",
+   "s": 199,
+   "cle": false,
+   "t": "Créer trois préfets maritimes outre-mer contre les trafics de drogue et l'immigration illégale",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-9.html"
+  },
+  {
+   "id": "villepin-199-4",
+   "s": 199,
+   "cle": false,
+   "t": "Permettre des évolutions institutionnelles, jusqu'à l'autonomie, si les populations le souhaitent",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-9.html"
+  },
+  {
+   "id": "villepin-199-5",
+   "s": 199,
+   "cle": false,
+   "t": "Retrouver le consensus en Nouvelle-Calédonie, l'État jouant un rôle neutre de facilitateur",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-9.html"
+  },
+  {
+   "id": "villepin-200-1",
+   "s": 200,
+   "cle": true,
+   "t": "Créer un Conseil de sécurité européen de cinq États (dont l'Allemagne, l'Espagne, l'Italie et la Pologne) dans un « pacte de souveraineté »",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-10.html"
+  },
+  {
+   "id": "villepin-200-2",
+   "s": 200,
+   "cle": false,
+   "t": "Créer un pilier européen de défense au sein de l'OTAN, avec un état-major européen",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-10.html"
+  },
+  {
+   "id": "villepin-200-3",
+   "s": 200,
+   "cle": false,
+   "t": "Créer une « DARPA » européenne pour l'innovation de défense (IA, drones, quantique, spatial)",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-10.html"
+  },
+  {
+   "id": "villepin-200-4",
+   "s": 200,
+   "cle": false,
+   "t": "Élargir progressivement la taxe carbone aux frontières de l'Union européenne",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-10.html"
+  },
+  {
+   "id": "villepin-200-5",
+   "s": 200,
+   "cle": false,
+   "t": "Adopter un « Buy European Act » pour la commande publique",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-10.html"
+  },
+  {
+   "id": "villepin-200-6",
+   "s": 200,
+   "cle": false,
+   "t": "Créer un statut européen de l'artiste avec portabilité des droits sociaux",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-10.html"
+  },
+  {
+   "id": "villepin-200-7",
+   "s": 200,
+   "cle": false,
+   "t": "Proposer un traité universel de sécurité de l'IA et une agence internationale sur le modèle de l'AIEA",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-11.html"
+  },
+  {
+   "id": "villepin-200-8",
+   "s": 200,
+   "cle": false,
+   "t": "Lancer une déclaration universelle des droits cognitifs en 2028",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-11.html"
+  },
+  {
+   "id": "villepin-200-9",
+   "s": 200,
+   "cle": false,
+   "t": "Créer une organisation internationale fixant des niveaux annuels de production d'énergies fossiles compatibles avec 1,5 à 2 °C",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-11.html"
+  },
+  {
+   "id": "villepin-200-10",
+   "s": 200,
+   "cle": false,
+   "t": "Interdire la militarisation et l'appropriation de l'espace",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-11.html"
+  },
+  {
+   "id": "villepin-200-11",
+   "s": 200,
+   "cle": false,
+   "t": "Organiser dès 2027 une conférence pour la paix en Palestine et conditionner l'accord UE-Israël à des progrès concrets",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-11.html"
+  },
+  {
+   "id": "villepin-200-12",
+   "s": 200,
+   "cle": false,
+   "t": "Pérenniser le soutien à l'Ukraine et ouvrir une adhésion graduelle à l'Union européenne",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-11.html"
+  },
+  {
+   "id": "villepin-200-13",
+   "s": 200,
+   "cle": false,
+   "t": "Porter une interdiction internationale des armes létales autonomes",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-11.html"
+  },
+  {
+   "id": "villepin-200-14",
+   "s": 200,
+   "cle": false,
+   "t": "Accueillir une conférence internationale sur les violences faites aux femmes et aux enfants",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-11.html"
+  },
+  {
+   "id": "villepin-200-15",
+   "s": 200,
+   "cle": false,
+   "t": "Porter l'aide au développement à 0,7 % du PIB",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-11.html"
+  },
+  {
+   "id": "villepin-200-16",
+   "s": 200,
+   "cle": false,
+   "t": "Transformer les 98 Instituts français en laboratoires de co-création artistique",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-11.html"
+  },
+  {
+   "id": "villepin-200-17",
+   "s": 200,
+   "cle": false,
+   "t": "Créer un « Erasmus mondial de la culture » de 10 000 mobilités par an d'ici 2030",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-11.html"
+  },
+  {
+   "id": "villepin-200-18",
+   "s": 200,
+   "cle": false,
+   "t": "Faire de la francophonie le premier espace de coopération, avec une alliance francophone de l'IA",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-11.html"
+  },
+  {
+   "id": "villepin-201-1",
+   "s": 201,
+   "cle": false,
+   "t": "Étendre la participation aux entreprises de plus de 50 salariés : un euro de participation pour deux euros de dividendes",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-12.html"
+  },
+  {
+   "id": "villepin-201-2",
+   "s": 201,
+   "cle": true,
+   "t": "Basculer plus de 200 milliards d'euros de cotisations vers la CSG en dix ans, pour environ +200 € de salaire net par mois en moyenne",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-12.html"
+  },
+  {
+   "id": "villepin-201-3",
+   "s": 201,
+   "cle": true,
+   "t": "Vendre l'électricité aux ménages proche de son coût de production, via des contrats couvrant 95 % de la facture, et supprimer certaines taxes",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-12.html"
+  },
+  {
+   "id": "villepin-202-1",
+   "s": 202,
+   "cle": true,
+   "t": "Produire 500 000 logements par an, dont 100 000 logements sociaux",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-12.html"
+  },
+  {
+   "id": "villepin-202-2",
+   "s": 202,
+   "cle": false,
+   "t": "Créer un statut de logement social coopératif",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-12.html"
+  },
+  {
+   "id": "villepin-202-3",
+   "s": 202,
+   "cle": false,
+   "t": "Remplacer la taxe foncière par une taxe sur le foncier nu et créer un statut unique du bailleur privé",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-12.html"
+  },
+  {
+   "id": "villepin-202-4",
+   "s": 202,
+   "cle": false,
+   "t": "Créer une banque publique du logement (prêts viagers hypothécaires, prêts sur la nue-propriété)",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-12.html"
+  },
+  {
+   "id": "villepin-202-5",
+   "s": 202,
+   "cle": false,
+   "t": "Créer une garantie locative universelle : les assureurs couvriraient les impayés de loyer",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-12.html"
+  },
+  {
+   "id": "villepin-203-1",
+   "s": 203,
+   "cle": false,
+   "t": "Distribuer des cartes-mobilité de 100 € dans les communes de moins de 3 500 habitants, sous conditions de ressources",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-12.html"
+  },
+  {
+   "id": "villepin-203-2",
+   "s": 203,
+   "cle": false,
+   "t": "Instaurer un prix unique au kilomètre pour les liaisons entre préfectures, sous-préfectures et métropoles",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-12.html"
+  },
+  {
+   "id": "villepin-203-3",
+   "s": 203,
+   "cle": false,
+   "t": "Proposer un million de voitures électriques compactes en leasing social sur le quinquennat",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-12.html"
+  },
+  {
+   "id": "villepin-203-4",
+   "s": 203,
+   "cle": false,
+   "t": "Aider les communes rurales à acquérir des « voitures communales » électriques",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-12.html"
+  },
+  {
+   "id": "villepin-204-1",
+   "s": 204,
+   "cle": false,
+   "t": "Développer chaque technologie de production électrique selon son coût de long terme, avec des appels d'offres annuels",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-12.html"
+  },
+  {
+   "id": "villepin-205-1",
+   "s": 205,
+   "cle": false,
+   "t": "Imposer un rayon bio et local dans les grandes surfaces",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-12.html"
+  },
+  {
+   "id": "villepin-205-2",
+   "s": 205,
+   "cle": false,
+   "t": "Étendre les contrats écrits EGalim aux céréales, fruits et légumes et renforcer la DGCCRF",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-12.html"
+  },
+  {
+   "id": "villepin-205-3",
+   "s": 205,
+   "cle": false,
+   "t": "Signer des contrats de long terme par filière, avec des prix fondés sur les coûts de production",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-12.html"
+  },
+  {
+   "id": "villepin-205-4",
+   "s": 205,
+   "cle": false,
+   "t": "Moderniser les outils agroalimentaires de proximité pour la sécurité alimentaire en cas de crise",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-12.html"
+  },
+  {
+   "id": "villepin-206-1",
+   "s": 206,
+   "cle": false,
+   "t": "Garantir un accès rapide à un professionnel de santé (téléconsultation, IA, tri aux urgences)",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-13.html"
+  },
+  {
+   "id": "villepin-206-2",
+   "s": 206,
+   "cle": false,
+   "t": "Créer des parcours coordonnés pour les maladies chroniques, avec un référent social",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-13.html"
+  },
+  {
+   "id": "villepin-206-3",
+   "s": 206,
+   "cle": true,
+   "t": "Augmenter de 50 % les dépenses de prévention sur le quinquennat",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-13.html"
+  },
+  {
+   "id": "villepin-206-4",
+   "s": 206,
+   "cle": false,
+   "t": "Enseigner la prévention des risques physiques et psychiques à l'école",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-13.html"
+  },
+  {
+   "id": "villepin-206-5",
+   "s": 206,
+   "cle": true,
+   "t": "Plafonner le reste à charge annuel des patients selon leur revenu",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-13.html"
+  },
+  {
+   "id": "villepin-206-6",
+   "s": 206,
+   "cle": false,
+   "t": "Lancer une campagne nationale sur la santé des femmes (cœur, ménopause, endométriose)",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-13.html"
+  },
+  {
+   "id": "villepin-206-7",
+   "s": 206,
+   "cle": false,
+   "t": "Rendre pluriannuel l'objectif de dépenses de l'Assurance maladie et régionaliser les financements hospitaliers",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-13.html"
+  },
+  {
+   "id": "villepin-206-8",
+   "s": 206,
+   "cle": false,
+   "t": "Débureaucratiser l'hôpital et permettre aux hôpitaux publics de passer au statut d'ESPIC",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-13.html"
+  },
+  {
+   "id": "villepin-207-1",
+   "s": 207,
+   "cle": false,
+   "t": "Désigner un référent personnel permanent pour les personnes âgées, handicapées, malades ou jeunes vulnérables",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-14.html"
+  },
+  {
+   "id": "villepin-207-2",
+   "s": 207,
+   "cle": false,
+   "t": "Reconnaître les 11 millions d'aidants, dont 500 000 jeunes aidants, avec un statut de travailleur aidant",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-14.html"
+  },
+  {
+   "id": "villepin-207-3",
+   "s": 207,
+   "cle": false,
+   "t": "Créer des équipes territoriales contre la pauvreté",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-14.html"
+  },
+  {
+   "id": "villepin-207-4",
+   "s": 207,
+   "cle": false,
+   "t": "Créer 30 000 places d'hébergement (« logement d'abord »)",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-14.html"
+  },
+  {
+   "id": "villepin-207-5",
+   "s": 207,
+   "cle": false,
+   "t": "Voter une loi-cadre contre la pauvreté, en évaluant les politiques sur les 10 % les plus pauvres",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-14.html"
+  },
+  {
+   "id": "villepin-207-6",
+   "s": 207,
+   "cle": false,
+   "t": "Renforcer l'aide sociale à l'enfance, avec formation et certification obligatoires des familles d'accueil",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-14.html"
+  },
+  {
+   "id": "villepin-207-7",
+   "s": 207,
+   "cle": false,
+   "t": "Créer une allocation d'autonomie pour les jeunes de 18 à 25 ans sortis de l'aide sociale à l'enfance",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-14.html"
+  },
+  {
+   "id": "villepin-207-8",
+   "s": 207,
+   "cle": false,
+   "t": "Enquêter sur les dérives de l'adoption internationale",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-14.html"
+  },
+  {
+   "id": "villepin-207-9",
+   "s": 207,
+   "cle": false,
+   "t": "Supprimer la barrière d'âge de 60 ans pour la prestation de compensation du handicap",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-14.html"
+  },
+  {
+   "id": "villepin-207-10",
+   "s": 207,
+   "cle": false,
+   "t": "Rendre accessibles les services publics essentiels d'ici 2029 et tous les bâtiments publics d'ici 2035",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-14.html"
+  },
+  {
+   "id": "villepin-207-11",
+   "s": 207,
+   "cle": false,
+   "t": "Renforcer l'école inclusive avec un enseignant référent et des AESH mieux déployés",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-14.html"
+  },
+  {
+   "id": "villepin-208-1",
+   "s": 208,
+   "cle": false,
+   "t": "Instaurer trois rendez-vous en PMI (grossesse, naissance, 6 mois) pour repérer dépression post-partum et violences",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-15.html"
+  },
+  {
+   "id": "villepin-208-2",
+   "s": 208,
+   "cle": false,
+   "t": "Créer un service public de la petite enfance et revaloriser les assistantes maternelles",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-15.html"
+  },
+  {
+   "id": "villepin-208-3",
+   "s": 208,
+   "cle": false,
+   "t": "Prendre en charge 20 à 33 séances par an de soins du psychotraumatisme pour les enfants victimes de violences",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-15.html"
+  },
+  {
+   "id": "villepin-208-4",
+   "s": 208,
+   "cle": false,
+   "t": "Interdire qu'un adulte soit seul avec un enfant de moins de 12 ans dans le périscolaire",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-15.html"
+  },
+  {
+   "id": "villepin-208-5",
+   "s": 208,
+   "cle": false,
+   "t": "Offrir chaque année un rendez-vous chez un psychologue aux jeunes à des âges clés",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-15.html"
+  },
+  {
+   "id": "villepin-208-6",
+   "s": 208,
+   "cle": false,
+   "t": "Former tous les jeunes aux premiers secours et leur faire découvrir les réserves",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-15.html"
+  },
+  {
+   "id": "villepin-208-7",
+   "s": 208,
+   "cle": true,
+   "t": "Créer des bourses d'autonomie de 400 € par mois pour les 18-25 ans, remboursables à taux zéro selon les revenus futurs",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-15.html"
+  },
+  {
+   "id": "villepin-208-8",
+   "s": 208,
+   "cle": true,
+   "t": "Garantir un emploi ou une formation à tous les jeunes de 18 à 25 ans sans activité",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-15.html"
+  },
+  {
+   "id": "villepin-208-9",
+   "s": 208,
+   "cle": false,
+   "t": "Proposer une aide à la parentalité dans chaque Maison du lien",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-15.html"
+  },
+  {
+   "id": "villepin-209-1",
+   "s": 209,
+   "cle": false,
+   "t": "Créer un parcours de prévention pour vieillir en restant autonome",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-15.html"
+  },
+  {
+   "id": "villepin-209-2",
+   "s": 209,
+   "cle": false,
+   "t": "Construire 100 000 places d'Ehpad et de logements intermédiaires en dix ans",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-15.html"
+  },
+  {
+   "id": "villepin-209-3",
+   "s": 209,
+   "cle": false,
+   "t": "Ouvrir au moins une unité de soins palliatifs et une maison d'accompagnement par département d'ici 2030",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-15.html"
+  },
+  {
+   "id": "villepin-210-1",
+   "s": 210,
+   "cle": true,
+   "t": "Inscrire dans la Constitution une charte des droits sociaux et confier aux partenaires sociaux la revalorisation du Smic",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-16.html"
+  },
+  {
+   "id": "villepin-210-2",
+   "s": 210,
+   "cle": false,
+   "t": "Proposer l'adhésion à un syndicat à chaque embauche, avec un chèque syndical de l'État",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-16.html"
+  },
+  {
+   "id": "villepin-210-3",
+   "s": 210,
+   "cle": true,
+   "t": "Réserver 30 % des sièges des conseils d'administration aux salariés dans les entreprises de plus de 1 000 salariés",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-16.html"
+  },
+  {
+   "id": "villepin-210-4",
+   "s": 210,
+   "cle": false,
+   "t": "Réunir une conférence sociale sur la qualité de vie au travail",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-16.html"
+  },
+  {
+   "id": "villepin-210-5",
+   "s": 210,
+   "cle": false,
+   "t": "Viser zéro accident du travail mortel en 2032",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-16.html"
+  },
+  {
+   "id": "villepin-210-6",
+   "s": 210,
+   "cle": false,
+   "t": "Créer une sécurité sociale professionnelle : revenu de transition jusqu'à deux ans pour se reconvertir",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-16.html"
+  },
+  {
+   "id": "villepin-210-7",
+   "s": 210,
+   "cle": false,
+   "t": "Soumettre à la CSG les dépenses d'IA des entreprises",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-16.html"
+  },
+  {
+   "id": "villepin-210-8",
+   "s": 210,
+   "cle": false,
+   "t": "Instaurer un dialogue social sur l'IA dans les entreprises de plus de 50 salariés",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-16.html"
+  },
+  {
+   "id": "villepin-211-1",
+   "s": 211,
+   "cle": false,
+   "t": "Préparer la réforme des retraites en un an : experts, conférence sociale, convention citoyenne tirée au sort, débat parlementaire puis référendum",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-16.html"
+  },
+  {
+   "id": "villepin-211-2",
+   "s": 211,
+   "cle": true,
+   "t": "Créer un système à trois étages : retraite minimum d'État, retraite par points gérée par les partenaires sociaux, capitalisation publique via le Fonds France",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-16.html"
+  },
+  {
+   "id": "villepin-212-1",
+   "s": 212,
+   "cle": false,
+   "t": "Créer une réserve citoyenne nationale locale et un registre communal des compétences",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-17.html"
+  },
+  {
+   "id": "villepin-212-2",
+   "s": 212,
+   "cle": false,
+   "t": "Créer une Maison du lien dans chaque bassin de vie",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-17.html"
+  },
+  {
+   "id": "villepin-212-3",
+   "s": 212,
+   "cle": false,
+   "t": "Créer une carte du citoyen engagé, avec 10 % d'abattement d'impôt pour les retraités bénévoles",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-17.html"
+  },
+  {
+   "id": "villepin-212-4",
+   "s": 212,
+   "cle": false,
+   "t": "Valider des trimestres de retraite pour le bénévolat associatif",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-17.html"
+  },
+  {
+   "id": "villepin-212-5",
+   "s": 212,
+   "cle": false,
+   "t": "Consacrer 2,5 % du budget de l'État aux associations d'ici 2032",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-17.html"
+  },
+  {
+   "id": "villepin-212-6",
+   "s": 212,
+   "cle": false,
+   "t": "Créer un chèque fiscal associatif de 30 € par contribuable",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-17.html"
+  },
+  {
+   "id": "villepin-212-7",
+   "s": 212,
+   "cle": false,
+   "t": "Généraliser le mécénat de compétences",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-17.html"
+  },
+  {
+   "id": "villepin-212-8",
+   "s": 212,
+   "cle": false,
+   "t": "Financer 150 000 emplois associatifs au Smic sur des contrats de trois ans",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-17.html"
+  },
+  {
+   "id": "villepin-212-9",
+   "s": 212,
+   "cle": false,
+   "t": "Financer les réseaux de voisinage d'aide aux personnes vulnérables",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-17.html"
+  },
+  {
+   "id": "villepin-212-10",
+   "s": 212,
+   "cle": false,
+   "t": "Exonérer les successions et donations entre non-parents jusqu'à 100 000 € par personne",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-17.html"
+  },
+  {
+   "id": "villepin-212-11",
+   "s": 212,
+   "cle": false,
+   "t": "Organiser des États généraux du sport dès fin 2027",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-17.html"
+  },
+  {
+   "id": "villepin-212-12",
+   "s": 212,
+   "cle": false,
+   "t": "Garantir un « savoir-bouger » en fin de CM2 et rendre les équipements sportifs accessibles d'ici 2032",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-17.html"
+  },
+  {
+   "id": "villepin-212-13",
+   "s": 212,
+   "cle": false,
+   "t": "Rembourser l'activité physique adaptée prescrite aux malades",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-17.html"
+  },
+  {
+   "id": "villepin-212-14",
+   "s": 212,
+   "cle": false,
+   "t": "Créer des Maisons des sports dans chaque bassin de vie",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-17.html"
+  },
+  {
+   "id": "villepin-212-15",
+   "s": 212,
+   "cle": false,
+   "t": "Consigner une part des revenus des jeunes sportifs jusqu'à leurs 18 ans",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-17.html"
+  },
+  {
+   "id": "villepin-212-16",
+   "s": 212,
+   "cle": false,
+   "t": "Soutenir 10 000 cafés ruraux, dont plus de 1 000 créations en cinq ans",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-17.html"
+  },
+  {
+   "id": "villepin-212-17",
+   "s": 212,
+   "cle": false,
+   "t": "Interdire les enregistrements dissimulés de personnes privées",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-17.html"
+  },
+  {
+   "id": "villepin-213-1",
+   "s": 213,
+   "cle": false,
+   "t": "Inscrire l'égalité réelle entre femmes et hommes à l'article 1er de la Constitution",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-18.html"
+  },
+  {
+   "id": "villepin-213-2",
+   "s": 213,
+   "cle": false,
+   "t": "Revaloriser les métiers à prédominance féminine (soin, éducation)",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-18.html"
+  },
+  {
+   "id": "villepin-213-3",
+   "s": 213,
+   "cle": false,
+   "t": "Former les soignants au repérage du contrôle coercitif et des violences sexuelles",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-18.html"
+  },
+  {
+   "id": "villepin-213-4",
+   "s": 213,
+   "cle": false,
+   "t": "Renforcer le statut du parent isolé",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-18.html"
+  },
+  {
+   "id": "villepin-213-5",
+   "s": 213,
+   "cle": false,
+   "t": "Viser 50 % de filles dans les nouvelles formations d'ingénieurs et du numérique d'ici 2035",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-18.html"
+  },
+  {
+   "id": "villepin-213-6",
+   "s": 213,
+   "cle": false,
+   "t": "Imposer 40 % de chaque sexe parmi les cadres dirigeants dès 2028, y compris dans les entreprises de 250 salariés",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-18.html"
+  },
+  {
+   "id": "villepin-214-1",
+   "s": 214,
+   "cle": true,
+   "t": "Créer un « Fonds France » réunissant 1 200 à 1 600 milliards d'euros d'actifs de l'État, dont chaque Français serait actionnaire",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-19.html"
+  },
+  {
+   "id": "villepin-214-2",
+   "s": 214,
+   "cle": false,
+   "t": "Réformer le Plan et transformer le CESE en « Assemblée du futur »",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-19.html"
+  },
+  {
+   "id": "villepin-215-1",
+   "s": 215,
+   "cle": false,
+   "t": "Augmenter de 20 % la dépense par élève en dix ans",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-20.html"
+  },
+  {
+   "id": "villepin-215-2",
+   "s": 215,
+   "cle": true,
+   "t": "Augmenter d'au moins 10 % la rémunération des enseignants",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-20.html"
+  },
+  {
+   "id": "villepin-215-3",
+   "s": 215,
+   "cle": false,
+   "t": "Mettre deux enseignants par classe et développer la remédiation en petits groupes",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-20.html"
+  },
+  {
+   "id": "villepin-215-4",
+   "s": 215,
+   "cle": false,
+   "t": "Créer des auxiliaires d'enseignement qui suivent un groupe d'élèves",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-20.html"
+  },
+  {
+   "id": "villepin-215-5",
+   "s": 215,
+   "cle": false,
+   "t": "Expérimenter l'élection des chefs d'établissement par le conseil pédagogique",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-20.html"
+  },
+  {
+   "id": "villepin-215-6",
+   "s": 215,
+   "cle": false,
+   "t": "Interdire réellement le téléphone à l'école et graduer l'exposition des enfants à l'IA",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-20.html"
+  },
+  {
+   "id": "villepin-215-7",
+   "s": 215,
+   "cle": true,
+   "t": "Imposer des objectifs de mixité sociale à l'enseignement privé financé par l'argent public",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-20.html"
+  },
+  {
+   "id": "villepin-215-8",
+   "s": 215,
+   "cle": false,
+   "t": "Répartir les moyens de l'éducation prioritaire selon l'origine sociale des élèves plutôt que par zones",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-20.html"
+  },
+  {
+   "id": "villepin-215-9",
+   "s": 215,
+   "cle": false,
+   "t": "Faire de Parcoursup un outil d'aide aux conseillers d'orientation",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-20.html"
+  },
+  {
+   "id": "villepin-215-10",
+   "s": 215,
+   "cle": false,
+   "t": "Créer des cursus de présélection des futurs enseignants réservés aux boursiers dès le bac",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-20.html"
+  },
+  {
+   "id": "villepin-215-11",
+   "s": 215,
+   "cle": false,
+   "t": "Créer des internats d'excellence des savoir-faire artisanaux et industriels",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-20.html"
+  },
+  {
+   "id": "villepin-215-12",
+   "s": 215,
+   "cle": false,
+   "t": "Instaurer 30 minutes d'activité physique par jour et 100 heures de pratique artistique par an",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-20.html"
+  },
+  {
+   "id": "villepin-215-13",
+   "s": 215,
+   "cle": false,
+   "t": "Viser +20 points aux évaluations PISA en mathématiques et en lecture d'ici la fin du quinquennat",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-20.html"
+  },
+  {
+   "id": "villepin-215-14",
+   "s": 215,
+   "cle": false,
+   "t": "Créer des Maisons des arts, des sciences et du sport partagées par les établissements",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-20.html"
+  },
+  {
+   "id": "villepin-215-15",
+   "s": 215,
+   "cle": false,
+   "t": "Créer des filières d'excellence réservées aux bacheliers professionnels",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-20.html"
+  },
+  {
+   "id": "villepin-215-16",
+   "s": 215,
+   "cle": false,
+   "t": "Créer un parcours d'éducation aux émotions et à la coopération de la crèche à la majorité",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-20.html"
+  },
+  {
+   "id": "villepin-215-17",
+   "s": 215,
+   "cle": false,
+   "t": "Nommer un coordinateur bien-être et protection de l'enfance dans chaque établissement",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-20.html"
+  },
+  {
+   "id": "villepin-215-18",
+   "s": 215,
+   "cle": false,
+   "t": "Stabiliser et former les personnels de l'école inclusive",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-20.html"
+  },
+  {
+   "id": "villepin-216-1",
+   "s": 216,
+   "cle": true,
+   "t": "Porter la recherche à 3 % du PIB, avec 5 milliards d'euros de crédits annuels en plus",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-21.html"
+  },
+  {
+   "id": "villepin-216-2",
+   "s": 216,
+   "cle": false,
+   "t": "Créer des chaires « jeunes professeurs » de trois ans renouvelables",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-21.html"
+  },
+  {
+   "id": "villepin-216-3",
+   "s": 216,
+   "cle": false,
+   "t": "Faire des universités les opérateurs de la formation continue et rendre la VAE gratuite au bout de dix ans",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-21.html"
+  },
+  {
+   "id": "villepin-216-4",
+   "s": 216,
+   "cle": false,
+   "t": "Réduire la précarité dans l'enseignement supérieur avec un statut d'attaché permanent d'enseignement",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-21.html"
+  },
+  {
+   "id": "villepin-216-5",
+   "s": 216,
+   "cle": false,
+   "t": "Créer un Centre national de la recherche appliquée aux côtés du CNRS",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-21.html"
+  },
+  {
+   "id": "villepin-216-6",
+   "s": 216,
+   "cle": false,
+   "t": "Financer jusqu'à 2 500 contrats Cifre de doctorants en entreprise",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-21.html"
+  },
+  {
+   "id": "villepin-216-7",
+   "s": 216,
+   "cle": false,
+   "t": "Assouplir le statut de jeune entreprise innovante",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-21.html"
+  },
+  {
+   "id": "villepin-216-8",
+   "s": 216,
+   "cle": false,
+   "t": "Recentrer le crédit d'impôt recherche sur la deeptech et l'innovation de rupture",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-21.html"
+  },
+  {
+   "id": "villepin-188-6",
+   "s": 188,
+   "cle": false,
+   "t": "Nommer un défenseur des communs (eau, air, sols, mers)",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-22.html"
+  },
+  {
+   "id": "villepin-188-7",
+   "s": 188,
+   "cle": false,
+   "t": "Partager l'eau par des allocations collectives annuelles par point de captage d'ici 2050",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-22.html"
+  },
+  {
+   "id": "villepin-188-8",
+   "s": 188,
+   "cle": false,
+   "t": "Rémunérer les agriculteurs pour les services rendus à l'eau (haies, mares, zones humides)",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-22.html"
+  },
+  {
+   "id": "villepin-188-9",
+   "s": 188,
+   "cle": false,
+   "t": "Créer des espaces publics frais à moins de 20 minutes de chacun pendant les canicules",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-22.html"
+  },
+  {
+   "id": "villepin-188-10",
+   "s": 188,
+   "cle": false,
+   "t": "Créer un Institut de santé environnementale avec données en libre accès",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-22.html"
+  },
+  {
+   "id": "villepin-188-11",
+   "s": 188,
+   "cle": true,
+   "t": "Réduire de moitié l'usage des pesticides d'ici 2030",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-22.html"
+  },
+  {
+   "id": "villepin-188-12",
+   "s": 188,
+   "cle": false,
+   "t": "Placer 15 % du territoire sous protection forte d'ici la fin de la décennie, contre 5,9 % aujourd'hui",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-22.html"
+  },
+  {
+   "id": "villepin-188-13",
+   "s": 188,
+   "cle": false,
+   "t": "Créer un marché intercommunal des droits à artificialiser les sols",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-22.html"
+  },
+  {
+   "id": "villepin-188-14",
+   "s": 188,
+   "cle": false,
+   "t": "Créer une filière de l'économie circulaire",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-22.html"
+  },
+  {
+   "id": "villepin-188-15",
+   "s": 188,
+   "cle": false,
+   "t": "Financer les acteurs de la transition écologique (démonstration, sensibilisation)",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-22.html"
+  },
+  {
+   "id": "villepin-205-5",
+   "s": 205,
+   "cle": false,
+   "t": "Doter la transformation agricole de 1,5 milliard d'euros de plus par an",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-22.html"
+  },
+  {
+   "id": "villepin-205-6",
+   "s": 205,
+   "cle": true,
+   "t": "Maintenir 400 000 exploitations familiales, avec un revenu annuel minimum visé pour les agriculteurs",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-22.html"
+  },
+  {
+   "id": "villepin-205-7",
+   "s": 205,
+   "cle": false,
+   "t": "Créer un statut d'exploitation commerciale exportatrice",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-22.html"
+  },
+  {
+   "id": "villepin-205-8",
+   "s": 205,
+   "cle": false,
+   "t": "Atteindre 20 % d'exploitations en bio d'ici la fin du quinquennat",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-22.html"
+  },
+  {
+   "id": "villepin-205-9",
+   "s": 205,
+   "cle": false,
+   "t": "Ouvrir les prêts de consolidation de Bpifrance à toutes les fermes",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-22.html"
+  },
+  {
+   "id": "villepin-205-10",
+   "s": 205,
+   "cle": false,
+   "t": "Protéger les infrastructures agroalimentaires stratégiques contre les cyberattaques",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-22.html"
+  },
+  {
+   "id": "villepin-205-11",
+   "s": 205,
+   "cle": false,
+   "t": "Créer des filières de reconversion vers l'agriculture dans les collèges et lycées",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-22.html"
+  },
+  {
+   "id": "villepin-214-3",
+   "s": 214,
+   "cle": true,
+   "t": "Reprendre les autoroutes en gestion publique à la fin des concessions (2031-2036)",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-23.html"
+  },
+  {
+   "id": "villepin-214-4",
+   "s": 214,
+   "cle": false,
+   "t": "Créer des foncières publiques régionales de 10 milliards d'euros pour acheter des terrains industriels",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-23.html"
+  },
+  {
+   "id": "villepin-214-5",
+   "s": 214,
+   "cle": false,
+   "t": "Orienter en priorité le Fonds France vers la réindustrialisation",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-23.html"
+  },
+  {
+   "id": "villepin-214-6",
+   "s": 214,
+   "cle": false,
+   "t": "Lancer 100 territoires pilotes de réindustrialisation par les compétences",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-23.html"
+  },
+  {
+   "id": "villepin-214-7",
+   "s": 214,
+   "cle": false,
+   "t": "Exonérer de droits de succession les transmissions anticipées d'entreprises familiales",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-23.html"
+  },
+  {
+   "id": "villepin-214-8",
+   "s": 214,
+   "cle": false,
+   "t": "Donner aux industriels l'électricité au prix de production du parc français pour 95 % de leur facture",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-23.html"
+  },
+  {
+   "id": "villepin-214-9",
+   "s": 214,
+   "cle": true,
+   "t": "Supprimer les impôts de production en les intégrant à l'impôt sur les sociétés",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-23.html"
+  },
+  {
+   "id": "villepin-214-10",
+   "s": 214,
+   "cle": false,
+   "t": "Faciliter l'accès des PME à la commande publique et à la trésorerie",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-23.html"
+  },
+  {
+   "id": "villepin-214-11",
+   "s": 214,
+   "cle": false,
+   "t": "Créer une direction générale de la protection des entreprises contre l'espionnage",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-23.html"
+  },
+  {
+   "id": "villepin-214-12",
+   "s": 214,
+   "cle": false,
+   "t": "Conditionner les aides aux entreprises de plus de 1 000 salariés à des engagements sociaux et environnementaux",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-23.html"
+  },
+  {
+   "id": "villepin-214-13",
+   "s": 214,
+   "cle": false,
+   "t": "Encourager les entreprises à mission et une comptabilité financière, humaine et écologique",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-23.html"
+  },
+  {
+   "id": "villepin-217-1",
+   "s": 217,
+   "cle": false,
+   "t": "Interdire les algorithmes de défilement infini qui captent l'attention, notamment des jeunes",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-24.html"
+  },
+  {
+   "id": "villepin-217-2",
+   "s": 217,
+   "cle": false,
+   "t": "Créer un label pour les œuvres générées par IA et rémunérer les auteurs dont les œuvres entraînent les modèles",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-24.html"
+  },
+  {
+   "id": "villepin-217-3",
+   "s": 217,
+   "cle": false,
+   "t": "Taxer les contenus culturels générés par IA pour financer la création humaine",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-24.html"
+  },
+  {
+   "id": "villepin-217-4",
+   "s": 217,
+   "cle": true,
+   "t": "Garantir aux artistes un revenu de 1 000 € par mois",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-24.html"
+  },
+  {
+   "id": "villepin-217-5",
+   "s": 217,
+   "cle": false,
+   "t": "Créer une Maison des arts dans chaque bassin de vie",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-24.html"
+  },
+  {
+   "id": "villepin-217-6",
+   "s": 217,
+   "cle": false,
+   "t": "Taxer les billets des grandes salles et festivals pour financer les petites salles",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-24.html"
+  },
+  {
+   "id": "villepin-198-6",
+   "s": 198,
+   "cle": false,
+   "t": "Créer des DATAR régionales et des DDE départementales pour des projets de territoire à 2040",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-25.html"
+  },
+  {
+   "id": "villepin-198-7",
+   "s": 198,
+   "cle": false,
+   "t": "Moderniser les grands réseaux (électricité, eau, recharge, télécoms) avec le Fonds France",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-25.html"
+  },
+  {
+   "id": "villepin-198-8",
+   "s": 198,
+   "cle": false,
+   "t": "Signer avec les grandes villes des plans d'adaptation au climat (végétalisation, réseaux de froid)",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-25.html"
+  },
+  {
+   "id": "villepin-198-9",
+   "s": 198,
+   "cle": false,
+   "t": "Rendre obligatoire un volet « mouvement » (marche, vélo, sport libre) dans les documents d'urbanisme",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-25.html"
+  },
+  {
+   "id": "villepin-198-10",
+   "s": 198,
+   "cle": false,
+   "t": "Imposer des lieux communs gratuits dans les opérations de renouvellement urbain",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-25.html"
+  },
+  {
+   "id": "villepin-198-11",
+   "s": 198,
+   "cle": false,
+   "t": "Renforcer les sous-préfectures avec des services pour les élus et les habitants",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-25.html"
+  },
+  {
+   "id": "villepin-198-12",
+   "s": 198,
+   "cle": false,
+   "t": "Rendre les services publics essentiels accessibles en vingt minutes",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-25.html"
+  },
+  {
+   "id": "villepin-198-13",
+   "s": 198,
+   "cle": false,
+   "t": "Compenser les communes qui accueillent de grands équipements (énergie, data centers) par des baisses de facture",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-25.html"
+  },
+  {
+   "id": "villepin-198-14",
+   "s": 198,
+   "cle": false,
+   "t": "Lancer un plan Littoral 2050 sur le recul du trait de côte",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-25.html"
+  },
+  {
+   "id": "villepin-198-15",
+   "s": 198,
+   "cle": false,
+   "t": "Lancer un plan Montagne 2050 avec des préfets de massif",
+   "sous": [],
+   "page": null,
+   "src": "https://lafrancehumaniste.fr/programme/reussir-a-nouveau/chapitre-25.html"
+  },
+  {
+   "id": "attal-218-1",
+   "s": 218,
    "cle": true,
    "t": "Créer une banque nationale d'investissement pour le logement, qui financerait jusqu'à 50 % du prix d'achat en échange d'une part du bien",
    "sous": [],
@@ -4129,8 +7474,8 @@
    "src": "https://www.journaldelagence.com/1414778-presidentielle-2027-quelles-sont-les-propositions-de-gabriel-attal-pour-le-logement"
   },
   {
-   "id": "attal-188-2",
-   "s": 188,
+   "id": "attal-218-2",
+   "s": 218,
    "cle": false,
    "t": "Faciliter l'achat de leur logement par les locataires du parc social",
    "sous": [],
@@ -4138,8 +7483,8 @@
    "src": "https://www.journaldelagence.com/1414778-presidentielle-2027-quelles-sont-les-propositions-de-gabriel-attal-pour-le-logement"
   },
   {
-   "id": "attal-188-3",
-   "s": 188,
+   "id": "attal-218-3",
+   "s": 218,
    "cle": false,
    "t": "Aligner la fiscalité des donations des grands-parents aux petits-enfants sur celle des parents aux enfants",
    "sous": [],
@@ -4147,8 +7492,8 @@
    "src": "https://www.journaldelagence.com/1414778-presidentielle-2027-quelles-sont-les-propositions-de-gabriel-attal-pour-le-logement"
   },
   {
-   "id": "attal-188-4",
-   "s": 188,
+   "id": "attal-218-4",
+   "s": 218,
    "cle": false,
    "t": "Créer un statut du bailleur privé et étendre la garantie Visale à tous les locataires",
    "sous": [],
@@ -4156,8 +7501,8 @@
    "src": "https://www.journaldelagence.com/1414778-presidentielle-2027-quelles-sont-les-propositions-de-gabriel-attal-pour-le-logement"
   },
   {
-   "id": "attal-188-5",
-   "s": 188,
+   "id": "attal-218-5",
+   "s": 218,
    "cle": false,
    "t": "Assouplir le « zéro artificialisation nette » et limiter les recours contre un permis de construire à un seul, jugé en 18 mois maximum",
    "sous": [],
@@ -4165,8 +7510,8 @@
    "src": "https://www.journaldelagence.com/1414778-presidentielle-2027-quelles-sont-les-propositions-de-gabriel-attal-pour-le-logement"
   },
   {
-   "id": "attal-188-6",
-   "s": 188,
+   "id": "attal-218-6",
+   "s": 218,
    "cle": false,
    "t": "Reconnaître un droit à la climatisation, notamment en copropriété",
    "sous": [],
