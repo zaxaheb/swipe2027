@@ -9,9 +9,9 @@
     "#0f7c8c,#06414a",
     "#2b6f5e,#123b31"
    ],
-   "eco": "Édouard Philippe mise sur la baisse des dépenses publiques, dont la moitié de l'effort sur les dépenses sociales, et sur le travail. Pas encore de chiffrage global publié dans nos sources.",
-   "ecoUrl": "https://fr.euronews.com/2026/10/09/presidentielle-2027-edouard-philippe-mise-sur-le-travail-et-la-reduction-des-depenses-publ",
-   "note": "Programme complet pas encore publié : propositions annoncées dans la presse."
+   "eco": "Édouard Philippe vise un déficit public sous 2,5 % du PIB en 2032, avec une « double règle d'or » et une baisse « massive » des dépenses publiques, dont les dépenses sociales hors santé. Plan de redressement détaillé annoncé après le programme.",
+   "ecoUrl": "https://lcp.fr/actualites/presidentielle-2027-promettant-des-reformes-radicales-edouard-philippe-cherche-une",
+   "note": "Programme « Croire en nous » (volume 1, 142 propositions) présenté le 18 novembre 2026. Un volume 2 (culture, sport, santé, institutions) est annoncé pour début 2027."
   },
   "ATTAL": {
    "nom": "Renaissance",
@@ -89,7 +89,12 @@
    ],
    "eco": "Pas de chiffrage 2027 publié.",
    "ecoUrl": "https://www.france-vote.fr/candidats/francois-ruffin",
-   "note": "Programme 2027 pas encore publié : positions recensées par France-Vote à partir de déclarations, votes et documents de campagne."
+   "note": "Programme 2027 pas encore publié : positions recensées par France-Vote à partir de déclarations, votes et documents de campagne.",
+   "retrait": {
+    "date": "2026-11-21",
+    "texte": "Ne se présente plus : retrait annoncé le 21 novembre 2026, sans soutenir d'autre candidat.",
+    "url": "https://www.lagazettefrance.fr/article/presidentielle-ruffin-renonce-le-paysage-se-clarifie-a-gauche"
+   }
   },
   "BERTRAND": {
    "nom": "LR · Nous France",
@@ -128,7 +133,7 @@
    ],
    "eco": "Financement envisagé : taxe Zucman, ISF « vert », TVA verte. Pas de chiffrage global publié.",
    "ecoUrl": "https://www.france-vote.fr/candidats/marine-tondelier",
-   "note": "Candidature maintenue par son parti, mais les adhérents votent du 10 au 13 décembre 2026 sur un éventuel soutien à un autre candidat de gauche. Positions recensées par France-Vote."
+   "note": "Candidature maintenue à ce jour. Le 18 novembre 2026, Marine Tondelier s'est dite prête à « travailler à une coalition » autour de Jean-Luc Mélenchon. Les adhérents votent du 10 au 13 décembre : candidature autonome, soutien à Mélenchon ou à Glucksmann. Positions recensées par France-Vote."
   },
   "CAZENEUVE": {
    "nom": "La Convention",
@@ -316,6 +321,19 @@
    "eco": "Pas encore de chiffrage publié : orientations générales (dette, pouvoir d'achat).",
    "ecoUrl": "https://touch-actu.fr/actualites/portraits-politiques-8889-teddy-riner-candidat-a-la-presidentielle-2027-programme-reactions-et-parrainages",
    "note": "Candidature annoncée le 9 novembre 2026, « ni de droite, ni de gauche ». Orientations générales pour l'instant, sans programme détaillé ni chiffré."
+  },
+  "VILLEPIN": {
+   "nom": "La France humaniste",
+   "cand": "Dominique de Villepin",
+   "long": "La France humaniste · Dominique de Villepin",
+   "badge": "",
+   "grad": [
+    "#1d3557,#0b1a2e",
+    "#264a73,#10233d"
+   ],
+   "eco": "Dominique de Villepin vise un déficit public de 3 % du PIB en 2031, financé surtout par la suppression des niches fiscales et sociales et un « big bang » fiscal (neuf grands impôts, CSG à taux unique). Pas de chiffrage global détaillé publié.",
+   "ecoUrl": "https://lcp.fr/actualites/presidentielle-2027-dominique-villepin-veut-une-nouvelle-abolition-des-privileges-et-un",
+   "note": "Candidature annoncée le 20 novembre 2026. Propositions issues de ses textes de 2026 et de sa déclaration de candidature : pas encore de programme complet chiffré."
   }
  },
  "sections": [
@@ -1726,6 +1744,110 @@
    "intro": "",
    "url": "https://fr.qz.com/eric-zemmour-800000-postes-fonction-publique-111226",
    "prog": "ROUSSEL"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Finances publiques",
+   "section": "Finances publiques",
+   "intro": "",
+   "url": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et",
+   "prog": "PHILIPPE"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Économie",
+   "section": "Économie",
+   "intro": "",
+   "url": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et",
+   "prog": "PHILIPPE"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Énergie",
+   "section": "Énergie",
+   "intro": "",
+   "url": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et",
+   "prog": "PHILIPPE"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Sécurité et justice",
+   "section": "Sécurité et justice",
+   "intro": "",
+   "url": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et",
+   "prog": "PHILIPPE"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Enseignement supérieur",
+   "section": "Enseignement supérieur",
+   "intro": "",
+   "url": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et",
+   "prog": "PHILIPPE"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Logement",
+   "section": "Logement",
+   "intro": "",
+   "url": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et",
+   "prog": "PHILIPPE"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Finances publiques",
+   "section": "Finances publiques",
+   "intro": "",
+   "url": "https://www.publicsenat.fr/actualites/politique/dominique-de-villepin-annonce-sa-candidature-a-lelection-presidentielle-une-decision-lourde-et-difficile-declare-t-il",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Fiscalité",
+   "section": "Fiscalité",
+   "intro": "",
+   "url": "https://lcp.fr/actualites/presidentielle-2027-dominique-villepin-veut-une-nouvelle-abolition-des-privileges-et-un",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Pouvoir d'achat",
+   "section": "Pouvoir d'achat",
+   "intro": "",
+   "url": "https://fr.headtopics.com/news/dominique-de-villepin-devoile-son-programme-economique-pour-90197322",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Retraites",
+   "section": "Retraites",
+   "intro": "",
+   "url": "https://www.lagazettefrance.fr/article/villepin-veut-inscrire-le-principe-de-la-negociation-sociale-dans-la-constitution",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Institutions",
+   "section": "Institutions",
+   "intro": "",
+   "url": "https://www.lagazettefrance.fr/article/villepin-veut-inscrire-le-principe-de-la-negociation-sociale-dans-la-constitution",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Europe et défense",
+   "section": "Europe et défense",
+   "intro": "",
+   "url": "https://www.publicsenat.fr/actualites/politique/dominique-de-villepin-annonce-sa-candidature-a-lelection-presidentielle-une-decision-lourde-et-difficile-declare-t-il",
+   "prog": "VILLEPIN"
+  },
+  {
+   "partie": "Propositions annoncées",
+   "chapitre": "Logement",
+   "section": "Logement",
+   "intro": "",
+   "url": "https://www.journaldelagence.com/1414778-presidentielle-2027-quelles-sont-les-propositions-de-gabriel-attal-pour-le-logement",
+   "prog": "ATTAL"
   }
  ],
  "mesures": [
@@ -3672,6 +3794,384 @@
    "sous": [],
    "page": null,
    "src": "https://fr.qz.com/eric-zemmour-800000-postes-fonction-publique-111226"
+  },
+  {
+   "id": "philippe-0-2",
+   "s": 0,
+   "cle": false,
+   "t": "Introduire une dose de capitalisation dans le système de retraite",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+  },
+  {
+   "id": "philippe-0-3",
+   "s": 0,
+   "cle": false,
+   "t": "Après la réforme, confier le pilotage des retraites aux partenaires sociaux, avec une règle d'or d'équilibre",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+  },
+  {
+   "id": "philippe-176-1",
+   "s": 176,
+   "cle": true,
+   "t": "Instaurer une « double règle d'or » obligeant le gouvernement et le Parlement à revenir vers l'équilibre budgétaire",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+  },
+  {
+   "id": "philippe-176-2",
+   "s": 176,
+   "cle": false,
+   "t": "Ramener le déficit public sous 2,5 % du PIB en 2032",
+   "sous": [],
+   "page": null,
+   "src": "https://lcp.fr/actualites/presidentielle-2027-promettant-des-reformes-radicales-edouard-philippe-cherche-une"
+  },
+  {
+   "id": "philippe-3-3",
+   "s": 3,
+   "cle": true,
+   "t": "Revenir sur les 35 heures",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+  },
+  {
+   "id": "philippe-3-4",
+   "s": 3,
+   "cle": true,
+   "t": "Instaurer trois jours de carence pour tous les arrêts maladie, dans le public comme dans le privé",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+  },
+  {
+   "id": "philippe-2-2",
+   "s": 2,
+   "cle": false,
+   "t": "Réduire de 30 % le nombre d'allocataires du RSA",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+  },
+  {
+   "id": "philippe-2-3",
+   "s": 2,
+   "cle": false,
+   "t": "Suspendre automatiquement le RSA des délinquants condamnés",
+   "sous": [],
+   "page": null,
+   "src": "https://lcp.fr/actualites/presidentielle-2027-promettant-des-reformes-radicales-edouard-philippe-cherche-une"
+  },
+  {
+   "id": "philippe-177-1",
+   "s": 177,
+   "cle": true,
+   "t": "Baisser de 50 milliards d'euros les impôts de production, financés par une baisse de 50 milliards d'euros des aides aux entreprises",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+  },
+  {
+   "id": "philippe-177-2",
+   "s": 177,
+   "cle": false,
+   "t": "Supprimer l'objectif « zéro artificialisation nette » (ZAN)",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+  },
+  {
+   "id": "philippe-178-1",
+   "s": 178,
+   "cle": true,
+   "t": "Construire 8 réacteurs nucléaires en plus des 6 déjà annoncés, soit 14 au total",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+  },
+  {
+   "id": "philippe-6-3",
+   "s": 6,
+   "cle": false,
+   "t": "Fixer des quotas d'immigration « choisie » pour la restauration, les hôpitaux et l'agriculture",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+  },
+  {
+   "id": "philippe-6-4",
+   "s": 6,
+   "cle": true,
+   "t": "Instaurer un moratoire sur le regroupement familial",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+  },
+  {
+   "id": "philippe-179-1",
+   "s": 179,
+   "cle": true,
+   "t": "Autoriser la reconnaissance faciale, de façon ciblée et strictement encadrée",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+  },
+  {
+   "id": "philippe-179-2",
+   "s": 179,
+   "cle": false,
+   "t": "Utiliser la vidéoprotection assistée par l'IA pour identifier casseurs et criminels",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+  },
+  {
+   "id": "philippe-179-3",
+   "s": 179,
+   "cle": false,
+   "t": "Construire 30 000 places de prison supplémentaires",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+  },
+  {
+   "id": "philippe-179-4",
+   "s": 179,
+   "cle": false,
+   "t": "Interdire aux magistrats de se syndiquer",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+  },
+  {
+   "id": "philippe-5-6",
+   "s": 5,
+   "cle": true,
+   "t": "Donner plus d'autonomie aux établissements : rythmes, horaires, discipline, recrutement des équipes, choix de l'uniforme",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+  },
+  {
+   "id": "philippe-5-7",
+   "s": 5,
+   "cle": false,
+   "t": "Publier les évaluations de chaque établissement scolaire",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+  },
+  {
+   "id": "philippe-5-8",
+   "s": 5,
+   "cle": false,
+   "t": "Réduire le nombre d'élèves par classe en maternelle et en primaire",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+  },
+  {
+   "id": "philippe-5-5",
+   "s": 5,
+   "cle": false,
+   "t": "Recréer des écoles normales pour former les enseignants et reconnaître le métier d'AESH",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+  },
+  {
+   "id": "philippe-180-1",
+   "s": 180,
+   "cle": false,
+   "t": "Laisser les universités choisir leur mode de sélection des étudiants",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+  },
+  {
+   "id": "philippe-180-2",
+   "s": 180,
+   "cle": false,
+   "t": "Fermer les formations aux faibles taux de diplomation et d'insertion",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+  },
+  {
+   "id": "philippe-181-1",
+   "s": 181,
+   "cle": true,
+   "t": "Supprimer les frais de notaire pour le premier achat d'une résidence principale par les moins de 35 ans",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/capitalisation-suppression-de-250-000-postes-de-fonctionnaires-autonomie-des-ecoles-fin-des-35-heures-aides-pour-les-familles-edouard-philippe-presente-son-projet-massif-et"
+  },
+  {
+   "id": "villepin-182-1",
+   "s": 182,
+   "cle": true,
+   "t": "Ramener le déficit public à 3 % du PIB d'ici 2031",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/dominique-de-villepin-annonce-sa-candidature-a-lelection-presidentielle-une-decision-lourde-et-difficile-declare-t-il"
+  },
+  {
+   "id": "villepin-182-2",
+   "s": 182,
+   "cle": true,
+   "t": "Supprimer progressivement toutes les niches fiscales et sociales par une « grande loi d'extinction » (« nouvelle nuit du 4 août »)",
+   "sous": [],
+   "page": null,
+   "src": "https://lcp.fr/actualites/presidentielle-2027-dominique-villepin-veut-une-nouvelle-abolition-des-privileges-et-un"
+  },
+  {
+   "id": "villepin-183-1",
+   "s": 183,
+   "cle": false,
+   "t": "Simplifier le système fiscal autour de neuf grands impôts",
+   "sous": [],
+   "page": null,
+   "src": "https://lcp.fr/actualites/presidentielle-2027-dominique-villepin-veut-une-nouvelle-abolition-des-privileges-et-un"
+  },
+  {
+   "id": "villepin-183-2",
+   "s": 183,
+   "cle": true,
+   "t": "Rétablir un impôt sur la fortune, sous la forme d'un impôt unique sur toutes les formes de patrimoine",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/dominique-de-villepin-annonce-sa-candidature-a-lelection-presidentielle-une-decision-lourde-et-difficile-declare-t-il"
+  },
+  {
+   "id": "villepin-183-3",
+   "s": 183,
+   "cle": false,
+   "t": "Taxer plus fortement les successions, en exonérant totalement les transmissions faites de son vivant",
+   "sous": [],
+   "page": null,
+   "src": "https://lcp.fr/actualites/presidentielle-2027-dominique-villepin-veut-une-nouvelle-abolition-des-privileges-et-un"
+  },
+  {
+   "id": "villepin-183-4",
+   "s": 183,
+   "cle": true,
+   "t": "Basculer plus de 200 milliards d'euros de cotisations salariales et patronales vers une CSG à taux unique, élargie aux dépenses d'intelligence artificielle",
+   "sous": [],
+   "page": null,
+   "src": "https://lcp.fr/actualites/presidentielle-2027-dominique-villepin-veut-une-nouvelle-abolition-des-privileges-et-un"
+  },
+  {
+   "id": "villepin-184-1",
+   "s": 184,
+   "cle": false,
+   "t": "Augmenter le salaire net d'environ 200 € par mois en moyenne en rapprochant le brut du net",
+   "sous": [],
+   "page": null,
+   "src": "https://fr.headtopics.com/news/dominique-de-villepin-devoile-son-programme-economique-pour-90197322"
+  },
+  {
+   "id": "villepin-185-1",
+   "s": 185,
+   "cle": true,
+   "t": "Passer à une retraite par points où chacun choisit son âge de départ, la valeur du point étant fixée par les partenaires sociaux",
+   "sous": [],
+   "page": null,
+   "src": "https://www.lagazettefrance.fr/article/villepin-veut-inscrire-le-principe-de-la-negociation-sociale-dans-la-constitution"
+  },
+  {
+   "id": "villepin-185-2",
+   "s": 185,
+   "cle": false,
+   "t": "Préparer la réforme des retraites par une conférence sociale, une convention citoyenne et, si nécessaire, un référendum",
+   "sous": [],
+   "page": null,
+   "src": "https://www.lagazettefrance.fr/article/villepin-veut-inscrire-le-principe-de-la-negociation-sociale-dans-la-constitution"
+  },
+  {
+   "id": "villepin-186-1",
+   "s": 186,
+   "cle": false,
+   "t": "Inscrire le principe de la négociation sociale dans la loi, voire dans la Constitution, via une « charte sociale »",
+   "sous": [],
+   "page": null,
+   "src": "https://www.lagazettefrance.fr/article/villepin-veut-inscrire-le-principe-de-la-negociation-sociale-dans-la-constitution"
+  },
+  {
+   "id": "villepin-186-2",
+   "s": 186,
+   "cle": false,
+   "t": "Rompre avec l'« hyperprésidentialité » et relancer le référendum pour consulter directement les citoyens",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/dominique-de-villepin-annonce-sa-candidature-a-lelection-presidentielle-une-decision-lourde-et-difficile-declare-t-il"
+  },
+  {
+   "id": "villepin-187-1",
+   "s": 187,
+   "cle": false,
+   "t": "Créer un Conseil de sécurité européen réunissant les cinq principaux pays européens, pour un « pacte de souveraineté »",
+   "sous": [],
+   "page": null,
+   "src": "https://www.publicsenat.fr/actualites/politique/dominique-de-villepin-annonce-sa-candidature-a-lelection-presidentielle-une-decision-lourde-et-difficile-declare-t-il"
+  },
+  {
+   "id": "attal-188-1",
+   "s": 188,
+   "cle": true,
+   "t": "Créer une banque nationale d'investissement pour le logement, qui financerait jusqu'à 50 % du prix d'achat en échange d'une part du bien",
+   "sous": [],
+   "page": null,
+   "src": "https://www.journaldelagence.com/1414778-presidentielle-2027-quelles-sont-les-propositions-de-gabriel-attal-pour-le-logement"
+  },
+  {
+   "id": "attal-188-2",
+   "s": 188,
+   "cle": false,
+   "t": "Faciliter l'achat de leur logement par les locataires du parc social",
+   "sous": [],
+   "page": null,
+   "src": "https://www.journaldelagence.com/1414778-presidentielle-2027-quelles-sont-les-propositions-de-gabriel-attal-pour-le-logement"
+  },
+  {
+   "id": "attal-188-3",
+   "s": 188,
+   "cle": false,
+   "t": "Aligner la fiscalité des donations des grands-parents aux petits-enfants sur celle des parents aux enfants",
+   "sous": [],
+   "page": null,
+   "src": "https://www.journaldelagence.com/1414778-presidentielle-2027-quelles-sont-les-propositions-de-gabriel-attal-pour-le-logement"
+  },
+  {
+   "id": "attal-188-4",
+   "s": 188,
+   "cle": false,
+   "t": "Créer un statut du bailleur privé et étendre la garantie Visale à tous les locataires",
+   "sous": [],
+   "page": null,
+   "src": "https://www.journaldelagence.com/1414778-presidentielle-2027-quelles-sont-les-propositions-de-gabriel-attal-pour-le-logement"
+  },
+  {
+   "id": "attal-188-5",
+   "s": 188,
+   "cle": false,
+   "t": "Assouplir le « zéro artificialisation nette » et limiter les recours contre un permis de construire à un seul, jugé en 18 mois maximum",
+   "sous": [],
+   "page": null,
+   "src": "https://www.journaldelagence.com/1414778-presidentielle-2027-quelles-sont-les-propositions-de-gabriel-attal-pour-le-logement"
+  },
+  {
+   "id": "attal-188-6",
+   "s": 188,
+   "cle": false,
+   "t": "Reconnaître un droit à la climatisation, notamment en copropriété",
+   "sous": [],
+   "page": null,
+   "src": "https://www.journaldelagence.com/1414778-presidentielle-2027-quelles-sont-les-propositions-de-gabriel-attal-pour-le-logement"
   }
  ]
 }
