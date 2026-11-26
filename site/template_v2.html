@@ -826,12 +826,44 @@ body[data-v="home"] .live{margin-top:30px}
   .dbl,.list .dbrow{background:#fff}
   .dbt{font-size:18px}
   .dbtitle{font-size:34px}
-  body[data-v="debat"] .wrap,body[data-v="debats"] .wrap{max-width:900px!important}
+  
 }
 .seg{grid-template-columns:repeat(4,auto)!important}
 .seg a{padding-left:8px!important;padding-right:8px!important}
 .dba button.vb{white-space:nowrap}
 @media (min-width:1100px){.seg{max-width:620px!important}}
+/* zone d'écriture dans la page */
+.dbfoot{border-top:1px solid var(--line);margin:0 -14px;padding:12px 14px}
+.dbl>.dbfoot:first-child{border-top:0}
+.dbbox textarea{width:100%;font:15px/1.45 var(--sans);padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);resize:vertical;display:block}
+.dbbox textarea:focus,.dbbox input:focus,.dbnew input:focus,.dbnew textarea:focus{outline:2px solid #d9ccff;border-color:var(--accent)}
+.dbbox:not(.open) textarea{resize:none;min-height:0;height:44px;overflow:hidden;border-radius:999px;padding:11px 16px;background:var(--soft,#f4f2ef)}
+.dbmore{display:none}.dbbox.open .dbmore{display:block}
+.dbbox input{width:100%;font:14px var(--sans);padding:9px 12px;border:1px solid var(--line);border-radius:12px;margin-top:8px;background:#fff;color:var(--ink)}
+.dbgo{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap}
+.dbgo .btn{padding:9px 18px}
+.dbgo a{color:var(--accent);font-weight:600}
+.dbrbox:empty{display:none}.dbrbox{margin-top:10px}
+.dbwarn{margin-top:10px;background:#fff6e6;color:#7a4b00;border-radius:12px;padding:10px 12px;font-size:14px}
+.dbwarn ul{margin:6px 0 0;padding-left:18px}
+.dbkind{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:6px;margin-bottom:3px}
+.dbkind .dot{width:7px;height:7px}
+.dbclamp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.dbtop{font-size:13.5px;color:#4a4752;margin-top:5px;font-style:italic;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.dbtop span{font-style:normal;color:var(--muted);font-weight:600}
+.dbnew{margin-top:8px}
+.dblab{display:block;font-size:14px;font-weight:700;margin:16px 0 6px}
+.dbnew input,.dbnew textarea{width:100%;font:15px/1.45 var(--sans);padding:11px 13px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);display:block}
+.dbnew #dbn-t{font:600 17px/1.3 var(--serif)}
+.dbnew .dbtags:empty{display:none}
+.dbnew .dbtags{margin:0 0 8px}
+.dbtag button{border:0;background:none;padding:0 0 0 4px;font-size:11px;color:inherit;opacity:.7;cursor:pointer}
+#dbn-s{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:12px;margin-top:6px;overflow:hidden}
+#dbn-s:empty{display:none}
+#dbn-s button{border:0;border-top:1px solid var(--line);background:#fff;text-align:left;padding:10px 12px;font:14px/1.35 var(--sans);color:var(--ink);cursor:pointer}
+#dbn-s button:first-child{border-top:0}#dbn-s button:hover{background:var(--soft,#f4f2ef)}
+.dbrow .dbtags .dbtag.m{max-width:260px}
+@media (min-width:1100px){ body[data-v="forum"] .wrap{max-width:900px!important} }
 
 </style>
 </head>
@@ -843,7 +875,7 @@ body[data-v="home"] .live{margin-top:30px}
   <a href="#/explorer" data-n="explorer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Explorer</a>
   <a href="#/swipe" data-n="swipe" class="mid"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="17" rx="2.5"/><path d="M3 7v10M21 7v10"/></svg>Swipe</a>
   <a href="#/chat" data-n="chat"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/></svg>Chat</a>
-  <a href="#/debats" data-n="debats" class="desk-only"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h7M8.5 14.5h4.5"/></svg>Débats</a>
+  <a href="#/forum" data-n="forum" class="desk-only"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h7M8.5 14.5h4.5"/></svg>Forum</a>
   <a href="#/info" data-n="info" class="desk-only"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>Infos</a>
   <a href="#/profil" data-n="profil"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>Profil</a>
 </div></nav>
@@ -1005,7 +1037,7 @@ function vHome(){
     </div>
     ${d.length?`<section class="sec"><div class="sec-h"><h2>Les mesures du jour</h2><span style="font-size:13px;color:var(--muted)">dans l'actualité</span></div>
       <div class="daily">${d.map(m=>{ const f=F[m.id], nc=(f.critiques||[]).length; return `<a class="photo" href="#/m/${encodeURIComponent(m.id)}" style="background:${cgrad(m.P)}"><div class="who2">${esc(C[m.P].cand)}<small>· ${esc(C[m.P].nom)}</small></div><h2 class="q${m.t.length>150?" l":""}">${esc(m.t)}</h2><div class="meta2">${esc(THM[m.th].t)} · dans la presse le ${esc(dateFr(m.dp))}${nc?" · "+plural(nc,"critique","critiques"):""}</div></a>`; }).join("")}</div></section>`:""}
-    ${dbSection(null,"Les débats du moment")}
+    ${dbSection(null,"Le forum")}
     <section class="sec"><div class="sec-h"><h2>Explorer les sujets</h2><a href="#/explorer">${nEx}/${TH.length} explorés</a></div>
       <div class="tiles-h">${sugg.map(t=>tile(t,true)).join("")}</div></section>
     <section class="sec"><div class="sec-h"><h2>L'actu de la campagne</h2><a href="#/actus">Tout le fil</a></div><div class="card-l" id="home-act"></div></section>
@@ -1033,13 +1065,13 @@ const dateFr=d=>{ const [y,m,j]=d.split("-").map(Number); return j+" "+MOIS[m-1]
 function vExplorer(tab){
   tab=tab||LS.get("ex:tab")||"sujets"; LS.set("ex:tab",tab);
   setTop("");
-  const seg=`<div class="seg">${[["sujets","Sujets"],["candidats","Candidats"],["debats","Débats"],["condamnations","Condamnations"]].map(([k,l])=>`<a href="#/explorer/${k}" class="${tab===k?"on":""}">${l}</a>`).join("")}</div>`;
+  const seg=`<div class="seg">${[["sujets","Sujets"],["candidats","Candidats"],["forum","Forum"],["condamnations","Condamnations"]].map(([k,l])=>`<a href="#/explorer/${k}" class="${tab===k?"on":""}">${l}</a>`).join("")}</div>`;
   let body="";
   if(tab==="candidats"){
     const L=CK.slice().sort((a,b)=>C[b].n-C[a].n||lastName(C[a].cand).localeCompare(lastName(C[b].cand),"fr")), max=C[L[0]].n;
     body=`<div class="list" style="margin-top:12px">${L.map(P=>`<a class="crow" href="#/c/${P}"><b><i class="dot" style="background:${C[P].color}"></i>${esc(C[P].cand)}</b><span class="nb">${C[P].n}</span><span class="tr"><i style="width:${Math.max(1.5,100*C[P].n/max)}%;background:${C[P].color}"></i></span><small>${esc(C[P].nom)} · ${C[P].complet?"programme complet publié":"propositions annoncées"}</small></a>`).join("")}</div>`;
   } else if(tab==="condamnations"){ $("#app").innerHTML=seg; v1Frame("cond",condTidy,$("#app .seg").getBoundingClientRect().bottom+4); return; }
-  else if(tab==="debats") body=dbList();
+  else if(tab==="forum") body=dbList();
   else body=`<div class="sqs" style="margin-top:12px">${TH.map(t=>tile(t,true)).join("")}</div>`;
   $("#app").innerHTML=seg+body;
 }
@@ -1086,7 +1118,7 @@ function vSujet(id,focus){
     <div class="hs" style="margin-top:14px"><a class="chip${fc?"":" on"}" href="#" data-sf="">Tous <small>${ms.length}</small></a>${has.map(P=>`<a class="chip${fc===P?" on":""}" href="#" data-sf="${P}"><i class="dot" style="background:${C[P].color}"></i>${esc(lastName(C[P].cand))} <small>${ms.filter(m=>m.P===P).length}</small></a>`).join("")}</div>
     ${body}
     ${none.length&&!fc?`<div class="absent"><b>Rien trouvé dans nos sources</b>${none.map(P=>esc(C[P].cand)).join(", ")}</div>`:""}
-    ${dbSection({th:id},"Débats sur ce sujet")}
+    ${dbSection({th:id},"Forum")}
     <p class="hint">Pour chaque question, toutes les mesures de chaque candidat, par ordre alphabétique des candidats. Le classement a été fait par une IA, puis vérifié : signale les erreurs.</p>`;
   document.querySelectorAll("[data-sf]").forEach(a=>a.onclick=e=>{ e.preventDefault(); SF[id]=a.dataset.sf; const y=scrollY; vSujet(id); window.scrollTo(0,y); });
   if(focus) setTimeout(()=>{ const el=$("#pt-"+focus); if(el) window.scrollTo({top:el.getBoundingClientRect().top+scrollY-64,behavior:"smooth"}); },30);
@@ -1124,7 +1156,7 @@ function vCand(P){
       <div class="dive-h"><h2>Ses mesures par sujet</h2></div>
       <div class="hs" style="margin-bottom:10px"><a class="chip${fl==="tout"?" on":""}" href="#" data-f="tout">Toutes <small>${ms.length}</small></a>${nf&&nf<ms.length?`<a class="chip${fl==="fiches"?" on":""}" href="#" data-f="fiches">Avec fiche <small>${nf}</small></a>`:""}${ths.map(x=>`<a class="chip${fl===x.t.id?" on":""}" href="#" data-f="${x.t.id}">${esc(x.t.t)} <small>${x.n}</small></a>`).join("")}</div>
       ${rowsWithMore(list,20,false,"c-"+P+"-"+fl)}
-      ${dbSection({P},"Débats")}
+      ${dbSection({P},"Forum")}
       <section class="sec"><div class="sec-h"><h2>Son actu</h2><a href="#/actus/${P}">Tout</a></div><div class="card-l" id="c-act"></div></section></div></div>`;
     fillActus($("#c-act"),c.cand,4);
     document.querySelectorAll("[data-f]").forEach(a=>a.onclick=e=>{ e.preventDefault(); CF[P]=a.dataset.f; track("candidat:filtre"); const y=scrollY; draw(); window.scrollTo(0,y); });
@@ -1217,7 +1249,7 @@ function vMesure(id){
       ${dbDiscussion(m.id)}
       <a class="bubble" style="bottom:calc(var(--nav) + 30px + env(safe-area-inset-bottom))" href="#/chat?m=${encodeURIComponent(m.id)}" aria-label="Poser une question sur cette proposition"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg></a>`;
     mountDive($("#app")); bindAvis($("#app")); $("#b-flag").onclick=()=>openFlag(m); deskPanel(m);
-    if(/\?debat/.test(location.hash)) setTimeout(()=>{ const d=$("#debat"); if(d) scrollTo({top:d.getBoundingClientRect().top+scrollY-70,behavior:"smooth"}); },60);
+    if(/\?forum/.test(location.hash)) setTimeout(()=>{ const d=$("#forum"); if(d) scrollTo({top:d.getBoundingClientRect().top+scrollY-70,behavior:"smooth"}); },60);
   }
 }
 /* « Pour aller plus loin » : onglets + volets qu'on fait glisser de gauche à droite. Même composant sur la fiche et dans le Swipe. */
@@ -1502,8 +1534,8 @@ function swipePanels(m,f,hidden){
   if((f.concret||[]).length) P.push({k:"concret",label:"Concrètement",html:mk(`<ul>${f.concret.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`)});
   if(lg) P.push({k:"pour",label:"Pourquoi",html:mk(`<p>${esc(lg.texte)}</p>`)});
   if(crit.length) P.push({k:"contre",label:"Critiques",cnt:crit.length,html:mk(crit.slice(0,5).map(x=>`<div class="q c"><div class="h">${esc(x.camp||x.qui||"")}</div><div class="x">${esc(firstSentence(x.texte))}</div></div>`).join(""))});
-  if(!hidden){ const top=(DB_COM[m.id]||[]).slice().sort((a,b)=>dbV(b)-dbV(a))[0], n=dbAll(m.id), u="#/m/"+encodeURIComponent(m.id)+"?debat";
-    P.push({k:"debat",label:"Débat",cnt:n,html:(top?`<div class="q"><div class="h">@${esc(top.u)} · ◆ ${top.q}/100 · ▲ ${dbV(top)}</div><div class="x">${esc(firstSentence(top.t))}</div></div><a class="src" href="${u}">Lire le débat (${n}) →</a>`:`<p>Pas encore d'analyse de lecteur sur cette mesure.</p><a class="src" href="${u}">Ajouter la première →</a>`)+` <span class="dbdemo">Démo</span>`}); }
+  if(!hidden){ const top=(DB_COM[m.id]||[]).slice().sort((a,b)=>dbV(b)-dbV(a))[0], n=dbAll(m.id), u="#/m/"+encodeURIComponent(m.id)+"?forum";
+    P.push({k:"forum",label:"Forum",cnt:n,html:(top?`<div class="q"><div class="h">@${esc(top.u)} · ▲ ${dbV(top)}</div><div class="x">${esc(firstSentence(top.t))}</div></div><a class="src" href="${u}">Lire les ${n} messages →</a>`:`<p>Pas encore de message sur cette mesure.</p><a class="src" href="${u}">Lancer la discussion →</a>`)+` <span class="dbdemo">Démo</span>`}); }
   return P;
 }
 function toast(t){ const d=document.createElement("div"); d.className="flash"; d.style.cssText="background:var(--dark);color:#fff;font-size:15px;top:22%;animation-duration:2.2s"; d.textContent=t; document.body.appendChild(d); setTimeout(()=>d.remove(),2300); }
@@ -1693,163 +1725,202 @@ function candHero(P){
     <div class="pills"><span>${esc(c.nom)}</span>${pollOf(P)!=null?`<a href="#/sondages">${pct(pollOf(P))} · ${esc(POLL.institut)}</a>`:""}<a href="#/actus/${P}">Son actu</a></div></div>`;
 }
 
-/* ---------- Débats entre lecteurs : DÉMO (branche zak/participatif) ----------
-   Données fictives, rien n'est envoyé au serveur : votes, messages et brouillons restent sur l'appareil (localStorage).
-   Dans la vraie version : tables Supabase + /api/participer (filtre IA) + file de modération dans admin.html (voir PARTICIPATIF.md). */
+/* ---------- Forum : DÉMO (branche zak/participatif) ----------
+   Données fictives, rien n'est envoyé au serveur : votes et messages restent sur l'appareil (localStorage).
+   Côté lecteur, on parle seulement de relecture et de règles. La note de qualité calculée avant publication reste interne : elle sert au tri dans la file de modération (admin).
+   Vraie version : tables Supabase + /api/participer + file de modération dans admin.html (voir PARTICIPATIF.md). */
 const DB_SEUIL=60;
 const DB_COM={
  "augmenter-les-salaires-1":[
-  {id:"c1",u:"thomas_eco",q:88,v:42,ago:"il y a 3 h",t:"Le point clé, c'est l'effet sur les petites entreprises. Le programme prévoit une caisse de péréquation financée par les grands groupes pour aider les TPE-PME à absorber la hausse : sans ce mécanisme, la mesure ne se lit pas de la même façon. Il manque encore un chiffrage public de cette caisse.",src:["Programme LFI : salaires","Rapport du groupe d'experts sur le Smic"],rep:[
-    {id:"c11",u:"camille_r",q:81,v:17,ago:"il y a 2 h",t:"Pour compléter : l'indexation sur l'inflation existe déjà pour le Smic, la nouveauté est de l'étendre à tous les salaires. C'est cette extension qui fait le plus débat chez les économistes.",src:["Code du travail : revalorisation du Smic"]},
-    {id:"c12",u:"jb_lyon",q:74,v:5,ago:"il y a 1 h",t:"D'accord sur la caisse, mais l'effet dépend du secteur : l'hôtellerie-restauration et le commerce ont beaucoup de salariés au Smic. Une analyse par branche serait utile.",src:["Dares : salariés au Smic par secteur"]}]},
-  {id:"c2",u:"nadia_k",q:79,v:23,ago:"il y a 5 h",t:"Comparaison utile avec l'Allemagne : le salaire minimum y est fixé par une commission où siègent syndicats et patronat. Ce choix de méthode change beaucoup la façon dont une hausse est acceptée par les entreprises.",src:["Mindestlohnkommission (site officiel)"],rep:[]},
-  {id:"c3",u:"paul_d",q:66,v:-2,ago:"il y a 6 h",t:"Les études sur les hausses rapides du salaire minimum ne concluent pas toutes pareil sur l'emploi : ça dépend du niveau de départ par rapport au salaire médian. Il faudrait regarder où se situerait la France après la hausse.",src:["OCDE : salaires minimums"],rep:[]}],
+  {id:"c1",u:"thomas_eco",v:42,ago:"il y a 3 h",t:"Le point clé, c'est l'effet sur les petites entreprises. Le programme prévoit une caisse de péréquation financée par les grands groupes pour aider les TPE-PME à absorber la hausse : sans ce mécanisme, la mesure ne se lit pas de la même façon. Il manque encore un chiffrage public de cette caisse.",src:["Programme LFI : salaires"],rep:[
+    {id:"c11",u:"camille_r",v:17,ago:"il y a 2 h",t:"Pour compléter : l'indexation sur l'inflation existe déjà pour le Smic, la nouveauté est de l'étendre à tous les salaires. C'est cette extension qui fait le plus débat chez les économistes."},
+    {id:"c12",u:"jb_lyon",v:5,ago:"il y a 1 h",t:"D'accord sur la caisse, mais l'effet dépend du secteur : l'hôtellerie-restauration et le commerce ont beaucoup de salariés au Smic. Une analyse par branche serait utile.",src:["Dares : salariés au Smic par secteur"]}]},
+  {id:"c2",u:"nadia_k",v:23,ago:"il y a 5 h",t:"Comparaison utile avec l'Allemagne : le salaire minimum y est fixé par une commission où siègent syndicats et patronat. Ce choix de méthode change beaucoup la façon dont une hausse est acceptée par les entreprises.",rep:[]},
+  {id:"c3",u:"paul_d",v:-2,ago:"il y a 6 h",t:"Les études sur les hausses rapides du salaire minimum ne concluent pas toutes pareil sur l'emploi : ça dépend du niveau de départ par rapport au salaire médian. Il faudrait regarder où se situerait la France après la hausse.",src:["OCDE : salaires minimums"],rep:[]}],
  "rn-3-1":[
-  {id:"c4",u:"marc_v",q:77,v:12,ago:"hier",t:"Les peines planchers ont déjà existé en France. Avant d'en débattre, il faudrait regarder les évaluations publiées sur leur application et leur effet sur la récidive : c'est la meilleure base pour comparer avec la proposition.",src:["Rapport d'évaluation (ministère de la Justice)"],rep:[]}],
+  {id:"c4",u:"marc_v",v:12,ago:"hier",t:"Les peines planchers ont déjà existé en France. Avant d'en débattre, il faudrait regarder les évaluations publiées sur leur application et leur effet sur la récidive : c'est la meilleure base pour comparer avec la proposition.",rep:[]}],
  "garantir-une-retraite-digne-1":[
-  {id:"c5",u:"sofia_b",q:82,v:19,ago:"il y a 4 h",t:"Pour comparer les candidats, il faut regarder deux paramètres à la fois : l'âge légal et la durée de cotisation. Revenir à 60 ans avec 40 annuités ne touche pas les mêmes personnes qu'un simple retour à 62 ans.",src:["Conseil d'orientation des retraites : rapport annuel"],rep:[]}]
+  {id:"c5",u:"sofia_b",v:19,ago:"il y a 4 h",t:"Pour comparer les candidats, il faut regarder deux paramètres à la fois : l'âge légal et la durée de cotisation. Revenir à 60 ans avec 40 annuités ne touche pas les mêmes personnes qu'un simple retour à 62 ans.",src:["Conseil d'orientation des retraites : rapport annuel"],rep:[]}]
 };
+const DB_AGO={"augmenter-les-salaires-1":"il y a 1 h","rn-3-1":"hier","garantir-une-retraite-digne-1":"il y a 4 h"};
 const DB_TH=[
- {id:"t1",t:"Smic à 1 700 € : quels effets selon les secteurs ?",u:"thomas_eco",v:58,n:14,ago:"il y a 2 h",q:86,th:["salaires"],P:["LFI"],m:["augmenter-les-salaires-1"],
-  texte:"Ouvrons un fil pour regarder secteur par secteur. Dans certaines branches, une grande part des salariés est payée au Smic : l'effet d'une hausse n'y est pas le même que dans l'industrie. Je propose de rassembler ici les données par branche et les mesures d'accompagnement prévues par les candidats qui veulent augmenter le Smic.",src:["Dares : salariés au Smic par secteur","Programme LFI : salaires"],com:"augmenter-les-salaires-1"},
- {id:"t2",t:"Âge de départ : comparer les propositions des candidats",u:"camille_r",v:41,n:22,ago:"il y a 5 h",q:82,th:["retraites"],P:["RN","PHILIPPE","LFI"],m:["garantir-une-retraite-digne-1","rn-x7-3"],
-  texte:"Les propositions mélangent âge légal, durée de cotisation et carrières longues. Ce fil sert à les mettre côte à côte, paramètre par paramètre, avec les chiffrages publics quand ils existent.",src:["Conseil d'orientation des retraites : rapport annuel"],com:"garantir-une-retraite-digne-1"},
- {id:"t3",t:"Peines planchers : que disent les évaluations passées ?",u:"jb_lyon",v:33,n:9,ago:"hier",q:84,th:["securite"],P:["RN","RETAILLEAU"],m:["rn-3-1"],
-  texte:"Plusieurs candidats veulent rétablir les peines planchers. Le dispositif a déjà existé : rassemblons ici les évaluations publiées et ce qu'elles disent de son application.",src:["Rapport d'évaluation (ministère de la Justice)"],com:"rn-3-1"},
- {id:"t4",t:"Comment lire un sondage à 6 mois de l'élection ?",u:"nadia_k",v:27,n:6,ago:"hier",q:90,th:[],P:[],m:[],general:true,
-  texte:"Marge d'erreur, intentions de vote, notices de la Commission des sondages : un fil pour partager les bonnes pratiques de lecture.",src:["Commission des sondages : notices"]},
- {id:"t5",t:"Nucléaire et renouvelables : quels coûts de production comparer ?",u:"paul_d",v:12,n:3,ago:"il y a 2 j",q:71,th:["ecologie"],P:["TONDELIER","BERTRAND"],m:["organiser-le-100-d-energies-renouvelables-4"],
+ {id:"t1",t:"Smic à 1 700 € : quels effets selon les secteurs ?",u:"thomas_eco",v:58,n:14,ago:"il y a 2 h",th:["salaires"],P:["LFI"],m:["augmenter-les-salaires-1"],
+  texte:"Ouvrons une discussion pour regarder secteur par secteur. Dans certaines branches, une grande part des salariés est payée au Smic : l'effet d'une hausse n'y est pas le même que dans l'industrie. Je propose de rassembler ici les données par branche et les mesures d'accompagnement prévues par les candidats qui veulent augmenter le Smic.",src:["Dares : salariés au Smic par secteur"],com:"augmenter-les-salaires-1"},
+ {id:"t2",t:"Âge de départ : comparer les propositions des candidats",u:"camille_r",v:41,n:22,ago:"il y a 5 h",th:["retraites"],P:["RN","PHILIPPE","LFI"],m:["garantir-une-retraite-digne-1","rn-x7-3"],
+  texte:"Les propositions mélangent âge légal, durée de cotisation et carrières longues. Cette discussion sert à les mettre côte à côte, paramètre par paramètre, avec les chiffrages publics quand ils existent.",com:"garantir-une-retraite-digne-1"},
+ {id:"t3",t:"Peines planchers : que disent les évaluations passées ?",u:"jb_lyon",v:33,n:9,ago:"hier",th:["securite"],P:["RN","RETAILLEAU"],m:["rn-3-1"],
+  texte:"Plusieurs candidats veulent rétablir les peines planchers. Le dispositif a déjà existé : rassemblons ici les évaluations publiées et ce qu'elles disent de son application.",com:"rn-3-1"},
+ {id:"t4",t:"Comment lire un sondage à 6 mois de l'élection ?",u:"nadia_k",v:27,n:6,ago:"hier",th:[],P:[],m:[],general:true,
+  texte:"Marge d'erreur, intentions de vote, notices de la Commission des sondages : une discussion pour partager les bonnes pratiques de lecture."},
+ {id:"t5",t:"Nucléaire et renouvelables : quels coûts de production comparer ?",u:"paul_d",v:12,n:3,ago:"il y a 2 j",th:["ecologie"],P:["TONDELIER","BERTRAND"],m:["organiser-le-100-d-energies-renouvelables-4"],
   texte:"Les chiffres de coût qui circulent ne mesurent pas tous la même chose (coût complet, coût du réseau, stockage). Quels rapports publics comparer ?",src:["RTE : Futurs énergétiques 2050"]}
 ];
 const dbVotes=()=>LS.get("debat:votes")||{}, dbMine=()=>LS.get("debat:mine")||[];
 const dbV=c=>c.v+(dbVotes()[c.id]||0);
 const dbAll=cible=>{ const L=(DB_COM[cible]||[]); return L.length+L.reduce((n,c)=>n+(c.rep||[]).length,0); };
-const dbThreads=f=>DB_TH.filter(t=>t.th.length+t.P.length+t.m.length>=0&&(!f||((!f.th||t.th.includes(f.th))&&(!f.P||t.P.includes(f.P))&&(!f.m||t.m.includes(f.m))&&(!f.general||t.general))));
-const DBQ=q=>`<span class="dbq${q>=80?" hi":""}" title="Note du filtre : sources, profondeur, ton, pertinence">◆ ${q}</span>`;
+const dbHot=mid=>(DB_COM[mid]||[]).reduce((n,c)=>n+dbV(c)+(c.rep||[]).reduce((k,r)=>k+dbV(r),0),0);
+const DBDEMO=`<span class="dbdemo">Démo</span>`;
+/* Un message (ou une réponse) */
 function dbCom(c,cible,lvl){
   const my=dbVotes()[c.id]||0;
-  return `<div class="dbc"><div class="dbv"><button data-dbv="${c.id}" data-d="1" class="${my>0?"on":""}" aria-label="Utile">▲</button><b>${dbV(c)}</b><button data-dbv="${c.id}" data-d="-1" class="dn${my<0?" on":""}" aria-label="Pas utile">▼</button></div>
-    <div class="dbb"><div class="dbh"><b>@${esc(c.u)}</b><span>${esc(c.ago)}</span>${DBQ(c.q)}</div><p>${esc(c.t)}</p>
+  return `<div class="dbc" id="dbc-${c.id}"><div class="dbv"><button data-dbv="${c.id}" data-d="1" class="${my>0?"on":""}" aria-label="Utile">▲</button><b>${dbV(c)}</b><button data-dbv="${c.id}" data-d="-1" class="dn${my<0?" on":""}" aria-label="Pas utile">▼</button></div>
+    <div class="dbb"><div class="dbh"><b>@${esc(c.u)}</b><span>${esc(c.ago)}</span></div><p>${esc(c.t)}</p>
     ${(c.src||[]).length?`<div class="dbs">${c.src.map(s=>`<span>↗ ${esc(s)}</span>`).join("")}</div>`:""}
-    <div class="dba">${lvl?"":`<button data-dbpost="${esc(cible)}" data-parent="${c.id}">Répondre</button>`}<button data-dbflag>Signaler</button></div></div></div>
-    ${(c.rep||[]).length?`<div class="dbrep">${c.rep.map(r=>dbCom(r,cible,1)).join("")}</div>`:""}`;
+    <div class="dba">${lvl?"":`<button data-dbreply="${c.id}" data-cible="${esc(cible)}">Répondre</button>`}<button data-dbflag>Signaler</button></div>
+    <div class="dbrbox" id="dbr-${c.id}"></div></div></div>
+    ${(c.rep||[]).length||dbMine().some(x=>x.parent===c.id)?`<div class="dbrep">${(c.rep||[]).map(r=>dbCom(r,cible,1)).join("")}${dbMine().filter(x=>x.parent===c.id).map(dbPend).join("")}</div>`:""}`;
 }
-const dbPend=x=>`<div class="dbc pend"><div class="dbv"><b>·</b></div><div class="dbb"><div class="dbh"><b>@${esc(x.u)}</b><span class="dbst">En attente de modération</span>${DBQ(x.score)}</div>${x.titre?`<p><b>${esc(x.titre)}</b></p>`:""}<p>${esc(x.texte)}</p><p class="hint" style="margin:0">Visible par toi seulement tant qu'un modérateur ne l'a pas relu.</p></div></div>`;
+const dbPend=x=>`<div class="dbc pend"><div class="dbv"><b>·</b></div><div class="dbb"><div class="dbh"><b>@${esc(x.u)}</b><span class="dbst">En attente de relecture</span></div>${x.titre?`<p><b>${esc(x.titre)}</b></p>`:""}<p>${esc(x.texte)}</p><p class="hint" style="margin:0">Toi seul le vois pour l'instant : il sera publié après relecture par l'équipe de modération.</p></div></div>`;
+/* La zone d'écriture, directement dans la page (plus de panneau qui s'ouvre) */
+function dbBox(cible,parent,ph,open){
+  return `<div class="dbbox${open?" open":""}" data-cible="${esc(cible)}" data-parent="${esc(parent||"")}">
+    <textarea rows="${open?4:1}" placeholder="${esc(ph||"Écrire un message…")}" data-dbgrow></textarea>
+    <div class="dbmore"><input type="url" placeholder="Lien vers une source (facultatif)">
+      <div class="dbgo"><span class="hint" style="margin:0">Relu avant publication · <a href="#" data-dbrules>Règles du forum</a></span><span style="flex:1"></span>${parent?`<button class="btn" data-dbcancel>Annuler</button>`:""}<button class="btn dark" data-dbsend>Publier</button></div>
+      <div class="dbmsg"></div></div></div>`;
+}
 let DBSORT="utile";
 function dbDiscussion(mid){
-  const L=(DB_COM[mid]||[]).slice().sort((a,b)=>DBSORT==="utile"?(dbV(b)+b.q/10)-(dbV(a)+a.q/10):0), mine=dbMine().filter(x=>x.cible===mid), n=dbAll(mid);
-  const th=dbThreads({m:mid});
-  return `<div class="dbhead" id="debat"><h2>Le débat <small>${n}</small></h2><span class="dbdemo">Démo</span></div>
-    <p class="hint" style="margin:0 0 10px">Des analyses de lecteurs, sourcées et relues avant publication. ▲ veut dire « utile », pas « d'accord ».</p>
-    ${n?`<div class="hs" style="margin-bottom:8px"><a class="chip${DBSORT==="utile"?" on":""}" href="#" data-dbsort="utile">Les plus utiles</a><a class="chip${DBSORT==="rec"?" on":""}" href="#" data-dbsort="rec">Récentes</a></div>`:""}
-    <div class="dbl">${mine.map(dbPend).join("")}${L.map(c=>dbCom(c,mid,0)).join("")||(mine.length?"":`<p class="dbempty">Pas encore d'analyse. Une source, un raisonnement : la tienne peut être la première.</p>`)}</div>
-    <button class="btn dark" style="width:100%;margin-top:10px" data-dbpost="${esc(mid)}">Ajouter mon analyse</button>
-    ${th.length?`<div class="dbhead" style="margin-top:18px"><h2>Dans les débats</h2><a href="#/debats">Tous →</a></div><div class="list">${th.map(dbRow).join("")}</div>`:""}`;
+  const L=(DB_COM[mid]||[]).slice().sort((a,b)=>DBSORT==="utile"?dbV(b)-dbV(a):0), mine=dbMine().filter(x=>x.cible===mid&&!x.parent), n=dbAll(mid);
+  const th=DB_TH.filter(t=>t.m.includes(mid));
+  return `<div class="dbhead" id="forum"><h2>Forum${n?` <small>${n}</small>`:""}</h2>${DBDEMO}</div>
+    <p class="hint" style="margin:0 0 10px">Les messages sont relus avant d'être publiés. ▲ veut dire « utile », pas « d'accord ».</p>
+    ${n>1?`<div class="hs" style="margin-bottom:8px"><a class="chip${DBSORT==="utile"?" on":""}" href="#" data-dbsort="utile">Les plus utiles</a><a class="chip${DBSORT==="rec"?" on":""}" href="#" data-dbsort="rec">Récents</a></div>`:""}
+    <div class="dbl">${mine.map(dbPend).join("")}${L.map(c=>dbCom(c,mid,0)).join("")||(mine.length?"":`<p class="dbempty">Pas encore de message sur cette mesure.</p>`)}
+      <div class="dbfoot">${dbBox(mid,"",n?"Ajouter un message…":"Lancer la discussion sur cette mesure…")}</div></div>
+    ${th.length?`<div class="dbhead" style="margin-top:18px"><h2>Discussions liées</h2><a href="#/forum">Tout le forum →</a></div><div class="list">${th.map(t=>dbRow({k:"fil",t})).join("")}</div>`:""}
+    <a class="src" href="#/forum/nouveau?m=${encodeURIComponent(mid)}" style="margin-top:10px">+ Ouvrir une discussion plus large à partir de cette mesure</a>`;
+}
+/* Le forum mélange deux choses : les discussions créées par les lecteurs, et les cartes de mesures où l'on discute. */
+function dbItems(f){
+  f=f||{};
+  const fils=DB_TH.filter(t=>(!f.th||(f.th==="general"?t.general:t.th.includes(f.th)))&&(!f.P||t.P.includes(f.P))).map(t=>({k:"fil",t,hot:dbV(t),n:t.n,i:DB_TH.indexOf(t)}));
+  const cartes=Object.keys(DB_COM).filter(id=>MID[id]&&dbAll(id)&&(!f.th||MID[id].th===f.th)&&(!f.P||MID[id].P===f.P)).map((id,i)=>({k:"carte",m:MID[id],hot:dbHot(id),n:dbAll(id),i:i+.5}));
+  return f.type==="fil"?fils:f.type==="carte"?cartes:[...fils,...cartes];
 }
 const dbTag=(k,v)=>k==="th"?`<a class="dbtag s" href="#/s/${v}"># ${esc(THM[v]?THM[v].t:v)}</a>`:k==="P"?`<a class="dbtag c" href="#/c/${v}"><i class="dot" style="background:${C[v].color}"></i>${esc(lastName(C[v].cand))}</a>`:MID[v]?`<a class="dbtag m" href="#/m/${encodeURIComponent(v)}">📄 ${esc(MID[v].t.length>48?MID[v].t.slice(0,46)+"…":MID[v].t)}</a>`:"";
 const dbTags=(t,flat)=>{ const h=[...(t.general?[`<span class="dbtag s"># Général</span>`]:[]),...t.th.map(v=>dbTag("th",v)),...t.P.filter(P=>C[P]).map(v=>dbTag("P",v)),...t.m.map(v=>dbTag("m",v))].join("");
   return flat?h.replace(/<a class=/g,"<span class=").replace(/ href="[^"]*"/g,"").replace(/<\/a>/g,"</span>"):h; };   // flat : dans une ligne déjà cliquable (pas de lien dans un lien)
-const dbRow=t=>`<a class="dbrow" href="#/debat/${t.id}"><div class="dbn"><b>${dbV(t)}</b>▲</div><div style="min-width:0"><div class="dbt">${esc(t.t)}</div><div class="dbm">@${esc(t.u)} · ${esc(t.ago)} · ${plural(t.n,"message","messages")}</div></div></a>`;
-function dbSection(f,title){
-  const L=dbThreads(f).sort((a,b)=>dbV(b)-dbV(a));
-  const pre=JSON.stringify(f||{}).replace(/"/g,"&quot;");
-  return `<section class="sec"><div class="sec-h"><h2>${title||"Les débats"} <span class="dbdemo">Démo</span></h2><a href="#/debats">Tous les débats</a></div>
-    ${L.length?`<div class="list">${L.slice(0,4).map(dbRow).join("")}</div>`:`<p class="dbempty">Aucun débat pour l'instant.</p>`}
-    <button class="btn" style="margin-top:10px" data-dbnew="${pre}">+ Lancer un débat</button></section>`;
+function dbRow(x,withTags){
+  if(x.k==="fil"){ const t=x.t;
+    return `<a class="dbrow" href="#/forum/${t.id}"><div class="dbn"><b>${dbV(t)}</b>▲</div><div style="min-width:0;flex:1"><div class="dbkind">Discussion</div><div class="dbt">${esc(t.t)}</div><div class="dbm">@${esc(t.u)} · ${esc(t.ago)} · ${plural(t.n,"message","messages")}</div>${withTags?`<div class="dbtags">${dbTags(t,true)}</div>`:""}</div></a>`; }
+  const m=x.m, c=C[m.P], top=(DB_COM[m.id]||[]).slice().sort((a,b)=>dbV(b)-dbV(a))[0];
+  return `<a class="dbrow" href="#/m/${encodeURIComponent(m.id)}?forum"><div class="dbn"><b>${x.n}</b>💬</div><div style="min-width:0;flex:1"><div class="dbkind"><i class="dot" style="background:${c.color}"></i>Mesure · ${esc(c.cand)}</div><div class="dbt dbclamp">${esc(m.t)}</div>
+    ${top?`<div class="dbtop">« ${esc(firstSentence(top.t))} » <span>@${esc(top.u)}</span></div>`:""}<div class="dbm">${plural(x.n,"message","messages")} · dernier ${esc(DB_AGO[m.id]||"récemment")}</div>${withTags?`<div class="dbtags"><span class="dbtag s"># ${esc(THM[m.th].t)}</span></div>`:""}</div></a>`;
 }
-const DBF={th:"",P:"",tri:"pop"};
+function dbSection(f,title){
+  const L=dbItems(f).sort((a,b)=>b.hot-a.hot), q=new URLSearchParams(Object.entries(f||{}).filter(([k,v])=>v)).toString();
+  return `<section class="sec"><div class="sec-h"><h2>${title||"Forum"} ${DBDEMO}</h2><a href="#/forum">Tout le forum</a></div>
+    ${L.length?`<div class="list">${L.slice(0,4).map(x=>dbRow(x)).join("")}</div>`:`<p class="dbempty">Rien pour l'instant.</p>`}
+    <a class="btn" style="margin-top:10px" href="#/forum/nouveau${q?"?"+q:""}">+ Nouvelle discussion</a></section>`;
+}
+const DBF={th:"",P:"",type:"",tri:"pop"};
 function dbList(){
-  let L=DB_TH.filter(t=>(!DBF.th||(DBF.th==="general"?t.general:t.th.includes(DBF.th)))&&(!DBF.P||t.P.includes(DBF.P)));
-  L=L.slice().sort((a,b)=>DBF.tri==="pop"?dbV(b)-dbV(a):DBF.tri==="peu"?a.n-b.n:DB_TH.indexOf(a)-DB_TH.indexOf(b));
+  const L=dbItems(DBF).sort((a,b)=>DBF.tri==="pop"?b.hot-a.hot:DBF.tri==="peu"?a.n-b.n:a.i-b.i);
   const mine=dbMine().filter(x=>x.fil);
-  return `<p class="lead" style="margin-top:12px">Des discussions qui dépassent une seule mesure. Chaque débat peut être relié à un sujet, à des candidats et à des mesures. <span class="dbdemo">Démo</span></p>
+  return `<p class="lead" style="margin-top:12px">Les discussions des lecteurs : sur une mesure, ou plus larges, sur un sujet ou un candidat. Les messages sont relus avant publication. ${DBDEMO}</p>
     <div class="dbfil"><select data-dbf="th"><option value="">Tous les sujets</option><option value="general"${DBF.th==="general"?" selected":""}>Général</option>${TH.map(t=>`<option value="${t.id}"${DBF.th===t.id?" selected":""}>${esc(t.t)}</option>`).join("")}</select>
       <select data-dbf="P"><option value="">Tous les candidats</option>${CK.map(P=>`<option value="${P}"${DBF.P===P?" selected":""}>${esc(C[P].cand)}</option>`).join("")}</select></div>
-    <div class="hs" style="margin:10px 0">${[["pop","Populaires"],["rec","Récents"],["peu","Peu de réponses"]].map(([k,l])=>`<a class="chip${DBF.tri===k?" on":""}" href="#" data-dbtri="${k}">${l}</a>`).join("")}</div>
+    <div class="hs" style="margin:10px 0">${[["","Tout"],["fil","Discussions"],["carte","Mesures commentées"]].map(([k,l])=>`<a class="chip${DBF.type===k?" on":""}" href="#" data-dbtype="${k}">${l}</a>`).join("")}<span style="flex:none;width:8px"></span>${[["pop","Populaires"],["rec","Récents"],["peu","Peu de réponses"]].map(([k,l])=>`<a class="chip${DBF.tri===k?" on":""}" href="#" data-dbtri="${k}">${l}</a>`).join("")}</div>
     ${mine.length?`<div class="dbl" style="margin-bottom:10px">${mine.map(dbPend).join("")}</div>`:""}
-    <div class="list">${L.map(t=>dbRow(t).replace('</div></a>',`<div class="dbtags">${dbTags(t,true)}</div></div></a>`)).join("")||`<p class="dbempty" style="padding:14px">Aucun débat avec ces filtres.</p>`}</div>
-    <button class="btn dark" style="width:100%;margin-top:12px" data-dbnew="${JSON.stringify({th:DBF.th&&DBF.th!=="general"?DBF.th:"",P:DBF.P}).replace(/"/g,"&quot;")}">+ Lancer un débat</button>`;
+    <div class="list">${L.map(x=>dbRow(x,true)).join("")||`<p class="dbempty" style="padding:14px">Rien avec ces filtres.</p>`}</div>
+    <a class="btn dark" style="width:100%;margin-top:12px" href="#/forum/nouveau?${new URLSearchParams(Object.entries({th:DBF.th!=="general"?DBF.th:"",P:DBF.P}).filter(([k,v])=>v)).toString()}">+ Nouvelle discussion</a>`;
 }
-function vDebat(id){
+function vForumFil(id){
   const t=DB_TH.find(x=>x.id===id); if(!t) return vNotFound();
-  backTop("Débat"); track("debat:vue");
-  const my=dbVotes()[t.id]||0, cible="fil:"+t.id, rep=(DB_COM[t.com]||[]), mine=dbMine().filter(x=>x.cible===cible);
+  backTop("Forum"); track("forum:vue");
+  const my=dbVotes()[t.id]||0, cible="fil:"+t.id, rep=(DB_COM[t.com]||[]), mine=dbMine().filter(x=>x.cible===cible&&!x.parent);
   $("#app").innerHTML=`<div class="dbtags" style="margin-top:10px">${dbTags(t)}</div>
-    <h1 class="dbtitle">${esc(t.t)}</h1><div class="dbm">@${esc(t.u)} · ${esc(t.ago)} · ${DBQ(t.q)} <span class="dbdemo">Démo</span></div>
+    <h1 class="dbtitle">${esc(t.t)}</h1><div class="dbm">@${esc(t.u)} · ${esc(t.ago)} ${DBDEMO}</div>
     <p class="dbtxt">${esc(t.texte)}</p>${(t.src||[]).length?`<div class="dbs">${t.src.map(s=>`<span>↗ ${esc(s)}</span>`).join("")}</div>`:""}
-    <div class="dba" style="margin-top:8px"><button data-dbv="${t.id}" data-d="1" class="vb${my>0?" on":""}">▲ ${dbV(t)} utile</button><button data-dbpost="${cible}">Répondre</button><button data-dbflag>Signaler</button></div>
+    <div class="dba" style="margin-top:8px"><button data-dbv="${t.id}" data-d="1" class="vb${my>0?" on":""}">▲ ${dbV(t)} utile</button><button data-dbfocus>Répondre</button><button data-dbflag>Signaler</button></div>
     ${t.m.filter(x=>MID[x]).length?`<div class="sec-h" style="margin-top:22px"><h2>Mesures reliées</h2></div><div class="list">${t.m.filter(x=>MID[x]).map(x=>row(MID[x])).join("")}</div>`:""}
     <div class="sec-h" style="margin-top:22px"><h2>${plural(t.n,"message","messages")}</h2></div>
-    <div class="dbl">${mine.map(dbPend).join("")}${rep.map(c=>dbCom(c,cible,0)).join("")}</div>
-    <button class="btn dark" style="width:100%;margin-top:10px" data-dbpost="${cible}">Répondre au débat</button>`;
+    <div class="dbl">${mine.map(dbPend).join("")}${rep.map(c=>dbCom(c,cible,0)).join("")}<div class="dbfoot">${dbBox(cible,"","Répondre à la discussion…")}</div></div>`;
 }
-/* Note simulée (la vraie : l'IA avec la grille sources 30 · profondeur 30 · ton 20 · pertinence 20, et la même note pour un argument pour ou contre). */
-function dbEval(txt,src){
-  const t=txt.trim(), n=t.split(/\s+/).filter(Boolean).length, urls=(src+" "+t).match(/https?:\/\/\S+/g)||[];
-  const insult=/\b(con|cons|nul|nulle|idiot|crétin|débile|pourri|menteur|honte|clown)\b/i.test(t), caps=(t.match(/\b[A-ZÉÈ]{5,}\b/g)||[]).length, bang=(t.match(/!{2,}/g)||[]).length;
-  const opinion=/(je pense|à mon avis|j'adore|je déteste|votez|il faut voter|meilleur candidat|n'importe quoi)/i.test(t);
-  const data=/\d/.test(t)||/(étude|rapport|insee|ocde|cour des comptes|selon|données|chiffr)/i.test(t);
-  const S={sources:urls.length>1?30:urls.length?24:0,profondeur:Math.min(30,Math.round(n/4)+(data?8:0)),ton:Math.max(0,20-(insult?18:0)-caps*4-bang*4),pertinence:t.length<20?4:opinion?8:18};
-  const total=S.sources+S.profondeur+S.ton+S.pertinence, why=[];
-  if(!urls.length) why.push("Ajoute au moins une source vérifiable : article, étude, rapport, texte officiel.");
-  if(n<40) why.push("Développe : le mécanisme, pour qui ça change quelque chose, à quelle échelle.");
-  if(opinion) why.push("Pas d'avis ni de consigne de vote : l'espace sert à analyser, pas à dire pour qui voter.");
-  if(insult||caps||bang) why.push("Garde un ton respectueux : pas d'insulte, ni de majuscules ou de « !! ».");
-  return {S,total,why};
-}
-const DB_REGLES=[["On analyse, on ne milite pas.","Pas de « votez X » : explique ce que change une mesure, pour qui, et pourquoi."],["On source.","Un fait vérifiable vient avec un lien."],["On respecte les gens.","On critique des idées, jamais des personnes."],["On reste sur le sujet.","Celui de la carte ou du débat."],["Pas de données personnelles.","Ni les tiennes, ni celles des autres."]];
-function dbSheet(h){ $("#sheet").innerHTML=`<div class="grab"></div>`+h; $("#sheet").classList.add("on"); $("#sheet-bg").classList.add("on"); }
-function dbCompose(o){
-  if(!USER&&!LS.get("debat:essai")){
-    dbSheet(`<h3>Il faut un compte pour participer</h3><p>Lire est libre. Pour publier, répondre ou voter, un pseudo suffit : pas d'e-mail. Ça limite les faux comptes et les votes en série.</p>
-      <div class="actions" style="display:grid;gap:8px"><a class="btn dark" href="#/profil">Créer un compte ou me connecter</a><button class="btn" id="db-try">Essayer la démo sans compte</button></div>`);
-    $("#db-try").onclick=()=>{ LS.set("debat:essai",1); dbCompose(o); }; return;
-  }
-  if(!LS.get("debat:charte")){
-    dbSheet(`<h3>Les règles du débat</h3><ol class="dbrules">${DB_REGLES.map(([a,b])=>`<li><b>${a}</b> ${b}</li>`).join("")}</ol>
-      <p>Chaque message reçoit une note sur 100 avant publication. Sous ${DB_SEUIL}, il est refusé avec des conseils. Au-dessus, un modérateur le relit.</p>
-      <div class="actions"><button class="btn dark" id="db-ok" style="width:100%">J'ai lu et j'accepte</button></div>`);
-    $("#db-ok").onclick=()=>{ LS.set("debat:charte",1); dbCompose(o); }; return;
-  }
-  const fil=!!o.fil, lk={th:o.th||"",P:o.P||""};
-  dbSheet(`<h3>${fil?"Lancer un débat":o.parent?"Répondre":"Ton analyse"}</h3>
-    ${fil?`<input id="db-ti" placeholder="Une question précise, ex. « Peines planchers : que disent les évaluations ? »" maxlength="140">
-      <div class="dbfil" style="margin:8px 0"><select id="db-th"><option value="">Sujet…</option>${TH.map(t=>`<option value="${t.id}"${lk.th===t.id?" selected":""}>${esc(t.t)}</option>`).join("")}</select>
-      <select id="db-P"><option value="">Candidat…</option>${CK.map(P=>`<option value="${P}"${lk.P===P?" selected":""}>${esc(C[P].cand)}</option>`).join("")}</select></div>`:""}
-    <textarea id="db-tx" placeholder="Explique ton raisonnement : ce que la mesure changerait, pour qui, avec quelles données…" style="min-height:130px"></textarea>
-    <input id="db-src" type="url" placeholder="Lien vers une source (https://…)">
-    <div class="actions"><button class="btn dark" id="db-send" style="width:100%">Envoyer</button></div>
-    <p class="hint" style="text-align:center">Note minimale : ${DB_SEUIL}/100 · Démo : la note est simulée</p><div id="db-res"></div>`);
-  $("#db-send").onclick=()=>{
-    const tx=$("#db-tx").value, src=$("#db-src").value, r=dbEval(tx,src), ok=r.total>=DB_SEUIL;
-    const col=v=>v>=80?"#1f8a5b":v>=60?"#3a6fd8":v>=40?"#c98a00":"#d0453b";
-    $("#db-res").innerHTML=`<div class="dbeval"><div class="dbbig" style="color:${col(r.total)}">${r.total}<small>/100</small></div>
-      ${[["Sources","sources",30],["Profondeur","profondeur",30],["Ton","ton",20],["Pertinence","pertinence",20]].map(([l,k,m])=>`<div class="dbcrit"><span>${l}</span><i><b style="width:${r.S[k]/m*100}%;background:${col(r.S[k]/m*100)}"></b></i><span>${r.S[k]}/${m}</span></div>`).join("")}
-      <div class="dbverd ${ok?"ok":"ko"}">${ok?"<b>Envoyé en modération.</b> Tu le vois déjà, marqué « en attente ». Il sera visible par tous une fois relu.":"<b>Pas publié.</b> Ton texte est gardé : modifie-le et renvoie-le."}${r.why.length?`<ul>${r.why.map(w=>`<li>${w}</li>`).join("")}</ul>`:""}</div>
-      ${ok?`<button class="btn" id="db-close" style="width:100%;margin-top:10px">Fermer</button>`:""}</div>`;
-    track("debat:envoi:"+(ok?"moderation":"refuse"));
-    if(ok){ const L=dbMine(); L.unshift({id:"m"+Date.now(),cible:o.cible||"",parent:o.parent||"",fil,titre:fil?($("#db-ti").value||"(sans titre)"):"",texte:tx,score:r.total,u:USER?pseudoOf(USER):"toi",th:fil?$("#db-th").value:"",P:fil?$("#db-P").value:""}); LS.set("debat:mine",L.slice(0,30));
-      $("#db-send").disabled=true; $("#db-close").onclick=()=>{ closeSheet(); const y=scrollY; route(); scrollTo(0,y); }; }
-    $("#db-res").scrollIntoView({block:"nearest",behavior:"smooth"});
+/* Nouvelle discussion : une vraie page, avec les liens pré-remplis d'après l'endroit d'où l'on vient */
+let DBNEW=null;
+function vForumNouveau(qs){
+  backTop("Nouvelle discussion");
+  const q=new URLSearchParams(qs||"");
+  if(!DBNEW||DBNEW.qs!==qs) DBNEW={qs,links:[...(q.get("th")?[["th",q.get("th")]]:[]),...(q.get("P")?[["P",q.get("P")]]:[]),...(q.get("m")&&MID[q.get("m")]?[["m",q.get("m")]]:[])]};
+  const chip=([k,v],i)=>`<span class="dbtag ${k==="th"?"s":k==="P"?"c":"m"}">${k==="th"?"# "+esc(THM[v].t):k==="P"?`<i class="dot" style="background:${C[v].color}"></i>`+esc(C[v].cand):"📄 "+esc(MID[v].t.slice(0,50))+(MID[v].t.length>50?"…":"")}<button data-dbunlink="${i}" aria-label="Retirer">✕</button></span>`;
+  $("#app").innerHTML=`<div class="dbnew">
+    <label class="dblab" for="dbn-t">Titre</label><input id="dbn-t" maxlength="140" placeholder="Une question précise, ex. « Peines planchers : que disent les évaluations ? »">
+    <label class="dblab" for="dbn-x">Ton message</label><textarea id="dbn-x" rows="7" placeholder="Explique ce que tu veux discuter : ce que tu as lu, ce qui te pose question, ce que changerait la mesure…"></textarea>
+    <label class="dblab">Relier à <span class="hint" style="margin:0;font-weight:500">(facultatif : sujet, candidat ou mesure)</span></label>
+    <div class="dbtags" id="dbn-l">${DBNEW.links.map(chip).join("")}</div>
+    <div class="dbfind"><input id="dbn-q" placeholder="Chercher un sujet, un candidat ou une mesure…" autocomplete="off"><div id="dbn-s"></div></div>
+    <label class="dblab" for="dbn-u">Source <span class="hint" style="margin:0;font-weight:500">(facultatif)</span></label><input id="dbn-u" type="url" placeholder="https://…">
+    <div class="dbmsg" id="dbn-m"></div>
+    <button class="btn dark" id="dbn-go" style="width:100%;margin-top:14px">Publier</button>
+    <p class="hint" style="text-align:center">Ta discussion sera visible après relecture par l'équipe de modération · <a href="#" data-dbrules>Règles du forum</a> ${DBDEMO}</p></div>`;
+  const qi=$("#dbn-q"), sg=$("#dbn-s");
+  qi.oninput=()=>{ const s=dbNorm(qi.value.trim()); if(s.length<2){ sg.innerHTML=""; return; }
+    const R=[...TH.filter(t=>dbNorm(t.t).includes(s)).slice(0,3).map(t=>["th",t.id,"# "+t.t]),...CK.filter(P=>dbNorm(C[P].cand).includes(s)).slice(0,3).map(P=>["P",P,"👤 "+C[P].cand]),...ML.filter(m=>dbNorm(m.t).includes(s)).slice(0,5).map(m=>["m",m.id,"📄 "+lastName(C[m.P].cand)+" · "+m.t])];
+    sg.innerHTML=R.map(([k,v,l])=>`<button data-dblink="${k}|${esc(v)}">${esc(l.length>110?l.slice(0,108)+"…":l)}</button>`).join("")||`<p class="hint" style="padding:6px 10px">Aucun résultat.</p>`; };
+  $("#dbn-go").onclick=()=>{
+    const ti=$("#dbn-t").value.trim(), tx=$("#dbn-x").value, src=$("#dbn-u").value;
+    if(ti.length<8){ $("#dbn-m").innerHTML=`<div class="dbwarn">Donne un titre à ta discussion (une question précise marche bien).</div>`; return; }
+    dbSubmit(tx,src,$("#dbn-m"),()=>{ const L=dbMine(); L.unshift({id:"m"+Date.now(),fil:true,titre:ti,texte:tx,u:USER?pseudoOf(USER):"toi",links:DBNEW.links}); LS.set("debat:mine",L.slice(0,30)); DBNEW=null; location.hash="#/forum"; });
   };
 }
+const dbNorm=s=>String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+/* Avant publication : un contrôle de qualité (simulé ici), invisible pour le lecteur. Sous le seuil, on explique quelle règle n'est pas respectée ; au-dessus, file de relecture. */
+function dbEval(txt,src){
+  const t=txt.trim(), n=t.split(/\s+/).filter(Boolean).length, url=/https?:\/\//.test(src+" "+t);
+  const insult=/\b(con|cons|nul|nulle|idiot|crétin|débile|pourri|menteur|honte|clown)\b/i.test(t), caps=(t.match(/\b[A-ZÉÈ]{5,}\b/g)||[]).length, bang=(t.match(/!{2,}/g)||[]).length;
+  const vote=/(votez|il faut voter|meilleur candidat|ne votez pas)/i.test(t), avis=/(je pense que c'est|j'adore|je déteste|n'importe quoi)/i.test(t);
+  const total=(url?30:18)+Math.min(30,Math.round(n/4)+(/\d|étude|rapport|selon|données|chiffr/i.test(t)?8:0))+Math.max(0,20-(insult?18:0)-caps*4-bang*4)+(t.length<20?4:vote||avis?8:18), why=[];
+  if(n<25) why.push(["On explique.","Développe un peu : ce que la mesure changerait, pour qui, pourquoi."]);
+  if(vote||avis) why.push(["On analyse, on ne milite pas.","Évite les avis tranchés et les consignes de vote."]);
+  if(insult||caps||bang) why.push(["On respecte les gens.","Pas d'insulte, ni de majuscules ou de « !! »."]);
+  return {ok:total>=DB_SEUIL,why};
+}
+function dbSubmit(tx,src,msgEl,done){
+  if(!USER&&!LS.get("debat:essai")){
+    msgEl.innerHTML=`<div class="dbwarn"><b>Il faut un compte pour publier.</b> Un pseudo suffit, sans e-mail. <div class="dbgo" style="margin-top:8px"><a class="btn dark" href="#/profil">Me connecter</a><button class="btn" data-dbtry>Continuer (démo)</button></div></div>`; return; }
+  if(tx.trim().length<3){ msgEl.innerHTML=`<div class="dbwarn">Ton message est vide.</div>`; return; }
+  const r=dbEval(tx,src); track("forum:envoi:"+(r.ok?"relecture":"refuse"));
+  if(!r.ok){ msgEl.innerHTML=`<div class="dbwarn"><b>Ton message ne respecte pas encore les règles du forum.</b> Tu peux le modifier et le republier :<ul>${r.why.map(([a,b])=>`<li><b>${a}</b> ${b}</li>`).join("")}</ul></div>`; return; }
+  done();
+}
+const DB_REGLES=[["On analyse, on ne milite pas.","Pas de « votez X » : explique ce que change une mesure, pour qui, et pourquoi."],["On donne ses sources quand on peut.","Un lien aide les autres à vérifier un fait ou un chiffre."],["On respecte les gens.","On critique des idées, jamais des personnes, ni les candidats, ni les autres membres."],["On reste sur le sujet.","Celui de la mesure ou de la discussion."],["Pas de données personnelles.","Ni les tiennes, ni celles des autres."]];
+function dbSheet(h){ $("#sheet").innerHTML=`<div class="grab"></div>`+h; $("#sheet").classList.add("on"); $("#sheet-bg").classList.add("on"); }
+const dbRefresh=()=>{ const y=scrollY; route(); scrollTo(0,y); };
 document.addEventListener("click",e=>{
   const v=e.target.closest("[data-dbv]");
-  if(v){ e.preventDefault(); const V=dbVotes(), id=v.dataset.dbv, d=+v.dataset.d; if(!USER&&!LS.get("debat:essai")) return dbCompose({}); V[id]=V[id]===d?0:d; LS.set("debat:votes",V); const y=scrollY; route(); scrollTo(0,y); return; }
-  const p=e.target.closest("[data-dbpost]"); if(p){ e.preventDefault(); return dbCompose({cible:p.dataset.dbpost,parent:p.dataset.parent||""}); }
-  const n=e.target.closest("[data-dbnew]"); if(n){ e.preventDefault(); let f={}; try{ f=JSON.parse(n.dataset.dbnew||"{}")||{}; }catch(_){} return dbCompose({fil:true,th:f.th||"",P:f.P||""}); }
-  const s=e.target.closest("[data-dbsort]"); if(s){ e.preventDefault(); DBSORT=s.dataset.dbsort; const y=scrollY; route(); scrollTo(0,y); return; }
-  const t=e.target.closest("[data-dbtri]"); if(t){ e.preventDefault(); DBF.tri=t.dataset.dbtri; const y=scrollY; route(); scrollTo(0,y); return; }
-  if(e.target.closest("[data-dbflag]")){ e.preventDefault(); dbSheet(`<h3>Signaler ce message</h3><div class="opts">${["Hors sujet","Pas de source","Irrespectueux","Données personnelles","Spam"].map(x=>`<button class="opt" onclick="closeSheet()">${x}</button>`).join("")}</div><p class="hint">Au bout de 3 signalements, un message est masqué en attendant qu'un modérateur le relise. (Démo : rien n'est envoyé.)</p>`); }
+  if(v){ e.preventDefault(); if(!USER&&!LS.get("debat:essai")){ LS.set("debat:essai",1); }   // démo : on laisse voter
+    const V=dbVotes(), id=v.dataset.dbv, d=+v.dataset.d; V[id]=V[id]===d?0:d; LS.set("debat:votes",V); return dbRefresh(); }
+  const rp=e.target.closest("[data-dbreply]");
+  if(rp){ e.preventDefault(); document.querySelectorAll(".dbrbox").forEach(b=>{ if(b.id!=="dbr-"+rp.dataset.dbreply) b.innerHTML=""; });
+    const b=$("#dbr-"+rp.dataset.dbreply); if(b.innerHTML){ b.innerHTML=""; return; } b.innerHTML=dbBox(rp.dataset.cible,rp.dataset.dbreply,"Ta réponse…",true); b.querySelector("textarea").focus(); return; }
+  if(e.target.closest("[data-dbcancel]")){ e.preventDefault(); e.target.closest(".dbrbox").innerHTML=""; return; }
+  if(e.target.closest("[data-dbfocus]")){ e.preventDefault(); const t=document.querySelector(".dbfoot textarea"); t.scrollIntoView({block:"center",behavior:"smooth"}); t.focus(); return; }
+  if(e.target.closest("[data-dbtry]")){ e.preventDefault(); LS.set("debat:essai",1); const m=e.target.closest(".dbmsg"); if(m) m.innerHTML=""; return; }
+  const sd=e.target.closest("[data-dbsend]");
+  if(sd){ e.preventDefault(); const box=sd.closest(".dbbox"), tx=box.querySelector("textarea").value, src=box.querySelector("input").value;
+    return dbSubmit(tx,src,box.querySelector(".dbmsg"),()=>{ const L=dbMine(); L.unshift({id:"m"+Date.now(),cible:box.dataset.cible,parent:box.dataset.parent,texte:tx,u:USER?pseudoOf(USER):"toi"}); LS.set("debat:mine",L.slice(0,30)); dbRefresh(); }); }
+  const lk=e.target.closest("[data-dblink]");
+  if(lk){ e.preventDefault(); const [k,val]=lk.dataset.dblink.split("|"); if(!DBNEW.links.some(x=>x[0]===k&&x[1]===val)) DBNEW.links.push([k,val]); const keep={t:$("#dbn-t").value,x:$("#dbn-x").value,u:$("#dbn-u").value}; vForumNouveau(DBNEW.qs); $("#dbn-t").value=keep.t; $("#dbn-x").value=keep.x; $("#dbn-u").value=keep.u; $("#dbn-q").focus(); return; }
+  const ul=e.target.closest("[data-dbunlink]");
+  if(ul){ e.preventDefault(); DBNEW.links.splice(+ul.dataset.dbunlink,1); const keep={t:$("#dbn-t").value,x:$("#dbn-x").value,u:$("#dbn-u").value}; vForumNouveau(DBNEW.qs); $("#dbn-t").value=keep.t; $("#dbn-x").value=keep.x; $("#dbn-u").value=keep.u; return; }
+  const s=e.target.closest("[data-dbsort]"); if(s){ e.preventDefault(); DBSORT=s.dataset.dbsort; return dbRefresh(); }
+  const t=e.target.closest("[data-dbtri]"); if(t){ e.preventDefault(); DBF.tri=t.dataset.dbtri; return dbRefresh(); }
+  const ty=e.target.closest("[data-dbtype]"); if(ty){ e.preventDefault(); DBF.type=ty.dataset.dbtype; return dbRefresh(); }
+  if(e.target.closest("[data-dbrules]")){ e.preventDefault(); return dbSheet(`<h3>Les règles du forum</h3><ol class="dbrules">${DB_REGLES.map(([a,b])=>`<li><b>${a}</b> ${b}</li>`).join("")}</ol><p>Chaque message est relu par l'équipe de modération avant d'être publié. Un message signalé plusieurs fois est masqué en attendant d'être revu.</p><div class="actions"><button class="btn dark" style="width:100%" onclick="closeSheet()">OK</button></div>`); }
+  if(e.target.closest("[data-dbflag]")){ e.preventDefault(); dbSheet(`<h3>Signaler ce message</h3><div class="opts">${["Hors sujet","Irrespectueux","Fausse information","Données personnelles","Spam"].map(x=>`<button class="opt" onclick="closeSheet()">${x}</button>`).join("")}</div><p class="hint">Un message signalé plusieurs fois est masqué en attendant que l'équipe de modération le relise. (Démo : rien n'est envoyé.)</p>`); }
 });
-document.addEventListener("change",e=>{ const s=e.target.closest("[data-dbf]"); if(!s) return; DBF[s.dataset.dbf]=s.value; const y=scrollY; route(); scrollTo(0,y); });
+/* la zone d'écriture s'ouvre quand on clique dedans */
+document.addEventListener("focusin",e=>{ const t=e.target.closest("[data-dbgrow]"); if(t){ t.closest(".dbbox").classList.add("open"); if(t.rows<4) t.rows=4; } });
+document.addEventListener("change",e=>{ const s=e.target.closest("[data-dbf]"); if(!s) return; DBF[s.dataset.dbf]=s.value; dbRefresh(); });
 
 function route(){
   const h=location.hash.replace(/^#/,"")||"/";
   const [path,qs]=h.split("?"); const p=path.split("/").filter(Boolean).map(decodeURIComponent);
   document.body.dataset.v=p[0]||"home";
-  const nav=p[0]==="debats"||p[0]==="debat"?"debats":p[0]==="swipe"?"swipe":p[0]==="chat"?"chat":p[0]==="profil"?"profil":p[0]==="info"?"info":["explorer","sujets","s","candidats","c"].includes(p[0])?"explorer":"home";
-  document.querySelectorAll(".nav a").forEach(a=>a.classList.toggle("on",a.dataset.n===nav||(nav==="debats"&&!DESK.matches&&a.dataset.n==="explorer")));
+  const nav=p[0]==="forum"?"forum":p[0]==="swipe"?"swipe":p[0]==="chat"?"chat":p[0]==="profil"?"profil":p[0]==="info"?"info":["explorer","sujets","s","candidats","c"].includes(p[0])?"explorer":"home";
+  document.querySelectorAll(".nav a").forEach(a=>a.classList.toggle("on",a.dataset.n===nav||(nav==="forum"&&!DESK.matches&&a.dataset.n==="explorer")));
   closeSheet(); if(!["chat","profil","info"].includes(p[0])&&!(p[0]==="explorer"&&p[1]==="condamnations")&&!(DESK.matches&&["m","swipe"].includes(p[0]))) v1Hide();
   if(p[0]!=="parcours") document.body.classList.remove("story-on");
   if(p[0]!=="swipe") document.body.classList.remove("sw-on");
@@ -1869,8 +1940,7 @@ function route(){
   else if(p[0]==="candidats") vExplorer("candidats");
   else if(p[0]==="c") vCand(p[1]);
   else if(p[0]==="m") vMesure(p[1]);
-  else if(p[0]==="debats") vExplorer("debats");
-  else if(p[0]==="debat") vDebat(p[1]);
+  else if(p[0]==="forum") p[1]==="nouveau"?vForumNouveau(qs||""):p[1]?vForumFil(p[1]):vExplorer("forum");
   else if(p[0]==="sondages") vSondages();
   else if(p[0]==="actus") vActus(p[1]);
   else if(p[0]==="chercher") vChercher(qs?new URLSearchParams(qs).get("q")||"":null);

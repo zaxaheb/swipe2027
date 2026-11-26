@@ -2,12 +2,19 @@
 
 ## Démo intégrée à l'app (données fictives, rien n'est envoyé)
 
-- **Fiche mesure** : section « Le débat » sous la carte (votes ▲ ▼, réponses, tri, « Ajouter mon analyse »), plus un volet « Débat » dans « Pour aller plus loin », ce qui le fait apparaître aussi dans le Swipe et le carrousel. Exemples : Smic LFI (`#/m/augmenter-les-salaires-1`), peines planchers RN (`#/m/rn-3-1`).
-- **Débats** : onglet dans Explorer sur mobile, lien « Débats » dans la barre sur ordi (`#/debats`), et une page par débat (`#/debat/t1`).
-- **Sections « Débats »** sur l'accueil, sur chaque page sujet et sur chaque fiche candidat.
-- **Pour poster** : il faut un compte, mais la démo laisse essayer sans. Les règles sont à accepter la première fois. Le texte reçoit une note simulée : sous 60, il est refusé avec des conseils ; au-dessus, il apparaît « en attente de modération », visible seulement par son auteur.
-- **admin.html** : carte « Débats · file de modération », avec la file, le curseur de seuil et les options.
-- Code : bloc « Débats entre lecteurs : DÉMO » dans `site/template_v2.html`. Les votes et les messages restent dans le localStorage.
+Partout, le nom est « Forum ». Côté lecteur, on parle seulement de **relecture par l'équipe de modération** et des **règles du forum** : ni l'IA ni la note de qualité ne sont mentionnées. La note reste interne et sert à trier la file de l'admin. La source est facultative.
+
+- **Fiche mesure** : une section « Forum » sous la carte. On y trouve :
+  - les messages, avec les votes ▲ ▼ (« utile ») ;
+  - les réponses, qui s'écrivent dans la page, sous le message ;
+  - une zone « Ajouter un message… » qui s'agrandit au clic.
+
+  Un volet « Forum » s'ajoute aussi dans « Pour aller plus loin », donc dans le Swipe et le carrousel.
+- **Forum** (onglet d'Explorer sur mobile, lien dans la barre sur ordi : `#/forum`) : il mélange les **discussions** créées par les lecteurs et les **mesures commentées**, avec filtres par sujet et par candidat, tri, et un choix Tout / Discussions / Mesures commentées.
+- **Nouvelle discussion** : une vraie page (`#/forum/nouveau`) avec titre, message et liens facultatifs vers un sujet, un candidat ou une mesure. Ces liens se cherchent dans un champ, et sont pré-remplis selon la page d'où l'on vient. La source est facultative.
+- **Après envoi** : le message apparaît chez son auteur, marqué « En attente de relecture ». Si le contrôle le refuse, l'auteur voit quelle règle n'est pas respectée, sans note ni mention de l'IA.
+- **Sections « Forum »** sur l'accueil, sur chaque page sujet et sur chaque fiche candidat.
+- **admin.html** : carte « Forum · file de modération ».
 
 Maquette séparée (première version) : `site/maquette-participatif.html`.
 
@@ -23,7 +30,7 @@ Maquette séparée (première version) : `site/maquette-participatif.html`.
 3. **Compte obligatoire** pour poster et voter. C'est le compte pseudo + mot de passe qui existe déjà (`api/compte.js`). La lecture reste libre.
 4. **Modération en deux temps.**
    - **Filtre IA**, avec une note sur 100 :
-     - Sources : 30 points.
+     - Sources : 30 points (facultatives : un message sans source peut passer s'il est argumenté).
      - Profondeur : 30 points.
      - Ton et respect : 20 points.
      - Pertinence : 20 points. C'est une analyse et pas un avis : aucun « votez X ».
