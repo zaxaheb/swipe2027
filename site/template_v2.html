@@ -624,6 +624,15 @@ body[data-v="home"] .live{margin-top:30px}
 .ha-c a{font-size:12.5px;font-weight:600;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);border-radius:999px;padding:6px 11px}
 @media (min-width:1100px){.ha-c span{width:auto}}
 .ha-sg a{font-size:13px;padding:7px 11px}
+
+/* mobile (27/11) : barre du bas collée en bas et opaque, le contenu ne passe plus derrière */
+@media (max-width:1099px){
+  .nav{left:0;right:0;bottom:0;max-width:none;margin:0;border-radius:0;border:0;border-top:1px solid rgba(255,255,255,.06);background:#2a2a31;
+    backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:0 -4px 18px rgba(0,0,0,.08);padding-bottom:env(safe-area-inset-bottom)}
+  .nav .wrap{max-width:520px;margin:0 auto}
+  body{padding-bottom:calc(var(--nav) + env(safe-area-inset-bottom) + 24px)}
+}
+@media (max-width:1099px){.appframe:not(.panel){height:calc(100% - var(--nav) - env(safe-area-inset-bottom))}}
 </style>
 </head>
 <body>
@@ -1190,7 +1199,7 @@ function v1Frame(view,after,top,panel){
       if(after) setTimeout(()=>after(w,d),60); }catch(e){} };
   if(!f.dataset.on){ f.dataset.on=1; f.onload=go; f.src="/app#"+(view||"chat"); } else go();
 }
-function v1Hide(){ const f=$("#v1"); if(f){ f.hidden=true; f.classList.remove("panel"); } document.body.classList.remove("frame-on","panel-on"); }
+function v1Hide(){ const f=$("#v1"); if(f){ f.hidden=true; f.classList.remove("panel"); f.style.visibility=""; try{ const i=f.contentDocument.getElementById("info"); if(i) i.classList.remove("on"); }catch(e){} } document.body.classList.remove("frame-on","panel-on"); }
 // Sur ordi, à droite : une ouverture de discussion sur la proposition affichée (comme l'onglet Découvrir de l'app d'origine).
 function deskPanel(m){ if(!DESK.matches) return; v1Frame("chat",w=>{ try{ w.openConvo("m:"+m.id,{fresh:true}); }catch(e){} },0,true); }
 // Sur ordi, les questions prêtes d'une carte partent dans ce panneau au lieu d'ouvrir la page du chat.
@@ -1215,7 +1224,11 @@ const PRINCIPE=`<div class="label">Le principe</div><div class="answer sm">Swipe
   <div class="item"><div class="who">Le chat</div><div class="txt" style="font-size:16px">Pose n'importe quelle question sur une mesure ou un sujet, suis un mini-cours ou teste-toi avec un quiz. Les réponses sont neutres et sourcées.</div></div>
   <div class="item"><div class="who">Le Swipe</div><div class="txt" style="font-size:16px">Pour te faire un avis carte après carte : ♥ pour, ✕ contre. Ton profil montre ensuite de quels candidats tu es proche.</div></div>
   <div class="item"><div class="who">D'où viennent les fiches</div><div class="txt" style="font-size:16px">Les résumés, les critiques et le classement par sujet sont préparés avec l'aide d'une IA à partir des sources citées, puis relus au fur et à mesure. Une erreur ? Signale-la depuis la carte.</div></div>`;
-function vInfo(){ setTop(""); $("#app").innerHTML=""; v1Frame(null,(w,d)=>{ w.renderInfo(); const b0=d.querySelector("#info-body .box"); if(b0) b0.innerHTML=PRINCIPE; d.getElementById("info").classList.add("on"); d.getElementById("info-body").scrollTop=0;
+function vInfo(){ setTop(""); $("#app").innerHTML=`<div class="empty" style="padding-top:30vh">Chargement…</div>`;
+  // On cache l'app intégrée tant que la fiche Infos n'est pas prête : sinon on voit passer une autre page (Comprendre) avant elle.
+  const f=$("#v1"); f.style.visibility="hidden"; clearTimeout(window.INFOT); window.INFOT=setTimeout(()=>{ f.style.visibility=""; },2500);
+  v1Frame(null,(w,d)=>{ w.renderInfo(); const b0=d.querySelector("#info-body .box"); if(b0) b0.innerHTML=PRINCIPE; d.getElementById("info").classList.add("on"); d.getElementById("info-body").scrollTop=0;
+  requestAnimationFrame(()=>{ clearTimeout(window.INFOT); f.style.visibility=""; });
   const x=d.getElementById("info-x"); if(!x.dataset.v2){ x.dataset.v2=1; x.addEventListener("click",()=>{ if(location.hash.startsWith("#/info")) goBack(); }); } }); }
 function mdInline(s){ return s.replace(/^#{1,4}\s*(.+)$/gm,'<b>$1</b>').replace(/\[([^\]]{1,140})\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>')
   .replace(/(^|[\s(])(https?:\/\/[^\s<)]+)/g,'$1<a href="$2" target="_blank" rel="noopener">$2</a>').replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>'); }
