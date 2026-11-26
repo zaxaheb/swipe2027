@@ -1112,10 +1112,11 @@ const maskHtml=(html,P)=>html.replace(/>([^<]+)</g,(x,t)=>">"+maskName(t,P,true)
 const restPool=pid=>{ const r=PT[pid]; return ML.filter(m=>m.th===r.th&&!r.cov.has(m.pt)); };
 function storyCards(pid){
   if(pid.startsWith("rest:")){ const pool=restPool(pid), cs=shuffled(CK.filter(P=>pool.some(m=>m.P===P)),ST.seed+7);
-    return cs.map(P=>{ const l=pool.filter(m=>m.P===P).sort(byRank); return {P,m:l[0],more:l.length-1}; }); }
+    return cs.flatMap(P=>pool.filter(m=>m.P===P).sort(byRank).map(m=>({P,m,more:0}))); }
   const ok=m=>m.pt===pid&&(!ST.only||ST.only.has(m.id));
   const cs=shuffled(CK.filter(P=>ML.some(m=>m.P===P&&ok(m))),ST.seed+pid.length*31);
-  return cs.map(P=>{ const l=ML.filter(m=>m.P===P&&ok(m)).sort(byRank); return {P,m:l[0],more:ML.filter(m=>m.P===P&&m.pt===pid).length-1}; });
+  // une carte par mesure (les candidats dans un ordre mélangé, leurs mesures les unes après les autres)
+  return cs.flatMap(P=>ML.filter(m=>m.P===P&&ok(m)).sort(byRank).map(m=>({P,m,more:0})));
 }
 function newSteps(sid,only){ const t=THM[sid]; return (t&&t.pts||[]).map(p=>p[0]).filter(pid=>ML.some(m=>m.pt===pid&&only.has(m.id))); }
 function renderStory(dir){
@@ -1129,14 +1130,14 @@ function renderStory(dir){
       <p class="st-p">${ST.sid?"La synthèse du sujet rassemble toutes les positions, question par question. Tu peux y revenir quand tu veux : une pastille te signalera les nouvelles propositions.":"Chaque question regroupe ce que proposent les candidats sur le même point. Pour aller plus loin, ouvre un sujet ou cherche une mesure que tu as entendue."}</p>
       <div style="display:grid;gap:8px">${ST.sid?`<a class="btn dark" href="#/s/${ST.sid}" onclick="event.preventDefault();ST=null;location.replace('#/s/${ST.sid}')">Voir la synthèse du sujet</a><a class="btn" href="#/explorer/sujets">Explorer un autre sujet</a>`:`<a class="btn dark" href="#/explorer/sujets">Explorer les sujets</a><a class="btn" href="#/chercher">Chercher une mesure</a>`}${ST.only?"":`<button class="btn" id="st-restart">Recommencer</button>`}</div>`;
   } else {
-    const pid=steps[i], pt=PT[pid], th=THM[pt.th]; cards=storyCards(pid); total=cards.length+2;
+    const pid=steps[i], pt=PT[pid], th=THM[pt.th]; cards=storyCards(pid); total=cards.length+2; const cps=[...new Set(cards.map(c=>c.P))];
     const j=Math.min(ST.j,total-1); ST.j=j; frac=(j+1)/total;
     if(j===0){
       track("parcours:etape:"+(i+1));
       card=`<div class="st-kick">${esc(th.t)} · question ${i+1} sur ${steps.length}</div>
         <h2 class="st-q">${pid.startsWith("rest:")?"Les autres propositions sur ce sujet":esc(pt.t)+"&nbsp;: que proposent les candidats&nbsp;?"}</h2>
-        <p class="st-p">${pid.startsWith("rest:")?`Des mesures sur lesquelles peu de candidats se sont prononcés. ${plural(cards.length,"candidat","candidats")}.`:plural(cards.length,"candidat a","candidats ont")+" une position."} Fais défiler pour les voir une par une${ST.blind?", sans les noms : ils sont révélés à la fin de la question":""}.</p>
-        <div class="st-avs">${cards.map(c=>`<span class="av" style="background:${ST.blind?"#9a968f":C[c.P].color}">${ST.blind?"?":initials(C[c.P].cand)}</span>`).join("")}</div>
+        <p class="st-p">${pid.startsWith("rest:")?`Des mesures sur lesquelles peu de candidats se sont prononcés. ${plural(cps.length,"candidat","candidats")}, ${plural(cards.length,"mesure","mesures")}.`:plural(cps.length,"candidat a","candidats ont")+" une position."} Fais défiler pour les voir une par une${ST.blind?", sans les noms : ils sont révélés à la fin de la question":""}.</p>
+        <div class="st-avs">${cps.map(P=>`<span class="av" style="background:${ST.blind?"#9a968f":C[P].color}">${ST.blind?"?":initials(C[P].cand)}</span>`).join("")}</div>
         <div class="st-hint">Touche à droite ou glisse vers la gauche pour avancer</div>`;
     } else if(j<=cards.length){
       const c=cards[j-1], hidden=ST.blind&&!ST.shown.has(c.m.id);
@@ -1144,8 +1145,8 @@ function renderStory(dir){
         ${c.more>0?`<span class="hint" style="margin:0">+ ${plural(c.more,"autre mesure","autres mesures")} de ce candidat ici : dans le récapitulatif.</span>`:""}`;
     } else {
       card=`<div class="st-kick">${esc(pt.t)} · récapitulatif</div>
-        <h2 class="st-q" style="font-size:22px">${pid.startsWith("rest:")?"Toutes les autres propositions":plural(cards.length,"position","positions")+" sur cette question"}</h2>
-        <div>${(pid.startsWith("rest:")?restPool(pid).sort((a,b)=>lastName(C[a.P].cand).localeCompare(lastName(C[b.P].cand),"fr")||byRank(a,b)):cards.flatMap(c=>ML.filter(m=>m.P===c.P&&m.pt===pid&&(!ST.only||ST.only.has(m.id))).sort((a,b)=>(b===c.m)-(a===c.m)||byRank(a,b)))).map(m=>`<a class="st-rc" href="#/m/${encodeURIComponent(m.id)}" data-fiche="1">${who(m.P)}<div class="x">${esc(m.t)}</div></a>`).join("")}</div>`;
+        <h2 class="st-q" style="font-size:22px">${pid.startsWith("rest:")?"Toutes les autres propositions":plural(cards.length,"proposition","propositions")+" sur cette question"}</h2>
+        <div>${(pid.startsWith("rest:")?restPool(pid).sort((a,b)=>lastName(C[a.P].cand).localeCompare(lastName(C[b.P].cand),"fr")||byRank(a,b)):cards.map(c=>c.m)).map(m=>`<a class="st-rc" href="#/m/${encodeURIComponent(m.id)}" data-fiche="1">${who(m.P)}<div class="x">${esc(m.t)}</div></a>`).join("")}</div>`;
     }
   }
   const bar=steps.map((_,k)=>`<i><b style="transform:scaleX(${k<ST.i?1:k===ST.i&&!done?frac:0})"></b></i>`).join("");
@@ -1183,7 +1184,6 @@ document.addEventListener("keydown",e=>{ if(!document.body.classList.contains("s
    dans un cadre (même site, donc mêmes réponses et mêmes conversations), sans sa barre du bas. */
 const V1CSS=`nav.tabs,.fab{display:none!important}
   @media (min-width:1100px){body{grid-template-columns:0 minmax(0,1fr) min(440px,32vw)!important}body.wide,body.chatv{grid-template-columns:0 minmax(0,1fr)!important}body.chatv #convo{left:0!important}.actbar,.kbd-hint{left:0!important}#v-chat.view,#v-profil.view{max-width:none!important;margin:0!important;padding-left:40px!important;padding-right:40px!important}}
-  .convo .composer{padding-bottom:calc(86px + var(--safe-b))}   /* la barre pour écrire passe au-dessus de la navigation de la v2 */
   #v-cond .ptitle,#v-cond .psub{display:none}
   #v-cond .warn{font-size:12.5px;line-height:1.4;padding:8px 11px;margin-top:4px}
   #v-cond .lire{margin:0 0 10px}#v-cond .lire summary{cursor:pointer;font-size:13px;font-weight:600;color:var(--muted)}#v-cond .lire .note{margin:6px 0 0!important}`;
