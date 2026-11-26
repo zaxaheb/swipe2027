@@ -633,6 +633,8 @@ body[data-v="home"] .live{margin-top:30px}
   body{padding-bottom:calc(var(--nav) + env(safe-area-inset-bottom) + 24px)}
 }
 @media (max-width:1099px){.appframe:not(.panel){height:calc(100% - var(--nav) - env(safe-area-inset-bottom))}}
+.hero-ask form{align-items:center}.hero-ask input#ha-in{flex:1;min-width:0;border:0;outline:0;background:transparent;font:500 16.5px/1.2 var(--sans);color:#1f1c27;height:46px;padding:0;margin:0}.hero-ask input#ha-in::placeholder{color:#8d8982}
+@media (min-width:1100px){.hero-ask input#ha-in{font-size:19px;height:54px}}
 </style>
 </head>
 <body>
@@ -793,7 +795,7 @@ function vHome(){
     <section class="hero-ask">
       <h1>Une question sur la présidentielle&nbsp;?</h1>
       <p>La réponse est neutre et sourcée.</p>
-      <form id="ha-f" autocomplete="off"><textarea id="ha-in" rows="1" maxlength="500" placeholder="Pose ta question…"></textarea><button aria-label="Envoyer">→</button></form>
+      <form id="ha-f" autocomplete="off"><input id="ha-in" type="text" enterkeyhint="send" maxlength="500" placeholder="Pose ta question…"><button aria-label="Envoyer">→</button></form>
       <div class="ha-sg">${["C'est quoi le 49.3 ?","Qui veut la retraite à 60 ans ?","ISF ou taxe Zucman ?"].map(q=>`<a href="#/chat/new?q=${encodeURIComponent(q)}">${esc(q)}</a>`).join("")}</div>
       <div class="ha-c"><span>Mini-cours</span>${COURS.slice(0,4).map(([id,t,e])=>`<a href="#/chat/cours:${id}">${e} ${esc(t)}</a>`).join("")}<a href="#/chat">Tous →</a></div>
     </section>
@@ -811,7 +813,6 @@ function vHome(){
   const fi=$("#ha-in"); let qi=0;
   const send=()=>{ const v=fi.value.trim(); if(!v) return fi.focus(); location.hash="#/chat/new?q="+encodeURIComponent(v); };
   $("#ha-f").onsubmit=e=>{ e.preventDefault(); send(); };
-  fi.onkeydown=e=>{ if(e.key==="Enter"&&!e.shiftKey){ e.preventDefault(); send(); } };
   clearInterval(window.ASKT);
 }
 /* Sujets du moment : d'après les articles cités dans nos fiches (gardé pour plus tard). */
@@ -1192,10 +1193,10 @@ const DESK=matchMedia("(min-width:1100px)");
 function v1Frame(view,after,top,panel){
   const f=$("#v1"); document.body.classList.toggle("frame-on",!panel); document.body.classList.toggle("panel-on",!!panel); f.classList.toggle("panel",!!panel);
   f.hidden=false; f.style.top=((panel?0:top||0)+(DESK.matches?64:0))+"px";   // sur ordi, sous la barre du haut
-  const go=()=>{ try{ const w=f.contentWindow, d=w.document;
+  const go=()=>{ try{ const w=f.contentWindow, d=w.document; if(!/\/app$/.test(w.location.pathname)) return;   // pas encore chargée
       if(!d.getElementById("v1-embed")){ const st=d.createElement("style"); st.id="v1-embed"; st.textContent=V1CSS; d.head.appendChild(st); }
       ["convo","info"].forEach(k=>{ const e=d.getElementById(k); if(e) e.classList.remove("on"); });   // on repart d'un écran propre
-      if(view&&w.location.hash!=="#"+view) w.location.hash=view;
+      if(view&&w.location.hash!=="#"+view) w.location.replace(w.location.pathname+"#"+view);   // replace : pas d'entrée d'historique dans l'iframe
       if(after) setTimeout(()=>after(w,d),60); }catch(e){} };
   if(!f.dataset.on){ f.dataset.on=1; f.onload=go; f.src="/app#"+(view||"chat"); } else go();
 }
@@ -1229,7 +1230,7 @@ function vInfo(){ setTop(""); $("#app").innerHTML=`<div class="empty" style="pad
   const f=$("#v1"); f.style.visibility="hidden"; clearTimeout(window.INFOT); window.INFOT=setTimeout(()=>{ f.style.visibility=""; },2500);
   v1Frame(null,(w,d)=>{ w.renderInfo(); const b0=d.querySelector("#info-body .box"); if(b0) b0.innerHTML=PRINCIPE; d.getElementById("info").classList.add("on"); d.getElementById("info-body").scrollTop=0;
   requestAnimationFrame(()=>{ clearTimeout(window.INFOT); f.style.visibility=""; });
-  const x=d.getElementById("info-x"); if(!x.dataset.v2){ x.dataset.v2=1; x.addEventListener("click",()=>{ if(location.hash.startsWith("#/info")) goBack(); }); } }); }
+  const x=d.getElementById("info-x"); if(!x.dataset.v2){ x.dataset.v2=1; x.addEventListener("click",()=>{ if(location.hash.startsWith("#/info")) location.hash=INFO_FROM&&!INFO_FROM.startsWith("#/info")?INFO_FROM:"#/"; }); } }); }
 function mdInline(s){ return s.replace(/^#{1,4}\s*(.+)$/gm,'<b>$1</b>').replace(/\[([^\]]{1,140})\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>')
   .replace(/(^|[\s(])(https?:\/\/[^\s<)]+)/g,'$1<a href="$2" target="_blank" rel="noopener">$2</a>').replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>'); }
 
@@ -1478,7 +1479,8 @@ function route(){
   else vNotFound();
 }
 let last=location.hash;
-window.addEventListener("hashchange",()=>{ POS[last]=scrollY; last=location.hash; HIST++; route(); window.scrollTo(0,POS[location.hash]||0); });
+let INFO_FROM="#/";
+window.addEventListener("hashchange",()=>{ POS[last]=scrollY; if(location.hash.startsWith("#/info")&&!last.startsWith("#/info")) INFO_FROM=last||"#/"; last=location.hash; HIST++; route(); window.scrollTo(0,POS[location.hash]||0); });
 document.addEventListener("click",e=>{ const b=e.target.closest("[data-more]"); if(!b) return; const k=b.dataset.more, step=+b.dataset.step; EXP[k]=(EXP[k]||step)+(step===1?1e6:20); const y=scrollY; route(); window.scrollTo(0,y); });
 window.addEventListener("scroll",()=>$("#top").classList.toggle("sc",scrollY>4),{passive:true});
 route();
