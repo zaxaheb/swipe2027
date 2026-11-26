@@ -1,4 +1,5 @@
-# Construit index.html (données intégrées) et data/base.json (base pour l'IA côté serveur).
+# Construit app.html (l'app d'origine, intégrée dans la nouvelle) et data/base.json (base pour l'IA côté serveur).
+# La nouvelle app (template_v2.html) est construite ensuite par build_v2.py dans index.html : c'est la page d'accueil.
 # Usage : python3 build.py <dossier data>   (par défaut ../data/)
 import json, sys, os
 D = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(__file__), "..", "data") + "/"
@@ -31,7 +32,7 @@ J = lambda o: json.dumps(o, ensure_ascii=False, separators=(',', ':')).replace('
 h = open(os.path.join(H, 'template.html')).read()
 for k, o in [('PROG', {'progs': progs, 'sections': S, 'mesures': Mz}), ('VOTES', v), ('COND', c), ('FICHES', fi)]:
     h = h.replace(f'/*__{k}__*/null', J(o))
-open(os.path.join(H, 'index.html'), 'w').write(h)
+open(os.path.join(H, 'app.html'), 'w').write(h)
 # base serveur
 cand = {'LFI': {'nom': 'LFI', 'cand': 'Jean-Luc Mélenchon'}, 'RN': {'nom': 'RN', 'cand': 'Marine Le Pen'}}
 cand.update({k: {'nom': x['nom'], 'cand': x['cand'] + (' (' + x['retrait']['texte'] + ')' if x.get('retrait') else '')} for k, x in progs.items()})
@@ -42,7 +43,7 @@ base = {'candidats': cand,
         'fiches': fi, 'scrutins': v['scrutins'], 'condamnations': c['condamnations']}
 os.makedirs(os.path.join(H, 'data'), exist_ok=True)
 json.dump(base, open(os.path.join(H, 'data', 'base.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
-print('index.html', len(h), '| base.json', len(base['mesures']), 'mesures')
+print('app.html', len(h), '| base.json', len(base['mesures']), 'mesures')
 
 # Version 2 (exploration UX sans swipe) : v2.html
 from build_v2 import build as build_v2

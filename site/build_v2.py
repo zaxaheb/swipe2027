@@ -142,7 +142,8 @@ def build(H, progs, S, Mz, fi, cond=None):
     u, k = re.search(r'SUPABASE_URL:\s*"([^"]*)"', t1), re.search(r'SUPABASE_ANON_KEY:\s*"([^"]*)"', t1)
     sb = json.dumps({"url": u[1], "key": k[1]}) if u and k and u[1] and k[1] else "null"
     h = open(os.path.join(H, "template_v2.html")).read().replace("/*__DATA__*/null", J).replace("/*__SB__*/null", sb)
-    open(os.path.join(H, "v2.html"), "w").write(h)
+    open(os.path.join(H, "index.html"), "w").write(h)   # page d'accueil du site
+    open(os.path.join(H, "v2.html"), "w").write(h)      # ancienne adresse /v2, gardée pour les liens déjà partagés
     by = {}
     for m in mes: by.setdefault(m["th"], {}).setdefault(m["P"], 0); by[m["th"]][m["P"]] += 1
-    print("v2.html", len(h), "|", ", ".join(f"{t['id']}:{sum(by.get(t['id'], {}).values())}/{len(by.get(t['id'], {}))}c" for t in themes))
+    print("index.html + v2.html", len(h), "|", ", ".join(f"{t['id']}:{sum(by.get(t['id'], {}).values())}/{len(by.get(t['id'], {}))}c" for t in themes))

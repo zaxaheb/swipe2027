@@ -1168,7 +1168,7 @@ function v1Frame(view,after,top,panel){
       ["convo","info"].forEach(k=>{ const e=d.getElementById(k); if(e) e.classList.remove("on"); });   // on repart d'un écran propre
       if(view&&w.location.hash!=="#"+view) w.location.hash=view;
       if(after) setTimeout(()=>after(w,d),60); }catch(e){} };
-  if(!f.dataset.on){ f.dataset.on=1; f.onload=go; f.src="/#"+(view||"chat"); } else go();
+  if(!f.dataset.on){ f.dataset.on=1; f.onload=go; f.src="/app#"+(view||"chat"); } else go();
 }
 function v1Hide(){ const f=$("#v1"); if(f){ f.hidden=true; f.classList.remove("panel"); } document.body.classList.remove("frame-on","panel-on"); }
 // Sur ordi, à droite : une ouverture de discussion sur la proposition affichée (comme l'onglet Découvrir de l'app d'origine).
