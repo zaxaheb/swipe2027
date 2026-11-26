@@ -1215,8 +1215,11 @@ function vChat(arg,qs){
   setTop(""); $("#app").innerHTML="";
   const sp=new URLSearchParams(qs||""), mid=sp.get("m"), q=sp.get("q");
   const cours=arg&&arg.startsWith("cours:")?arg.slice(6):null;
-  v1Frame("chat",mid?(w,d)=>{ w.openConvo("m:"+mid); v1Ask(d,q); }:arg==="new"?(w,d)=>{ d.getElementById("new-chat").click(); v1Ask(d,q); }
-    :cours?(w,d)=>{ const b=d.querySelector('#topics .topic[data-t="'+cours+'"]'); if(b) b.click(); }:null);
+  // Retour depuis une conversation ouverte d'ailleurs (une proposition, l'accueil, un cours) : on revient à la page d'avant.
+  const bindBack=d=>{ const b=d.getElementById("cv-back"); if(!b||b.dataset.v2) return; b.dataset.v2=1;
+    b.addEventListener("click",()=>{ const h=location.hash; if(h.startsWith("#/chat")&&h!=="#/chat"&&h!=="#/chat/") location.hash=CHAT_FROM&&!CHAT_FROM.startsWith("#/chat")?CHAT_FROM:"#/"; }); };
+  v1Frame("chat",mid?(w,d)=>{ bindBack(d); w.openConvo("m:"+mid); v1Ask(d,q); }:arg==="new"?(w,d)=>{ bindBack(d); d.getElementById("new-chat").click(); v1Ask(d,q); }
+    :cours?(w,d)=>{ bindBack(d); const b=d.querySelector('#topics .topic[data-t="'+cours+'"]'); if(b) b.click(); }:null);
 }
 function vProfilV1(){ setTop(""); $("#app").innerHTML="";
   // les réponses données dans la v2 (Swipe) sont relues avant d'afficher le profil
@@ -1481,8 +1484,8 @@ function route(){
   else vNotFound();
 }
 let last=location.hash;
-let INFO_FROM="#/";
-window.addEventListener("hashchange",()=>{ POS[last]=scrollY; if(location.hash.startsWith("#/info")&&!last.startsWith("#/info")) INFO_FROM=last||"#/"; last=location.hash; HIST++; route(); window.scrollTo(0,POS[location.hash]||0); });
+let INFO_FROM="#/", CHAT_FROM="#/";
+window.addEventListener("hashchange",()=>{ POS[last]=scrollY; if(location.hash.startsWith("#/info")&&!last.startsWith("#/info")) INFO_FROM=last||"#/"; if(location.hash.startsWith("#/chat")&&!last.startsWith("#/chat")) CHAT_FROM=last||"#/"; last=location.hash; HIST++; route(); window.scrollTo(0,POS[location.hash]||0); });
 document.addEventListener("click",e=>{ const b=e.target.closest("[data-more]"); if(!b) return; const k=b.dataset.more, step=+b.dataset.step; EXP[k]=(EXP[k]||step)+(step===1?1e6:20); const y=scrollY; route(); window.scrollTo(0,y); });
 window.addEventListener("scroll",()=>$("#top").classList.toggle("sc",scrollY>4),{passive:true});
 route();
