@@ -55,10 +55,12 @@ def theme_of(text, section, extra="", w_sec=1):
 LFI_RN = {
     "LFI": {"nom": "LFI", "cand": "Jean-Luc Mélenchon", "long": "La France insoumise · L'Avenir en commun", "color": "#2f7d5b", "grad": "#2f7d5b,#174a37",
             "eco": "Pour tout son programme, LFI annonce 106,4 Md€ de recettes nouvelles et 81,7 Md€ de dépenses nouvelles en 2027, sans chiffrage mesure par mesure.",
-            "ecoUrl": "https://www.lavenirencommun.org/financement/", "complet": True},
+            "ecoUrl": "https://www.lavenirencommun.org/financement/", "complet": True,
+            "sources": [{"t": "L'Avenir en commun, édition 2027 (programme officiel, texte intégral)", "url": "https://www.lavenirencommun.org/"}]},
     "RN": {"nom": "RN", "cand": "Marine Le Pen", "long": "Rassemblement national", "color": "#1f3a9e", "grad": "#1f3a9e,#0d1b4f",
            "note": "Candidature annoncée le 7 juillet 2026. Son éligibilité dépend de l'issue de son pourvoi en cassation. Le programme 2027 complet n'est pas encore publié.",
-           "eco": "Le contre-budget RN (6 oct. 2026) annonce 140 Md€ d'économies nettes d'ici 2032 et 30 Md€ de baisses d'impôts. L'Institut de l'Entreprise juge environ 7,5 Md€ de ces économies crédibles."},
+           "eco": "Le contre-budget RN (6 oct. 2026) annonce 140 Md€ d'économies nettes d'ici 2032 et 30 Md€ de baisses d'impôts. L'Institut de l'Entreprise juge environ 7,5 Md€ de ces économies crédibles.",
+           "sources": [{"t": "Les 22 mesures (site officiel du RN)", "url": "https://rassemblementnational.fr/22-mesures"}, {"t": "Contre-budget 2027 du RN, d'après la presse", "url": "https://www.planetegrandesecoles.com/budget-marine-le-pen-2027-mesures-contre-budget-rn"}]},
 }
 
 def load_sorting(H):
@@ -91,7 +93,7 @@ def build(H, progs, S, Mz, fi, cond=None):
     TX, CL = load_sorting(H)
     cands = dict(LFI_RN)
     for k, x in progs.items():
-        c = {f: x.get(f) for f in ("nom", "cand", "long", "note", "eco", "ecoUrl") if x.get(f)}
+        c = {f: x.get(f) for f in ("nom", "cand", "long", "note", "eco", "ecoUrl", "sources", "complet") if x.get(f)}
         c["color"] = (x.get("grad") or ["#555555,#222222"])[0].split(",")[0]
         c["grad"] = (x.get("grad") or ["#555555,#222222"])[0]   # dégradé des cartes, comme dans l'app d'origine
         if x.get("retrait"): c["retrait"] = x["retrait"].get("texte", "retiré")
@@ -101,6 +103,7 @@ def build(H, progs, S, Mz, fi, cond=None):
         s = S[m["s"]]
         txt = m["t"] + (" " + " ".join(m["sous"]) if m["sous"] else "")
         x = {"id": m["id"], "P": s["prog"], "t": m["t"], "sous": m["sous"], "cle": bool(m.get("cle")), "sec": s["section"], "url": m.get("src") or s["url"]}
+        if m.get("orig"): x["orig"] = m["orig"]
         c = CL.get(m["id"]) if CL else None
         if c: x["th"], x["pt"] = c[0], c[1]
         else: x["th"] = theme_of(txt, s["section"] + " " + s.get("chapitre", ""), fi.get(m["id"], {}).get("resume") or "", 1 if s["prog"] == "LFI" else 4)

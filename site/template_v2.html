@@ -774,6 +774,7 @@ function candCard(P,n,nf){
     <div class="idc-s"><span class="pill ${tone}">${esc(st)}</span><span><b>${n}</b> ${n>1?"mesures":"mesure"} · <b>${nf}</b> ${nf>1?"fiches":"fiche"}</span></div>
     ${note?`<div class="idc-r"><b>${esc(c.retrait?"Candidature":noteL)}</b><p>${esc(note)}</p></div>`:""}
     ${c.eco?`<div class="idc-r"><b>Financement</b><p${noEco?' class="mute"':""}>${esc(noEco?"Pas de chiffrage publié pour l'instant.":c.eco)}</p>${c.ecoUrl&&!noEco?`<a class="src" href="${esc(c.ecoUrl)}" target="_blank" rel="noopener">${esc(host(c.ecoUrl))} ↗</a>`:""}</div>`:""}
+    ${(c.sources||[]).length?`<div class="idc-r"><b>Sources de ses mesures</b><p class="mute">Chaque mesure est citée mot pour mot, avec son lien.</p>${c.sources.map(x=>`<a class="src" style="display:block;margin-top:6px" href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.t)} ↗</a>`).join("")}</div>`:""}
   </div>`;
 }
 const CF={};   // filtre choisi sur chaque page candidat

@@ -555,9 +555,11 @@ const SEC=PROG.sections, M=PROG.mesures;
 M.forEach((m,i)=>{m.i=i;m.S=SEC[m.s];m.P=m.S.prog;m.n=norm(m.t+" "+m.sous.join(" ")+" "+m.S.section+" "+m.S.chapitre);});
 const BYID=Object.fromEntries(M.map(m=>[m.id,m]));
 const PROGS={LFI:{nom:"LFI",long:"La France insoumise · L'Avenir en commun",cand:"Jean-Luc Mélenchon",badge:"lfi",
-   eco:"Pour tout son programme, LFI annonce 106,4 Md€ de recettes nouvelles et 81,7 Md€ de dépenses nouvelles en 2027, sans chiffrage mesure par mesure.",ecoUrl:"https://www.lavenirencommun.org/financement/"},
+   eco:"Pour tout son programme, LFI annonce 106,4 Md€ de recettes nouvelles et 81,7 Md€ de dépenses nouvelles en 2027, sans chiffrage mesure par mesure.",ecoUrl:"https://www.lavenirencommun.org/financement/",
+   sources:[{t:"L'Avenir en commun, édition 2027 (programme officiel, texte intégral)",url:"https://www.lavenirencommun.org/"}]},
   RN:{nom:"RN",long:"Rassemblement national · 22 mesures + contre-budget 2027",cand:"Marine Le Pen",badge:"rn",
-   note:"Candidature annoncée le 7 juillet 2026. Son éligibilité dépend de l'issue de son pourvoi en cassation. Le programme 2027 complet n'est pas encore publié.",eco:"Le contre-budget RN (6 oct. 2026) annonce 140 Md€ d'économies nettes d'ici 2032 et 30 Md€ de baisses d'impôts. L'Institut de l'Entreprise juge environ 7,5 Md€ de ces économies crédibles.",ecoUrl:"https://www.planetegrandesecoles.com/budget-marine-le-pen-2027-mesures-contre-budget-rn"}};
+   note:"Candidature annoncée le 7 juillet 2026. Son éligibilité dépend de l'issue de son pourvoi en cassation. Le programme 2027 complet n'est pas encore publié.",eco:"Le contre-budget RN (6 oct. 2026) annonce 140 Md€ d'économies nettes d'ici 2032 et 30 Md€ de baisses d'impôts. L'Institut de l'Entreprise juge environ 7,5 Md€ de ces économies crédibles.",ecoUrl:"https://www.planetegrandesecoles.com/budget-marine-le-pen-2027-mesures-contre-budget-rn",
+   sources:[{t:"Les 22 mesures (site officiel du RN)",url:"https://rassemblementnational.fr/22-mesures"},{t:"Contre-budget 2027 du RN, d'après la presse",url:"https://www.planetegrandesecoles.com/budget-marine-le-pen-2027-mesures-contre-budget-rn"}]}};
 Object.assign(PROGS,PROG.progs||{});
 const PKEYS=Object.keys(PROGS).filter(P=>M.some(m=>m.P===P)&&!PROGS[P].retrait);   // les candidats qui se sont retirés restent dans les données, mais ne sont plus proposés
 const short=p=>p.replace(/^\d+\.\s*/,"");
@@ -803,7 +805,7 @@ function renderProfile(q){
   /* infos */
   if(FEAT.ficheComplete) parts.push(`<div class="box"><div class="vitals"><div class="vital">${IC.flag}${esc(P.nom)} · 2027</div>${m.cle?`<div class="vital">${IC.key}Mesure clé</div>`:""}${m.page?`<div class="vital">${IC.book}Livre p. ${m.page}</div>`:""}<div class="vital">${IC.folder}${esc(m.S.chapitre)}</div></div>
     <div class="vrow">${IC.list}<span>${esc(short(m.S.partie))}</span></div>
-    ${P.note?`<div class="vrow">${IC.spark}<span>${esc(P.note)}</span></div>`:""}<div class="vrow">${IC.link}<a href="${esc(m.src||(m.S.url+(m.P==="LFI"?"#"+m.id:"")))}" target="_blank" rel="noopener">${m.src&&!/rassemblementnational|lavenirencommun/.test(m.src)?"Voir la source":"Lire le texte officiel"}</a></div></div>`);
+    ${P.note?`<div class="vrow">${IC.spark}<span>${esc(P.note)}</span></div>`:""}<div class="vrow">${IC.link}<a href="${esc(m.src||(m.S.url+(m.P==="LFI"?"#"+m.id:"")))}" target="_blank" rel="noopener">${m.src&&!/rassemblementnational|lavenirencommun/.test(m.src)?"Voir la source":"Lire le texte officiel"}</a>${m.orig?`<span class="note"> · ${esc(m.orig)}</span>`:""}</div></div>`);
   /* ===== cartes compactes : un résumé visible, le détail au toucher ===== */
   const one=(s,n=170)=>{ s=String(s||"").trim(); const m1=s.match(/^.+?[.!?](\s|$)/); let o=(m1?m1[0]:s).trim(); if(o.length>n) o=o.slice(0,n-1).replace(/\s+\S*$/,"")+"…"; return o; };
   const rest=(s)=>{ s=String(s||"").trim(); const f=one(s,10000); return s.length>f.length+2?s.slice(f.length).trim():""; };
@@ -1129,6 +1131,11 @@ $("#cv-form").onsubmit=async e=>{ e.preventDefault(); const q=$("#cv-in").value.
 
 /* ================= PROFIL ================= */
 /* histogramme : nombre de propositions par candidat */
+function srcListHTML(){
+  const ks=Object.keys(PROGS).filter(P=>M.some(m=>m.P===P)).sort((a,b)=>PROGS[a].cand.localeCompare(PROGS[b].cand,"fr"));
+  return ks.map(P=>{ const p=PROGS[P], L=p.sources||[]; const n=M.filter(m=>m.P===P).length;
+    return `<details class="faq src-c"><summary>${esc(p.cand)} <span class="note">· ${n} proposition${n>1?"s":""}${p.retrait?" · retiré":""}</span></summary>${L.length?`<ul style="margin:6px 0 4px;padding-left:18px">${L.map(x=>`<li style="margin:4px 0"><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.t)}</a></li>`).join("")}</ul>`:`<p>${esc(p.note||"Propositions annoncées dans la presse : chaque carte renvoie à l'article d'origine.")}</p>`}</details>`; }).join("");
+}
 function chartHTML(){
   const rows=PKEYS.map(P=>({P,n:M.filter(m=>m.P===P).length})).sort((a,b)=>b.n-a.n);
   // Axe coupé : la plus grande barre dépasse largement les autres, on la coupe (repère « ⫽ ») pour garder les autres lisibles.
@@ -1240,12 +1247,13 @@ function renderInfo(){
   $("#info-body").innerHTML=`
   <div class="box prompt" style="padding-bottom:20px"><div class="label">Le principe</div><div class="answer sm">Une proposition à la fois. ❤ si tu es pour, ✕ si tu es contre. Sous chaque proposition, tu trouves son contexte, ce qu'en disent les autres camps, son coût et ce qui se fait ailleurs. À la fin, ton profil montre de quels candidats tu es proche, mesure par mesure.</div></div>
   <div class="box prompt" style="padding-bottom:20px"><div class="label">Les candidats et leurs propositions</div><p class="note" style="margin:-6px 0 12px">${nCand} candidats déclarés, ${M.length.toLocaleString("fr-FR")} propositions. Touche un nom pour ne voir que les siennes.</p>${chartHTML()}
-    <p class="note" style="margin:12px 0 0">Les écarts viennent surtout de l'état des programmes : La France insoumise a publié un programme complet ; les autres candidats n'ont encore annoncé qu'une partie de leurs propositions. L'app se met à jour à mesure qu'ils publient.</p></div>
+    <p class="note" style="margin:12px 0 0">Les écarts viennent surtout de l'état des programmes : certains candidats ont publié un programme complet, d'autres seulement quelques propositions. L'app se met à jour à mesure qu'ils publient.</p></div>
   <div class="box prompt" style="padding-bottom:20px"><div class="label">D'où viennent les propositions</div>
-    <div class="item"><div class="who">Programmes officiels</div><div class="txt" style="font-size:16px">L'Avenir en commun (LFI), les 22 mesures et le programme 2024 du RN, sur les sites des partis.</div></div>
-    <div class="item"><div class="who">Annonces dans la presse</div><div class="txt" style="font-size:16px">Pour les candidats sans programme complet : déclarations, livres, conférences, relayés par la presse.</div></div>
-    <div class="item"><div class="who">Positions recensées</div><div class="txt" style="font-size:16px">Pour certains candidats, positions compilées par France-Vote à partir de leurs déclarations et de leurs votes.</div></div>
-    <p class="note" style="margin:8px 0 0">Chaque proposition a un lien « Lire le texte officiel » ou « Voir la source ».</p></div>
+    <p class="note" style="margin:-6px 0 12px">Les propositions sont citées mot pour mot, telles que les candidats les ont écrites ou dites. Chacune a un lien vers sa source.</p>
+    <div class="item"><div class="who">Programmes officiels</div><div class="txt" style="font-size:16px">Le texte publié sur le site du candidat ou de son parti : L'Avenir en commun (LFI), le programme d'Édouard Philippe, les 258 propositions de Dominique de Villepin, l'Acte I de Place Publique…</div></div>
+    <div class="item"><div class="who">Relevés de Votons</div><div class="txt" style="font-size:16px">Pour la plupart des autres candidats, les mesures relevées par <a href="https://votons-2027.fr" target="_blank" rel="noopener">Votons</a>, plateforme citoyenne neutre, qui les cite mot pour mot depuis le site officiel du candidat. Le lien de chaque carte va directement à ce site officiel.</div></div>
+    <div class="item"><div class="who">Déclarations</div><div class="txt" style="font-size:16px">Quand un candidat n'a pas encore publié de programme : ses prises de position publiques (interviews, discours, livre), avec la date et le média.</div></div>
+    <p class="note" style="margin:10px 0 6px">Les sources, candidat par candidat :</p>${srcListHTML()}</div>
   <div class="box prompt" style="padding-bottom:20px"><div class="label">Les analyses</div>
     <div class="item"><div class="who">Fiches sourcées (${nFiches})</div><div class="txt" style="font-size:16px">Écrites à partir d'articles de presse, de think tanks de tous bords et d'institutions. Chaque critique a son lien.</div></div>
     <div class="item"><div class="who">Fiches générées</div><div class="txt" style="font-size:16px">Pour les autres mesures, l'IA fait des recherches web et rédige une fiche, partagée ensuite avec tout le monde. Elles sont marquées « Fiche générée » : vérifie les sources.</div></div>
