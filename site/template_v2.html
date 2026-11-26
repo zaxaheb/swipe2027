@@ -603,6 +603,18 @@ h1.ttl{font-family:var(--serif);font-weight:600;font-size:28px;line-height:1.1;m
 @media (min-width:1100px){.hero-ask{padding:38px 40px 26px}.hero-ask h1{font-size:44px}.hero-ask p{font-size:16px}.hero-ask form{max-width:820px}.hero-ask textarea{font-size:19px}}
 .hero-ask+.search{margin-top:12px}
 @media (min-width:1100px){section.live{grid-template-columns:auto minmax(0,560px)}}
+
+/* accueil aéré (27/11) */
+body[data-v="home"] .sec{margin-top:34px}
+body[data-v="home"] .live{margin-top:30px}
+.hero-ask{margin-top:18px;padding:26px 20px 20px}
+.hero-ask h1{font-size:27px}
+.hero-ask p{margin-top:6px;font-size:14px}
+.hero-ask form{margin-top:18px;align-items:center;padding:6px 6px 6px 16px}
+.hero-ask textarea{min-height:0;font-size:16.5px;padding:10px 0}
+.ha-sg{margin-top:14px}
+.ha-c{display:block;margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.12);font-size:13px;color:rgba(255,255,255,.75);text-decoration:none}
+@media (min-width:1100px){.hero-ask{padding:44px 48px 32px}.hero-ask h1{font-size:42px}body[data-v="home"] .sec{margin-top:44px}}
 </style>
 </head>
 <body>
@@ -759,16 +771,16 @@ function vHome(){
   const d=dailyMeasures(3), nEx=TH.filter(t=>explored(t.id)).length;
   const sugg=[...TH.filter(t=>newIn(t.id).length),...TH.filter(t=>!explored(t.id)),...TH.filter(t=>explored(t.id)&&!newIn(t.id).length)];
   $("#app").innerHTML=`
+    <a class="search" href="#/chercher" aria-label="Chercher une mesure" style="margin-top:6px">${ICO.search}<input placeholder="Chercher une mesure : Smic, retraites…" readonly tabindex="-1"></a>
     <section class="hero-ask">
-      <h1>Une question sur la présidentielle ?</h1>
-      <p>Programmes, mécanismes, votes, affaires : demande, la réponse est neutre et sourcée.</p>
-      <form id="ha-f" autocomplete="off"><textarea id="ha-in" rows="2" maxlength="500" placeholder="${esc(GSUGG[0])}"></textarea><button aria-label="Envoyer">${ICO.send||"→"}</button></form>
-      <div class="ha-sg">${GSUGG.map(q=>`<a href="#/chat/new?q=${encodeURIComponent(q)}">${esc(q)}</a>`).join("")}</div>
-      <div class="ha-c"><span>Ou suis un mini-cours :</span>${COURS.slice(0,4).map(([id,t,e])=>`<a href="#/chat/cours:${id}">${e} ${esc(t)}</a>`).join("")}<a href="#/chat">Tous les cours →</a></div>
+      <h1>Une question sur la présidentielle&nbsp;?</h1>
+      <p>La réponse est neutre et sourcée.</p>
+      <form id="ha-f" autocomplete="off"><textarea id="ha-in" rows="1" maxlength="500" placeholder="${esc(GSUGG[0])}"></textarea><button aria-label="Envoyer">→</button></form>
+      <div class="ha-sg">${GSUGG.slice(0,3).map(q=>`<a href="#/chat/new?q=${encodeURIComponent(q)}">${esc(q)}</a>`).join("")}</div>
+      <a class="ha-c" href="#/chat">Ou suis un mini-cours : voter, la présidentielle, la dette… →</a>
     </section>
-    <a class="search" href="#/chercher" aria-label="Chercher une mesure">${ICO.search}<input placeholder="Une mesure entendue ? Smic, retraites…" readonly tabindex="-1"></a>
     ${liveBlock()}
-    ${d.length?`<section class="sec" style="margin-top:18px"><div class="sec-h"><h2>Les mesures du jour</h2><span style="font-size:13px;color:var(--muted)">dans l'actualité</span></div>
+    ${d.length?`<section class="sec"><div class="sec-h"><h2>Les mesures du jour</h2><span style="font-size:13px;color:var(--muted)">dans l'actualité</span></div>
       <div class="daily">${d.map(m=>{ const f=F[m.id], nc=(f.critiques||[]).length; return `<a class="photo" href="#/m/${encodeURIComponent(m.id)}" style="background:${cgrad(m.P)}"><div class="who2">${esc(C[m.P].cand)}<small>· ${esc(C[m.P].nom)}</small></div><h2 class="q${m.t.length>150?" l":""}">${esc(m.t)}</h2><div class="meta2">${esc(THM[m.th].t)} · dans la presse le ${esc(dateFr(m.dp))}${nc?" · "+plural(nc,"critique","critiques"):""}</div></a>`; }).join("")}</div></section>`:""}
     <section class="sec"><div class="sec-h"><h2>Explorer les sujets</h2><a href="#/explorer">${nEx}/${TH.length} explorés</a></div>
       <div class="tiles-h">${sugg.map(t=>tile(t,true)).join("")}</div></section>
@@ -1109,8 +1121,7 @@ function renderStory(dir){
         <div class="st-hint">Touche à droite ou glisse vers la gauche pour avancer</div>`;
     } else if(j<=cards.length){
       const c=cards[j-1], hidden=ST.blind&&!ST.shown.has(c.m.id);
-      card=`${propCard(c.m,{hidden,compact:true,closed:!ST.open,kick:pt.t+" · "+j+" / "+cards.length})}
-        ${ST.open?"":`<button class="btn" id="st-open" style="margin-top:4px">Ouvrir la carte ▾</button>`}
+      card=`${propCard(c.m,{hidden,compact:true,closed:false,kick:pt.t+" · "+j+" / "+cards.length})}
         ${c.more>0?`<span class="hint" style="margin:0">+ ${plural(c.more,"autre mesure","autres mesures")} de ce candidat ici : dans le récapitulatif.</span>`:""}`;
     } else {
       card=`<div class="st-kick">${esc(pt.t)} · récapitulatif</div>
@@ -1135,7 +1146,7 @@ function renderStory(dir){
   if($("#st-blind")) $("#st-blind").onclick=()=>{ ST.blind=!ST.blind; track("parcours:aveugle:"+(ST.blind?"on":"off")); renderStory(0); };
   document.querySelectorAll("#story [data-reveal]").forEach(b=>b.onclick=e=>{ e.stopPropagation(); const c=storyCards(steps[ST.i])[ST.j-1]; ST.shown.add(c.m.id); renderStory(0); });
   if($("#st-open")) $("#st-open").onclick=e=>{ e.stopPropagation(); ST.open=true; renderStory(0); };
-  if(ST.open) mountDive($("#st-card"),{scroller:$("#st-card")});
+  if($("#st-card")) mountDive($("#st-card"),{scroller:$("#st-card")});
   if($("#st-restart")) $("#st-restart").onclick=()=>{ ST.i=0; ST.j=0; ST.seed=1+Math.floor(Math.random()*9999); track("parcours:recommence"); renderStory(0); };
   document.querySelectorAll("#story [data-fiche]").forEach(a=>a.addEventListener("click",()=>track("parcours:fiche")));
   // Gestes : toucher à droite/gauche de la carte, ou glisser horizontalement.
