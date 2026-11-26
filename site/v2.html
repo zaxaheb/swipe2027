@@ -1063,9 +1063,11 @@ const dateFr=d=>{ const [y,m,j]=d.split("-").map(Number); return j+" "+MOIS[m-1]
 
 /* Explorer : sujets, candidats et condamnations au même endroit. */
 function vExplorer(tab){
-  tab=tab||LS.get("ex:tab")||"sujets"; LS.set("ex:tab",tab);
+  if(tab==="forum"&&!/^#\/forum/.test(location.hash)){ location.replace("#/forum"); return; }
+  tab=tab||LS.get("ex:tab")||"sujets"; if(tab==="forum"&&!/^#\/forum/.test(location.hash)) tab="sujets"; LS.set("ex:tab",tab);
+  if(tab==="forum") document.body.dataset.v="explorer";
   setTop("");
-  const seg=`<div class="seg">${[["sujets","Sujets"],["candidats","Candidats"],["forum","Forum"],["condamnations","Condamnations"]].map(([k,l])=>`<a href="#/explorer/${k}" class="${tab===k?"on":""}">${l}</a>`).join("")}</div>`;
+  const seg=`<div class="seg">${[["sujets","Sujets"],["candidats","Candidats"],["forum","Forum"],["condamnations","Condamnations"]].map(([k,l])=>`<a href="${k==="forum"?"#/forum":"#/explorer/"+k}" class="${tab===k?"on":""}">${l}</a>`).join("")}</div>`;
   let body="";
   if(tab==="candidats"){
     const L=CK.slice().sort((a,b)=>C[b].n-C[a].n||lastName(C[a].cand).localeCompare(lastName(C[b].cand),"fr")), max=C[L[0]].n;
