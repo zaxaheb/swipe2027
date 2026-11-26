@@ -52,6 +52,32 @@ select{font:inherit;padding:9px 10px;border:1px solid var(--line);border-radius:
     <div><button id="reset-q" title="Remet à zéro les limites du jour (questions à l'IA, fiches, profil) pour tous les visiteurs">Remettre les limites à zéro</button> <button id="reload">Actualiser</button> <button id="out">Se déconnecter</button></div>
   </div>
   <div class="kpis" id="kpis"></div>
+<style>@media(max-width:800px){.dbm-g{grid-template-columns:1fr!important}.dbm-g>div:last-child{border-left:0!important;padding-left:0!important}}</style>
+  <div class="card" style="margin-bottom:14px" id="dbmod"><h2>Débats · file de modération <span class="pill gen">Démo</span> <span class="muted small">(données fictives, branche zak/participatif)</span></h2>
+    <p class="small muted" style="margin:-6px 0 12px">Sous le seuil, le filtre IA refuse tout de suite (l'auteur voit pourquoi). Au-dessus, le message arrive ici avant d'être visible.</p>
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:16px" class="dbm-g">
+      <div id="dbq"></div>
+      <div style="border-left:1px solid var(--line);padding-left:16px">
+        <b class="small">Seuil de refus automatique : <span id="dbs-v">60</span>/100</b><input type="range" min="30" max="90" value="60" id="dbs" style="width:100%;padding:0;margin:6px 0 12px;accent-color:var(--brand)">
+        <label class="small" style="display:flex;gap:8px;margin:6px 0"><input type="checkbox" style="width:auto"> Publier directement au-dessus de 85 (relu ensuite)</label>
+        <label class="small" style="display:flex;gap:8px;margin:6px 0"><input type="checkbox" checked style="width:auto"> Masquer après 3 signalements</label>
+        <label class="small" style="display:flex;gap:8px;margin:6px 0"><input type="checkbox" checked style="width:auto"> Nouveaux comptes : 3 messages par jour</label>
+        <div class="small muted" style="margin-top:12px">7 derniers jours : <b>41</b> publiés · <b>118</b> refusés par le filtre · <b>2</b> signalements</div>
+      </div>
+    </div>
+  </div>
+  <script>
+  (()=>{ const Q=[
+    {u:"marc_v",q:72,o:"Carte · Rétablir les peines planchers (RN)",t:"Les peines planchers ont déjà existé en France. Avant d'en débattre, il faudrait regarder les évaluations publiées sur leur application et leur effet sur la récidive.",ia:"Sourcé, ton neutre. Vérifier que le lien pointe vers l'évaluation officielle."},
+    {u:"sofia_b",q:64,o:"Débat · Âge de départ",t:"Les candidats ne partent pas de la même base de calcul : âge légal, durée de cotisation ou les deux. Le rapport du COR permet de comparer les effets sur le solde du système.",ia:"Pertinent, une seule source. Un signalement « hors sujet » qui semble infondé.",f:1},
+    {u:"lucas_p",q:61,o:"Carte · Smic à 1 700 € net (LFI)",t:"Le chiffrage du parti n'est pas repris par les économistes que j'ai lus. Voir l'article ci-dessous.",ia:"Juste au-dessus du seuil : source de presse unique, argument général.",f:2}];
+    const draw=()=>{ document.getElementById("dbq").innerHTML=Q.length?Q.map((m,i)=>`<div class="q" style="padding:12px 0"><div class="who"><b>@${m.u}</b> · ${m.o} · <span class="pill ${m.q>=70?"base":"gen"}">◆ ${m.q}/100</span>${m.f?` <span style="color:var(--contre);font-weight:600">${m.f} signalement${m.f>1?"s":""}</span>`:""}</div>
+      <div style="margin:6px 0">${m.t}</div><div class="small muted">Avis IA : ${m.ia}</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px"><button class="primary" data-i="${i}">Publier</button><button data-i="${i}">Demander une source</button><button data-i="${i}" style="color:var(--contre)">Refuser</button><button data-i="${i}" style="color:var(--contre)">Bloquer l'auteur</button></div></div>`).join(""):`<p class="muted small">File vide.</p>`;
+      document.querySelectorAll("#dbq button").forEach(b=>b.onclick=()=>{ Q.splice(+b.dataset.i,1); draw(); }); };
+    draw(); const s=document.getElementById("dbs"); s.oninput=()=>document.getElementById("dbs-v").textContent=s.value;
+  })();
+  </script>
   <div class="card" style="margin-bottom:14px"><h2>Remarques des utilisateurs</h2>
     <div class="tabs" id="rt"><button aria-pressed="true" data-s="nouveau">À traiter</button><button aria-pressed="false" data-s="traite">Traitées</button><button aria-pressed="false" data-s="rejete">Rejetées</button></div>
     <div class="scroll" id="remarques"></div></div>

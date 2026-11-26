@@ -1,6 +1,15 @@
 # Espace participatif : proposition (branche `zak/participatif`)
 
-Maquette cliquable : `site/maquette-participatif.html` (en local, ou sur `/maquette-participatif` dans la preview Vercel de la branche). Les données y sont fictives.
+## Démo intégrée à l'app (données fictives, rien n'est envoyé)
+
+- **Fiche mesure** : section « Le débat » sous la carte (votes ▲ ▼, réponses, tri, « Ajouter mon analyse »), plus un volet « Débat » dans « Pour aller plus loin », ce qui le fait apparaître aussi dans le Swipe et le carrousel. Exemples : Smic LFI (`#/m/augmenter-les-salaires-1`), peines planchers RN (`#/m/rn-3-1`).
+- **Débats** : onglet dans Explorer sur mobile, lien « Débats » dans la barre sur ordi (`#/debats`), et une page par débat (`#/debat/t1`).
+- **Sections « Débats »** sur l'accueil, sur chaque page sujet et sur chaque fiche candidat.
+- **Pour poster** : il faut un compte, mais la démo laisse essayer sans. Les règles sont à accepter la première fois. Le texte reçoit une note simulée : sous 60, il est refusé avec des conseils ; au-dessus, il apparaît « en attente de modération », visible seulement par son auteur.
+- **admin.html** : carte « Débats · file de modération », avec la file, le curseur de seuil et les options.
+- Code : bloc « Débats entre lecteurs : DÉMO » dans `site/template_v2.html`. Les votes et les messages restent dans le localStorage.
+
+Maquette séparée (première version) : `site/maquette-participatif.html`.
 
 ## Ce qu'on construit
 
